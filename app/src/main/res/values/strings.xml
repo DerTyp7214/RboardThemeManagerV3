@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Rboard Theme Manager V3</string>
+    <string name="search">Search</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="please_open_app">Please open the app</string>
+
+
+    <string name="title_themes">Themes</string>
+    <string name="title_downloads">Downloads</string>
+    <string name="title_sounds">Sounds</string>
+</resources>

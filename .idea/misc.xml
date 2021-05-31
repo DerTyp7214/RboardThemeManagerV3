@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/lengw/.gradle/caches/transforms-3/ffa66179cbb312a4534e538e80752919/transformed/jetified-PreferencesPlus-1.1/res/drawable/round_corners.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable-v24-night/ic_keyboard.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable-v24/ic_keyboard.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable-v24/ic_selected_theme_grid.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/bottom_sheet_background.xml" value="2.190625" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/bottomsheet_background.xml" value="2.190625" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_download.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_download_two_tone.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_downloads_state.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_sounds.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_sounds_tow_tone.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_style.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_style_state.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/round_outline.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/small_line.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/activity_main.xml" value="0.33489583333333334" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/bottom_bar.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/fragment_theme_list.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/menu_item.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/sample_my_view.xml" value="0.33489583333333334" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/search_bar.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/single_theme_item.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/theme_grid_item_single.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/menu/navigation.xml" value="0.3489583333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

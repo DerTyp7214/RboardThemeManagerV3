@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_themes"
+        android:icon="@drawable/ic_style_state"
+        android:title="@string/title_themes" />
+
+    <item
+        android:id="@+id/navigation_downloads"
+        android:icon="@drawable/ic_downloads_state"
+        android:title="@string/title_downloads" />
+
+    <item
+        android:id="@+id/navigation_sounds"
+        android:icon="@drawable/ic_sounds_state"
+        android:title="@string/title_sounds" />
+
+</menu>
