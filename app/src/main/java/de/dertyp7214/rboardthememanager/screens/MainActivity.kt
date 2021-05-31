@@ -28,6 +28,7 @@ import de.dertyp7214.rboardthememanager.core.setMargin
 import de.dertyp7214.rboardthememanager.data.MenuItem
 import de.dertyp7214.rboardthememanager.utils.FileUtils
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
+import de.dertyp7214.rboardthememanager.utils.asyncInto
 import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
 import java.io.File
 
@@ -110,12 +111,7 @@ class MainActivity : AppCompatActivity() {
             themesViewModel.setFilter()
         }
 
-        Thread {
-            val themes = ThemeUtils.loadThemes()
-            runOnUiThread {
-                themesViewModel.setThemes(themes)
-            }
-        }.start()
+        ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
     }
 
     private fun setUp() {

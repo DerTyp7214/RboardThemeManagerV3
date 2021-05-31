@@ -22,6 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="com.dertyp7214.logs.helpers.CrashReportDialog" />
+        <activity android:name="com.dertyp7214.logs.screens.Logs" />
     </application>
 
 </manifest>

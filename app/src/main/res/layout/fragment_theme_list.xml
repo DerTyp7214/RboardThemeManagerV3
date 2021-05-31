@@ -15,7 +15,8 @@
         android:translationZ="0dp"
         app:cardBackgroundColor="?attr/colorBackgroundFloating"
         app:cardCornerRadius="25dp"
-        app:elevation="1dp"
+        app:cardElevation="0dp"
+        app:elevation="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

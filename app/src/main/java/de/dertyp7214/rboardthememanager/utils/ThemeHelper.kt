@@ -153,10 +153,10 @@ object ThemeUtils {
     }
 
     fun loadPreviewThemes(context: Context): List<ThemeDataClass> {
-        return loadThemes(File(getThemePacksPath(context), "previews"))
+        return loadThemesWithPath(File(getThemePacksPath(context), "previews"))
     }
 
-    fun loadThemes(themeDir: File): List<ThemeDataClass> {
+    fun loadThemesWithPath(themeDir: File): List<ThemeDataClass> {
         return themeDir.listFiles()?.filter {
             it.name.lowercase(Locale.ROOT).endsWith("zip")
         }?.map {
