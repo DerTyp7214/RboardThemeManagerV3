@@ -15,6 +15,8 @@
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_download.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_download_two_tone.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_downloads_state.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_sounds.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_sounds_tow_tone.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_style.xml" value="0.3651041666666667" />
@@ -31,6 +33,10 @@
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/single_theme_item.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/theme_grid_item_single.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/menu/navigation.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/mipmap/ic_launcher.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/mipmap/ic_launcher_round.xml" value="0.3651041666666667" />
       </map>
     </option>
   </component>
