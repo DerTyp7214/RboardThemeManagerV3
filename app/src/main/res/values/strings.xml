@@ -9,4 +9,23 @@
     <string name="title_themes">Themes</string>
     <string name="title_downloads">Downloads</string>
     <string name="title_sounds">Sounds</string>
+    <string name="error">Whoops!</string>
+    <string name="update_ready">Update ready, do you want to install it?</string>
+    <string name="update">Update</string>
+    <string name="install_gboard">Do you want to install Gboard?</string>
+    <string name="gboard_not_installed">Gboard is not installed</string>
+    <string name="cant_use_app">You cannot use this app without root</string>
+    <string name="not_rooted">Your device is not rooted</string>
+    <string name="channel_name">Push Notifications</string>
+    <string name="default_notification_channel_id">push_channel</string>
+    <string name="channel_description">For updates and informations.</string>
+    <string name="channel_name_download">Download Notifications</string>
+    <string name="download_notification_channel_id">download_channel</string>
+    <string name="channel_description_download">For download notifications</string>
+    <string name="download_update">Downloading Update</string>
+    <string name="download_update_progress">Downloading Update (%s)</string>
+    <string name="download_complete">Download complete</string>
+    <string name="download_error">Error while downloading</string>
+    <string name="reboot">Reboot</string>
+    <string name="reboot_to_continue">You have to reboot for the module to work</string>
 </resources>

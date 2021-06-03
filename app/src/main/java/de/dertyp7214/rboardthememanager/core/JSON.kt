@@ -1,3 +1,5 @@
+@file:Suppress("BlockingMethodInNonBlockingContext")
+
 package de.dertyp7214.rboardthememanager.core
 
 import org.json.JSONArray

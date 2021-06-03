@@ -19,17 +19,24 @@ class SearchBar(context: Context, attrs: AttributeSet?) : LinearLayout(context, 
     private var closeListener: () -> Unit = {}
     private var focusListener: () -> Unit = {}
 
+    private val searchBar: CardView
+    private val searchButton: ImageButton
+    private val backButton: ImageButton
+    private val moreButton: ImageButton
+    private val searchText: TextView
+    private val searchEdit: EditText
+
     init {
         inflate(context, R.layout.search_bar, this)
 
-        val searchBar = findViewById<CardView>(R.id.search_bar)
+        searchBar = findViewById(R.id.search_bar)
 
-        val searchButton = findViewById<ImageButton>(R.id.search_button)
-        val backButton = findViewById<ImageButton>(R.id.back_button)
-        val moreButton = findViewById<ImageButton>(R.id.more_button)
+        searchButton = findViewById(R.id.search_button)
+        backButton = findViewById(R.id.back_button)
+        moreButton = findViewById(R.id.more_button)
 
-        val searchText = findViewById<TextView>(R.id.search_text)
-        val searchEdit = findViewById<EditText>(R.id.search)
+        searchText = findViewById(R.id.search_text)
+        searchEdit = findViewById(R.id.search)
 
         searchBar.setOnClickListener {
             if (!focus) {
@@ -74,6 +81,20 @@ class SearchBar(context: Context, attrs: AttributeSet?) : LinearLayout(context, 
                 true
             } else false
         }
+    }
+
+    fun setText(text: String = "") {
+        if (text.isEmpty()) {
+            focus = false
+            searchButton.visibility = VISIBLE
+            backButton.visibility = GONE
+
+            searchText.visibility = VISIBLE
+            searchEdit.visibility = GONE
+        }
+
+        searchEdit.setText(text)
+        clearFocus(searchEdit)
     }
 
     fun setOnSearchListener(listener: (text: String) -> Unit) {

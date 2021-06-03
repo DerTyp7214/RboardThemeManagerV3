@@ -6,6 +6,7 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import com.dertyp7214.logs.helpers.Logger
+import com.downloader.PRDownloader
 import com.topjohnwu.superuser.Shell
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 
@@ -21,6 +22,7 @@ class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        PRDownloader.initialize(this)
         Logger.init(this)
         Logger.extraData = {
             StringBuilder("Rooted: ")

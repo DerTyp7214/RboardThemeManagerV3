@@ -14,8 +14,8 @@ android {
         applicationId "de.dertyp7214.rboardthememanager"
         minSdkPreview "S"
         targetSdkPreview "S"
-        versionCode 1
-        versionName "1.0"
+        versionCode 300
+        versionName "3.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -74,6 +74,6 @@ dependencies {
         exclude module: 'PreferencesPlus'
     }
 
-    debugImplementation "androidx.compose.ui:ui-tooling:1.0.0-beta07"
+    debugImplementation "androidx.compose.ui:ui-tooling:1.0.0-beta08"
     debugImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }

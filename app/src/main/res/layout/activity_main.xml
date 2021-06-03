@@ -10,20 +10,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentContainerView"
-            android:name="androidx.navigation.fragment.NavHostFragment"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refreshLayout"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="64dp"
             android:background="@android:color/transparent"
-            android:elevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchBar"
-            app:navGraph="@navigation/home"
-            tools:layout="@layout/fragment_theme_list" />
+            app:layout_constraintTop_toBottomOf="@+id/searchBar">
+
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragmentContainerView"
+                android:name="androidx.navigation.fragment.NavHostFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:elevation="0dp"
+                app:navGraph="@navigation/home"
+                tools:layout="@layout/fragment_theme_list" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <de.dertyp7214.rboardthememanager.components.SearchBar
             android:id="@+id/searchBar"
