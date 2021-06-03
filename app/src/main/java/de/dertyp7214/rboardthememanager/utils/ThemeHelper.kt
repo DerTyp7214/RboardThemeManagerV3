@@ -239,7 +239,7 @@ object ThemeUtils {
                     image,
                     "System auto",
                     "",
-                    colorFilter = if (isDark) null else PorterDuffColorFilter(
+                    colorFilter = PorterDuffColorFilter(
                         getDeviceAccentColor(Application.context!!),
                         PorterDuff.Mode.MULTIPLY
                     )
