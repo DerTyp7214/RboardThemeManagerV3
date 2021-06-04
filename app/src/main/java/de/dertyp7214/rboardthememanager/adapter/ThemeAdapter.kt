@@ -21,7 +21,11 @@ import de.dertyp7214.rboardthememanager.utils.ColorUtils
 import de.dertyp7214.rboardthememanager.utils.getActiveTheme
 import java.util.*
 
-class ThemeAdapter(private val context: Context, private val themes: List<ThemeDataClass>) :
+class ThemeAdapter(
+    private val context: Context,
+    private val themes: List<ThemeDataClass>,
+    private val onClickTheme: (theme: ThemeDataClass) -> Unit
+) :
     RecyclerView.Adapter<ThemeAdapter.ViewHolder>() {
 
     private var recyclerView: RecyclerView? = null
@@ -108,6 +112,10 @@ class ThemeAdapter(private val context: Context, private val themes: List<ThemeD
             holder.selectOverlay.alpha = 0F
 
         holder.card.setCardBackgroundColor(color)
+
+        holder.card.setOnClickListener {
+            onClickTheme(dataClass)
+        }
 
         /*holder.card.setOnClickListener {
             if (selection) {

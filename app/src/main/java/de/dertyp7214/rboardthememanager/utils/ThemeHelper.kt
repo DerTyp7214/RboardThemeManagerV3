@@ -19,31 +19,38 @@ import com.dertyp7214.logs.helpers.Logger
 import com.dertyp7214.preferencesplus.core.dp
 import com.dertyp7214.preferencesplus.core.setHeight
 import com.dertyp7214.preferencesplus.core.setWidth
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
 import com.topjohnwu.superuser.io.SuFileOutputStream
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
+import de.dertyp7214.rboardthememanager.Config.PACKS_URL
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.decodeBitmap
 import de.dertyp7214.rboardthememanager.core.getAttrColor
 import de.dertyp7214.rboardthememanager.core.getBitmap
 import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
+import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.utils.FileUtils.getThemePacksPath
 import java.io.BufferedInputStream
 import java.io.File
+import java.net.URL
 import java.nio.charset.Charset
 import java.util.*
 import kotlin.collections.ArrayList
 
 @SuppressLint("SdCardPath")
 fun applyTheme(
-    name: String,
+    theme: ThemeDataClass,
     withBorders: Boolean = false,
     context: Context? = null
 ): Boolean {
+    val name =
+        if (theme.path.isEmpty() || theme.path.startsWith("assets:")) theme.path else "system:${theme.name}.zip"
     val inputPackageName = GBOARD_PACKAGE_NAME
     val fileName =
         "/data/data/$inputPackageName/shared_prefs/${inputPackageName}_preferences.xml"
@@ -68,12 +75,12 @@ fun applyTheme(
             changed = if ("<string name=\"additional_keyboard_theme\">" in changed)
                 changed.replace(
                     "<string name=\"additional_keyboard_theme\">.*</string>".toRegex(),
-                    "<string name=\"additional_keyboard_theme\">system:$name</string>"
+                    "<string name=\"additional_keyboard_theme\">$name</string>"
                 )
             else
                 changed.replace(
                     "<map>",
-                    "<map><string name=\"additional_keyboard_theme\">system:$name</string>"
+                    "<map><string name=\"additional_keyboard_theme\">$name</string>"
                 )
 
             // Change enable_key_border value
@@ -139,7 +146,7 @@ object ThemeUtils {
     fun loadThemes(): List<ThemeDataClass> {
         val themeDir =
             SuFile(Config.MAGISK_THEME_LOC)
-        return themeDir.listFiles()?.filter {
+        return (themeDir.listFiles()?.filter {
             it.name.lowercase(Locale.ROOT).endsWith(".zip")
         }?.map {
             val imageFile = SuFile(Config.MAGISK_THEME_LOC, it.name.removeSuffix(".zip"))
@@ -149,13 +156,31 @@ object ThemeUtils {
                 it.absolutePath
             )
             else ThemeDataClass(null, it.name.removeSuffix(".zip"), it.absolutePath)
-        }.apply { if (this != null) Config.themeCount = size } ?: ArrayList()
+        }.apply { if (this != null) Config.themeCount = size } ?: ArrayList()).let {
+            val themes = arrayListOf<ThemeDataClass>()
+            getSystemAutoTheme()?.let { theme -> themes.add(theme) }
+            themes.addAll(buildPreinstalledThemesList())
+            themes.addAll(it)
+            themes
+        }
+    }
+
+    fun loadThemePacks(): List<ThemePack> {
+        return try {
+            Gson().fromJson(
+                URL(PACKS_URL).readText(),
+                object : TypeToken<List<ThemePack>>() {}.type
+            )
+        } catch (e: Exception) {
+            listOf()
+        }
     }
 
     fun loadPreviewThemes(context: Context): List<ThemeDataClass> {
         return loadThemesWithPath(File(getThemePacksPath(context), "previews"))
     }
 
+    @JvmStatic
     fun loadThemesWithPath(themeDir: File): List<ThemeDataClass> {
         return themeDir.listFiles()?.filter {
             it.name.lowercase(Locale.ROOT).endsWith("zip")
@@ -185,6 +210,33 @@ object ThemeUtils {
 
     fun checkForExistingThemes(): Boolean {
         return getThemesPathFromProps() != null
+    }
+
+    private fun buildPreinstalledThemesList(): List<ThemeDataClass> {
+        val themes = arrayListOf<ThemeDataClass>()
+        val themeNames = listOf(
+            "color_black", "color_blue", "color_blue_grey", "color_brown", "color_cyan",
+            "color_deep_purple", "color_green", "color_light_pink", "color_pink", "color_red",
+            "color_sand", "color_teal", "google_blue_dark", "google_blue_light", "holo_blue",
+            "holo_white", "material_dark", "material_light"
+        )
+
+        themeNames.forEach { name ->
+            val path = "assets:theme_package_metadata_$name.binarypb"
+            val image = Application.context?.let {
+                try {
+                    val inputStream = it.resources.openRawResource(
+                        FileUtils.getResourceId(it, name, "raw", it.packageName)
+                    )
+                    BitmapFactory.decodeStream(BufferedInputStream(inputStream))
+                } catch (e: Exception) {
+                    null
+                }
+            }
+            themes.add(ThemeDataClass(image, name, path))
+        }
+
+        return themes
     }
 
     fun getActiveThemeData(): ThemeDataClass {
@@ -221,31 +273,35 @@ object ThemeUtils {
                 SuFile(Config.THEME_LOCATION, "$themeName.zip").absolutePath
             )
         } else {
-            if (Application.context != null) {
-                val isDark =
-                    (Application.context!!.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
-                val image = Application.context?.let {
-                    val inputStream = it.resources.openRawResource(
-                        FileUtils.getResourceId(
-                            it,
-                            if (isDark) "google_blue_dark" else "default_snapshot",
-                            "raw",
-                            it.packageName
-                        )
-                    )
-                    BitmapFactory.decodeStream(BufferedInputStream(inputStream))
-                }
-                ThemeDataClass(
-                    image,
-                    "System auto",
-                    "",
-                    colorFilter = PorterDuffColorFilter(
-                        getDeviceAccentColor(Application.context!!),
-                        PorterDuff.Mode.MULTIPLY
+            getSystemAutoTheme() ?: ThemeDataClass(null, "", "")
+        }
+    }
+
+    private fun getSystemAutoTheme(): ThemeDataClass? {
+        return if (Application.context != null) {
+            val isDark =
+                (Application.context!!.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
+            val image = Application.context?.let { context ->
+                val inputStream = context.resources.openRawResource(
+                    FileUtils.getResourceId(
+                        context,
+                        if (isDark) "google_blue_dark" else "default_snapshot",
+                        "raw",
+                        context.packageName
                     )
                 )
-            } else ThemeDataClass(null, "", "")
-        }
+                BitmapFactory.decodeStream(BufferedInputStream(inputStream))
+            }
+            ThemeDataClass(
+                image,
+                "System auto",
+                "",
+                colorFilter = PorterDuffColorFilter(
+                    getDeviceAccentColor(Application.context!!),
+                    PorterDuff.Mode.MULTIPLY
+                )
+            )
+        } else null
     }
 
     @JvmStatic
@@ -259,6 +315,7 @@ object ThemeUtils {
     @SuppressLint("InflateParams")
     fun getThemeView(theme: ThemeDataClass, context: Context): View {
         return LinearLayout(context).apply {
+            id = R.id.current_theme_view
             orientation = LinearLayout.VERTICAL
             setPadding(8.dp(context), 8.dp(context), 8.dp(context), 0)
             addView(LayoutInflater.from(context).inflate(R.layout.single_theme_item, null).apply {

@@ -10,6 +10,6 @@ object ColorUtils {
     }
 
     fun isColorLight(color: Int): Boolean {
-        return ColorUtils.calculateLuminance(color) > .5
+        return ColorUtils.calculateLuminance(color) > .4
     }
 }

@@ -14,7 +14,8 @@ import de.dertyp7214.rboardthememanager.R
 
 class SearchBar(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
 
-    private var focus = false
+    var focus = false
+        private set
     private var searchListener: (text: String) -> Unit = {}
     private var closeListener: () -> Unit = {}
     private var focusListener: () -> Unit = {}
@@ -107,6 +108,10 @@ class SearchBar(context: Context, attrs: AttributeSet?) : LinearLayout(context, 
 
     fun setOnFocusListener(listener: () -> Unit) {
         focusListener = listener
+    }
+
+    override fun clearFocus() {
+        clearFocus(searchEdit)
     }
 
     private fun clearFocus(editText: EditText) {

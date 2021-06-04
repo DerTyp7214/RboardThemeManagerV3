@@ -28,4 +28,22 @@
     <string name="download_error">Error while downloading</string>
     <string name="reboot">Reboot</string>
     <string name="reboot_to_continue">You have to reboot for the module to work</string>
+    <string name="apply_theme">Apply Theme</string>
+    <string name="applied">Theme Applied</string>
+    <string name="delete_theme">Delete Theme</string>
+    <string name="q_delete_theme">Do you want to delete this theme?</string>
+    <string name="theme_deleted">Theme Deleted</string>
+
+    <string name="info">Info</string>
+    <string name="theme_count">Installed themes count</string>
+    <string name="theme_path">Theme path</string>
+    <string name="installation_method">Installation method</string>
+    <string name="magisk">Magisk</string>
+    <string name="other">Other</string>
+    <string name="rboard_app_version">Rboard app version</string>
+    <string name="device">Device</string>
+    <string name="android_version">Android version</string>
+    <string name="root_version">Root version</string>
+    <string name="gboard_version">Gboard version</string>
+    <string name="unsupported_oem">Is unsupported OEM</string>
 </resources>

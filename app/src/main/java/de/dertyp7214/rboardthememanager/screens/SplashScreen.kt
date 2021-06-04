@@ -15,6 +15,7 @@ import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.getTextFromUrl
 import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.core.openUrl
 import de.dertyp7214.rboardthememanager.core.runAsCommand
@@ -38,7 +39,7 @@ class SplashScreen : AppCompatActivity() {
 
     private val isReady: Boolean
         get() {
-            return checkedForUpdate && rootAccess
+            return checkedForUpdate || !rootAccess
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,12 +85,13 @@ class SplashScreen : AppCompatActivity() {
             else -> checkForUpdate {
                 checkedForUpdate = true
                 startActivity(Intent(this, MainActivity::class.java).putExtra("update", it))
+                finish()
             }
         }
     }
 
     private fun checkForUpdate(callback: (update: Boolean) -> Unit) {
-        doAsync(URL(checkUpdateUrl)::readText) { text ->
+        doAsync(URL(checkUpdateUrl)::getTextFromUrl) { text ->
             try {
                 val outputMetadata = Gson().fromJson(text, OutputMetadata::class.java)
                 val versionCode = outputMetadata.elements.first().versionCode
@@ -113,9 +115,10 @@ class SplashScreen : AppCompatActivity() {
         val channelIdDownload = getString(R.string.download_notification_channel_id)
         val descriptionTextDownload = getString(R.string.channel_description_download)
         val importanceDownload = NotificationManager.IMPORTANCE_LOW
-        val channelDownload = NotificationChannel(channelIdDownload, nameDownload, importanceDownload).apply {
-            description = descriptionTextDownload
-        }
+        val channelDownload =
+            NotificationChannel(channelIdDownload, nameDownload, importanceDownload).apply {
+                description = descriptionTextDownload
+            }
 
         val notificationManager: NotificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

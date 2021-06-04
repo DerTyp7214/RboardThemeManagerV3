@@ -1,5 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package de.dertyp7214.rboardthememanager.screens
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.RenderEffect
 import android.graphics.Shader
@@ -16,13 +19,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.widget.NestedScrollView
-import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
@@ -33,6 +36,7 @@ import de.dertyp7214.rboardthememanager.data.MenuItem
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -41,7 +45,9 @@ class MainActivity : AppCompatActivity() {
         "https://raw.githubusercontent.com/DerTyp7214/RboardThemeManagerV3/master/app/${BuildConfig.BUILD_TYPE}/app-${BuildConfig.BUILD_TYPE}.apk"
 
     private lateinit var downloadResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<NestedScrollView>
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -52,26 +58,32 @@ class MainActivity : AppCompatActivity() {
 
         val searchBar = findViewById<SearchBar>(R.id.searchBar)
         val bottomSheet = findViewById<NestedScrollView>(R.id.bottom_bar)
-        val refreshLayout = findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
-        val navigationHolder = findViewById<FragmentContainerView>(R.id.fragmentContainerView)
+        val navigationHolder =
+            supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val controller = navigationHolder.navController
 
         val navigation = findViewById<BottomNavigationView>(R.id.navigation)
         val menuRecyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 
         val secondaryContent = findViewById<LinearLayout>(R.id.secondaryContent)
 
-        val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
 
-        refreshLayout.isRefreshing = true
-        refreshLayout.setProgressViewOffset(
-            true,
-            0,
-            5.dpToPx(this).toInt()
+        val mainMenuItems = arrayListOf(
+            MenuItem(
+                R.drawable.ic_info,
+                R.string.info
+            ) {
+                InfoActivity::class.java.start(this)
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
         )
-        refreshLayout.setProgressBackgroundColorSchemeColor(getAttrColor(R.attr.colorBackgroundFloating))
-        refreshLayout.setColorSchemeColors(getAttrColor(R.attr.colorOnPrimary))
 
-        refreshLayout.setMargin(
+        val menuItems = ArrayList(mainMenuItems)
+
+        val menuAdapter = MenuAdapter(menuItems, this)
+
+        findViewById<View>(R.id.fragmentContainerView).setMargin(
             bottomMargin = resources.getDimension(R.dimen.bottomBarHeight).toInt() + 18.dpToPx(this)
                 .toInt()
         )
@@ -84,7 +96,12 @@ class MainActivity : AppCompatActivity() {
 
         bottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {}
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    if (themesViewModel.getSelectedTheme() != null)
+                        themesViewModel.setSelectedTheme()
+                }
+            }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 navigation.alpha = 1 - slideOffset
@@ -95,26 +112,48 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        val menuAdapter = MenuAdapter(listOf(
-            MenuItem(
-                R.drawable.ic_download,
-                R.string.app_name
-            ) {
-                Toast.makeText(this, "Hi 1", Toast.LENGTH_LONG).show()
-            },
-            MenuItem(
-                R.drawable.ic_download,
-                R.string.app_name
-            ) {
-                Toast.makeText(this, "Hi 2", Toast.LENGTH_LONG).show()
-            },
-            MenuItem(
-                R.drawable.ic_download,
-                R.string.app_name
-            ) {
-                Toast.makeText(this, "Hi 3", Toast.LENGTH_LONG).show()
+        themesViewModel.observerSelectedTheme(this) { theme ->
+            secondaryContent.removeViewAt(0)
+            if (theme != null) {
+                secondaryContent.addView(ThemeUtils.getThemeView(theme, this), 0)
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                searchBar.clearFocus()
+                menuItems.clear()
+                menuItems.add(MenuItem(R.drawable.ic_apply_theme, R.string.apply_theme) {
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                    if (applyTheme(theme, true))
+                        Toast.makeText(this, R.string.applied, Toast.LENGTH_SHORT).show()
+                    else Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show()
+                    delayed(150) {
+                        themesViewModel.setSelectedTheme()
+                    }
+                })
+                if (theme.path.isNotEmpty() && !theme.path.startsWith("assets:"))
+                    menuItems.add(MenuItem(R.drawable.ic_delete_theme, R.string.delete_theme) {
+                        openDialog(R.string.q_delete_theme, R.string.delete_theme) {
+                            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                            if (SuFile(theme.path).delete())
+                                Toast.makeText(this, R.string.theme_deleted, Toast.LENGTH_SHORT)
+                                    .show()
+                            else Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show()
+                            delayed(150) {
+                                themesViewModel.setSelectedTheme()
+                                themesViewModel.setThemes(listOf())
+                            }
+                        }
+                    })
+            } else {
+                secondaryContent.addView(
+                    ThemeUtils.getThemeView(
+                        ThemeUtils.getActiveThemeData(),
+                        this
+                    ), 0
+                )
+                menuItems.clear()
+                menuItems.addAll(mainMenuItems)
             }
-        ), this)
+            menuAdapter.notifyDataSetChanged()
+        }
 
         secondaryContent.addView(ThemeUtils.getThemeView(ThemeUtils.getActiveThemeData(), this), 0)
 
@@ -130,18 +169,49 @@ class MainActivity : AppCompatActivity() {
             themesViewModel.setFilter()
         }
 
-        themesViewModel.themesObserve(this) {
-            refreshLayout.isRefreshing = false
-        }
-
-        refreshLayout.setOnRefreshListener {
-            refreshLayout.isRefreshing = true
+        themesViewModel.onClearSearch(this) {
             searchBar.setText()
-            themesViewModel.setFilter()
-            ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
         }
 
-        ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
+        controller.addOnDestinationChangedListener { _, destination, _ ->
+            themesViewModel.setFilter()
+            themesViewModel.clearSearch()
+
+            when (destination.id) {
+                R.id.action_themeListFragment_to_downloadListFragment -> {
+                }
+                R.id.action_downloadListFragment_to_themeListFragment -> {
+                }
+            }
+        }
+
+        navigation.setOnNavigationItemSelectedListener {
+            val currentDestination = controller.currentDestination?.id ?: -1
+            when (it.itemId) {
+                R.id.navigation_themes -> {
+                    if (currentDestination == R.id.downloadListFragment) {
+                        controller.navigate(R.id.action_downloadListFragment_to_themeListFragment)
+                    }
+                }
+                R.id.navigation_downloads -> {
+                    if (currentDestination == R.id.themeListFragment) {
+                        controller.navigate(R.id.action_themeListFragment_to_downloadListFragment)
+                    }
+                }
+                R.id.navigation_sounds -> {
+                }
+            }
+            true
+        }
+    }
+
+    override fun onBackPressed() {
+        when {
+            searchBar.focus -> searchBar.setText()
+            bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED ->
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            else -> super.onBackPressed()
+        }
     }
 
     private fun setUp() {
