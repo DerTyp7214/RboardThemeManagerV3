@@ -2,17 +2,14 @@ package de.dertyp7214.rboardthememanager.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.Configuration
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.view.ContextThemeWrapper
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.dertyp7214.logs.helpers.Logger
@@ -185,13 +182,9 @@ object ThemeUtils {
         return themeDir.listFiles()?.filter {
             it.name.lowercase(Locale.ROOT).endsWith("zip")
         }?.map {
-            val imageFile = File(themeDir.absolutePath, it.name.removeSuffix(".zip"))
+            val imageFile = SuFile(themeDir.absolutePath, it.name.removeSuffix(".zip"))
             if (imageFile.exists()) ThemeDataClass(
-                try {
-                    ImageDecoder.decodeBitmap(ImageDecoder.createSource(imageFile))
-                } catch (e: Exception) {
-                    BitmapFactory.decodeFile(imageFile.path)
-                },
+                imageFile.decodeBitmap(),
                 it.name.removeSuffix(".zip"),
                 it.absolutePath
             )
@@ -279,13 +272,11 @@ object ThemeUtils {
 
     private fun getSystemAutoTheme(): ThemeDataClass? {
         return if (Application.context != null) {
-            val isDark =
-                (Application.context!!.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
             val image = Application.context?.let { context ->
                 val inputStream = context.resources.openRawResource(
                     FileUtils.getResourceId(
                         context,
-                        if (isDark) "google_blue_dark" else "default_snapshot",
+                        "system_auto",
                         "raw",
                         context.packageName
                     )
@@ -294,22 +285,14 @@ object ThemeUtils {
             }
             ThemeDataClass(
                 image,
-                "System auto",
+                "system_auto",
                 "",
                 colorFilter = PorterDuffColorFilter(
-                    getDeviceAccentColor(Application.context!!),
-                    PorterDuff.Mode.MULTIPLY
+                    Application.context!!.getAttrColor(android.R.attr.colorAccent),
+                    PorterDuff.Mode.OVERLAY
                 )
             )
         } else null
-    }
-
-    @JvmStatic
-    fun getDeviceAccentColor(context: Context): Int {
-        val value = TypedValue()
-        val ctx = ContextThemeWrapper(context, android.R.style.Theme_DeviceDefault)
-        ctx.theme.resolveAttribute(android.R.attr.colorAccent, value, true)
-        return value.data
     }
 
     @SuppressLint("InflateParams")

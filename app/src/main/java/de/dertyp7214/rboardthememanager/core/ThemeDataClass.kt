@@ -21,5 +21,5 @@ fun ThemeDataClass.moveToCache(context: Context): ThemeDataClass {
     val newImage = SuFile(context.cacheDir, imageFile.name)
     zip.copy(newZip)
     if (imageFile.exists()) imageFile.copy(newImage)
-    return ThemeDataClass(image, name, newZip.absolutePath, selected)
+    return ThemeDataClass(image, name, newZip.absolutePath)
 }

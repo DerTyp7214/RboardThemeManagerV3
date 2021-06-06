@@ -30,6 +30,24 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.OPENABLE" />
+
+                <data android:host="*" />
+                <data android:mimeType="*/*" />
+                <data android:pathPattern=".*\\.pack" />
+                <data android:pathPattern=".*\\..*\\.pack" />
+                <data android:pathPattern=".*\\..*\\..*\\.pack" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.pack" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.pack" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.pack" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.pack" />
+                <data android:scheme="content" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".screens.MainActivity"
@@ -40,8 +58,8 @@
         <activity android:name="com.dertyp7214.logs.screens.Logs" />
 
         <provider
-            android:name=".GenericFileProvider"
-            android:authorities="${applicationId}.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

@@ -1,6 +1,5 @@
 package de.dertyp7214.rboardthememanager.fragments
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +20,6 @@ import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
 
 class ThemeListFragment : Fragment() {
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,7 +36,11 @@ class ThemeListFragment : Fragment() {
             ViewModelProvider(this)[ThemesViewModel::class.java]
         }
 
-        val adapter = ThemeAdapter(requireContext(), themeList) { theme ->
+        val adapter = ThemeAdapter(requireContext(), themeList, null, { state, adapter ->
+            themesViewModel.setSelections(
+                Pair(state == ThemeAdapter.SelectionState.SELECTING, adapter)
+            )
+        }) { theme ->
             themesViewModel.setSelectedTheme(theme)
         }
 
@@ -69,7 +71,7 @@ class ThemeListFragment : Fragment() {
                         true
                     )
                 })
-                adapter.notifyDataSetChanged()
+                adapter.notifyDataChanged()
                 refreshLayout.isRefreshing = false
             }
         }
@@ -79,7 +81,11 @@ class ThemeListFragment : Fragment() {
             themeList.addAll(unfilteredThemeList.filter {
                 it.name.contains(filter, true)
             })
-            adapter.notifyDataSetChanged()
+            adapter.notifyDataChanged()
+        }
+
+        themesViewModel.onRefreshThemes(this) {
+            adapter.notifyDataChanged()
         }
 
         refreshLayout.setOnRefreshListener {

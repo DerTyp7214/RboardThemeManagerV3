@@ -2,8 +2,10 @@
 
 package de.dertyp7214.rboardthememanager.screens
 
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.Intent.*
 import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.os.Bundle
@@ -18,11 +20,18 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.app.ShareCompat
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.core.view.marginBottom
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dertyp7214.preferencesplus.core.dp
+import com.dertyp7214.preferencesplus.core.setMargins
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.topjohnwu.superuser.io.SuFile
@@ -46,6 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var downloadResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<NestedScrollView>
+    private lateinit var themesViewModel: ThemesViewModel
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,8 +64,9 @@ class MainActivity : AppCompatActivity() {
 
         setUp()
 
-        val themesViewModel = ViewModelProvider(this)[ThemesViewModel::class.java]
+        themesViewModel = ViewModelProvider(this)[ThemesViewModel::class.java]
 
+        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         val searchBar = findViewById<SearchBar>(R.id.searchBar)
         val bottomSheet = findViewById<NestedScrollView>(R.id.bottom_bar)
         val navigationHolder =
@@ -112,6 +123,95 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        toolbar.navigationIcon =
+            ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)
+        toolbar.setNavigationOnClickListener { themesViewModel.getSelections().second?.clearSelection() }
+
+        toolbar.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.share -> {
+                    val adapter = themesViewModel.getSelections().second
+                    val themes = adapter?.getSelected()?.filter {
+                        it.path.isNotEmpty() && !it.path.startsWith("assets:")
+                    }
+                    if (!themes.isNullOrEmpty()) {
+                        openShareThemeDialog { dialog, name, author ->
+                            val files = arrayListOf<File>()
+                            File(cacheDir, "pack.meta").apply {
+                                files.add(this)
+                                writeText("name=$name\nauthor=$author\n")
+                            }
+                            themes.map { it.moveToCache(this) }.forEach {
+                                val image = File(it.path.removeSuffix(".zip"))
+                                files.add(File(it.path))
+                                if (image.exists()) files.add(image)
+                            }
+                            val zip = File(cacheDir, "themes.pack")
+                            zip.delete()
+                            ZipHelper().zip(files.map { it.absolutePath }, zip.absolutePath)
+                            files.forEach { it.delete() }
+                            val uri = FileProvider.getUriForFile(this, packageName, zip)
+                            ShareCompat.IntentBuilder(this)
+                                .setStream(uri)
+                                .setType("application/pack")
+                                .intent.setAction(ACTION_SEND)
+                                .setDataAndType(uri, "application/pack")
+                                .addFlags(FLAG_GRANT_READ_URI_PERMISSION).apply {
+                                    startActivity(
+                                        createChooser(
+                                            this,
+                                            getString(R.string.share_themes)
+                                        )
+                                    )
+                                }
+                            dialog.dismiss()
+                            adapter.clearSelection()
+                        }
+                    } else if (themes?.isEmpty() == true) {
+                        Toast.makeText(
+                            this,
+                            R.string.select_at_least_one_not_default_theme,
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+                R.id.delete -> {
+                    val adapter = themesViewModel.getSelections().second
+                    if (adapter != null) {
+                        val themes = adapter.getSelected().filter {
+                            it.path.isNotEmpty() && !it.path.startsWith("assets:")
+                        }
+                        if (themes.isNotEmpty()) {
+                            themes.forEach { theme ->
+                                theme.delete()
+                            }
+                            themesViewModel.setThemes()
+                            adapter.clearSelection()
+                        } else {
+                            Toast.makeText(
+                                this,
+                                R.string.select_at_least_one_not_default_theme,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                }
+            }
+            true
+        }
+
+        themesViewModel.observeSelections(this) { selections ->
+            val originHeight = toolbar.marginBottom
+            val destinationHeight = if (selections.first) 8.dp(this) else 62.dp(this)
+            ValueAnimator.ofInt(originHeight, destinationHeight).apply {
+                addUpdateListener {
+                    toolbar.setMargins(0, 0, 0, it.animatedValue as Int)
+                }
+                duration = 150
+                start()
+            }
+        }
+
         themesViewModel.observerSelectedTheme(this) { theme ->
             secondaryContent.removeViewAt(0)
             if (theme != null) {
@@ -126,6 +226,7 @@ class MainActivity : AppCompatActivity() {
                     else Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show()
                     delayed(150) {
                         themesViewModel.setSelectedTheme()
+                        themesViewModel.refreshThemes()
                     }
                 })
                 if (theme.path.isNotEmpty() && !theme.path.startsWith("assets:"))
@@ -207,9 +308,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         when {
-            searchBar.focus -> searchBar.setText()
             bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED ->
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            themesViewModel.getSelections().first -> themesViewModel.getSelections().second?.clearSelection()
+            searchBar.focus -> searchBar.setText()
             else -> super.onBackPressed()
         }
     }

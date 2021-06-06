@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.topjohnwu.superuser.BusyBoxInstaller
@@ -44,8 +45,8 @@ class SplashScreen : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_splash_screen)
+
         Shell.enableVerboseLogging = BuildConfig.DEBUG
         Shell.setDefaultBuilder(Shell.Builder.create().apply {
             setFlags(Shell.FLAG_MOUNT_MASTER)
@@ -60,32 +61,43 @@ class SplashScreen : AppCompatActivity() {
             SuFile(it.absolutePath).deleteRecursive()
         }
 
-        val content = findViewById<View>(android.R.id.content)
-        content.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
-            override fun onPreDraw(): Boolean {
-                return if (isReady) {
-                    content.viewTreeObserver.removeOnPreDrawListener(this)
-                    true
-                } else false
-            }
-        })
+        val data = intent.data
 
-        rootAccess = Shell.rootAccess()
-        gboardInstalled = isPackageInstalled(Config.GBOARD_PACKAGE_NAME, packageManager)
+        if (data != null) {
+            Toast.makeText(this, "YEEET", Toast.LENGTH_LONG).show()
+            finishAndRemoveTask()
+        } else {
+            val content = findViewById<View>(android.R.id.content)
+            content.viewTreeObserver.addOnPreDrawListener(object :
+                ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    return if (isReady) {
+                        content.viewTreeObserver.removeOnPreDrawListener(this)
+                        true
+                    } else false
+                }
+            })
 
-        createNotificationChannels()
+            rootAccess = Shell.rootAccess()
+            gboardInstalled = isPackageInstalled(Config.GBOARD_PACKAGE_NAME, packageManager)
 
-        when {
-            !gboardInstalled -> openDialog(R.string.install_gboard, R.string.gboard_not_installed) {
-                openUrl(gboardPlayStoreUrl)
-            }
-            !rootAccess -> openDialog(R.string.cant_use_app, R.string.not_rooted, null) {
-                finishAndRemoveTask()
-            }
-            else -> checkForUpdate {
-                checkedForUpdate = true
-                startActivity(Intent(this, MainActivity::class.java).putExtra("update", it))
-                finish()
+            createNotificationChannels()
+
+            when {
+                !gboardInstalled -> openDialog(
+                    R.string.install_gboard,
+                    R.string.gboard_not_installed
+                ) {
+                    openUrl(gboardPlayStoreUrl)
+                }
+                !rootAccess -> openDialog(R.string.cant_use_app, R.string.not_rooted, null) {
+                    finishAndRemoveTask()
+                }
+                else -> checkForUpdate {
+                    checkedForUpdate = true
+                    startActivity(Intent(this, MainActivity::class.java).putExtra("update", it))
+                    finish()
+                }
             }
         }
     }

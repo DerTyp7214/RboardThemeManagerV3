@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/lengw/.gradle/caches/transforms-3/da9339fab3753c7222f5eb242e4aec53/transformed/jetified-logs/res/drawable/ic_action_delete.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/.gradle/caches/transforms-3/ffa66179cbb312a4534e538e80752919/transformed/jetified-PreferencesPlus-1.1/res/drawable/round_corners.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable-v24-night/ic_keyboard.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable-v24/ic_keyboard.xml" value="0.3651041666666667" />
@@ -16,6 +17,7 @@
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_get_app_24.xml" value="0.20364583333333333" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.20364583333333333" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_delete_theme.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_download.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_download_two_tone.xml" value="0.3651041666666667" />
@@ -27,6 +29,7 @@
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_rboard.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_root.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_selected_theme_grid.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_sounds.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_sounds_tow_tone.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_style.xml" value="0.3651041666666667" />
@@ -49,9 +52,11 @@
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/sample_chip_container.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/sample_my_view.xml" value="0.33489583333333334" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/search_bar.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/share_popup.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/single_theme_item.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/theme_grid_item_single.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/menu/navigation.xml" value="0.3489583333333333" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/menu/selected_themes_menu.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/mipmap/ic_launcher.xml" value="0.3651041666666667" />

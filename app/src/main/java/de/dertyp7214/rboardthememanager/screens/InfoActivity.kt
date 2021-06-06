@@ -9,6 +9,7 @@ import de.Maxr1998.modernpreferences.helpers.categoryHeader
 import de.Maxr1998.modernpreferences.helpers.pref
 import de.Maxr1998.modernpreferences.helpers.screen
 import de.dertyp7214.rboardthememanager.BuildConfig
+import de.dertyp7214.rboardthememanager.Config.IS_MIUI
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.Config.THEME_LOCATION
 import de.dertyp7214.rboardthememanager.Config.themeCount
@@ -71,7 +72,7 @@ class InfoActivity : AppCompatActivity() {
             }
             pref("unsupported_oem") {
                 titleRes = R.string.unsupported_oem
-                summary = "No" // TODO:  do check
+                summaryRes = if (IS_MIUI) R.string.yes else R.string.no
                 iconRes = R.drawable.ic_trash
             }
         }

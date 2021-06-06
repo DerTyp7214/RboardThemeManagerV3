@@ -67,6 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:alpha="0"
+                android:background="?attr/colorBackgroundFloating"
                 android:gravity="center">
 
                 <ImageView
@@ -87,7 +88,7 @@
                     android:layout_marginStart="14dp"
                     android:layout_marginTop="14dp"
                     android:textAlignment="viewStart"
-                    android:textColor="@android:color/white"
+                    android:textColor="?attr/colorOnPrimary"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

@@ -22,6 +22,14 @@ fun String.booleanOrNull(): Boolean? {
     return if (this == "true" || this == "false") toBoolean() else null
 }
 
+fun String.getSystemProperty(): String {
+    return try {
+        Runtime.getRuntime().exec("getprop $this").inputStream.bufferedReader().readLine()
+    } catch (e: Exception) {
+        ""
+    }
+}
+
 fun List<String>.runAsCommand(callback: (result: Array<String>) -> Unit = {}): Boolean {
     return Shell.su(*this.toTypedArray()).exec().apply {
         if (err.size > 0) Logger.log(

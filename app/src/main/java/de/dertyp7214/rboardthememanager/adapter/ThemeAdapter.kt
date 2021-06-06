@@ -16,14 +16,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.getBitmap
+import de.dertyp7214.rboardthememanager.core.setAll
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.utils.ColorUtils
 import de.dertyp7214.rboardthememanager.utils.getActiveTheme
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ThemeAdapter(
     private val context: Context,
     private val themes: List<ThemeDataClass>,
+    private val forcedSelectionState: SelectionState? = null,
+    private val onSelectionStateChange: (selectionState: SelectionState, adapter: ThemeAdapter) -> Unit,
     private val onClickTheme: (theme: ThemeDataClass) -> Unit
 ) :
     RecyclerView.Adapter<ThemeAdapter.ViewHolder>() {
@@ -39,10 +43,54 @@ class ThemeAdapter(
         R.drawable.ic_keyboard
     )!!.getBitmap()
 
+    private val selected: ArrayListWrapper<Boolean> = ArrayListWrapper(themes.map { false }) {
+        if (oldSelectionState != selectionState) {
+            oldSelectionState = selectionState
+            onSelectionStateChange(selectionState, this)
+        }
+    }
+    private var oldSelectionState: SelectionState? = null
+    private val selectionState: SelectionState
+        get() = forcedSelectionState
+            ?: if (selected.any { it }) SelectionState.SELECTING else SelectionState.NONE
+
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         this.recyclerView = recyclerView
         activeTheme = getActiveTheme()
+            .removePrefix("assets:theme_package_metadata_")
+            .removeSuffix(".binarypb").let {
+                if (it.isBlank()) "system_auto" else it
+            }
+    }
+
+    private class ArrayListWrapper<E>(
+        private val list: ArrayList<E>,
+        private val onSet: (items: ArrayList<E>) -> Unit
+    ) {
+        constructor(list: List<E>, onSet: (items: ArrayList<E>) -> Unit) : this(
+            ArrayList(list),
+            onSet
+        )
+
+        val size: Int
+            get() = list.size
+
+        fun filter(predicate: (e: E) -> Boolean) = list.filter(predicate)
+        fun <T> mapIndexed(transform: (index: Int, e: E) -> T) = list.mapIndexed(transform)
+        fun clear() = list.clear()
+        fun addAll(items: List<E>) = list.addAll(items)
+        fun any(predicate: (e: E) -> Boolean) = list.any(predicate)
+        operator fun get(index: Int) = list[index]
+        operator fun set(index: Int, e: E) {
+            list[index] = e
+            onSet(list)
+        }
+
+        fun setAll(e: E) {
+            list.setAll(e)
+            onSet(list)
+        }
     }
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
@@ -58,6 +106,36 @@ class ThemeAdapter(
         }
     }
 
+    enum class SelectionState {
+        SELECTING,
+        NONE
+    }
+
+    fun clearSelection() {
+        selected.setAll(false)
+        notifyDataChanged()
+    }
+
+    @Suppress("MemberVisibilityCanBePrivate")
+    fun getSelected(): List<ThemeDataClass> {
+        return selected.mapIndexed { index, value -> Pair(themes[index], value) }
+            .filter { it.second }.map { it.first }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun notifyDataChanged() {
+        if (selected.size != themes.size) selected.apply {
+            clear()
+            addAll(themes.map { false })
+        }
+        notifyDataSetChanged()
+        activeTheme = getActiveTheme()
+            .removePrefix("assets:theme_package_metadata_")
+            .removeSuffix(".binarypb").let {
+                if (it.isBlank()) "system_auto" else it
+            }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(context)
@@ -67,10 +145,13 @@ class ThemeAdapter(
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val selection = true in themes.map { it.selected }
         val dataClass = themes[position]
 
-        val color = ColorUtils.dominantColor(dataClass.image ?: default)
+        holder.themeImage.setImageBitmap(dataClass.image ?: default)
+        holder.themeImage.colorFilter = dataClass.colorFilter
+        holder.themeImage.alpha = if (dataClass.image != null) 1F else .3F
+
+        val color = ColorUtils.dominantColor(holder.themeImage.drawable.getBitmap())
 
         if (holder.gradient != null) {
             val gradient = GradientDrawable(
@@ -79,9 +160,6 @@ class ThemeAdapter(
             )
             holder.gradient.background = gradient
         }
-
-        holder.themeImage.setImageBitmap(dataClass.image ?: default)
-        holder.themeImage.alpha = if (dataClass.image != null) 1F else .3F
 
         holder.themeName.text =
             "${
@@ -106,7 +184,9 @@ class ThemeAdapter(
 
         holder.themeName.setTextColor(if (ColorUtils.isColorLight(color)) Color.BLACK else Color.WHITE)
 
-        if (dataClass.selected)
+        holder.selectOverlay.background.alpha = 187
+
+        if (selected[position])
             holder.selectOverlay.alpha = 1F
         else
             holder.selectOverlay.alpha = 0F
@@ -114,37 +194,22 @@ class ThemeAdapter(
         holder.card.setCardBackgroundColor(color)
 
         holder.card.setOnClickListener {
-            onClickTheme(dataClass)
-        }
-
-        /*holder.card.setOnClickListener {
-            if (selection) {
-                list[position].selected = !list[position].selected
-                holder.selectOverlay.animate().alpha(1F - holder.selectOverlay.alpha)
+            if (selectionState == SelectionState.SELECTING) {
+                selected[position] = !selected[position]
+                holder.selectOverlay.animate().alpha(if (selected[position]) 1F else 0F)
                     .setDuration(200).withEndAction {
-                        notifyDataSetChanged()
-                        if (list[position].selected) addItemSelect(dataClass, position)
-                        if (!list[position].selected) removeItemSelect(dataClass, position)
-                        if (true !in list.map { it.selected }) selectToggle(false)
-                    }.start()
-            } else {
-                SelectedThemeBottomSheet(dataClass, default, color, isColorLight(color), context) {
-                    homeViewModel.setRefetch(true)
-                }.show(
-                    context.supportFragmentManager,
-                    ""
-                )
-            }
+                        notifyDataChanged()
+                    }
+            } else onClickTheme(dataClass)
         }
 
         holder.card.setOnLongClickListener {
-            list[position].selected = true
+            selected[position] = true
             holder.selectOverlay.animate().alpha(1F).setDuration(200).withEndAction {
-                notifyDataSetChanged()
-                selectToggle(true)
+                notifyDataChanged()
             }
             true
-        }*/
+        }
 
         setAnimation(holder.card, position)
     }

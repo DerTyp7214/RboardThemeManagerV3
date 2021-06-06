@@ -46,4 +46,12 @@
     <string name="root_version">Root version</string>
     <string name="gboard_version">Gboard version</string>
     <string name="unsupported_oem">Is unsupported OEM</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="share">Share</string>
+    <string name="delete">Delete</string>
+    <string name="name">Name</string>
+    <string name="author">Author</string>
+    <string name="share_themes">Share themes</string>
+    <string name="select_at_least_one_not_default_theme">Select at least one not default theme</string>
 </resources>
