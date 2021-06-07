@@ -7,7 +7,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
-import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import com.topjohnwu.superuser.BusyBoxInstaller
@@ -16,13 +16,11 @@ import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.getTextFromUrl
-import de.dertyp7214.rboardthememanager.core.openDialog
-import de.dertyp7214.rboardthememanager.core.openUrl
-import de.dertyp7214.rboardthememanager.core.runAsCommand
+import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.OutputMetadata
 import de.dertyp7214.rboardthememanager.utils.FileUtils
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
+import de.dertyp7214.rboardthememanager.utils.ZipHelper
 import de.dertyp7214.rboardthememanager.utils.doAsync
 import java.io.File
 import java.net.URL
@@ -64,8 +62,34 @@ class SplashScreen : AppCompatActivity() {
         val data = intent.data
 
         if (data != null) {
-            Toast.makeText(this, "YEEET", Toast.LENGTH_LONG).show()
-            finishAndRemoveTask()
+            val resultLauncher =
+                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                    finishAndRemoveTask()
+                }
+            val dialog = openLoadingDialog(R.string.unpacking_themes)
+            doAsync({
+                val zip = File(cacheDir, "themes.pack").apply {
+                    delete()
+                    data.writeToFile(this@SplashScreen, this)
+                }
+                if (!zip.exists()) listOf()
+                else {
+                    val destination = File(cacheDir, zip.nameWithoutExtension)
+                    if (ZipHelper().unpackZip(destination.absolutePath, zip.absolutePath)) {
+                        destination.listFiles { file -> file.extension == "zip" }
+                            ?.map { it.absolutePath }
+                            ?: listOf()
+                    } else listOf()
+                }
+            }) {
+                dialog.dismiss()
+                resultLauncher.launch(
+                    Intent(
+                        this,
+                        InstallPackActivity::class.java
+                    ).putStringArrayListExtra("themes", ArrayList(it))
+                )
+            }
         } else {
             val content = findViewById<View>(android.R.id.content)
             content.viewTreeObserver.addOnPreDrawListener(object :

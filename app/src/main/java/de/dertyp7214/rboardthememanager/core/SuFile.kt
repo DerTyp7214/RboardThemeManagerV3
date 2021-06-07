@@ -5,9 +5,11 @@ import android.graphics.BitmapFactory
 import android.util.Log
 import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
+import com.topjohnwu.superuser.io.SuFileOutputStream
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
+import java.nio.charset.Charset
 
 fun SuFile.copy(newFile: File): Boolean {
     return "\\cp $absolutePath ${newFile.absolutePath}".runAsCommand()
@@ -44,4 +46,11 @@ fun SuFile.decodeBitmap(opts: BitmapFactory.Options? = null): Bitmap? {
 
 fun SuFile.tar(zip: File): Boolean {
     return listOf("cd $absolutePath", "tar -cf ${zip.absolutePath} .").runAsCommand()
+}
+
+fun SuFile.writeFile(content: String) {
+    SuFileOutputStream.open(this).writer(Charset.defaultCharset())
+        .use { outputStreamWriter ->
+            outputStreamWriter.write(content)
+        }
 }

@@ -15,4 +15,25 @@
         <item name="android:statusBarColor" tools:targetApi="l">@android:color/system_neutral1_800</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3">
+        <item name="android:navigationBarColor">@android:color/system_neutral1_700</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.Info" parent="Theme.RboardThemeManagerV3">
+        <item name="android:statusBarColor">@android:color/system_neutral1_700</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.InstallPack" parent="Theme.RboardThemeManagerV3">
+        <item name="android:statusBarColor">@android:color/system_neutral1_700</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary">@android:color/system_neutral1_700</item>
+        <item name="colorPrimaryVariant">@android:color/system_neutral1_700</item>
+        <item name="colorOnPrimary">@android:color/system_neutral1_0</item>
+        <item name="android:textColorPrimary">?attr/colorOnPrimary</item>
+    </style>
 </resources>

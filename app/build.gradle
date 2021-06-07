@@ -10,6 +10,10 @@ android {
     buildToolsVersion "30.0.3"
     buildFeatures.dataBinding = true
 
+    androidExtensions {
+        experimental = true
+    }
+
     defaultConfig {
         applicationId "de.dertyp7214.rboardthememanager"
         minSdkPreview "S"
@@ -51,6 +55,7 @@ dependencies {
     implementation "com.github.topjohnwu.libsu:io:${libsuVersion}"
     implementation "com.github.topjohnwu.libsu:busybox:${libsuVersion}"
     implementation 'de.maxr1998:modernandroidpreferences:2.0'
+    implementation 'dev.chrisbanes.insetter:insetter:0.5.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.core:core-ktx:1.5.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

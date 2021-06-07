@@ -9,6 +9,7 @@ import android.net.Uri
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import de.dertyp7214.rboardthememanager.R
@@ -67,6 +68,20 @@ fun Activity.openShareThemeDialog(
             view.findViewById<Button>(R.id.cancel)?.setOnClickListener {
                 negative(dialog)
             }
+            dialog.show()
+        }
+}
+
+fun Activity.openLoadingDialog(@StringRes message: Int): AlertDialog {
+    val content = findViewById<View>(android.R.id.content)
+    content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
+    val view = layoutInflater.inflate(R.layout.loading_dialog, null)
+    return AlertDialog.Builder(this)
+        .setCancelable(false)
+        .setView(view)
+        .setOnDismissListener { content.setRenderEffect(null) }
+        .create().also { dialog ->
+            view.findViewById<TextView>(R.id.message).setText(message)
             dialog.show()
         }
 }

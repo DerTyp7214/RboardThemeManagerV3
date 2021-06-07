@@ -3,6 +3,7 @@ package de.dertyp7214.rboardthememanager.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
@@ -15,10 +16,13 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.getAttrColor
 import de.dertyp7214.rboardthememanager.core.getBitmap
 import de.dertyp7214.rboardthememanager.core.setAll
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.utils.ColorUtils
+import de.dertyp7214.rboardthememanager.utils.TraceWrapper
+import de.dertyp7214.rboardthememanager.utils.doAsync
 import de.dertyp7214.rboardthememanager.utils.getActiveTheme
 import java.util.*
 import kotlin.collections.ArrayList
@@ -42,9 +46,11 @@ class ThemeAdapter(
         context,
         R.drawable.ic_keyboard
     )!!.getBitmap()
+    private val selectedBackground =
+        ColorDrawable(context.getAttrColor(R.attr.colorBackgroundFloating)).apply { alpha = 187 }
 
     private val selected: ArrayListWrapper<Boolean> = ArrayListWrapper(themes.map { false }) {
-        if (oldSelectionState != selectionState) {
+        if (oldSelectionState != selectionState || forcedSelectionState == SelectionState.SELECTING) {
             oldSelectionState = selectionState
             onSelectionStateChange(selectionState, this)
         }
@@ -53,6 +59,10 @@ class ThemeAdapter(
     private val selectionState: SelectionState
         get() = forcedSelectionState
             ?: if (selected.any { it }) SelectionState.SELECTING else SelectionState.NONE
+
+    init {
+        cacheColor()
+    }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
@@ -127,6 +137,7 @@ class ThemeAdapter(
         if (selected.size != themes.size) selected.apply {
             clear()
             addAll(themes.map { false })
+            cacheColor()
         }
         notifyDataSetChanged()
         activeTheme = getActiveTheme()
@@ -136,6 +147,36 @@ class ThemeAdapter(
             }
     }
 
+    operator fun set(index: Int, value: Boolean) {
+        selected[index] = value
+    }
+
+    private fun cacheColor() {
+        themes.forEachIndexed { index, themeDataClass ->
+            doAsync({
+                ImageView(context).let { view ->
+                    view.setImageBitmap(themeDataClass.image ?: default)
+                    view.colorFilter = themeDataClass.colorFilter
+                    val color = ColorUtils.dominantColor(view.drawable.getBitmap())
+                    Pair(color, ColorUtils.isColorLight(color))
+                }
+            }, { colorCache[index] = it })
+        }
+    }
+
+    private fun getColorAndCache(dataClass: ThemeDataClass, position: Int): Int {
+        return (selected.size != themes.size).let {
+            if (it) null
+            else colorCache[position]?.first
+        } ?: ImageView(context).let { view ->
+            view.setImageBitmap(dataClass.image ?: default)
+            view.colorFilter = dataClass.colorFilter
+            val color = ColorUtils.dominantColor(view.drawable.getBitmap())
+            colorCache[position] = Pair(color, ColorUtils.isColorLight(color))
+            color
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(context)
@@ -143,15 +184,24 @@ class ThemeAdapter(
         )
     }
 
+    private val colorCache: HashMap<Int, Pair<Int, Boolean>> = hashMapOf()
+
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dataClass = themes[position]
+
+        val trace = TraceWrapper("ADAPTER $position", false)
+        trace.addSplit("IMAGE")
 
         holder.themeImage.setImageBitmap(dataClass.image ?: default)
         holder.themeImage.colorFilter = dataClass.colorFilter
         holder.themeImage.alpha = if (dataClass.image != null) 1F else .3F
 
-        val color = ColorUtils.dominantColor(holder.themeImage.drawable.getBitmap())
+        trace.addSplit("CALCULATE COLOR")
+
+        val color = getColorAndCache(dataClass, position)
+
+        trace.addSplit("BACKGROUND")
 
         if (holder.gradient != null) {
             val gradient = GradientDrawable(
@@ -161,30 +211,20 @@ class ThemeAdapter(
             holder.gradient.background = gradient
         }
 
-        holder.themeName.text =
-            "${
-                dataClass.name.split("_").joinToString(" ") { s ->
-                    s.replaceFirstChar {
-                        if (it.isLowerCase()) it.titlecase(
-                            Locale.ROOT
-                        ) else it.toString()
-                    }
-                }
-            } ${if (dataClass.name == activeTheme) "(applied)" else ""}"
-        holder.themeNameSelect.text =
-            "${
-                dataClass.name.split("_").joinToString(" ") { s ->
-                    s.replaceFirstChar {
-                        if (it.isLowerCase()) it.titlecase(
-                            Locale.ROOT
-                        ) else it.toString()
-                    }
-                }
-            } ${if (dataClass.name == activeTheme) "(applied)" else ""}"
+        holder.selectOverlay.background = selectedBackground
 
-        holder.themeName.setTextColor(if (ColorUtils.isColorLight(color)) Color.BLACK else Color.WHITE)
+        trace.addSplit("TEXT")
 
-        holder.selectOverlay.background.alpha = 187
+        "${dataClass.readableName} ${if (dataClass.name == activeTheme) "(applied)" else ""}".let {
+            holder.themeName.text = it
+            holder.themeNameSelect.text = it
+        }
+
+        holder.themeName.setTextColor(
+            if (colorCache[position]?.second == true) Color.BLACK else Color.WHITE
+        )
+
+        trace.addSplit("CLICK")
 
         if (selected[position])
             holder.selectOverlay.alpha = 1F
@@ -211,7 +251,9 @@ class ThemeAdapter(
             true
         }
 
+        trace.addSplit("ANIMATION")
         setAnimation(holder.card, position)
+        trace.end()
     }
 
     private fun setAnimation(viewToAnimate: View, position: Int) {

@@ -16,18 +16,26 @@ import de.dertyp7214.rboardthememanager.Config.themeCount
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.utils.GboardUtils.getGboardVersion
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
+import dev.chrisbanes.insetter.applyInsetter
 import kotlinx.android.synthetic.main.activity_info.*
 
 class InfoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.setDecorFitsSystemWindows(false)
         setContentView(R.layout.activity_info)
 
         val usingModule = MagiskUtils.getModules().any { it.id == MODULE_ID }
 
-        setSupportActionBar(toolbar)
+        setSupportActionBar(info_toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setTitle(R.string.info)
+
+        info_toolbar.applyInsetter {
+            type(statusBars = true) {
+                margin()
+            }
+        }
 
         val screen = screen(this) {
             pref("theme_count") {

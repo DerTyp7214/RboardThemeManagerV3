@@ -1,5 +1,6 @@
 package de.dertyp7214.rboardthememanager.viewmodels
 
+import androidx.annotation.IdRes
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -16,6 +17,7 @@ class ThemesViewModel : ViewModel() {
     private val clearSearch = MutableLiveData<String>()
     private val refreshThemes = MutableLiveData<String>()
     private val selections = MutableLiveData<Pair<Boolean, ThemeAdapter?>>()
+    private val navigate = MutableLiveData<@IdRes Int>()
 
     fun getSelectedTheme(): ThemeDataClass? {
         return selectedTheme.value
@@ -91,5 +93,13 @@ class ThemesViewModel : ViewModel() {
 
     fun onRefreshThemes(owner: LifecycleOwner, observer: Observer<String>) {
         refreshThemes.observe(owner, observer)
+    }
+
+    fun navigate(@IdRes id: Int) {
+        navigate.value = id
+    }
+
+    fun onNavigate(owner: LifecycleOwner, observer: Observer<Int>) {
+        navigate.observe(owner, observer)
     }
 }

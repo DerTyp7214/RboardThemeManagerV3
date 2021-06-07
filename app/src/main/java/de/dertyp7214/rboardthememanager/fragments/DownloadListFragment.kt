@@ -1,10 +1,12 @@
 package de.dertyp7214.rboardthememanager.fragments
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,13 +34,21 @@ class DownloadListFragment : Fragment() {
         val originalThemePacks = arrayListOf<ThemePack>()
         val themePacks = ArrayList(originalThemePacks)
 
-        val adapter = ThemePackAdapter(themePacks, requireContext())
-
-        val tags = arrayListOf<String>()
-
         val themesViewModel = requireActivity().run {
             ViewModelProvider(this)[ThemesViewModel::class.java]
         }
+
+        val resultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (it.resultCode == Activity.RESULT_OK) {
+                    themesViewModel.setThemes()
+                    themesViewModel.navigate(R.id.navigation_themes)
+                }
+            }
+
+        val adapter = ThemePackAdapter(themePacks, requireActivity(), resultLauncher)
+
+        val tags = arrayListOf<String>()
 
         themesViewModel.themePacksObserve(this) { packs ->
             originalThemePacks.clear()

@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.Intent.*
 import android.graphics.RenderEffect
 import android.graphics.Shader
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -44,6 +45,7 @@ import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.MenuItem
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 import de.dertyp7214.rboardthememanager.utils.*
+import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
 import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
@@ -87,6 +89,19 @@ class MainActivity : AppCompatActivity() {
             ) {
                 InfoActivity::class.java.start(this)
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            },
+            MenuItem(
+                R.drawable.ic_creator,
+                R.string.rboard_theme_creator
+            ) {
+                if (isPackageInstalled(Config.RBOARD_THEME_CREATOR_PACKAGE_NAME, packageManager))
+                    startActivity(packageManager.getLaunchIntentForPackage(Config.RBOARD_THEME_CREATOR_PACKAGE_NAME))
+                else startActivity(
+                    Intent(
+                        ACTION_VIEW,
+                        Uri.parse("https://github.com/DerTyp7214/RboardThemeCreator#readme")
+                    )
+                )
             }
         )
 
@@ -176,23 +191,29 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 R.id.delete -> {
-                    val adapter = themesViewModel.getSelections().second
-                    if (adapter != null) {
-                        val themes = adapter.getSelected().filter {
-                            it.path.isNotEmpty() && !it.path.startsWith("assets:")
-                        }
-                        if (themes.isNotEmpty()) {
-                            themes.forEach { theme ->
-                                theme.delete()
+                    openDialog(
+                        R.string.do_you_want_to_delete_theme,
+                        R.string.delete_theme
+                    ) { dialog ->
+                        dialog.dismiss()
+                        val adapter = themesViewModel.getSelections().second
+                        if (adapter != null) {
+                            val themes = adapter.getSelected().filter {
+                                it.path.isNotEmpty() && !it.path.startsWith("assets:")
                             }
-                            themesViewModel.setThemes()
-                            adapter.clearSelection()
-                        } else {
-                            Toast.makeText(
-                                this,
-                                R.string.select_at_least_one_not_default_theme,
-                                Toast.LENGTH_LONG
-                            ).show()
+                            if (themes.isNotEmpty()) {
+                                themes.forEach { theme ->
+                                    theme.delete()
+                                }
+                                themesViewModel.setThemes()
+                                adapter.clearSelection()
+                            } else {
+                                Toast.makeText(
+                                    this,
+                                    R.string.select_at_least_one_not_default_theme,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
                         }
                     }
                 }
@@ -303,6 +324,10 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             true
+        }
+
+        themesViewModel.onNavigate(this) { id ->
+            navigation.selectedItemId = id
         }
     }
 
