@@ -1,0 +1,1 @@
+[![Build](https://github.com/DerTyp7214/RboardThemeManagerV3/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/DerTyp7214/RboardThemeManagerV3/actions/workflows/build.yml)
