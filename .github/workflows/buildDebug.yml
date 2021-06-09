@@ -42,17 +42,6 @@ jobs:
           name: Release artifact
           path: app/build/outputs/apk/debug/app-artifact-*.apk
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: latest-debug
-          release_name: App
-          draft: false
-          prerelease: true
-
       - name: Save name of Artifact to ENV
         id: set-result-artifact
         run: |
@@ -62,24 +51,14 @@ jobs:
           echo "ARTIFACT_PATHNAME_APK=${ARTIFACT_PATHNAME_APK}" >> $GITHUB_ENV
           echo "ARTIFACT_NAME_APK=${ARTIFACT_NAME_APK}" >> $GITHUB_ENV
 
-      - name: Upload Apk
-        id: upload-release-asset-apk
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Assets
+        id: upload_assets
+        uses: marvinpinto/action-automatic-releases@latest
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ env.ARTIFACT_PATHNAME_APK }}
-          asset_name: ${{ env.ARTIFACT_NAME_APK }}
-          asset_content_type: application/zip
-
-      - name: Upload JSON
-        id: upload-release-asset-json
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: app/build/outputs/apk/debug/output-metadata.json
-          asset_name: output-metadata.json
-          asset_content_type: application/json
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: latest-debug
+          prerelease: true
+          title: Development Build
+          files: |
+            ${{ env.ARTIFACT_PATHNAME_APK }}
+            app/build/outputs/apk/debug/output-metadata.json
