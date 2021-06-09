@@ -1,4 +1,4 @@
-name: Build Debug
+name: Build R Compatible
 
 on:
   push:
