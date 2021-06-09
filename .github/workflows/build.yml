@@ -16,7 +16,7 @@ jobs:
         with:
           java-version: 11
 
-      - name: Build all artifacts
+      - name: Build apk
         id: buildAllApks
         uses: eskatos/gradle-command-action@v1.3.3
         with:
@@ -48,12 +48,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: latest
+          release_name: App
           draft: false
           prerelease: true
 
-      - name: Save name of our Artifact
+      - name: Save name of Artifact to ENV
         id: set-result-artifact
         run: |
           ARTIFACT_PATHNAME_APK=$(ls app/build/outputs/apk/debug/*.apk | head -n 1)
@@ -62,7 +62,7 @@ jobs:
           echo "ARTIFACT_PATHNAME_APK=${ARTIFACT_PATHNAME_APK}" >> $GITHUB_ENV
           echo "ARTIFACT_NAME_APK=${ARTIFACT_NAME_APK}" >> $GITHUB_ENV
 
-      - name: Upload Artifact
+      - name: Upload Apk
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
@@ -72,3 +72,14 @@ jobs:
           asset_path: ${{ env.ARTIFACT_PATHNAME_APK }}
           asset_name: ${{ env.ARTIFACT_NAME_APK }}
           asset_content_type: application/zip
+
+      - name: Upload JSON
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: app/build/outputs/apk/debug/output-metadata.json
+          asset_name: output-metadata.json
+          asset_content_type: application/json
