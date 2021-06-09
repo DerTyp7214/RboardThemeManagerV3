@@ -1,4 +1,4 @@
-name: Build
+name: Build Debug
 
 on:
   push:
@@ -48,7 +48,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: latest
+          tag_name: latest-debug
           release_name: App
           draft: false
           prerelease: true
