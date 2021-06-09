@@ -405,8 +405,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun update() {
-        val content = findViewById<View>(android.R.id.content)
-
         val maxProgress = 100
         val notificationId = 42069
         val builder =
@@ -443,9 +441,7 @@ class MainActivity : AppCompatActivity() {
                 builder.setContentText(getString(R.string.download_complete))
                     .setProgress(0, 0, false)
                 manager.notify(notificationId, builder.build())
-                content
                 PackageUtils.install(this@MainActivity, File(path), downloadResultLauncher) {
-                    content
                     Toast.makeText(this@MainActivity, R.string.error, Toast.LENGTH_LONG).show()
                 }
             }

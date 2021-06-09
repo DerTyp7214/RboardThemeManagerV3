@@ -89,7 +89,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: latest-rCompatible
           prerelease: true
-          title: Development Build
+          title: Android R Compatible
           files: |
             app/build/outputs/apk/debug/app-debug.apk
             app/build/outputs/apk/debug/output-metadata.json
