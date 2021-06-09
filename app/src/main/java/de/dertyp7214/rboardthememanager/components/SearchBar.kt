@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import de.dertyp7214.rboardthememanager.R
 
-
 class SearchBar(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
 
     var focus = false

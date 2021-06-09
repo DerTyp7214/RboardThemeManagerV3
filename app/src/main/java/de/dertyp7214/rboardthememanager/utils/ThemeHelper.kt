@@ -32,7 +32,6 @@ import de.dertyp7214.rboardthememanager.core.getBitmap
 import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.data.ThemePack
-import de.dertyp7214.rboardthememanager.utils.FileUtils.getThemePacksPath
 import java.io.BufferedInputStream
 import java.io.File
 import java.net.URL
@@ -120,6 +119,7 @@ fun getActiveTheme(): String {
     }
 }
 
+@Suppress("unused")
 fun getSoundsDirectory(): SuFile? {
     val productMedia = SuFile("/system/product/media/audio/ui/KeypressStandard.ogg")
     val systemMedia = SuFile("/system/media/audio/ui/KeypressStandard.ogg")
@@ -130,13 +130,6 @@ fun getSoundsDirectory(): SuFile? {
     } else {
         null
     }
-}
-
-private fun writeSuFile(file: SuFile, content: String) {
-    SuFileOutputStream.open(file).writer(Charset.defaultCharset())
-        .use { outputStreamWriter ->
-            outputStreamWriter.write(content)
-        }
 }
 
 object ThemeUtils {
@@ -155,8 +148,19 @@ object ThemeUtils {
             else ThemeDataClass(null, it.name.removeSuffix(".zip"), it.absolutePath)
         }.apply { if (this != null) Config.themeCount = size } ?: ArrayList()).let {
             val themes = arrayListOf<ThemeDataClass>()
-            getSystemAutoTheme()?.let { theme -> themes.add(theme) }
-            themes.addAll(buildPreinstalledThemesList())
+            val context = Application.context
+            if (context?.let { ctx ->
+                    Settings.SETTINGS.SHOW_SYSTEM_THEME.getValue(
+                        ctx,
+                        true
+                    )
+                } == true) getSystemAutoTheme()?.let { theme -> themes.add(theme) }
+            if (context?.let { ctx ->
+                    Settings.SETTINGS.SHOW_PREINSTALLED_THEMES.getValue(
+                        ctx,
+                        true
+                    )
+                } == true) themes.addAll(buildPreinstalledThemesList())
             themes.addAll(it)
             themes
         }
@@ -171,25 +175,6 @@ object ThemeUtils {
         } catch (e: Exception) {
             listOf()
         }
-    }
-
-    fun loadPreviewThemes(context: Context): List<ThemeDataClass> {
-        return loadThemesWithPath(File(getThemePacksPath(context), "previews"))
-    }
-
-    @JvmStatic
-    fun loadThemesWithPath(themeDir: File): List<ThemeDataClass> {
-        return themeDir.listFiles()?.filter {
-            it.name.lowercase(Locale.ROOT).endsWith("zip")
-        }?.map {
-            val imageFile = SuFile(themeDir.absolutePath, it.name.removeSuffix(".zip"))
-            if (imageFile.exists()) ThemeDataClass(
-                imageFile.decodeBitmap(),
-                it.name.removeSuffix(".zip"),
-                it.absolutePath
-            )
-            else ThemeDataClass(null, it.name.removeSuffix(".zip"), it.absolutePath)
-        }.apply { if (this != null) Config.themeCount = size } ?: ArrayList()
     }
 
     fun getThemesPathFromProps(): String? {
@@ -256,7 +241,13 @@ object ThemeUtils {
             }
             ThemeDataClass(
                 image,
-                imgName.split("_").joinToString(" ") { it.capitalize(Locale.getDefault()) }, ""
+                imgName.split("_").joinToString(" ") {
+                    it.replaceFirstChar { char ->
+                        if (char.isLowerCase()) char.titlecase(
+                            Locale.getDefault()
+                        ) else char.toString()
+                    }
+                }, ""
             )
         } else if (themeName.isNotEmpty()) {
             val image = SuFile(Config.THEME_LOCATION, themeName)

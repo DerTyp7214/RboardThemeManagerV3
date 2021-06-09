@@ -24,9 +24,7 @@ class MenuAdapter(private val items: List<MenuItem>, private val context: Contex
 
         holder.textView.setText(item.title)
         holder.textView.setCompoundDrawablesWithIntrinsicBounds(item.icon, 0, 0, 0)
-        holder.textView.setOnClickListener {
-            item.onClick()
-        }
+        holder.textView.setOnClickListener { item.onClick() }
     }
 
     override fun getItemCount(): Int = items.size

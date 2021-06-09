@@ -14,7 +14,6 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import de.dertyp7214.rboardthememanager.R
 
-
 fun Activity.openUrl(url: String) {
     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
 }

@@ -23,7 +23,7 @@
             android:exported="true"
             android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />
         <activity
-            android:name=".screens.InfoActivity"
+            android:name=".screens.PreferencesActivity"
             android:exported="true"
             android:theme="@style/Theme.RboardThemeManagerV3.Info" />
         <activity

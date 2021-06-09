@@ -82,13 +82,41 @@ class MainActivity : AppCompatActivity() {
 
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
 
+        val reloadThemesLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                themesViewModel.setThemes()
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
+
+        val closeBottomSheetBehaviorLaucher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            }
+
         val mainMenuItems = arrayListOf(
             MenuItem(
                 R.drawable.ic_info,
                 R.string.info
             ) {
-                InfoActivity::class.java.start(this)
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                PreferencesActivity::class.java.start(this, closeBottomSheetBehaviorLaucher) {
+                    putExtra("type", "info")
+                }
+            },
+            MenuItem(
+                R.drawable.ic_settings,
+                R.string.settings
+            ) {
+                PreferencesActivity::class.java.start(this, reloadThemesLauncher) {
+                    putExtra("type", "settings")
+                }
+            },
+            MenuItem(
+                R.drawable.ic_baseline_outlined_flag_24,
+                R.string.flags
+            ) {
+                PreferencesActivity::class.java.start(this, closeBottomSheetBehaviorLaucher) {
+                    putExtra("type", "flags")
+                }
             },
             MenuItem(
                 R.drawable.ic_creator,

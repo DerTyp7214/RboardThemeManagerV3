@@ -61,4 +61,22 @@
     <string name="themes_installed">Themes installed</string>
     <string name="unpacking_themes">Unpacking themes</string>
     <string name="do_you_want_to_delete_theme">Do you want to delete these themes?</string>
+    <string name="show_preinstalled_themes">Show preinstalled themes</string>
+    <string name="emoji_compat_app_whitelist">Emoj compat fix</string>
+    <string name="flags">Flags</string>
+    <string name="themes_header">Themes</string>
+    <string name="show_system_theme">Show system theme</string>
+    <string name="enable_joystick_delete">Joystick delete</string>
+    <string name="deprecate_search">Google icon</string>
+    <string name="enable_sharing">Share Icon</string>
+    <string name="themed_navbar_style">Navbar color</string>
+    <string name="enable_email_provider_completion">Email provider</string>
+    <string name="enable_popup_view_v2">Popup v2</string>
+    <string name="enable_key_border">Enable key border</string>
+    <string name="enable_secondary_symbols">Enable seconday symbols</string>
+    <string name="show_suggestions">Show suggestions</string>
+    <string name="show_all_flags">Show all flags</string>
+    <string name="show_all_flags_long">Shows all flags that are currently set</string>
+    <string name="all_flags">All flags</string>
+    <string name="loading_preferences">Loading Preferences</string>
 </resources>

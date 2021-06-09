@@ -86,7 +86,6 @@ class ThemeAdapter(
         val size: Int
             get() = list.size
 
-        fun filter(predicate: (e: E) -> Boolean) = list.filter(predicate)
         fun <T> mapIndexed(transform: (index: Int, e: E) -> T) = list.mapIndexed(transform)
         fun clear() = list.clear()
         fun addAll(items: List<E>) = list.addAll(items)
@@ -137,6 +136,7 @@ class ThemeAdapter(
         if (selected.size != themes.size) selected.apply {
             clear()
             addAll(themes.map { false })
+            colorCache.clear()
             cacheColor()
         }
         notifyDataSetChanged()
@@ -213,6 +213,8 @@ class ThemeAdapter(
 
         holder.selectOverlay.background = selectedBackground
 
+        holder.card.setCardBackgroundColor(color)
+
         trace.addSplit("TEXT")
 
         "${dataClass.readableName} ${if (dataClass.name == activeTheme) "(applied)" else ""}".let {
@@ -230,8 +232,6 @@ class ThemeAdapter(
             holder.selectOverlay.alpha = 1F
         else
             holder.selectOverlay.alpha = 0F
-
-        holder.card.setCardBackgroundColor(color)
 
         holder.card.setOnClickListener {
             if (selectionState == SelectionState.SELECTING) {

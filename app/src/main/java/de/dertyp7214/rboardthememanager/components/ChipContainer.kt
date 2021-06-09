@@ -11,7 +11,6 @@ import de.dertyp7214.rboardthememanager.core.dpToPx
 import de.dertyp7214.rboardthememanager.core.getAttrColor
 import java.util.*
 
-
 class ChipContainer(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
 
     private val chipGroup: ChipGroup

@@ -7,7 +7,6 @@ import android.content.pm.PackageManager.NameNotFoundException
 import com.dertyp7214.logs.helpers.Logger
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
 
-
 object GboardUtils {
     fun getGboardVersion(context: Context): String {
         return try {
