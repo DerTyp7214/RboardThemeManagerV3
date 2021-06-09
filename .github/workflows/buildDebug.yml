@@ -40,7 +40,7 @@ jobs:
         uses: actions/upload-artifact@v2.2.3
         with:
           name: Release artifact
-          path: ${{ steps.signArtifact.outputs.signedReleaseFile }}
+          path: app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload Assets
         id: upload_assets
