@@ -3,8 +3,6 @@ package de.dertyp7214.rboardthememanager.core
 import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.RenderEffect
-import android.graphics.Shader
 import android.net.Uri
 import android.view.View
 import android.widget.Button
@@ -25,13 +23,13 @@ fun Activity.openDialog(
     positive: (dialogInterface: DialogInterface) -> Unit
 ): AlertDialog {
     val content = findViewById<View>(android.R.id.content)
-    content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
+    content
     return AlertDialog.Builder(this)
         .setCancelable(false)
         .setMessage(message)
         .setTitle(title)
         .setPositiveButton(android.R.string.ok) { dialogInterface, _ -> positive(dialogInterface) }
-        .setOnDismissListener { content.setRenderEffect(null) }
+        .setOnDismissListener { content }
         .apply {
             if (negative != null) setNegativeButton(android.R.string.cancel) { dialogInterface, _ ->
                 negative.invoke(
@@ -47,12 +45,12 @@ fun Activity.openShareThemeDialog(
     positive: (dialogInterface: DialogInterface, name: String, author: String) -> Unit
 ): AlertDialog {
     val content = findViewById<View>(android.R.id.content)
-    content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
+    content
     val view = layoutInflater.inflate(R.layout.share_popup, null)
     return AlertDialog.Builder(this)
         .setCancelable(false)
         .setView(view)
-        .setOnDismissListener { content.setRenderEffect(null) }
+        .setOnDismissListener { content }
         .create().also { dialog ->
             val nameInput = view.findViewById<EditText>(R.id.editTextName)
             val authorInput = view.findViewById<EditText>(R.id.editTextAuthor)
@@ -73,12 +71,12 @@ fun Activity.openShareThemeDialog(
 
 fun Activity.openLoadingDialog(@StringRes message: Int): AlertDialog {
     val content = findViewById<View>(android.R.id.content)
-    content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
+    content
     val view = layoutInflater.inflate(R.layout.loading_dialog, null)
     return AlertDialog.Builder(this)
         .setCancelable(false)
         .setView(view)
-        .setOnDismissListener { content.setRenderEffect(null) }
+        .setOnDismissListener { content }
         .create().also { dialog ->
             view.findViewById<TextView>(R.id.message).setText(message)
             dialog.show()

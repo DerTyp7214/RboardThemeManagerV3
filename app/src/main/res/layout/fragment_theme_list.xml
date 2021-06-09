@@ -32,7 +32,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_outline"
                 android:clipChildren="true"
-                android:clipToOutline="true"
                 android:translationZ="0dp"
                 tools:listitem="@layout/theme_grid_item_single" />
 

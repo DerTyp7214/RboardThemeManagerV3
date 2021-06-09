@@ -6,8 +6,6 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.*
-import android.graphics.RenderEffect
-import android.graphics.Shader
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -372,7 +370,7 @@ class MainActivity : AppCompatActivity() {
     private fun setUp() {
         downloadResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                findViewById<View>(android.R.id.content).setRenderEffect(null)
+                findViewById<View>(android.R.id.content)
             }
 
         if (ThemeUtils.checkForExistingThemes()) ThemeUtils.getThemesPathFromProps()
@@ -445,15 +443,9 @@ class MainActivity : AppCompatActivity() {
                 builder.setContentText(getString(R.string.download_complete))
                     .setProgress(0, 0, false)
                 manager.notify(notificationId, builder.build())
-                content.setRenderEffect(
-                    RenderEffect.createBlurEffect(
-                        10F,
-                        10F,
-                        Shader.TileMode.REPEAT
-                    )
-                )
+                content
                 PackageUtils.install(this@MainActivity, File(path), downloadResultLauncher) {
-                    content.setRenderEffect(null)
+                    content
                     Toast.makeText(this@MainActivity, R.string.error, Toast.LENGTH_LONG).show()
                 }
             }

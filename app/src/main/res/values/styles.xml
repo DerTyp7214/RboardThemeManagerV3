@@ -1,7 +1,7 @@
 <resources>
 
     <style name="Widget.Theme.RboardThemeManagerV3.MyView" parent="">
-        <item name="android:background">@color/gray_400</item>
-        <item name="exampleColor">@color/light_blue_400</item>
+        <item name="android:background">@color/bg</item>
+        <item name="exampleColor">@color/cornflowerblue</item>
     </style>
 </resources>

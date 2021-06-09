@@ -7,8 +7,8 @@ plugins {
 }
 
 android {
-    compileSdkPreview "android-S"
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 30
+    buildToolsVersion '31.0.0 rc5'
     buildFeatures.dataBinding = true
 
     androidExtensions {
@@ -17,8 +17,8 @@ android {
 
     defaultConfig {
         applicationId "de.dertyp7214.rboardthememanager"
-        minSdkPreview "S"
-        targetSdkPreview "S"
+        minSdkVersion 30
+        targetSdkVersion 30
         versionCode 303
         versionName "3.0.3"
 
