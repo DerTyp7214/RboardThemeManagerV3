@@ -11,6 +11,7 @@
     <color name="light_blue_600">#FF039BE5</color>
     <color name="gray_400">#FFBDBDBD</color>
     <color name="gray_600">#FF757575</color>
+    <color name="transparentBlack">#80000000</color>
 
     <color name="ic_launcher_background">@android:color/system_accent2_50</color>
     <color name="ic_launcher_foreground">@android:color/system_accent1_600</color>

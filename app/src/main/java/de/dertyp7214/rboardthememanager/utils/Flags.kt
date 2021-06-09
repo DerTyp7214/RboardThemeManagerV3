@@ -19,7 +19,9 @@ import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import org.xml.sax.InputSource
 import java.io.StringReader
+import java.util.*
 import javax.xml.parsers.DocumentBuilderFactory
+import kotlin.collections.HashMap
 
 class Flags {
     enum class FILES(val fileName: String) {
@@ -97,8 +99,8 @@ class Flags {
             FILES.FLAGS
         ),
         THEMED_NAVBAR_STYLE(
-            "themed_navbar_style",
-            R.string.themed_navbar_style,
+            "themed_nav_bar_style",
+            R.string.themed_nav_bar_style,
             -1,
             R.drawable.ic_navbar,
             false,
@@ -155,6 +157,51 @@ class Flags {
             TYPE.BOOLEAN,
             FILES.GBOARD_PREFERENCES
         ),
+        MONET(
+            "monet",
+            R.string.monet,
+            -1,
+            -1,
+            "",
+            TYPE.GROUP,
+            FILES.FLAGS
+        ),
+        USE_SILK_THEME_BY_DEFAULT(
+            "use_silk_theme_by_default",
+            R.string.use_silk_theme_by_default,
+            -1,
+            R.drawable.ic_themes,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
+        ),
+        SILK_ON_ALL_PIXEL(
+            "silk_on_all_pixel",
+            R.string.silk_on_all_pixel,
+            -1,
+            R.drawable.ic_themes,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
+        ),
+        SILK_THEME(
+            "silk_theme",
+            R.string.silk_theme,
+            -1,
+            R.drawable.ic_themes,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
+        ),
+        EMPTY(
+            "empty",
+            -1,
+            -1,
+            -1,
+            "",
+            TYPE.GROUP,
+            FILES.FLAGS
+        ),
         SHOW_ALL_FLAGS(
             "show_all_flags",
             R.string.show_all_flags,
@@ -183,8 +230,125 @@ class Flags {
         }
 
         @SuppressLint("SdCardPath")
-        fun <T> setValue(v: T): Boolean {
-            val value = if (valueMap != null) valueMap[v] else v
+        fun <T> setValue(v: T) = setValue(if (valueMap != null) valueMap[v] else v, key, file)
+    }
+
+    fun preferences(builder: PreferenceScreen.Builder) {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(Application.context)
+        FLAGS.values().forEach { item ->
+            if (item.visible) {
+                prefs.edit { remove(item.key) }
+                val pref: Preference = when (item.type) {
+                    TYPE.BOOLEAN -> builder.switch(item.key) {
+                        defaultValue = item.getValue(item.defaultValue) as? Boolean ?: false
+                        onCheckedChange {
+                            if (!item.setValue(it)) Application.context?.let { context ->
+                                Toast.makeText(
+                                    context,
+                                    R.string.error,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                            true
+                        }
+                    }
+                    TYPE.INT, TYPE.LONG, TYPE.FLOAT -> builder.pref(item.key) {}
+                    TYPE.GROUP -> builder.categoryHeader(item.key) {
+                        titleRes = item.title
+                        summaryRes = item.summary
+                    }.let { Preference("") }
+                    TYPE.STRING -> builder.pref(item.key) {}
+                    TYPE.JUST_CLICK -> builder.pref(item.key) {
+                        onClick { item.onClick(); false }
+                    }
+                }
+                pref.apply {
+                    titleRes = item.title
+                    summaryRes = item.summary
+                    iconRes = item.icon
+                    if (item.summary == -1) summary = item.key
+                }
+            }
+        }
+    }
+
+    fun allFlagsPreferences(builder: PreferenceScreen.Builder) {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(Application.context)
+        values.forEach { entry ->
+            prefs.edit { remove(entry.key) }
+            if (entry.value is Boolean) builder.switch(entry.key) {
+                title = entry.key.split("_").joinToString(" ") {
+                    it.replaceFirstChar { char ->
+                        if (char.isLowerCase()) char.titlecase(
+                            Locale.getDefault()
+                        ) else char.toString()
+                    }
+                }
+                summary = entry.key
+                defaultValue = entry.value as Boolean
+                onCheckedChange {
+                    if (!setValue(it, entry.key, FILES.FLAGS)) Application.context?.let { context ->
+                        Toast.makeText(
+                            context,
+                            R.string.error,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                    true
+                }
+            } else {
+                builder.pref(entry.key) {
+                    title = entry.key.split("_").joinToString(" ") {
+                        it.replaceFirstChar { char ->
+                            if (char.isLowerCase()) char.titlecase(
+                                Locale.getDefault()
+                            ) else char.toString()
+                        }
+                    }
+                    summary = entry.value.toString()
+                }
+            }
+        }
+    }
+
+    companion object {
+        val values: Map<String, Any>
+            get() {
+                return getCurrentXmlValues(FILES.FLAGS.fileName) + getCurrentXmlValues(FILES.GBOARD_PREFERENCES.fileName)
+            }
+
+        @SuppressLint("SdCardPath")
+        private fun getCurrentXmlValues(file: String): Map<String, Any> {
+            val output = HashMap<String, Any>()
+
+            val fileName = "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/$file"
+            val xmlFile = SuFile(fileName)
+            if (!xmlFile.exists()) return output
+
+            val map = try {
+                DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
+                    InputSource(
+                        StringReader(
+                            SuFileInputStream.open(xmlFile).bufferedReader().readText()
+                        )
+                    )
+                ).getElementsByTagName("map")
+            } catch (e: Exception) {
+                return output
+            }
+
+            for (item in map.item(0).childNodes) {
+                val name = item.attributes?.getNamedItem("name")?.nodeValue
+                val value = item.attributes?.getNamedItem("value")?.nodeValue
+                if (name != null) output[name] =
+                    (value?.booleanOrNull() ?: value) ?: item.textContent ?: ""
+            }
+
+            return output
+        }
+
+        @SuppressLint("SdCardPath")
+        private fun <T> setValue(value: T, key: String, file: FILES): Boolean {
             val fileName = "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
             val content = SuFileInputStream.open(SuFile(fileName)).use {
                 it.bufferedReader().readText()
@@ -231,81 +395,6 @@ class Flags {
             SuFile(fileName).writeFile(content)
 
             return "am force-stop ${Config.GBOARD_PACKAGE_NAME}".runAsCommand()
-        }
-    }
-
-    fun preferences(builder: PreferenceScreen.Builder) {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(Application.context)
-        FLAGS.values().forEach { item ->
-            if (item.visible) {
-                prefs.edit { remove(item.key) }
-                val pref: Preference = when (item.type) {
-                    TYPE.BOOLEAN -> builder.switch(item.key) {
-                        defaultValue = item.getValue(item.defaultValue) as? Boolean ?: false
-                        onCheckedChange {
-                            if (!item.setValue(it)) Application.context?.let { context ->
-                                Toast.makeText(
-                                    context,
-                                    R.string.error,
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                            true
-                        }
-                    }
-                    TYPE.INT, TYPE.LONG, TYPE.FLOAT -> builder.pref(item.key) {}
-                    TYPE.GROUP -> builder.categoryHeader(item.key) {
-                        titleRes = item.title
-                        summaryRes = item.summary
-                    }.let { Preference("") }
-                    TYPE.STRING -> builder.pref(item.key) {}
-                    TYPE.JUST_CLICK -> builder.pref(item.key) {
-                        onClick { item.onClick(); false }
-                    }
-                }
-                pref.apply {
-                    titleRes = item.title
-                    summaryRes = item.summary
-                    iconRes = item.icon
-                }
-            }
-        }
-    }
-
-    companion object {
-        val values: Map<String, Any>
-            get() {
-                return getCurrentXmlValues(FILES.FLAGS.fileName) + getCurrentXmlValues(FILES.GBOARD_PREFERENCES.fileName)
-            }
-
-        @SuppressLint("SdCardPath")
-        private fun getCurrentXmlValues(file: String): Map<String, Any> {
-            val output = HashMap<String, Any>()
-
-            val fileName = "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/$file"
-            val xmlFile = SuFile(fileName)
-            if (!xmlFile.exists()) return output
-
-            val map = try {
-                DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
-                    InputSource(
-                        StringReader(
-                            SuFileInputStream.open(xmlFile).bufferedReader().readText()
-                        )
-                    )
-                ).getElementsByTagName("map")
-            } catch (e: Exception) {
-                return output
-            }
-
-            for (item in map.item(0).childNodes) {
-                val name = item.attributes?.getNamedItem("name")?.nodeValue
-                val value = item.attributes?.getNamedItem("value")?.nodeValue
-                if (name != null) output[name] =
-                    (value?.booleanOrNull() ?: value) ?: item.textContent ?: ""
-            }
-
-            return output
         }
     }
 }

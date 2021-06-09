@@ -36,7 +36,7 @@ class Preferences(private val activity: Activity, private val intent: Intent) {
 
     private fun getSettingsPreferences() = screen(activity, Settings()::preferences)
     private fun getFlagsPreferences() = screen(activity, Flags()::preferences)
-    private fun getAllFlagsPreferences() = screen(activity) {}
+    private fun getAllFlagsPreferences() = screen(activity, Flags()::allFlagsPreferences)
 
     private fun getInfoPreferences(): PreferenceScreen {
         val usingModule = MagiskUtils.getModules().any { it.id == Config.MODULE_ID }

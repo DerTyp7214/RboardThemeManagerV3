@@ -69,14 +69,18 @@
     <string name="enable_joystick_delete">Joystick delete</string>
     <string name="deprecate_search">Google icon</string>
     <string name="enable_sharing">Share Icon</string>
-    <string name="themed_navbar_style">Navbar color</string>
+    <string name="themed_nav_bar_style">Navbar color</string>
     <string name="enable_email_provider_completion">Email provider</string>
     <string name="enable_popup_view_v2">Popup v2</string>
     <string name="enable_key_border">Enable key border</string>
-    <string name="enable_secondary_symbols">Enable seconday symbols</string>
+    <string name="enable_secondary_symbols">Enable secondary symbols</string>
     <string name="show_suggestions">Show suggestions</string>
     <string name="show_all_flags">Show all flags</string>
     <string name="show_all_flags_long">Shows all flags that are currently set</string>
     <string name="all_flags">All flags</string>
     <string name="loading_preferences">Loading Preferences</string>
+    <string name="use_silk_theme_by_default">Use silk theme by default</string>
+    <string name="monet">Monet</string>
+    <string name="silk_on_all_pixel">Silk on all Pixel</string>
+    <string name="silk_theme">Silk theme</string>
 </resources>
