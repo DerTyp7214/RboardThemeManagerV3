@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ic_launcher_background">@android:color/system_accent2_800</color>
-    <color name="ic_launcher_foreground">@android:color/system_accent1_200</color>
+    <color name="bg">#000000</color>
+    <color name="fg">#1a1a1a</color>
+    <color name="cornflowerblue">#6495ed</color>
+    <color name="text">#ffffff</color>
+    <color name="black">#ffffff</color>
+    <color name="transparentBlack">#80000000</color>
+
+    <color name="ic_launcher_background">@color/cornflowerblue</color>
+    <color name="ic_launcher_foreground">@color/bg</color>
 </resources>
