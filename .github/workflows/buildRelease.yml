@@ -51,7 +51,7 @@ jobs:
           tag_name: latest-release
           release_name: App
           draft: false
-          prerelease: true
+          prerelease: false
 
       - name: Save name of Artifact to ENV
         id: set-result-artifact
