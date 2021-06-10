@@ -19,8 +19,8 @@ android {
         applicationId "de.dertyp7214.rboardthememanager"
         minSdkVersion 30
         targetSdkVersion 30
-        versionCode 304
-        versionName "3.0.4"
+        versionCode 305
+        versionName "3.0.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -58,13 +58,13 @@ dependencies {
     implementation "com.github.topjohnwu.libsu:core:${libsuVersion}"
     implementation "com.github.topjohnwu.libsu:io:${libsuVersion}"
     implementation "com.github.topjohnwu.libsu:busybox:${libsuVersion}"
-    implementation 'de.maxr1998:modernandroidpreferences:2.0'
-    implementation 'dev.chrisbanes.insetter:insetter:0.5.0'
+    implementation 'de.maxr1998:modernandroidpreferences:2.1.0'
+    implementation 'dev.chrisbanes.insetter:insetter:0.6.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.core:core-ktx:1.5.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0-beta01'
+    implementation 'com.google.android.material:material:1.4.0-rc01'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'androidx.activity:activity-ktx:1.2.3'
@@ -72,7 +72,7 @@ dependencies {
     implementation 'com.jaredrummler:android-shell:1.0.0'
     implementation 'com.google.firebase:firebase-analytics:19.0.0'
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.8.7'
     implementation 'com.bignerdranch.android:simple-item-decoration:1.0.0'
     implementation 'de.dertyp7214:PRDownloader:v0.6.0'
     testImplementation 'junit:junit:4.13.2'
