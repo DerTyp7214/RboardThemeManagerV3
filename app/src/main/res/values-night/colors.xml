@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="bg">#000000</color>
-    <color name="fg">#1a1a1a</color>
-    <color name="cornflowerblue">#6495ed</color>
+    <color name="background">#000000</color>
+    <color name="foreground">#1c1c1c</color>
+    <color name="accent">#6495ed</color>
     <color name="text">#ffffff</color>
     <color name="black">#ffffff</color>
     <color name="transparentBlack">#80000000</color>
 
-    <color name="ic_launcher_background">@color/cornflowerblue</color>
-    <color name="ic_launcher_foreground">@color/bg</color>
+    <color name="ic_launcher_background">@color/accent</color>
+    <color name="ic_launcher_foreground">@color/background</color>
 </resources>
