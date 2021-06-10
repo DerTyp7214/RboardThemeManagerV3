@@ -28,7 +28,7 @@ jobs:
 
       - name: Sign artifact
         id: signArtifact
-        uses: Tlaster/android-sign@v1
+        uses: Tlaster/android-sign@v1.2.2
         with:
           releaseDirectory: app/build/outputs/apk/release
           output: build/release/signed
