@@ -24,25 +24,13 @@ jobs:
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
-          arguments: assembleDebug
-
-      - name: Get JSON
-        id: metadataJson
-        run: |
-          content=`cat app/build/outputs/apk/debug/output-metadata.json`
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          echo "::set-output name=json::$content"
-
-      - name: List files
-        run: ls app/build/outputs/apk/debug
+          arguments: assembleRelease
 
       - name: Sign artifact
         id: signArtifact
         uses: r0adkll/sign-android-release@v1
         with:
-          releaseDirectory: app/build/outputs/apk/debug
+          releaseDirectory: app/build/outputs/apk/release
           alias: ${{ secrets.KEYALIAS }}
           signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
@@ -51,36 +39,16 @@ jobs:
           BUILD_TOOLS_VERSION: 30.0.3
 
       - name: List files
-        run: ls app/build/outputs/apk/debug
-
-      - name: Delete old APK
-        run: rm app/build/outputs/apk/debug/app-debug.apk
+        run: ls app/build/outputs/apk/release
 
       - name: Rename APK
-        run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk
+        run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+      - name: Upload apk
+        uses: actions/upload-artifact@v2.2.3
         with:
-          name: Debug Artifact
-          path: app/build/outputs/apk/debug/app-debug.apk
-
-      - name: Send Notification
-        uses: fjogeleit/http-request-action@master
-        with:
-          url: 'https://fcm.googleapis.com/fcm/send'
-          method: 'POST'
-          customHeaders: '{"Authorization":"key=${{ secrets.FCM_KEY }}"}'
-          data: '{"to": "/topics/update-v3-debug","data": {"version": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},"type": "update","notification": {"body": "Update available","title": "Update"}}}'
-
-      - name: Send Telegram message
-        uses: appleboy/telegram-action@master
-        with:
-          to: ${{ secrets.TELEGRAM_TO }}
-          token: ${{ secrets.TELEGRAM_TOKEN }}
-          format: markdown
-          message: "commit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})"
-          document: app/build/outputs/apk/debug/app-debug.apk
+          name: Release artifact
+          path: app/build/outputs/apk/release/app-release.apk
 
       - name: Upload Assets
         id: upload_assets
@@ -91,5 +59,5 @@ jobs:
           prerelease: true
           title: Android R Compatible
           files: |
-            app/build/outputs/apk/debug/app-debug.apk
-            app/build/outputs/apk/debug/output-metadata.json
+            app/build/outputs/apk/release/app-release.apk
+            app/build/outputs/apk/release/output-metadata.json
