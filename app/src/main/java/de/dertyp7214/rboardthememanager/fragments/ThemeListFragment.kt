@@ -24,7 +24,11 @@ class ThemeListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_theme_list, container, false)
+        return inflater.inflate(R.layout.fragment_theme_list, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         val refreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.refreshLayout)
@@ -97,7 +101,5 @@ class ThemeListFragment : Fragment() {
 
         if (themesViewModel.getThemes().isEmpty())
             ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
-
-        return view
     }
 }

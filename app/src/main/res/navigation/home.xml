@@ -9,18 +9,22 @@
         android:id="@+id/themeListFragment"
         android:name="de.dertyp7214.rboardthememanager.fragments.ThemeListFragment"
         android:label="fragment_theme_list"
-        tools:layout="@layout/fragment_theme_list" >
+        tools:layout="@layout/fragment_theme_list">
         <action
             android:id="@+id/action_themeListFragment_to_downloadListFragment"
-            app:destination="@id/downloadListFragment" />
+            app:destination="@id/downloadListFragment"
+            app:popUpTo="@id/home"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/downloadListFragment"
         android:name="de.dertyp7214.rboardthememanager.fragments.DownloadListFragment"
         android:label="fragment_download_list"
-        tools:layout="@layout/fragment_download_list" >
+        tools:layout="@layout/fragment_download_list">
         <action
             android:id="@+id/action_downloadListFragment_to_themeListFragment"
-            app:destination="@id/themeListFragment" />
+            app:destination="@id/themeListFragment"
+            app:popUpTo="@id/home"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

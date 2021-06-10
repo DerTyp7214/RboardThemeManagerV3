@@ -25,12 +25,16 @@ import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
 
 class DownloadListFragment : Fragment() {
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_download_list, container, false)
+        return inflater.inflate(R.layout.fragment_download_list, container, false)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val chipContainer = view.findViewById<ChipContainer>(R.id.chipContainer)
@@ -98,8 +102,6 @@ class DownloadListFragment : Fragment() {
         }
 
         ThemeUtils::loadThemePacks asyncInto themesViewModel::setThemePacks
-
-        return view
     }
 
     private fun filterThemePacks(

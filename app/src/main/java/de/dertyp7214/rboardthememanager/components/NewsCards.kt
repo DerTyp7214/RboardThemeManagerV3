@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.AttributeSet
-import android.util.Log
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -56,8 +55,6 @@ class NewsCards(context: Context, attrs: AttributeSet?) : LinearLayout(context, 
 
     @SuppressLint("NotifyDataSetChanged")
     private fun setUpViews() {
-        Log.d("CARDS", cards.toTypedArray().contentToString())
-
         newsFeedAdapter.notifyDataSetChanged()
     }
 
