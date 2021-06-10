@@ -36,6 +36,9 @@ jobs:
           keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
 
+      - name: List files
+        run: ls app/build/outputs/apk/debug
+
       - name: Upload apk
         uses: actions/upload-artifact@v2.2.3
         with:
