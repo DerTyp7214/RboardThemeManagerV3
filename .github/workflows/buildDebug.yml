@@ -42,6 +42,14 @@ jobs:
           name: Release artifact
           path: app/build/outputs/apk/debug/app-debug.apk
 
+      - name: Send Telegram message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: App got update
+          document: app/build/outputs/apk/debug/app-debug.apk
+
       - name: Upload Assets
         id: upload_assets
         uses: marvinpinto/action-automatic-releases@latest
