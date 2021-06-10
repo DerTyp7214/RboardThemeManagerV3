@@ -25,6 +25,7 @@ import androidx.core.content.FileProvider
 import androidx.core.view.marginBottom
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +35,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.topjohnwu.superuser.io.SuFile
+import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.MenuAdapter
@@ -333,26 +335,30 @@ class MainActivity : AppCompatActivity() {
         }
 
         navigation.setOnNavigationItemSelectedListener {
-            val currentDestination = controller.currentDestination?.id ?: -1
-            when (it.itemId) {
-                R.id.navigation_themes -> {
-                    if (currentDestination == R.id.downloadListFragment) {
-                        controller.navigate(R.id.action_downloadListFragment_to_themeListFragment)
-                    }
-                }
-                R.id.navigation_downloads -> {
-                    if (currentDestination == R.id.themeListFragment) {
-                        controller.navigate(R.id.action_themeListFragment_to_downloadListFragment)
-                    }
-                }
-                R.id.navigation_sounds -> {
-                }
-            }
+            navigate(controller, it.itemId)
             true
         }
 
         themesViewModel.onNavigate(this) { id ->
-            navigation.selectedItemId = id
+            navigate(controller, id)
+        }
+    }
+
+    private fun navigate(controller: NavController, id: Int) {
+        val currentDestination = controller.currentDestination?.id ?: -1
+        when (id) {
+            R.id.navigation_themes -> {
+                if (currentDestination == R.id.downloadListFragment) {
+                    controller.navigate(R.id.action_downloadListFragment_to_themeListFragment)
+                }
+            }
+            R.id.navigation_downloads -> {
+                if (currentDestination == R.id.themeListFragment) {
+                    controller.navigate(R.id.action_themeListFragment_to_downloadListFragment)
+                }
+            }
+            R.id.navigation_sounds -> {
+            }
         }
     }
 
