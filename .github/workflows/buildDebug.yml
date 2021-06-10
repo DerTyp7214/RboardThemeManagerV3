@@ -44,15 +44,18 @@ jobs:
       - name: List files
         run: ls app/build/outputs/apk/debug
 
-      - name: Rename APK
-        run: ls app/build/outputs/apk/debug
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Debug Artifact
+          path: app/build/outputs/apk/debug/app-debug-signed.apk
 
       - name: Send Telegram message
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          document: ${{ steps.sign_app.outputs.signedReleaseFile }}
+          document: app/build/outputs/apk/debug/app-debug-signed.apk
 
       - name: Upload Assets
         id: upload_assets
@@ -63,5 +66,5 @@ jobs:
           prerelease: true
           title: Development Build
           files: |
-            ${{ steps.sign_app.outputs.signedReleaseFile }}
+            app/build/outputs/apk/debug/app-debug-signed.apk
             app/build/outputs/apk/debug/output-metadata.json
