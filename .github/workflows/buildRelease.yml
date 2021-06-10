@@ -44,11 +44,8 @@ jobs:
       - name: List files
         run: ls app/build/outputs/apk/release
 
-      - name: Upload apk
-        uses: actions/upload-artifact@v2.2.3
-        with:
-          name: Release artifact
-          path: ${{ steps.sign_app.outputs.signedReleaseFile }}
+      - name: Rename APK
+        run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk
 
       - name: Upload Assets
         id: upload_assets
@@ -59,5 +56,5 @@ jobs:
           prerelease: false
           title: Release Build
           files: |
-            ${{ steps.sign_app.outputs.signedReleaseFile }}
+            app/build/outputs/apk/release/app-release.apk
             app/build/outputs/apk/release/output-metadata.json

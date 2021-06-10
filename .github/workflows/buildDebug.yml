@@ -44,11 +44,8 @@ jobs:
       - name: List files
         run: ls app/build/outputs/apk/debug
 
-      - name: Upload apk
-        uses: actions/upload-artifact@v2.2.3
-        with:
-          name: Release artifact
-          path: ${{ steps.sign_app.outputs.signedReleaseFile }}
+      - name: Rename APK
+        run: ls app/build/outputs/apk/debug
 
       - name: Send Telegram message
         uses: appleboy/telegram-action@master
