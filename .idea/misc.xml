@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/activity_preferences.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/install_pack.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/navigation.xml" value="0.371875" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/fragment_theme_list.xml" value="0.12681159420289856" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/theme_grid_item_single.xml" value="0.2594995366079703" />
         <entry key="..\:/Users/lengw/.gradle/caches/transforms-3/da9339fab3753c7222f5eb242e4aec53/transformed/jetified-logs/res/drawable/ic_action_delete.xml" value="0.3651041666666667" />
