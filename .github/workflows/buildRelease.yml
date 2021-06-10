@@ -30,20 +30,20 @@ jobs:
         id: signArtifact
         uses: r0adkll/sign-android-release@v1.0.1
         with:
-          releaseDirectory: app/release
+          releaseDirectory: app/build/outputs/apk/release
           alias: ${{ secrets.KEYALIAS }}
           signingKeyBase64: ${{ secrets.KEYSTORE }}
           keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
 
       - name: List files
-        run: ls app/release
+        run: ls app/build/outputs/apk/release
 
       - name: Upload apk
         uses: actions/upload-artifact@v2.2.3
         with:
           name: Release artifact
-          path: app/release/app-release.apk
+          path: app/build/outputs/apk/release/app-release.apk
 
       - name: Upload Assets
         id: upload_assets
@@ -54,5 +54,5 @@ jobs:
           prerelease: false
           title: Release Build
           files: |
-            app/release/app-release.apk
-            app/release/output-metadata.json
+            app/build/outputs/apk/release/app-release.apk
+            app/build/outputs/apk/release/output-metadata.json
