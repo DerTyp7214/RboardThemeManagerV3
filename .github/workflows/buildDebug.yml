@@ -26,14 +26,17 @@ jobs:
           configuration-cache-enabled: true
           arguments: assembleDebug
 
+      - name: List files
+        run: ls app/build/outputs/apk/debug
+
       - name: Sign artifact
         id: signArtifact
         uses: r0adkll/sign-android-release@v1
         with:
           releaseDirectory: app/build/outputs/apk/debug
           alias: ${{ secrets.KEYALIAS }}
-          signingKeyBase64: ${{ secrets.KEYSTORE }}
-          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
           BUILD_TOOLS_VERSION: 30.0.3
@@ -45,14 +48,14 @@ jobs:
         uses: actions/upload-artifact@v2.2.3
         with:
           name: Release artifact
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: ${{ steps.sign_app.outputs.signedReleaseFile }}
 
       - name: Send Telegram message
         uses: appleboy/telegram-action@master
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          document: app/build/outputs/apk/debug/app-debug.apk
+          document: ${{ steps.sign_app.outputs.signedReleaseFile }}
 
       - name: Upload Assets
         id: upload_assets
@@ -63,5 +66,5 @@ jobs:
           prerelease: true
           title: Development Build
           files: |
-            app/build/outputs/apk/debug/app-debug.apk
+            ${{ steps.sign_app.outputs.signedReleaseFile }}
             app/build/outputs/apk/debug/output-metadata.json
