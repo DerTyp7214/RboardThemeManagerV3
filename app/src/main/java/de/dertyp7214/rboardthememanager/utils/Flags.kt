@@ -314,7 +314,8 @@ class Flags {
     companion object {
         val values: Map<String, Any>
             get() {
-                return getCurrentXmlValues(FILES.FLAGS.fileName) + getCurrentXmlValues(FILES.GBOARD_PREFERENCES.fileName)
+                return getCurrentXmlValues(FILES.GBOARD_PREFERENCES.fileName) +
+                        getCurrentXmlValues(FILES.FLAGS.fileName)
             }
 
         @SuppressLint("SdCardPath")

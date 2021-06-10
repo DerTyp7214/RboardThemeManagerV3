@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.data.ThemePack
-import de.dertyp7214.rboardthememanager.utils.doAsync
+import de.dertyp7214.rboardthememanager.utils.asyncInto
 
 class NewsFeedAdapter(
     private val news: List<NewsCards.CardElement>,
@@ -44,7 +44,9 @@ class NewsFeedAdapter(
         val item = news[position]
 
         holder.imageView.setImageDrawable(defaultBg)
-        doAsync(item::bitmap) { holder.imageView.setImageBitmap(it) }
+
+        item::bitmap asyncInto holder.imageView::setImageBitmap
+
         holder.name.text = item.title
         holder.author.text = "by ${item.author}"
 
