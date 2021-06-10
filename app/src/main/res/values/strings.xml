@@ -62,7 +62,7 @@
     <string name="unpacking_themes">Unpacking themes</string>
     <string name="do_you_want_to_delete_theme">Do you want to delete these themes?</string>
     <string name="show_preinstalled_themes">Show preinstalled themes</string>
-    <string name="emoji_compat_app_whitelist">Emoj compat fix</string>
+    <string name="emoji_compat_app_whitelist">Emoji compat fix</string>
     <string name="flags">Flags</string>
     <string name="themes_header">Themes</string>
     <string name="show_system_theme">Show system theme</string>
