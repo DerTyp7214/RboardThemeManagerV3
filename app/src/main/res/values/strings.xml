@@ -83,4 +83,11 @@
     <string name="monet">Monet</string>
     <string name="silk_on_all_pixel">Silk on all Pixel</string>
     <string name="silk_theme">Silk theme</string>
+    <string name="android_12">Android 12</string>
+    <string name="general">General</string>
+    <string name="show_branding_on_space">Show branding on space</string>
+    <string name="enable_auto_float_keyboard_in_multi_window">Enable auto float Keyboard in multi window</string>
+    <string name="pill_shaped_key">Pill shaped key</string>
+    <string name="enable_clipboard_screenshot_paste">Enable clipboard screenshot paste</string>
+    <string name="enable_lens">Enable lens</string>
 </resources>

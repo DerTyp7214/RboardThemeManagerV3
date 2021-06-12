@@ -51,6 +51,15 @@ class Flags {
         val visible: Boolean = true,
         val onClick: () -> Unit = {}
     ) {
+        GENERAL(
+            "general",
+            R.string.general,
+            -1,
+            -1,
+            "",
+            TYPE.GROUP,
+            FILES.FLAGS
+        ),
         EMOJI_COMPAT_APP_WHITELIST(
             "emoji_compat_app_whitelist",
             R.string.emoji_compat_app_whitelist,
@@ -107,9 +116,9 @@ class Flags {
             TYPE.BOOLEAN,
             FILES.FLAGS,
             mapOf(
-                Pair(true, 2),
-                Pair(false, 1),
-                Pair(null, 1)
+                Pair(true, 2L),
+                Pair(false, 1L),
+                Pair(null, 1L)
             )
         ),
         ENABLE_EMAIL_PROVIDER_COMPLETION(
@@ -156,6 +165,60 @@ class Flags {
             false,
             TYPE.BOOLEAN,
             FILES.GBOARD_PREFERENCES
+        ),
+        SHOW_BRANDING_ON_SPACE(
+            "show_branding_on_space",
+            R.string.show_branding_on_space,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
+        ),
+        ENABLE_AUTO_FLOAT_KEYBOARD_IN_MULTI_WINDOW(
+            "enable_auto_float_keyboard_in_multi_window",
+            R.string.enable_auto_float_keyboard_in_multi_window,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
+        ),
+        ENABLE_CLIPBOARD_SCREENSHOT_PASTE(
+            "enable_clipboard_screenshot_paste",
+            R.string.enable_clipboard_screenshot_paste,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
+        ),
+        ENABLE_LENS(
+            "enable_lens",
+            R.string.enable_lens,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
+        ),
+        ANDROID_12(
+            "android_12",
+            R.string.android_12,
+            -1,
+            -1,
+            "",
+            TYPE.GROUP,
+            FILES.FLAGS
+        ),
+        PILL_SHAPED_KEY(
+            "pill_shaped_key",
+            R.string.pill_shaped_key,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
         ),
         MONET(
             "monet",
@@ -274,7 +337,7 @@ class Flags {
 
     fun allFlagsPreferences(builder: PreferenceScreen.Builder) {
         val prefs = PreferenceManager.getDefaultSharedPreferences(Application.context)
-        values.forEach { entry ->
+        getCurrentXmlValues(FILES.FLAGS.fileName).forEach { entry ->
             prefs.edit { remove(entry.key) }
             if (entry.value is Boolean) builder.switch(entry.key) {
                 title = entry.key.split("_").joinToString(" ") {
@@ -357,6 +420,7 @@ class Flags {
                 val type = when (value) {
                     is Boolean -> "boolean"
                     is Int -> "integer"
+                    is Long -> "long"
                     is Float -> "float"
                     else -> "string"
                 }
