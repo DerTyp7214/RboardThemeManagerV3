@@ -90,4 +90,7 @@
     <string name="pill_shaped_key">Pill shaped key</string>
     <string name="enable_clipboard_screenshot_paste">Enable clipboard screenshot paste</string>
     <string name="enable_lens">Enable lens</string>
+    <string name="branding">Branding</string>
+    <string name="show_branding_interval_seconds">Show branding interval seconds</string>
+    <string name="branding_fadeout_delay_ms">Branding fadeout delay</string>
 </resources>

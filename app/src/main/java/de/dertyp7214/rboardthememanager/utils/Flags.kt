@@ -7,6 +7,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import com.dertyp7214.logs.helpers.Logger
 import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
 import de.Maxr1998.modernpreferences.Preference
@@ -15,7 +16,10 @@ import de.Maxr1998.modernpreferences.helpers.*
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.core.iterator
+import de.dertyp7214.rboardthememanager.core.runAsCommand
+import de.dertyp7214.rboardthememanager.core.start
+import de.dertyp7214.rboardthememanager.core.writeFile
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import org.xml.sax.InputSource
 import java.io.StringReader
@@ -166,15 +170,6 @@ class Flags {
             TYPE.BOOLEAN,
             FILES.GBOARD_PREFERENCES
         ),
-        SHOW_BRANDING_ON_SPACE(
-            "show_branding_on_space",
-            R.string.show_branding_on_space,
-            -1,
-            -1,
-            false,
-            TYPE.BOOLEAN,
-            FILES.FLAGS
-        ),
         ENABLE_AUTO_FLOAT_KEYBOARD_IN_MULTI_WINDOW(
             "enable_auto_float_keyboard_in_multi_window",
             R.string.enable_auto_float_keyboard_in_multi_window,
@@ -201,6 +196,50 @@ class Flags {
             false,
             TYPE.BOOLEAN,
             FILES.FLAGS
+        ),
+        BRANDING(
+            "branding",
+            R.string.branding,
+            -1,
+            -1,
+            "",
+            TYPE.GROUP,
+            FILES.FLAGS
+        ),
+        SHOW_BRANDING_ON_SPACE(
+            "show_branding_on_space",
+            R.string.show_branding_on_space,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
+        ),
+        SHOW_BRANDING_INTERVAL_SECONDS(
+            "show_branding_interval_seconds",
+            R.string.show_branding_interval_seconds,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS,
+            mapOf(
+                Pair(true, 0L),
+                Pair(false, 86400000L)
+            )
+        ),
+        BRANDING_FADEOUT_DELAY_MS(
+            "branding_fadeout_delay_ms",
+            R.string.branding_fadeout_delay_ms,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS,
+            mapOf(
+                Pair(true, Int.MAX_VALUE.toLong()),
+                Pair(false, 900L)
+            )
         ),
         ANDROID_12(
             "android_12",
@@ -403,9 +442,16 @@ class Flags {
 
             for (item in map.item(0).childNodes) {
                 val name = item.attributes?.getNamedItem("name")?.nodeValue
-                val value = item.attributes?.getNamedItem("value")?.nodeValue
-                if (name != null) output[name] =
-                    (value?.booleanOrNull() ?: value) ?: item.textContent ?: ""
+                val value = item.attributes?.getNamedItem("value")?.nodeValue?.let {
+                    when (item.nodeName) {
+                        "long" -> it.toLong()
+                        "boolean" -> it.toBooleanStrict()
+                        "float" -> it.toFloat()
+                        "integer" -> it.toInt()
+                        else -> it
+                    }
+                }
+                if (name != null) output[name] = value ?: item.textContent ?: ""
             }
 
             return output
@@ -424,6 +470,11 @@ class Flags {
                     is Float -> "float"
                     else -> "string"
                 }
+                Logger.log(
+                    Logger.Companion.Type.DEBUG,
+                    "CHANGE FLAG",
+                    "value: $value key: $key type: $type"
+                )
                 if (type != "string") {
                     when {
                         "<$type name=\"$key\"" in fileText -> fileText.replace(
