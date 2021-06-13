@@ -7,6 +7,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import com.dertyp7214.logs.helpers.Logger
 import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
 import de.Maxr1998.modernpreferences.Preference
@@ -15,7 +16,10 @@ import de.Maxr1998.modernpreferences.helpers.*
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.core.iterator
+import de.dertyp7214.rboardthememanager.core.runAsCommand
+import de.dertyp7214.rboardthememanager.core.start
+import de.dertyp7214.rboardthememanager.core.writeFile
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import org.xml.sax.InputSource
 import java.io.StringReader
@@ -51,6 +55,15 @@ class Flags {
         val visible: Boolean = true,
         val onClick: () -> Unit = {}
     ) {
+        GENERAL(
+            "general",
+            R.string.general,
+            -1,
+            -1,
+            "",
+            TYPE.GROUP,
+            FILES.FLAGS
+        ),
         EMOJI_COMPAT_APP_WHITELIST(
             "emoji_compat_app_whitelist",
             R.string.emoji_compat_app_whitelist,
@@ -107,9 +120,9 @@ class Flags {
             TYPE.BOOLEAN,
             FILES.FLAGS,
             mapOf(
-                Pair(true, 2),
-                Pair(false, 1),
-                Pair(null, 1)
+                Pair(true, 2L),
+                Pair(false, 1L),
+                Pair(null, 1L)
             )
         ),
         ENABLE_EMAIL_PROVIDER_COMPLETION(
@@ -156,6 +169,95 @@ class Flags {
             false,
             TYPE.BOOLEAN,
             FILES.GBOARD_PREFERENCES
+        ),
+        ENABLE_AUTO_FLOAT_KEYBOARD_IN_MULTI_WINDOW(
+            "enable_auto_float_keyboard_in_multi_window",
+            R.string.enable_auto_float_keyboard_in_multi_window,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
+        ),
+        ENABLE_CLIPBOARD_SCREENSHOT_PASTE(
+            "enable_clipboard_screenshot_paste",
+            R.string.enable_clipboard_screenshot_paste,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
+        ),
+        ENABLE_LENS(
+            "enable_lens",
+            R.string.enable_lens,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
+        ),
+        BRANDING(
+            "branding",
+            R.string.branding,
+            -1,
+            -1,
+            "",
+            TYPE.GROUP,
+            FILES.FLAGS
+        ),
+        SHOW_BRANDING_ON_SPACE(
+            "show_branding_on_space",
+            R.string.show_branding_on_space,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
+        ),
+        SHOW_BRANDING_INTERVAL_SECONDS(
+            "show_branding_interval_seconds",
+            R.string.show_branding_interval_seconds,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS,
+            mapOf(
+                Pair(true, 0L),
+                Pair(false, 86400000L)
+            )
+        ),
+        BRANDING_FADEOUT_DELAY_MS(
+            "branding_fadeout_delay_ms",
+            R.string.branding_fadeout_delay_ms,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS,
+            mapOf(
+                Pair(true, Int.MAX_VALUE.toLong()),
+                Pair(false, 900L)
+            )
+        ),
+        ANDROID_12(
+            "android_12",
+            R.string.android_12,
+            -1,
+            -1,
+            "",
+            TYPE.GROUP,
+            FILES.FLAGS
+        ),
+        PILL_SHAPED_KEY(
+            "pill_shaped_key",
+            R.string.pill_shaped_key,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
         ),
         MONET(
             "monet",
@@ -274,7 +376,7 @@ class Flags {
 
     fun allFlagsPreferences(builder: PreferenceScreen.Builder) {
         val prefs = PreferenceManager.getDefaultSharedPreferences(Application.context)
-        values.forEach { entry ->
+        getCurrentXmlValues(FILES.FLAGS.fileName).forEach { entry ->
             prefs.edit { remove(entry.key) }
             if (entry.value is Boolean) builder.switch(entry.key) {
                 title = entry.key.split("_").joinToString(" ") {
@@ -340,9 +442,16 @@ class Flags {
 
             for (item in map.item(0).childNodes) {
                 val name = item.attributes?.getNamedItem("name")?.nodeValue
-                val value = item.attributes?.getNamedItem("value")?.nodeValue
-                if (name != null) output[name] =
-                    (value?.booleanOrNull() ?: value) ?: item.textContent ?: ""
+                val value = item.attributes?.getNamedItem("value")?.nodeValue?.let {
+                    when (item.nodeName) {
+                        "long" -> it.toLong()
+                        "boolean" -> it.toBooleanStrict()
+                        "float" -> it.toFloat()
+                        "integer" -> it.toInt()
+                        else -> it
+                    }
+                }
+                if (name != null) output[name] = value ?: item.textContent ?: ""
             }
 
             return output
@@ -357,9 +466,15 @@ class Flags {
                 val type = when (value) {
                     is Boolean -> "boolean"
                     is Int -> "integer"
+                    is Long -> "long"
                     is Float -> "float"
                     else -> "string"
                 }
+                Logger.log(
+                    Logger.Companion.Type.DEBUG,
+                    "CHANGE FLAG",
+                    "value: $value key: $key type: $type"
+                )
                 if (type != "string") {
                     when {
                         "<$type name=\"$key\"" in fileText -> fileText.replace(
