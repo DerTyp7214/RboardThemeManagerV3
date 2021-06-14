@@ -3,9 +3,12 @@
 package de.dertyp7214.rboardthememanager.utils
 
 import android.content.Context
+import android.content.Intent
+import androidx.core.content.FileProvider
 import com.downloader.Error
 import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
+import de.dertyp7214.rboardthememanager.BuildConfig
 import java.io.File
 import kotlin.math.roundToLong
 
@@ -54,6 +57,17 @@ class UpdateHelper(
             .start(object : OnDownloadListener {
                 override fun onDownloadComplete() {
                     finishListener("$path/update.apk", System.currentTimeMillis() - startTime)
+                    val toInstall: File = File(path, "$path/update.apk")
+                    val intent: Intent
+                    val apkUri = FileProvider.getUriForFile(
+                        context,
+                        BuildConfig.APPLICATION_ID + ".fileprovider",
+                        toInstall
+                    )
+                    intent = Intent(Intent.ACTION_INSTALL_PACKAGE)
+                    intent.data = apkUri
+                    intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    context.startActivity(intent)
                 }
 
                 override fun onError(error: Error?) {
