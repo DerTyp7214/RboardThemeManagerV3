@@ -19,7 +19,7 @@ class UpdateHelper(
 ) {
     companion object {
         private fun getPath(context: Context, folder: String): String {
-            return File(context.filesDir, folder).absolutePath
+            return File(context.getExternalFilesDir("."), folder).absolutePath
         }
     }
 
@@ -66,7 +66,7 @@ class UpdateHelper(
                     )
                     intent = Intent(Intent.ACTION_INSTALL_PACKAGE)
                     intent.data = apkUri
-                    intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     context.startActivity(intent)
                 }
 
