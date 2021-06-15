@@ -93,4 +93,5 @@
     <string name="branding">Branding</string>
     <string name="show_branding_interval_seconds">Show branding interval seconds</string>
     <string name="branding_fadeout_delay_ms">Branding fadeout delay</string>
+    <string name="monet_details">Keyboard theme based on System theme</string>
 </resources>
