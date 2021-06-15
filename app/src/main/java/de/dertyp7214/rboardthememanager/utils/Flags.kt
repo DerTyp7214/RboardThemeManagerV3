@@ -197,6 +197,15 @@ class Flags {
             TYPE.BOOLEAN,
             FILES.FLAGS
         ),
+        PILL_SHAPED_KEY(
+            "pill_shaped_key",
+            R.string.pill_shaped_key,
+            -1,
+            -1,
+            false,
+            TYPE.BOOLEAN,
+            FILES.FLAGS
+        ),
         BRANDING(
             "branding",
             R.string.branding,
@@ -241,7 +250,7 @@ class Flags {
                 Pair(false, 900L)
             )
         ),
-        ANDROID_12(
+        /*ANDROID_12(
             "android_12",
             R.string.android_12,
             -1,
@@ -249,16 +258,7 @@ class Flags {
             "",
             TYPE.GROUP,
             FILES.FLAGS
-        ),
-        PILL_SHAPED_KEY(
-            "pill_shaped_key",
-            R.string.pill_shaped_key,
-            -1,
-            -1,
-            false,
-            TYPE.BOOLEAN,
-            FILES.FLAGS
-        ),
+        ),*/
         MONET(
             "monet",
             R.string.monet,
