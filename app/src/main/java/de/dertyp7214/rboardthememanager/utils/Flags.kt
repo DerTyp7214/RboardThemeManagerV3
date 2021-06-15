@@ -2,6 +2,7 @@ package de.dertyp7214.rboardthememanager.utils
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -241,7 +242,7 @@ class Flags {
             R.drawable.ic_themes,
             false,
             TYPE.BOOLEAN,
-			visible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S,
+			visible = Build.VERSION.SDK_INT > Build.VERSION_CODES.R,
             linkedKeys = listOf("use_silk_theme_by_default", "silk_on_all_pixel", "silk_theme")
         ),
         USE_SILK_THEME_BY_DEFAULT(
