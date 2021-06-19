@@ -26,7 +26,7 @@ fun ThemeDataClass.moveToCache(context: Context): ThemeDataClass {
     return ThemeDataClass(image, name, newZip.absolutePath)
 }
 
-fun ThemeDataClass.install(context: Context, overrideTheme: Boolean = true): Boolean {
+fun ThemeDataClass.install(overrideTheme: Boolean = true): Boolean {
     val file = File(path)
     val imageFile = File(file.absolutePath.removeSuffix(".zip"))
     val installPath = SuFile(Config.MAGISK_THEME_LOC, file.name)

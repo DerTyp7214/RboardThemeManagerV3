@@ -12,7 +12,18 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import de.dertyp7214.rboardthememanager.R
+
+inline val Activity.content: View
+    get() {
+        return findViewById(android.R.id.content)
+    }
+
+operator fun <T : ViewModel> FragmentActivity.get(modelClass: Class<T>): T =
+    run(::ViewModelProvider)[modelClass]
 
 fun Activity.openUrl(url: String) {
     startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
@@ -24,7 +35,6 @@ fun Activity.openDialog(
     negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
     positive: (dialogInterface: DialogInterface) -> Unit
 ): AlertDialog {
-    val content = findViewById<View>(android.R.id.content)
     content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
     return AlertDialog.Builder(this)
         .setCancelable(false)
@@ -46,7 +56,6 @@ fun Activity.openShareThemeDialog(
     negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },
     positive: (dialogInterface: DialogInterface, name: String, author: String) -> Unit
 ): AlertDialog {
-    val content = findViewById<View>(android.R.id.content)
     content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
     val view = layoutInflater.inflate(R.layout.share_popup, null)
     return AlertDialog.Builder(this)
@@ -72,7 +81,6 @@ fun Activity.openShareThemeDialog(
 }
 
 fun Activity.openLoadingDialog(@StringRes message: Int): AlertDialog {
-    val content = findViewById<View>(android.R.id.content)
     content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
     val view = layoutInflater.inflate(R.layout.loading_dialog, null)
     return AlertDialog.Builder(this)

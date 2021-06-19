@@ -13,15 +13,22 @@ import de.dertyp7214.rboardthememanager.core.decodeBitmap
 import de.dertyp7214.rboardthememanager.core.install
 import de.dertyp7214.rboardthememanager.core.isInstalled
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
+import de.dertyp7214.rboardthememanager.databinding.ActivityInstallPackBinding
 import de.dertyp7214.rboardthememanager.utils.doAsync
-import kotlinx.android.synthetic.main.activity_install_pack.*
 import java.io.File
 import java.util.regex.Pattern
 
 class InstallPackActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityInstallPackBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_install_pack)
+        binding = ActivityInstallPackBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val toolbar = binding.toolbar
+        val recyclerview = binding.recyclerview
 
         toolbar.title = getString(R.string.install_themes, "0")
 
@@ -42,7 +49,7 @@ class InstallPackActivity : AppCompatActivity() {
         }
         toolbar.setOnMenuItemClickListener { item ->
             if (item.itemId == R.id.install_theme) {
-                val success = adapter.getSelected().map { it.install(this) }
+                val success = adapter.getSelected().map { it.install() }
                 if (success.contains(false)) Toast.makeText(this, R.string.error, Toast.LENGTH_LONG)
                     .show()
                 else Toast.makeText(this, R.string.themes_installed, Toast.LENGTH_LONG).show()

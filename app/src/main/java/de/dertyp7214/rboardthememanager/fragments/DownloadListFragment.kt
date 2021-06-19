@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
@@ -17,6 +16,7 @@ import de.dertyp7214.rboardthememanager.adapter.ThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.ChipContainer
 import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.core.download
+import de.dertyp7214.rboardthememanager.core.get
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
@@ -43,9 +43,7 @@ class DownloadListFragment : Fragment() {
         val originalThemePacks = arrayListOf<ThemePack>()
         val themePacks = ArrayList(originalThemePacks)
 
-        val themesViewModel = requireActivity().run {
-            ViewModelProvider(this)[ThemesViewModel::class.java]
-        }
+        val themesViewModel = requireActivity()[ThemesViewModel::class.java]
 
         val resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {

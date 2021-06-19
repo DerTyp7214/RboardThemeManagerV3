@@ -26,14 +26,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.view.marginBottom
 import androidx.core.widget.NestedScrollView
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dertyp7214.preferencesplus.core.dp
 import com.dertyp7214.preferencesplus.core.setMargins
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.topjohnwu.superuser.io.SuFile
@@ -41,14 +39,13 @@ import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.MenuAdapter
-import de.dertyp7214.rboardthememanager.components.SearchBar
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.MenuItem
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
+import de.dertyp7214.rboardthememanager.databinding.ActivityMainBinding
 import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
 import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -60,17 +57,20 @@ class MainActivity : AppCompatActivity() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<NestedScrollView>
     private lateinit var themesViewModel: ThemesViewModel
 
+    private lateinit var binding: ActivityMainBinding
+
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        setUp()
+        checkModuleAndUpdate()
 
-        themesViewModel = ViewModelProvider(this)[ThemesViewModel::class.java]
+        themesViewModel = this[ThemesViewModel::class.java]
 
-        val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
-        val searchBar = findViewById<SearchBar>(R.id.searchBar)
+        val toolbar = binding.toolbar
+        val searchBar = binding.searchBar
         val bottomSheet = findViewById<NestedScrollView>(R.id.bottom_bar)
         val navigationHolder =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
@@ -365,6 +365,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        val searchBar = binding.searchBar
         when {
             bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED ->
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -374,10 +375,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setUp() {
+    private fun checkModuleAndUpdate() {
         downloadResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                findViewById<View>(android.R.id.content).setRenderEffect(null)
+                content.setRenderEffect(null)
             }
 
         if (ThemeUtils.checkForExistingThemes()) ThemeUtils.getThemesPathFromProps()
@@ -412,8 +413,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun update() {
-        val content = findViewById<View>(android.R.id.content)
-
         val maxProgress = 100
         val notificationId = 42069
         val builder =
