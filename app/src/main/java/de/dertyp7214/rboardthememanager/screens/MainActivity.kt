@@ -49,7 +49,7 @@ import java.io.File
 class MainActivity : AppCompatActivity() {
 
     private val updateUrl =
-        "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-${BuildConfig.BUILD_TYPE}/app-${BuildConfig.BUILD_TYPE}.apk"
+        "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk"
 
     private lateinit var downloadResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<NestedScrollView>
