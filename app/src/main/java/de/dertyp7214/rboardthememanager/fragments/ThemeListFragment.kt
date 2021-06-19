@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
 import de.dertyp7214.rboardthememanager.core.dpToPx
+import de.dertyp7214.rboardthememanager.core.get
 import de.dertyp7214.rboardthememanager.core.getAttrColor
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
@@ -36,17 +36,13 @@ class ThemeListFragment : Fragment() {
         val unfilteredThemeList = arrayListOf<ThemeDataClass>()
         val themeList = arrayListOf<ThemeDataClass>()
 
-        val themesViewModel = requireActivity().run {
-            ViewModelProvider(this)[ThemesViewModel::class.java]
-        }
+        val themesViewModel = requireActivity()[ThemesViewModel::class.java]
 
         val adapter = ThemeAdapter(requireContext(), themeList, null, { state, adapter ->
             themesViewModel.setSelections(
                 Pair(state == ThemeAdapter.SelectionState.SELECTING, adapter)
             )
-        }) { theme ->
-            themesViewModel.setSelectedTheme(theme)
-        }
+        }, themesViewModel::setSelectedTheme)
 
         refreshLayout.isRefreshing = themesViewModel.getThemes().isEmpty()
         refreshLayout.setProgressViewOffset(
