@@ -21,6 +21,7 @@ import de.dertyp7214.rboardthememanager.utils.FileUtils
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
 import de.dertyp7214.rboardthememanager.utils.ZipHelper
 import de.dertyp7214.rboardthememanager.utils.doAsync
+import org.json.JSONObject
 import java.io.File
 import java.net.URL
 
@@ -52,10 +53,35 @@ class SplashScreen : AppCompatActivity() {
 
         "rm -rf ${cacheDir.absolutePath}/*".runAsCommand()
         val files = ArrayList<File>()
-        files += FileUtils.getThemePacksPath(this).listFiles()!!
-        files += FileUtils.getSoundPacksPath(this).listFiles()!!
         files.forEach {
             SuFile(it.absolutePath).deleteRecursive()
+        }
+
+        File(applicationInfo.dataDir, "flags.json").apply {
+            doAsync(URL("https://raw.githubusercontent.com/GboardThemes/Packs/master/flags.json")::getTextFromUrl) {
+                if (it.isBlank()) {
+                    if (!exists() || lastModified() < packageManager.getPackageInfo(
+                            packageName,
+                            0
+                        ).lastUpdateTime
+                    ) {
+                        writeText(
+                            resources.openRawResource(
+                                FileUtils.getResourceId(
+                                    this@SplashScreen,
+                                    "flags",
+                                    "raw",
+                                    packageName
+                                )
+                            ).bufferedReader().use { reader -> reader.readText() }
+                        )
+                    }
+                } else {
+                    val json = SafeJSON(JSONObject(it))
+                    if (!exists() || lastModified() < json.getLong("time"))
+                        writeText(json.getJSONArray("flags").toString())
+                }
+            }
         }
 
         val data = intent.data
