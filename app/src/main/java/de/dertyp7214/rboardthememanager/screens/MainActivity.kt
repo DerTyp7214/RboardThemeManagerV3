@@ -192,7 +192,7 @@ class MainActivity : AppCompatActivity() {
                             zip.delete()
                             ZipHelper().zip(files.map { it.absolutePath }, zip.absolutePath)
                             files.forEach { it.delete() }
-                            val uri = FileProvider.getUriForFile(this, packageName, zip)
+                            val uri = FileProvider.getUriForFile(this, packageName  + ".fileprovider", zip )
                             ShareCompat.IntentBuilder(this)
                                 .setStream(uri)
                                 .setType("application/pack")
