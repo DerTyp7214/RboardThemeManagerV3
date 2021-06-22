@@ -1,0 +1,301 @@
+[
+  {
+    "key": "general",
+    "title": "general",
+    "summary": "",
+    "icon": "",
+    "defaultValue": "",
+    "type": "GROUP"
+  },
+  {
+    "key": "emoji_compat_app_whitelist",
+    "title": "emoji_compat_app_whitelist",
+    "summary": "",
+    "icon": "ic_emoji_compat",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS",
+    "valueMap": [
+      {
+        "first": true,
+        "second": "*"
+      },
+      {
+        "first": false,
+        "second": "disabled"
+      },
+      {
+        "first": null,
+        "second": "disabled"
+      }
+    ]
+  },
+  {
+    "key": "enable_joystick_delete",
+    "title": "enable_joystick_delete",
+    "summary": "",
+    "icon": "ic_backspace",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS"
+  },
+  {
+    "key": "deprecate_search",
+    "title": "deprecate_search",
+    "summary": "",
+    "icon": "ic_google_logo",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS",
+    "valueMap": [
+      {
+        "first": false,
+        "second": true
+      },
+      {
+        "first": null,
+        "second": false
+      },
+      {
+        "first": false,
+        "second": true
+      }
+    ],
+    "visible": false
+  },
+  {
+    "key": "enable_sharing",
+    "title": "enable_sharing",
+    "summary": "",
+    "icon": "ic_baseline_share_24",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS"
+  },
+  {
+    "key": "themed_nav_bar_style",
+    "title": "themed_nav_bar_style",
+    "summary": "",
+    "icon": "ic_navbar",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS",
+    "valueMap": [
+      {
+        "first": true,
+        "second": 2,
+        "type2": "long"
+      },
+      {
+        "first": false,
+        "second": 1,
+        "type2": "long"
+      },
+      {
+        "first": null,
+        "second": 1,
+        "type2": "long"
+      }
+    ]
+  },
+  {
+    "key": "enable_email_provider_completion",
+    "title": "enable_email_provider_completion",
+    "summary": "",
+    "icon": "ic_email",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS"
+  },
+  {
+    "key": "enable_popup_view_v2",
+    "title": "enable_popup_view_v2",
+    "summary": "",
+    "icon": "ic_popup_v2",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS"
+  },
+  {
+    "key": "enable_key_border",
+    "title": "enable_key_border",
+    "summary": "",
+    "icon": "ic_key_boarder",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "GBOARD_PREFERENCES"
+  },
+  {
+    "key": "enable_secondary_symbols",
+    "title": "enable_secondary_symbols",
+    "summary": "",
+    "icon": "ic_numeric",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "GBOARD_PREFERENCES"
+  },
+  {
+    "key": "show_suggestions",
+    "title": "show_suggestions",
+    "summary": "",
+    "icon": "ic_alphabetical",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "GBOARD_PREFERENCES"
+  },
+  {
+    "key": "branding",
+    "title": "show_branding_on_space",
+    "summary": "show_branding_on_space",
+    "icon": "ic_google_logo",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "NONE",
+    "linkedKeys": [
+      "show_branding_on_space",
+      "show_branding_interval_seconds",
+      "branding_fadeout_delay_ms"
+    ]
+  },
+  {
+    "key": "show_branding_on_space",
+    "title": "show_branding_on_space",
+    "summary": "",
+    "icon": "",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS",
+    "visible": false
+  },
+  {
+    "key": "show_branding_interval_seconds",
+    "title": "show_branding_interval_seconds",
+    "summary": "",
+    "icon": "",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS",
+    "visible": false,
+    "valueMap": [
+      {
+        "first": true,
+        "second": 0,
+        "type2": "long"
+      },
+      {
+        "first": false,
+        "second": 86400000,
+        "type2": "long"
+      }
+    ]
+  },
+  {
+    "key": "branding_fadeout_delay_ms",
+    "title": "branding_fadeout_delay_ms",
+    "summary": "",
+    "icon": "",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS",
+    "visible": false,
+    "valueMap": [
+      {
+        "first": true,
+        "second": 2147483647,
+        "type2": "long"
+      },
+      {
+        "first": false,
+        "second": 900,
+        "type2": "long"
+      }
+    ]
+  },
+  {
+    "key": "monet",
+    "title": "monet",
+    "summary": "monet_details",
+    "icon": "ic_themes",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "linkedKeys": [
+      "use_silk_theme_by_default",
+      "silk_on_all_pixel",
+      "silk_theme"
+    ]
+  },
+  {
+    "key": "use_silk_theme_by_default",
+    "title": "use_silk_theme_by_default",
+    "summary": "",
+    "icon": "ic_themes",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS",
+    "visible": false
+  },
+  {
+    "key": "silk_on_all_pixel",
+    "title": "silk_on_all_pixel",
+    "summary": "",
+    "icon": "ic_themes",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS",
+    "visible": false
+  },
+  {
+    "key": "silk_theme",
+    "title": "silk_theme",
+    "summary": "",
+    "icon": "ic_themes",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS",
+    "visible": false
+  },
+  {
+    "key": "pill_shaped_key",
+    "title": "pill_shaped_key",
+    "summary": "",
+    "icon": "",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS"
+  },
+  {
+    "key": "enable_clipboard_screenshot_paste",
+    "title": "enable_clipboard_screenshot_paste",
+    "summary": "",
+    "icon": "",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS"
+  },
+  {
+    "key": "enable_lens",
+    "title": "enable_lens",
+    "summary": "",
+    "icon": "",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS"
+  },
+  {
+    "key": "enable_auto_float_keyboard_in_multi_window",
+    "title": "enable_auto_float_keyboard_in_multi_window",
+    "summary": "",
+    "icon": "",
+    "defaultValue": false,
+    "type": "BOOLEAN",
+    "file": "FLAGS"
+  },
+  {
+    "key": "empty",
+    "title": "",
+    "summary": "",
+    "icon": "",
+    "defaultValue": "",
+    "type": "GROUP"
+  }
+]

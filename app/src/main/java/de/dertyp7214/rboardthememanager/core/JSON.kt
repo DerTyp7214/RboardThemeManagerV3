@@ -5,6 +5,56 @@ package de.dertyp7214.rboardthememanager.core
 import org.json.JSONArray
 import org.json.JSONObject
 
+class SafeJSON(private val json: JSONObject) {
+    fun getBoolean(name: String, defaultValue: Boolean = false): Boolean {
+        return try {
+            json.getBoolean(name)
+        } catch (e: Exception) {
+            defaultValue
+        }
+    }
+
+    fun getString(name: String, defaultValue: String = ""): String {
+        return try {
+            json.getString(name)
+        } catch (e: Exception) {
+            defaultValue
+        }
+    }
+
+    fun getLong(name: String, defaultValue: Long = 0): Long {
+        return try {
+            json.getLong(name)
+        } catch (e: Exception) {
+            defaultValue
+        }
+    }
+
+    fun getJSONArray(name: String, defaultValue: JSONArray = JSONArray()): JSONArray {
+        return try {
+            json.getJSONArray(name)
+        } catch (e: Exception) {
+            defaultValue
+        }
+    }
+
+    fun getJSONObject(name: String, defaultValue: JSONObject = JSONObject()): JSONObject {
+        return try {
+            json.getJSONObject(name)
+        } catch (e: Exception) {
+            defaultValue
+        }
+    }
+
+    fun get(name: String, defaultValue: Any = ""): Any {
+        return try {
+            json.get(name)
+        } catch (e: Exception) {
+            defaultValue
+        }
+    }
+}
+
 fun JSONObject.safeParse(string: String): JSONObject {
     return try {
         JSONObject(string)
@@ -21,21 +71,16 @@ fun JSONArray.safeParse(string: String): JSONArray {
     }
 }
 
-fun JSONArray.forEach(run: (o: Any, index: Int) -> Unit) {
-    for (i in 0 until length()) run(get(i), i)
+inline fun <reified E> JSONArray.toList(): List<E> {
+    return map<Any, E> { it as E }
 }
 
-@Suppress("UNCHECKED_CAST")
-fun <V> JSONArray.toList(): ArrayList<V> {
-    val list = ArrayList<V>()
-    forEach { o, _ -> list += o as V }
+inline fun <reified E> JSONArray.forEach(run: (o: E, index: Int) -> Unit) {
+    for (i in 0 until length()) if (get(i) is E) run(get(i) as E, i)
+}
+
+inline fun <reified E, B> JSONArray.map(run: (o: E) -> B): List<B> {
+    val list = arrayListOf<B>()
+    forEach<E> { o, _ -> list.add(run(o)) }
     return list
-}
-
-fun <V> JSONObject.getList(key: String): ArrayList<V> {
-    return try {
-        getJSONArray(key).toList()
-    } catch (e: Exception) {
-        ArrayList()
-    }
 }
