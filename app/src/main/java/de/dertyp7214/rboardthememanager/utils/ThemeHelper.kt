@@ -24,7 +24,7 @@ import com.topjohnwu.superuser.io.SuFileOutputStream
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
-import de.dertyp7214.rboardthememanager.Config.PACKS_URL
+import de.dertyp7214.rboardthememanager.Config.REPOS
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.decodeBitmap
 import de.dertyp7214.rboardthememanager.core.getAttrColor
@@ -168,11 +168,20 @@ object ThemeUtils {
 
     fun loadThemePacks(): List<ThemePack> {
         return try {
-            Gson().fromJson(
-                URL(PACKS_URL).readText(),
-                object : TypeToken<List<ThemePack>>() {}.type
-            )
-        } catch (e: Exception) {
+            val packs = arrayListOf<ThemePack>()
+            REPOS.forEach { repo ->
+                try {
+                    packs.addAll(
+                        Gson().fromJson(
+                            URL(repo).readText(),
+                            object : TypeToken<List<ThemePack>>() {}.type
+                        )
+                    )
+                } catch (_: Exception) {
+                }
+            }
+            packs
+        } catch (_: Exception) {
             listOf()
         }
     }

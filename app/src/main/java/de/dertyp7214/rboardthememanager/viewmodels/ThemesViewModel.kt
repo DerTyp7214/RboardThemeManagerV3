@@ -35,7 +35,7 @@ class ThemesViewModel : ViewModel() {
         return themePacks.value ?: listOf()
     }
 
-    fun setThemePacks(list: List<ThemePack>) {
+    fun setThemePacks(list: List<ThemePack> = listOf()) {
         themePacks.value = list
     }
 

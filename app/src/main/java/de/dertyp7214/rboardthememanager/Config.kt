@@ -20,6 +20,7 @@ object Config {
 
     const val PACKS_URL =
         "https://raw.githubusercontent.com/GboardThemes/Packs/master/download_list.json"
+    val REPOS = arrayListOf(PACKS_URL)
 
     const val SOUNDS_PACKS_URL =
         "https://raw.githubusercontent.com/GboardThemes/Soundpack/master/download_sounds.json"

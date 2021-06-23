@@ -7,9 +7,13 @@ import androidx.preference.PreferenceManager
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.helpers.categoryHeader
+import de.Maxr1998.modernpreferences.helpers.onClick
 import de.Maxr1998.modernpreferences.helpers.pref
 import de.Maxr1998.modernpreferences.helpers.switch
+import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.start
+import de.dertyp7214.rboardthememanager.screens.ReposActivity
 
 class Settings {
     enum class TYPE {
@@ -27,7 +31,8 @@ class Settings {
         @StringRes val summary: Int,
         @DrawableRes val icon: Int,
         val defaultValue: Any,
-        val type: TYPE
+        val type: TYPE,
+        val onClick: () -> Unit = {}
     ) {
         THEMES_HEADER(
             "themes_header",
@@ -52,6 +57,31 @@ class Settings {
             R.drawable.ic_themes,
             true,
             TYPE.BOOLEAN
+        ),
+        DOWNLOAD(
+            "download_header",
+            R.string.download_header,
+            -1,
+            -1,
+            "",
+            TYPE.GROUP
+        ),
+        REPOS(
+            "repos",
+            R.string.repos,
+            R.string.repos_long,
+            -1,
+            "",
+            TYPE.STRING,
+            {
+                Application.context?.let {
+                    ReposActivity::class.java.start(
+                        it
+                    ) {
+                        flags = android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+                    }
+                }
+            }
         );
 
         inline fun <reified T> getValue(context: Context, defaultValue: T? = null): T? {
@@ -80,6 +110,7 @@ class Settings {
                 titleRes = item.title
                 summaryRes = item.summary
                 iconRes = item.icon
+                onClick { item.onClick(); false }
             }
         }
     }

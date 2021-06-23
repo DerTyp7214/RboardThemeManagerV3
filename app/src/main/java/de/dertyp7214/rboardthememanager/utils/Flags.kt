@@ -3,7 +3,6 @@ package de.dertyp7214.rboardthememanager.utils
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -351,7 +350,6 @@ class Flags(val context: Context) {
 
         @SuppressLint("SdCardPath")
         private fun <T> setValue(value: T, key: String, file: FILES): Boolean {
-            Log.d("VALUE", "$key $value $file")
             if (file == FILES.NONE) return true
             val fileName = "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
             val content = SuFileInputStream.open(SuFile(fileName)).use {

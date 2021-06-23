@@ -1,5 +1,6 @@
 package de.dertyp7214.rboardthememanager.core
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
@@ -76,6 +77,30 @@ fun Activity.openShareThemeDialog(
             view.findViewById<Button>(R.id.cancel)?.setOnClickListener {
                 negative(dialog)
             }
+            dialog.show()
+        }
+}
+
+@SuppressLint("InflateParams")
+fun Activity.openInputDialog(
+    @StringRes hint: Int,
+    negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },
+    positive: (dialogInterface: DialogInterface, text: String) -> Unit
+): AlertDialog {
+    content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
+    val view = layoutInflater.inflate(R.layout.input_dialog, null)
+    return AlertDialog.Builder(this)
+        .setCancelable(false)
+        .setView(view)
+        .setOnDismissListener { content.setRenderEffect(null) }
+        .create().also { dialog ->
+            val input = view.findViewById<EditText>(R.id.editText)
+            input.setHint(hint)
+
+            view.findViewById<Button>(R.id.ok)?.setOnClickListener {
+                positive(dialog, input?.text?.toString() ?: "")
+            }
+            view.findViewById<Button>(R.id.cancel)?.setOnClickListener { negative(dialog) }
             dialog.show()
         }
 }
