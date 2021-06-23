@@ -8,35 +8,43 @@
     <group>
         <path
             android:fillAlpha=".8"
-            android:fillColor="@color/ic_launcher_foreground"
-            android:pathData="M159.568,302.138L272.972,302.138A5,5 0,0 1,277.972 307.138L277.972,318.277A5,5 0,0 1,272.972 323.277L159.568,323.277A5,5 0,0 1,154.568 318.277L154.568,307.138A5,5 0,0 1,159.568 302.138z" />
+            android:fillColor="@color/foreground_icon"
+            android:pathData="M159.568,302.138L272.972,302.138A5,5 0,0 1,277.972 307.138L277.972,318.277A5,5 0,0 1,272.972 323.277L159.568,323.277A5,5 0,0 1,154.568 318.277L154.568,307.138A5,5 0,0 1,159.568 302.138z"
+            tools:fillColor="@color/foreground_icon" />
         <path
             android:fillAlpha=".8"
-            android:fillColor="@color/ic_launcher_foreground"
-            android:pathData="M138.67,265.9L148.574,265.9A5,5 0,0 1,153.574 270.9L153.574,281.032A5,5 0,0 1,148.574 286.032L138.67,286.032A5,5 0,0 1,133.67 281.032L133.67,270.9A5,5 0,0 1,138.67 265.9z" />
+            android:fillColor="@color/foreground_icon"
+            android:pathData="M138.67,265.9L148.574,265.9A5,5 0,0 1,153.574 270.9L153.574,281.032A5,5 0,0 1,148.574 286.032L138.67,286.032A5,5 0,0 1,133.67 281.032L133.67,270.9A5,5 0,0 1,138.67 265.9z"
+            tools:fillColor="@color/foreground_icon" />
         <path
             android:fillAlpha=".8"
-            android:fillColor="@color/ic_launcher_foreground"
-            android:pathData="M138.67,229.663L148.574,229.663A5,5 0,0 1,153.574 234.663L153.574,244.795A5,5 0,0 1,148.574 249.795L138.67,249.795A5,5 0,0 1,133.67 244.795L133.67,234.663A5,5 0,0 1,138.67 229.663z" />
+            android:fillColor="@color/foreground_icon"
+            android:pathData="M138.67,229.663L148.574,229.663A5,5 0,0 1,153.574 234.663L153.574,244.795A5,5 0,0 1,148.574 249.795L138.67,249.795A5,5 0,0 1,133.67 244.795L133.67,234.663A5,5 0,0 1,138.67 229.663z"
+            tools:fillColor="@color/foreground_icon" />
         <path
             android:fillAlpha=".8"
-            android:fillColor="@color/ic_launcher_foreground"
-            android:pathData="M175.492,265.9L185.396,265.9A5,5 0,0 1,190.396 270.9L190.396,281.032A5,5 0,0 1,185.396 286.032L175.492,286.032A5,5 0,0 1,170.492 281.032L170.492,270.9A5,5 0,0 1,175.492 265.9z" />
+            android:fillColor="@color/foreground_icon"
+            android:pathData="M175.492,265.9L185.396,265.9A5,5 0,0 1,190.396 270.9L190.396,281.032A5,5 0,0 1,185.396 286.032L175.492,286.032A5,5 0,0 1,170.492 281.032L170.492,270.9A5,5 0,0 1,175.492 265.9z"
+            tools:fillColor="@color/foreground_icon" />
         <path
             android:fillAlpha=".8"
-            android:fillColor="@color/ic_launcher_foreground"
-            android:pathData="M247.146,265.9L257.05,265.9A5,5 0,0 1,262.05 270.9L262.05,281.032A5,5 0,0 1,257.05 286.032L247.146,286.032A5,5 0,0 1,242.146 281.032L242.146,270.9A5,5 0,0 1,247.146 265.9z" />
+            android:fillColor="@color/foreground_icon"
+            android:pathData="M247.146,265.9L257.05,265.9A5,5 0,0 1,262.05 270.9L262.05,281.032A5,5 0,0 1,257.05 286.032L247.146,286.032A5,5 0,0 1,242.146 281.032L242.146,270.9A5,5 0,0 1,247.146 265.9z"
+            tools:fillColor="@color/foreground_icon" />
         <path
             android:fillAlpha=".8"
-            android:fillColor="@color/ic_launcher_foreground"
-            android:pathData="M283.969,229.663L293.873,229.663A5,5 0,0 1,298.873 234.663L298.873,244.795A5,5 0,0 1,293.873 249.795L283.969,249.795A5,5 0,0 1,278.969 244.795L278.969,234.663A5,5 0,0 1,283.969 229.663z" />
+            android:fillColor="@color/foreground_icon"
+            android:pathData="M283.969,229.663L293.873,229.663A5,5 0,0 1,298.873 234.663L298.873,244.795A5,5 0,0 1,293.873 249.795L283.969,249.795A5,5 0,0 1,278.969 244.795L278.969,234.663A5,5 0,0 1,283.969 229.663z"
+            tools:fillColor="@color/foreground_icon" />
         <path
             android:fillAlpha=".8"
-            android:fillColor="@color/ic_launcher_foreground"
-            android:pathData="M283.969,265.9L293.873,265.9A5,5 0,0 1,298.873 270.9L298.873,281.032A5,5 0,0 1,293.873 286.032L283.969,286.032A5,5 0,0 1,278.969 281.032L278.969,270.9A5,5 0,0 1,283.969 265.9z" />
+            android:fillColor="@color/foreground_icon"
+            android:pathData="M283.969,265.9L293.873,265.9A5,5 0,0 1,298.873 270.9L298.873,281.032A5,5 0,0 1,293.873 286.032L283.969,286.032A5,5 0,0 1,278.969 281.032L278.969,270.9A5,5 0,0 1,283.969 265.9z"
+            tools:fillColor="@color/foreground_icon" />
         <path
-            android:fillColor="@color/ic_launcher_foreground"
+            android:fillColor="@color/white"
             android:fillType="evenOdd"
-            android:pathData="M169.27,132.338v76.547l47.03,39.403 47.496,-39.487 0.375,-76.463L169.27,132.338zM164.27,112.338h104.926c8.313,0 15.04,6.761 15,15.074l-0.411,83.817a15.001,15.001 0,0 1,-5.411 11.461l-58.915,48.981a5,5 0,0 1,-6.407 -0.013l-58.416,-48.941a15.001,15.001 0,0 1,-5.366 -11.498v-83.881c0,-8.284 6.715,-15 15,-15z" />
+            android:pathData="M169.27,132.338v76.547l47.03,39.403 47.496,-39.487 0.375,-76.463L169.27,132.338zM164.27,112.338h104.926c8.313,0 15.04,6.761 15,15.074l-0.411,83.817a15.001,15.001 0,0 1,-5.411 11.461l-58.915,48.981a5,5 0,0 1,-6.407 -0.013l-58.416,-48.941a15.001,15.001 0,0 1,-5.366 -11.498v-83.881c0,-8.284 6.715,-15 15,-15z"
+            tools:fillColor="@color/white" />
     </group>
 </vector>

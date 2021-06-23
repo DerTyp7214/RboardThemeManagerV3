@@ -2,11 +2,14 @@
 <resources>
     <color name="background">#ffffff</color>
     <color name="foreground">#e3e3e3</color>
-    <color name="accent">#6495ed</color>
+    <color name="accent">#7AACFF</color>
+    <color name="background_icon">#7AACFF</color>
+    <color name="foreground_icon">#183A71</color>
     <color name="text">#000000</color>
+    <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="transparentBlack">#80000000</color>
 
-    <color name="ic_launcher_background">@color/accent</color>
+    <color name="ic_launcher_background">@color/background_icon</color>
     <color name="ic_launcher_foreground">@color/background</color>
 </resources>
