@@ -101,4 +101,5 @@
     <string name="add">Add</string>
     <string name="save_repos">Do you want to apply the changes?</string>
     <string name="repository">Repository URL</string>
+    <string name="repo_added">Repo added</string>
 </resources>

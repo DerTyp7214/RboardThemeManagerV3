@@ -6,8 +6,11 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.ViewTreeObserver
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.edit
+import androidx.preference.PreferenceManager
 import com.google.gson.Gson
 import com.topjohnwu.superuser.BusyBoxInstaller
 import com.topjohnwu.superuser.Shell
@@ -84,67 +87,92 @@ class SplashScreen : AppCompatActivity() {
             }
         }
 
+
+        val scheme = intent.scheme
         val data = intent.data
 
-        if (data != null) {
-            val resultLauncher =
-                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                    finishAndRemoveTask()
+        when {
+            scheme != "content" && data != null -> {
+                when (data.host?.split(".")?.first()) {
+                    "repos" -> {
+                        data.queryParameterNames.forEach {
+                            when (it) {
+                                "add" -> {
+                                    PreferenceManager.getDefaultSharedPreferences(this).apply {
+                                        val repos = ArrayList(getStringSet("repos", setOf()))
+                                        repos.add(data.getQueryParameter("add"))
+                                        edit { putStringSet("repos", repos.toSet()) }
+                                    }
+                                    Toast.makeText(this, R.string.repo_added, Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                            }
+                        }
+                    }
                 }
-            val dialog = openLoadingDialog(R.string.unpacking_themes)
-            doAsync({
-                val zip = File(cacheDir, "themes.pack").apply {
-                    delete()
-                    data.writeToFile(this@SplashScreen, this)
-                }
-                if (!zip.exists()) listOf()
-                else {
-                    val destination = File(cacheDir, zip.nameWithoutExtension)
-                    if (ZipHelper().unpackZip(destination.absolutePath, zip.absolutePath)) {
-                        destination.listFiles { file -> file.extension == "zip" }
-                            ?.map { it.absolutePath }
-                            ?: listOf()
-                    } else listOf()
-                }
-            }) {
-                dialog.dismiss()
-                resultLauncher.launch(
-                    Intent(
-                        this,
-                        InstallPackActivity::class.java
-                    ).putStringArrayListExtra("themes", ArrayList(it))
-                )
+                finishAndRemoveTask()
             }
-        } else {
-            content.viewTreeObserver.addOnPreDrawListener(object :
-                ViewTreeObserver.OnPreDrawListener {
-                override fun onPreDraw(): Boolean {
-                    return if (isReady) {
-                        content.viewTreeObserver.removeOnPreDrawListener(this)
-                        true
-                    } else false
+            data != null -> {
+                val resultLauncher =
+                    registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                        finishAndRemoveTask()
+                    }
+                val dialog = openLoadingDialog(R.string.unpacking_themes)
+                doAsync({
+                    val zip = File(cacheDir, "themes.pack").apply {
+                        delete()
+                        data.writeToFile(this@SplashScreen, this)
+                    }
+                    if (!zip.exists()) listOf()
+                    else {
+                        val destination = File(cacheDir, zip.nameWithoutExtension)
+                        if (ZipHelper().unpackZip(destination.absolutePath, zip.absolutePath)) {
+                            destination.listFiles { file -> file.extension == "zip" }
+                                ?.map { it.absolutePath }
+                                ?: listOf()
+                        } else listOf()
+                    }
+                }) {
+                    dialog.dismiss()
+                    resultLauncher.launch(
+                        Intent(
+                            this,
+                            InstallPackActivity::class.java
+                        ).putStringArrayListExtra("themes", ArrayList(it))
+                    )
                 }
-            })
+            }
+            else -> {
+                content.viewTreeObserver.addOnPreDrawListener(object :
+                    ViewTreeObserver.OnPreDrawListener {
+                    override fun onPreDraw(): Boolean {
+                        return if (isReady) {
+                            content.viewTreeObserver.removeOnPreDrawListener(this)
+                            true
+                        } else false
+                    }
+                })
 
-            rootAccess = Shell.rootAccess()
-            gboardInstalled = isPackageInstalled(Config.GBOARD_PACKAGE_NAME, packageManager)
+                rootAccess = Shell.rootAccess()
+                gboardInstalled = isPackageInstalled(Config.GBOARD_PACKAGE_NAME, packageManager)
 
-            createNotificationChannels()
+                createNotificationChannels()
 
-            when {
-                !gboardInstalled -> openDialog(
-                    R.string.install_gboard,
-                    R.string.gboard_not_installed
-                ) {
-                    openUrl(gboardPlayStoreUrl)
-                }
-                !rootAccess -> openDialog(R.string.cant_use_app, R.string.not_rooted, null) {
-                    finishAndRemoveTask()
-                }
-                else -> checkForUpdate {
-                    checkedForUpdate = true
-                    startActivity(Intent(this, MainActivity::class.java).putExtra("update", it))
-                    finish()
+                when {
+                    !gboardInstalled -> openDialog(
+                        R.string.install_gboard,
+                        R.string.gboard_not_installed
+                    ) {
+                        openUrl(gboardPlayStoreUrl)
+                    }
+                    !rootAccess -> openDialog(R.string.cant_use_app, R.string.not_rooted, null) {
+                        finishAndRemoveTask()
+                    }
+                    else -> checkForUpdate {
+                        checkedForUpdate = true
+                        startActivity(Intent(this, MainActivity::class.java).putExtra("update", it))
+                        finish()
+                    }
                 }
             }
         }
