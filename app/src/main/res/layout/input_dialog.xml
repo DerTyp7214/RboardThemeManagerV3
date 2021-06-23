@@ -43,8 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="@android:string/cancel"
-                app:cornerRadius="@dimen/roundCorners" />
+                android:text="@android:string/cancel" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/ok"
@@ -52,8 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="@android:string/ok"
-                app:cornerRadius="@dimen/roundCorners" />
+                android:text="@android:string/ok" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
 
-        val closeBottomSheetBehaviorLaucher =
+        val closeBottomSheetBehaviorLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
                 R.drawable.ic_info,
                 R.string.info
             ) {
-                PreferencesActivity::class.java.start(this, closeBottomSheetBehaviorLaucher) {
+                PreferencesActivity::class.java.start(this, closeBottomSheetBehaviorLauncher) {
                     putExtra("type", "info")
                 }
             },
@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                 R.drawable.ic_baseline_outlined_flag_24,
                 R.string.flags
             ) {
-                PreferencesActivity::class.java.start(this, closeBottomSheetBehaviorLaucher) {
+                PreferencesActivity::class.java.start(this, closeBottomSheetBehaviorLauncher) {
                     putExtra("type", "flags")
                 }
             },
@@ -192,7 +192,7 @@ class MainActivity : AppCompatActivity() {
                             zip.delete()
                             ZipHelper().zip(files.map { it.absolutePath }, zip.absolutePath)
                             files.forEach { it.delete() }
-                            val uri = FileProvider.getUriForFile(this, packageName  + ".fileprovider", zip )
+                            val uri = FileProvider.getUriForFile(this, packageName, zip)
                             ShareCompat.IntentBuilder(this)
                                 .setStream(uri)
                                 .setType("application/pack")

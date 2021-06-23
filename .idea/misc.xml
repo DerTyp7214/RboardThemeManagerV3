@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/news_bg_default.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/activity_preferences.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/activity_repos.xml" value="0.18085106382978725" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/input_dialog.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/loading_dialog.xml" value="0.18085106382978725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/install_pack.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/navigation.xml" value="0.371875" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/fragment_theme_list.xml" value="0.12681159420289856" />
@@ -94,10 +98,13 @@
       <item index="0" class="java.lang.String" itemvalue="android.annotation.SuppressLint" />
     </list>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="SuppressKotlinCodeStyleNotification">
+    <option name="disableForAll" value="true" />
   </component>
 </project>

@@ -86,7 +86,7 @@ class ReposActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (modified) {
-            openDialog(R.string.save_repos, R.string.apply, false, {
+            openDialog(R.string.save_repos, R.string.apply, {
                 super.onBackPressed()
             }) {
                 apply()

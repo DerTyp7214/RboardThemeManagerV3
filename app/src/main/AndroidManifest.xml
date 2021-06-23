@@ -4,7 +4,6 @@
     package="de.dertyp7214.rboardthememanager">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission
         android:name="android.permission.QUERY_ALL_PACKAGES"
@@ -20,46 +19,6 @@
         android:theme="@style/Theme.RboardThemeManagerV3"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".screens.ShareFlags"
-            android:exported="true"
-            android:theme="@style/Theme.RboardThemeManagerV3.Info" />
-        <activity
-            android:name=".screens.ReadMoreReadFast"
-            android:exported="true" />
-
-        <receiver
-            android:name=".widgets.SwitchKeyboardWidget"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/switch_keyboard_widget_info" />
-        </receiver>
-
-        <activity
-            android:name=".widgets.SwitchKeyboardWidgetConfigureActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
-            </intent-filter>
-        </activity>
-
-        <receiver
-            android:name=".widgets.FlagsWidget"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.appwidget.provider"
-                android:resource="@xml/flags_widget_info" />
-        </receiver>
-
-        <activity
             android:name=".screens.ReposActivity"
             android:exported="true"
             android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />
@@ -72,10 +31,8 @@
             android:exported="true"
             android:theme="@style/Theme.RboardThemeManagerV3.Info" />
         <activity
-            android:name=".screens.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.RboardThemeManagerV3.Main"
-            android:windowSoftInputMode="adjustNothing">
+            android:name=".screens.SplashScreen"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -98,25 +55,6 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.pack" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.pack" />
                 <data android:scheme="content" />
-                <data android:scheme="file" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <category android:name="android.intent.category.OPENABLE" />
-
-                <data android:host="*" />
-                <data android:mimeType="*/*" />
-                <data android:pathPattern=".*\\.rboard" />
-                <data android:pathPattern=".*\\..*\\.rboard" />
-                <data android:pathPattern=".*\\..*\\..*\\.rboard" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\.rboard" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.rboard" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.rboard" />
-                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.rboard" />
-                <data android:scheme="content" />
             </intent-filter>
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
@@ -132,6 +70,11 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".screens.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.RboardThemeManagerV3.Main"
+            android:windowSoftInputMode="adjustNothing" />
         <activity android:name="com.dertyp7214.logs.helpers.CrashReportDialog" />
         <activity android:name="com.dertyp7214.logs.screens.Logs" />
 
@@ -144,21 +87,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
-        <service
-            android:name=".services.MessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_notification" />
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_channel_id"
-            android:value="@string/default_notification_channel_id" />
     </application>
 
 </manifest>
