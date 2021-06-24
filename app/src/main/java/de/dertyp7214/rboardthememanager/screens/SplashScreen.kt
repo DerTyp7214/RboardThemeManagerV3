@@ -1,6 +1,5 @@
 package de.dertyp7214.rboardthememanager.screens
 
-
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context

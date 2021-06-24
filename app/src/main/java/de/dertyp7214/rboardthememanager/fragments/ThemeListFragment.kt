@@ -10,15 +10,18 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
-import de.dertyp7214.rboardthememanager.core.dpToPx
-import de.dertyp7214.rboardthememanager.core.get
-import de.dertyp7214.rboardthememanager.core.getAttrColor
+import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.utils.asyncInto
 import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
 
 class ThemeListFragment : Fragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        applyTransitions()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +32,7 @@ class ThemeListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        applyTransitionsViewCreated()
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view)
         val refreshLayout = view.findViewById<SwipeRefreshLayout>(R.id.refreshLayout)

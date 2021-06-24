@@ -15,15 +15,24 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.ChipContainer
 import de.dertyp7214.rboardthememanager.components.NewsCards
+import de.dertyp7214.rboardthememanager.core.applyTransitions
+import de.dertyp7214.rboardthememanager.core.applyTransitionsViewCreated
 import de.dertyp7214.rboardthememanager.core.download
 import de.dertyp7214.rboardthememanager.core.get
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
+import de.dertyp7214.rboardthememanager.utils.TraceWrapper
 import de.dertyp7214.rboardthememanager.utils.asyncInto
+import de.dertyp7214.rboardthememanager.utils.doAsync
 import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
 
 class DownloadListFragment : Fragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        applyTransitions()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,15 +44,21 @@ class DownloadListFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        applyTransitionsViewCreated()
+
+        val trace = TraceWrapper("DOWNLOADS", false)
+        trace.addSplit("GET VIEWS")
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val chipContainer = view.findViewById<ChipContainer>(R.id.chipContainer)
         val newsCards = view.findViewById<NewsCards>(R.id.newsCard)
 
-        val originalThemePacks = arrayListOf<ThemePack>()
+        val themesViewModel = requireActivity()[ThemesViewModel::class.java]
+
+        val originalThemePacks = ArrayList(themesViewModel.getThemePacks())
         val themePacks = ArrayList(originalThemePacks)
 
-        val themesViewModel = requireActivity()[ThemesViewModel::class.java]
+        trace.addSplit("RESULT LAUNCHER")
 
         val resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -53,9 +68,13 @@ class DownloadListFragment : Fragment() {
                 }
             }
 
+        trace.addSplit("ADAPTER")
+
         val adapter = ThemePackAdapter(themePacks, requireActivity(), resultLauncher)
 
         val tags = arrayListOf<String>()
+
+        trace.addSplit("CLICK LISTENER")
 
         newsCards.setClickNewsListener { pack ->
             pack.download(requireActivity()) {
@@ -68,38 +87,58 @@ class DownloadListFragment : Fragment() {
             }
         }
 
-        themesViewModel.themePacksObserve(this) { packs ->
-            originalThemePacks.clear()
-            originalThemePacks.addAll(packs)
-            themePacks.clear()
-            themePacks.addAll(originalThemePacks)
-            packs.forEach { pack ->
-                tags.addAll(pack.tags.filter { !tags.contains(it) })
-            }
+        trace.addSplit("OBSERVERS")
 
-            adapter.notifyDataSetChanged()
-            chipContainer.setChips(tags)
+        themesViewModel.themePacksObserve(this) { packs ->
+            if (packs.isEmpty()) ThemeUtils::loadThemePacks asyncInto themesViewModel::setThemePacks
+            else
+                doAsync({
+                    originalThemePacks.clear()
+                    originalThemePacks.addAll(packs)
+                    themePacks.clear()
+                    themePacks.addAll(originalThemePacks)
+                    packs.forEach { pack ->
+                        tags.addAll(pack.tags.filter { !tags.contains(it) })
+                    }
+                }) {
+                    adapter.notifyDataSetChanged()
+                    chipContainer.setChips(tags)
+                }
         }
 
         themesViewModel.observeFilter(this) { filter ->
-            val chipFilters = chipContainer.filters
-            themePacks.clear()
-            themePacks.addAll(filterThemePacks(originalThemePacks, chipFilters, filter))
-            adapter.notifyDataSetChanged()
+            doAsync({
+                val chipFilters = chipContainer.filters
+                themePacks.clear()
+                themePacks.addAll(filterThemePacks(originalThemePacks, chipFilters, filter))
+            }) {
+                adapter.notifyDataSetChanged()
+            }
         }
+
+        trace.addSplit("RECYCLERVIEW")
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
 
+        trace.addSplit("CHIP CONTAINER")
+
         chipContainer.setOnFilterToggle { filters ->
-            val searchFilter = themesViewModel.getFilter()
-            themePacks.clear()
-            themePacks.addAll(filterThemePacks(originalThemePacks, filters, searchFilter))
-            adapter.notifyDataSetChanged()
+            doAsync({
+                val searchFilter = themesViewModel.getFilter()
+                themePacks.clear()
+                themePacks.addAll(filterThemePacks(originalThemePacks, filters, searchFilter))
+            }) {
+                adapter.notifyDataSetChanged()
+            }
         }
 
-        ThemeUtils::loadThemePacks asyncInto themesViewModel::setThemePacks
+        trace.addSplit("LOAD THEME PACKS")
+
+        if (themesViewModel.getThemePacks().isEmpty())
+            ThemeUtils::loadThemePacks asyncInto themesViewModel::setThemePacks
+
+        trace.end()
     }
 
     private fun filterThemePacks(
