@@ -67,11 +67,6 @@ class ThemeAdapter(
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         this.recyclerView = recyclerView
-        activeTheme = getActiveTheme()
-            .removePrefix("assets:theme_package_metadata_")
-            .removeSuffix(".binarypb").let {
-                if (it.isBlank()) "system_auto" else it
-            }
     }
 
     private class ArrayListWrapper<E>(

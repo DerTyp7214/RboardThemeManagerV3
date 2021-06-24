@@ -86,6 +86,7 @@ class MainActivity : AppCompatActivity() {
         val reloadThemesLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 themesViewModel.setThemes()
+                themesViewModel.setThemePacks()
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
 
