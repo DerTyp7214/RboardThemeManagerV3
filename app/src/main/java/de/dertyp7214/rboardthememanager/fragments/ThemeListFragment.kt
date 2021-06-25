@@ -58,7 +58,7 @@ class ThemeListFragment : Fragment() {
         refreshLayout.setColorSchemeColors(requireActivity().getAttrColor(R.attr.colorOnPrimary))
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.setHasFixedSize(true)
+        recyclerView.setHasFixedSize(false)
         recyclerView.adapter = adapter
 
         themesViewModel.themesObserve(this) { themes ->

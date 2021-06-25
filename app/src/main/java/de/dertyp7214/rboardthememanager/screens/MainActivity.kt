@@ -310,7 +310,7 @@ class MainActivity : AppCompatActivity() {
         secondaryContent.addView(ThemeUtils.getThemeView(ThemeUtils.getActiveThemeData(), this), 0)
 
         menuRecyclerView.layoutManager = LinearLayoutManager(this)
-        menuRecyclerView.setHasFixedSize(true)
+        menuRecyclerView.setHasFixedSize(false)
         menuRecyclerView.adapter = menuAdapter
 
         searchBar.setOnSearchListener { text ->

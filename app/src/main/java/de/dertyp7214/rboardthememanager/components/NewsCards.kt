@@ -16,7 +16,7 @@ import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.utils.doAsync
 import java.net.URL
 
-class NewsCards(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
+class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
 
     private val newsFeedUrl = "https://raw.githubusercontent.com/GboardThemes/Packs/master/top.json"
 

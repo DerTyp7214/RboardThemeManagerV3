@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.core.download
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
@@ -18,7 +19,7 @@ class ThemePackAdapter(
     private val activity: Activity,
     private val resultLauncher: ActivityResultLauncher<Intent>
 ) :
-    RecyclerView.Adapter<ThemePackAdapter.ViewHolder>() {
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val root: View = v.findViewById(R.id.root)
@@ -26,27 +27,47 @@ class ThemePackAdapter(
         val author: TextView = v.findViewById(R.id.author)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    class NewsViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+        val newsCards: NewsCards = v as NewsCards
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if (viewType == 0) return NewsViewHolder(NewsCards(activity))
         return ViewHolder(LayoutInflater.from(activity).inflate(R.layout.pack_item, parent, false))
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val themePack = list[position]
 
-        holder.title.text = themePack.title
-        holder.author.text = themePack.author
+        if (holder is ViewHolder) {
+            holder.title.text = themePack.title
+            holder.author.text = themePack.author
 
-        holder.root.setOnClickListener {
-            themePack.download(activity) {
-                resultLauncher.launch(
-                    Intent(
-                        activity,
-                        InstallPackActivity::class.java
-                    ).putStringArrayListExtra("themes", ArrayList(it))
-                )
+            holder.root.setOnClickListener {
+                themePack.download(activity) {
+                    resultLauncher.launch(
+                        Intent(
+                            activity,
+                            InstallPackActivity::class.java
+                        ).putStringArrayListExtra("themes", ArrayList(it))
+                    )
+                }
+            }
+        } else if (holder is NewsViewHolder) {
+            holder.newsCards.setClickNewsListener { pack ->
+                pack.download(activity) {
+                    resultLauncher.launch(
+                        Intent(
+                            activity,
+                            InstallPackActivity::class.java
+                        ).putStringArrayListExtra("themes", ArrayList(it))
+                    )
+                }
             }
         }
     }
+
+    override fun getItemViewType(position: Int): Int = position
 
     override fun getItemCount(): Int = list.size
 }
