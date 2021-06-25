@@ -14,7 +14,7 @@ android {
 
     defaultConfig {
         applicationId "de.dertyp7214.rboardthememanager"
-        minSdkVersion 30
+        minSdkVersion 23
         targetSdkVersion 30
         versionCode 309
         versionName "3.0.9"

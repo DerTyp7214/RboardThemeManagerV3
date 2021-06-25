@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.core.download
-import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 
@@ -53,20 +52,6 @@ class ThemePackAdapter(
                         ).putStringArrayListExtra("themes", ArrayList(it))
                     )
                 }
-            }
-
-            holder.root.setOnLongClickListener {
-                activity.run {
-                    openDialog(
-                        themePack.description ?: getString(R.string.theme_pack),
-                        getString(R.string.description),
-                        true,
-                        null
-                    ) {
-                        it.dismiss()
-                    }
-                }
-                false
             }
         } else if (holder is NewsViewHolder) {
             holder.newsCards.setClickNewsListener { pack ->

@@ -2,7 +2,6 @@ package de.dertyp7214.rboardthememanager.fragments
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,13 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.ChipContainer
-import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.core.applyTransitions
 import de.dertyp7214.rboardthememanager.core.applyTransitionsViewCreated
-import de.dertyp7214.rboardthememanager.core.download
 import de.dertyp7214.rboardthememanager.core.get
 import de.dertyp7214.rboardthememanager.data.ThemePack
-import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.utils.TraceWrapper
 import de.dertyp7214.rboardthememanager.utils.asyncInto
@@ -51,12 +47,11 @@ class DownloadListFragment : Fragment() {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val chipContainer = view.findViewById<ChipContainer>(R.id.chipContainer)
-        val newsCards = view.findViewById<NewsCards>(R.id.newsCard)
 
         val themesViewModel = requireActivity()[ThemesViewModel::class.java]
 
         val originalThemePacks = ArrayList(themesViewModel.getThemePacks())
-        val themePacks = ArrayList(originalThemePacks)
+        val themePacks = arrayListOf(ThemePack.NONE, *originalThemePacks.toTypedArray())
 
         trace.addSplit("RESULT LAUNCHER")
 
@@ -74,19 +69,6 @@ class DownloadListFragment : Fragment() {
 
         val tags = arrayListOf<String>()
 
-        trace.addSplit("CLICK LISTENER")
-
-        newsCards.setClickNewsListener { pack ->
-            pack.download(requireActivity()) {
-                resultLauncher.launch(
-                    Intent(
-                        activity,
-                        InstallPackActivity::class.java
-                    ).putStringArrayListExtra("themes", ArrayList(it))
-                )
-            }
-        }
-
         trace.addSplit("OBSERVERS")
 
         themesViewModel.themePacksObserve(this) { packs ->
@@ -94,6 +76,7 @@ class DownloadListFragment : Fragment() {
             else
                 doAsync({
                     originalThemePacks.clear()
+                    originalThemePacks.add(ThemePack.NONE)
                     originalThemePacks.addAll(packs)
                     themePacks.clear()
                     themePacks.addAll(originalThemePacks)
@@ -119,6 +102,7 @@ class DownloadListFragment : Fragment() {
         trace.addSplit("RECYCLERVIEW")
 
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.setHasFixedSize(false)
         recyclerView.adapter = adapter
 
         trace.addSplit("CHIP CONTAINER")
@@ -147,17 +131,18 @@ class DownloadListFragment : Fragment() {
         filter: String
     ): List<ThemePack> {
         return packs.filter { pack ->
-            (pack.title.contains(
-                filter,
-                true
-            ) || pack.author.contains(
-                filter,
-                true
-            )) && (filters.isEmpty() || pack.tags.any {
-                filters.contains(
-                    it
-                )
-            })
+            pack.none ||
+                    ((pack.title.contains(
+                        filter,
+                        true
+                    ) || pack.author.contains(
+                        filter,
+                        true
+                    )) && (filters.isEmpty() || pack.tags.any {
+                        filters.contains(
+                            it
+                        )
+                    }))
         }
     }
 }

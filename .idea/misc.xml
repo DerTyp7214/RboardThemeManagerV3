@@ -5,14 +5,17 @@
       <map>
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable-night/ic_keyboard.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_keyboard.xml" value="0.3725" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_launcher_background.xml" value="0.199" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/news_bg_default.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/activity_preferences.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/activity_repos.xml" value="0.18085106382978725" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/fragment_download_list.xml" value="0.18085106382978725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/input_dialog.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/loading_dialog.xml" value="0.18085106382978725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/install_pack.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/navigation.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.359" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/mipmap/ic_launcher.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/mipmap/ic_launcher_round.xml" value="0.3725" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/fragment_theme_list.xml" value="0.12681159420289856" />
