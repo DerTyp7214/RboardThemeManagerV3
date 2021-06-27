@@ -82,6 +82,14 @@ class Flags(val context: Context) {
                     }
                 }
             }
+        ),
+        EMPTY1(
+            "empty1",
+            -1,
+            -1,
+            -1,
+            "",
+            TYPE.GROUP
         );
 
         @Suppress("UNCHECKED_CAST")

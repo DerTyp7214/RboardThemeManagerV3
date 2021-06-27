@@ -4,6 +4,8 @@ package de.dertyp7214.rboardthememanager.utils
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import androidx.core.content.FileProvider
 import com.downloader.Error
 import com.downloader.OnDownloadListener
@@ -11,6 +13,7 @@ import com.downloader.PRDownloader
 import de.dertyp7214.rboardthememanager.BuildConfig
 import java.io.File
 import kotlin.math.roundToLong
+
 
 class UpdateHelper(
     private val url: String,
@@ -59,15 +62,22 @@ class UpdateHelper(
                     finishListener("$path/update.apk", System.currentTimeMillis() - startTime)
                     val toInstall: File = File(path, "$path/update.apk")
                     val intent: Intent
-                    val apkUri = FileProvider.getUriForFile(
-                        context,
-                        BuildConfig.APPLICATION_ID + ".fileprovider",
-                        toInstall
-                    )
-                    intent = Intent(Intent.ACTION_INSTALL_PACKAGE)
-                    intent.data = apkUri
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    context.startActivity(intent)
+                    if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                        val apkUri = FileProvider.getUriForFile(
+                            context,
+                            BuildConfig.APPLICATION_ID + ".fileprovider",
+                            toInstall
+                        )
+                        intent = Intent(Intent.ACTION_INSTALL_PACKAGE)
+                        intent.data = apkUri
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        context.startActivity(intent)
+                    } else {
+                        val apkUri: Uri = Uri.fromFile(toInstall)
+                        intent = Intent(Intent.ACTION_VIEW)
+                        intent.setDataAndType(apkUri, "application/vnd.android.package-archive")
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    }
                 }
 
                 override fun onError(error: Error?) {

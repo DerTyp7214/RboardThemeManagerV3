@@ -1,8 +1,11 @@
 package de.dertyp7214.rboardthememanager.screens
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.dertyp7214.rboardthememanager.databinding.ActivityPreferencesBinding
@@ -14,10 +17,13 @@ class PreferencesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPreferencesBinding
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPreferencesBinding.inflate(layoutInflater)
-        window.setDecorFitsSystemWindows(false)
+        window.run{
+            WindowCompat.setDecorFitsSystemWindows(this, false)
+        }
         setContentView(binding.root)
 
         val preferences = Preferences(this, intent)

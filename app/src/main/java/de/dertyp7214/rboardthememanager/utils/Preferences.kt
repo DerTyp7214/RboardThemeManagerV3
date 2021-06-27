@@ -3,6 +3,7 @@ package de.dertyp7214.rboardthememanager.utils
 import android.app.Activity
 import android.content.Intent
 import android.os.Build
+import androidx.annotation.RequiresApi
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.helpers.categoryHeader
 import de.Maxr1998.modernpreferences.helpers.pref
@@ -13,6 +14,7 @@ import de.dertyp7214.rboardthememanager.R
 
 class Preferences(private val activity: Activity, private val intent: Intent) {
     val preferences: PreferenceScreen
+        @RequiresApi(Build.VERSION_CODES.R)
         get() {
             return when (intent.getStringExtra("type")) {
                 "info" -> getInfoPreferences()
@@ -38,6 +40,7 @@ class Preferences(private val activity: Activity, private val intent: Intent) {
     private fun getFlagsPreferences() = screen(activity, Flags(activity)::preferences)
     private fun getAllFlagsPreferences() = screen(activity, Flags(activity)::allFlagsPreferences)
 
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun getInfoPreferences(): PreferenceScreen {
         val usingModule = MagiskUtils.getModules().any { it.id == Config.MODULE_ID }
         return screen(activity) {
@@ -66,7 +69,7 @@ class Preferences(private val activity: Activity, private val intent: Intent) {
             }
             pref("android_version") {
                 titleRes = R.string.android_version
-                summary = Build.VERSION.RELEASE_OR_CODENAME
+                summary = Build.VERSION.RELEASE
                 iconRes = R.drawable.ic_android
             }
             if (MagiskUtils.isMagiskInstalled())
