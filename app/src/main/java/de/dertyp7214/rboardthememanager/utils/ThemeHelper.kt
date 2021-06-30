@@ -18,18 +18,25 @@ import com.dertyp7214.preferencesplus.core.setWidth
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.topjohnwu.superuser.io.SuFile
+import com.topjohnwu.superuser.io.SuFileInputStream
+import com.topjohnwu.superuser.io.SuFileOutputStream
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
 import de.dertyp7214.rboardthememanager.Config.REPOS
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.core.decodeBitmap
+import de.dertyp7214.rboardthememanager.core.getAttr
+import de.dertyp7214.rboardthememanager.core.getBitmap
+import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.data.ThemePack
-import de.dertyp7214.rboardthememanager.preferences.Flags
-import de.dertyp7214.rboardthememanager.preferences.Settings
+import org.apache.commons.text.StringEscapeUtils
 import java.io.BufferedInputStream
+import java.io.File
+import java.io.InputStream
 import java.net.URL
+import java.nio.charset.Charset
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -39,19 +46,54 @@ fun applyTheme(
     withBorders: Boolean = false
 ): Boolean {
     val name =
-        if (theme.path.isEmpty() || theme.path.startsWith("assets:") || theme.path.startsWith("system_auto:")) theme.path
-        else "${if (Config.useMagisk) "system:" else "files:themes/"}${theme.name}.zip"
+        if (theme.path.isEmpty() || theme.path.startsWith("assets:")) theme.path else "system:${theme.name}.zip"
     val inputPackageName = GBOARD_PACKAGE_NAME
-    val fileName = Config.GBOARD_PREFS_PATH
+    val fileName =
+        "/data/data/$inputPackageName/shared_prefs/${inputPackageName}_preferences.xml"
     Logger.log(
         Logger.Companion.Type.INFO,
         "APPLY",
         "[ApplyTheme]: $name $inputPackageName $fileName"
     )
+    val useFallback = !SuFile(fileName).exists()
+    fun readText(): InputStream {
+        return if (useFallback) {
+            Runtime.getRuntime()
+                .exec("su --mount-master -c cat $fileName").inputStream
+        } else {
+            SuFileInputStream.open(SuFile(fileName))
+        }
+    }
 
-    val content = SuFile(fileName).openStream()?.use {
+    fun writeText(content: String) {
+        if (useFallback)
+            Runtime.getRuntime()
+                .exec("su --mount-master -c echo \"${StringEscapeUtils.escapeJava(content)}\" > '$fileName'")
+                .apply {
+                    errorStream.bufferedReader().readText().let { error ->
+                        Logger.log(
+                            Logger.Companion.Type.INFO,
+                            "APPLY",
+                            "[Error]: $error"
+                        )
+                    }
+                    inputStream.bufferedReader().readText().let { error ->
+                        Logger.log(
+                            Logger.Companion.Type.INFO,
+                            "APPLY",
+                            "[Response]: $error"
+                        )
+                    }
+                }
+        else SuFileOutputStream.open(File(fileName)).writer(Charset.defaultCharset())
+            .use { outputStreamWriter ->
+                outputStreamWriter.write(content)
+            }
+    }
+
+    val content = readText().use {
         it.bufferedReader().readText()
-    }?.let {
+    }.let {
         var changed = it
 
         changed = if ("<string name=\"additional_keyboard_theme\">" in changed)
@@ -80,23 +122,22 @@ fun applyTheme(
         return@let changed
     }
 
-    if (content != null)
-        SuFile(fileName).writeFile(content.trim())
+    writeText(content)
 
     return "am force-stop $inputPackageName".runAsCommand()
 }
 
 @SuppressLint("SdCardPath")
 fun getActiveTheme(): String {
+    val inputPackageName = "com.google.android.inputmethod.latin"
     val fileLol =
-        SuFile(Config.GBOARD_PREFS_PATH)
+        SuFile("/data/data/$inputPackageName/shared_prefs/${inputPackageName}_preferences.xml")
     return try {
-        fileLol.openStream()?.bufferedReader()?.readText()
-            ?.split("<string name=\"additional_keyboard_theme\">")
-            ?.let { if (it.size > 1) it[1].split("</string>")[0] else "" }
-            ?.removePrefix("files:themes/")
-            ?.removePrefix("system:")
-            ?.removeSuffix(".zip") ?: ""
+        if (!fileLol.exists()) ""
+        else SuFileInputStream.open(fileLol).bufferedReader().readText()
+            .split("<string name=\"additional_keyboard_theme\">")
+            .let { if (it.size > 1) it[1].split("</string>")[0] else "" }.replace("system:", "")
+            .replace(".zip", "")
     } catch (error: Exception) {
         Logger.log(Logger.Companion.Type.ERROR, "ActiveTheme", error.message)
         ""
@@ -138,10 +179,7 @@ object ThemeUtils {
                         ctx,
                         true
                     )
-                } == true) {
-                if (Flags.values.monet) getDynamicColorsTheme()?.let { theme -> themes.add(theme) }
-                themes.add(getSystemAutoTheme())
-            }
+                } == true) getSystemAutoTheme()?.let { theme -> themes.add(theme) }
             if (context?.let { ctx ->
                     Settings.SETTINGS.SHOW_PREINSTALLED_THEMES.getValue(
                         ctx,
@@ -216,12 +254,11 @@ object ThemeUtils {
     fun getActiveThemeData(): ThemeDataClass = getThemeData(getActiveTheme())
 
     fun getThemeData(themeName: String): ThemeDataClass {
-        return if ((themeName.startsWith("assets:") || themeName.startsWith("system_auto:")) && Application.context != null) {
+        return if (themeName.startsWith("assets:") && Application.context != null) {
             val imgName =
                 themeName
                     .removePrefix("assets:theme_package_metadata_")
                     .removeSuffix(".binarypb")
-                    .removeSuffix(":")
             val image = Application.context?.let {
                 try {
                     val inputStream = it.resources.openRawResource(
@@ -256,11 +293,11 @@ object ThemeUtils {
                 SuFile(Config.MAGISK_THEME_LOC, name).absolutePath
             )
         } else {
-            getDynamicColorsTheme() ?: ThemeDataClass(null, "", "")
+            getSystemAutoTheme() ?: ThemeDataClass(null, "", "")
         }
     }
 
-    private fun getDynamicColorsTheme(): ThemeDataClass? {
+    private fun getSystemAutoTheme(): ThemeDataClass? {
         return if (Application.context != null) {
             val image = Application.context?.let { context ->
                 val inputStream = context.resources.openRawResource(
@@ -275,7 +312,7 @@ object ThemeUtils {
             }
             ThemeDataClass(
                 image,
-                "dynamic_color",
+                "system_auto",
                 "",
                 colorFilter = PorterDuffColorFilter(
                     Application.context!!.getAttr(android.R.attr.colorAccent),
@@ -283,16 +320,6 @@ object ThemeUtils {
                 )
             )
         } else null
-    }
-
-    fun getSystemAutoTheme(): ThemeDataClass {
-        return ThemeDataClass(
-            Application.context?.let { context ->
-                BitmapFactory.decodeStream(BufferedInputStream(context.resources.openRawResource(R.raw.system_auto)))
-            },
-            "system_auto:",
-            "system_auto:"
-        )
     }
 
     @SuppressLint("InflateParams")
@@ -332,7 +359,14 @@ object ThemeUtils {
 
                 card.setCardBackgroundColor(color)
 
-                themeName.text = theme.readableName
+                themeName.text =
+                    theme.name.split("_").joinToString(" ") { s ->
+                        s.replaceFirstChar {
+                            if (it.isLowerCase()) it.titlecase(
+                                Locale.getDefault()
+                            ) else it.toString()
+                        }
+                    }
                 themeName.setTextColor(if (!isDark) Color.WHITE else Color.BLACK)
             })
             addView(View(context).apply {

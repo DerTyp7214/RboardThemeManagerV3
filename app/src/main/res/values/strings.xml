@@ -102,4 +102,7 @@
     <string name="save_repos">Do you want to apply the changes?</string>
     <string name="repository">Repository URL</string>
     <string name="repo_added">Repo added</string>
+    <string name="configure">Configure</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">Keyboard switch Widget</string>
 </resources>

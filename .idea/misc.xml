@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable-night/ic_keyboard.xml" value="0.3725" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/app_widget_background.xml" value="0.3725" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/app_widget_inner_view_background.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/bottom_sheet_background.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_key_boarder.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_keyboard.xml" value="0.3725" />
@@ -20,6 +22,8 @@
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/fragment_download_list.xml" value="0.18085106382978725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/input_dialog.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/loading_dialog.xml" value="0.18085106382978725" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/switch_keyboard_widget.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/switch_keyboard_widget_configure.xml" value="0.1331521739130435" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/theme_grid_item_single.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/install_pack.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/navigation.xml" value="0.371875" />

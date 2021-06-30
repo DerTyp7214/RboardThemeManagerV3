@@ -8,7 +8,6 @@ import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
 import com.topjohnwu.superuser.io.SuFileOutputStream
 import de.dertyp7214.rboardthememanager.BuildConfig
-import org.apache.commons.text.StringEscapeUtils
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
@@ -35,9 +34,8 @@ fun SuFile.decodeBitmap(opts: BitmapFactory.Options? = null): Bitmap? {
         Log.e("BitmapFactory", "Unable to decode stream: $e")
         try {
             val file = File("/data/data/${BuildConfig.APPLICATION_ID}")
-            ProcessBuilder().su("cp $pathName ${file.absolutePath}").apply {
-                errorStream.bufferedReader().readText()
-                    .let { text -> Log.d("BitmapFactory", "Error: $text") }
+            Runtime.getRuntime().exec("su --mount-master -c cp $pathName ${file.absolutePath}").apply {
+                errorStream.bufferedReader().readText().let { text -> Log.d("BitmapFactory", "Error: $text") }
             }
             stream = SuFileInputStream.open(file)
             bm = BitmapFactory.decodeStream(stream, null, opts)
@@ -61,15 +59,8 @@ fun SuFile.tar(zip: File): Boolean {
 }
 
 fun SuFile.writeFile(content: String) {
-    if (exists()) SuFileOutputStream.open(this).writer(Charset.defaultCharset())
+    SuFileOutputStream.open(this).writer(Charset.defaultCharset())
         .use { outputStreamWriter ->
             outputStreamWriter.write(content)
         }
-    else ProcessBuilder().su("echo \"${StringEscapeUtils.escapeJava(content)}\" > '$absolutePath'")
-        .logs("APPLY", true)
-}
-
-fun SuFile.openStream(): InputStream? {
-    return if (exists()) SuFileInputStream.open(this)
-    else ProcessBuilder().su("cat $absolutePath").logs("READ", true).inputStream
 }

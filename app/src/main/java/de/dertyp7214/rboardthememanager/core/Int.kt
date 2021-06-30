@@ -1,6 +1,8 @@
 package de.dertyp7214.rboardthememanager.core
 
+import android.content.Context
 import android.graphics.Color
+import android.util.DisplayMetrics
 
 fun Int.changeAlpha(alpha: Int): Int {
     return Color.argb(
@@ -10,5 +12,3 @@ fun Int.changeAlpha(alpha: Int): Int {
         Color.blue(this)
     )
 }
-
-fun lerp(a: Int, b: Int, f: Float): Float = a + (f * (a - b).toFloat())

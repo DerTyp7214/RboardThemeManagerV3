@@ -42,15 +42,12 @@ class ThemeAdapter(
             ?: 0
 
     private var activeTheme = ""
-    private val default by lazy {
-        ContextCompat.getDrawable(
-            context,
-            R.drawable.ic_keyboard
-        )!!.getBitmap()
-    }
-    private val selectedBackground by lazy {
+    private val default = ContextCompat.getDrawable(
+        context,
+        R.drawable.ic_keyboard
+    )!!.getBitmap()
+    private val selectedBackground =
         ColorDrawable(context.getAttr(R.attr.colorBackgroundFloating)).apply { alpha = 187 }
-    }
 
     private val selected: ArrayListWrapper<Boolean> = ArrayListWrapper(themes.map { false }) {
         if (oldSelectionState != selectionState || forcedSelectionState == SelectionState.SELECTING) {
@@ -124,11 +121,6 @@ class ThemeAdapter(
         notifyDataChanged()
     }
 
-    fun selectAll() {
-        selected.setAll(true)
-        notifyDataChanged()
-    }
-
     @Suppress("MemberVisibilityCanBePrivate")
     fun getSelected(): List<ThemeDataClass> {
         return selected.mapIndexed { index, value -> Pair(themes[index], value) }
@@ -147,7 +139,7 @@ class ThemeAdapter(
         activeTheme = getActiveTheme()
             .removePrefix("assets:theme_package_metadata_")
             .removeSuffix(".binarypb").let {
-                if (it.isBlank()) "dynamic_color" else it
+                if (it.isBlank()) "system_auto" else it
             }
     }
 

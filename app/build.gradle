@@ -14,10 +14,10 @@ android {
 
     defaultConfig {
         applicationId "de.dertyp7214.rboardthememanager"
-        minSdkVersion 23
+        minSdkVersion 26
         targetSdkVersion 30
-        versionCode 310
-        versionName "3.1.0"
+        versionCode 311
+        versionName "3.1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -48,6 +48,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'org.apache.commons:commons-text:1.9'
 
     implementation "com.github.topjohnwu.libsu:core:$libsuVersion"
     implementation "com.github.topjohnwu.libsu:io:$libsuVersion"
