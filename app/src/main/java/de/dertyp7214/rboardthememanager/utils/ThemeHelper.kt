@@ -9,7 +9,6 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import com.dertyp7214.logs.helpers.Logger
@@ -32,8 +31,10 @@ import de.dertyp7214.rboardthememanager.core.getBitmap
 import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.data.ThemePack
+import org.apache.commons.text.StringEscapeUtils
 import java.io.BufferedInputStream
 import java.io.File
+import java.io.InputStream
 import java.net.URL
 import java.nio.charset.Charset
 import java.util.*
@@ -55,51 +56,76 @@ fun applyTheme(
         "APPLY",
         "[ApplyTheme]: $name $inputPackageName $fileName"
     )
-    return if (!SuFile(fileName).exists()
-            .also { Logger.log(Logger.Companion.Type.DEBUG, "APPLY", "[ApplyTheme]: exists = $it") }
-    ) {
-        context?.apply {
-            Toast.makeText(this, R.string.please_open_app, Toast.LENGTH_LONG).show()
+    val useFallback = !SuFile(fileName).exists()
+    fun readText(): InputStream {
+        return if (useFallback) {
+            Runtime.getRuntime()
+                .exec("su --mount-master -c cat $fileName").inputStream
+        } else {
+            SuFileInputStream.open(SuFile(fileName))
         }
-        false
-    } else {
-        val content = SuFileInputStream.open(SuFile(fileName)).use {
-            it.bufferedReader().readText()
-        }.let {
-            var changed = it
+    }
 
-            changed = if ("<string name=\"additional_keyboard_theme\">" in changed)
-                changed.replace(
-                    "<string name=\"additional_keyboard_theme\">.*</string>".toRegex(),
-                    "<string name=\"additional_keyboard_theme\">$name</string>"
-                )
-            else
-                changed.replace(
-                    "<map>",
-                    "<map><string name=\"additional_keyboard_theme\">$name</string>"
-                )
-
-            // Change enable_key_border value
-            changed = if ("<boolean name=\"enable_key_border\"" in changed) {
-                changed.replace(
-                    "<boolean name=\"enable_key_border\" value=\".*\" />".toRegex(),
-                    "<boolean name=\"enable_key_border\" value=\"$withBorders\" />"
-                )
-            } else {
-                changed.replace(
-                    "<map>",
-                    "<map><boolean name=\"enable_key_border\" value=\"$withBorders\" />"
-                )
-            }
-            return@let changed
-        }
-        SuFileOutputStream.open(File(fileName)).writer(Charset.defaultCharset())
+    fun writeText(content: String) {
+        if (useFallback)
+            Runtime.getRuntime()
+                .exec("su --mount-master -c echo \"${StringEscapeUtils.escapeJava(content)}\" > '$fileName'")
+                .apply {
+                    errorStream.bufferedReader().readText().let { error ->
+                        Logger.log(
+                            Logger.Companion.Type.INFO,
+                            "APPLY",
+                            "[Error]: $error"
+                        )
+                    }
+                    inputStream.bufferedReader().readText().let { error ->
+                        Logger.log(
+                            Logger.Companion.Type.INFO,
+                            "APPLY",
+                            "[Response]: $error"
+                        )
+                    }
+                }
+        else SuFileOutputStream.open(File(fileName)).writer(Charset.defaultCharset())
             .use { outputStreamWriter ->
                 outputStreamWriter.write(content)
             }
-
-        "am force-stop $inputPackageName".runAsCommand()
     }
+
+    val content = readText().use {
+        it.bufferedReader().readText()
+    }.let {
+        var changed = it
+
+        changed = if ("<string name=\"additional_keyboard_theme\">" in changed)
+            changed.replace(
+                "<string name=\"additional_keyboard_theme\">.*</string>".toRegex(),
+                "<string name=\"additional_keyboard_theme\">$name</string>"
+            )
+        else
+            changed.replace(
+                "<map>",
+                "<map><string name=\"additional_keyboard_theme\">$name</string>"
+            )
+
+        // Change enable_key_border value
+        changed = if ("<boolean name=\"enable_key_border\"" in changed) {
+            changed.replace(
+                "<boolean name=\"enable_key_border\" value=\".*\" />".toRegex(),
+                "<boolean name=\"enable_key_border\" value=\"$withBorders\" />"
+            )
+        } else {
+            changed.replace(
+                "<map>",
+                "<map><boolean name=\"enable_key_border\" value=\"$withBorders\" />"
+            )
+        }
+        return@let changed
+    }
+
+    writeText(content)
+
+    return "am force-stop $inputPackageName".runAsCommand()
 }
 
 @SuppressLint("SdCardPath")
@@ -226,8 +252,9 @@ object ThemeUtils {
         return themes
     }
 
-    fun getActiveThemeData(): ThemeDataClass {
-        val themeName = getActiveTheme()
+    fun getActiveThemeData(): ThemeDataClass = getThemeData(getActiveTheme())
+
+    fun getThemeData(themeName: String): ThemeDataClass {
         return if (themeName.startsWith("assets:") && Application.context != null) {
             val imgName =
                 themeName
@@ -256,14 +283,15 @@ object ThemeUtils {
                             Locale.getDefault()
                         ) else char.toString()
                     }
-                }, ""
+                }, themeName
             )
         } else if (themeName.isNotEmpty()) {
-            val image = SuFile(Config.THEME_LOCATION, themeName)
+            val name = themeName.split("/").last()
+            val image = SuFile(Config.MAGISK_THEME_LOC, name.removeSuffix(".zip"))
             ThemeDataClass(
                 image.decodeBitmap(),
-                themeName,
-                SuFile(Config.THEME_LOCATION, "$themeName.zip").absolutePath
+                image.name,
+                SuFile(Config.MAGISK_THEME_LOC, name).absolutePath
             )
         } else {
             getSystemAutoTheme() ?: ThemeDataClass(null, "", "")

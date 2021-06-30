@@ -15,4 +15,7 @@
 
     <color name="ic_launcher_background">@android:color/system_accent2_50</color>
     <color name="ic_launcher_foreground">@android:color/system_accent1_600</color>
+    <color name="light_blue_50">#FFE1F5FE</color>
+    <color name="light_blue_200">#FF81D4FA</color>
+    <color name="light_blue_900">#FF01579B</color>
 </resources>

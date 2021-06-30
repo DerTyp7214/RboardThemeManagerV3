@@ -1,5 +1,7 @@
 package de.dertyp7214.rboardthememanager.core
 
+import android.content.Context
+import android.util.DisplayMetrics
 import java.lang.Double.parseDouble
 
 fun Any.isNumber(): Boolean {
@@ -17,4 +19,13 @@ fun Any.equalsNumber(second: Any?): Boolean {
     } catch (e: Exception) {
         false
     }
+}
+
+fun Number.dpToPx(context: Context): Float {
+    return this.toFloat() * (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
+}
+
+@Suppress("unused")
+fun Number.pxToDp(context: Context): Float {
+    return this.toFloat() / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
 }

@@ -112,7 +112,8 @@ class ThemeAdapter(
 
     enum class SelectionState {
         SELECTING,
-        NONE
+        NONE,
+        NEVER
     }
 
     fun clearSelection() {
@@ -238,13 +239,14 @@ class ThemeAdapter(
             } else onClickTheme(dataClass)
         }
 
-        holder.card.setOnLongClickListener {
-            selected[position] = true
-            holder.selectOverlay.animate().alpha(1F).setDuration(200).withEndAction {
-                notifyDataChanged()
+        if (selectionState != SelectionState.NEVER)
+            holder.card.setOnLongClickListener {
+                selected[position] = true
+                holder.selectOverlay.animate().alpha(1F).setDuration(200).withEndAction {
+                    notifyDataChanged()
+                }
+                true
             }
-            true
-        }
 
         trace.addSplit("ANIMATION")
         setAnimation(holder.card, position)

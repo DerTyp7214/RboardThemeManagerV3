@@ -1,0 +1,19 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.RboardThemeManagerV3.AppWidget.Container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:padding="8dp"
+    android:theme="@style/Theme.RboardThemeManagerV3.AppWidgetContainer">
+
+    <ImageView
+        android:id="@+id/theme_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/default_theme"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>
