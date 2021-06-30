@@ -35,10 +35,10 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
     }
 
     override fun onReceive(context: Context, intent: Intent) {
-        val themePath = intent.getStringExtra("themePath")
-        if (themePath != null) {
+        super.onReceive(context, intent)
+        intent.getStringExtra("themePath")?.let { themePath ->
             val theme = ThemeUtils.getThemeData(themePath)
-            if (applyTheme(theme, true, context))
+            if (applyTheme(theme, true))
                 Toast.makeText(context, R.string.applied, Toast.LENGTH_SHORT).show()
         }
     }
@@ -49,8 +49,7 @@ internal fun updateAppWidget(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
-    val themeName = loadThemePath(context, appWidgetId)
-    if (themeName != null) {
+    loadThemePath(context, appWidgetId)?.let { themeName ->
         val theme = ThemeUtils.getThemeData(themeName)
         val themeImage = theme.image?.roundCorners(
             context.resources.getDimension(android.R.dimen.system_app_widget_background_radius)
@@ -59,7 +58,12 @@ internal fun updateAppWidget(
 
         val pendingIntent = Intent(context, SwitchKeyboardWidget::class.java).let { intent ->
             intent.putExtra("themePath", theme.path)
-            PendingIntent.getBroadcast(context, appWidgetId, intent, PendingIntent.FLAG_IMMUTABLE)
+            PendingIntent.getBroadcast(
+                context,
+                appWidgetId,
+                intent,
+                PendingIntent.FLAG_IMMUTABLE
+            )
         }
 
         val views = RemoteViews(context.packageName, R.layout.switch_keyboard_widget)

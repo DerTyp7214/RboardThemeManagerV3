@@ -11,7 +11,7 @@ fun delayed(delay: Long, callback: () -> Unit) {
     Handler(Looper.getMainLooper()).postDelayed(delay) { callback() }
 }
 
-fun Context.getAttrColor(@AttrRes attr: Int): Int {
+fun Context.getAttr(@AttrRes attr: Int): Int {
     val typedValue = TypedValue()
     theme.resolveAttribute(attr, typedValue, true)
     return typedValue.data

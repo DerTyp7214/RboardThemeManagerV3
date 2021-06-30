@@ -26,7 +26,7 @@ import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
 import de.dertyp7214.rboardthememanager.Config.REPOS
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.decodeBitmap
-import de.dertyp7214.rboardthememanager.core.getAttrColor
+import de.dertyp7214.rboardthememanager.core.getAttr
 import de.dertyp7214.rboardthememanager.core.getBitmap
 import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
@@ -43,8 +43,7 @@ import kotlin.collections.ArrayList
 @SuppressLint("SdCardPath")
 fun applyTheme(
     theme: ThemeDataClass,
-    withBorders: Boolean = false,
-    context: Context? = null
+    withBorders: Boolean = false
 ): Boolean {
     val name =
         if (theme.path.isEmpty() || theme.path.startsWith("assets:")) theme.path else "system:${theme.name}.zip"
@@ -316,7 +315,7 @@ object ThemeUtils {
                 "system_auto",
                 "",
                 colorFilter = PorterDuffColorFilter(
-                    Application.context!!.getAttrColor(android.R.attr.colorAccent),
+                    Application.context!!.getAttr(android.R.attr.colorAccent),
                     PorterDuff.Mode.OVERLAY
                 )
             )
@@ -376,7 +375,7 @@ object ThemeUtils {
             addView(View(context).apply {
                 setHeight(1.dp(context) / 2)
                 setWidth(LinearLayout.LayoutParams.MATCH_PARENT)
-                setBackgroundColor(context.getAttrColor(R.attr.colorOnPrimary))
+                setBackgroundColor(context.getAttr(R.attr.colorOnPrimary))
                 alpha = .6F
             })
         }

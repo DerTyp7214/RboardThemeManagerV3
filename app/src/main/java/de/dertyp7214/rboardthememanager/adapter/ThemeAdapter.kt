@@ -16,7 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.getAttrColor
+import de.dertyp7214.rboardthememanager.core.getAttr
 import de.dertyp7214.rboardthememanager.core.getBitmap
 import de.dertyp7214.rboardthememanager.core.setAll
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
@@ -47,7 +47,7 @@ class ThemeAdapter(
         R.drawable.ic_keyboard
     )!!.getBitmap()
     private val selectedBackground =
-        ColorDrawable(context.getAttrColor(R.attr.colorBackgroundFloating)).apply { alpha = 187 }
+        ColorDrawable(context.getAttr(R.attr.colorBackgroundFloating)).apply { alpha = 187 }
 
     private val selected: ArrayListWrapper<Boolean> = ArrayListWrapper(themes.map { false }) {
         if (oldSelectionState != selectionState || forcedSelectionState == SelectionState.SELECTING) {
