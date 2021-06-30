@@ -52,7 +52,7 @@ internal fun updateAppWidget(
     loadThemePath(context, appWidgetId)?.let { themeName ->
         val theme = ThemeUtils.getThemeData(themeName)
         val themeImage = theme.image?.roundCorners(
-            context.resources.getDimension(android.R.dimen.thumbnail_width)
+            16
                 .dpToPx(context).toInt(), theme.colorFilter
         )
 

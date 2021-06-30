@@ -44,8 +44,8 @@
     </style>
 
     <style name="Theme.RboardThemeManagerV3.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">
-        <item name="appWidgetRadius">8dp</item>
-        <item name="appWidgetInnerRadius">8dp</item>
+        <item name="appWidgetRadius">16dp</item>
+        <item name="appWidgetInnerRadius">16dp</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.AppWidgetContainer" parent="Theme.RboardThemeManagerV3.AppWidgetContainerParent">
