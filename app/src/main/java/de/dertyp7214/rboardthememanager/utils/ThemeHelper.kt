@@ -64,7 +64,7 @@ fun applyTheme(
             Runtime.getRuntime()
                 .exec("su --mount-master -c echo \"${StringEscapeUtils.escapeJava(content)}\" > '$fileName'")
                 .logs("APPLY", true)
-        else SuFile(fileName).writeFile(content)
+        else SuFile(fileName).writeFile(content.trim())
     }
 
     val content = readText().use {

@@ -92,7 +92,7 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
             val theme = ThemeUtils.getThemeData(themePath)
             if (applyTheme(theme, true))
                 Toast.makeText(context, R.string.applied, Toast.LENGTH_SHORT).show()
-            onUpdate(context, AppWidgetManager.getInstance(context), widgetIds)
         }
+        onUpdate(context, AppWidgetManager.getInstance(context), widgetIds)
     }
 }

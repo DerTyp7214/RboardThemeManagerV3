@@ -329,7 +329,7 @@ class Flags(val context: Context) {
             val fileName = "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/$file"
             val content = SuFile(fileName).let {
                 if (it.exists()) SuFileInputStream.open(it) else Runtime.getRuntime()
-                    .exec("su --mount-master -c cat $fileName").logs("READ").inputStream
+                    .exec("su --mount-master -c cat $fileName").logs("READ", true).inputStream
             }.use {
                 it.bufferedReader().readText()
             }
@@ -339,6 +339,7 @@ class Flags(val context: Context) {
                     InputSource(StringReader(content))
                 ).getElementsByTagName("map")
             } catch (e: Exception) {
+                e.printStackTrace()
                 return output
             }
 
@@ -369,7 +370,7 @@ class Flags(val context: Context) {
                         Runtime.getRuntime()
                             .exec("su --mount-master -c echo \"${StringEscapeUtils.escapeJava(it)}\" > '$fileName'")
                             .logs("APPLY", true)
-                    else SuFile(fileName).writeFile(it)
+                    else SuFile(fileName).writeFile(it.trim())
                 }
             }
 
@@ -381,13 +382,12 @@ class Flags(val context: Context) {
             FILES.values().filter { it != FILES.NONE }.forEach { file ->
                 val fileName =
                     "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
-                if (SuFile(fileName).exists())
-                    flagsString[file] = SuFile(fileName).let { suFile ->
-                        if (suFile.exists()) SuFileInputStream.open(suFile).use {
-                            it.bufferedReader().readText()
-                        }
-                        else null
-                    }
+                flagsString[file] = SuFile(fileName).let { suFile ->
+                    if (suFile.exists()) SuFileInputStream.open(suFile)
+                    else null
+                }?.use {
+                    it.bufferedReader().readText()
+                }
             }
         }
 

@@ -1,15 +1,18 @@
 package de.dertyp7214.rboardthememanager.utils
 
 import android.app.Activity
+import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.os.Build
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.helpers.categoryHeader
 import de.Maxr1998.modernpreferences.helpers.pref
 import de.Maxr1998.modernpreferences.helpers.screen
+import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 
 class Preferences(private val activity: Activity, intent: Intent) {
 
@@ -35,7 +38,18 @@ class Preferences(private val activity: Activity, intent: Intent) {
             }
             "settings" -> {
             }
-            "flags" -> Flags.applyChanges()
+            "flags" -> {
+                Flags.applyChanges()
+                Application.context?.let { context ->
+                    FlagsWidget.widgetIds.forEach { id ->
+                        FlagsWidget.updateAppWidget(
+                            context,
+                            AppWidgetManager.getInstance(context),
+                            id
+                        )
+                    }
+                }
+            }
             "all_flags" -> {
             }
             else -> {

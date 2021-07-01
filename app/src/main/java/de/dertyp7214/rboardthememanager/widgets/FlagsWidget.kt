@@ -16,7 +16,8 @@ class FlagsWidget : AppWidgetProvider() {
 
     @Suppress("MemberVisibilityCanBePrivate")
     companion object {
-        private var widgetIds: IntArray = intArrayOf()
+        var widgetIds: IntArray = intArrayOf()
+            private set
 
         internal enum class FLAGS(val key: String) {
             MONET("monet"),
@@ -46,24 +47,18 @@ class FlagsWidget : AppWidgetProvider() {
                 val views = RemoteViews(context.packageName, R.layout.flags_widget)
 
                 views.setCompoundButtonChecked(R.id.monetCheckbox, flags[FLAGS.MONET] ?: false)
-                views.setOnCheckedChangeResponse(
-                    R.id.monetCheckbox,
-                    RemoteViews.RemoteResponse.fromPendingIntent(pendingIntent(FLAGS.MONET))
-                )
+                views.setOnClickPendingIntent(R.id.monetCheckbox, pendingIntent(FLAGS.MONET))
 
                 views.setCompoundButtonChecked(R.id.gLogoCheckbox, flags[FLAGS.G_LOGO] ?: false)
-                views.setOnCheckedChangeResponse(
-                    R.id.gLogoCheckbox,
-                    RemoteViews.RemoteResponse.fromPendingIntent(pendingIntent(FLAGS.G_LOGO))
-                )
+                views.setOnClickPendingIntent(R.id.gLogoCheckbox, pendingIntent(FLAGS.G_LOGO))
 
                 views.setCompoundButtonChecked(
                     R.id.keyBorderCheckbox,
                     flags[FLAGS.KEY_BORDER] ?: false
                 )
-                views.setOnCheckedChangeResponse(
+                views.setOnClickPendingIntent(
                     R.id.keyBorderCheckbox,
-                    RemoteViews.RemoteResponse.fromPendingIntent(pendingIntent(FLAGS.KEY_BORDER))
+                    pendingIntent(FLAGS.KEY_BORDER)
                 )
 
                 appWidgetManager.updateAppWidget(appWidgetId, views)
@@ -163,7 +158,7 @@ class FlagsWidget : AppWidgetProvider() {
             }
             Flags.applyChanges()
             Toast.makeText(context, R.string.flag_applied, Toast.LENGTH_SHORT).show()
-            onUpdate(context, AppWidgetManager.getInstance(context), widgetIds)
         }
+        onUpdate(context, AppWidgetManager.getInstance(context), widgetIds)
     }
 }
