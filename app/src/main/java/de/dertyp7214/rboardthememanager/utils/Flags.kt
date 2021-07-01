@@ -24,6 +24,7 @@ import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
+import org.apache.commons.text.StringEscapeUtils
 import org.json.JSONArray
 import org.json.JSONObject
 import org.xml.sax.InputSource
@@ -83,13 +84,14 @@ class Flags(val context: Context) {
                 }
             }
         ),
-        EMPTY1(
-            "empty1",
+        EMPTY2(
+            "empty2",
             -1,
             -1,
             -1,
             "",
-            TYPE.GROUP
+            TYPE.GROUP,
+            FILES.NONE
         );
 
         @Suppress("UNCHECKED_CAST")
@@ -246,6 +248,7 @@ class Flags(val context: Context) {
 
     companion object {
         private val flags = arrayListOf<FlagItem>()
+        private var flagsString: EnumMap<FILES, String> = EnumMap(FILES::class.java)
 
         fun getFlagItems(context: Context, refresh: Boolean = false): List<FlagItem> {
             if (!refresh && flags.isNotEmpty()) return flags
@@ -324,18 +327,19 @@ class Flags(val context: Context) {
             val output = HashMap<String, Any>()
 
             val fileName = "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/$file"
-            val xmlFile = SuFile(fileName)
-            if (!xmlFile.exists()) return output
+            val content = SuFile(fileName).let {
+                if (it.exists()) SuFileInputStream.open(it) else Runtime.getRuntime()
+                    .exec("su --mount-master -c cat $fileName").logs("READ", true).inputStream
+            }.use {
+                it.bufferedReader().readText()
+            }
 
             val map = try {
                 DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
-                    InputSource(
-                        StringReader(
-                            SuFileInputStream.open(xmlFile).bufferedReader().readText()
-                        )
-                    )
+                    InputSource(StringReader(content))
                 ).getElementsByTagName("map")
             } catch (e: Exception) {
+                e.printStackTrace()
                 return output
             }
 
@@ -357,12 +361,39 @@ class Flags(val context: Context) {
         }
 
         @SuppressLint("SdCardPath")
-        private fun <T> setValue(value: T, key: String, file: FILES): Boolean {
+        fun applyChanges(): Boolean {
+            FILES.values().filter { it != FILES.NONE }.forEach { file ->
+                val fileName =
+                    "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
+                flagsString[file]?.let {
+                    if (!SuFile(fileName).exists())
+                        Runtime.getRuntime()
+                            .exec("su --mount-master -c echo \"${StringEscapeUtils.escapeJava(it)}\" > '$fileName'")
+                            .logs("APPLY", true)
+                    else SuFile(fileName).writeFile(it.trim())
+                }
+            }
+
+            return "am force-stop ${Config.GBOARD_PACKAGE_NAME}".runAsCommand()
+        }
+
+        @SuppressLint("SdCardPath")
+        fun setUpFlags() {
+            FILES.values().filter { it != FILES.NONE }.forEach { file ->
+                val fileName =
+                    "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
+                flagsString[file] = SuFile(fileName).let { suFile ->
+                    if (suFile.exists()) SuFileInputStream.open(suFile)
+                    else null
+                }?.use {
+                    it.bufferedReader().readText()
+                }
+            }
+        }
+
+        fun <T> setValue(value: T, key: String, file: FILES): Boolean {
             if (file == FILES.NONE) return true
-            val fileName = "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
-            val content = SuFileInputStream.open(SuFile(fileName)).use {
-                it.bufferedReader().readText()
-            }.let { fileText ->
+            flagsString[file] = flagsString[file]?.let { fileText ->
                 val type = when (value) {
                     is Boolean -> "boolean"
                     is Int -> "integer"
@@ -408,9 +439,7 @@ class Flags(val context: Context) {
                 }
             }
 
-            SuFile(fileName).writeFile(content)
-
-            return "am force-stop ${Config.GBOARD_PACKAGE_NAME}".runAsCommand()
+            return true
         }
     }
 }

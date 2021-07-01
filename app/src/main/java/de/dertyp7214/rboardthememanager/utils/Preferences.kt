@@ -12,11 +12,44 @@ import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 
-class Preferences(private val activity: Activity, private val intent: Intent) {
+class Preferences(private val activity: Activity, intent: Intent) {
+
+    private val type = intent.getStringExtra("type")
+
+    init {
+        when (type) {
+            "info" -> {
+            }
+            "settings" -> {
+            }
+            "flags" -> Flags.setUpFlags()
+            "all_flags" -> {
+            }
+            else -> {
+            }
+        }
+    }
+
+    fun onBackPressed() {
+        when (type) {
+            "info" -> {
+            }
+            "settings" -> {
+            }
+            "flags" -> {
+                Flags.applyChanges()
+            }
+            "all_flags" -> {
+            }
+            else -> {
+            }
+        }
+    }
+
     val preferences: PreferenceScreen
         @RequiresApi(Build.VERSION_CODES.R)
         get() {
-            return when (intent.getStringExtra("type")) {
+            return when (type) {
                 "info" -> getInfoPreferences()
                 "settings" -> getSettingsPreferences()
                 "flags" -> getFlagsPreferences()
@@ -27,7 +60,7 @@ class Preferences(private val activity: Activity, private val intent: Intent) {
 
     val title: String
         get() {
-            return when (intent.getStringExtra("type")) {
+            return when (type) {
                 "info" -> activity.getString(R.string.info)
                 "settings" -> activity.getString(R.string.settings)
                 "flags" -> activity.getString(R.string.flags)

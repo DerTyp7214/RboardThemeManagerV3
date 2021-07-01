@@ -19,24 +19,18 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
-import com.topjohnwu.superuser.io.SuFileOutputStream
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
 import de.dertyp7214.rboardthememanager.Config.REPOS
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.decodeBitmap
-import de.dertyp7214.rboardthememanager.core.getAttr
-import de.dertyp7214.rboardthememanager.core.getBitmap
-import de.dertyp7214.rboardthememanager.core.runAsCommand
+import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import org.apache.commons.text.StringEscapeUtils
 import java.io.BufferedInputStream
-import java.io.File
 import java.io.InputStream
 import java.net.URL
-import java.nio.charset.Charset
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -59,7 +53,7 @@ fun applyTheme(
     fun readText(): InputStream {
         return if (useFallback) {
             Runtime.getRuntime()
-                .exec("su --mount-master -c cat $fileName").inputStream
+                .exec("su --mount-master -c cat $fileName").logs("READ", true).inputStream
         } else {
             SuFileInputStream.open(SuFile(fileName))
         }
@@ -69,26 +63,8 @@ fun applyTheme(
         if (useFallback)
             Runtime.getRuntime()
                 .exec("su --mount-master -c echo \"${StringEscapeUtils.escapeJava(content)}\" > '$fileName'")
-                .apply {
-                    errorStream.bufferedReader().readText().let { error ->
-                        Logger.log(
-                            Logger.Companion.Type.INFO,
-                            "APPLY",
-                            "[Error]: $error"
-                        )
-                    }
-                    inputStream.bufferedReader().readText().let { error ->
-                        Logger.log(
-                            Logger.Companion.Type.INFO,
-                            "APPLY",
-                            "[Response]: $error"
-                        )
-                    }
-                }
-        else SuFileOutputStream.open(File(fileName)).writer(Charset.defaultCharset())
-            .use { outputStreamWriter ->
-                outputStreamWriter.write(content)
-            }
+                .logs("APPLY", true)
+        else SuFile(fileName).writeFile(content.trim())
     }
 
     val content = readText().use {

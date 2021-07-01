@@ -19,7 +19,7 @@
         android:theme="@style/Theme.RboardThemeManagerV3"
         tools:ignore="AllowBackup">
         <receiver
-            android:name=".components.SwitchKeyboardWidget"
+            android:name=".widgets.SwitchKeyboardWidget"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -31,7 +31,7 @@
         </receiver>
 
         <activity
-            android:name=".components.SwitchKeyboardWidgetConfigureActivity"
+            android:name=".widgets.SwitchKeyboardWidgetConfigureActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
