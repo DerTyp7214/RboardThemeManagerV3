@@ -1,8 +1,7 @@
-package de.dertyp7214.rboardthememanager.components
+package de.dertyp7214.rboardthememanager.widgets
 
 import android.app.Activity
 import android.appwidget.AppWidgetManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,8 +29,12 @@ class SwitchKeyboardWidgetConfigureActivity : Activity() {
 
         val adapter =
             ThemeAdapter(this, list, ThemeAdapter.SelectionState.NEVER, { _, _ -> }) { theme ->
-                saveThemePath(applicationContext, appWidgetId, theme.path)
-                updateAppWidget(this, AppWidgetManager.getInstance(this), appWidgetId)
+                SwitchKeyboardWidget.saveThemePath(applicationContext, appWidgetId, theme.path)
+                SwitchKeyboardWidget.updateAppWidget(
+                    this,
+                    AppWidgetManager.getInstance(this),
+                    appWidgetId
+                )
                 setResult(
                     RESULT_OK,
                     Intent().apply { putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId) })
@@ -60,25 +63,4 @@ class SwitchKeyboardWidgetConfigureActivity : Activity() {
             return
         }
     }
-
-}
-
-private const val PREFS_NAME = "de.dertyp7214.rboardthememanager.components.SwitchKeyboardWidget"
-private const val PREF_PREFIX_KEY = "appwidget_"
-
-internal fun saveThemePath(context: Context, appWidgetId: Int, path: String) {
-    val prefs = context.getSharedPreferences(PREFS_NAME, 0).edit()
-    prefs.putString(PREF_PREFIX_KEY + appWidgetId, path)
-    prefs.apply()
-}
-
-internal fun loadThemePath(context: Context, appWidgetId: Int): String? {
-    val prefs = context.getSharedPreferences(PREFS_NAME, 0)
-    return prefs.getString(PREF_PREFIX_KEY + appWidgetId, null)
-}
-
-internal fun deleteThemePath(context: Context, appWidgetId: Int) {
-    val prefs = context.getSharedPreferences(PREFS_NAME, 0).edit()
-    prefs.remove(PREF_PREFIX_KEY + appWidgetId)
-    prefs.apply()
 }

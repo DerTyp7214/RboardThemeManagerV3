@@ -13,6 +13,7 @@ import dev.chrisbanes.insetter.applyInsetter
 class PreferencesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPreferencesBinding
+    private lateinit var preferences: Preferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +21,7 @@ class PreferencesActivity : AppCompatActivity() {
         window.setDecorFitsSystemWindows(false)
         setContentView(binding.root)
 
-        val preferences = Preferences(this, intent)
+        preferences = Preferences(this, intent)
 
         val preferencesToolbar = binding.preferencesToolbar
         val loadingPreferences = binding.loadingPreferences
@@ -46,5 +47,10 @@ class PreferencesActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        preferences.onBackPressed()
     }
 }
