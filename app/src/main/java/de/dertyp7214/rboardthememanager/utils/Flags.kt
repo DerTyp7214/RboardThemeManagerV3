@@ -24,6 +24,7 @@ import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
+import org.apache.commons.text.StringEscapeUtils
 import org.json.JSONArray
 import org.json.JSONObject
 import org.xml.sax.InputSource
@@ -326,16 +327,16 @@ class Flags(val context: Context) {
             val output = HashMap<String, Any>()
 
             val fileName = "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/$file"
-            val xmlFile = SuFile(fileName)
-            if (!xmlFile.exists()) return output
+            val content = SuFile(fileName).let {
+                if (it.exists()) SuFileInputStream.open(it) else Runtime.getRuntime()
+                    .exec("su --mount-master -c cat $fileName").logs("READ").inputStream
+            }.use {
+                it.bufferedReader().readText()
+            }
 
             val map = try {
                 DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
-                    InputSource(
-                        StringReader(
-                            SuFileInputStream.open(xmlFile).bufferedReader().readText()
-                        )
-                    )
+                    InputSource(StringReader(content))
                 ).getElementsByTagName("map")
             } catch (e: Exception) {
                 return output
@@ -363,7 +364,13 @@ class Flags(val context: Context) {
             FILES.values().filter { it != FILES.NONE }.forEach { file ->
                 val fileName =
                     "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
-                flagsString[file]?.let { SuFile(fileName).writeFile(it) }
+                flagsString[file]?.let {
+                    if (!SuFile(fileName).exists())
+                        Runtime.getRuntime()
+                            .exec("su --mount-master -c echo \"${StringEscapeUtils.escapeJava(it)}\" > '$fileName'")
+                            .logs("APPLY", true)
+                    else SuFile(fileName).writeFile(it)
+                }
             }
 
             return "am force-stop ${Config.GBOARD_PACKAGE_NAME}".runAsCommand()
@@ -374,9 +381,13 @@ class Flags(val context: Context) {
             FILES.values().filter { it != FILES.NONE }.forEach { file ->
                 val fileName =
                     "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
-                flagsString[file] = SuFileInputStream.open(SuFile(fileName)).use {
-                    it.bufferedReader().readText()
-                }
+                if (SuFile(fileName).exists())
+                    flagsString[file] = SuFile(fileName).let { suFile ->
+                        if (suFile.exists()) SuFileInputStream.open(suFile).use {
+                            it.bufferedReader().readText()
+                        }
+                        else null
+                    }
             }
         }
 

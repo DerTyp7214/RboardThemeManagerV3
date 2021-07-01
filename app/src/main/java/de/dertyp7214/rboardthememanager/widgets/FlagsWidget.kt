@@ -6,8 +6,8 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import android.widget.RemoteViews
+import android.widget.Toast
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.utils.Flags
 import kotlin.math.roundToInt
@@ -121,17 +121,17 @@ class FlagsWidget : AppWidgetProvider() {
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
         intent.getStringExtra("flag")?.let { flag ->
-            Log.d("REEEE", flag)
             Flags.setUpFlags()
+            val values = Flags.values
             when (flag) {
                 FLAGS.MONET.key -> {
-                    val bool = !Flags.values.monet
+                    val bool = !values.monet
                     Flags.setValue(bool, "use_silk_theme_by_default", Flags.FILES.FLAGS)
                     Flags.setValue(bool, "silk_on_all_pixel", Flags.FILES.FLAGS)
                     Flags.setValue(bool, "silk_theme", Flags.FILES.FLAGS)
                 }
                 FLAGS.G_LOGO.key -> {
-                    if (Flags.values.logo) {
+                    if (values.logo) {
                         Flags.setValue(
                             false, "show_branding_on_space", Flags.FILES.FLAGS
                         )
@@ -155,13 +155,14 @@ class FlagsWidget : AppWidgetProvider() {
                 }
                 FLAGS.KEY_BORDER.key -> {
                     Flags.setValue(
-                        !Flags.values.border,
+                        !values.border,
                         "enable_key_border",
                         Flags.FILES.GBOARD_PREFERENCES
                     )
                 }
             }
             Flags.applyChanges()
+            Toast.makeText(context, R.string.flag_applied, Toast.LENGTH_SHORT).show()
             onUpdate(context, AppWidgetManager.getInstance(context), widgetIds)
         }
     }
