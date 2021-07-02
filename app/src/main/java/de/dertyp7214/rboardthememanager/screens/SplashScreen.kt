@@ -59,32 +59,33 @@ class SplashScreen : AppCompatActivity() {
         }
 
         File(applicationInfo.dataDir, "flags.json").apply {
+            val timeStamp = let {
+                if (!it.exists()) -1
+                else SafeJSON(JSONObject(it.readText())).getLong("time", -1)
+            }
             doAsync(URL("https://raw.githubusercontent.com/GboardThemes/Packs/master/flags.json")::getTextFromUrl) {
                 if (it.isBlank()) {
-                    if (!exists() || lastModified() < packageManager.getPackageInfo(
-                            packageName,
-                            0
-                        ).lastUpdateTime
-                    ) {
+                    if (!exists()) {
                         writeText(
-                            resources.openRawResource(
-                                FileUtils.getResourceId(
-                                    this@SplashScreen,
-                                    "flags",
-                                    "raw",
-                                    packageName
-                                )
-                            ).bufferedReader().use { reader -> reader.readText() }
+                            SafeJSON(
+                                JSONObject(resources.openRawResource(
+                                    FileUtils.getResourceId(
+                                        this@SplashScreen,
+                                        "flags",
+                                        "raw",
+                                        packageName
+                                    )
+                                ).bufferedReader().use { reader -> reader.readText() })
+                            ).toString()
                         )
                     }
                 } else {
                     val json = SafeJSON(JSONObject(it))
-                    if (!exists() || lastModified() < json.getLong("time"))
-                        writeText(json.getJSONArray("flags").toString())
+                    if (!exists() || timeStamp < json.getLong("time"))
+                        writeText(json.toString())
                 }
             }
         }
-
 
         val scheme = intent.scheme
         val data = intent.data
