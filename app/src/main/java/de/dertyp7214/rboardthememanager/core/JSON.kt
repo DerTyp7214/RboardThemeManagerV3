@@ -53,6 +53,14 @@ class SafeJSON(private val json: JSONObject) {
             defaultValue
         }
     }
+
+    override fun toString(): String {
+        return try {
+            json.toString(2)
+        } catch (e: Exception) {
+            ""
+        }
+    }
 }
 
 fun JSONObject.safeParse(string: String): JSONObject {

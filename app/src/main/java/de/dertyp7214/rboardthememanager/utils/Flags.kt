@@ -256,7 +256,7 @@ class Flags(val context: Context) {
 
             val json = File(context.applicationInfo.dataDir, "flags.json").let {
                 if (!it.exists()) null
-                else JSONArray(it.readText())
+                else it.readText().let { text -> SafeJSON(JSONObject(text)).getJSONArray("flags") }
             }
 
             json?.forEach<JSONObject> { obj, _ ->
