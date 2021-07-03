@@ -25,7 +25,6 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import org.apache.commons.text.StringEscapeUtils
-import org.json.JSONArray
 import org.json.JSONObject
 import org.xml.sax.InputSource
 import java.io.File
@@ -256,12 +255,7 @@ class Flags(val context: Context) {
 
             val json = File(context.applicationInfo.dataDir, "flags.json").let {
                 if (!it.exists()) null
-                else it.readText().let { text ->
-                    SafeJSON(JSONObject(text)).getJSONArray(
-                        "flags",
-                        JSONArray(text)
-                    )
-                }
+                else it.readText().let { text -> SafeJSON(JSONObject(text)).getJSONArray("flags") }
             }
 
             json?.forEach<JSONObject> { obj, _ ->
