@@ -8,7 +8,7 @@
     android:layout_margin="12dp"
     android:background="?attr/colorBackgroundFloating"
     android:elevation="0dp"
-    app:cardCornerRadius="25dp"
+    app:cardCornerRadius="@dimen/roundCorners"
     app:cardElevation="0dp">
 
     <FrameLayout

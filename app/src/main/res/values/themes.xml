@@ -45,6 +45,6 @@
     </style>
 
     <style name="Theme.RboardThemeManagerV3.AppWidgetContainer" parent="Theme.RboardThemeManagerV3.AppWidgetContainerParent">
-        <item name="appWidgetPadding">16dp</item>
+        <item name="appWidgetPadding">@dimen/roundCorners</item>
     </style>
 </resources>

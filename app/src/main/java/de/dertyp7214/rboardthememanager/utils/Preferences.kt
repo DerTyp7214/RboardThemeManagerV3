@@ -4,8 +4,12 @@ import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import android.widget.Toast
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.helpers.categoryHeader
+import de.Maxr1998.modernpreferences.helpers.onClick
 import de.Maxr1998.modernpreferences.helpers.pref
 import de.Maxr1998.modernpreferences.helpers.screen
 import de.dertyp7214.rboardthememanager.Application
@@ -105,6 +109,17 @@ class Preferences(private val activity: Activity, intent: Intent) {
                 titleRes = R.string.rboard_app_version
                 summary = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
                 iconRes = R.drawable.ic_rboard
+                var count = 0
+                onClick {
+                    count++
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        count--
+                    }, 2000)
+                    if (count == 8)
+                        Toast.makeText(Application.context, R.string.easter_egg, Toast.LENGTH_SHORT)
+                            .show()
+                    false
+                }
             }
             categoryHeader("device") {
                 titleRes = R.string.device

@@ -54,9 +54,6 @@
                     android:layout_height="wrap_content"
                     tools:listitem="@layout/menu_item" />
             </LinearLayout>
-
         </FrameLayout>
-
     </LinearLayout>
-
 </androidx.core.widget.NestedScrollView>

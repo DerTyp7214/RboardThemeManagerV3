@@ -3,6 +3,6 @@
     android:shape="rectangle">
     <solid android:color="?attr/colorBackgroundFloating" />
     <corners
-        android:topLeftRadius="25dp"
-        android:topRightRadius="25dp" />
+        android:topLeftRadius="@dimen/roundCorners"
+        android:topRightRadius="@dimen/roundCorners" />
 </shape>

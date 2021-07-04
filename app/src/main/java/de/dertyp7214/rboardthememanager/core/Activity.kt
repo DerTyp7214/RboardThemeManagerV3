@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import de.dertyp7214.rboardthememanager.R
 
 inline val Activity.content: View
@@ -33,12 +34,13 @@ fun Activity.openUrl(url: String) {
 fun Activity.openDialog(
     message: String,
     title: String,
+    cancelable: Boolean = false,
     negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
     positive: (dialogInterface: DialogInterface) -> Unit
 ): AlertDialog {
     content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
-    return AlertDialog.Builder(this)
-        .setCancelable(false)
+    return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
+        .setCancelable(cancelable)
         .setMessage(message)
         .setTitle(title)
         .setPositiveButton(android.R.string.ok) { dialogInterface, _ -> positive(dialogInterface) }
@@ -56,9 +58,10 @@ fun Activity.openDialog(
 fun Activity.openDialog(
     @StringRes message: Int,
     @StringRes title: Int,
+    cancelable: Boolean = false,
     negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
     positive: (dialogInterface: DialogInterface) -> Unit
-): AlertDialog = openDialog(getString(message), getString(title), negative, positive)
+): AlertDialog = openDialog(getString(message), getString(title), cancelable, negative, positive)
 
 fun Activity.openShareThemeDialog(
     negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },
@@ -66,7 +69,7 @@ fun Activity.openShareThemeDialog(
 ): AlertDialog {
     content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
     val view = layoutInflater.inflate(R.layout.share_popup, null)
-    return AlertDialog.Builder(this)
+    return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
         .setCancelable(false)
         .setView(view)
         .setOnDismissListener { content.setRenderEffect(null) }
@@ -96,7 +99,7 @@ fun Activity.openInputDialog(
 ): AlertDialog {
     content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
     val view = layoutInflater.inflate(R.layout.input_dialog, null)
-    return AlertDialog.Builder(this)
+    return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
         .setCancelable(false)
         .setView(view)
         .setOnDismissListener { content.setRenderEffect(null) }
@@ -115,7 +118,7 @@ fun Activity.openInputDialog(
 fun Activity.openLoadingDialog(@StringRes message: Int): AlertDialog {
     content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
     val view = layoutInflater.inflate(R.layout.loading_dialog, null)
-    return AlertDialog.Builder(this)
+    return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
         .setCancelable(false)
         .setView(view)
         .setOnDismissListener { content.setRenderEffect(null) }

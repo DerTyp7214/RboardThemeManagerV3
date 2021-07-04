@@ -60,6 +60,7 @@ class ThemePackAdapter(
                     openDialog(
                         themePack.description ?: getString(R.string.themepack),
                         getString(R.string.description),
+                        true,
                         null
                     ) {
                         it.dismiss()

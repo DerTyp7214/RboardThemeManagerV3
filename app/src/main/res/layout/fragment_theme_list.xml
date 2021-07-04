@@ -19,7 +19,7 @@
             android:layout_marginEnd="8dp"
             android:translationZ="0dp"
             app:cardBackgroundColor="?attr/colorBackgroundFloating"
-            app:cardCornerRadius="25dp"
+            app:cardCornerRadius="@dimen/roundCorners"
             app:cardElevation="0dp"
             app:elevation="0dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/round_outline"
                 android:clipChildren="true"
-                android:clipToOutline="true"
                 android:translationZ="0dp"
                 tools:listitem="@layout/theme_grid_item_single" />
 

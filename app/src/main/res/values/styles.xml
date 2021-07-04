@@ -16,4 +16,13 @@
         <item name="android:background">@drawable/app_widget_inner_view_background</item>
         <item name="android:clipToOutline">true</item>
     </style>
+
+    <style name="Dialog.RboardThemeManagerV3.MaterialAlertDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Dialog.Rounded</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.MyApp.Dialog.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/roundCorners</item>
+    </style>
 </resources>
