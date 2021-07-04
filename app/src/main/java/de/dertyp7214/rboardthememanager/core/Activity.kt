@@ -31,8 +31,8 @@ fun Activity.openUrl(url: String) {
 }
 
 fun Activity.openDialog(
-    @StringRes message: Int,
-    @StringRes title: Int,
+    message: String,
+    title: String,
     negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
     positive: (dialogInterface: DialogInterface) -> Unit
 ): AlertDialog {
@@ -52,6 +52,13 @@ fun Activity.openDialog(
         }
         .create().also { it.show() }
 }
+
+fun Activity.openDialog(
+    @StringRes message: Int,
+    @StringRes title: Int,
+    negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
+    positive: (dialogInterface: DialogInterface) -> Unit
+): AlertDialog = openDialog(getString(message), getString(title), negative, positive)
 
 fun Activity.openShareThemeDialog(
     negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },

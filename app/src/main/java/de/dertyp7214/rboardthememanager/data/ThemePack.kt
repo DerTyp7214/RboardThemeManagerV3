@@ -5,9 +5,10 @@ data class ThemePack(
     val url: String,
     val title: String,
     val tags: List<String>,
+    val description: String? = null,
     val none: Boolean = false
 ) {
     companion object {
-        val NONE = ThemePack("", "", "", listOf(), true)
+        val NONE = ThemePack("", "", "", listOf(), null, true)
     }
 }
