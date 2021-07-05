@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
@@ -63,27 +64,20 @@ fun Activity.openDialog(
 fun Activity.openShareThemeDialog(
     negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },
     positive: (dialogInterface: DialogInterface, name: String, author: String) -> Unit
-): AlertDialog {
-    val view = layoutInflater.inflate(R.layout.share_popup, null)
-    return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
-        .setCancelable(false)
-        .setView(view)
-        .create().also { dialog ->
-            val nameInput = view.findViewById<EditText>(R.id.editTextName)
-            val authorInput = view.findViewById<EditText>(R.id.editTextAuthor)
+) = openDialog(R.layout.share_popup, false) { dialog ->
+    val nameInput = findViewById<EditText>(R.id.editTextName)
+    val authorInput = findViewById<EditText>(R.id.editTextAuthor)
 
-            view.findViewById<Button>(R.id.ok)?.setOnClickListener {
-                positive(
-                    dialog,
-                    nameInput?.text?.toString() ?: "Shared Pack",
-                    authorInput?.text?.toString() ?: "Rboard Theme Manager"
-                )
-            }
-            view.findViewById<Button>(R.id.cancel)?.setOnClickListener {
-                negative(dialog)
-            }
-            dialog.show()
-        }
+    findViewById<Button>(R.id.ok)?.setOnClickListener {
+        positive(
+            dialog,
+            nameInput?.text?.toString() ?: "Shared Pack",
+            authorInput?.text?.toString() ?: "Rboard Theme Manager"
+        )
+    }
+    findViewById<Button>(R.id.cancel)?.setOnClickListener {
+        negative(dialog)
+    }
 }
 
 @SuppressLint("InflateParams")
@@ -91,30 +85,32 @@ fun Activity.openInputDialog(
     @StringRes hint: Int,
     negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },
     positive: (dialogInterface: DialogInterface, text: String) -> Unit
-): AlertDialog {
-    val view = layoutInflater.inflate(R.layout.input_dialog, null)
-    return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
-        .setCancelable(false)
-        .setView(view)
-        .create().also { dialog ->
-            val input = view.findViewById<EditText>(R.id.editText)
-            input.setHint(hint)
+) = openDialog(R.layout.loading_dialog, false) { dialog ->
+    val input = findViewById<EditText>(R.id.editText)
+    input.setHint(hint)
 
-            view.findViewById<Button>(R.id.ok)?.setOnClickListener {
-                positive(dialog, input?.text?.toString() ?: "")
-            }
-            view.findViewById<Button>(R.id.cancel)?.setOnClickListener { negative(dialog) }
-            dialog.show()
-        }
+    findViewById<Button>(R.id.ok)?.setOnClickListener {
+        positive(dialog, input?.text?.toString() ?: "")
+    }
+    findViewById<Button>(R.id.cancel)?.setOnClickListener { negative(dialog) }
 }
 
-fun Activity.openLoadingDialog(@StringRes message: Int): AlertDialog {
-    val view = layoutInflater.inflate(R.layout.loading_dialog, null)
+fun Activity.openLoadingDialog(@StringRes message: Int) =
+openDialog(R.layout.loading_dialog, false) {
+    findViewById<TextView>(R.id.message).setText(message)
+}
+
+fun Activity.openDialog(
+    @LayoutRes layout: Int,
+    cancelable: Boolean = true,
+    block: View.(DialogInterface) -> Unit
+): AlertDialog {
+    val view = layoutInflater.inflate(layout, null)
     return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
-        .setCancelable(false)
+        .setCancelable(cancelable)
         .setView(view)
         .create().also { dialog ->
-            view.findViewById<TextView>(R.id.message).setText(message)
+            block(view, dialog)
             dialog.show()
         }
 }

@@ -1,14 +1,10 @@
-@file:Suppress("unused")
-
 package de.dertyp7214.rboardthememanager.components
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
 import android.util.AttributeSet
-import android.view.WindowInsets
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -19,7 +15,7 @@ import androidx.cardview.widget.CardView
 import de.dertyp7214.rboardthememanager.R
 
 @SuppressLint("ResourceType")
-class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
+class SearchBar(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
 
     var focus = false
         private set
@@ -27,8 +23,10 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
     private var closeListener: () -> Unit = {}
     private var focusListener: () -> Unit = {}
 
-    private var popupMenu: PopupMenu? = null
+    @MenuRes
+    private var menuId: Int = -1
     private var menuItemClickListener: PopupMenu.OnMenuItemClickListener? = null
+
 
     private val searchBar: CardView
     private val searchButton: ImageButton
@@ -58,8 +56,10 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
                 searchText.visibility = GONE
                 searchEdit.visibility = VISIBLE
 
-                searchEdit.windowInsetsController?.show(WindowInsets.Type.ime())
                 searchEdit.requestFocus()
+                val imm: InputMethodManager =
+                    context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(searchEdit, InputMethodManager.SHOW_IMPLICIT)
                 focusListener()
             }
         }
@@ -80,7 +80,12 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
         }
 
         moreButton.setOnClickListener {
-            popupMenu?.show()
+            if (menuId > 0) {
+                val popupMenu = PopupMenu(context, it)
+                popupMenu.menuInflater.inflate(menuId, popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener(menuItemClickListener)
+                popupMenu.show()
+            }
         }
 
         searchEdit.setOnEditorActionListener { _, actionId, _ ->
@@ -93,15 +98,11 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
     }
 
     fun setMenu(
-        @MenuRes menu: Int? = null,
+        @MenuRes menu: Int = -1,
         itemClickListener: PopupMenu.OnMenuItemClickListener? = null
     ) {
-        popupMenu = if (menu != null)
-            PopupMenu(context, moreButton).also { popup ->
-                popup.menuInflater.inflate(menu, popup.menu)
-                popup.setOnMenuItemClickListener(itemClickListener)
-            }
-        else null
+        menuId = menu
+        menuItemClickListener = itemClickListener
     }
 
     fun setText(text: String = "") {
@@ -135,8 +136,9 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
     }
 
     private fun clearFocus(editText: EditText) {
-        Handler(Looper.getMainLooper()).postDelayed({
-            editText.windowInsetsController?.hide(WindowInsets.Type.ime())
-        }, 100)
+        editText.clearFocus()
+        val imm: InputMethodManager =
+            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(editText.windowToken, 0)
     }
 }

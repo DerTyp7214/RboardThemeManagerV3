@@ -40,7 +40,7 @@ fun applyTheme(
     withBorders: Boolean = false
 ): Boolean {
     val name =
-        if (theme.path.isEmpty() || theme.path.startsWith("assets:")) theme.path else "system:${theme.name}.zip"
+        if (theme.path.isEmpty() || theme.path.startsWith("assets:") || theme.path.startsWith("system_auto:")) theme.path else "system:${theme.name}.zip"
     val inputPackageName = GBOARD_PACKAGE_NAME
     val fileName =
         "/data/data/$inputPackageName/shared_prefs/${inputPackageName}_preferences.xml"
@@ -269,11 +269,11 @@ object ThemeUtils {
                 SuFile(Config.MAGISK_THEME_LOC, name).absolutePath
             )
         } else {
-            getSystemAutoTheme() ?: ThemeDataClass(null, "", "")
+            getDynamicColorsTheme() ?: ThemeDataClass(null, "", "")
         }
     }
 
-    private fun getSystemAutoTheme(): ThemeDataClass? {
+    private fun getDynamicColorsTheme(): ThemeDataClass? {
         return if (Application.context != null) {
             val image = Application.context?.let { context ->
                 val inputStream = context.resources.openRawResource(
@@ -288,7 +288,7 @@ object ThemeUtils {
             }
             ThemeDataClass(
                 image,
-                "system_auto",
+                "dynamic_color",
                 "",
                 colorFilter = PorterDuffColorFilter(
                     Application.context!!.getAttr(android.R.attr.colorAccent),
@@ -297,6 +297,17 @@ object ThemeUtils {
             )
         } else null
     }
+
+    private fun getSystemAutoTheme(): ThemeDataClass {
+        return ThemeDataClass(
+            Application.context?.let { context ->
+                BitmapFactory.decodeStream(BufferedInputStream(context.resources.openRawResource(R.raw.system_auto)))
+            },
+            "system_auto:",
+            "system_auto:"
+        )
+    }
+
 
     @SuppressLint("InflateParams")
     fun getThemeView(theme: ThemeDataClass, context: Context): View {

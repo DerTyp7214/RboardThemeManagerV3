@@ -105,7 +105,10 @@
     <string name="configure">Configure</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">Keyboard switch Widget</string>
-    <string name="themepack">This is a Theme Pack</string>
+    <string name="theme_pack">This is a Theme Pack</string>
     <string name="description">Description</string>
     <string name="easter_egg">What did you think would happen?</string>
+    <string name="filter_settings">Filter settings</string>
+    <string name="settings">Settings</string>
+    <string name="select_all">Select all</string>
 </resources>

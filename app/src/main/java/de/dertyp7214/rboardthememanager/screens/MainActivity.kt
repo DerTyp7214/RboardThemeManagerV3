@@ -175,7 +175,9 @@ class MainActivity : AppCompatActivity() {
                 R.id.share -> {
                     val adapter = themesViewModel.getSelections().second
                     val themes = adapter?.getSelected()?.filter {
-                        it.path.isNotEmpty() && !it.path.startsWith("assets:")
+                        it.path.isNotEmpty() && !it.path.startsWith("assets:") && !it.path.startsWith(
+                            "system_auto:"
+                        )
                     }
                     if (!themes.isNullOrEmpty()) {
                         openShareThemeDialog { dialog, name, author ->
@@ -244,6 +246,9 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                     }
+                }
+                R.id.select_all -> {
+                    themesViewModel.getSelections().second?.selectAll()
                 }
             }
             true
@@ -329,6 +334,7 @@ class MainActivity : AppCompatActivity() {
 
             when (destination.id) {
                 R.id.action_themeListFragment_to_downloadListFragment -> {
+                    searchBar.setMenu(R.menu.menu_downloads)
                 }
                 R.id.action_downloadListFragment_to_themeListFragment -> {
                 }
@@ -347,6 +353,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun navigate(controller: NavController, id: Int) {
         val currentDestination = controller.currentDestination?.id ?: -1
+
+        binding.searchBar.setMenu()
+
         when (id) {
             R.id.navigation_themes -> {
                 if (currentDestination == R.id.downloadListFragment) {
@@ -354,6 +363,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             R.id.navigation_downloads -> {
+                binding.searchBar.setMenu(R.menu.menu_downloads) {
+                    when (it.itemId) {
+                        R.id.downloads_filter_settings -> {
+                            TODO()
+                            true
+                        }
+                        else -> false
+                    }
+                }
                 if (currentDestination == R.id.themeListFragment) {
                     controller.navigate(R.id.action_themeListFragment_to_downloadListFragment)
                 }

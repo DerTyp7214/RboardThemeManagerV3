@@ -12,7 +12,9 @@
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_launcher_background.xml" value="0.199" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_navbar.xml" value="0.3725" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_select_all.xml" value="0.15" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/news_bg_default.xml" value="0.3725" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/popup_background.xml" value="0.15" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/round_outline.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/small_line.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/activity_preferences.xml" value="0.371875" />
@@ -32,8 +34,10 @@
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/switch_keyboard_widget_configure.xml" value="0.1331521739130435" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/theme_grid_item_single.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/install_pack.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/menu_downloads.xml" value="0.1" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/navigation.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/repos.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/selected_themes_menu.xml" value="0.1" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.359" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/mipmap/ic_launcher.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/mipmap/ic_launcher_round.xml" value="0.3725" />
