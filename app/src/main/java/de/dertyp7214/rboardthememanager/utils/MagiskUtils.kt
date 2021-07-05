@@ -57,6 +57,14 @@ object MagiskUtils {
         }.catch { Logger.log(Logger.Companion.Type.ERROR, "INSTALL_MODULE", it) }
     }
 
+    fun uninstallModule(moduleId: String) {
+        RootUtils.runWithRoot {
+            val moduleDir = SuFile(MODULES_PATH, moduleId)
+            if (moduleDir.exists())
+                SuFile(moduleDir, "remove").writeText("")
+        }
+    }
+
     fun updateModule(meta: ModuleMeta, files: Map<String, String?>) {
         RootUtils.runWithRoot {
             val moduleDir = SuFile(MODULES_PATH, meta.id)
