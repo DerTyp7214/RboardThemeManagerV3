@@ -59,9 +59,14 @@ class SplashScreen : AppCompatActivity() {
         }
 
         File(applicationInfo.dataDir, "flags.json").apply {
-            val timeStamp = let {
-                if (!it.exists()) -1
-                else SafeJSON(JSONObject(it.readText())).getLong("time", -1)
+            val timeStamp = try {
+                let {
+                    if (!it.exists()) -1
+                    else SafeJSON(JSONObject(it.readText())).getLong("time", -1)
+                }
+            } catch (e: Exception) {
+                delete()
+                -1
             }
             doAsync(URL("https://raw.githubusercontent.com/GboardThemes/Packs/master/flags.json")::getTextFromUrl) {
                 if (it.isBlank()) {

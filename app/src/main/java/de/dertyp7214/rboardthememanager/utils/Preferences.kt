@@ -21,7 +21,6 @@ import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 class Preferences(private val activity: Activity, intent: Intent) {
 
     private val type = intent.getStringExtra("type")
-    private val extraData: HashMap<String, Any> = hashMapOf()
 
     init {
         when (type) {
@@ -62,10 +61,6 @@ class Preferences(private val activity: Activity, intent: Intent) {
         }
     }
 
-    fun putExtra(key: String, data: Any) {
-        extraData[key] = data
-    }
-
     val preferences: PreferenceScreen
         get() {
             return when (type) {
@@ -88,7 +83,7 @@ class Preferences(private val activity: Activity, intent: Intent) {
             }
         }
 
-    private fun getSettingsPreferences() = screen(activity, Settings(extraData["rebootLauncher"], activity)::preferences)
+    private fun getSettingsPreferences() = screen(activity, Settings(activity)::preferences)
     private fun getFlagsPreferences() = screen(activity, Flags(activity)::preferences)
     private fun getAllFlagsPreferences() = screen(activity, Flags(activity)::allFlagsPreferences)
 
