@@ -4,8 +4,8 @@ package de.dertyp7214.rboardthememanager.utils
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import androidx.activity.result.ActivityResultLauncher
+import android.os.Handler
+import android.os.Looper
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.preference.PreferenceManager
@@ -16,14 +16,14 @@ import de.Maxr1998.modernpreferences.helpers.onClick
 import de.Maxr1998.modernpreferences.helpers.pref
 import de.Maxr1998.modernpreferences.helpers.switch
 import de.dertyp7214.rboardthememanager.Application
-import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.openDialog
+import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.core.start
 import de.dertyp7214.rboardthememanager.screens.ReposActivity
 
-class Settings(private val rebootLauncher: Any?, private val activity: Activity) {
+class Settings(private val activity: Activity) {
     enum class TYPE {
         BOOLEAN,
         STRING,
@@ -40,7 +40,7 @@ class Settings(private val rebootLauncher: Any?, private val activity: Activity)
         @DrawableRes val icon: Int,
         val defaultValue: Any,
         val type: TYPE,
-        val onClick: (data: List<Any?>) -> Unit = {}
+        val onClick: (Activity) -> Unit = {}
     ) {
         THEMES_HEADER(
             "themes_header",
@@ -106,19 +106,12 @@ class Settings(private val rebootLauncher: Any?, private val activity: Activity)
             -1,
             "",
             TYPE.STRING,
-            { list ->
-                val activity = list[1]
-                if (activity is Activity) {
-                    activity.openDialog(R.string.uninstall_long, R.string.uninstall, false) {
-                        MagiskUtils.uninstallModule(MODULE_ID)
-                        val intent =
-                            Intent(Intent.ACTION_DELETE).setData(Uri.parse("package:${BuildConfig.APPLICATION_ID}"))
-                        list.first()?.let { launcher ->
-                            if (launcher is ActivityResultLauncher<*>) {
-                                (launcher as ActivityResultLauncher<Intent>).launch(intent)
-                            } else Application.context?.startActivity(intent)
-                        } ?: Application.context?.startActivity(intent)
-                    }
+            { activity ->
+                activity.openDialog(R.string.uninstall_long, R.string.uninstall, false) {
+                    MagiskUtils.uninstallModule(MODULE_ID)
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        "reboot".runAsCommand()
+                    }, 500)
                 }
             }
         );
@@ -149,7 +142,7 @@ class Settings(private val rebootLauncher: Any?, private val activity: Activity)
                 titleRes = item.title
                 summaryRes = item.summary
                 iconRes = item.icon
-                onClick { item.onClick(listOf(rebootLauncher, activity)); false }
+                onClick { item.onClick(activity); false }
             }
         }
     }
