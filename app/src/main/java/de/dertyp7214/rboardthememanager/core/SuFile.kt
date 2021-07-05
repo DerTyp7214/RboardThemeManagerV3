@@ -34,8 +34,9 @@ fun SuFile.decodeBitmap(opts: BitmapFactory.Options? = null): Bitmap? {
         Log.e("BitmapFactory", "Unable to decode stream: $e")
         try {
             val file = File("/data/data/${BuildConfig.APPLICATION_ID}")
-            Runtime.getRuntime().exec("su --mount-master -c cp $pathName ${file.absolutePath}").apply {
-                errorStream.bufferedReader().readText().let { text -> Log.d("BitmapFactory", "Error: $text") }
+            ProcessBuilder().su("cp $pathName ${file.absolutePath}").apply {
+                errorStream.bufferedReader().readText()
+                    .let { text -> Log.d("BitmapFactory", "Error: $text") }
             }
             stream = SuFileInputStream.open(file)
             bm = BitmapFactory.decodeStream(stream, null, opts)

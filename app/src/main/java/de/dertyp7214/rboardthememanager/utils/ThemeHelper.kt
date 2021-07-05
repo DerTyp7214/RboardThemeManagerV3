@@ -52,8 +52,7 @@ fun applyTheme(
     val useFallback = !SuFile(fileName).exists()
     fun readText(): InputStream {
         return if (useFallback) {
-            Runtime.getRuntime()
-                .exec("su --mount-master -c cat $fileName").logs("READ", true).inputStream
+            ProcessBuilder().su("cat $fileName").logs("READ", true).inputStream
         } else {
             SuFileInputStream.open(SuFile(fileName))
         }
@@ -61,8 +60,7 @@ fun applyTheme(
 
     fun writeText(content: String) {
         if (useFallback)
-            Runtime.getRuntime()
-                .exec("su --mount-master -c echo \"${StringEscapeUtils.escapeJava(content)}\" > '$fileName'")
+            ProcessBuilder().su("echo \"${StringEscapeUtils.escapeJava(content)}\" > '$fileName'")
                 .logs("APPLY", true)
         else SuFile(fileName).writeFile(content.trim())
     }
@@ -156,7 +154,6 @@ object ThemeUtils {
                         true
                     )
                 } == true) {
-                Flags.setUpFlags()
                 if (Flags.values.monet) getDynamicColorsTheme()?.let { theme -> themes.add(theme) }
                 themes.add(getSystemAutoTheme())
             }
@@ -234,11 +231,12 @@ object ThemeUtils {
     fun getActiveThemeData(): ThemeDataClass = getThemeData(getActiveTheme())
 
     fun getThemeData(themeName: String): ThemeDataClass {
-        return if (themeName.startsWith("assets:") && Application.context != null) {
+        return if ((themeName.startsWith("assets:") || themeName.startsWith("system_auto:")) && Application.context != null) {
             val imgName =
                 themeName
                     .removePrefix("assets:theme_package_metadata_")
                     .removeSuffix(".binarypb")
+                    .removeSuffix(":")
             val image = Application.context?.let {
                 try {
                     val inputStream = it.resources.openRawResource(

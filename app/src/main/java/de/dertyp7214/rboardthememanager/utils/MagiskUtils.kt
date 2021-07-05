@@ -8,6 +8,7 @@ import com.topjohnwu.superuser.io.SuFileOutputStream
 import de.dertyp7214.rboardthememanager.Config.MODULES_PATH
 import de.dertyp7214.rboardthememanager.core.getString
 import de.dertyp7214.rboardthememanager.core.parseModuleMeta
+import de.dertyp7214.rboardthememanager.core.writeFile
 import de.dertyp7214.rboardthememanager.data.MagiskModule
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 import java.nio.charset.Charset
@@ -61,7 +62,7 @@ object MagiskUtils {
         RootUtils.runWithRoot {
             val moduleDir = SuFile(MODULES_PATH, moduleId)
             if (moduleDir.exists())
-                SuFile(moduleDir, "remove").writeText("")
+                SuFile(moduleDir, "remove").writeFile("")
         }
     }
 

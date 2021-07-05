@@ -327,9 +327,9 @@ class Flags(val context: Context) {
 
             val fileName = "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/$file"
             val content = SuFile(fileName).let {
-                if (it.exists()) SuFileInputStream.open(it) else Runtime.getRuntime()
-                    .exec("su --mount-master -c cat $fileName").logs("READ", true).inputStream
-            }.use {
+                if (it.exists()) SuFileInputStream.open(it) else ProcessBuilder().su("cat $fileName")
+                .logs("READ", true).inputStream
+            }?.use {
                 it.bufferedReader().readText()
             }
 
@@ -343,17 +343,19 @@ class Flags(val context: Context) {
             }
 
             for (item in map.item(0).childNodes) {
-                val name = item.attributes?.getNamedItem("name")?.nodeValue
-                val value = item.attributes?.getNamedItem("value")?.nodeValue?.let {
-                    when (item.nodeName) {
-                        "long" -> it.toLong()
-                        "boolean" -> it.toBooleanStrict()
-                        "float" -> it.toFloat()
-                        "integer" -> it.toInt()
-                        else -> it
+                if (item.nodeName != "set" && !item.nodeName.startsWith("#")) {
+                    val name = item.attributes?.getNamedItem("name")?.nodeValue
+                    val value = item.attributes?.getNamedItem("value")?.nodeValue?.let {
+                        when (item.nodeName) {
+                            "long" -> it.toLong()
+                            "boolean" -> it.toBooleanStrict()
+                            "float" -> it.toFloat()
+                            "integer" -> it.toInt()
+                            else -> it
+                        }
                     }
+                    if (name != null) output[name] = value ?: item.textContent ?: ""
                 }
-                if (name != null) output[name] = value ?: item.textContent ?: ""
             }
 
             return output
@@ -366,8 +368,7 @@ class Flags(val context: Context) {
                     "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
                 flagsString[file]?.let {
                     if (!SuFile(fileName).exists())
-                        Runtime.getRuntime()
-                            .exec("su --mount-master -c echo \"${StringEscapeUtils.escapeJava(it)}\" > '$fileName'")
+                        ProcessBuilder().su("echo \"${StringEscapeUtils.escapeJava(it)}\" > '$fileName'")
                             .logs("APPLY", true)
                     else SuFile(fileName).writeFile(it.trim())
                 }
@@ -383,7 +384,7 @@ class Flags(val context: Context) {
                     "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
                 flagsString[file] = SuFile(fileName).let { suFile ->
                     if (suFile.exists()) SuFileInputStream.open(suFile)
-                    else null
+                    else ProcessBuilder().su("cat $fileName").logs("READ", true).inputStream
                 }?.use {
                     it.bufferedReader().readText()
                 }
