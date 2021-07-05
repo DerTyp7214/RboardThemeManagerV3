@@ -167,7 +167,12 @@ class SplashScreen : AppCompatActivity() {
                     ) {
                         openUrl(gboardPlayStoreUrl)
                     }
-                    !rootAccess -> openDialog(R.string.cant_use_app, R.string.not_rooted, null) {
+                    !rootAccess -> openDialog(
+                        R.string.cant_use_app,
+                        R.string.not_rooted,
+                        false,
+                        null
+                    ) {
                         finishAndRemoveTask()
                     }
                     else -> checkForUpdate {

@@ -401,7 +401,7 @@ class MainActivity : AppCompatActivity() {
                 Pair(Config.THEME_LOCATION, null)
             )
             MagiskUtils.installModule(meta, file)
-            openDialog(R.string.reboot_to_continue, R.string.reboot, {
+            openDialog(R.string.reboot_to_continue, R.string.reboot, false, {
                 finishAndRemoveTask()
             }) {
                 "reboot".runAsCommand()

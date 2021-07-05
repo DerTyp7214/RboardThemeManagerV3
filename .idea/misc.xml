@@ -21,8 +21,13 @@
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/chip_container.xml" value="0.18085106382978725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/flags_widget.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/fragment_download_list.xml" value="0.18085106382978725" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/fragment_theme_list.xml" value="0.1" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/input_dialog.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/loading_dialog.xml" value="0.18085106382978725" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/news_item.xml" value="0.1" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/search_bar.xml" value="0.22" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/share_popup.xml" value="0.1" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/single_theme_item.xml" value="0.1" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/switch_keyboard_widget.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/switch_keyboard_widget_configure.xml" value="0.1331521739130435" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/theme_grid_item_single.xml" value="0.371875" />

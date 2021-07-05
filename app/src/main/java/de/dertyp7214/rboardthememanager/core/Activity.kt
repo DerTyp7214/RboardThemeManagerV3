@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import de.dertyp7214.rboardthememanager.R
 
 inline val Activity.content: View
@@ -29,12 +30,14 @@ fun Activity.openUrl(url: String) {
 }
 
 fun Activity.openDialog(
-    @StringRes message: Int,
-    @StringRes title: Int,
+    message: String,
+    title: String,
+    cancelable: Boolean = false,
     negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
     positive: (dialogInterface: DialogInterface) -> Unit
 ): AlertDialog {
-    return AlertDialog.Builder(this)
+    return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
+        .setCancelable(cancelable)
         .setCancelable(false)
         .setMessage(message)
         .setTitle(title)
@@ -49,12 +52,20 @@ fun Activity.openDialog(
         .create().also { it.show() }
 }
 
+fun Activity.openDialog(
+    @StringRes message: Int,
+    @StringRes title: Int,
+    cancelable: Boolean = false,
+    negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
+    positive: (dialogInterface: DialogInterface) -> Unit
+): AlertDialog = openDialog(getString(message), getString(title), cancelable, negative, positive)
+
 fun Activity.openShareThemeDialog(
     negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },
     positive: (dialogInterface: DialogInterface, name: String, author: String) -> Unit
 ): AlertDialog {
     val view = layoutInflater.inflate(R.layout.share_popup, null)
-    return AlertDialog.Builder(this)
+    return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
         .setCancelable(false)
         .setView(view)
         .create().also { dialog ->
@@ -82,7 +93,7 @@ fun Activity.openInputDialog(
     positive: (dialogInterface: DialogInterface, text: String) -> Unit
 ): AlertDialog {
     val view = layoutInflater.inflate(R.layout.input_dialog, null)
-    return AlertDialog.Builder(this)
+    return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
         .setCancelable(false)
         .setView(view)
         .create().also { dialog ->
@@ -99,7 +110,7 @@ fun Activity.openInputDialog(
 
 fun Activity.openLoadingDialog(@StringRes message: Int): AlertDialog {
     val view = layoutInflater.inflate(R.layout.loading_dialog, null)
-    return AlertDialog.Builder(this)
+    return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
         .setCancelable(false)
         .setView(view)
         .create().also { dialog ->
