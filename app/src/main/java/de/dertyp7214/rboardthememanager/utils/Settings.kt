@@ -1,6 +1,11 @@
 package de.dertyp7214.rboardthememanager.utils
 
+
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.preference.PreferenceManager
@@ -11,11 +16,14 @@ import de.Maxr1998.modernpreferences.helpers.onClick
 import de.Maxr1998.modernpreferences.helpers.pref
 import de.Maxr1998.modernpreferences.helpers.switch
 import de.dertyp7214.rboardthememanager.Application
+import de.dertyp7214.rboardthememanager.BuildConfig
+import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.core.start
 import de.dertyp7214.rboardthememanager.screens.ReposActivity
 
-class Settings {
+class Settings(private val rebootLauncher: Any?, private val activity: Activity) {
     enum class TYPE {
         BOOLEAN,
         STRING,
@@ -24,7 +32,7 @@ class Settings {
         FLOAT,
         GROUP
     }
-
+    @Suppress("UNCHECKED_CAST")
     enum class SETTINGS(
         val key: String,
         @StringRes val title: Int,
@@ -32,7 +40,7 @@ class Settings {
         @DrawableRes val icon: Int,
         val defaultValue: Any,
         val type: TYPE,
-        val onClick: () -> Unit = {}
+        val onClick: (data: List<Any?>) -> Unit = {}
     ) {
         THEMES_HEADER(
             "themes_header",
@@ -78,7 +86,38 @@ class Settings {
                     ReposActivity::class.java.start(
                         it
                     ) {
-                        flags = android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    }
+                }
+            }
+        ),
+        MANAGER(
+            "manager",
+            R.string.manager,
+            -1,
+            -1,
+            "",
+            TYPE.GROUP
+        ),
+        UNINSTALL(
+            "uninstall",
+            R.string.uninstall,
+            R.string.uninstall_long,
+            -1,
+            "",
+            TYPE.STRING,
+            { list ->
+                val activity = list[1]
+                if (activity is Activity) {
+                    activity.openDialog(R.string.uninstall_long, R.string.uninstall, false) {
+                        MagiskUtils.uninstallModule(MODULE_ID)
+                        val intent =
+                            Intent(Intent.ACTION_DELETE).setData(Uri.parse("package:${BuildConfig.APPLICATION_ID}"))
+                        list.first()?.let { launcher ->
+                            if (launcher is ActivityResultLauncher<*>) {
+                                (launcher as ActivityResultLauncher<Intent>).launch(intent)
+                            } else Application.context?.startActivity(intent)
+                        } ?: Application.context?.startActivity(intent)
                     }
                 }
             }
@@ -110,7 +149,7 @@ class Settings {
                 titleRes = item.title
                 summaryRes = item.summary
                 iconRes = item.icon
-                onClick { item.onClick(); false }
+                onClick { item.onClick(listOf(rebootLauncher, activity)); false }
             }
         }
     }
