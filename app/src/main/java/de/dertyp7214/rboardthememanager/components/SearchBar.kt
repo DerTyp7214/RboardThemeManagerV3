@@ -1,5 +1,6 @@
 package de.dertyp7214.rboardthememanager.components
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.inputmethod.EditorInfo
@@ -8,9 +9,12 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.MenuRes
+import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
 import de.dertyp7214.rboardthememanager.R
 
+@SuppressLint("ResourceType")
 class SearchBar(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
 
     var focus = false
@@ -18,6 +22,10 @@ class SearchBar(context: Context, attrs: AttributeSet?) : LinearLayout(context, 
     private var searchListener: (text: String) -> Unit = {}
     private var closeListener: () -> Unit = {}
     private var focusListener: () -> Unit = {}
+
+    @MenuRes
+    private var menuId: Int = -1
+    private var menuItemClickListener: PopupMenu.OnMenuItemClickListener? = null
 
     private val searchBar: CardView
     private val searchButton: ImageButton
@@ -71,7 +79,12 @@ class SearchBar(context: Context, attrs: AttributeSet?) : LinearLayout(context, 
         }
 
         moreButton.setOnClickListener {
-
+            if (menuId > 0) {
+                val popupMenu = PopupMenu(context, it)
+                popupMenu.menuInflater.inflate(menuId, popupMenu.menu)
+                popupMenu.setOnMenuItemClickListener(menuItemClickListener)
+                popupMenu.show()
+            }
         }
 
         searchEdit.setOnEditorActionListener { _, actionId, _ ->
@@ -81,6 +94,14 @@ class SearchBar(context: Context, attrs: AttributeSet?) : LinearLayout(context, 
                 true
             } else false
         }
+    }
+
+    fun setMenu(
+        @MenuRes menu: Int = -1,
+        itemClickListener: PopupMenu.OnMenuItemClickListener? = null
+    ) {
+        menuId = menu
+        menuItemClickListener = itemClickListener
     }
 
     fun setText(text: String = "") {

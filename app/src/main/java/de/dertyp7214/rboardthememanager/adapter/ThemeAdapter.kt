@@ -69,6 +69,7 @@ class ThemeAdapter(
         this.recyclerView = recyclerView
     }
 
+    @Suppress("UNCHECKED_CAST")
     private class ArrayListWrapper<E>(
         private val list: ArrayList<E>,
         private val onSet: (items: ArrayList<E>) -> Unit
@@ -85,6 +86,7 @@ class ThemeAdapter(
         fun clear() = list.clear()
         fun addAll(items: List<E>) = list.addAll(items)
         fun any(predicate: (e: E) -> Boolean) = list.any(predicate)
+        fun toTypedArray(): Array<E> = list.toTypedArray<Any?>() as Array<E>
         operator fun get(index: Int) = list[index]
         operator fun set(index: Int, e: E) {
             list[index] = e
@@ -121,6 +123,11 @@ class ThemeAdapter(
         notifyDataChanged()
     }
 
+    fun selectAll() {
+        selected.setAll(true)
+        notifyDataChanged()
+    }
+
     @Suppress("MemberVisibilityCanBePrivate")
     fun getSelected(): List<ThemeDataClass> {
         return selected.mapIndexed { index, value -> Pair(themes[index], value) }
@@ -139,7 +146,7 @@ class ThemeAdapter(
         activeTheme = getActiveTheme()
             .removePrefix("assets:theme_package_metadata_")
             .removeSuffix(".binarypb").let {
-                if (it.isBlank()) "system_auto" else it
+                if (it.isBlank()) "dynamic_color" else it
             }
     }
 

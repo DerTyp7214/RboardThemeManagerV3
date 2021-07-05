@@ -58,7 +58,7 @@ class ThemePackAdapter(
             holder.root.setOnLongClickListener {
                 activity.run {
                     openDialog(
-                        themePack.description ?: getString(R.string.themepack),
+                        themePack.description ?: getString(R.string.theme_pack),
                         getString(R.string.description),
                         true,
                         null

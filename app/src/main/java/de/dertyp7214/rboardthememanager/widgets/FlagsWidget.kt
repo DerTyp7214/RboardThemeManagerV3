@@ -9,6 +9,9 @@ import android.content.Intent
 import android.widget.RemoteViews
 import android.widget.Toast
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.border
+import de.dertyp7214.rboardthememanager.core.logo
+import de.dertyp7214.rboardthememanager.core.monet
 import de.dertyp7214.rboardthememanager.utils.Flags
 import kotlin.math.roundToInt
 
@@ -74,23 +77,6 @@ class FlagsWidget : AppWidgetProvider() {
                 Pair(FLAGS.KEY_BORDER, values.border)
             )
         }
-
-        private val Map<String, Any>.monet: Boolean
-            get() {
-                return this["use_silk_theme_by_default"] == true
-                        && this["silk_on_all_pixel"] == true
-                        && this["silk_theme"] == true
-            }
-        private val Map<String, Any>.logo: Boolean
-            get() {
-                return this["show_branding_on_space"] == true
-                        && this["show_branding_interval_seconds"] == 0L
-                        && this["branding_fadeout_delay_ms"] == 2147483647L
-            }
-        private val Map<String, Any>.border: Boolean
-            get() {
-                return this["enable_key_border"] == true
-            }
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")

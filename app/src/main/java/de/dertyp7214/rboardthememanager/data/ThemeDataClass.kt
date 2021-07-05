@@ -17,5 +17,5 @@ data class ThemeDataClass(
                 Locale.ROOT
             ) else it.toString()
         }
-    }
+    }.removeSuffix(":")
 }
