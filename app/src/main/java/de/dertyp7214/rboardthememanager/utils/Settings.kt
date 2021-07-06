@@ -81,8 +81,8 @@ class Settings(private val activity: Activity) {
             R.string.repos_long,
             -1,
             "",
-            listOf(),
             TYPE.STRING,
+            listOf(),
             {
                 Application.context?.let {
                     ReposActivity::class.java.start(
