@@ -37,7 +37,7 @@ fun Activity.openDialog(
     negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
     positive: (dialogInterface: DialogInterface) -> Unit
 ): AlertDialog {
-    return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
+    return MaterialAlertDialogBuilder(this)
         .setCancelable(cancelable)
         .setCancelable(false)
         .setMessage(message)
@@ -106,7 +106,7 @@ fun Activity.openDialog(
     block: View.(DialogInterface) -> Unit
 ): AlertDialog {
     val view = layoutInflater.inflate(layout, null)
-    return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
+    return MaterialAlertDialogBuilder(this)
         .setCancelable(cancelable)
         .setView(view)
         .create().also { dialog ->

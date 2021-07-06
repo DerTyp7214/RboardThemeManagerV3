@@ -3,11 +3,8 @@ package de.dertyp7214.rboardthememanager
 import de.dertyp7214.rboardthememanager.core.getSystemProperty
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 
-@Suppress("MemberVisibilityCanBePrivate", "unused", "SdCardPath")
+@Suppress("MemberVisibilityCanBePrivate", "unused")
 object Config {
-    var useMagisk = false
-    var newGboard = true
-
     var THEME_LOCATION = "/system/etc/gboard_theme"
 
     const val MODULES_PATH = "/data/adb/modules"
@@ -15,7 +12,7 @@ object Config {
     const val MODULE_PATH = "$MODULES_PATH/$MODULE_ID"
     const val GBOARD_PACKAGE_NAME = "com.google.android.inputmethod.latin"
     const val RBOARD_THEME_CREATOR_PACKAGE_NAME = "de.dertyp7214.rboardthemecreator"
-
+    
     val MODULE_META = ModuleMeta(
         MODULE_ID,
         "Rboard Themes",
@@ -24,21 +21,12 @@ object Config {
         "RKBDI & DerTyp7214",
         "Module for Rboard Themes app"
     )
-
+    
     val IS_MIUI = "ro.miui.ui.version.name".getSystemProperty().isNotEmpty()
-
-    val GBOARD_PREFS_PATH: String
-        get() {
-            return newGboard.let {
-                if (it) "/data/user_de/0/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
-                else "/data/data/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
-            }
-        }
 
     val MAGISK_THEME_LOC: String
         get() {
-            return if (!useMagisk) "/data/data/$GBOARD_PACKAGE_NAME/files/themes"
-            else if (!THEME_LOCATION.startsWith("/system")) THEME_LOCATION else "$MODULE_PATH$THEME_LOCATION"
+            return if (!THEME_LOCATION.startsWith("/system")) THEME_LOCATION else "$MODULE_PATH$THEME_LOCATION"
         }
 
     const val PACKS_URL =

@@ -12,8 +12,8 @@ import de.dertyp7214.rboardthememanager.core.writeFile
 import de.dertyp7214.rboardthememanager.data.MagiskModule
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 import java.nio.charset.Charset
-import kotlin.text.Charsets.UTF_8
 
+@Suppress("unused")
 object MagiskUtils {
     fun isMagiskInstalled(): Boolean {
         val result = Shell.run("magisk")
@@ -78,14 +78,14 @@ object MagiskUtils {
             files.forEach { file ->
                 if (SuFile(moduleDir, file.key).exists()) {
                     SuFile(moduleDir, file.key).apply {
-                        var text = SuFileInputStream.open(this).readBytes().toString(UTF_8)
+                        var text = SuFileInputStream.open(this).bufferedReader().readText()
 
                         if (file.value?.split("=")?.get(0).toString() in text) {
                             text = text.replace(
                                 text.lines()
-                                    .first {
+                                    .firstOrNull {
                                         file.value?.split("=")?.get(0).toString() in it
-                                    }, file.value ?: ""
+                                    } ?: "", file.value ?: ""
                             )
                         } else {
                             text += "\n${file.value ?: ""}"

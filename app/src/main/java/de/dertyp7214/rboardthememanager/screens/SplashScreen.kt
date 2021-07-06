@@ -30,10 +30,12 @@ import java.net.URL
 
 class SplashScreen : AppCompatActivity() {
 
-    private val checkUpdateUrl =
+    private val checkUpdateUrl by lazy {
         "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/output-metadata.json"
-    private val gboardPlayStoreUrl =
+        }
+    private val gboardPlayStoreUrl by lazy {
         "https://play.google.com/store/apps/details?id=${Config.GBOARD_PACKAGE_NAME}"
+        }
 
     private var checkedForUpdate = false
     private var rootAccess = false

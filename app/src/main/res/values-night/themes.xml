@@ -17,6 +17,10 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
         <item name="popupMenuStyle">@style/PopupStyle</item>
+        <item name="alertDialogTheme">@style/Dialog.RboardThemeManagerV3.MaterialAlertDialog</item>
+        <item name="materialAlertDialogTheme">
+            @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
+        </item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3">

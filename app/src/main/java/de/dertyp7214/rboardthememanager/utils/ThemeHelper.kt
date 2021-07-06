@@ -298,7 +298,7 @@ object ThemeUtils {
         } else null
     }
 
-    private fun getSystemAutoTheme(): ThemeDataClass {
+    fun getSystemAutoTheme(): ThemeDataClass {
         return ThemeDataClass(
             Application.context?.let { context ->
                 BitmapFactory.decodeStream(BufferedInputStream(context.resources.openRawResource(R.raw.system_auto)))
@@ -346,14 +346,7 @@ object ThemeUtils {
 
                 card.setCardBackgroundColor(color)
 
-                themeName.text =
-                    theme.name.split("_").joinToString(" ") { s ->
-                        s.replaceFirstChar {
-                            if (it.isLowerCase()) it.titlecase(
-                                Locale.getDefault()
-                            ) else it.toString()
-                        }
-                    }
+                themeName.text = theme.readableName
                 themeName.setTextColor(if (!isDark) Color.WHITE else Color.BLACK)
             })
             addView(View(context).apply {

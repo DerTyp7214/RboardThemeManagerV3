@@ -19,7 +19,7 @@ import de.dertyp7214.rboardthememanager.R
 
 class Preferences(private val activity: Activity, intent: Intent) {
 
-    private val type = intent.getStringExtra("type")
+    private val type by lazy { intent.getStringExtra("type") }
 
     init {
         when (type) {

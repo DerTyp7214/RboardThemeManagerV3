@@ -42,12 +42,15 @@ class ThemeAdapter(
             ?: 0
 
     private var activeTheme = ""
-    private val default = ContextCompat.getDrawable(
-        context,
-        R.drawable.ic_keyboard
-    )!!.getBitmap()
-    private val selectedBackground =
+    private val default by lazy {
+        ContextCompat.getDrawable(
+            context,
+            R.drawable.ic_keyboard
+        )!!.getBitmap()
+    }
+    private val selectedBackground by lazy {
         ColorDrawable(context.getAttr(R.attr.colorBackgroundFloating)).apply { alpha = 187 }
+    }
 
     private val selected: ArrayListWrapper<Boolean> = ArrayListWrapper(themes.map { false }) {
         if (oldSelectionState != selectionState || forcedSelectionState == SelectionState.SELECTING) {
@@ -68,7 +71,7 @@ class ThemeAdapter(
         super.onAttachedToRecyclerView(recyclerView)
         this.recyclerView = recyclerView
     }
-    @Suppress("UNCHECKED_CAST")
+
     private class ArrayListWrapper<E>(
         private val list: ArrayList<E>,
         private val onSet: (items: ArrayList<E>) -> Unit
@@ -85,7 +88,6 @@ class ThemeAdapter(
         fun clear() = list.clear()
         fun addAll(items: List<E>) = list.addAll(items)
         fun any(predicate: (e: E) -> Boolean) = list.any(predicate)
-        fun toTypedArray(): Array<E> = list.toTypedArray<Any?>() as Array<E>
         operator fun get(index: Int) = list[index]
         operator fun set(index: Int, e: E) {
             list[index] = e

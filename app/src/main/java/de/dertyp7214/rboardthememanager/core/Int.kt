@@ -1,8 +1,6 @@
 package de.dertyp7214.rboardthememanager.core
 
-import android.content.Context
 import android.graphics.Color
-import android.util.DisplayMetrics
 
 fun Int.changeAlpha(alpha: Int): Int {
     return Color.argb(
