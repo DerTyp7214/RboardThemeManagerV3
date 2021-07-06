@@ -15,6 +15,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -37,21 +38,23 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
+import de.dertyp7214.rboardthememanager.Config.MODULE_META
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.MenuAdapter
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.MenuItem
-import de.dertyp7214.rboardthememanager.data.ModuleMeta
 import de.dertyp7214.rboardthememanager.databinding.ActivityMainBinding
 import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
+import de.dertyp7214.rboardthememanager.utils.ThemeUtils.getSystemAutoTheme
 import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
-    private val updateUrl =
+    private val updateUrl by lazy {
         "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-${BuildConfig.BUILD_TYPE}/app-${BuildConfig.BUILD_TYPE}.apk"
+    }
 
     private lateinit var downloadResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<NestedScrollView>
@@ -285,7 +288,47 @@ class MainActivity : AppCompatActivity() {
                         themesViewModel.refreshThemes()
                     }
                 })
-                if (theme.path.isNotEmpty() && !theme.path.startsWith("assets:"))
+                fun applyTheme(dark: Boolean) {
+                    val files = mapOf(
+                        Pair(
+                            "system.prop",
+                            "ro.com.google.ime.${if (dark) "d_" else ""}theme_file=${File(theme.fileName).name}"
+                        )
+                    )
+                    MagiskUtils.updateModule(MODULE_META, files)
+                    //"setprop persist.gboard_${if (dark) "d_" else ""}theme ${File(theme.fileName).name}".runAsCommand() TODO: add when overlay is ready
+                    Flags.run {
+                        setUpFlags()
+                        setValue(true, "oem_dark_theme", Flags.FILES.FLAGS)
+                        applyChanges()
+                    }
+                    applyTheme(getSystemAutoTheme(), true)
+                }
+                if (theme.path.isNotEmpty() && !theme.path.startsWith("assets:") && !theme.path.startsWith(
+                        "system_auto:"
+                    )
+                ) {
+                    menuItems.add(
+                        MenuItem(
+                            R.drawable.ic_auto_theme,
+                            R.string.apply_automatic_theme
+                        ) {
+                            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                            delayed(150) {
+                                themesViewModel.setSelectedTheme()
+                                themesViewModel.refreshThemes()
+                            }
+                            openDialog(R.layout.auto_theme_select, true) { dialog ->
+                                findViewById<TextView>(R.id.dark_theme)?.setOnClickListener {
+                                    applyTheme(true)
+                                    dialog.dismiss()
+                                }
+                                findViewById<TextView>(R.id.light_theme)?.setOnClickListener {
+                                    applyTheme(false)
+                                    dialog.dismiss()
+                                }
+                            }
+                        })
                     menuItems.add(MenuItem(R.drawable.ic_delete_theme, R.string.delete_theme) {
                         openDialog(R.string.q_delete_theme, R.string.delete_theme) {
                             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -299,6 +342,7 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                     })
+                }
             } else {
                 secondaryContent.addView(
                     ThemeUtils.getThemeView(
@@ -404,15 +448,7 @@ class MainActivity : AppCompatActivity() {
             ?.apply { Config.THEME_LOCATION = this }
 
         if (!MagiskUtils.getModules().any { it.id == Config.MODULE_ID }) {
-            val meta = ModuleMeta(
-                Config.MODULE_ID,
-                "Rboard Themes",
-                "v30",
-                "300",
-                "RKBDI & DerTyp7214",
-                "Module for Rboard Themes app"
-            )
-            val file = mapOf(
+            val files = mapOf(
                 Pair(
                     "system.prop",
                     "# Default Theme and Theme-location\n" +
@@ -421,7 +457,7 @@ class MainActivity : AppCompatActivity() {
                 ),
                 Pair(Config.THEME_LOCATION, null)
             )
-            MagiskUtils.installModule(meta, file)
+            MagiskUtils.installModule(MODULE_META, files)
             openDialog(R.string.reboot_to_continue, R.string.reboot, false, {
                 finishAndRemoveTask()
             }) {

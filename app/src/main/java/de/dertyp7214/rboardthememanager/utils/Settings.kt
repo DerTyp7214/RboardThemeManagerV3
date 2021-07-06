@@ -7,13 +7,12 @@ import android.os.Handler
 import android.os.Looper
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
-import de.Maxr1998.modernpreferences.helpers.categoryHeader
-import de.Maxr1998.modernpreferences.helpers.onClick
-import de.Maxr1998.modernpreferences.helpers.pref
-import de.Maxr1998.modernpreferences.helpers.switch
+import de.Maxr1998.modernpreferences.helpers.*
+import de.Maxr1998.modernpreferences.preferences.choice.SelectionItem
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.R
@@ -29,7 +28,8 @@ class Settings(private val activity: Activity) {
         INT,
         LONG,
         FLOAT,
-        GROUP
+        GROUP,
+        SELECT
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -40,6 +40,7 @@ class Settings(private val activity: Activity) {
         @DrawableRes val icon: Int,
         val defaultValue: Any,
         val type: TYPE,
+        val items: List<SelectionItem> = listOf(),
         val onClick: (Activity) -> Unit = {}
     ) {
         THEMES_HEADER(
@@ -81,6 +82,7 @@ class Settings(private val activity: Activity) {
             -1,
             "",
             TYPE.STRING,
+            listOf(),
             {
                 Application.context?.let {
                     ReposActivity::class.java.start(
@@ -99,6 +101,19 @@ class Settings(private val activity: Activity) {
             "",
             TYPE.GROUP
         ),
+        APP_THEME(
+            "app_theme",
+            R.string.app_theme,
+            -1,
+            -1,
+            "",
+            TYPE.SELECT,
+            listOf(
+                SelectionItem("dark", R.string.dark, -1),
+                SelectionItem("light", R.string.light, -1),
+                SelectionItem("system_theme", R.string.system_theme, -1)
+            )
+        ),
         UNINSTALL(
             "uninstall",
             R.string.uninstall,
@@ -106,6 +121,7 @@ class Settings(private val activity: Activity) {
             -1,
             "",
             TYPE.STRING,
+            listOf(),
             { activity ->
                 activity.openDialog(R.string.uninstall_long, R.string.uninstall, false) {
                     MagiskUtils.uninstallModule(MODULE_ID)
@@ -137,6 +153,23 @@ class Settings(private val activity: Activity) {
                     iconRes = item.icon
                 }.let { Preference("") }
                 TYPE.STRING -> builder.pref(item.key) {}
+                TYPE.SELECT -> builder.singleChoice(item.key, item.items) {
+                    initialSelection = item.items.last().key
+                    onSelectionChange {
+                        when (it) {
+                            "dark" -> {
+                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                            }
+                            "light" -> {
+                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                            }
+                            "system_auto" -> {
+                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_UNSPECIFIED)
+                            }
+                        }
+                        true
+                    }
+                }
             }
             pref.apply {
                 titleRes = item.title

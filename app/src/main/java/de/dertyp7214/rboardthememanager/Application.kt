@@ -46,12 +46,17 @@ class Application : Application() {
         context = this
         uiHandler = Handler(Looper.getMainLooper())
         PreferenceManager.getDefaultSharedPreferences(this).apply {
-            AppCompatDelegate.setDefaultNightMode(
-                getInt(
-                    "theme_pref",
-                    AppCompatDelegate.getDefaultNightMode()
-                )
-            )
+            when (getString("app_theme", "system_auto")) {
+                "dark" -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+                "light" -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                }
+                "system_auto" -> {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_UNSPECIFIED)
+                }
+            }
         }
     }
 }

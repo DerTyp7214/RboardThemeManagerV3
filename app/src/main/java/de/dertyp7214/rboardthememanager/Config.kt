@@ -1,7 +1,9 @@
 package de.dertyp7214.rboardthememanager
 
 import de.dertyp7214.rboardthememanager.core.getSystemProperty
+import de.dertyp7214.rboardthememanager.data.ModuleMeta
 
+@Suppress("MemberVisibilityCanBePrivate", "unused")
 object Config {
     var THEME_LOCATION = "/system/etc/gboard_theme"
 
@@ -10,6 +12,15 @@ object Config {
     const val MODULE_PATH = "$MODULES_PATH/$MODULE_ID"
     const val GBOARD_PACKAGE_NAME = "com.google.android.inputmethod.latin"
     const val RBOARD_THEME_CREATOR_PACKAGE_NAME = "de.dertyp7214.rboardthemecreator"
+
+    val MODULE_META = ModuleMeta(
+        MODULE_ID,
+        "Rboard Themes",
+        "v30",
+        "300",
+        "RKBDI & DerTyp7214",
+        "Module for Rboard Themes app"
+    )
 
     val IS_MIUI = "ro.miui.ui.version.name".getSystemProperty().isNotEmpty()
 

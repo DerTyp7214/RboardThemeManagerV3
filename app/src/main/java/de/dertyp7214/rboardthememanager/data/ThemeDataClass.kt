@@ -2,6 +2,7 @@ package de.dertyp7214.rboardthememanager.data
 
 import android.graphics.Bitmap
 import android.graphics.ColorFilter
+import java.io.File
 import java.util.*
 
 data class ThemeDataClass(
@@ -18,4 +19,7 @@ data class ThemeDataClass(
             ) else it.toString()
         }
     }.removeSuffix(":")
+    val fileName = File(path).name
+        .removeSuffix(".binarypb")
+        .removeSuffix(":")
 }

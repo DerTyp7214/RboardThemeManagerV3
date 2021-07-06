@@ -20,6 +20,7 @@
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_alphabetical.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_android.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_apply_theme.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_auto_theme.xml" value="0.3665" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_backspace.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.3651041666666667" />
@@ -67,6 +68,7 @@
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/activity_preferences.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/activity_repos.xml" value="0.3515625" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/activity_splash_screen.xml" value="0.33489583333333334" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/auto_theme_select.xml" value="0.3" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/bottom_bar.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/chip_container.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/flags_widget.xml" value="0.3" />

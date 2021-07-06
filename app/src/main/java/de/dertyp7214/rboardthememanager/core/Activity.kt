@@ -40,7 +40,7 @@ fun Activity.openDialog(
     positive: (dialogInterface: DialogInterface) -> Unit
 ): AlertDialog {
     content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
-    return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
+    return MaterialAlertDialogBuilder(this)
         .setCancelable(cancelable)
         .setMessage(message)
         .setTitle(title)
@@ -110,7 +110,7 @@ fun Activity.openDialog(
 ): AlertDialog {
     content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
     val view = layoutInflater.inflate(layout, null)
-    return MaterialAlertDialogBuilder(this, R.style.Dialog_RboardThemeManagerV3_MaterialAlertDialog)
+    return MaterialAlertDialogBuilder(this)
         .setCancelable(cancelable)
         .setView(view)
         .setOnDismissListener { content.setRenderEffect(null) }

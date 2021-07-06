@@ -29,6 +29,7 @@
     <string name="reboot">Reboot</string>
     <string name="reboot_to_continue">You have to reboot for the module to work</string>
     <string name="apply_theme">Apply Theme</string>
+    <string name="apply_automatic_theme">Apply Automatic Theme</string>
     <string name="applied">Theme Applied</string>
     <string name="delete_theme">Delete Theme</string>
     <string name="q_delete_theme">Do you want to delete this theme?</string>
@@ -115,5 +116,11 @@
     <string name="select_all">Select all</string>
     <string name="manager">Manager</string>
     <string name="uninstall">Uninstall</string>
-    <string name="uninstall_long">Uninstall module and app</string>
+    <string name="uninstall_long">Uninstall module and reboot</string>
+    <string name="apply_dark">Apply Theme for Dark</string>
+    <string name="apply_light">Apply Theme for Light</string>
+    <string name="app_theme">App Theme</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="system_theme">System Theme</string>
 </resources>
