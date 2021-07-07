@@ -20,6 +20,13 @@ fun Bitmap.getDominantColor(): Int {
     return color
 }
 
+fun Bitmap.resize(width: Int? = null, height: Int? = null): Bitmap {
+    if (width == null && height == null) return this
+    val w = width ?: (this.height / (height ?: 0)) * this.width
+    val h = height ?: (this.width / (width ?: 0)) * this.height
+    return Bitmap.createScaledBitmap(this, w, h, false)
+}
+
 fun Bitmap.roundCorners(pixels: Int, colorFilter: ColorFilter? = null): Bitmap {
     val output = Bitmap.createBitmap(
         width, height, Bitmap.Config.ARGB_8888
