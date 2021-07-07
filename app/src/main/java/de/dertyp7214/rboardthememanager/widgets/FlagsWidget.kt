@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
@@ -19,9 +20,6 @@ class FlagsWidget : AppWidgetProvider() {
 
     @Suppress("MemberVisibilityCanBePrivate")
     companion object {
-        var widgetIds: IntArray = intArrayOf()
-            private set
-
         internal enum class FLAGS(val key: String) {
             MONET("monet"),
             G_LOGO("g_logo"),
@@ -85,7 +83,6 @@ class FlagsWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-        widgetIds = appWidgetIds
         appWidgetIds.forEach { appWidgetId ->
             updateAppWidget(context, appWidgetManager, appWidgetId)
         }
@@ -145,6 +142,12 @@ class FlagsWidget : AppWidgetProvider() {
             Flags.applyChanges()
             Toast.makeText(context, R.string.flag_applied, Toast.LENGTH_SHORT).show()
         }
-        onUpdate(context, AppWidgetManager.getInstance(context), widgetIds)
+        AppWidgetManager.getInstance(context).let { appWidgetManager ->
+            onUpdate(
+                context,
+                appWidgetManager,
+                appWidgetManager.getAppWidgetIds(ComponentName(context, FlagsWidget::class.java))
+            )
+        }
     }
 }

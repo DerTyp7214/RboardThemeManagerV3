@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
@@ -18,10 +19,9 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
 
     @Suppress("MemberVisibilityCanBePrivate")
     companion object {
-        private const val PREFS_NAME = "de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget"
+        private const val PREFS_NAME =
+            "de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget"
         private const val PREF_PREFIX_KEY = "appwidget_"
-
-        private var widgetIds: IntArray = intArrayOf()
 
         internal fun updateAppWidget(
             context: Context,
@@ -72,7 +72,6 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-        widgetIds = appWidgetIds
         appWidgetIds.forEach { appWidgetId ->
             updateAppWidget(context, appWidgetManager, appWidgetId)
         }
@@ -93,6 +92,18 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
             if (applyTheme(theme, true))
                 Toast.makeText(context, R.string.applied, Toast.LENGTH_SHORT).show()
         }
-        onUpdate(context, AppWidgetManager.getInstance(context), widgetIds)
+
+        AppWidgetManager.getInstance(context).let { appWidgetManager ->
+            onUpdate(
+                context,
+                appWidgetManager,
+                appWidgetManager.getAppWidgetIds(
+                    ComponentName(
+                        context,
+                        SwitchKeyboardWidget::class.java
+                    )
+                )
+            )
+        }
     }
 }

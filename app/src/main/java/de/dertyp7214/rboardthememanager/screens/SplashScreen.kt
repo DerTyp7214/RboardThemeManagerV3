@@ -2,6 +2,8 @@ package de.dertyp7214.rboardthememanager.screens
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -22,6 +24,8 @@ import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.OutputMetadata
 import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
+import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
+import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
 import org.json.JSONObject
 import java.io.File
 import java.net.URL
@@ -58,6 +62,19 @@ class SplashScreen : AppCompatActivity() {
         val files = ArrayList<File>()
         files.forEach {
             SuFile(it.absolutePath).deleteRecursive()
+        }
+
+        AppWidgetManager.getInstance(this).let { appWidgetManager ->
+            appWidgetManager.getAppWidgetIds(
+                ComponentName(this, FlagsWidget::class.java)
+            ).forEach { id ->
+                FlagsWidget.updateAppWidget(this, appWidgetManager, id)
+            }
+            appWidgetManager.getAppWidgetIds(
+                ComponentName(this, SwitchKeyboardWidget::class.java)
+            ).forEach { id ->
+                SwitchKeyboardWidget.updateAppWidget(this, appWidgetManager, id)
+            }
         }
 
         File(applicationInfo.dataDir, "flags.json").apply {

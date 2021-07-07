@@ -2,6 +2,7 @@ package de.dertyp7214.rboardthememanager.utils
 
 import android.app.Activity
 import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Intent
 import android.os.Build
 import android.os.Handler
@@ -44,13 +45,11 @@ class Preferences(private val activity: Activity, intent: Intent) {
             }
             "flags" -> {
                 Flags.applyChanges()
-                Application.context?.let { context ->
-                    FlagsWidget.widgetIds.forEach { id ->
-                        FlagsWidget.updateAppWidget(
-                            context,
-                            AppWidgetManager.getInstance(context),
-                            id
-                        )
+                AppWidgetManager.getInstance(activity).let { appWidgetManager ->
+                    appWidgetManager.getAppWidgetIds(
+                        ComponentName(activity, FlagsWidget::class.java)
+                    ).forEach { id ->
+                        FlagsWidget.updateAppWidget(activity, appWidgetManager, id)
                     }
                 }
             }
