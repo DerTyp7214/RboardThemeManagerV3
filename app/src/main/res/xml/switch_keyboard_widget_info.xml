@@ -9,6 +9,7 @@
     android:minHeight="40dp"
 
     android:previewImage="@drawable/default_theme"
+    android:resizeMode="horizontal|vertical"
     android:layout_height="wrap_content"
     android:layout_width="0dp"
     android:updatePeriodMillis="86400000"

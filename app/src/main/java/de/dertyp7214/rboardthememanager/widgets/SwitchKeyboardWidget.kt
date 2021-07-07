@@ -9,6 +9,9 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.widget.RemoteViews
 import android.widget.Toast
+import android.util.Log
+import java.lang.Float.max
+import kotlin.math.min
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.dpToPx
 import de.dertyp7214.rboardthememanager.core.resize
@@ -33,14 +36,23 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
             appWidgetId: Int
         ) {
             loadThemePath(context, appWidgetId)?.let { themeName ->
+            val views = RemoteViews(context.packageName, R.layout.switch_keyboard_widget)
+
+                val width = appWidgetManager.getAppWidgetOptions(appWidgetId)
+                    .getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH).dpToPx(context).toInt()
+
+                var ratio = 1F
+                
                 val theme = ThemeUtils.getThemeData(themeName)
-                val themeImage = (theme.image
-                    ?: BitmapFactory.decodeResource(
-                        context.resources,
-                        R.raw.system_auto
-                    ))?.resize(540, 405)?.roundCorners(
+                val themeImage = (theme.image ?: BitmapFactory.decodeResource(
+                    context.resources,
+                    R.raw.system_auto
+                ))?.let {
+                    ratio = width.toFloat() / it.width.toFloat()
+                    it
+                }?.resize(width)?.roundCorners(
                     16
-                        .dpToPx(context).let { it / 2 }.toInt(), theme.colorFilter
+                        .dpToPx(context).let { it * min(ratio, 1F) }.toInt(), theme.colorFilter
                 )
 
                 val pendingIntent =
@@ -54,7 +66,6 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
                         )
                     }
 
-                val views = RemoteViews(context.packageName, R.layout.switch_keyboard_widget)
                 views.setImageViewBitmap(R.id.theme_image, themeImage)
                 views.setOnClickPendingIntent(R.id.theme_image, pendingIntent)
 
