@@ -34,6 +34,7 @@ import com.dertyp7214.preferencesplus.core.dp
 import com.dertyp7214.preferencesplus.core.setMargins
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.button.MaterialButton
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
@@ -323,7 +324,9 @@ class MainActivity : AppCompatActivity() {
                                 findViewById<TextView>(R.id.light_theme)?.setOnClickListener {
                                     applyTheme(false)
                                     dialog.dismiss()
-                                }
+                                 }
+                                findViewById<MaterialButton>(R.id.cancel)?.setOnClickListener { dialog.dismiss() }
+                                findViewById<MaterialButton>(R.id.ok)?.setOnClickListener { dialog.dismiss() }
                             }
                         })
                     menuItems.add(MenuItem(R.drawable.ic_delete_theme, R.string.delete_theme) {

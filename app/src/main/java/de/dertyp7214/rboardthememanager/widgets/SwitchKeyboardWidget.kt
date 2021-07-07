@@ -13,15 +13,17 @@ import de.dertyp7214.rboardthememanager.core.dpToPx
 import de.dertyp7214.rboardthememanager.core.roundCorners
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.utils.applyTheme
+import android.content.ComponentName
 
 class SwitchKeyboardWidget : AppWidgetProvider() {
 
     @Suppress("MemberVisibilityCanBePrivate")
     companion object {
-        private const val PREFS_NAME = "de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget"
+        private const val PREFS_NAME =
+            "de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget"
         private const val PREF_PREFIX_KEY = "appwidget_"
 
-        private var widgetIds: IntArray = intArrayOf()
+        
 
         internal fun updateAppWidget(
             context: Context,
@@ -72,7 +74,7 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-        widgetIds = appWidgetIds
+        
         appWidgetIds.forEach { appWidgetId ->
             updateAppWidget(context, appWidgetManager, appWidgetId)
         }
@@ -93,6 +95,18 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
             if (applyTheme(theme, true))
                 Toast.makeText(context, R.string.applied, Toast.LENGTH_SHORT).show()
         }
-        onUpdate(context, AppWidgetManager.getInstance(context), widgetIds)
+        
+        AppWidgetManager.getInstance(context).let { appWidgetManager ->
+            onUpdate(
+                context,
+                appWidgetManager,
+                appWidgetManager.getAppWidgetIds(
+                    ComponentName(
+                        context,
+                        SwitchKeyboardWidget::class.java
+                    )
+                )
+            )
+        }
     }
 }
