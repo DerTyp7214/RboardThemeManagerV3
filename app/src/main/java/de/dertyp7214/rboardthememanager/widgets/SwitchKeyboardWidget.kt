@@ -6,10 +6,12 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.widget.RemoteViews
 import android.widget.Toast
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.dpToPx
+import de.dertyp7214.rboardthememanager.core.resize
 import de.dertyp7214.rboardthememanager.core.roundCorners
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.utils.applyTheme
@@ -32,9 +34,13 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
         ) {
             loadThemePath(context, appWidgetId)?.let { themeName ->
                 val theme = ThemeUtils.getThemeData(themeName)
-                val themeImage = theme.image?.roundCorners(
+                val themeImage = (theme.image
+                    ?: BitmapFactory.decodeResource(
+                        context.resources,
+                        R.raw.system_auto
+                    ))?.resize(540, 405)?.roundCorners(
                     16
-                        .dpToPx(context).toInt(), theme.colorFilter
+                        .dpToPx(context).let { it / 2 }.toInt(), theme.colorFilter
                 )
 
                 val pendingIntent =
