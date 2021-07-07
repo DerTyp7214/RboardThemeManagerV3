@@ -52,7 +52,7 @@ dependencies {
     implementation "com.github.topjohnwu.libsu:core:$libsuVersion"
     implementation "com.github.topjohnwu.libsu:io:$libsuVersion"
     implementation "com.github.topjohnwu.libsu:busybox:$libsuVersion"
-    implementation 'de.maxr1998:modernandroidpreferences:2.0'
+    //implementation 'de.maxr1998:modernandroidpreferences:2.0'
     implementation 'dev.chrisbanes.insetter:insetter:0.5.0'
     implementation "androidx.core:core-ktx:1.6.0"
     //noinspection DifferentStdlibGradleVersion
