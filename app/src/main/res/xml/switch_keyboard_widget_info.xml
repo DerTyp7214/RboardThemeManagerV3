@@ -9,6 +9,7 @@
     android:minHeight="40dp"
 
     android:previewLayout="@layout/switch_keyboard_widget"
+    android:resizeMode="horizontal|vertical"
     android:targetCellWidth="2"
     android:targetCellHeight="1"
     android:updatePeriodMillis="86400000"
