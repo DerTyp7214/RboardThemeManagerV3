@@ -29,9 +29,10 @@ class PreferencesActivity : AppCompatActivity() {
         val extraContent = binding.extraContent
 
         preferences = Preferences(this, intent) {
-            val adapter = recyclerView.adapter
-            if (adapter is PreferencesAdapter)
-                adapter.setRootScreen(preferences.preferences)
+            recyclerView.adapter.let { adapter ->
+                if (adapter is PreferencesAdapter)
+                    adapter.setRootScreen(preferences.preferences)
+            }
         }
 
         preferences.extraView?.let { extraContent.addView(it) }
