@@ -45,6 +45,7 @@ import de.dertyp7214.rboardthememanager.adapter.MenuAdapter
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.MenuItem
 import de.dertyp7214.rboardthememanager.databinding.ActivityMainBinding
+import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils.getSystemAutoTheme

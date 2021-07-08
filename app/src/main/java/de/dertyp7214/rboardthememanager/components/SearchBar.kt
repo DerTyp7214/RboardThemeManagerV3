@@ -17,7 +17,7 @@ import androidx.cardview.widget.CardView
 import de.dertyp7214.rboardthememanager.R
 
 @SuppressLint("ResourceType")
-class SearchBar(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
+class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
 
     var focus = false
         private set

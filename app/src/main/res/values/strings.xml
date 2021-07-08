@@ -123,4 +123,5 @@
     <string name="dark">Dark</string>
     <string name="light">Light</string>
     <string name="system_theme">System Theme</string>
+    <string name="flags_loaded">%o Flags loaded</string>
 </resources>

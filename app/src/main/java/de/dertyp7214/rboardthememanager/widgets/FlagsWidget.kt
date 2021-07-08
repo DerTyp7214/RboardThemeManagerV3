@@ -13,7 +13,7 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.border
 import de.dertyp7214.rboardthememanager.core.logo
 import de.dertyp7214.rboardthememanager.core.monet
-import de.dertyp7214.rboardthememanager.utils.Flags
+import de.dertyp7214.rboardthememanager.preferences.Flags
 import kotlin.math.roundToInt
 
 class FlagsWidget : AppWidgetProvider() {

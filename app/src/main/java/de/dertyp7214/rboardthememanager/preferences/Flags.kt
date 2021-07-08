@@ -1,8 +1,10 @@
-package de.dertyp7214.rboardthememanager.utils
+package de.dertyp7214.rboardthememanager.preferences
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -10,7 +12,6 @@ import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.dertyp7214.logs.helpers.Logger
 import com.topjohnwu.superuser.io.SuFile
-import com.topjohnwu.superuser.io.SuFileInputStream
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.helpers.onCheckedChange
@@ -22,19 +23,16 @@ import de.Maxr1998.modernpreferences.preferences.SwitchPreference
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.components.SearchBar
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
-import org.apache.commons.text.StringEscapeUtils
+import de.dertyp7214.rboardthememanager.utils.FileUtils
 import org.json.JSONObject
-import org.xml.sax.InputSource
 import java.io.File
-import java.io.StringReader
 import java.util.*
-import javax.xml.parsers.DocumentBuilderFactory
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
-class Flags(val context: Context) {
+class Flags(val activity: Activity) : AbstractPreference() {
     enum class FILES(val fileName: String) {
         FLAGS("flag_value.xml"),
         GBOARD_PREFERENCES("${Config.GBOARD_PACKAGE_NAME}_preferences.xml"),
@@ -165,19 +163,21 @@ class Flags(val context: Context) {
             setValue(if (valueMap != null) valueMap[v] else v, key, file)
     }
 
-    fun preferences(builder: PreferenceScreen.Builder) {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+    override fun getExtraView(): View? = null
+
+    override fun preferences(builder: PreferenceScreen.Builder) {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
         val preferences = hashMapOf<String, Preference>()
-        val allFlags = ArrayList(getFlagItems(context, true))
+        val allFlags = ArrayList(getFlagItems(activity, true))
         allFlags.addAll(FLAGS.values().map { FlagItem(it) })
         allFlags.forEach { item ->
             prefs.edit { remove(item.key) }
             val pref: Preference = when (item.type) {
                 TYPE.BOOLEAN -> SwitchPreference(item.key).apply {
-                    defaultValue = item.getValue(context, item.defaultValue) as? Boolean ?: false
+                    defaultValue = item.getValue(activity, item.defaultValue) as? Boolean ?: false
                     onCheckedChange {
                         if (!item.setValue(it)) Toast.makeText(
-                            context,
+                            activity,
                             R.string.error,
                             Toast.LENGTH_SHORT
                         ).show()
@@ -208,30 +208,36 @@ class Flags(val context: Context) {
         }
     }
 
-    fun allFlagsPreferences(builder: PreferenceScreen.Builder) {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        getCurrentXmlValues(FILES.FLAGS.fileName).forEach { entry ->
-            prefs.edit { remove(entry.key) }
-            if (entry.value is Boolean) builder.switch(entry.key) {
-                title = entry.key.split("_").joinToString(" ") {
-                    it.replaceFirstChar { char ->
-                        if (char.isLowerCase()) char.titlecase(
-                            Locale.getDefault()
-                        ) else char.toString()
-                    }
-                }
-                summary = entry.key
-                defaultValue = entry.value as Boolean
-                onCheckedChange {
-                    if (!setValue(it, entry.key, FILES.FLAGS)) Toast.makeText(
-                        context,
-                        R.string.error,
-                        Toast.LENGTH_SHORT
-                    ).show()
+    class AllFlags(
+        private val activity: Activity,
+        private val requestReload: () -> Unit
+    ) : AbstractPreference() {
+
+        private var filter: String = ""
+
+        private val searchBar = SearchBar(activity).apply {
+            setOnSearchListener {
+                filter = it
+                requestReload()
+            }
+            setOnCloseListener {
+                filter = ""
+                requestReload()
+            }
+        }
+
+        override fun getExtraView(): View = searchBar
+
+        override fun preferences(builder: PreferenceScreen.Builder) {
+            val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
+            getCurrentXmlValues(FILES.FLAGS.fileName).filter {
+                filter.isEmpty() || it.key.contains(
+                    filter,
                     true
-                }
-            } else {
-                builder.pref(entry.key) {
+                )
+            }.forEach { entry ->
+                prefs.edit { remove(entry.key) }
+                if (entry.value is Boolean) builder.switch(entry.key) {
                     title = entry.key.split("_").joinToString(" ") {
                         it.replaceFirstChar { char ->
                             if (char.isLowerCase()) char.titlecase(
@@ -239,7 +245,27 @@ class Flags(val context: Context) {
                             ) else char.toString()
                         }
                     }
-                    summary = entry.value.toString()
+                    summary = entry.key
+                    defaultValue = entry.value as Boolean
+                    onCheckedChange {
+                        if (!setValue(it, entry.key, FILES.FLAGS)) Toast.makeText(
+                            activity,
+                            R.string.error,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        true
+                    }
+                } else {
+                    builder.pref(entry.key) {
+                        title = entry.key.split("_").joinToString(" ") {
+                            it.replaceFirstChar { char ->
+                                if (char.isLowerCase()) char.titlecase(
+                                    Locale.getDefault()
+                                ) else char.toString()
+                            }
+                        }
+                        summary = entry.value.toString()
+                    }
                 }
             }
         }
@@ -322,44 +348,8 @@ class Flags(val context: Context) {
             }
 
         @SuppressLint("SdCardPath")
-        private fun getCurrentXmlValues(file: String): Map<String, Any> {
-            val output = HashMap<String, Any>()
-
-            val fileName = "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/$file"
-            val content = SuFile(fileName).let {
-                if (it.exists()) SuFileInputStream.open(it) else ProcessBuilder().su("cat $fileName")
-                .logs("READ", true).inputStream
-            }?.use {
-                it.bufferedReader().readText()
-            }
-
-            val map = try {
-                DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
-                    InputSource(StringReader(content))
-                ).getElementsByTagName("map")
-            } catch (e: Exception) {
-                e.printStackTrace()
-                return output
-            }
-
-            for (item in map.item(0).childNodes) {
-                if (item.nodeName != "set" && !item.nodeName.startsWith("#")) {
-                    val name = item.attributes?.getNamedItem("name")?.nodeValue
-                    val value = item.attributes?.getNamedItem("value")?.nodeValue?.let {
-                        when (item.nodeName) {
-                            "long" -> it.toLong()
-                            "boolean" -> it.toBooleanStrict()
-                            "float" -> it.toFloat()
-                            "integer" -> it.toInt()
-                            else -> it
-                        }
-                    }
-                    if (name != null) output[name] = value ?: item.textContent ?: ""
-                }
-            }
-
-            return output
-        }
+        private fun getCurrentXmlValues(file: String) =
+            SuFile("/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/$file").readXML()
 
         @SuppressLint("SdCardPath")
         fun applyChanges(): Boolean {
@@ -367,10 +357,7 @@ class Flags(val context: Context) {
                 val fileName =
                     "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
                 flagsString[file]?.let {
-                    if (!SuFile(fileName).exists())
-                        ProcessBuilder().su("echo \"${StringEscapeUtils.escapeJava(it)}\" > '$fileName'")
-                            .logs("APPLY", true)
-                    else SuFile(fileName).writeFile(it.trim())
+                    SuFile(fileName).writeFile(it.trim())
                 }
             }
 
@@ -382,10 +369,7 @@ class Flags(val context: Context) {
             FILES.values().filter { it != FILES.NONE }.forEach { file ->
                 val fileName =
                     "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
-                flagsString[file] = SuFile(fileName).let { suFile ->
-                    if (suFile.exists()) SuFileInputStream.open(suFile)
-                    else ProcessBuilder().su("cat $fileName").logs("READ", true).inputStream
-                }?.use {
+                flagsString[file] = SuFile(fileName).openStream()?.use {
                     it.bufferedReader().readText()
                 }
             }

@@ -18,7 +18,6 @@ import com.dertyp7214.preferencesplus.core.setWidth
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.topjohnwu.superuser.io.SuFile
-import com.topjohnwu.superuser.io.SuFileInputStream
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
@@ -27,9 +26,9 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.data.ThemePack
-import org.apache.commons.text.StringEscapeUtils
+import de.dertyp7214.rboardthememanager.preferences.Flags
+import de.dertyp7214.rboardthememanager.preferences.Settings
 import java.io.BufferedInputStream
-import java.io.InputStream
 import java.net.URL
 import java.util.*
 import kotlin.collections.ArrayList
@@ -49,25 +48,10 @@ fun applyTheme(
         "APPLY",
         "[ApplyTheme]: $name $inputPackageName $fileName"
     )
-    val useFallback = !SuFile(fileName).exists()
-    fun readText(): InputStream {
-        return if (useFallback) {
-            ProcessBuilder().su("cat $fileName").logs("READ", true).inputStream
-        } else {
-            SuFileInputStream.open(SuFile(fileName))
-        }
-    }
 
-    fun writeText(content: String) {
-        if (useFallback)
-            ProcessBuilder().su("echo \"${StringEscapeUtils.escapeJava(content)}\" > '$fileName'")
-                .logs("APPLY", true)
-        else SuFile(fileName).writeFile(content.trim())
-    }
-
-    val content = readText().use {
+    val content = SuFile(fileName).openStream()?.use {
         it.bufferedReader().readText()
-    }.let {
+    }?.let {
         var changed = it
 
         changed = if ("<string name=\"additional_keyboard_theme\">" in changed)
@@ -96,7 +80,8 @@ fun applyTheme(
         return@let changed
     }
 
-    writeText(content)
+    if (content != null)
+        SuFile(fileName).writeFile(content.trim())
 
     return "am force-stop $inputPackageName".runAsCommand()
 }
@@ -107,11 +92,11 @@ fun getActiveTheme(): String {
     val fileLol =
         SuFile("/data/data/$inputPackageName/shared_prefs/${inputPackageName}_preferences.xml")
     return try {
-        if (!fileLol.exists()) ""
-        else SuFileInputStream.open(fileLol).bufferedReader().readText()
-            .split("<string name=\"additional_keyboard_theme\">")
-            .let { if (it.size > 1) it[1].split("</string>")[0] else "" }.replace("system:", "")
-            .replace(".zip", "")
+        fileLol.openStream()?.bufferedReader()?.readText()
+            ?.split("<string name=\"additional_keyboard_theme\">")
+            ?.let { if (it.size > 1) it[1].split("</string>")[0] else "" }
+            ?.replace("system:", "")
+            ?.replace(".zip", "") ?: ""
     } catch (error: Exception) {
         Logger.log(Logger.Companion.Type.ERROR, "ActiveTheme", error.message)
         ""

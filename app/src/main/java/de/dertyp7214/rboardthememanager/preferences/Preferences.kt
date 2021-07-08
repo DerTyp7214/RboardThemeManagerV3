@@ -1,4 +1,4 @@
-package de.dertyp7214.rboardthememanager.utils
+package de.dertyp7214.rboardthememanager.preferences
 
 import android.app.Activity
 import android.appwidget.AppWidgetManager
@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.Toast
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.helpers.categoryHeader
@@ -17,22 +18,34 @@ import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.utils.GboardUtils
+import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 
-class Preferences(private val activity: Activity, intent: Intent) {
+class Preferences(private val activity: Activity, intent: Intent, onRequestReload: () -> Unit) : AbstractPreference() {
 
     private val type by lazy { intent.getStringExtra("type") }
+
+    private val preference: AbstractPreference
 
     init {
         when (type) {
             "info" -> {
+                preference = this
             }
             "settings" -> {
+                preference = Settings(activity)
             }
-            "flags" -> Flags.setUpFlags()
+            "flags" -> {
+                Flags.setUpFlags()
+                preference = Flags(activity)
+            }
             "all_flags" -> {
+                Flags.setUpFlags()
+                preference = Flags.AllFlags(activity, onRequestReload)
             }
             else -> {
+                preference = this
             }
         }
     }
@@ -43,7 +56,7 @@ class Preferences(private val activity: Activity, intent: Intent) {
             }
             "settings" -> {
             }
-            "flags" -> {
+            "flags", "all_flags" -> {
                 Flags.applyChanges()
                 AppWidgetManager.getInstance(activity).let { appWidgetManager ->
                     appWidgetManager.getAppWidgetIds(
@@ -53,8 +66,6 @@ class Preferences(private val activity: Activity, intent: Intent) {
                     }
                 }
             }
-            "all_flags" -> {
-            }
             else -> {
             }
         }
@@ -63,10 +74,10 @@ class Preferences(private val activity: Activity, intent: Intent) {
     val preferences: PreferenceScreen
         get() {
             return when (type) {
-                "info" -> getInfoPreferences()
-                "settings" -> getSettingsPreferences()
-                "flags" -> getFlagsPreferences()
-                "all_flags" -> getAllFlagsPreferences()
+                "info", "settings", "flags", "all_flags" -> screen(
+                    activity,
+                    preference::preferences
+                )
                 else -> screen(activity) {}
             }
         }
@@ -82,13 +93,13 @@ class Preferences(private val activity: Activity, intent: Intent) {
             }
         }
 
-    private fun getSettingsPreferences() = screen(activity, Settings(activity)::preferences)
-    private fun getFlagsPreferences() = screen(activity, Flags(activity)::preferences)
-    private fun getAllFlagsPreferences() = screen(activity, Flags(activity)::allFlagsPreferences)
+    val extraView: View? = preference.getExtraView()
 
-    private fun getInfoPreferences(): PreferenceScreen {
+    override fun getExtraView(): View? = null
+
+    override fun preferences(builder: PreferenceScreen.Builder) {
         val usingModule = MagiskUtils.getModules().any { it.id == Config.MODULE_ID }
-        return screen(activity) {
+        builder.apply {
             pref("theme_count") {
                 titleRes = R.string.theme_count
                 summary = Config.themeCount?.toString() ?: "0"
@@ -147,4 +158,9 @@ class Preferences(private val activity: Activity, intent: Intent) {
             }
         }
     }
+}
+
+abstract class AbstractPreference {
+    internal abstract fun preferences(builder: PreferenceScreen.Builder)
+    internal abstract fun getExtraView(): View?
 }

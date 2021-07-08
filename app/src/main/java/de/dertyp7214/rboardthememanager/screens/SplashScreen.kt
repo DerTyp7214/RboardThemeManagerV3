@@ -22,6 +22,7 @@ import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.OutputMetadata
+import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
 import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
@@ -134,6 +135,26 @@ class SplashScreen : AppCompatActivity() {
                     }
                 }
                 finishAndRemoveTask()
+            }
+            data?.toString()?.endsWith(".rboard") == true -> {
+                doAsync({
+                    File(cacheDir, "flags.rboard").apply {
+                        delete()
+                        data.writeToFile(this@SplashScreen, this)
+                    }.readXML()
+                }) {
+                    Flags.setUpFlags()
+                    it.forEach { entry ->
+                        Flags.setValue(entry.value, entry.key, Flags.FILES.FLAGS)
+                    }
+                    Flags.applyChanges()
+                    Toast.makeText(
+                        this,
+                        getString(R.string.flags_loaded, it.size),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    finishAndRemoveTask()
+                }
             }
             data != null -> {
                 val resultLauncher =

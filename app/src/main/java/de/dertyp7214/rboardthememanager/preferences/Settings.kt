@@ -1,10 +1,11 @@
-package de.dertyp7214.rboardthememanager.utils
+package de.dertyp7214.rboardthememanager.preferences
 
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
@@ -20,8 +21,9 @@ import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.core.start
 import de.dertyp7214.rboardthememanager.screens.ReposActivity
+import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 
-class Settings(private val activity: Activity) {
+class Settings(private val activity: Activity): AbstractPreference() {
     enum class TYPE {
         BOOLEAN,
         STRING,
@@ -140,7 +142,9 @@ class Settings(private val activity: Activity) {
         }
     }
 
-    fun preferences(builder: PreferenceScreen.Builder) {
+    override fun getExtraView(): View? = null
+
+    override fun preferences(builder: PreferenceScreen.Builder) {
         SETTINGS.values().forEach { item ->
             val pref: Preference = when (item.type) {
                 TYPE.BOOLEAN -> builder.switch(item.key) {
