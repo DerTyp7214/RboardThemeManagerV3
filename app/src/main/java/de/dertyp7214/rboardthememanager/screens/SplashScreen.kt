@@ -89,25 +89,30 @@ class SplashScreen : AppCompatActivity() {
                 -1
             }
             doAsync(URL("https://raw.githubusercontent.com/GboardThemes/Packs/master/flags.json")::getTextFromUrl) {
-                if (it.isBlank()) {
-                    if (!exists()) {
-                        writeText(
-                            SafeJSON(
-                                JSONObject(resources.openRawResource(
-                                    FileUtils.getResourceId(
-                                        this@SplashScreen,
-                                        "flags",
-                                        "raw",
-                                        packageName
-                                    )
-                                ).bufferedReader().use { reader -> reader.readText() })
-                            ).toString()
+                val rawJson = SafeJSON(
+                    JSONObject(resources.openRawResource(
+                        FileUtils.getResourceId(
+                            this@SplashScreen,
+                            "flags",
+                            "raw",
+                            packageName
                         )
-                    }
+                    ).bufferedReader().use { reader -> reader.readText() })
+                )
+                val rawTime = rawJson.getLong("time")
+                if (it.isBlank()) {
+                    if (!exists() || rawTime > timeStamp)
+                        writeText(rawJson.toString())
                 } else {
                     val json = SafeJSON(JSONObject(it))
-                    if (!exists() || timeStamp < json.getLong("time"))
-                        writeText(json.toString())
+                    val jsonTime = json.getLong("time")
+                    if (!exists()) {
+                        if (jsonTime < rawTime)
+                            writeText(rawJson.toString())
+                        else writeText(json.toString())
+                    } else if (timeStamp < rawTime && jsonTime < rawTime)
+                        writeText(rawJson.toString())
+                    else if (timeStamp < jsonTime) writeText(json.toString())
                 }
             }
         }
