@@ -29,6 +29,7 @@ import java.io.File
 import java.net.URL
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
+import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
 
 class SplashScreen : AppCompatActivity() {
@@ -131,6 +132,26 @@ AppWidgetManager.getInstance(this).let { appWidgetManager ->
                     }
                 }
                 finishAndRemoveTask()
+            }
+            data?.toString()?.endsWith(".rboard") == true -> {
+                doAsync({
+                    File(cacheDir, "flags.rboard").apply {
+                        delete()
+                        data.writeToFile(this@SplashScreen, this)
+                    }.readXML()
+                }) {
+                    Flags.setUpFlags()
+                    it.forEach { entry ->
+                        Flags.setValue(entry.value, entry.key, Flags.FILES.FLAGS)
+                    }
+                    Flags.applyChanges()
+                    Toast.makeText(
+                        this,
+                        getString(R.string.flags_loaded, it.size),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    finishAndRemoveTask()
+                }
             }
             data != null -> {
                 val resultLauncher =

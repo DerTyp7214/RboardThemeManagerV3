@@ -1,11 +1,12 @@
 package de.dertyp7214.rboardthememanager.preferences
 
+
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Handler
-import android.os.Looper
 import android.view.View
+import android.os.Looper
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
@@ -15,7 +16,6 @@ import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.helpers.*
 import de.Maxr1998.modernpreferences.preferences.choice.SelectionItem
 import de.dertyp7214.rboardthememanager.Application
-import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.openDialog
@@ -24,7 +24,7 @@ import de.dertyp7214.rboardthememanager.core.start
 import de.dertyp7214.rboardthememanager.screens.ReposActivity
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 
-class Settings(private val activity: Activity) : AbstractPreference() {
+class Settings(private val activity: Activity): AbstractPreference() {
     enum class TYPE {
         BOOLEAN,
         STRING,
@@ -34,7 +34,6 @@ class Settings(private val activity: Activity) : AbstractPreference() {
         GROUP,
         SELECT
     }
-
     @Suppress("UNCHECKED_CAST")
     enum class SETTINGS(
         val key: String,
@@ -44,7 +43,7 @@ class Settings(private val activity: Activity) : AbstractPreference() {
         val defaultValue: Any,
         val type: TYPE,
         val items: List<SelectionItem> = listOf(),
-        val onClick: Activity.(Boolean) -> Unit = {}
+        val onClick: (Activity) -> Unit = {}
     ) {
         THEMES_HEADER(
             "themes_header",
@@ -57,35 +56,18 @@ class Settings(private val activity: Activity) : AbstractPreference() {
         SHOW_SYSTEM_THEME(
             "show_system_theme",
             R.string.show_system_theme,
-            R.string.show_system_theme_long,
-            R.drawable.ic_keyboard_theme,
+            -1,
+            R.drawable.ic_themes,
             true,
             TYPE.BOOLEAN
         ),
         SHOW_PREINSTALLED_THEMES(
             "show_preinstalled_themes",
             R.string.show_preinstalled_themes,
-            R.string.show_preinstalled_themes_long,
-            R.drawable.ic_keyboard_theme,
+            -1,
+            R.drawable.ic_themes,
             true,
             TYPE.BOOLEAN
-        ),
-        USE_MAGISK(
-            "useMagisk",
-            R.string.use_magisk,
-            R.string.gboard_magisk,
-            R.drawable.ic_keyboard_theme,
-            false,
-            TYPE.BOOLEAN,
-            listOf(),
-            {
-                Config.useMagisk =
-                    PreferenceManager.getDefaultSharedPreferences(this)
-                        .getBoolean("useMagisk", false)
-                if (Config.useMagisk && !MagiskUtils.getModules()
-                        .any { module -> module.id == MODULE_ID }
-                ) MagiskUtils.installModule(this)
-            }
         ),
         DOWNLOAD(
             "download_header",
@@ -138,12 +120,12 @@ class Settings(private val activity: Activity) : AbstractPreference() {
             "uninstall",
             R.string.uninstall,
             R.string.uninstall_long,
-            R.drawable.ic_trash,
+            -1,
             "",
             TYPE.STRING,
             listOf(),
-            {
-                openDialog(R.string.uninstall_long, R.string.uninstall, false) {
+            { activity ->
+                activity.openDialog(R.string.uninstall_long, R.string.uninstall, false) {
                     MagiskUtils.uninstallModule(MODULE_ID)
                     Handler(Looper.getMainLooper()).postDelayed({
                         "reboot".runAsCommand()
@@ -167,10 +149,6 @@ class Settings(private val activity: Activity) : AbstractPreference() {
             val pref: Preference = when (item.type) {
                 TYPE.BOOLEAN -> builder.switch(item.key) {
                     defaultValue = item.defaultValue as Boolean
-                    onCheckedChange {
-                        item.onClick(activity, it)
-                        true
-                    }
                 }
                 TYPE.INT, TYPE.LONG, TYPE.FLOAT -> builder.pref(item.key) {}
                 TYPE.GROUP -> builder.categoryHeader(item.key) {
@@ -201,7 +179,7 @@ class Settings(private val activity: Activity) : AbstractPreference() {
                 titleRes = item.title
                 summaryRes = item.summary
                 iconRes = item.icon
-                onClick { item.onClick(activity, false); false }
+                onClick { item.onClick(activity); false }
             }
         }
     }

@@ -1,9 +1,13 @@
 package de.dertyp7214.rboardthememanager.core
 
+import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
+import org.xml.sax.InputSource
 import java.io.File
 import java.io.InputStream
+import java.io.StringReader
+import javax.xml.parsers.DocumentBuilderFactory
 import kotlin.text.Charsets.UTF_8
 
 fun File.parseModuleMeta(): ModuleMeta {
@@ -28,4 +32,40 @@ fun File.copyInputStreamToFile(inputStream: InputStream) {
     this.outputStream().use { fileOut ->
         inputStream.copyTo(fileOut)
     }
+}
+
+fun File.readXML(): Map<String, Any> {
+    val output = HashMap<String, Any>()
+
+    val fileName = absolutePath
+    val content = SuFile(fileName).openStream()?.use {
+        it.bufferedReader().readText()
+    }
+
+    val map = try {
+        DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
+            InputSource(StringReader(content))
+        ).getElementsByTagName("map")
+    } catch (e: Exception) {
+        e.printStackTrace()
+        return output
+    }
+
+    for (item in map.item(0).childNodes) {
+        if (item.nodeName != "set" && !item.nodeName.startsWith("#")) {
+            val name = item.attributes?.getNamedItem("name")?.nodeValue
+            val value = item.attributes?.getNamedItem("value")?.nodeValue?.let {
+                when (item.nodeName) {
+                    "long" -> it.toLong()
+                    "boolean" -> it.toBooleanStrict()
+                    "float" -> it.toFloat()
+                    "integer" -> it.toInt()
+                    else -> it
+                }
+            }
+            if (name != null) output[name] = value ?: item.textContent ?: ""
+        }
+    }
+
+    return output
 }

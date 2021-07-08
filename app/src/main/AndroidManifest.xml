@@ -81,6 +81,24 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.pack" />
                 <data android:scheme="content" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.OPENABLE" />
+
+                <data android:host="*" />
+                <data android:mimeType="*/*" />
+                <data android:pathPattern=".*\\.rboard" />
+                <data android:pathPattern=".*\\..*\\.rboard" />
+                <data android:pathPattern=".*\\..*\\..*\\.rboard" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.rboard" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.rboard" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.rboard" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.rboard" />
+                <data android:scheme="content" />
+            </intent-filter>
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 

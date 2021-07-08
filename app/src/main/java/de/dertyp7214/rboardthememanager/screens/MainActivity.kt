@@ -36,13 +36,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
 import com.topjohnwu.superuser.io.SuFile
-import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.MenuAdapter
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.MenuItem
 import de.dertyp7214.rboardthememanager.databinding.ActivityMainBinding
+import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
 import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel

@@ -10,6 +10,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import com.dertyp7214.logs.helpers.Logger
 import com.topjohnwu.superuser.io.SuFile
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
@@ -25,7 +26,6 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.SearchBar
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
-import de.dertyp7214.rboardthememanager.screens.ShareFlags
 import de.dertyp7214.rboardthememanager.utils.FileUtils
 import org.json.JSONObject
 import java.io.File
@@ -33,10 +33,9 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class Flags(val activity: Activity) : AbstractPreference() {
-    enum class FILES(val filePath: String) {
-        @SuppressLint("SdCardPath")
-        FLAGS("/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/flag_value.xml"),
-        GBOARD_PREFERENCES(Config.GBOARD_PREFS_PATH),
+    enum class FILES(val fileName: String) {
+        FLAGS("flag_value.xml"),
+        GBOARD_PREFERENCES("${Config.GBOARD_PACKAGE_NAME}_preferences.xml"),
         NONE("")
     }
 
@@ -91,6 +90,27 @@ class Flags(val activity: Activity) : AbstractPreference() {
             TYPE.GROUP,
             FILES.NONE
         );
+
+        @Suppress("UNCHECKED_CAST")
+        fun <T> getValue(defaultValue: T? = null): T? {
+            fun <E> getVal(defaultValue: E? = null, valueMap: Map<Any?, Any?>?): E? {
+                return if (valueMap != null) valueMap.filter {
+                    if (it.isNumber()) it.equalsNumber(values[key])
+                    else it.value == values[key]
+                }.entries.firstOrNull()?.key as? E ?: defaultValue else values[key] as? E
+                    ?: defaultValue
+            }
+            return if (linkedKeys.isEmpty()) getVal(defaultValue, valueMap) else {
+                !linkedKeys.map { key ->
+                    values().find { flag -> flag.key == key }?.let {
+                        it.getValue(it.defaultValue)
+                    } ?: false
+                }.contains(false) as? T ?: defaultValue
+            }
+        }
+
+        @SuppressLint("SdCardPath")
+        fun <T> setValue(v: T) = setValue(if (valueMap != null) valueMap[v] else v, key, file)
     }
 
     data class FlagItem(
@@ -121,27 +141,23 @@ class Flags(val activity: Activity) : AbstractPreference() {
         )
 
         @Suppress("UNCHECKED_CAST")
-        fun <T> getValue(
-            context: Context,
-            defaultValue: T? = null,
-            values: Map<String, Any> = Companion.values
-        ): T? {
+        fun <T> getValue(context: Context, defaultValue: T? = null): T? {
             fun <E> getVal(defaultValue: E? = null, valueMap: Map<Any?, Any?>?): E? {
                 return if (valueMap != null) valueMap.filter {
                     if (it.isNumber()) it.equalsNumber(values[key])
                     else it.value == values[key]
-                }.entries.firstOrNull()?.key as? E ?: defaultValue
-                else values[key] as? E ?: defaultValue
+                }.entries.firstOrNull()?.key as? E ?: defaultValue else values[key] as? E
+                    ?: defaultValue
             }
             return if (linkedKeys.isEmpty()) getVal(defaultValue, valueMap) else {
-                val flags = getFlagItems(context)
                 !linkedKeys.map { key ->
-                    flags.find { flag -> flag.key == key }?.let {
-                        it.getValue(context, it.defaultValue, values)
+                    getFlagItems(context).find { flag -> flag.key == key }?.let {
+                        it.getValue(context, it.defaultValue)
                     } ?: false
                 }.contains(false) as? T ?: defaultValue
             }
         }
+
 
         @SuppressLint("SdCardPath")
         fun <T> setValue(v: T) =
@@ -154,14 +170,12 @@ class Flags(val activity: Activity) : AbstractPreference() {
         val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
         val preferences = hashMapOf<String, Preference>()
         val allFlags = ArrayList(getFlagItems(activity, true))
-        val values = values
         allFlags.addAll(FLAGS.values().map { FlagItem(it) })
         allFlags.forEach { item ->
             prefs.edit { remove(item.key) }
             val pref: Preference = when (item.type) {
                 TYPE.BOOLEAN -> SwitchPreference(item.key).apply {
-                    defaultValue =
-                        item.getValue(activity, item.defaultValue, values) as? Boolean ?: false
+                    defaultValue = item.getValue(activity, item.defaultValue) as? Boolean ?: false
                     onCheckedChange {
                         if (!item.setValue(it)) Toast.makeText(
                             activity,
@@ -196,66 +210,35 @@ class Flags(val activity: Activity) : AbstractPreference() {
     }
 
     class AllFlags(
-        private val activity: Activity,
-        private val requestReload: () -> Unit
-    ) : AbstractPreference() {
+            private val activity: Activity,
+            private val requestReload: () -> Unit
+        ) : AbstractPreference() {
 
-        private var filter: String = ""
-        private var onlyDisabled: Boolean = false
+            private var filter: String = ""
 
-        private val searchBar = SearchBar(activity).apply {
-            setOnSearchListener {
-                filter = it
-                requestReload()
-            }
-            setOnCloseListener {
-                filter = ""
-                requestReload()
-            }
-            setMenu(R.menu.all_flags) {
-                when (it.itemId) {
-                    R.id.only_disabled -> {
-                        it.isChecked = !it.isChecked
-                        onlyDisabled = it.isChecked
-                        requestReload()
-                    }
-                    R.id.share_flags -> ShareFlags::class.java.start(activity)
+            private val searchBar = SearchBar(activity).apply {
+                setOnSearchListener {
+                    filter = it
+                    requestReload()
                 }
-                true
+                setOnCloseListener {
+                    filter = ""
+                    requestReload()
+                }
             }
-        }
 
-        override fun getExtraView(): View = searchBar
+            override fun getExtraView(): View = searchBar
 
-        override fun preferences(builder: PreferenceScreen.Builder) {
-            val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
-            getCurrentXmlValues(FILES.FLAGS.filePath, true).filter {
-                (filter.isEmpty() || it.key.contains(
-                    filter,
-                    true
-                )) && onlyDisabled.let { b -> if (b) it.value is Boolean && it.value == false else true }
-            }.forEach { entry ->
-                prefs.edit { remove(entry.key) }
-                if (entry.value is Boolean) builder.switch(entry.key) {
-                    title = entry.key.split("_").joinToString(" ") {
-                        it.replaceFirstChar { char ->
-                            if (char.isLowerCase()) char.titlecase(
-                                Locale.getDefault()
-                            ) else char.toString()
-                        }
-                    }
-                    summary = entry.key
-                    defaultValue = entry.value as Boolean
-                    onCheckedChange {
-                        if (!setValue(it, entry.key, FILES.FLAGS)) Toast.makeText(
-                            activity,
-                            R.string.error,
-                            Toast.LENGTH_SHORT
-                        ).show()
+            override fun preferences(builder: PreferenceScreen.Builder) {
+                val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
+                getCurrentXmlValues(FILES.FLAGS.fileName).filter {
+                    filter.isEmpty() || it.key.contains(
+                        filter,
                         true
-                    }
-                } else {
-                    builder.pref(entry.key) {
+                    )
+                }.forEach { entry ->
+                    prefs.edit { remove(entry.key) }
+                    if (entry.value is Boolean) builder.switch(entry.key) {
                         title = entry.key.split("_").joinToString(" ") {
                             it.replaceFirstChar { char ->
                                 if (char.isLowerCase()) char.titlecase(
@@ -263,16 +246,32 @@ class Flags(val activity: Activity) : AbstractPreference() {
                                 ) else char.toString()
                             }
                         }
-                        summary = entry.value.toString()
+                        summary = entry.key
+                        defaultValue = entry.value as Boolean
+                        onCheckedChange {
+                            if (!setValue(it, entry.key, FILES.FLAGS)) Toast.makeText(
+                                activity,
+                                R.string.error,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            true
+                        }
+                    } else {
+                        builder.pref(entry.key) {
+                            title = entry.key.split("_").joinToString(" ") {
+                                it.replaceFirstChar { char ->
+                                    if (char.isLowerCase()) char.titlecase(
+                                        Locale.getDefault()
+                                    ) else char.toString()
+                                }
+                            }
+                            summary = entry.value.toString()
+                        }
                     }
                 }
             }
         }
-    }
-
     companion object {
-        private var changes: Boolean = false
-
         private val flags = arrayListOf<FlagItem>()
         private var flagsString: EnumMap<FILES, String> = EnumMap(FILES::class.java)
 
@@ -344,29 +343,19 @@ class Flags(val activity: Activity) : AbstractPreference() {
 
         val values: Map<String, Any>
             get() {
-                return getCurrentXmlValues(FILES.GBOARD_PREFERENCES.filePath) +
-                        getCurrentXmlValues(FILES.FLAGS.filePath)
-            }
-
-        val flagValues: Map<String, Any>
-            get() {
-                return getCurrentXmlValues(FILES.FLAGS.filePath)
+                return getCurrentXmlValues(FILES.GBOARD_PREFERENCES.fileName) +
+                        getCurrentXmlValues(FILES.FLAGS.fileName)
             }
 
         @SuppressLint("SdCardPath")
-        private fun getCurrentXmlValues(file: String, cached: Boolean = false): Map<String, Any> {
-            return SuFile(file).readXML(
-                if (cached) FILES.values().find { it.filePath == file }?.let { flagsString[it] }
-                else null
-            )
-        }
+        private fun getCurrentXmlValues(file: String) =
+            SuFile("/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/$file").readXML()
 
         @SuppressLint("SdCardPath")
         fun applyChanges(): Boolean {
-            if (!changes) return false
-            changes = false
             FILES.values().filter { it != FILES.NONE }.forEach { file ->
-                val fileName = file.filePath
+                val fileName =
+                    "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
                 flagsString[file]?.let {
                     SuFile(fileName).writeFile(it.trim())
                 }
@@ -377,19 +366,63 @@ class Flags(val activity: Activity) : AbstractPreference() {
 
         @SuppressLint("SdCardPath")
         fun setUpFlags() {
-            changes = false
             FILES.values().filter { it != FILES.NONE }.forEach { file ->
-                val fileName = file.filePath
+                val fileName =
+                    "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
                 flagsString[file] = SuFile(fileName).openStream()?.use {
                     it.bufferedReader().readText()
-                } ?: "<map></map>"
+                }
             }
         }
 
         fun <T> setValue(value: T, key: String, file: FILES): Boolean {
             if (file == FILES.NONE) return true
-            changes = true
-            flagsString[file] = flagsString[file]?.setXmlValue(value, key)
+            flagsString[file] = flagsString[file]?.let { fileText ->
+                val type = when (value) {
+                    is Boolean -> "boolean"
+                    is Int -> "integer"
+                    is Long -> "long"
+                    is Float -> "float"
+                    else -> "string"
+                }
+                Logger.log(
+                    Logger.Companion.Type.DEBUG,
+                    "CHANGE FLAG",
+                    "value: $value key: $key type: $type"
+                )
+                if (type != "string") {
+                    when {
+                        "<$type name=\"$key\"" in fileText -> fileText.replace(
+                            """<$type name="$key" value=".*" />""".toRegex(),
+                            """<$type name="$key" value="$value" />"""
+                        )
+                        Regex("<map[ |]/>") in fileText -> fileText.replace(
+                            Regex("<map[ |]/>"),
+                            """<map><$type name="$key" value="$value" /></map>"""
+                        )
+                        else -> fileText.replace(
+                            "<map>",
+                            """<map><$type name="$key" value="$value" />"""
+                        )
+                    }
+                } else {
+                    when {
+                        "<$type name\"$key\"" in fileText -> fileText.replace(
+                            """<$type name="$key">.*</$type>""".toRegex(),
+                            """<$type name="$key">$value</$type>"""
+                        )
+                        Regex("<map[ |]>") in fileText -> fileText.replace(
+                            Regex("<map[ |]>"),
+                            """<map><$type name="$key">$value</$type></map>"""
+                        )
+                        else -> fileText.replace(
+                            "<map>",
+                            """<map><$type name="$key">$value</$type>"""
+                        )
+                    }
+                }
+            }
+
             return true
         }
     }
