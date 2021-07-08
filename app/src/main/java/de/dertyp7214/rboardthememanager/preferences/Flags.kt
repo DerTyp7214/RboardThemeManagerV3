@@ -230,7 +230,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
 
         override fun preferences(builder: PreferenceScreen.Builder) {
             val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
-            getCurrentXmlValues(FILES.FLAGS.fileName).filter {
+            getCurrentXmlValues(FILES.FLAGS.fileName, true).filter {
                 filter.isEmpty() || it.key.contains(
                     filter,
                     true
@@ -348,8 +348,12 @@ class Flags(val activity: Activity) : AbstractPreference() {
             }
 
         @SuppressLint("SdCardPath")
-        private fun getCurrentXmlValues(file: String) =
-            SuFile("/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/$file").readXML()
+        private fun getCurrentXmlValues(file: String, cached: Boolean = false): Map<String, Any> {
+            return SuFile("/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/$file").readXML(
+                if (cached) FILES.values().find { it.fileName == file }?.let { flagsString[it] }
+                else null
+            )
+        }
 
         @SuppressLint("SdCardPath")
         fun applyChanges(): Boolean {
