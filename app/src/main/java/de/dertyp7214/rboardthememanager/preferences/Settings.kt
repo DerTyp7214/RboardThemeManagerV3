@@ -56,16 +56,16 @@ class Settings(private val activity: Activity): AbstractPreference() {
         SHOW_SYSTEM_THEME(
             "show_system_theme",
             R.string.show_system_theme,
-            -1,
-            R.drawable.ic_themes,
+            R.string.show_system_theme_long,
+            R.drawable.ic_keyboard_theme,
             true,
             TYPE.BOOLEAN
         ),
         SHOW_PREINSTALLED_THEMES(
             "show_preinstalled_themes",
             R.string.show_preinstalled_themes,
-            -1,
-            R.drawable.ic_themes,
+            R.string.show_preinstalled_themes_long,
+            R.drawable.ic_keyboard_theme,
             true,
             TYPE.BOOLEAN
         ),
@@ -120,7 +120,7 @@ class Settings(private val activity: Activity): AbstractPreference() {
             "uninstall",
             R.string.uninstall,
             R.string.uninstall_long,
-            -1,
+            R.drawable.ic_trash,
             "",
             TYPE.STRING,
             listOf(),
