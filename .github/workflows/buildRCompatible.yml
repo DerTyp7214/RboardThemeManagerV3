@@ -56,6 +56,8 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_AKOS }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          message: "commit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})"
           document: app/build/outputs/apk/release/app-release.apk
 
       - name: Upload Assets
