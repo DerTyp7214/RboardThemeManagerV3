@@ -18,11 +18,14 @@ import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.start
+import de.dertyp7214.rboardthememanager.screens.ReadMoreReadFast
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 
-class Preferences(private val activity: Activity, intent: Intent, onRequestReload: () -> Unit) : AbstractPreference() {
+class Preferences(private val activity: Activity, intent: Intent, onRequestReload: () -> Unit) :
+    AbstractPreference() {
 
     private val type by lazy { intent.getStringExtra("type") }
 
@@ -125,9 +128,15 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
                     Handler(Looper.getMainLooper()).postDelayed({
                         count--
                     }, 2000)
-                    if (count == 8)
+                    if (count == 8) {
                         Toast.makeText(Application.context, R.string.easter_egg, Toast.LENGTH_SHORT)
                             .show()
+                        Application.context?.let {
+                            ReadMoreReadFast::class.java.start(it) {
+                                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                            }
+                        }
+                    }
                     false
                 }
             }

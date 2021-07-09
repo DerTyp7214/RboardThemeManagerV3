@@ -39,6 +39,9 @@ class SplashScreen : AppCompatActivity() {
     private val gboardPlayStoreUrl by lazy {
         "https://play.google.com/store/apps/details?id=${Config.GBOARD_PACKAGE_NAME}"
     }
+    private val flagsUrl by lazy {
+        "https://raw.githubusercontent.com/GboardThemes/Packs/master/flags.json"
+    }
 
     private var checkedForUpdate = false
     private var rootAccess = false
@@ -88,32 +91,25 @@ class SplashScreen : AppCompatActivity() {
                 delete()
                 -1
             }
-            doAsync(URL("https://raw.githubusercontent.com/GboardThemes/Packs/master/flags.json")::getTextFromUrl) {
-                val rawJson = SafeJSON(
-                    JSONObject(resources.openRawResource(
-                        FileUtils.getResourceId(
-                            this@SplashScreen,
-                            "flags",
-                            "raw",
-                            packageName
-                        )
-                    ).bufferedReader().use { reader -> reader.readText() })
+            doAsync(URL(flagsUrl)::getTextFromUrl) {
+                val flagFiles = listOf(
+                    SafeJSON(
+                        JSONObject(resources.openRawResource(
+                            FileUtils.getResourceId(
+                                this@SplashScreen,
+                                "flags",
+                                "raw",
+                                packageName
+                            )
+                        ).bufferedReader().use { reader -> reader.readText() })
+                    ),
+                    SafeJSON(JSONObject(it))
                 )
-                val rawTime = rawJson.getLong("time")
-                if (it.isBlank()) {
-                    if (!exists() || rawTime > timeStamp)
-                        writeText(rawJson.toString())
-                } else {
-                    val json = SafeJSON(JSONObject(it))
-                    val jsonTime = json.getLong("time")
-                    if (!exists()) {
-                        if (jsonTime < rawTime)
-                            writeText(rawJson.toString())
-                        else writeText(json.toString())
-                    } else if (timeStamp < rawTime && jsonTime < rawTime)
-                        writeText(rawJson.toString())
-                    else if (timeStamp < jsonTime) writeText(json.toString())
-                }
+                val latestJson =
+                    flagFiles.reduce { acc, safeJSON -> if (acc.getLong("time") > safeJSON.getLong("time")) acc else safeJSON }
+                val time = latestJson.getLong("time")
+                if (!exists() || time > timeStamp)
+                    writeText(latestJson.toString())
             }
         }
 
