@@ -11,9 +11,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.3
 
-      - name: Log
-        run: echo ${{ toJson(github.event) }}
-
       - name: Setup JDK
         uses: actions/setup-java@v1
         with:
@@ -64,6 +61,8 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
+          format: markdown
+          message: "commit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})"
           document: app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload Assets
