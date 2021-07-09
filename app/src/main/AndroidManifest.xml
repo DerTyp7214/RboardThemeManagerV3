@@ -24,6 +24,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RboardThemeManagerV3"
         tools:ignore="AllowBackup">
+        <activity
+            android:name=".screens.ReadMoreReadFast"
+            android:exported="true" />
+
         <receiver
             android:name=".widgets.SwitchKeyboardWidget"
             android:exported="true">

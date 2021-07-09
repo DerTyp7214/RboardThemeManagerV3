@@ -53,4 +53,4 @@ class ReadMoreReadFast : AppCompatActivity() {
             }
         }
     }
-}
+} 

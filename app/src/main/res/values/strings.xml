@@ -27,6 +27,7 @@
     <string name="download_complete">Download complete</string>
     <string name="download_error">Error while downloading</string>
     <string name="reboot">Reboot</string>
+    <string name="reboot_now">Reboot now?</string>
     <string name="reboot_to_continue">You have to reboot for the module to work</string>
     <string name="apply_theme">Apply Theme</string>
     <string name="apply_automatic_theme">Apply Automatic Theme</string>
@@ -108,7 +109,7 @@
     <string name="app_widget_description">Keyboard switch Widget</string>
     <string name="theme_pack">This is a Theme Pack</string>
     <string name="description">Description</string>
-    <string name="easter_egg">What did you think would happen?</string>
+    <string name="easter_egg">System goes speedy mode now</string>
     <string name="filter_settings">Filter settings</string>
     <string name="settings">Settings</string>
     <string name="select_all">Select all</string>
@@ -124,4 +125,5 @@
     <string name="flags_loaded">%o Flags loaded</string>
     <string name="show_preinstalled_themes_long">Show preinstalled themes in themes section</string>
     <string name="show_system_theme_long">Show system themes in themes section</string>
+    <string name="speedup_process">Speedup process</string>
 </resources> 
