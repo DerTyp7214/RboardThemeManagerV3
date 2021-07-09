@@ -215,7 +215,7 @@ AppWidgetManager.getInstance(this).let { appWidgetManager ->
                     }
                     else -> checkForUpdate { update ->
                         checkedForUpdate = true
-                        checkKey {
+                        validApp {
                             if (it) startActivity(
                                 Intent(this, MainActivity::class.java).putExtra(
                                     "update",
