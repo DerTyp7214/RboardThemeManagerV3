@@ -11,6 +11,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.3
 
+      - name: Log
+        run: echo ${{ github.event }}
+
       - name: Setup JDK
         uses: actions/setup-java@v1
         with:
