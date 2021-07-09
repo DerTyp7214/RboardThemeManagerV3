@@ -85,7 +85,7 @@ class SplashScreen : AppCompatActivity() {
             val timeStamp = try {
                 let {
                     if (!it.exists()) -1
-                    else SafeJSON(JSONObject(it.readText())).getLong("time", -1)
+                    else JSONObject().safeParse(it.readText()).getLong("time", -1)
                 }
             } catch (e: Exception) {
                 delete()
@@ -93,17 +93,15 @@ class SplashScreen : AppCompatActivity() {
             }
             doAsync(URL(flagsUrl)::getTextFromUrl) {
                 val flagFiles = listOf(
-                    SafeJSON(
-                        JSONObject(resources.openRawResource(
-                            FileUtils.getResourceId(
-                                this@SplashScreen,
-                                "flags",
-                                "raw",
-                                packageName
-                            )
-                        ).bufferedReader().use { reader -> reader.readText() })
-                    ),
-                    SafeJSON(JSONObject(it))
+                    JSONObject().safeParse(resources.openRawResource(
+                        FileUtils.getResourceId(
+                            this@SplashScreen,
+                            "flags",
+                            "raw",
+                            packageName
+                        )
+                    ).bufferedReader().use { reader -> reader.readText() }),
+                    JSONObject().safeParse(it)
                 )
                 val latestJson =
                     flagFiles.reduce { acc, safeJSON -> if (acc.getLong("time") > safeJSON.getLong("time")) acc else safeJSON }
@@ -218,10 +216,17 @@ class SplashScreen : AppCompatActivity() {
                     ) {
                         finishAndRemoveTask()
                     }
-                    else -> checkForUpdate {
+                    else -> checkForUpdate { update ->
                         checkedForUpdate = true
-                        startActivity(Intent(this, MainActivity::class.java).putExtra("update", it))
-                        finish()
+                        checkKey {
+                            if (it) startActivity(
+                                Intent(this, MainActivity::class.java).putExtra(
+                                    "update",
+                                    update
+                                )
+                            )
+                            finish()
+                        }
                     }
                 }
             }
@@ -236,6 +241,19 @@ class SplashScreen : AppCompatActivity() {
                 callback(versionCode > BuildConfig.VERSION_CODE)
             } catch (e: Exception) {
                 callback(false)
+            }
+        }
+    }
+
+    private fun checkKey(callback: (valid: Boolean) -> Unit) {
+        PreferenceManager.getDefaultSharedPreferences(this).apply {
+            var valid = getBoolean("verified", false)
+            if (valid) callback(valid)
+            else openInputDialog(R.string.key) { dialogInterface, text ->
+                dialogInterface.dismiss()
+                valid = text == "pls Don't share :)"
+                callback(valid)
+                edit { putBoolean("verified", true) }
             }
         }
     }

@@ -88,7 +88,7 @@ fun Activity.openInputDialog(
     @StringRes hint: Int,
     negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },
     positive: (dialogInterface: DialogInterface, text: String) -> Unit
-) = openDialog(R.layout.loading_dialog, false) { dialog ->
+) = openDialog(R.layout.input_dialog, false) { dialog ->
     val input = findViewById<EditText>(R.id.editText)
     input.setHint(hint)
 
