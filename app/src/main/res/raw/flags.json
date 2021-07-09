@@ -1,5 +1,5 @@
 {
-  "time": "1625245712",
+  "time": "1625787536200",
   "flags": [
     {
       "key": "general",
@@ -45,7 +45,7 @@
       "key": "deprecate_search",
       "title": "deprecate_search",
       "summary": "",
-      "icon": "ic_google_logo",
+      "icon": "ic_search",
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS",
@@ -69,7 +69,7 @@
       "key": "enable_sharing",
       "title": "enable_sharing",
       "summary": "",
-      "icon": "ic_baseline_share_24",
+      "icon": "ic_share",
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS"
@@ -122,7 +122,7 @@
       "key": "enable_key_border",
       "title": "enable_key_border",
       "summary": "",
-      "icon": "ic_key_boarder",
+      "icon": "ic_key_border",
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "GBOARD_PREFERENCES"
@@ -217,7 +217,7 @@
       "key": "pill_shaped_key",
       "title": "pill_shaped_key",
       "summary": "",
-      "icon": "",
+      "icon": "ic_pill",
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS"
@@ -226,7 +226,7 @@
       "key": "enable_clipboard_screenshot_paste",
       "title": "enable_clipboard_screenshot_paste",
       "summary": "",
-      "icon": "",
+      "icon": "ic_screenshot",
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS"
@@ -235,7 +235,7 @@
       "key": "enable_lens",
       "title": "enable_lens",
       "summary": "",
-      "icon": "",
+      "icon": "ic_lens",
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS"
@@ -244,7 +244,7 @@
       "key": "enable_auto_float_keyboard_in_multi_window",
       "title": "enable_auto_float_keyboard_in_multi_window",
       "summary": "",
-      "icon": "",
+      "icon": "ic_float",
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS"
