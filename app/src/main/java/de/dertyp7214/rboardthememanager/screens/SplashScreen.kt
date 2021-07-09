@@ -218,7 +218,7 @@ class SplashScreen : AppCompatActivity() {
                     }
                     else -> checkForUpdate { update ->
                         checkedForUpdate = true
-                        checkKey {
+                        validApp {
                             if (it) startActivity(
                                 Intent(this, MainActivity::class.java).putExtra(
                                     "update",
@@ -245,13 +245,12 @@ class SplashScreen : AppCompatActivity() {
         }
     }
 
-    private fun checkKey(callback: (valid: Boolean) -> Unit) {
+    private fun validApp(callback: (valid: Boolean) -> Unit) {
         PreferenceManager.getDefaultSharedPreferences(this).apply {
             var valid = getBoolean("verified", false)
             if (valid) callback(valid)
-            else openInputDialog(R.string.key) { dialogInterface, text ->
-                dialogInterface.dismiss()
-                valid = text == "pls Don't share :)"
+            else openDialog(R.string.unreleased, R.string.notice) {
+                valid = true
                 callback(valid)
                 edit { putBoolean("verified", true) }
             }
