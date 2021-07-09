@@ -82,7 +82,7 @@ AppWidgetManager.getInstance(this).let { appWidgetManager ->
             val timeStamp = try {
                 let {
                     if (!it.exists()) -1
-                    else SafeJSON(JSONObject(it.readText())).getLong("time", -1)
+                    else JSONObject().safeParse(it.readText()).getLong("time", -1)
                 }
             } catch (e: Exception) {
                 delete()
@@ -90,17 +90,15 @@ AppWidgetManager.getInstance(this).let { appWidgetManager ->
             }
             doAsync(URL(flagsUrl)::getTextFromUrl) {
                 val flagFiles = listOf(
-                    SafeJSON(
-                        JSONObject(resources.openRawResource(
-                            FileUtils.getResourceId(
-                                this@SplashScreen,
-                                "flags",
-                                "raw",
-                                packageName
-                            )
-                        ).bufferedReader().use { reader -> reader.readText() })
-                    ),
-                    SafeJSON(JSONObject(it))
+                    JSONObject().safeParse(resources.openRawResource(
+                        FileUtils.getResourceId(
+                            this@SplashScreen,
+                            "flags",
+                            "raw",
+                            packageName
+                        )
+                    ).bufferedReader().use { reader -> reader.readText() }),
+                    JSONObject().safeParse(it)
                 )
                 val latestJson =
                     flagFiles.reduce { acc, safeJSON -> if (acc.getLong("time") > safeJSON.getLong("time")) acc else safeJSON }
@@ -215,12 +213,31 @@ AppWidgetManager.getInstance(this).let { appWidgetManager ->
                     ) {
                         finishAndRemoveTask()
                     }
-                    else -> checkForUpdate {
+                    else -> checkForUpdate { update ->
                         checkedForUpdate = true
-                        startActivity(Intent(this, MainActivity::class.java).putExtra("update", it))
-                        finish()
+                        checkKey {
+                            if (it) startActivity(
+                                Intent(this, MainActivity::class.java).putExtra(
+                                    "update",
+                                    update
+                                )
+                            )
+                            finish()
+                        }
                     }
                 }
+            }
+        }
+    }
+    
+    private fun validApp(callback: (valid: Boolean) -> Unit) {
+        PreferenceManager.getDefaultSharedPreferences(this).apply {
+            var valid = getBoolean("verified", false)
+            if (valid) callback(valid)
+            else openDialog(R.string.unreleased, R.string.notice) {
+                valid = true
+                callback(valid)
+                edit { putBoolean("verified", true) }
             }
         }
     }

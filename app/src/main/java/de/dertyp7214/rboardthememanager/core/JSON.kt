@@ -63,11 +63,11 @@ class SafeJSON(private val json: JSONObject) {
     }
 }
 
-fun JSONObject.safeParse(string: String): JSONObject {
+fun JSONObject.safeParse(string: String): SafeJSON {
     return try {
-        JSONObject(string)
+        SafeJSON(JSONObject(string))
     } catch (e: Exception) {
-        this
+        SafeJSON(this)
     }
 }
 
