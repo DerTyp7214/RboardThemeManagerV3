@@ -35,7 +35,7 @@ jobs:
           content="${content//$'\r'/'%0D'}"
           echo "::set-output name=json::$content"
 
-      - run: echo "${{ steps.metadataJson.outputs.json }}"
+      - run: echo "${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }}"
 
       - name: List files
         run: ls app/build/outputs/apk/debug
