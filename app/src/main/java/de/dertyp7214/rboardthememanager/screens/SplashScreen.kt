@@ -2,18 +2,20 @@ package de.dertyp7214.rboardthememanager.screens
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.ViewTreeObserver
-import com.google.firebase.messaging.FirebaseMessaging
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.topjohnwu.superuser.BusyBoxInstaller
 import com.topjohnwu.superuser.Shell
@@ -23,15 +25,13 @@ import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.OutputMetadata
+import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
+import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
 import org.json.JSONObject
 import java.io.File
 import java.net.URL
-import android.appwidget.AppWidgetManager
-import android.content.ComponentName
-import de.dertyp7214.rboardthememanager.preferences.Flags
-import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
 
 class SplashScreen : AppCompatActivity() {
 
@@ -202,7 +202,7 @@ val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
 
                 createNotificationChannels()
                 FirebaseMessaging.getInstance()
-                    .subscribeToTopic("update-v3-${BuildConfig.BUILD_TYPE.lowercase()}")
+                    .subscribeToTopic("update-v3-r-${BuildConfig.BUILD_TYPE.lowercase()}")
 
                 when {
                     !gboardInstalled -> openDialog(
