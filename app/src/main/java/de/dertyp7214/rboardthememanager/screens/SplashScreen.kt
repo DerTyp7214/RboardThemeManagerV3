@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.ViewTreeObserver
+import com.google.firebase.messaging.FirebaseMessaging
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -108,11 +109,14 @@ AppWidgetManager.getInstance(this).let { appWidgetManager ->
             }
         }
 
+val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
+        val initialized = preferenceManager.getBoolean("initialized", false)
+
         val scheme = intent.scheme
         val data = intent.data
 
         when {
-            scheme != "content" && data != null -> {
+            initialized && scheme != "content" && data != null -> {
                 when (data.host?.split(".")?.first()) {
                     "repos" -> {
                         data.queryParameterNames.forEach {
@@ -132,7 +136,7 @@ AppWidgetManager.getInstance(this).let { appWidgetManager ->
                 }
                 finishAndRemoveTask()
             }
-            data?.toString()?.endsWith(".rboard") == true -> {
+            initialized && data?.toString()?.endsWith(".rboard") == true -> {
                 doAsync({
                     File(cacheDir, "flags.rboard").apply {
                         delete()
@@ -152,7 +156,7 @@ AppWidgetManager.getInstance(this).let { appWidgetManager ->
                     finishAndRemoveTask()
                 }
             }
-            data != null -> {
+            initialized && data != null -> {
                 val resultLauncher =
                     registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                         finishAndRemoveTask()
@@ -197,6 +201,8 @@ AppWidgetManager.getInstance(this).let { appWidgetManager ->
                 gboardInstalled = isPackageInstalled(Config.GBOARD_PACKAGE_NAME, packageManager)
 
                 createNotificationChannels()
+                FirebaseMessaging.getInstance()
+                    .subscribeToTopic("update-v3-${BuildConfig.BUILD_TYPE.lowercase()}")
 
                 when {
                     !gboardInstalled -> openDialog(
@@ -216,12 +222,10 @@ AppWidgetManager.getInstance(this).let { appWidgetManager ->
                     else -> checkForUpdate { update ->
                         checkedForUpdate = true
                         validApp {
-                            if (it) startActivity(
-                                Intent(this, MainActivity::class.java).putExtra(
-                                    "update",
-                                    update
-                                )
-                            )
+                            preferenceManager.edit { putBoolean("initialized", true) }
+                            if (it) MainActivity::class.java.start(this) {
+                                putExtra("update", update)
+                            }
                             finish()
                         }
                     }
@@ -234,7 +238,11 @@ AppWidgetManager.getInstance(this).let { appWidgetManager ->
         PreferenceManager.getDefaultSharedPreferences(this).apply {
             var valid = getBoolean("verified", false)
             if (valid) callback(valid)
-            else openDialog(R.string.unreleased, R.string.notice) {
+            else openDialog(R.string.unreleased, R.string.notice, false, {
+                it.dismiss()
+                callback(valid)
+            }) {
+                it.dismiss()
                 valid = true
                 callback(valid)
                 edit { putBoolean("verified", true) }

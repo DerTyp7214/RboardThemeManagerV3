@@ -90,27 +90,6 @@ class Flags(val activity: Activity) : AbstractPreference() {
             TYPE.GROUP,
             FILES.NONE
         );
-
-        @Suppress("UNCHECKED_CAST")
-        fun <T> getValue(defaultValue: T? = null): T? {
-            fun <E> getVal(defaultValue: E? = null, valueMap: Map<Any?, Any?>?): E? {
-                return if (valueMap != null) valueMap.filter {
-                    if (it.isNumber()) it.equalsNumber(values[key])
-                    else it.value == values[key]
-                }.entries.firstOrNull()?.key as? E ?: defaultValue else values[key] as? E
-                    ?: defaultValue
-            }
-            return if (linkedKeys.isEmpty()) getVal(defaultValue, valueMap) else {
-                !linkedKeys.map { key ->
-                    values().find { flag -> flag.key == key }?.let {
-                        it.getValue(it.defaultValue)
-                    } ?: false
-                }.contains(false) as? T ?: defaultValue
-            }
-        }
-
-        @SuppressLint("SdCardPath")
-        fun <T> setValue(v: T) = setValue(if (valueMap != null) valueMap[v] else v, key, file)
     }
 
     data class FlagItem(
@@ -141,18 +120,23 @@ class Flags(val activity: Activity) : AbstractPreference() {
         )
 
         @Suppress("UNCHECKED_CAST")
-        fun <T> getValue(context: Context, defaultValue: T? = null): T? {
+        fun <T> getValue(
+            context: Context,
+            defaultValue: T? = null,
+            values: Map<String, Any> = Companion.values
+        ): T? {
             fun <E> getVal(defaultValue: E? = null, valueMap: Map<Any?, Any?>?): E? {
                 return if (valueMap != null) valueMap.filter {
                     if (it.isNumber()) it.equalsNumber(values[key])
                     else it.value == values[key]
-                }.entries.firstOrNull()?.key as? E ?: defaultValue else values[key] as? E
-                    ?: defaultValue
+                }.entries.firstOrNull()?.key as? E ?: defaultValue
+                else values[key] as? E ?: defaultValue
             }
             return if (linkedKeys.isEmpty()) getVal(defaultValue, valueMap) else {
+            val flags = getFlagItems(context)
                 !linkedKeys.map { key ->
-                    getFlagItems(context).find { flag -> flag.key == key }?.let {
-                        it.getValue(context, it.defaultValue)
+                    flags.find { flag -> flag.key == key }?.let {
+                        it.getValue(context, it.defaultValue, values)
                     } ?: false
                 }.contains(false) as? T ?: defaultValue
             }
@@ -170,12 +154,13 @@ class Flags(val activity: Activity) : AbstractPreference() {
         val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
         val preferences = hashMapOf<String, Preference>()
         val allFlags = ArrayList(getFlagItems(activity, true))
+        val values = values
         allFlags.addAll(FLAGS.values().map { FlagItem(it) })
         allFlags.forEach { item ->
             prefs.edit { remove(item.key) }
             val pref: Preference = when (item.type) {
                 TYPE.BOOLEAN -> SwitchPreference(item.key).apply {
-                    defaultValue = item.getValue(activity, item.defaultValue) as? Boolean ?: false
+                    defaultValue = item.getValue(activity, item.defaultValue, values) as? Boolean ?: false
                     onCheckedChange {
                         if (!item.setValue(it)) Toast.makeText(
                             activity,
