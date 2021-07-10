@@ -467,8 +467,9 @@ class MainActivity : AppCompatActivity() {
             }) {
                 "reboot".runAsCommand()
             }
-        } else if (intent.extras?.getBoolean("update") == true)
+        } else if (intent.extras?.getBoolean("update") == true) {
             openDialog(R.string.update_ready, R.string.update) { update() }
+        }
     }
 
     private fun update() {

@@ -26,6 +26,17 @@ jobs:
           configuration-cache-enabled: true
           arguments: assembleDebug
 
+      - name: Get JSON
+        id: metadataJson
+        run: |
+          content=`cat app/build/outputs/apk/debug/output-metadata.json`
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          echo "::set-output name=json::$content"
+
+      - run: echo "${{ steps.metadataJson.outputs.json }}"
+
       - name: List files
         run: ls app/build/outputs/apk/debug
 

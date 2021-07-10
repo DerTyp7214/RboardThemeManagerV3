@@ -131,4 +131,5 @@
     <string name="key">Key</string>
     <string name="unreleased">This app is unreleased, some features may not work. Please dont report any errors to the main group.</string>
     <string name="notice">Notice</string>
+    <string name="flags_applied">Flags applied</string>
 </resources>

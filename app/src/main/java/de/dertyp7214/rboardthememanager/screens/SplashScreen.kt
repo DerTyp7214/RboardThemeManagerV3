@@ -13,6 +13,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.topjohnwu.superuser.BusyBoxInstaller
 import com.topjohnwu.superuser.Shell
@@ -111,11 +112,14 @@ class SplashScreen : AppCompatActivity() {
             }
         }
 
+        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
+        val initialized = preferenceManager.getBoolean("initialized", false)
+
         val scheme = intent.scheme
         val data = intent.data
 
         when {
-            scheme != "content" && data != null -> {
+            initialized && scheme != "content" && data != null -> {
                 when (data.host?.split(".")?.first()) {
                     "repos" -> {
                         data.queryParameterNames.forEach {
@@ -135,7 +139,7 @@ class SplashScreen : AppCompatActivity() {
                 }
                 finishAndRemoveTask()
             }
-            data?.toString()?.endsWith(".rboard") == true -> {
+            initialized && data?.toString()?.endsWith(".rboard") == true -> {
                 doAsync({
                     File(cacheDir, "flags.rboard").apply {
                         delete()
@@ -155,7 +159,7 @@ class SplashScreen : AppCompatActivity() {
                     finishAndRemoveTask()
                 }
             }
-            data != null -> {
+            initialized && data != null -> {
                 val resultLauncher =
                     registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                         finishAndRemoveTask()
@@ -200,6 +204,8 @@ class SplashScreen : AppCompatActivity() {
                 gboardInstalled = isPackageInstalled(Config.GBOARD_PACKAGE_NAME, packageManager)
 
                 createNotificationChannels()
+                FirebaseMessaging.getInstance()
+                    .subscribeToTopic("update-v3-${BuildConfig.BUILD_TYPE.lowercase()}")
 
                 when {
                     !gboardInstalled -> openDialog(
@@ -219,12 +225,10 @@ class SplashScreen : AppCompatActivity() {
                     else -> checkForUpdate { update ->
                         checkedForUpdate = true
                         validApp {
-                            if (it) startActivity(
-                                Intent(this, MainActivity::class.java).putExtra(
-                                    "update",
-                                    update
-                                )
-                            )
+                            preferenceManager.edit { putBoolean("initialized", true) }
+                            if (it) MainActivity::class.java.start(this) {
+                                putExtra("update", update)
+                            }
                             finish()
                         }
                     }
@@ -249,7 +253,11 @@ class SplashScreen : AppCompatActivity() {
         PreferenceManager.getDefaultSharedPreferences(this).apply {
             var valid = getBoolean("verified", false)
             if (valid) callback(valid)
-            else openDialog(R.string.unreleased, R.string.notice) {
+            else openDialog(R.string.unreleased, R.string.notice, false, {
+                it.dismiss()
+                callback(valid)
+            }) {
+                it.dismiss()
                 valid = true
                 callback(valid)
                 edit { putBoolean("verified", true) }

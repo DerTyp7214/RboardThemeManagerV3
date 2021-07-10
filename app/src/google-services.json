@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "445227417004",
-    "firebase_url": "https://gboardthememanager.firebaseio.com",
-    "project_id": "gboardthememanager",
-    "storage_bucket": "gboardthememanager.appspot.com"
+    "project_number": "317045394384",
+    "project_id": "rboardthememanager",
+    "storage_bucket": "rboardthememanager.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:445227417004:android:1e8b1ab531e4a0a6fa0e09",
+        "mobilesdk_app_id": "1:317045394384:android:e4cbcbdd564ae4588d87d5",
         "android_client_info": {
           "package_name": "de.dertyp7214.rboardthememanager"
         }
       },
       "oauth_client": [
         {
-          "client_id": "445227417004-6domgbpbk9ecq4ng91e49drn549jm773.apps.googleusercontent.com",
+          "client_id": "317045394384-f2fl4gbvhjs491ss94num4d733dau5kp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC6HAzlQPXz1S9riOo_CRNH3WpSRGr2ymo"
+          "current_key": "AIzaSyCEHbRfATaDmcXL13JGk8dSPtPe4spySlU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "445227417004-6domgbpbk9ecq4ng91e49drn549jm773.apps.googleusercontent.com",
+              "client_id": "317045394384-f2fl4gbvhjs491ss94num4d733dau5kp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -37,56 +36,27 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:445227417004:android:ca05a63f6e85fc8dfa0e09",
+        "mobilesdk_app_id": "1:317045394384:android:34f489a3984081f28d87d5",
         "android_client_info": {
           "package_name": "de.dertyp7214.rboardthememanager.debug"
         }
       },
       "oauth_client": [
         {
-          "client_id": "445227417004-6domgbpbk9ecq4ng91e49drn549jm773.apps.googleusercontent.com",
+          "client_id": "317045394384-f2fl4gbvhjs491ss94num4d733dau5kp.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyC6HAzlQPXz1S9riOo_CRNH3WpSRGr2ymo"
+          "current_key": "AIzaSyCEHbRfATaDmcXL13JGk8dSPtPe4spySlU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "445227417004-6domgbpbk9ecq4ng91e49drn549jm773.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:445227417004:android:40f5b2e04315c83afa0e09",
-        "android_client_info": {
-          "package_name": "de.dertyp7214.rboardthememanager.dogfood"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "445227417004-6domgbpbk9ecq4ng91e49drn549jm773.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyC6HAzlQPXz1S9riOo_CRNH3WpSRGr2ymo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "445227417004-6domgbpbk9ecq4ng91e49drn549jm773.apps.googleusercontent.com",
+              "client_id": "317045394384-f2fl4gbvhjs491ss94num4d733dau5kp.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

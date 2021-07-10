@@ -13,4 +13,5 @@
     android:paddingBottom="16dp"
     app:drawableTint="?attr/colorOnPrimary"
     tools:drawableStartCompat="@drawable/ic_download"
+    tools:ignore="TextContrastCheck"
     tools:text="TextView" />

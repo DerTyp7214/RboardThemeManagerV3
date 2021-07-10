@@ -1,0 +1,40 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:width="300dp"
+    android:height="300dp"
+    android:viewportWidth="300"
+    android:viewportHeight="300"
+    tools:ignore="VectorRaster">
+    <path
+        android:fillAlpha=".8"
+        android:fillColor="@color/ic_launcher_foreground"
+        android:pathData="M92.899,232.456L206.301,232.456A5,5 0,0 1,211.301 237.456L211.301,248.594A5,5 0,0 1,206.301 253.594L92.899,253.594A5,5 0,0 1,87.899 248.594L87.899,237.456A5,5 0,0 1,92.899 232.456z" />
+    <path
+        android:fillAlpha=".8"
+        android:fillColor="@color/ic_launcher_foreground"
+        android:pathData="M72,196.22L81.904,196.22A5,5 0,0 1,86.904 201.22L86.904,211.351A5,5 0,0 1,81.904 216.351L72,216.351A5,5 0,0 1,67 211.351L67,201.22A5,5 0,0 1,72 196.22z" />
+    <path
+        android:fillAlpha=".8"
+        android:fillColor="@color/ic_launcher_foreground"
+        android:pathData="M72.002,159.984L81.906,159.984A5,5 0,0 1,86.906 164.984L86.906,175.115A5,5 0,0 1,81.906 180.115L72.002,180.115A5,5 0,0 1,67.002 175.115L67.002,164.984A5,5 0,0 1,72.002 159.984z" />
+    <path
+        android:fillAlpha=".8"
+        android:fillColor="@color/ic_launcher_foreground"
+        android:pathData="M108.821,196.22L118.725,196.22A5,5 0,0 1,123.725 201.22L123.725,211.351A5,5 0,0 1,118.725 216.351L108.821,216.351A5,5 0,0 1,103.821 211.351L103.821,201.22A5,5 0,0 1,108.821 196.22z" />
+    <path
+        android:fillAlpha=".8"
+        android:fillColor="@color/ic_launcher_foreground"
+        android:pathData="M180.475,196.22L190.379,196.22A5,5 0,0 1,195.379 201.22L195.379,211.351A5,5 0,0 1,190.379 216.351L180.475,216.351A5,5 0,0 1,175.475 211.351L175.475,201.22A5,5 0,0 1,180.475 196.22z" />
+    <path
+        android:fillAlpha=".8"
+        android:fillColor="@color/ic_launcher_foreground"
+        android:pathData="M217.297,159.984L227.201,159.984A5,5 0,0 1,232.201 164.984L232.201,175.115A5,5 0,0 1,227.201 180.115L217.297,180.115A5,5 0,0 1,212.297 175.115L212.297,164.984A5,5 0,0 1,217.297 159.984z" />
+    <path
+        android:fillAlpha=".8"
+        android:fillColor="@color/ic_launcher_foreground"
+        android:pathData="M217.297,196.22L227.201,196.22A5,5 0,0 1,232.201 201.22L232.201,211.351A5,5 0,0 1,227.201 216.351L217.297,216.351A5,5 0,0 1,212.297 211.351L212.297,201.22A5,5 0,0 1,217.297 196.22z" />
+    <path
+        android:fillColor="@color/ic_launcher_foreground"
+        android:fillType="evenOdd"
+        android:pathData="M103.001,66v76.549l47.031,39.403 47.498,-39.488 0.375,-76.464h-94.904zM98.001,46L202.93,46c8.313,0 15.041,6.76 15,15.074l-0.411,83.819a15.003,15.003 0,0 1,-5.411 11.461l-58.916,48.981a5,5 0,0 1,-6.408 -0.012l-58.417,-48.942A15.003,15.003 0,0 1,83 144.882L83,61c0,-8.284 6.716,-15 15,-15z" />
+</vector>
