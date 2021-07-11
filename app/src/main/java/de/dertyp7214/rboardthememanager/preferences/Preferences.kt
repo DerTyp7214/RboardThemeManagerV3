@@ -106,12 +106,13 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
             }
             pref("theme_path") {
                 titleRes = R.string.theme_path
-                summary = Config.THEME_LOCATION
+                summary = if (!Config.useMagisk) Config.MAGISK_THEME_LOC else Config.THEME_LOCATION
                 iconRes = R.drawable.ic_folder_open
             }
             pref("installation_method") {
                 titleRes = R.string.installation_method
-                summaryRes = if (usingModule) R.string.magisk else R.string.other
+                summaryRes =
+                    if (!Config.useMagisk) R.string.pref_gboard else if (usingModule) R.string.magisk else R.string.other
                 iconRes = R.drawable.ic_download
             }
             pref("rboard_app_version") {

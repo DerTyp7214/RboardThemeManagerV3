@@ -18,14 +18,14 @@ import de.Maxr1998.modernpreferences.preferences.choice.SelectionItem
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.core.start
 import de.dertyp7214.rboardthememanager.screens.ReposActivity
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 
-class Settings(private val activity: Activity): AbstractPreference() {
-    enum class TYPE {
+class Settings(private val activity: Activity) : AbstractPreference() {    enum class TYPE {
         BOOLEAN,
         STRING,
         INT,
@@ -43,7 +43,7 @@ class Settings(private val activity: Activity): AbstractPreference() {
         val defaultValue: Any,
         val type: TYPE,
         val items: List<SelectionItem> = listOf(),
-        val onClick: (Activity) -> Unit = {}
+        val onClick: Activity.(Boolean) -> Unit = {}
     ) {
         THEMES_HEADER(
             "themes_header",
@@ -68,6 +68,23 @@ class Settings(private val activity: Activity): AbstractPreference() {
             R.drawable.ic_keyboard_theme,
             true,
             TYPE.BOOLEAN
+        ),
+        USE_MAGISK(
+            "useMagisk",
+            R.string.use_magisk,
+            R.string.gboard_magisk,
+            R.drawable.ic_keyboard_theme,
+            false,
+            TYPE.BOOLEAN,
+            listOf(),
+            {
+                Config.useMagisk =
+                    PreferenceManager.getDefaultSharedPreferences(this)
+                        .getBoolean("useMagisk", false)
+                if (Config.useMagisk && !MagiskUtils.getModules()
+                        .any { module -> module.id == MODULE_ID }
+                ) MagiskUtils.installModule(this)
+            }
         ),
         DOWNLOAD(
             "download_header",
@@ -124,8 +141,8 @@ class Settings(private val activity: Activity): AbstractPreference() {
             "",
             TYPE.STRING,
             listOf(),
-            { activity ->
-                activity.openDialog(R.string.uninstall_long, R.string.uninstall, false) {
+            {
+                openDialog(R.string.uninstall_long, R.string.uninstall, false) {
                     MagiskUtils.uninstallModule(MODULE_ID)
                     Handler(Looper.getMainLooper()).postDelayed({
                         "reboot".runAsCommand()
@@ -149,6 +166,10 @@ class Settings(private val activity: Activity): AbstractPreference() {
             val pref: Preference = when (item.type) {
                 TYPE.BOOLEAN -> builder.switch(item.key) {
                     defaultValue = item.defaultValue as Boolean
+                    onCheckedChange {
+                        item.onClick(activity, it)
+                        true
+                    }
                 }
                 TYPE.INT, TYPE.LONG, TYPE.FLOAT -> builder.pref(item.key) {}
                 TYPE.GROUP -> builder.categoryHeader(item.key) {
@@ -179,7 +200,7 @@ class Settings(private val activity: Activity): AbstractPreference() {
                 titleRes = item.title
                 summaryRes = item.summary
                 iconRes = item.icon
-                onClick { item.onClick(activity); false }
+                onClick { item.onClick(activity, false); false }
             }
         }
     }

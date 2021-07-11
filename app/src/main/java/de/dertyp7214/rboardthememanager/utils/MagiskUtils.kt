@@ -1,14 +1,15 @@
 package de.dertyp7214.rboardthememanager.utils
 
+import android.app.Activity
+import de.dertyp7214.rboardthememanager.Config
+import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.*
 import com.dertyp7214.logs.helpers.Logger
 import com.jaredrummler.android.shell.Shell
 import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
 import com.topjohnwu.superuser.io.SuFileOutputStream
 import de.dertyp7214.rboardthememanager.Config.MODULES_PATH
-import de.dertyp7214.rboardthememanager.core.getString
-import de.dertyp7214.rboardthememanager.core.parseModuleMeta
-import de.dertyp7214.rboardthememanager.core.writeFile
 import de.dertyp7214.rboardthememanager.data.MagiskModule
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 import java.nio.charset.Charset
@@ -56,6 +57,24 @@ object MagiskUtils {
                 }
             }
         }.catch { Logger.log(Logger.Companion.Type.ERROR, "INSTALL_MODULE", it) }
+    }
+
+    fun installModule(activity: Activity) {
+        val files = mapOf(
+            Pair(
+                "system.prop",
+                "# Default Theme and Theme-location\n" +
+                        "ro.com.google.ime.theme_file=veu.zip\n" +
+                        "ro.com.google.ime.themes_dir=${Config.THEME_LOCATION}"
+            ),
+            Pair(Config.THEME_LOCATION, null)
+        )
+        installModule(Config.MODULE_META, files)
+        activity.openDialog(R.string.reboot_to_continue, R.string.reboot, false, {
+            activity.finishAndRemoveTask()
+        }) {
+            "reboot".runAsCommand()
+        }
     }
 
     fun uninstallModule(moduleId: String) {

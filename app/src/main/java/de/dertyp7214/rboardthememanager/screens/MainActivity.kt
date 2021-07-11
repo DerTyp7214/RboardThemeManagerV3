@@ -9,7 +9,9 @@ import android.content.Intent.*
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import androidx.core.content.edit
 import android.view.View
+import androidx.preference.PreferenceManager
 import android.widget.TextView
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -446,31 +448,43 @@ class MainActivity : AppCompatActivity() {
         if (ThemeUtils.checkForExistingThemes()) ThemeUtils.getThemesPathFromProps()
             ?.apply { Config.THEME_LOCATION = this }
 
-        if (!MagiskUtils.getModules().any { it.id == Config.MODULE_ID }) {
-            fun installModule() {
-                val files = mapOf(
-                    Pair(
-                        "system.prop",
-                        "# Default Theme and Theme-location\n" +
-                                "ro.com.google.ime.theme_file=veu.zip\n" +
-                                "ro.com.google.ime.themes_dir=${Config.THEME_LOCATION}"
-                    ),
-                    Pair(Config.THEME_LOCATION, null)
-                )
-                MagiskUtils.installModule(MODULE_META, files)
-                openDialog(R.string.reboot_to_continue, R.string.reboot, false, {
-                    finishAndRemoveTask()
+        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
+
+        if (!preferenceManager.getBoolean(
+                "usageSet",
+                !MagiskUtils.getModules()
+                    .any { it.id == Config.MODULE_ID }
+            )
+        ) {
+            openDialog(
+                R.string.use_gboard,
+                R.string.module,
+                R.string.use_module,
+                R.string.gboard,
+                false,
+                {
+                    it.dismiss()
+                    preferenceManager.edit {
+                        putBoolean("useMagisk", false)
+                        putBoolean("usageSet", true)
+                    }
+                    Config.useMagisk = false
+                    ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
                 }) {
-                    "reboot".runAsCommand()
+                preferenceManager.edit {
+                    putBoolean("useMagisk", true)
+                    putBoolean("usageSet", true)
                 }
+                Config.useMagisk = true
+                ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
+                if (ThemeUtils.checkForExistingThemes()) openDialog(
+                    R.string.install_module,
+                    R.string.module
+                ) {
+                    it.dismiss()
+                    MagiskUtils.installModule(this)
+                } else MagiskUtils.installModule(this)
             }
-            if (ThemeUtils.checkForExistingThemes()) openDialog(
-                R.string.install_module,
-                R.string.module
-            ) {
-                it.dismiss()
-                installModule()
-            } else installModule()
         } else if (intent.extras?.getBoolean("update") == true) { 
             openDialog(R.string.update_ready, R.string.update) { update() }
         }
