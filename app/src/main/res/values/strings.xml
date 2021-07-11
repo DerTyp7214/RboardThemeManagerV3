@@ -132,4 +132,6 @@
     <string name="unreleased">This app is unreleased, some features may not work. Please dont report any errors to the main group.</string>
     <string name="notice">Notice</string>
     <string name="flags_applied">Flags applied</string>
+    <string name="install_module">Existing themes path found, do you still want to install the module?</string>
+    <string name="module">Install module</string>
 </resources>

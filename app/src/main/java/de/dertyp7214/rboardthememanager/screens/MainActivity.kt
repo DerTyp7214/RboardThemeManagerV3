@@ -452,21 +452,30 @@ class MainActivity : AppCompatActivity() {
             ?.apply { Config.THEME_LOCATION = this }
 
         if (!MagiskUtils.getModules().any { it.id == Config.MODULE_ID }) {
-            val files = mapOf(
-                Pair(
-                    "system.prop",
-                    "# Default Theme and Theme-location\n" +
-                            "ro.com.google.ime.theme_file=veu.zip\n" +
-                            "ro.com.google.ime.themes_dir=${Config.THEME_LOCATION}"
-                ),
-                Pair(Config.THEME_LOCATION, null)
-            )
-            MagiskUtils.installModule(MODULE_META, files)
-            openDialog(R.string.reboot_to_continue, R.string.reboot, false, {
-                finishAndRemoveTask()
-            }) {
-                "reboot".runAsCommand()
+            fun installModule() {
+                val files = mapOf(
+                    Pair(
+                        "system.prop",
+                        "# Default Theme and Theme-location\n" +
+                                "ro.com.google.ime.theme_file=veu.zip\n" +
+                                "ro.com.google.ime.themes_dir=${Config.THEME_LOCATION}"
+                    ),
+                    Pair(Config.THEME_LOCATION, null)
+                )
+                MagiskUtils.installModule(MODULE_META, files)
+                openDialog(R.string.reboot_to_continue, R.string.reboot, false, {
+                    finishAndRemoveTask()
+                }) {
+                    "reboot".runAsCommand()
+                }
             }
+            if (ThemeUtils.checkForExistingThemes()) openDialog(
+                R.string.install_module,
+                R.string.module
+            ) {
+                it.dismiss()
+                installModule()
+            } else installModule()
         } else if (intent.extras?.getBoolean("update") == true) {
             openDialog(R.string.update_ready, R.string.update) { update() }
         }
