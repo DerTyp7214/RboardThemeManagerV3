@@ -38,6 +38,7 @@ fun applyTheme(
     theme: ThemeDataClass,
     withBorders: Boolean = false
 ): Boolean {
+    // TODO: move theme to /gboard/files and apply with files:<name of zip>
     val name =
         if (theme.path.isEmpty() || theme.path.startsWith("assets:") || theme.path.startsWith("system_auto:")) theme.path else "system:${theme.name}.zip"
     val inputPackageName = GBOARD_PACKAGE_NAME
