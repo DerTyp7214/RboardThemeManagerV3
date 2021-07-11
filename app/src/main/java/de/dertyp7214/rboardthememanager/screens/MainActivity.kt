@@ -308,29 +308,30 @@ class MainActivity : AppCompatActivity() {
                         "system_auto:"
                     )
                 ) {
-                    menuItems.add(
-                        MenuItem(
-                            R.drawable.ic_auto_theme,
-                            R.string.apply_automatic_theme
-                        ) {
-                            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                            delayed(150) {
-                                themesViewModel.setSelectedTheme()
-                                themesViewModel.refreshThemes()
-                            }
-                            openDialog(R.layout.auto_theme_select, true) { dialog ->
-                                findViewById<TextView>(R.id.dark_theme)?.setOnClickListener {
-                                    applyTheme(true)
-                                    dialog.dismiss()
+                    if (Config.useMagisk)
+                        menuItems.add(
+                            MenuItem(
+                                R.drawable.ic_auto_theme,
+                                R.string.apply_automatic_theme
+                            ) {
+                                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                                delayed(150) {
+                                    themesViewModel.setSelectedTheme()
+                                    themesViewModel.refreshThemes()
                                 }
-                                findViewById<TextView>(R.id.light_theme)?.setOnClickListener {
-                                    applyTheme(false)
-                                    dialog.dismiss()
+                                openDialog(R.layout.auto_theme_select, true) { dialog ->
+                                    findViewById<TextView>(R.id.dark_theme)?.setOnClickListener {
+                                        applyTheme(true)
+                                        dialog.dismiss()
+                                    }
+                                    findViewById<TextView>(R.id.light_theme)?.setOnClickListener {
+                                        applyTheme(false)
+                                        dialog.dismiss()
+                                    }
+                                    findViewById<MaterialButton>(R.id.cancel)?.setOnClickListener { dialog.dismiss() }
+                                    findViewById<MaterialButton>(R.id.ok)?.setOnClickListener { dialog.dismiss() }
                                  }
-                                findViewById<MaterialButton>(R.id.cancel)?.setOnClickListener { dialog.dismiss() }
-                                findViewById<MaterialButton>(R.id.ok)?.setOnClickListener { dialog.dismiss() }
-                            }
-                        })
+                            })
                     menuItems.add(MenuItem(R.drawable.ic_delete_theme, R.string.delete_theme) {
                         openDialog(R.string.q_delete_theme, R.string.delete_theme) {
                             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
