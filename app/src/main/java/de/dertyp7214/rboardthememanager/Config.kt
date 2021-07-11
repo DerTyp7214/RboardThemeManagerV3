@@ -3,8 +3,10 @@ package de.dertyp7214.rboardthememanager
 import de.dertyp7214.rboardthememanager.core.getSystemProperty
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 
-@Suppress("MemberVisibilityCanBePrivate", "unused")
+@Suppress("MemberVisibilityCanBePrivate", "unused", "SdCardPath")
 object Config {
+    var useMagisk = false
+
     var THEME_LOCATION = "/system/etc/gboard_theme"
 
     const val MODULES_PATH = "/data/adb/modules"
@@ -26,7 +28,8 @@ object Config {
 
     val MAGISK_THEME_LOC: String
         get() {
-            return if (!THEME_LOCATION.startsWith("/system")) THEME_LOCATION else "$MODULE_PATH$THEME_LOCATION"
+            return if (!useMagisk) "/data/data/$GBOARD_PACKAGE_NAME/files/themes"
+            else if (!THEME_LOCATION.startsWith("/system")) THEME_LOCATION else "$MODULE_PATH$THEME_LOCATION"
         }
 
     const val PACKS_URL =

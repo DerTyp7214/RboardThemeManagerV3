@@ -134,4 +134,10 @@
     <string name="flags_applied">Flags applied</string>
     <string name="install_module">Existing themes path found, do you still want to install the module?</string>
     <string name="module">Install module</string>
+    <string name="use_gboard">Do you want to load themes directly in gboard? Or continue with module</string>
+    <string name="gboard_magisk">Use Magisk Module instead of loading the themes in Gboard</string>
+    <string name="use_module">Module</string>
+    <string name="use_magisk">Use Magisk</string>
+    <string name="gboard">Use Gboard</string>
+    <string name="pref_gboard">Gboard</string>
 </resources>

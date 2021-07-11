@@ -38,9 +38,9 @@ fun applyTheme(
     theme: ThemeDataClass,
     withBorders: Boolean = false
 ): Boolean {
-    // TODO: move theme to /gboard/files and apply with files:<name of zip>
     val name =
-        if (theme.path.isEmpty() || theme.path.startsWith("assets:") || theme.path.startsWith("system_auto:")) theme.path else "system:${theme.name}.zip"
+        if (theme.path.isEmpty() || theme.path.startsWith("assets:") || theme.path.startsWith("system_auto:")) theme.path
+        else "${if (Config.useMagisk) "system:" else "files:themes/"}${theme.name}.zip"
     val inputPackageName = GBOARD_PACKAGE_NAME
     val fileName =
         "/data/data/$inputPackageName/shared_prefs/${inputPackageName}_preferences.xml"
@@ -96,8 +96,9 @@ fun getActiveTheme(): String {
         fileLol.openStream()?.bufferedReader()?.readText()
             ?.split("<string name=\"additional_keyboard_theme\">")
             ?.let { if (it.size > 1) it[1].split("</string>")[0] else "" }
-            ?.replace("system:", "")
-            ?.replace(".zip", "") ?: ""
+            ?.removePrefix("files:themes/")
+            ?.removePrefix("system:")
+            ?.removeSuffix(".zip") ?: ""
     } catch (error: Exception) {
         Logger.log(Logger.Companion.Type.ERROR, "ActiveTheme", error.message)
         ""
