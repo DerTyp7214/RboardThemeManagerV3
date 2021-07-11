@@ -53,7 +53,8 @@ class SplashScreen : AppCompatActivity() {
         get() {
             return checkedForUpdate || !rootAccess
         }
-
+    
+    @Suppress("ObjectLiteralToLambda")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
