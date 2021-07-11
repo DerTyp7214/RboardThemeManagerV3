@@ -119,6 +119,8 @@ class SplashScreen : AppCompatActivity() {
         val scheme = intent.scheme
         val data = intent.data
 
+        Config.useMagisk = preferenceManager.getBoolean("useMagisk", false)
+
         when {
             initialized && scheme != "content" && data != null -> {
                 when (data.host?.split(".")?.first()) {

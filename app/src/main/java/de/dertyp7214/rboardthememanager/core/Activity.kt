@@ -35,6 +35,8 @@ fun Activity.openUrl(url: String) {
 fun Activity.openDialog(
     message: String,
     title: String,
+    positiveText: String,
+    negativeText: String,
     cancelable: Boolean = false,
     negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
     positive: (dialogInterface: DialogInterface) -> Unit
@@ -44,10 +46,10 @@ fun Activity.openDialog(
         .setCancelable(cancelable)
         .setMessage(message)
         .setTitle(title)
-        .setPositiveButton(android.R.string.ok) { dialogInterface, _ -> positive(dialogInterface) }
+        .setPositiveButton(positiveText) { dialogInterface, _ -> positive(dialogInterface) }
         .setOnDismissListener { content.setRenderEffect(null) }
         .apply {
-            if (negative != null) setNegativeButton(android.R.string.cancel) { dialogInterface, _ ->
+            if (negative != null) setNegativeButton(negativeText) { dialogInterface, _ ->
                 negative.invoke(
                     dialogInterface
                 )
@@ -57,12 +59,46 @@ fun Activity.openDialog(
 }
 
 fun Activity.openDialog(
+    message: String,
+    title: String,
+    cancelable: Boolean = false,
+    negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
+    positive: (dialogInterface: DialogInterface) -> Unit
+): AlertDialog = openDialog(
+    message,
+    title,
+    getString(android.R.string.ok),
+    getString(android.R.string.cancel),
+    cancelable,
+    negative,
+    positive
+)
+
+fun Activity.openDialog(
     @StringRes message: Int,
     @StringRes title: Int,
     cancelable: Boolean = false,
     negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
     positive: (dialogInterface: DialogInterface) -> Unit
 ): AlertDialog = openDialog(getString(message), getString(title), cancelable, negative, positive)
+
+fun Activity.openDialog(
+    @StringRes message: Int,
+    @StringRes title: Int,
+    @StringRes positiveText: Int,
+    @StringRes negativeText: Int,
+    cancelable: Boolean = false,
+    negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
+    positive: (dialogInterface: DialogInterface) -> Unit
+): AlertDialog = openDialog(
+    getString(message),
+    getString(title),
+    getString(positiveText),
+    getString(negativeText),
+    cancelable,
+    negative,
+    positive
+)
 
 fun Activity.openShareThemeDialog(
     negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },
