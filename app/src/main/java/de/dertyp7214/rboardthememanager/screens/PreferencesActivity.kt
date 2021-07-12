@@ -29,7 +29,6 @@ class PreferencesActivity : AppCompatActivity() {
         }
         setContentView(binding.root)
 
-
         val preferencesToolbar = binding.preferencesToolbar
         val loadingPreferences = binding.loadingPreferences
         val recyclerView = binding.recyclerView
@@ -41,32 +40,32 @@ class PreferencesActivity : AppCompatActivity() {
                     adapter.setRootScreen(preferences.preferences)
             }
         }
-            preferences.extraView?.let { extraContent.addView(it) }
+        preferences.extraView?.let { extraContent.addView(it) }
 
-            setSupportActionBar(preferencesToolbar)
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            title = preferences.title
+        setSupportActionBar(preferencesToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        title = preferences.title
 
-            preferencesToolbar.applyInsetter {
-                type(statusBars = true) {
-                    margin()
-                }
-            }
-
-            recyclerView.layoutManager = LinearLayoutManager(this)
-            doAsync({ PreferencesAdapter(preferences.preferences) }) {
-                loadingPreferences.visibility = View.GONE
-                recyclerView.adapter = it
+        preferencesToolbar.applyInsetter {
+            type(statusBars = true) {
+                margin()
             }
         }
 
-        override fun onSupportNavigateUp(): Boolean {
-            onBackPressed()
-            return true
-        }
-
-        override fun onBackPressed() {
-            super.onBackPressed()
-            preferences.onBackPressed()
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        doAsync({ PreferencesAdapter(preferences.preferences) }) {
+            loadingPreferences.visibility = View.GONE
+            recyclerView.adapter = it
         }
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        preferences.onBackPressed()
+    }
+}

@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
@@ -25,6 +26,10 @@ class MenuAdapter(private val items: List<MenuItem>, private val context: Contex
         holder.textView.setText(item.title)
         holder.textView.setCompoundDrawablesWithIntrinsicBounds(item.icon, 0, 0, 0)
         holder.textView.setOnClickListener { item.onClick() }
+
+        holder.textView.layoutParams = holder.textView.layoutParams.apply {
+            height = if (item.visible) WRAP_CONTENT else 0
+        }
     }
 
     override fun getItemCount(): Int = items.size

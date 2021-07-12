@@ -4,10 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentActivity
+import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.runAsCommand
 import java.io.File
 
 object PackageUtils {
@@ -20,13 +24,34 @@ object PackageUtils {
         try {
             if (file.exists()) {
                 if (file.extension == "apk") {
+                    val intent: Intent?
                     val downloadedApk = getFileUri(context, file)
-                    val intent = Intent(Intent.ACTION_VIEW).setDataAndType(
-                        downloadedApk,
-                        "application/vnd.android.package-archive"
-                    )
-                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    resultLauncher?.launch(intent) ?: context.startActivity(intent)
+                    when {
+                        Build.VERSION.SDK_INT > Build.VERSION_CODES.R -> {
+                            intent = Intent(Intent.ACTION_VIEW).setDataAndType(
+                                downloadedApk,
+                                "application/vnd.android.package-archive"
+                            )
+                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        }
+                        Build.VERSION.SDK_INT > Build.VERSION_CODES.P -> {
+                            intent = Intent(Intent.ACTION_INSTALL_PACKAGE)
+                            intent.data = downloadedApk
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        }
+                        else -> {
+                            intent = null
+                            if ("pm install ${file.absolutePath}".runAsCommand() || "pm install -r ${file.absolutePath}".runAsCommand()) Toast.makeText(
+                                context,
+                                R.string.app_updated,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            else Toast.makeText(context, R.string.error, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    intent?.let {
+                        resultLauncher?.launch(it) ?: context.startActivity(it)
+                    }
                 } else error()
             } else error()
         } catch (e: Exception) {

@@ -133,7 +133,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
                 else values[key] as? E ?: defaultValue
             }
             return if (linkedKeys.isEmpty()) getVal(defaultValue, valueMap) else {
-            val flags = getFlagItems(context)
+                val flags = getFlagItems(context)
                 !linkedKeys.map { key ->
                     flags.find { flag -> flag.key == key }?.let {
                         it.getValue(context, it.defaultValue, values)
@@ -160,7 +160,8 @@ class Flags(val activity: Activity) : AbstractPreference() {
             prefs.edit { remove(item.key) }
             val pref: Preference = when (item.type) {
                 TYPE.BOOLEAN -> SwitchPreference(item.key).apply {
-                    defaultValue = item.getValue(activity, item.defaultValue, values) as? Boolean ?: false
+                    defaultValue =
+                        item.getValue(activity, item.defaultValue, values) as? Boolean ?: false
                     onCheckedChange {
                         if (!item.setValue(it)) Toast.makeText(
                             activity,
@@ -195,35 +196,54 @@ class Flags(val activity: Activity) : AbstractPreference() {
     }
 
     class AllFlags(
-            private val activity: Activity,
-            private val requestReload: () -> Unit
-        ) : AbstractPreference() {
+        private val activity: Activity,
+        private val requestReload: () -> Unit
+    ) : AbstractPreference() {
 
-            private var filter: String = ""
+        private var filter: String = ""
 
-            private val searchBar = SearchBar(activity).apply {
-                setOnSearchListener {
-                    filter = it
-                    requestReload()
-                }
-                setOnCloseListener {
-                    filter = ""
-                    requestReload()
-                }
+        private val searchBar = SearchBar(activity).apply {
+            setOnSearchListener {
+                filter = it
+                requestReload()
             }
+            setOnCloseListener {
+                filter = ""
+                requestReload()
+            }
+        }
 
-            override fun getExtraView(): View = searchBar
+        override fun getExtraView(): View = searchBar
 
-            override fun preferences(builder: PreferenceScreen.Builder) {
-                val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
-                getCurrentXmlValues(FILES.FLAGS.fileName).filter {
-                    filter.isEmpty() || it.key.contains(
-                        filter,
+        override fun preferences(builder: PreferenceScreen.Builder) {
+            val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
+            getCurrentXmlValues(FILES.FLAGS.fileName, true).filter {
+                filter.isEmpty() || it.key.contains(
+                    filter,
+                    true
+                )
+            }.forEach { entry ->
+                prefs.edit { remove(entry.key) }
+                if (entry.value is Boolean) builder.switch(entry.key) {
+                    title = entry.key.split("_").joinToString(" ") {
+                        it.replaceFirstChar { char ->
+                            if (char.isLowerCase()) char.titlecase(
+                                Locale.getDefault()
+                            ) else char.toString()
+                        }
+                    }
+                    summary = entry.key
+                    defaultValue = entry.value as Boolean
+                    onCheckedChange {
+                        if (!setValue(it, entry.key, FILES.FLAGS)) Toast.makeText(
+                            activity,
+                            R.string.error,
+                            Toast.LENGTH_SHORT
+                        ).show()
                         true
-                    )
-                }.forEach { entry ->
-                    prefs.edit { remove(entry.key) }
-                    if (entry.value is Boolean) builder.switch(entry.key) {
+                    }
+                } else {
+                    builder.pref(entry.key) {
                         title = entry.key.split("_").joinToString(" ") {
                             it.replaceFirstChar { char ->
                                 if (char.isLowerCase()) char.titlecase(
@@ -231,31 +251,13 @@ class Flags(val activity: Activity) : AbstractPreference() {
                                 ) else char.toString()
                             }
                         }
-                        summary = entry.key
-                        defaultValue = entry.value as Boolean
-                        onCheckedChange {
-                            if (!setValue(it, entry.key, FILES.FLAGS)) Toast.makeText(
-                                activity,
-                                R.string.error,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            true
-                        }
-                    } else {
-                        builder.pref(entry.key) {
-                            title = entry.key.split("_").joinToString(" ") {
-                                it.replaceFirstChar { char ->
-                                    if (char.isLowerCase()) char.titlecase(
-                                        Locale.getDefault()
-                                    ) else char.toString()
-                                }
-                            }
-                            summary = entry.value.toString()
-                        }
+                        summary = entry.value.toString()
                     }
                 }
             }
         }
+    }
+
     companion object {
         private val flags = arrayListOf<FlagItem>()
         private var flagsString: EnumMap<FILES, String> = EnumMap(FILES::class.java)
@@ -333,8 +335,12 @@ class Flags(val activity: Activity) : AbstractPreference() {
             }
 
         @SuppressLint("SdCardPath")
-        private fun getCurrentXmlValues(file: String) =
-            SuFile("/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/$file").readXML()
+        private fun getCurrentXmlValues(file: String, cached: Boolean = false): Map<String, Any> {
+            return SuFile("/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/$file").readXML(
+                if (cached) FILES.values().find { it.fileName == file }?.let { flagsString[it] }
+                else null
+            )
+        }
 
         @SuppressLint("SdCardPath")
         fun applyChanges(): Boolean {
@@ -356,7 +362,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
                     "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
                 flagsString[file] = SuFile(fileName).openStream()?.use {
                     it.bufferedReader().readText()
-                }
+                }.let { if (it.isNullOrBlank()) "<map></map>" else it }
             }
         }
 

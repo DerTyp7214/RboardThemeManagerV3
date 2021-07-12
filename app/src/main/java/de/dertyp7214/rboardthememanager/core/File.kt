@@ -45,27 +45,28 @@ fun File.readXML(): Map<String, Any> {
     val map = try {
         DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
             InputSource(StringReader(content))
-        ).getElementsByTagName("map")
+        ).getElementsByTagName("map") ?: return output
     } catch (e: Exception) {
         e.printStackTrace()
         return output
     }
 
-    for (item in map.item(0).childNodes) {
-        if (item.nodeName != "set" && !item.nodeName.startsWith("#")) {
-            val name = item.attributes?.getNamedItem("name")?.nodeValue
-            val value = item.attributes?.getNamedItem("value")?.nodeValue?.let {
-                when (item.nodeName) {
-                    "long" -> it.toLong()
-                    "boolean" -> it.toBooleanStrict()
-                    "float" -> it.toFloat()
-                    "integer" -> it.toInt()
-                    else -> it
+    if (map.length > 0)
+        for (item in map.item(0).childNodes) {
+            if (item.nodeName != "set" && !item.nodeName.startsWith("#")) {
+                val name = item.attributes?.getNamedItem("name")?.nodeValue
+                val value = item.attributes?.getNamedItem("value")?.nodeValue?.let {
+                    when (item.nodeName) {
+                        "long" -> it.toLong()
+                        "boolean" -> it.toBooleanStrict()
+                        "float" -> it.toFloat()
+                        "integer" -> it.toInt()
+                        else -> it
+                    }
                 }
+                if (name != null) output[name] = value ?: item.textContent ?: ""
             }
-            if (name != null) output[name] = value ?: item.textContent ?: ""
         }
-    }
 
     return output
 }

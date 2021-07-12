@@ -73,3 +73,7 @@ fun SuFile.openStream(): InputStream? {
     return if (exists()) SuFileInputStream.open(this)
     else ProcessBuilder().su("cat $absolutePath").logs("READ", true).inputStream
 }
+
+fun SuFile.readString(): String {
+    return openStream()?.bufferedReader()?.readText() ?: ""
+}

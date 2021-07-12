@@ -7,29 +7,29 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.*
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.core.content.edit
 import android.view.View
-import androidx.preference.PreferenceManager
-import android.widget.TextView
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import de.dertyp7214.rboardthememanager.Config.MODULE_META
 import androidx.core.app.ShareCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.content.edit
 import androidx.core.view.marginBottom
 import androidx.core.widget.NestedScrollView
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dertyp7214.preferencesplus.core.dp
@@ -39,6 +39,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.Config
+import de.dertyp7214.rboardthememanager.Config.MODULE_META
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.MenuAdapter
 import de.dertyp7214.rboardthememanager.core.*
@@ -47,15 +48,15 @@ import de.dertyp7214.rboardthememanager.databinding.ActivityMainBinding
 import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
-import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils.getSystemAutoTheme
+import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
 
     private val updateUrl by lazy {
         "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk"
-}
+    }
     private lateinit var downloadResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<NestedScrollView>
     private lateinit var themesViewModel: ThemesViewModel
@@ -117,7 +118,8 @@ class MainActivity : AppCompatActivity() {
             },
             MenuItem(
                 R.drawable.ic_baseline_outlined_flag_24,
-                R.string.flags
+                R.string.flags,
+                Build.VERSION.SDK_INT > Build.VERSION_CODES.O
             ) {
                 PreferencesActivity::class.java.start(this, closeBottomSheetBehaviorLauncher) {
                     putExtra("type", "flags")
@@ -200,7 +202,7 @@ class MainActivity : AppCompatActivity() {
                             zip.delete()
                             ZipHelper().zip(files.map { it.absolutePath }, zip.absolutePath)
                             files.forEach { it.delete() }
-                            val uri = FileProvider.getUriForFile(this, packageName + ".fileprovider", zip)
+                            val uri = FileProvider.getUriForFile(this, packageName, zip)
                             ShareCompat.IntentBuilder(this)
                                 .setStream(uri)
                                 .setType("application/pack")
@@ -330,7 +332,7 @@ class MainActivity : AppCompatActivity() {
                                     }
                                     findViewById<MaterialButton>(R.id.cancel)?.setOnClickListener { dialog.dismiss() }
                                     findViewById<MaterialButton>(R.id.ok)?.setOnClickListener { dialog.dismiss() }
-                                 }
+                                }
                             })
                     menuItems.add(MenuItem(R.drawable.ic_delete_theme, R.string.delete_theme) {
                         openDialog(R.string.q_delete_theme, R.string.delete_theme) {
@@ -453,7 +455,7 @@ class MainActivity : AppCompatActivity() {
 
         if (!preferenceManager.getBoolean(
                 "usageSet",
-                !MagiskUtils.getModules()
+                MagiskUtils.getModules()
                     .any { it.id == Config.MODULE_ID }
             )
         ) {
@@ -486,7 +488,7 @@ class MainActivity : AppCompatActivity() {
                     MagiskUtils.installModule(this)
                 } else MagiskUtils.installModule(this)
             }
-        } else if (intent.extras?.getBoolean("update") == true) { 
+        } else if (intent.extras?.getBoolean("update") == true) {
             openDialog(R.string.update_ready, R.string.update) { update() }
         }
     }

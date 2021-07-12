@@ -6,12 +6,10 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
@@ -37,13 +35,13 @@ class SplashScreen : AppCompatActivity() {
 
     private val checkUpdateUrl by lazy {
         "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/output-metadata.json"
-        }
+    }
     private val gboardPlayStoreUrl by lazy {
         "https://play.google.com/store/apps/details?id=${Config.GBOARD_PACKAGE_NAME}"
-        }
-        
-        private val flagsUrl by lazy {
-        "https://raw.githubusercontent.com/GboardThemes/Packs/master/flags.json"
+    }
+
+    private val flagsUrl by lazy {
+        "https://raw.githubusercontent.com/AkosPaha/Rboard-ColorsTheme/master/flags-R.json"
     }
     private var checkedForUpdate = false
     private var rootAccess = false
@@ -53,9 +51,8 @@ class SplashScreen : AppCompatActivity() {
         get() {
             return checkedForUpdate || !rootAccess
         }
-    
+
     @Suppress("ObjectLiteralToLambda")
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
@@ -72,7 +69,7 @@ class SplashScreen : AppCompatActivity() {
             SuFile(it.absolutePath).deleteRecursive()
         }
 
-AppWidgetManager.getInstance(this).let { appWidgetManager ->
+        AppWidgetManager.getInstance(this).let { appWidgetManager ->
             appWidgetManager.getAppWidgetIds(
                 ComponentName(this, SwitchKeyboardWidget::class.java)
             ).forEach { id ->
@@ -110,7 +107,7 @@ AppWidgetManager.getInstance(this).let { appWidgetManager ->
             }
         }
 
-val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
+        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
         val initialized = preferenceManager.getBoolean("initialized", false)
 
         val scheme = intent.scheme
@@ -236,7 +233,7 @@ val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
             }
         }
     }
-    
+
     private fun validApp(callback: (valid: Boolean) -> Unit) {
         PreferenceManager.getDefaultSharedPreferences(this).apply {
             var valid = getBoolean("verified", false)
@@ -265,7 +262,6 @@ val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun createNotificationChannels() {
         val namePush = getString(R.string.channel_name)
         val channelIdPush = getString(R.string.default_notification_channel_id)

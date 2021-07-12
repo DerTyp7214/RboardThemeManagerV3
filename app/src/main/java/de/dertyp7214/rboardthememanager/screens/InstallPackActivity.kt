@@ -12,6 +12,7 @@ import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
 import de.dertyp7214.rboardthememanager.core.decodeBitmap
 import de.dertyp7214.rboardthememanager.core.install
 import de.dertyp7214.rboardthememanager.core.isInstalled
+import de.dertyp7214.rboardthememanager.core.readString
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.ActivityInstallPackBinding
 import de.dertyp7214.rboardthememanager.utils.doAsync
@@ -78,7 +79,7 @@ class InstallPackActivity : AppCompatActivity() {
                 list
             } ?: listOf()
         }) {
-            val meta = File(File(it.firstOrNull()?.path ?: "").parent, "pack.meta")
+            val meta = SuFile(SuFile(it.firstOrNull()?.path ?: "").parent, "pack.meta")
             themes.clear()
             themes.addAll(it)
             adapter.notifyDataChanged()
@@ -91,7 +92,7 @@ class InstallPackActivity : AppCompatActivity() {
             if (meta.exists()) {
                 var name: String? = null
                 var author: String? = null
-                meta.readText().apply {
+                meta.readString().apply {
                     val matcher = Pattern.compile("(name|author)=(.*)\\n").matcher(this)
                     while (matcher.find()) {
                         when (matcher.group(1)) {

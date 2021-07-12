@@ -20,7 +20,7 @@ fun ThemePack.download(activity: Activity, result: (themes: List<String>) -> Uni
         .start(object : OnDownloadListener {
             override fun onDownloadComplete() {
                 val pack = File(activity.cacheDir, "$name.pack")
-                val destination = File(activity.cacheDir, name)
+                val destination = SuFile(activity.cacheDir, name)
                 if (ZipHelper().unpackZip(destination.absolutePath, pack.absolutePath)) {
                     SuFile(destination, "pack.meta").writeFile(
                         "name=$title\nauthor=$author\n"
