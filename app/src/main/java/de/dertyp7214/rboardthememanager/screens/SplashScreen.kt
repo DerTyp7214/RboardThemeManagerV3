@@ -128,9 +128,9 @@ class SplashScreen : AppCompatActivity() {
                     val file = SuFile(data.path).let {
                         File(filesDir, "theme.pack").apply {
                             ProcessBuilder().apply {
-                                su("rm $absolutePath").logs("File Import", true)
-                                su("cp ${it.absolutePath} $absolutePath").logs("File Import", true)
-                                su("chmod 644 $absolutePath").logs("File Import", true)
+                                su("rm $absolutePath").logs("File Import", true).waitFor()
+                                su("cp ${it.absolutePath} $absolutePath").logs("File Import", true).waitFor()
+                                su("chmod 644 $absolutePath").logs("File Import", true).waitFor()
                             }
                         }
                     }
