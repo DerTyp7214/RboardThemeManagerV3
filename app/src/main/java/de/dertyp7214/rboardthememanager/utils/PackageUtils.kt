@@ -48,8 +48,7 @@ object PackageUtils {
     private fun getFileUri(context: Context, file: File): Uri {
         return FileProvider.getUriForFile(
             context,
-            context.applicationContext
-                .packageName + ".fileprovider", file
+            context.applicationContext.packageName, file
         )
     }
 }

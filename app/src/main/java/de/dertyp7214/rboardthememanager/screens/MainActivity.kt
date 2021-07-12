@@ -491,7 +491,7 @@ class MainActivity : AppCompatActivity() {
                     MagiskUtils.installModule(this)
                 } else MagiskUtils.installModule(this)
             }
-        } else if (intent.extras?.getBoolean("update") == true) {
+        } else if (intent.getBooleanExtra("update", false)) {
             openDialog(R.string.update_ready, R.string.update) { update() }
         }
     }
@@ -530,9 +530,7 @@ class MainActivity : AppCompatActivity() {
             }
             setFinishListener { path, _ ->
                 finished = true
-                builder.setContentText(getString(R.string.download_complete))
-                    .setProgress(0, 0, false)
-                manager.notify(notificationId, builder.build())
+                manager.cancel(notificationId)
                 content.setRenderEffect(
                     RenderEffect.createBlurEffect(
                         10F,
@@ -546,6 +544,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             setErrorListener {
+                finished = true
                 builder.setContentText(getString(R.string.download_error))
                     .setProgress(0, 0, false)
                 manager.notify(notificationId, builder.build())
