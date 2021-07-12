@@ -27,17 +27,12 @@ object PackageUtils {
                     val intent: Intent?
                     val downloadedApk = getFileUri(context, file)
                     when {
-                        Build.VERSION.SDK_INT > Build.VERSION_CODES.R -> {
+                        Build.VERSION.SDK_INT > Build.VERSION_CODES.P -> {
                             intent = Intent(Intent.ACTION_VIEW).setDataAndType(
                                 downloadedApk,
                                 "application/vnd.android.package-archive"
                             )
                             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                        }
-                        Build.VERSION.SDK_INT > Build.VERSION_CODES.P -> {
-                            intent = Intent(Intent.ACTION_INSTALL_PACKAGE)
-                            intent.data = downloadedApk
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                         }
                         else -> {
                             intent = null

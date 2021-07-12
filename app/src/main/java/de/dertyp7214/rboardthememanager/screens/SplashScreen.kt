@@ -113,6 +113,10 @@ class SplashScreen : AppCompatActivity() {
         val scheme = intent.scheme
         val data = intent.data
 
+        if (!preferenceManager.contains("useMagisk")) preferenceManager.edit {
+            putBoolean("useMagisk", MagiskUtils.getModules()
+                .any { it.id == Config.MODULE_ID })
+        }
         Config.useMagisk = preferenceManager.getBoolean("useMagisk", false)
 
         when {

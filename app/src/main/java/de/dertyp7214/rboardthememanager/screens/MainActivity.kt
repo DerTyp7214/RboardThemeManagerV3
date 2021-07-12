@@ -488,7 +488,7 @@ class MainActivity : AppCompatActivity() {
                     MagiskUtils.installModule(this)
                 } else MagiskUtils.installModule(this)
             }
-        } else if (intent.extras?.getBoolean("update") == true) {
+        } else if (intent.getBooleanExtra("update", false)) {
             openDialog(R.string.update_ready, R.string.update) { update() }
         }
     }
