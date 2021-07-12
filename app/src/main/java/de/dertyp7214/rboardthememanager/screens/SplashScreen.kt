@@ -11,6 +11,7 @@ import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.FileProvider
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.google.firebase.messaging.FirebaseMessaging
@@ -123,7 +124,24 @@ class SplashScreen : AppCompatActivity() {
 
         when {
             initialized && scheme != "content" && data != null -> {
-                when (data.host?.split(".")?.first()) {
+                if (data.scheme == "file") {
+                    val file = SuFile(data.path).let {
+                        File(filesDir, "theme.pack").apply {
+                            ProcessBuilder().apply {
+                                su("rm $absolutePath").logs("File Import", true)
+                                su("cp ${it.absolutePath} $absolutePath").logs("File Import", true)
+                                su("chmod 644 $absolutePath").logs("File Import", true)
+                            }
+                        }
+                    }
+                    val uri = FileProvider.getUriForFile(this, packageName, file)
+                    Intent(Intent.ACTION_VIEW).apply {
+                        setDataAndType(uri, "application/pack")
+                        flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+                        startActivity(this)
+                        finish()
+                    }
+                } else when (data.host?.split(".")?.first()) {
                     "repos" -> {
                         data.queryParameterNames.forEach {
                             when (it) {

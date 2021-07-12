@@ -92,6 +92,7 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.pack" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.pack" />
                 <data android:scheme="content" />
+                <data android:scheme="file" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
