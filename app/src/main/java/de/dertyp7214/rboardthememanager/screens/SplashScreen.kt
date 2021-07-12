@@ -131,7 +131,7 @@ class SplashScreen : AppCompatActivity() {
                                 "rm $absolutePath",
                                 "cp ${it.absolutePath} $absolutePath",
                                 "chmod 644 $absolutePath"
-                            ).logs("File Import", true)
+                            ).logs("File Import", false)
                         }
                     }
                     val uri = FileProvider.getUriForFile(this, packageName, file)
