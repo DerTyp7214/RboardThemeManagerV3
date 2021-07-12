@@ -103,6 +103,7 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.rboard" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.rboard" />
                 <data android:scheme="content" />
+                <data android:scheme="file" />
             </intent-filter>
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
