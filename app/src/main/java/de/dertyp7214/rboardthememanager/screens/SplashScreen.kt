@@ -125,11 +125,11 @@ class SplashScreen : AppCompatActivity() {
                 if (data.scheme == "file") {
                     val file = SuFile(data.path).let {
                         File(filesDir, "theme.pack").apply {
-                            ProcessBuilder().apply {
-                                su("rm $absolutePath").logs("File Import", true)
-                                su("cp ${it.absolutePath} $absolutePath").logs("File Import", true)
-                                su("chmod 644 $absolutePath").logs("File Import", true)
-                            }
+                            ProcessBuilder().su(
+                                "rm $absolutePath",
+                                "cp ${it.absolutePath} $absolutePath",
+                                "chmod 644 $absolutePath"
+                            ).logs("File Import", true)
                         }
                     }
                     val uri = FileProvider.getUriForFile(this, packageName, file)
