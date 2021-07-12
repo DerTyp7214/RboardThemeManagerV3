@@ -11,11 +11,12 @@ fun Process.logs(tag: String = "Process", errorsOnly: Boolean = false): Process 
         )
     }
     if (!errorsOnly) inputStream.bufferedReader().readText().let { s ->
-        Logger.log(
-            Logger.Companion.Type.INFO,
-            tag,
-            "[Response]: $s"
-        )
+        if (s.isNotBlank())
+            Logger.log(
+                Logger.Companion.Type.INFO,
+                tag,
+                "[Response]: $s"
+            )
     }
     return this
 }
