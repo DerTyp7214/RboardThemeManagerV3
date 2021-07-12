@@ -527,9 +527,7 @@ class MainActivity : AppCompatActivity() {
             }
             setFinishListener { path, _ ->
                 finished = true
-                builder.setContentText(getString(R.string.download_complete))
-                    .setProgress(0, 0, false)
-                manager.notify(notificationId, builder.build())
+                manager.cancel(notificationId)
                 PackageUtils.install(this@MainActivity, File(path), downloadResultLauncher) {
                     Toast.makeText(this@MainActivity, R.string.error, Toast.LENGTH_LONG).show()
                 }

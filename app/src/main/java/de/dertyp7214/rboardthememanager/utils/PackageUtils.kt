@@ -46,7 +46,7 @@ object PackageUtils {
                                 R.string.app_updated,
                                 Toast.LENGTH_SHORT
                             ).show()
-                            else Toast.makeText(context, R.string.error, Toast.LENGTH_SHORT).show()
+                            else error()
                         }
                     }
                     intent?.let {
