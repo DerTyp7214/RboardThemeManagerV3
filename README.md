@@ -1,3 +1,1 @@
-[![Build Debug](https://github.com/DerTyp7214/RboardThemeManagerV3/actions/workflows/buildDebug.yml/badge.svg)](https://github.com/DerTyp7214/RboardThemeManagerV3/actions/workflows/buildDebug.yml)
-
-[![Build Release](https://github.com/DerTyp7214/RboardThemeManagerV3/actions/workflows/buildRelease.yml/badge.svg)](https://github.com/DerTyp7214/RboardThemeManagerV3/actions/workflows/buildRelease.yml)
+[![Build R Compatible](https://github.com/DerTyp7214/RboardThemeManagerV3/actions/workflows/buildRCompatible.yml/badge.svg?branch=rCompatible)](https://github.com/DerTyp7214/RboardThemeManagerV3/actions/workflows/buildRCompatible.yml)
