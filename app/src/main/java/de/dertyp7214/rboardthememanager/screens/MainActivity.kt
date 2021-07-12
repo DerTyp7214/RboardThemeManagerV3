@@ -458,7 +458,7 @@ class MainActivity : AppCompatActivity() {
 
         if (!preferenceManager.getBoolean(
                 "usageSet",
-                !MagiskUtils.getModules()
+                MagiskUtils.getModules()
                     .any { it.id == Config.MODULE_ID }
             )
         ) {
