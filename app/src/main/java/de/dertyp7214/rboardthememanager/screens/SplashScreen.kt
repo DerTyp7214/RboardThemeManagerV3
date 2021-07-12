@@ -124,7 +124,7 @@ class SplashScreen : AppCompatActivity() {
             initialized && scheme != "content" && data != null -> {
                 if (data.scheme == "file") {
                     val file = SuFile(data.path).let {
-                        File(filesDir, "theme.pack").apply {
+                        File(filesDir, "themes.pack").apply {
                             ProcessBuilder().su(
                                 "rm $absolutePath",
                                 "cp ${it.absolutePath} $absolutePath",
