@@ -52,6 +52,7 @@ import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils.getSystemAutoTheme
 import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
+import dev.chrisbanes.insetter.applyInsetter
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -71,6 +72,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        window.setDecorFitsSystemWindows(false)
 
         checkModuleAndUpdate()
 
@@ -89,6 +91,18 @@ class MainActivity : AppCompatActivity() {
         val secondaryContent = findViewById<LinearLayout>(R.id.secondaryContent)
 
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+
+        searchBar.applyInsetter {
+            type(statusBars = true) {
+                margin()
+            }
+        }
+
+        binding.root.applyInsetter {
+            type(navigationBars = true) {
+                margin()
+            }
+        }
 
         val reloadThemesLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {

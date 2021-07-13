@@ -10,3 +10,5 @@ fun Int.changeAlpha(alpha: Int): Int {
         Color.blue(this)
     )
 }
+
+fun lerp(a: Int, b: Int, f: Float): Float = a + (f * (a - b).toFloat())
