@@ -1,13 +1,12 @@
 package de.dertyp7214.rboardthememanager.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.dertyp7214.preferencesplus.core.dp
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
 import de.dertyp7214.rboardthememanager.core.*
@@ -15,6 +14,7 @@ import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.utils.asyncInto
 import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
+import java.lang.Integer.max
 
 class ThemeListFragment : Fragment() {
 
@@ -47,6 +47,27 @@ class ThemeListFragment : Fragment() {
                 Pair(state == ThemeAdapter.SelectionState.SELECTING, adapter)
             )
         }, themesViewModel::setSelectedTheme)
+
+        refreshLayout.setOnApplyWindowInsetsListener { insetsView, windowInsets ->
+            insetsView.setMargin(
+                bottomMargin = max(
+                    windowInsets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.ime()).bottom - 64.dp(
+                        requireContext()
+                    ) - windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom, 2.dp(requireContext())
+                )
+            )
+            windowInsets
+        }
+
+        refreshLayout.setWindowInsetsAnimationCallback(object :
+            WindowInsetsAnimation.Callback(DISPATCH_MODE_STOP) {
+            override fun onProgress(
+                insets: WindowInsets,
+                runningAnimations: MutableList<WindowInsetsAnimation>
+            ): WindowInsets {
+                return insets
+            }
+        })
 
         refreshLayout.isRefreshing = themesViewModel.getThemes().isEmpty()
         refreshLayout.setProgressViewOffset(
