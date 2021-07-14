@@ -4,11 +4,13 @@ package de.dertyp7214.rboardthememanager.components
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.AttributeSet
 import android.view.WindowInsets
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -18,7 +20,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
 import de.dertyp7214.rboardthememanager.R
 
-@SuppressLint("ResourceType")
+@SuppressLint("ResourceType", "ServiceCast")
 class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
     var focus = false
         private set
@@ -59,8 +61,13 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
                 searchText.visibility = GONE
                 searchEdit.visibility = VISIBLE
 
-                searchEdit.windowInsetsController?.show(WindowInsets.Type.ime())
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    searchEdit.windowInsetsController?.show(WindowInsets.Type.ime())
+                }
                 searchEdit.requestFocus()
+                val imm: InputMethodManager =
+                    context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                imm.showSoftInput(searchEdit, InputMethodManager.SHOW_IMPLICIT)
                 focusListener()
             }
         }
@@ -137,8 +144,16 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
     }
 
     private fun clearFocus(editText: EditText) {
-        Handler(Looper.getMainLooper()).postDelayed({
-            editText.windowInsetsController?.hide(WindowInsets.Type.ime())
-        }, 100)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            Handler(Looper.getMainLooper()).postDelayed({
+                editText.windowInsetsController?.hide(WindowInsets.Type.ime())
+            }, 100)
+        }
+        else{
+            editText.clearFocus()
+            val imm: InputMethodManager =
+                context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(editText.windowToken, 0)
+        }
     }
 } 

@@ -72,11 +72,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        window.run {
-            WindowCompat.setDecorFitsSystemWindows(this, false)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.run {
+                WindowCompat.setDecorFitsSystemWindows(this, false)
+            }
         }
-
         checkModuleAndUpdate()
 
         themesViewModel = this[ThemesViewModel::class.java]
