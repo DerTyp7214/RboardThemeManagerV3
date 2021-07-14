@@ -1,7 +1,9 @@
 package de.dertyp7214.rboardthememanager.fragments
 
+import android.os.Build
 import android.os.Bundle
 import android.view.*
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,6 +32,7 @@ class ThemeListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_theme_list, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         applyTransitionsViewCreated()
@@ -49,25 +52,29 @@ class ThemeListFragment : Fragment() {
         }, themesViewModel::setSelectedTheme)
 
         refreshLayout.setOnApplyWindowInsetsListener { insetsView, windowInsets ->
-            insetsView.setMargin(
-                bottomMargin = max(
-                    windowInsets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.ime()).bottom - 64.dp(
-                        requireContext()
-                    ) - windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom, 2.dp(requireContext())
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                insetsView.setMargin(
+                    bottomMargin = max(
+                        windowInsets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.ime()).bottom - 64.dp(
+                            requireContext()
+                        ) - windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom, 2.dp(requireContext())
+                    )
                 )
-            )
+            }
             windowInsets
         }
 
-        refreshLayout.setWindowInsetsAnimationCallback(object :
-            WindowInsetsAnimation.Callback(DISPATCH_MODE_STOP) {
-            override fun onProgress(
-                insets: WindowInsets,
-                runningAnimations: MutableList<WindowInsetsAnimation>
-            ): WindowInsets {
-                return insets
-            }
-        })
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            refreshLayout.setWindowInsetsAnimationCallback(object :
+                WindowInsetsAnimation.Callback(DISPATCH_MODE_STOP) {
+                override fun onProgress(
+                    insets: WindowInsets,
+                    runningAnimations: MutableList<WindowInsetsAnimation>
+                ): WindowInsets {
+                    return insets
+                }
+            })
+        }
 
         refreshLayout.isRefreshing = themesViewModel.getThemes().isEmpty()
         refreshLayout.setProgressViewOffset(

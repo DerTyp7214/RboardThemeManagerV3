@@ -361,8 +361,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
                 val fileName = file.filePath
                 flagsString[file] = SuFile(fileName).openStream()?.use {
                     it.bufferedReader().readText()
-                }.let { if (it.isNullOrBlank()) "<map></map>" else it 
-                } ?: "<map></map>"
+                }.let { if (it.isNullOrBlank()) "<map></map>" else it }
             }
         }
 
