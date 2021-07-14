@@ -29,12 +29,10 @@ object Config {
 
     val GBOARD_PREFS_PATH: String
         get() {
-            return "${
-                newGboard.let {
-                    if (it) "/data/user_de/0/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
-                    else "/data/data/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
-                }
-            }${GBOARD_PACKAGE_NAME}_preferences.xml"
+            return newGboard.let {
+                if (it) "/data/user_de/0/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
+                else "/data/data/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
+            }
         }
 
     val MAGISK_THEME_LOC: String
