@@ -45,6 +45,14 @@ object PackageUtils {
         }
     }
 
+    fun getAppVersionCode(packageName: String, packageManager: PackageManager): Long {
+        return try {
+            packageManager.getPackageInfo(packageName, 0).longVersionCode
+        } catch (e: PackageManager.NameNotFoundException) {
+            -1
+        }
+    }
+
     private fun getFileUri(context: Context, file: File): Uri {
         return FileProvider.getUriForFile(
             context,

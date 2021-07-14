@@ -25,6 +25,7 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.OutputMetadata
 import de.dertyp7214.rboardthememanager.utils.*
+import de.dertyp7214.rboardthememanager.utils.PackageUtils.getAppVersionCode
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
 import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
@@ -69,6 +70,8 @@ class SplashScreen : AppCompatActivity() {
         files.forEach {
             SuFile(it.absolutePath).deleteRecursive()
         }
+
+        Config.newGboard = getAppVersionCode(Config.GBOARD_PACKAGE_NAME, packageManager) >= 60780714
 
         AppWidgetManager.getInstance(this).let { appWidgetManager ->
             appWidgetManager.getAppWidgetIds(
