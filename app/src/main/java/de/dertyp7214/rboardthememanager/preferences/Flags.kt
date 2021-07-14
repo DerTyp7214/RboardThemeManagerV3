@@ -33,9 +33,10 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 class Flags(val activity: Activity) : AbstractPreference() {
-    enum class FILES(val fileName: String) {
-        FLAGS("flag_value.xml"),
-        GBOARD_PREFERENCES("${Config.GBOARD_PACKAGE_NAME}_preferences.xml"),
+    enum class FILES(val filePath: String) {
+        @SuppressLint("SdCardPath")
+        FLAGS("/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/flag_value.xml"),
+        GBOARD_PREFERENCES(Config.GBOARD_PREFS_PATH),
         NONE("")
     }
 
@@ -159,7 +160,8 @@ class Flags(val activity: Activity) : AbstractPreference() {
             prefs.edit { remove(item.key) }
             val pref: Preference = when (item.type) {
                 TYPE.BOOLEAN -> SwitchPreference(item.key).apply {
-                    defaultValue = item.getValue(activity, item.defaultValue, values) as? Boolean ?: false
+                    defaultValue =
+                        item.getValue(activity, item.defaultValue, values) as? Boolean ?: false
                     onCheckedChange {
                         if (!item.setValue(it)) Toast.makeText(
                             activity,
@@ -215,7 +217,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
 
         override fun preferences(builder: PreferenceScreen.Builder) {
             val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
-            getCurrentXmlValues(FILES.FLAGS.fileName, true).filter {
+            getCurrentXmlValues(FILES.FLAGS.filePath, true).filter {
                 filter.isEmpty() || it.key.contains(
                     filter,
                     true
@@ -328,14 +330,14 @@ class Flags(val activity: Activity) : AbstractPreference() {
 
         val values: Map<String, Any>
             get() {
-                return getCurrentXmlValues(FILES.GBOARD_PREFERENCES.fileName) +
-                        getCurrentXmlValues(FILES.FLAGS.fileName)
+                return getCurrentXmlValues(FILES.GBOARD_PREFERENCES.filePath) +
+                        getCurrentXmlValues(FILES.FLAGS.filePath)
             }
 
         @SuppressLint("SdCardPath")
         private fun getCurrentXmlValues(file: String, cached: Boolean = false): Map<String, Any> {
-            return SuFile("/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/$file").readXML(
-                if (cached) FILES.values().find { it.fileName == file }?.let { flagsString[it] }
+            return SuFile(file).readXML(
+                if (cached) FILES.values().find { it.filePath == file }?.let { flagsString[it] }
                 else null
             )
         }
@@ -343,8 +345,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
         @SuppressLint("SdCardPath")
         fun applyChanges(): Boolean {
             FILES.values().filter { it != FILES.NONE }.forEach { file ->
-                val fileName =
-                    "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
+                val fileName = file.filePath
                 flagsString[file]?.let {
                     SuFile(fileName).writeFile(it.trim())
                 }
@@ -356,11 +357,10 @@ class Flags(val activity: Activity) : AbstractPreference() {
         @SuppressLint("SdCardPath")
         fun setUpFlags() {
             FILES.values().filter { it != FILES.NONE }.forEach { file ->
-                val fileName =
-                    "/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/${file.fileName}"
+                val fileName = file.filePath
                 flagsString[file] = SuFile(fileName).openStream()?.use {
                     it.bufferedReader().readText()
-                }
+                } ?: "<map></map>"
             }
         }
 

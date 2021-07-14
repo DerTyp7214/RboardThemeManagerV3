@@ -6,6 +6,7 @@ import de.dertyp7214.rboardthememanager.data.ModuleMeta
 @Suppress("MemberVisibilityCanBePrivate", "unused", "SdCardPath")
 object Config {
     var useMagisk = false
+    var newGboard = true
 
     var THEME_LOCATION = "/system/etc/gboard_theme"
 
@@ -25,6 +26,16 @@ object Config {
     )
 
     val IS_MIUI = "ro.miui.ui.version.name".getSystemProperty().isNotEmpty()
+
+    val GBOARD_PREFS_PATH: String
+        get() {
+            return "${
+                newGboard.let {
+                    if (it) "/data/user_de/0/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
+                    else "/data/data/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
+                }
+            }${GBOARD_PACKAGE_NAME}_preferences.xml"
+        }
 
     val MAGISK_THEME_LOC: String
         get() {

@@ -42,8 +42,7 @@ fun applyTheme(
         if (theme.path.isEmpty() || theme.path.startsWith("assets:") || theme.path.startsWith("system_auto:")) theme.path
         else "${if (Config.useMagisk) "system:" else "files:themes/"}${theme.name}.zip"
     val inputPackageName = GBOARD_PACKAGE_NAME
-    val fileName =
-        "/data/data/$inputPackageName/shared_prefs/${inputPackageName}_preferences.xml"
+    val fileName = Config.GBOARD_PREFS_PATH
     Logger.log(
         Logger.Companion.Type.INFO,
         "APPLY",
@@ -89,9 +88,8 @@ fun applyTheme(
 
 @SuppressLint("SdCardPath")
 fun getActiveTheme(): String {
-    val inputPackageName = "com.google.android.inputmethod.latin"
     val fileLol =
-        SuFile("/data/data/$inputPackageName/shared_prefs/${inputPackageName}_preferences.xml")
+        SuFile(Config.GBOARD_PREFS_PATH)
     return try {
         fileLol.openStream()?.bufferedReader()?.readText()
             ?.split("<string name=\"additional_keyboard_theme\">")

@@ -15,7 +15,7 @@ android {
         applicationId "de.dertyp7214.rboardthememanager"
         minSdkPreview "S"
         targetSdkPreview "S"
-        versionCode 322001
+        versionCode 322002
         versionName "3.2.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
