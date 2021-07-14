@@ -93,13 +93,15 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
     }
 
     fun setMenu(
-        @MenuRes menu: Int = -1,
+        @MenuRes menu: Int? = null,
         itemClickListener: PopupMenu.OnMenuItemClickListener? = null
     ) {
-        popupMenu = PopupMenu(context, moreButton).also { popup ->
-            popup.menuInflater.inflate(menu, popup.menu)
-            popup.setOnMenuItemClickListener(itemClickListener)
-        }
+        popupMenu = if (menu != null)
+            PopupMenu(context, moreButton).also { popup ->
+                popup.menuInflater.inflate(menu, popup.menu)
+                popup.setOnMenuItemClickListener(itemClickListener)
+            }
+        else null
     }
 
     fun setText(text: String = "") {
