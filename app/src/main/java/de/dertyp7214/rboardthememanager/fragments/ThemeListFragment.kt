@@ -52,7 +52,7 @@ class ThemeListFragment : Fragment() {
         }, themesViewModel::setSelectedTheme)
 
         refreshLayout.setOnApplyWindowInsetsListener { insetsView, windowInsets ->
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 insetsView.setMargin(
                     bottomMargin = max(
                         windowInsets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.ime()).bottom - 64.dp(
