@@ -45,6 +45,7 @@ fun List<String>.runAsCommand(callback: (result: Array<String>) -> Unit = {}): B
     }
 }
 
+
 fun <T> String.setXmlValue(value: T, key: String): String {
     return this.let { fileText ->
         val type = when (value) {

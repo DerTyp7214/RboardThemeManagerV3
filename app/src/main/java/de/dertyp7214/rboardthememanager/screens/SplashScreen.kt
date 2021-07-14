@@ -26,6 +26,7 @@ import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.OutputMetadata
 import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.utils.*
+import de.dertyp7214.rboardthememanager.utils.PackageUtils.getAppVersionCode
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
 import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
 import org.json.JSONObject
@@ -69,6 +70,8 @@ class SplashScreen : AppCompatActivity() {
         files.forEach {
             SuFile(it.absolutePath).deleteRecursive()
         }
+
+        Config.newGboard = getAppVersionCode(Config.GBOARD_PACKAGE_NAME, packageManager) >= 60780714
 
         AppWidgetManager.getInstance(this).let { appWidgetManager ->
             appWidgetManager.getAppWidgetIds(
@@ -159,23 +162,29 @@ class SplashScreen : AppCompatActivity() {
                 finishAndRemoveTask()
             }
             initialized && data?.toString()?.endsWith(".rboard") == true -> {
+                val resultLauncher =
+                    registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                        val resultData = result.data
+                        if (result.resultCode == RESULT_OK && resultData != null) {
+                            val size = resultData.getIntExtra("size", 0)
+                            Toast.makeText(
+                                this,
+                                getString(R.string.flags_loaded, size),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        finishAndRemoveTask()
+                    }
                 doAsync({
                     File(cacheDir, "flags.rboard").apply {
                         delete()
                         data.writeToFile(this@SplashScreen, this)
                     }.readXML()
                 }) {
-                    Flags.setUpFlags()
-                    it.forEach { entry ->
-                        Flags.setValue(entry.value, entry.key, Flags.FILES.FLAGS)
+                    ShareFlags.flags = it
+                    ShareFlags::class.java.start(this, resultLauncher) {
+                        putExtra("import", true)
                     }
-                    Flags.applyChanges()
-                    Toast.makeText(
-                        this,
-                        getString(R.string.flags_loaded, it.size),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    finishAndRemoveTask()
                 }
             }
             initialized && data != null -> {

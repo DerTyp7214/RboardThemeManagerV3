@@ -222,20 +222,7 @@ class MainActivity : AppCompatActivity() {
                             zip.delete()
                             ZipHelper().zip(files.map { it.absolutePath }, zip.absolutePath)
                             files.forEach { it.delete() }
-                            val uri = FileProvider.getUriForFile(this, packageName, zip)
-                            ShareCompat.IntentBuilder(this)
-                                .setStream(uri)
-                                .setType("application/pack")
-                                .intent.setAction(ACTION_SEND)
-                                .setDataAndType(uri, "application/pack")
-                                .addFlags(FLAG_GRANT_READ_URI_PERMISSION).apply {
-                                    startActivity(
-                                        createChooser(
-                                            this,
-                                            getString(R.string.share_themes)
-                                        )
-                                    )
-                                }
+                            zip.share(this, "application/pack", ACTION_SEND, R.string.share_themes)
                             dialog.dismiss()
                             adapter.clearSelection()
                         }

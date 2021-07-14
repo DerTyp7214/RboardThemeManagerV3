@@ -10,7 +10,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
-import com.dertyp7214.logs.helpers.Logger
+import de.dertyp7214.rboardthememanager.screens.ShareFlags
 import com.topjohnwu.superuser.io.SuFile
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
@@ -202,6 +202,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
     ) : AbstractPreference() {
 
         private var filter: String = ""
+        private var onlyDisabled: Boolean = false
 
         private val searchBar = SearchBar(activity).apply {
             setOnSearchListener {
@@ -212,6 +213,17 @@ class Flags(val activity: Activity) : AbstractPreference() {
                 filter = ""
                 requestReload()
             }
+            setMenu(R.menu.all_flags) {
+                when (it.itemId) {
+                    R.id.only_disabled -> {
+                        it.isChecked = !it.isChecked
+                        onlyDisabled = it.isChecked
+                        requestReload()
+                    }
+                    R.id.share_flags -> ShareFlags::class.java.start(activity)
+                }
+                true
+            }
         }
 
         override fun getExtraView(): View = searchBar
@@ -219,10 +231,10 @@ class Flags(val activity: Activity) : AbstractPreference() {
         override fun preferences(builder: PreferenceScreen.Builder) {
             val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
             getCurrentXmlValues(FILES.FLAGS.filePath, true).filter {
-                filter.isEmpty() || it.key.contains(
+                (filter.isEmpty() || it.key.contains(
                     filter,
                     true
-                )
+                )) && onlyDisabled.let { b -> if (b) it.value is Boolean && it.value == false else true }
             }.forEach { entry ->
                 prefs.edit { remove(entry.key) }
                 if (entry.value is Boolean) builder.switch(entry.key) {
@@ -260,6 +272,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
     }
 
     companion object {
+        private var changes: Boolean = false
         private val flags = arrayListOf<FlagItem>()
         private var flagsString: EnumMap<FILES, String> = EnumMap(FILES::class.java)
 
@@ -335,6 +348,12 @@ class Flags(val activity: Activity) : AbstractPreference() {
                         getCurrentXmlValues(FILES.FLAGS.filePath)
             }
 
+        val flagValues: Map<String, Any>
+            get() {
+                return getCurrentXmlValues(FILES.FLAGS.filePath)
+            }
+
+
         @SuppressLint("SdCardPath")
         private fun getCurrentXmlValues(file: String, cached: Boolean = false): Map<String, Any> {
             return SuFile(file).readXML(
@@ -357,6 +376,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
 
         @SuppressLint("SdCardPath")
         fun setUpFlags() {
+            changes = false
             FILES.values().filter { it != FILES.NONE }.forEach { file ->
                 val fileName = file.filePath
                 flagsString[file] = SuFile(fileName).openStream()?.use {
@@ -367,51 +387,8 @@ class Flags(val activity: Activity) : AbstractPreference() {
 
         fun <T> setValue(value: T, key: String, file: FILES): Boolean {
             if (file == FILES.NONE) return true
-            flagsString[file] = flagsString[file]?.let { fileText ->
-                val type = when (value) {
-                    is Boolean -> "boolean"
-                    is Int -> "integer"
-                    is Long -> "long"
-                    is Float -> "float"
-                    else -> "string"
-                }
-                Logger.log(
-                    Logger.Companion.Type.DEBUG,
-                    "CHANGE FLAG",
-                    "value: $value key: $key type: $type"
-                )
-                if (type != "string") {
-                    when {
-                        "<$type name=\"$key\"" in fileText -> fileText.replace(
-                            """<$type name="$key" value=".*" />""".toRegex(),
-                            """<$type name="$key" value="$value" />"""
-                        )
-                        Regex("<map[ |]/>") in fileText -> fileText.replace(
-                            Regex("<map[ |]/>"),
-                            """<map><$type name="$key" value="$value" /></map>"""
-                        )
-                        else -> fileText.replace(
-                            "<map>",
-                            """<map><$type name="$key" value="$value" />"""
-                        )
-                    }
-                } else {
-                    when {
-                        "<$type name\"$key\"" in fileText -> fileText.replace(
-                            """<$type name="$key">.*</$type>""".toRegex(),
-                            """<$type name="$key">$value</$type>"""
-                        )
-                        Regex("<map[ |]>") in fileText -> fileText.replace(
-                            Regex("<map[ |]>"),
-                            """<map><$type name="$key">$value</$type></map>"""
-                        )
-                        else -> fileText.replace(
-                            "<map>",
-                            """<map><$type name="$key">$value</$type>"""
-                        )
-                    }
-                }
-            }
+            changes = true
+            flagsString[file] = flagsString[file]?.setXmlValue(value, key)
 
             return true
         }

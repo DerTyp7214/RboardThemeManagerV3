@@ -21,6 +21,7 @@
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/activity_main.xml" value="0.18085106382978725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/activity_preferences.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/activity_repos.xml" value="0.18085106382978725" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/activity_share_flags.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/auto_theme_select.xml" value="0.25" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/bottom_bar.xml" value="0.4919653893695921" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/chip_container.xml" value="0.18085106382978725" />
@@ -31,16 +32,20 @@
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/loading_dialog.xml" value="0.18085106382978725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/news_item.xml" value="0.1" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/search_bar.xml" value="0.22" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/share_flag_item.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/share_popup.xml" value="0.1" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/single_theme_item.xml" value="0.1" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/switch_keyboard_widget.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/switch_keyboard_widget_configure.xml" value="0.1331521739130435" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/theme_grid_item_single.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/all_flags.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/import_flags.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/install_pack.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/menu_downloads.xml" value="0.1" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/navigation.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/repos.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/selected_themes_menu.xml" value="0.1" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/share_flags.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.359" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/mipmap/ic_launcher.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/mipmap/ic_launcher_round.xml" value="0.3725" />

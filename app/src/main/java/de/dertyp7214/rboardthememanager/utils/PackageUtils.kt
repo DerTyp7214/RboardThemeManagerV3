@@ -27,7 +27,7 @@ object PackageUtils {
                     val intent: Intent?
                     val downloadedApk = getFileUri(context, file)
                     when {
-                        Build.VERSION.SDK_INT > Build.VERSION_CODES.P -> {
+                        Build.VERSION.SDK_INT > Build.VERSION_CODES.O -> {
                             intent = Intent(Intent.ACTION_VIEW).setDataAndType(
                                 downloadedApk,
                                 "application/vnd.android.package-archive"
@@ -65,13 +65,19 @@ object PackageUtils {
         }
     }
 
-    fun getAppVersionCode(packageName: String, packageManager: PackageManager): Long {
+    fun getAppVersionCode(packageName: String, packageManager: PackageManager): Long{
         return try {
-            packageManager.getPackageInfo(packageName, 0).longVersionCode
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                packageManager.getPackageInfo(packageName, 0).longVersionCode
+            } else {
+                packageManager.getPackageInfo(packageName, 0).versionCode.toLong()
+
+            }
         } catch (e: PackageManager.NameNotFoundException) {
             -1
         }
     }
+
 
     private fun getFileUri(context: Context, file: File): Uri {
         return FileProvider.getUriForFile(
