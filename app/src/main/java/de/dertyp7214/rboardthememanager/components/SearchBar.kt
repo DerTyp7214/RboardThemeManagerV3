@@ -27,8 +27,7 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
     private var closeListener: () -> Unit = {}
     private var focusListener: () -> Unit = {}
 
-    @MenuRes
-    private var menuId: Int = -1
+    private var popupMenu: PopupMenu? = null
     private var menuItemClickListener: PopupMenu.OnMenuItemClickListener? = null
 
     private val searchBar: CardView
@@ -81,12 +80,7 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
         }
 
         moreButton.setOnClickListener {
-            if (menuId > 0) {
-                val popupMenu = PopupMenu(context, it)
-                popupMenu.menuInflater.inflate(menuId, popupMenu.menu)
-                popupMenu.setOnMenuItemClickListener(menuItemClickListener)
-                popupMenu.show()
-            }
+            popupMenu?.show()
         }
 
         searchEdit.setOnEditorActionListener { _, actionId, _ ->
@@ -102,8 +96,10 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
         @MenuRes menu: Int = -1,
         itemClickListener: PopupMenu.OnMenuItemClickListener? = null
     ) {
-        menuId = menu
-        menuItemClickListener = itemClickListener
+        popupMenu = PopupMenu(context, moreButton).also { popup ->
+            popup.menuInflater.inflate(menu, popup.menu)
+            popup.setOnMenuItemClickListener(itemClickListener)
+        }
     }
 
     fun setText(text: String = "") {

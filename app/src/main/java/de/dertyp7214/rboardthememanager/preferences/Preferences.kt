@@ -60,13 +60,14 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
             "settings" -> {
             }
             "flags", "all_flags" -> {
-                Flags.applyChanges()
-                Toast.makeText(activity, R.string.flags_applied, Toast.LENGTH_SHORT).show()
-                AppWidgetManager.getInstance(activity).let { appWidgetManager ->
-                    appWidgetManager.getAppWidgetIds(
-                        ComponentName(activity, FlagsWidget::class.java)
-                    ).forEach { id ->
-                        FlagsWidget.updateAppWidget(activity, appWidgetManager, id)
+                if (Flags.applyChanges()) {
+                    Toast.makeText(activity, R.string.flags_applied, Toast.LENGTH_SHORT).show()
+                    AppWidgetManager.getInstance(activity).let { appWidgetManager ->
+                        appWidgetManager.getAppWidgetIds(
+                            ComponentName(activity, FlagsWidget::class.java)
+                        ).forEach { id ->
+                            FlagsWidget.updateAppWidget(activity, appWidgetManager, id)
+                        }
                     }
                 }
             }

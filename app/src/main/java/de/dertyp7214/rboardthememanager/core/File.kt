@@ -1,7 +1,12 @@
 package de.dertyp7214.rboardthememanager.core
 
+import android.app.Activity
+import android.content.Intent
+import androidx.core.app.ShareCompat
+import androidx.core.content.FileProvider
 import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
+import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 import org.xml.sax.InputSource
 import java.io.File
@@ -69,4 +74,26 @@ fun File.readXML(string: String? = null): Map<String, Any> {
         }
 
     return output
+}
+
+fun File.share(
+    activity: Activity,
+    type: String = "*/*",
+    action: String = Intent.ACTION_SEND,
+    shareText: Int = R.string.share
+) {
+    val uri = FileProvider.getUriForFile(activity, activity.packageName, this)
+    ShareCompat.IntentBuilder(activity)
+        .setStream(uri)
+        .setType(type)
+        .intent.setAction(action)
+        .setDataAndType(uri, type)
+        .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION).apply {
+            activity.startActivity(
+                Intent.createChooser(
+                    this,
+                    activity.getString(shareText)
+                )
+            )
+        }
 }

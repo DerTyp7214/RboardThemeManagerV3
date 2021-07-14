@@ -139,8 +139,8 @@ class FlagsWidget : AppWidgetProvider() {
                     )
                 }
             }
-            Flags.applyChanges()
-            Toast.makeText(context, R.string.flag_applied, Toast.LENGTH_SHORT).show()
+            if (Flags.applyChanges())
+                Toast.makeText(context, R.string.flag_applied, Toast.LENGTH_SHORT).show()
         }
         AppWidgetManager.getInstance(context).let { appWidgetManager ->
             onUpdate(

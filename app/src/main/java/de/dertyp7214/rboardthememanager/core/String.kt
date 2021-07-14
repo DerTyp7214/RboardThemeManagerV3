@@ -44,3 +44,51 @@ fun List<String>.runAsCommand(callback: (result: Array<String>) -> Unit = {}): B
         Logger.log(Logger.Companion.Type.INFO, "RUN COMMAND", "${this@runAsCommand} -> $this")
     }
 }
+
+fun <T> String.setXmlValue(value: T, key: String): String {
+    return this.let { fileText ->
+        val type = when (value) {
+            is Boolean -> "boolean"
+            is Int -> "integer"
+            is Long -> "long"
+            is Float -> "float"
+            else -> "string"
+        }
+        Logger.log(
+            Logger.Companion.Type.DEBUG,
+            "CHANGE FLAG",
+            "value: $value key: $key type: $type"
+        )
+        if (type != "string") {
+            when {
+                "<$type name=\"$key\"" in fileText -> fileText.replace(
+                    """<$type name="$key" value=".*" />""".toRegex(),
+                    """<$type name="$key" value="$value" />"""
+                )
+                Regex("<map( |)/>") in fileText -> fileText.replace(
+                    Regex("<map( |)/>"),
+                    """<map><$type name="$key" value="$value" /></map>"""
+                )
+                else -> fileText.replace(
+                    "<map>",
+                    """<map><$type name="$key" value="$value" />"""
+                )
+            }
+        } else {
+            when {
+                "<$type name\"$key\"" in fileText -> fileText.replace(
+                    """<$type name="$key">.*</$type>""".toRegex(),
+                    """<$type name="$key">$value</$type>"""
+                )
+                Regex("<map( |)/>") in fileText -> fileText.replace(
+                    Regex("<map( |)/>"),
+                    """<map><$type name="$key">$value</$type></map>"""
+                )
+                else -> fileText.replace(
+                    "<map>",
+                    """<map><$type name="$key">$value</$type>"""
+                )
+            }
+        }
+    }
+}

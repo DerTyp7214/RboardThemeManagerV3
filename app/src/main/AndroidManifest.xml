@@ -20,6 +20,10 @@
         android:theme="@style/Theme.RboardThemeManagerV3"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".screens.ShareFlags"
+            android:exported="true"
+            android:theme="@style/Theme.RboardThemeManagerV3.Info" />
+        <activity
             android:name=".screens.ReadMoreReadFast"
             android:exported="true" />
 
@@ -155,9 +159,9 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_notification" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
     </application>
+
 </manifest>
