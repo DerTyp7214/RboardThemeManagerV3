@@ -499,11 +499,7 @@ class MainActivity : AppCompatActivity() {
 
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
 
-        if (!preferenceManager.getBoolean(
-                "usageSet",
-                MagiskUtils.getModules()
-                    .any { it.id == Config.MODULE_ID }
-            )
+        if (!preferenceManager.getBoolean("usageSet", false)
         ) {
             openDialog(
                 R.string.use_gboard,
