@@ -12,5 +12,9 @@ fun URL.getTextFromUrl(): String {
 }
 
 fun URL.isReachable(): Boolean {
-    return (openConnection() as HttpURLConnection).responseCode == 200
+    return try {
+        (openConnection() as HttpURLConnection).responseCode == 200
+    } catch (e: Exception) {
+        false
+    }
 }
