@@ -48,40 +48,6 @@ class ThemeListFragment : Fragment() {
             )
         }, themesViewModel::setSelectedTheme)
 
-        refreshLayout.setOnApplyWindowInsetsListener { insetsView, windowInsets ->
-            insetsView.setMargin(
-                bottomMargin = max(
-                    windowInsets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.ime()).bottom - 64.dp(
-                        requireContext()
-                    ) - windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom, 2.dp(requireContext())
-                )
-            )
-            windowInsets
-        }
-
-        refreshLayout.setWindowInsetsAnimationCallback(object :
-            WindowInsetsAnimation.Callback(DISPATCH_MODE_STOP) {
-            override fun onProgress(
-                insets: WindowInsets,
-                runningAnimations: MutableList<WindowInsetsAnimation>
-            ): WindowInsets {
-                return insets
-            }
-        })
-
-        refreshLayout.isRefreshing = themesViewModel.getThemes().isEmpty()
-        refreshLayout.setProgressViewOffset(
-            true,
-            0,
-            5.dpToPx(requireContext()).toInt()
-        )
-        refreshLayout.setProgressBackgroundColorSchemeColor(requireActivity().getAttr(R.attr.colorBackgroundFloating))
-        refreshLayout.setColorSchemeColors(requireActivity().getAttr(R.attr.colorOnPrimary))
-
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.setHasFixedSize(false)
-        recyclerView.adapter = adapter
-
         themesViewModel.themesObserve(this) { themes ->
             if (themes.isEmpty()) {
                 refreshLayout.isRefreshing = true
@@ -99,6 +65,44 @@ class ThemeListFragment : Fragment() {
                 adapter.notifyDataChanged()
                 refreshLayout.isRefreshing = false
             }
+        }
+
+        refreshLayout.setOnApplyWindowInsetsListener { insetsView, windowInsets ->
+            insetsView.setMargin(
+                bottomMargin = max(
+                    windowInsets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.ime()).bottom - 64.dp(
+                        requireContext()
+                    ) - windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom,
+                    2.dp(requireContext())
+                )
+            )
+            windowInsets
+        }
+
+        refreshLayout.setWindowInsetsAnimationCallback(object :
+            WindowInsetsAnimation.Callback(DISPATCH_MODE_STOP) {
+            override fun onProgress(
+                insets: WindowInsets,
+                runningAnimations: MutableList<WindowInsetsAnimation>
+            ): WindowInsets {
+                return insets
+            }
+        })
+        refreshLayout.setProgressViewOffset(
+            true,
+            0,
+            5.dpToPx(requireContext()).toInt()
+        )
+        refreshLayout.setProgressBackgroundColorSchemeColor(requireActivity().getAttr(R.attr.colorBackgroundFloating))
+        refreshLayout.setColorSchemeColors(requireActivity().getAttr(R.attr.colorOnPrimary))
+
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.setHasFixedSize(false)
+        recyclerView.adapter = adapter
+
+        if (themesViewModel.getThemes().isEmpty()) {
+            refreshLayout.isRefreshing = true
+            ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
         }
 
         themesViewModel.observeFilter(this) { filter ->
@@ -119,8 +123,5 @@ class ThemeListFragment : Fragment() {
             themesViewModel.clearSearch()
             ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
         }
-
-        if (themesViewModel.getThemes().isEmpty())
-            ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
     }
 }

@@ -72,8 +72,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         window.setDecorFitsSystemWindows(false)
 
-        checkModuleAndUpdate()
-
         themesViewModel = this[ThemesViewModel::class.java]
 
         val toolbar = binding.toolbar
@@ -114,138 +112,139 @@ class MainActivity : AppCompatActivity() {
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
 
-        val mainMenuItems = arrayListOf(
-            MenuItem(
-                R.drawable.ic_info,
-                R.string.info
-            ) {
-                PreferencesActivity::class.java.start(this, closeBottomSheetBehaviorLauncher) {
-                    putExtra("type", "info")
-                }
-            },
-            MenuItem(
-                R.drawable.ic_settings,
-                R.string.settings
-            ) {
-                PreferencesActivity::class.java.start(this, reloadThemesLauncher) {
-                    putExtra("type", "settings")
-                }
-            },
-            MenuItem(
-                R.drawable.ic_baseline_outlined_flag_24,
-                R.string.flags
-            ) {
-                PreferencesActivity::class.java.start(this, closeBottomSheetBehaviorLauncher) {
-                    putExtra("type", "flags")
-                }
-            },
-            MenuItem(
-                R.drawable.ic_creator,
-                R.string.rboard_theme_creator
-            ) {
-                if (isPackageInstalled(Config.RBOARD_THEME_CREATOR_PACKAGE_NAME, packageManager))
-                    startActivity(packageManager.getLaunchIntentForPackage(Config.RBOARD_THEME_CREATOR_PACKAGE_NAME))
-                else startActivity(
-                    Intent(
-                        ACTION_VIEW,
-                        Uri.parse("https://github.com/DerTyp7214/RboardThemeCreator#readme")
-                    )
-                )
-            }
-        )
-
-        val menuItems = ArrayList(mainMenuItems)
-
-        val menuAdapter = MenuAdapter(menuItems, this)
-
-        findViewById<View>(R.id.fragmentContainerView).setMargin(
-            bottomMargin = resources.getDimension(R.dimen.bottomBarHeight).toInt() + 18.dpToPx(this)
-                .toInt()
-        )
-
-        bottomSheetBehavior.isFitToContents = true
-        bottomSheetBehavior.skipCollapsed = true
-        bottomSheetBehavior.peekHeight =
-            resources.getDimension(R.dimen.bottomBarHeight).toInt() + 8.dpToPx(this).toInt()
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-
-        bottomSheetBehavior.addBottomSheetCallback(object :
-            BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    if (themesViewModel.getSelectedTheme() != null)
-                        themesViewModel.setSelectedTheme()
-                }
+        downloadResultLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                content.setRenderEffect(null)
             }
 
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                navigation.alpha = 1 - slideOffset
-                secondaryContent.alpha = slideOffset
+        AppStartUp(this).apply {
+            setUp()
+            onCreate { intent ->
+                checkModuleAndUpdate(intent)
 
-                if (navigation.alpha == 0F) navigation.visibility = GONE
-                else if (navigation.visibility == GONE) navigation.visibility = VISIBLE
-            }
-        })
-
-        toolbar.navigationIcon =
-            ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)
-        toolbar.setNavigationOnClickListener { themesViewModel.getSelections().second?.clearSelection() }
-
-        toolbar.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.share -> {
-                    val adapter = themesViewModel.getSelections().second
-                    val themes = adapter?.getSelected()?.filter {
-                        it.path.isNotEmpty() && !it.path.startsWith("assets:") && !it.path.startsWith(
-                            "system_auto:"
+                val mainMenuItems = arrayListOf(
+                    MenuItem(
+                        R.drawable.ic_info,
+                        R.string.info
+                    ) {
+                        PreferencesActivity::class.java.start(
+                            this,
+                            closeBottomSheetBehaviorLauncher
+                        ) {
+                            putExtra("type", "info")
+                        }
+                    },
+                    MenuItem(
+                        R.drawable.ic_settings,
+                        R.string.settings
+                    ) {
+                        PreferencesActivity::class.java.start(this, reloadThemesLauncher) {
+                            putExtra("type", "settings")
+                        }
+                    },
+                    MenuItem(
+                        R.drawable.ic_baseline_outlined_flag_24,
+                        R.string.flags
+                    ) {
+                        PreferencesActivity::class.java.start(
+                            this,
+                            closeBottomSheetBehaviorLauncher
+                        ) {
+                            putExtra("type", "flags")
+                        }
+                    },
+                    MenuItem(
+                        R.drawable.ic_creator,
+                        R.string.rboard_theme_creator
+                    ) {
+                        if (isPackageInstalled(
+                                Config.RBOARD_THEME_CREATOR_PACKAGE_NAME,
+                                packageManager
+                            )
+                        )
+                            startActivity(packageManager.getLaunchIntentForPackage(Config.RBOARD_THEME_CREATOR_PACKAGE_NAME))
+                        else startActivity(
+                            Intent(
+                                ACTION_VIEW,
+                                Uri.parse("https://github.com/DerTyp7214/RboardThemeCreator#readme")
+                            )
                         )
                     }
-                    if (!themes.isNullOrEmpty()) {
-                        openShareThemeDialog { dialog, name, author ->
-                            val files = arrayListOf<File>()
-                            File(cacheDir, "pack.meta").apply {
-                                files.add(this)
-                                writeText("name=$name\nauthor=$author\n")
-                            }
-                            themes.map { it.moveToCache(this) }.forEach {
-                                val image = File(it.path.removeSuffix(".zip"))
-                                files.add(File(it.path))
-                                if (image.exists()) files.add(image)
-                            }
-                            val zip = File(cacheDir, "themes.pack")
-                            zip.delete()
-                            ZipHelper().zip(files.map { it.absolutePath }, zip.absolutePath)
-                            files.forEach { it.delete() }
-                            zip.share(this, "application/pack", ACTION_SEND, R.string.share_themes)
-                            dialog.dismiss()
-                            adapter.clearSelection()
+                )
+
+                val menuItems = ArrayList(mainMenuItems)
+
+                val menuAdapter = MenuAdapter(menuItems, this)
+
+                findViewById<View>(R.id.fragmentContainerView).setMargin(
+                    bottomMargin = resources.getDimension(R.dimen.bottomBarHeight)
+                        .toInt() + 18.dpToPx(this)
+                        .toInt()
+                )
+
+                bottomSheetBehavior.isFitToContents = true
+                bottomSheetBehavior.skipCollapsed = true
+                bottomSheetBehavior.peekHeight =
+                    resources.getDimension(R.dimen.bottomBarHeight).toInt() + 8.dpToPx(this).toInt()
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
+                bottomSheetBehavior.addBottomSheetCallback(object :
+                    BottomSheetBehavior.BottomSheetCallback() {
+                    override fun onStateChanged(bottomSheet: View, newState: Int) {
+                        if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                            if (themesViewModel.getSelectedTheme() != null)
+                                themesViewModel.setSelectedTheme()
                         }
-                    } else if (themes?.isEmpty() == true) {
-                        Toast.makeText(
-                            this,
-                            R.string.select_at_least_one_not_default_theme,
-                            Toast.LENGTH_LONG
-                        ).show()
                     }
-                }
-                R.id.delete -> {
-                    openDialog(
-                        R.string.do_you_want_to_delete_theme,
-                        R.string.delete_theme
-                    ) { dialog ->
-                        dialog.dismiss()
-                        val adapter = themesViewModel.getSelections().second
-                        if (adapter != null) {
-                            val themes = adapter.getSelected().filter {
-                                it.path.isNotEmpty() && !it.path.startsWith("assets:")
+
+                    override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                        navigation.alpha = 1 - slideOffset
+                        secondaryContent.alpha = slideOffset
+
+                        if (navigation.alpha == 0F) navigation.visibility = GONE
+                        else if (navigation.visibility == GONE) navigation.visibility = VISIBLE
+                    }
+                })
+
+                toolbar.navigationIcon =
+                    ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)
+                toolbar.setNavigationOnClickListener { themesViewModel.getSelections().second?.clearSelection() }
+
+                toolbar.setOnMenuItemClickListener { item ->
+                    when (item.itemId) {
+                        R.id.share -> {
+                            val adapter = themesViewModel.getSelections().second
+                            val themes = adapter?.getSelected()?.filter {
+                                it.path.isNotEmpty() && !it.path.startsWith("assets:") && !it.path.startsWith(
+                                    "system_auto:"
+                                )
                             }
-                            if (themes.isNotEmpty()) {
-                                themes.forEach { theme ->
-                                    theme.delete()
+                            if (!themes.isNullOrEmpty()) {
+                                openShareThemeDialog { dialog, name, author ->
+                                    val files = arrayListOf<File>()
+                                    File(cacheDir, "pack.meta").apply {
+                                        files.add(this)
+                                        writeText("name=$name\nauthor=$author\n")
+                                    }
+                                    themes.map { it.moveToCache(this) }.forEach {
+                                        val image = File(it.path.removeSuffix(".zip"))
+                                        files.add(File(it.path))
+                                        if (image.exists()) files.add(image)
+                                    }
+                                    val zip = File(cacheDir, "themes.pack")
+                                    zip.delete()
+                                    ZipHelper().zip(files.map { it.absolutePath }, zip.absolutePath)
+                                    files.forEach { it.delete() }
+                                    zip.share(
+                                        this,
+                                        "application/pack",
+                                        ACTION_SEND,
+                                        R.string.share_themes
+                                    )
+                                    dialog.dismiss()
+                                    adapter.clearSelection()
                                 }
-                                themesViewModel.setThemes()
-                                adapter.clearSelection()
-                            } else {
+                            } else if (themes?.isEmpty() == true) {
                                 Toast.makeText(
                                     this,
                                     R.string.select_at_least_one_not_default_theme,
@@ -253,153 +252,203 @@ class MainActivity : AppCompatActivity() {
                                 ).show()
                             }
                         }
-                    }
-                }
-                R.id.select_all -> {
-                    themesViewModel.getSelections().second?.selectAll()
-                }
-            }
-            true
-        }
-
-        themesViewModel.observeSelections(this) { selections ->
-            val originHeight = toolbar.marginBottom
-            val destinationHeight = if (selections.first) 8.dp(this) else 62.dp(this)
-            ValueAnimator.ofInt(originHeight, destinationHeight).apply {
-                addUpdateListener {
-                    toolbar.setMargins(0, 0, 0, it.animatedValue as Int)
-                }
-                duration = 150
-                start()
-            }
-        }
-
-        themesViewModel.observerSelectedTheme(this) { theme ->
-            secondaryContent.removeViewAt(0)
-            if (theme != null) {
-                secondaryContent.addView(ThemeUtils.getThemeView(theme, this), 0)
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-                searchBar.clearFocus()
-                menuItems.clear()
-                menuItems.add(MenuItem(R.drawable.ic_apply_theme, R.string.apply_theme) {
-                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                    if (applyTheme(theme, true))
-                        Toast.makeText(this, R.string.applied, Toast.LENGTH_SHORT).show()
-                    else Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show()
-                    delayed(150) {
-                        themesViewModel.setSelectedTheme()
-                        themesViewModel.refreshThemes()
-                    }
-                })
-                fun applyTheme(dark: Boolean) {
-                    val files = mapOf(
-                        Pair(
-                            "system.prop",
-                            "ro.com.google.ime.${if (dark) "d_" else ""}theme_file=${File(theme.fileName).name}"
-                        )
-                    )
-                    MagiskUtils.updateModule(MODULE_META, files)
-                    //"setprop persist.gboard_${if (dark) "d_" else ""}theme ${File(theme.fileName).name}".runAsCommand() TODO: add when overlay is ready
-                    Flags.run {
-                        setUpFlags()
-                        setValue(true, "oem_dark_theme", Flags.FILES.FLAGS)
-                        applyChanges()
-                    }
-                    applyTheme(getSystemAutoTheme(), true)
-                }
-                if (theme.path.isNotEmpty() && !theme.path.startsWith("assets:") && !theme.path.startsWith(
-                        "system_auto:"
-                    )
-                ) {
-                    if (Config.useMagisk)
-                        menuItems.add(
-                            MenuItem(
-                                R.drawable.ic_auto_theme,
-                                R.string.apply_automatic_theme
-                            ) {
-                                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                                delayed(150) {
-                                    themesViewModel.setSelectedTheme()
-                                    themesViewModel.refreshThemes()
-                                }
-                                openDialog(R.layout.auto_theme_select, true) { dialog ->
-                                    findViewById<TextView>(R.id.dark_theme)?.setOnClickListener {
-                                        applyTheme(true)
-                                        dialog.dismiss()
+                        R.id.delete -> {
+                            openDialog(
+                                R.string.do_you_want_to_delete_theme,
+                                R.string.delete_theme
+                            ) { dialog ->
+                                dialog.dismiss()
+                                val adapter = themesViewModel.getSelections().second
+                                if (adapter != null) {
+                                    val themes = adapter.getSelected().filter {
+                                        it.path.isNotEmpty() && !it.path.startsWith("assets:")
                                     }
-                                    findViewById<TextView>(R.id.light_theme)?.setOnClickListener {
-                                        applyTheme(false)
-                                        dialog.dismiss()
+                                    if (themes.isNotEmpty()) {
+                                        themes.forEach { theme ->
+                                            theme.delete()
+                                        }
+                                        themesViewModel.setThemes()
+                                        adapter.clearSelection()
+                                    } else {
+                                        Toast.makeText(
+                                            this,
+                                            R.string.select_at_least_one_not_default_theme,
+                                            Toast.LENGTH_LONG
+                                        ).show()
                                     }
-                                    findViewById<MaterialButton>(R.id.cancel)?.setOnClickListener { dialog.dismiss() }
-                                    findViewById<MaterialButton>(R.id.ok)?.setOnClickListener { dialog.dismiss() }
                                 }
-                            })
-                    menuItems.add(MenuItem(R.drawable.ic_delete_theme, R.string.delete_theme) {
-                        openDialog(R.string.q_delete_theme, R.string.delete_theme) {
+                            }
+                        }
+                        R.id.select_all -> {
+                            themesViewModel.getSelections().second?.selectAll()
+                        }
+                    }
+                    true
+                }
+
+                themesViewModel.observeSelections(this) { selections ->
+                    val originHeight = toolbar.marginBottom
+                    val destinationHeight = if (selections.first) 8.dp(this) else 62.dp(this)
+                    ValueAnimator.ofInt(originHeight, destinationHeight).apply {
+                        addUpdateListener {
+                            toolbar.setMargins(0, 0, 0, it.animatedValue as Int)
+                        }
+                        duration = 150
+                        start()
+                    }
+                }
+
+                themesViewModel.observerSelectedTheme(this) { theme ->
+                    secondaryContent.removeViewAt(0)
+                    if (theme != null) {
+                        secondaryContent.addView(ThemeUtils.getThemeView(theme, this), 0)
+                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                        searchBar.clearFocus()
+                        menuItems.clear()
+                        menuItems.add(MenuItem(R.drawable.ic_apply_theme, R.string.apply_theme) {
                             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                            if (SuFile(theme.path).delete())
-                                Toast.makeText(this, R.string.theme_deleted, Toast.LENGTH_SHORT)
-                                    .show()
+                            if (applyTheme(theme, true))
+                                Toast.makeText(this, R.string.applied, Toast.LENGTH_SHORT).show()
                             else Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show()
                             delayed(150) {
                                 themesViewModel.setSelectedTheme()
-                                themesViewModel.setThemes(listOf())
+                                themesViewModel.refreshThemes()
                             }
+                        })
+                        fun applyTheme(dark: Boolean) {
+                            val files = mapOf(
+                                Pair(
+                                    "system.prop",
+                                    "ro.com.google.ime.${if (dark) "d_" else ""}theme_file=${
+                                        File(
+                                            theme.fileName
+                                        ).name
+                                    }"
+                                )
+                            )
+                            MagiskUtils.updateModule(MODULE_META, files)
+                            //"setprop persist.gboard_${if (dark) "d_" else ""}theme ${File(theme.fileName).name}".runAsCommand() TODO: add when overlay is ready
+                            Flags.run {
+                                setUpFlags()
+                                setValue(true, "oem_dark_theme", Flags.FILES.FLAGS)
+                                applyChanges()
+                            }
+                            applyTheme(getSystemAutoTheme(), true)
                         }
-                    })
+                        if (theme.path.isNotEmpty() && !theme.path.startsWith("assets:") && !theme.path.startsWith(
+                                "system_auto:"
+                            )
+                        ) {
+                            if (Config.useMagisk)
+                                menuItems.add(
+                                    MenuItem(
+                                        R.drawable.ic_auto_theme,
+                                        R.string.apply_automatic_theme
+                                    ) {
+                                        bottomSheetBehavior.state =
+                                            BottomSheetBehavior.STATE_COLLAPSED
+                                        delayed(150) {
+                                            themesViewModel.setSelectedTheme()
+                                            themesViewModel.refreshThemes()
+                                        }
+                                        openDialog(R.layout.auto_theme_select, true) { dialog ->
+                                            findViewById<TextView>(R.id.dark_theme)?.setOnClickListener {
+                                                applyTheme(true)
+                                                dialog.dismiss()
+                                            }
+                                            findViewById<TextView>(R.id.light_theme)?.setOnClickListener {
+                                                applyTheme(false)
+                                                dialog.dismiss()
+                                            }
+                                            findViewById<MaterialButton>(R.id.cancel)?.setOnClickListener { dialog.dismiss() }
+                                            findViewById<MaterialButton>(R.id.ok)?.setOnClickListener { dialog.dismiss() }
+                                        }
+                                    })
+                            menuItems.add(
+                                MenuItem(
+                                    R.drawable.ic_delete_theme,
+                                    R.string.delete_theme
+                                ) {
+                                    openDialog(R.string.q_delete_theme, R.string.delete_theme) {
+                                        bottomSheetBehavior.state =
+                                            BottomSheetBehavior.STATE_COLLAPSED
+                                        if (SuFile(theme.path).delete())
+                                            Toast.makeText(
+                                                this,
+                                                R.string.theme_deleted,
+                                                Toast.LENGTH_SHORT
+                                            )
+                                                .show()
+                                        else Toast.makeText(
+                                            this,
+                                            R.string.error,
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        delayed(150) {
+                                            themesViewModel.setSelectedTheme()
+                                            themesViewModel.setThemes(listOf())
+                                        }
+                                    }
+                                })
+                        }
+                    } else {
+                        secondaryContent.addView(
+                            ThemeUtils.getThemeView(
+                                ThemeUtils.getActiveThemeData(),
+                                this
+                            ), 0
+                        )
+                        menuItems.clear()
+                        menuItems.addAll(mainMenuItems)
+                    }
+                    menuAdapter.notifyDataSetChanged()
                 }
-            } else {
+
                 secondaryContent.addView(
                     ThemeUtils.getThemeView(
                         ThemeUtils.getActiveThemeData(),
                         this
                     ), 0
                 )
-                menuItems.clear()
-                menuItems.addAll(mainMenuItems)
-            }
-            menuAdapter.notifyDataSetChanged()
-        }
 
-        secondaryContent.addView(ThemeUtils.getThemeView(ThemeUtils.getActiveThemeData(), this), 0)
+                menuRecyclerView.layoutManager = LinearLayoutManager(this)
+                menuRecyclerView.setHasFixedSize(false)
+                menuRecyclerView.adapter = menuAdapter
 
-        menuRecyclerView.layoutManager = LinearLayoutManager(this)
-        menuRecyclerView.setHasFixedSize(false)
-        menuRecyclerView.adapter = menuAdapter
-
-        searchBar.setOnSearchListener { text ->
-            themesViewModel.setFilter(text)
-        }
-
-        searchBar.setOnCloseListener {
-            themesViewModel.setFilter()
-        }
-
-        themesViewModel.onClearSearch(this) {
-            searchBar.setText()
-        }
-
-        controller.addOnDestinationChangedListener { _, destination, _ ->
-            themesViewModel.setFilter()
-            themesViewModel.clearSearch()
-
-            when (destination.id) {
-                R.id.action_themeListFragment_to_downloadListFragment -> {
-                    searchBar.setMenu(R.menu.menu_downloads)
+                searchBar.setOnSearchListener { text ->
+                    themesViewModel.setFilter(text)
                 }
-                R.id.action_downloadListFragment_to_themeListFragment -> {
+
+                searchBar.setOnCloseListener {
+                    themesViewModel.setFilter()
+                }
+
+                themesViewModel.onClearSearch(this) {
+                    searchBar.setText()
+                }
+
+                controller.addOnDestinationChangedListener { _, destination, _ ->
+                    themesViewModel.setFilter()
+                    themesViewModel.clearSearch()
+
+                    when (destination.id) {
+                        R.id.action_themeListFragment_to_downloadListFragment -> {
+                            searchBar.setMenu(R.menu.menu_downloads)
+                        }
+                        R.id.action_downloadListFragment_to_themeListFragment -> {
+                        }
+                    }
+                }
+
+                navigation.setOnNavigationItemSelectedListener {
+                    navigate(controller, it.itemId)
+                    true
+                }
+
+                themesViewModel.onNavigate(this) { id ->
+                    navigate(controller, id)
                 }
             }
-        }
-
-        navigation.setOnNavigationItemSelectedListener {
-            navigate(controller, it.itemId)
-            true
-        }
-
-        themesViewModel.onNavigate(this) { id ->
-            navigate(controller, id)
         }
     }
 
@@ -444,12 +493,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkModuleAndUpdate() {
-        downloadResultLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                content.setRenderEffect(null)
-            }
-
+    private fun checkModuleAndUpdate(intent: Intent) {
         if (ThemeUtils.checkForExistingThemes()) ThemeUtils.getThemesPathFromProps()
             ?.apply { Config.THEME_LOCATION = this }
 

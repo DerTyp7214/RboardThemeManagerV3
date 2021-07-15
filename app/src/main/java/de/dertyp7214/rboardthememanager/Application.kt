@@ -8,7 +8,10 @@ import androidx.preference.PreferenceManager
 import com.dertyp7214.logs.helpers.Logger
 import com.downloader.PRDownloader
 import com.topjohnwu.superuser.Shell
+import de.dertyp7214.rboardthememanager.core.isReachable
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
+import de.dertyp7214.rboardthememanager.utils.doInBackground
+import java.net.URL
 
 class Application : Application() {
 
@@ -23,6 +26,10 @@ class Application : Application() {
     override fun onCreate() {
         super.onCreate()
         PRDownloader.initialize(this)
+        doInBackground {
+            if (!URL("https://bin.utwitch.net").isReachable())
+                Logger.customBin = "hastebin.com"
+        }
         Logger.init(this)
         Logger.extraData = {
             StringBuilder("Rooted: ")
