@@ -7,15 +7,15 @@ plugins {
 
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion '30.0.3'
+    compileSdkVersion 31
+    buildToolsVersion '31.0.0'
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
 
     defaultConfig {
         applicationId "de.dertyp7214.rboardthememanager"
         minSdkVersion 26
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 323004
         versionName "3.2.3"
 
