@@ -271,6 +271,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     FirebaseMessaging.getInstance()
                         .subscribeToTopic("update-v3-${BuildConfig.BUILD_TYPE.lowercase()}")
 
+                    isReady = !gboardInstalled || !rootAccess
                     when {
                         !gboardInstalled -> openDialog(
                             R.string.install_gboard,
