@@ -2,15 +2,22 @@ package de.dertyp7214.rboardthememanager.preferences
 
 import android.app.Activity
 import android.content.Intent
+import android.content.Intent.ACTION_SEND
+import android.content.Intent.EXTRA_TEXT
 import android.os.Build
 import android.os.Handler
 import android.view.View
 import android.os.Looper
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import com.dertyp7214.logs.helpers.DogbinUtils
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.helpers.onClick
 import de.Maxr1998.modernpreferences.helpers.categoryHeader
+import de.Maxr1998.modernpreferences.helpers.onClick
 import de.Maxr1998.modernpreferences.helpers.pref
 import de.Maxr1998.modernpreferences.helpers.screen
 import de.dertyp7214.rboardthememanager.Application
@@ -26,6 +33,18 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
     AbstractPreference() {
     private val type by lazy { intent.getStringExtra("type") }
 
+    private val usingModule = MagiskUtils.getModules().any { it.id == Config.MODULE_ID }
+    private val infoData = mapOf(
+        "theme_count" to (Config.themeCount?.toString() ?: "0"),
+        "theme_path" to (if (!Config.useMagisk) Config.MAGISK_THEME_LOC else Config.THEME_LOCATION),
+        "installation_method" to (if (!Config.useMagisk) R.string.pref_gboard else if (usingModule) R.string.magisk else R.string.other),
+        "rboard_app_version" to "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
+        "phone_model" to Build.MODEL,
+        "android_version" to Build.VERSION.RELEASE,
+        "root_version" to "Magisk: ${MagiskUtils.getMagiskVersionString().removeSuffix(":MAGISK")}",
+        "gboard_version" to GboardUtils.getGboardVersion(activity).split("-").first(),
+        "unsupported_oem" to if (Config.IS_MIUI) R.string.yes else R.string.no
+    )
     private val preference: AbstractPreference
 
     init {
@@ -91,33 +110,85 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
             }
         }
 
+    fun loadMenu(menuInflater: MenuInflater, menu: Menu?) {
+        when (type) {
+            "info" -> {
+                if (menu != null)
+                    menuInflater.inflate(R.menu.share, menu)
+            }
+            "settings", "flags", "all_flags" -> {
+            }
+        }
+    }
+
+    fun onMenuClick(menuItem: MenuItem): Boolean {
+        return when (type) {
+            "info" -> when (menuItem.itemId) {
+                R.id.share -> {
+                    val stringBuilder = StringBuilder()
+                    infoData.forEach {
+                        stringBuilder.append(
+                            "${it.key}: ${
+                                it.value.let { value ->
+                                    if (value is Int) activity.getString(value)
+                                    else value
+                                }
+                            }\n"
+                        )
+                    }
+                    DogbinUtils.upload(
+                        stringBuilder.toString(),
+                        object : DogbinUtils.UploadResultCallback {
+                            override fun onSuccess(url: String) {
+                                Intent().apply {
+                                    action = ACTION_SEND
+                                    putExtra(EXTRA_TEXT, url)
+                                    type = "text/plain"
+                                }.let {
+                                    Intent.createChooser(it, activity.getString(R.string.share))
+                                }.also(activity::startActivity)
+                            }
+
+                            override fun onFail(message: String, e: Exception) {
+                                e.printStackTrace()
+                                Toast.makeText(activity, R.string.error, Toast.LENGTH_SHORT).show()
+                            }
+                        })
+                    true
+                }
+                else -> false
+            }
+            "settings", "flags", "all_flags" -> false
+            else -> false
+        }
+    }
+
+
     val extraView: View? = preference.getExtraView()
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun getExtraView(): View? = null
 
     override fun preferences(builder: PreferenceScreen.Builder) {
-        val usingModule = MagiskUtils.getModules().any { it.id == Config.MODULE_ID }
         builder.apply {
             pref("theme_count") {
                 titleRes = R.string.theme_count
-                summary = Config.themeCount?.toString() ?: "0"
+                summary = infoData[key] as String
                 iconRes = R.drawable.ic_themes
             }
             pref("theme_path") {
                 titleRes = R.string.theme_path
-                summary = if (!Config.useMagisk) Config.MAGISK_THEME_LOC else Config.THEME_LOCATION
+                summary = infoData[key] as String
                 iconRes = R.drawable.ic_folder_open
             }
             pref("installation_method") {
                 titleRes = R.string.installation_method
-                summaryRes =
-                    if (!Config.useMagisk) R.string.pref_gboard else if (usingModule) R.string.magisk else R.string.other
+                summaryRes = infoData[key] as Int
                 iconRes = R.drawable.ic_download
             }
             pref("rboard_app_version") {
                 titleRes = R.string.rboard_app_version
-                summary = "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})"
+                summary = infoData[key] as String
                 iconRes = R.drawable.ic_rboard
                 var count = 0
                 onClick {
@@ -142,26 +213,30 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
             categoryHeader("device") {
                 titleRes = R.string.device
             }
+            pref("phone_model") {
+                titleRes = R.string.model
+                summary = infoData[key] as String
+                iconRes = R.drawable.ic_model
+            }
             pref("android_version") {
                 titleRes = R.string.android_version
-                summary = Build.VERSION.RELEASE
+                summary = infoData[key] as String
                 iconRes = R.drawable.ic_android
             }
             if (MagiskUtils.isMagiskInstalled())
                 pref("root_version") {
                     titleRes = R.string.root_version
-                    summary =
-                        "Magisk: ${MagiskUtils.getMagiskVersionString().removeSuffix(":MAGISK")}"
+                    summary = infoData[key] as String
                     iconRes = R.drawable.ic_root
                 }
             pref("gboard_version") {
                 titleRes = R.string.gboard_version
-                summary = GboardUtils.getGboardVersion(activity).split("-").first()
+                summary = infoData[key] as String
                 iconRes = R.drawable.ic_gboard
             }
             pref("unsupported_oem") {
                 titleRes = R.string.unsupported_oem
-                summaryRes = if (Config.IS_MIUI) R.string.yes else R.string.no
+                summaryRes = infoData[key] as Int
                 iconRes = R.drawable.ic_trash
             }
         }

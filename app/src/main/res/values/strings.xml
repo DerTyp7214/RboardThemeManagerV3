@@ -142,4 +142,6 @@
     <string name="share_flags">Share flags</string>
     <string name="share_flags_title">Share flags (%o)</string>
     <string name="import_flags_title">Import flags (%o)</string>
+    <string name="model">Model</string>
+    <string name="processing_flags">Processing Flags</string>
 </resources> 

@@ -3,6 +3,8 @@ package de.dertyp7214.rboardthememanager.screens
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -58,6 +60,15 @@ class PreferencesActivity : AppCompatActivity() {
             recyclerView.adapter = it
         }
     }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        preferences.loadMenu(menuInflater, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return preferences.onMenuClick(item)
+    }
+
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()

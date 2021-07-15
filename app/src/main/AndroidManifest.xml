@@ -65,8 +65,10 @@
             android:exported="true"
             android:theme="@style/Theme.RboardThemeManagerV3.Info" />
         <activity
-            android:name=".screens.SplashScreen"
-            android:exported="true">
+            android:name=".screens.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.RboardThemeManagerV3.Main"
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -123,11 +125,6 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".screens.MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.RboardThemeManagerV3.Main"
-            android:windowSoftInputMode="adjustNothing" />
         <activity android:name="com.dertyp7214.logs.helpers.CrashReportDialog" />
         <activity android:name="com.dertyp7214.logs.screens.Logs" />
 

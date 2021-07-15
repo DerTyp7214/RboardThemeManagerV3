@@ -7,6 +7,7 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
@@ -29,7 +30,6 @@ import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.OutputMetadata
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 import de.dertyp7214.rboardthememanager.screens.ShareFlags
-import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
 import org.json.JSONObject
 import java.io.File
@@ -37,13 +37,13 @@ import java.net.URL
 
 class AppStartUp(private val activity: AppCompatActivity) {
     private val checkUpdateUrl by lazy {
-        "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-${BuildConfig.BUILD_TYPE}/output-metadata.json"
+        "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/output-metadata.json"
     }
     private val gboardPlayStoreUrl by lazy {
         "https://play.google.com/store/apps/details?id=${Config.GBOARD_PACKAGE_NAME}"
     }
     private val flagsUrl by lazy {
-        "https://raw.githubusercontent.com/GboardThemes/Packs/master/flags.json"
+        "https://raw.githubusercontent.com/AkosPaha/Rboard-ColorsTheme/master/flags-R.json"
     }
 
     private var checkedForUpdate = false
@@ -54,19 +54,21 @@ class AppStartUp(private val activity: AppCompatActivity) {
     private val preferences by lazy { PreferenceManager.getDefaultSharedPreferences(activity) }
 
     fun setUp() {
-        activity.splashScreen.setOnExitAnimationListener { splashScreenView ->
-            val slideUp = ObjectAnimator.ofFloat(
-                splashScreenView,
-                View.TRANSLATION_Y,
-                0f,
-                -splashScreenView.height.toFloat()
-            )
-            slideUp.interpolator = AnticipateInterpolator()
-            slideUp.duration = 200L
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            activity.splashScreen.setOnExitAnimationListener { splashScreenView ->
+                val slideUp = ObjectAnimator.ofFloat(
+                    splashScreenView,
+                    View.TRANSLATION_Y,
+                    0f,
+                    -splashScreenView.height.toFloat()
+                )
+                slideUp.interpolator = AnticipateInterpolator()
+                slideUp.duration = 200L
 
-            slideUp.doOnEnd { splashScreenView.remove() }
+                slideUp.doOnEnd { splashScreenView.remove() }
 
-            slideUp.start()
+                slideUp.start()
+            }
         }
     }
 
@@ -109,11 +111,6 @@ class AppStartUp(private val activity: AppCompatActivity) {
 
             doInBackground {
                 AppWidgetManager.getInstance(this).let { appWidgetManager ->
-                    appWidgetManager.getAppWidgetIds(
-                        ComponentName(this, FlagsWidget::class.java)
-                    ).forEach { id ->
-                        FlagsWidget.updateAppWidget(this, appWidgetManager, id)
-                    }
                     appWidgetManager.getAppWidgetIds(
                         ComponentName(this, SwitchKeyboardWidget::class.java)
                     ).forEach { id ->
@@ -269,7 +266,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
 
                     createNotificationChannels(this)
                     FirebaseMessaging.getInstance()
-                        .subscribeToTopic("update-v3-${BuildConfig.BUILD_TYPE.lowercase()}")
+                        .subscribeToTopic("update-v3-r-${BuildConfig.BUILD_TYPE.lowercase()}")
 
                     isReady = !gboardInstalled || !rootAccess
                     when {

@@ -21,7 +21,11 @@ fun <T> doAsync(doInBackground: () -> T, getResult: (result: T) -> Unit) {
         }
     }
 }
-
+fun doInBackground(doInBackground: () -> Unit) {
+    CoroutineScope(Dispatchers.Main).launch {
+        withContext(Dispatchers.Default) { doInBackground() }
+    }
+}
 infix fun <T> (() -> T).asyncInto(into: (result: T) -> Unit) {
     doAsync(this, into)
 }

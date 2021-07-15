@@ -12,7 +12,6 @@ import de.dertyp7214.rboardthememanager.core.isReachable
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.utils.doInBackground
 import java.net.URL
-
 class Application : Application() {
 
     companion object {

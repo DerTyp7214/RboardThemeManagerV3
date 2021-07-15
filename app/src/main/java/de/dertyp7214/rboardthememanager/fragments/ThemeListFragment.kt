@@ -51,6 +51,26 @@ class ThemeListFragment : Fragment() {
             )
         }, themesViewModel::setSelectedTheme)
 
+        themesViewModel.themesObserve(this) { themes ->
+            if (themes.isEmpty()) {
+                refreshLayout.isRefreshing = true
+                ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
+            } else {
+                unfilteredThemeList.clear()
+                unfilteredThemeList.addAll(themes)
+                themeList.clear()
+                themeList.addAll(unfilteredThemeList.filter {
+                    it.name.contains(
+                        themesViewModel.getFilter(),
+                        true
+                    )
+                })
+                adapter.notifyDataChanged()
+                refreshLayout.isRefreshing = false
+            }
+        }
+
+
         refreshLayout.setOnApplyWindowInsetsListener { insetsView, windowInsets ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 insetsView.setMargin(
@@ -76,7 +96,6 @@ class ThemeListFragment : Fragment() {
             })
         }
 
-        refreshLayout.isRefreshing = themesViewModel.getThemes().isEmpty()
         refreshLayout.setProgressViewOffset(
             true,
             0,
@@ -89,25 +108,10 @@ class ThemeListFragment : Fragment() {
         recyclerView.setHasFixedSize(false)
         recyclerView.adapter = adapter
 
-        themesViewModel.themesObserve(this) { themes ->
-            if (themes.isEmpty()) {
-                refreshLayout.isRefreshing = true
-                ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
-            } else {
-                unfilteredThemeList.clear()
-                unfilteredThemeList.addAll(themes)
-                themeList.clear()
-                themeList.addAll(unfilteredThemeList.filter {
-                    it.name.contains(
-                        themesViewModel.getFilter(),
-                        true
-                    )
-                })
-                adapter.notifyDataChanged()
-                refreshLayout.isRefreshing = false
-            }
+        if (themesViewModel.getThemes().isEmpty()) {
+            refreshLayout.isRefreshing = true
+            ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
         }
-
         themesViewModel.observeFilter(this) { filter ->
             themeList.clear()
             themeList.addAll(unfilteredThemeList.filter {
@@ -127,7 +131,5 @@ class ThemeListFragment : Fragment() {
             ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
         }
 
-        if (themesViewModel.getThemes().isEmpty())
-            ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
-    }
+       }
 }
