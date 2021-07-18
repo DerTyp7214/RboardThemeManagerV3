@@ -44,7 +44,9 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
         "phone_model" to Build.MODEL,
         "android_version" to Build.VERSION.RELEASE_OR_CODENAME,
         "root_version" to "Magisk: ${MagiskUtils.getMagiskVersionString().removeSuffix(":MAGISK")}",
-        "gboard_version" to GboardUtils.getGboardVersion(activity).split("-").first(),
+        "gboard_version" to "${
+            GboardUtils.getGboardVersion(activity).split("-").first()
+        } (${GboardUtils.getGboardVersionCode(activity)})",
         "unsupported_oem" to if (Config.IS_MIUI) R.string.yes else R.string.no
     )
 

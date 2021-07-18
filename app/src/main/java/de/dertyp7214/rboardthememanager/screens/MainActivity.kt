@@ -5,7 +5,8 @@ package de.dertyp7214.rboardthememanager.screens
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.Intent.*
+import android.content.Intent.ACTION_SEND
+import android.content.Intent.ACTION_VIEW
 import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.net.Uri
@@ -20,6 +21,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.animation.doOnEnd
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -32,7 +34,6 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dertyp7214.preferencesplus.core.dp
-import com.dertyp7214.preferencesplus.core.setMargins
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
@@ -289,11 +290,15 @@ class MainActivity : AppCompatActivity() {
                 themesViewModel.observeSelections(this) { selections ->
                     val originHeight = toolbar.marginBottom
                     val destinationHeight = if (selections.first) 8.dp(this) else 62.dp(this)
+                    if (selections.first) toolbar.elevation = 5.dpToPx(this@MainActivity)
                     ValueAnimator.ofInt(originHeight, destinationHeight).apply {
                         addUpdateListener {
-                            toolbar.setMargins(0, 0, 0, it.animatedValue as Int)
+                            toolbar.setMargin(bottomMargin = it.animatedValue as Int)
                         }
                         duration = 150
+                        doOnEnd {
+                            if (!selections.first) toolbar.elevation = 0F
+                        }
                         start()
                     }
                 }
@@ -329,9 +334,11 @@ class MainActivity : AppCompatActivity() {
                             MagiskUtils.updateModule(MODULE_META, files)
                             //"setprop persist.gboard_${if (dark) "d_" else ""}theme ${File(theme.fileName).name}".runAsCommand() TODO: add when overlay is ready
                             Flags.run {
-                                setUpFlags()
-                                setValue(true, "oem_dark_theme", Flags.FILES.FLAGS)
-                                applyChanges()
+                                if (flagValues["oem_dark_theme"] != true) {
+                                    setUpFlags()
+                                    setValue(true, "oem_dark_theme", Flags.FILES.FLAGS)
+                                    applyChanges()
+                                }
                             }
                             applyTheme(getSystemAutoTheme(), true)
                         }
@@ -447,6 +454,7 @@ class MainActivity : AppCompatActivity() {
 
                 themesViewModel.onNavigate(this) { id ->
                     navigate(controller, id)
+                    navigation.selectedItemId = id
                 }
             }
         }

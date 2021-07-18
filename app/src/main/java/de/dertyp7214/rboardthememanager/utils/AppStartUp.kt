@@ -101,10 +101,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
             }
 
             doAsync({
-                PackageUtils.getAppVersionCode(
-                    Config.GBOARD_PACKAGE_NAME,
-                    packageManager
-                ) >= 60780714
+                GboardUtils.getGboardVersionCode(this) >= 60780714
             }, Config::newGboard::set)
 
             doInBackground {
@@ -189,7 +186,9 @@ class AppStartUp(private val activity: AppCompatActivity) {
                                 when (it) {
                                     "add" -> {
                                         preferences.apply {
-                                            val repos = ArrayList(getStringSet("repos", setOf()))
+                                            val repos = ArrayList(
+                                                getStringSet("repos", setOf())?.toList() ?: listOf()
+                                            )
                                             repos.add(data.getQueryParameter("add"))
                                             edit { putStringSet("repos", repos.toSet()) }
                                         }

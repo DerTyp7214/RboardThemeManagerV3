@@ -1,9 +1,7 @@
 package de.dertyp7214.rboardthememanager.utils
 
 import android.content.Context
-import android.content.pm.PackageManager
 import android.content.pm.PackageManager.GET_META_DATA
-import android.content.pm.PackageManager.NameNotFoundException
 import com.dertyp7214.logs.helpers.Logger
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
 
@@ -19,5 +17,12 @@ object GboardUtils {
             )
             ""
         }
+    }
+
+    fun getGboardVersionCode(context: Context): Long {
+        return PackageUtils.getAppVersionCode(
+            GBOARD_PACKAGE_NAME,
+            context.packageManager
+        )
     }
 }
