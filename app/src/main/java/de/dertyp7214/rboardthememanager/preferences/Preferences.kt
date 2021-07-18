@@ -75,10 +75,10 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
             }
             "settings" -> {
             }
-            "flags" -> {
-                Flags.applyChanges()
-            }
-            "all_flags" -> {
+            "flags", "all_flags" -> {
+                if (Flags.applyChanges()) {
+                    Toast.makeText(activity, R.string.flags_applied, Toast.LENGTH_SHORT).show()
+                }
             }
             else -> {
             }

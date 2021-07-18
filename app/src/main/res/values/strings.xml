@@ -139,6 +139,7 @@
     <string name="pref_gboard">Gboard</string>
     <string name="app_updated">App updated</string>
     <string name="show_only_disabled">Show only disabled flags</string>
+    <string name="flags_applied">Flags applied</string>
     <string name="share_flags">Share flags</string>
     <string name="share_flags_title">Share flags (%o)</string>
     <string name="import_flags_title">Import flags (%o)</string>
