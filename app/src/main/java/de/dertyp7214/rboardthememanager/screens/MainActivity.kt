@@ -20,6 +20,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.animation.doOnEnd
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -294,11 +295,15 @@ class MainActivity : AppCompatActivity() {
                 themesViewModel.observeSelections(this) { selections ->
                     val originHeight = toolbar.marginBottom
                     val destinationHeight = if (selections.first) 8.dp(this) else 62.dp(this)
+                    if (selections.first) toolbar.elevation = 5.dpToPx(this@MainActivity)
                     ValueAnimator.ofInt(originHeight, destinationHeight).apply {
                         addUpdateListener {
-                            toolbar.setMargins(0, 0, 0, it.animatedValue as Int)
+                            toolbar.setMargin(bottomMargin = it.animatedValue as Int)
                         }
                         duration = 150
+                        doOnEnd {
+                            if (!selections.first) toolbar.elevation = 0F
+                        }
                         start()
                     }
                 }
@@ -334,9 +339,11 @@ class MainActivity : AppCompatActivity() {
                             MagiskUtils.updateModule(MODULE_META, files)
                             //"setprop persist.gboard_${if (dark) "d_" else ""}theme ${File(theme.fileName).name}".runAsCommand() TODO: add when overlay is ready
                             Flags.run {
-                                setUpFlags()
-                                setValue(true, "oem_dark_theme", Flags.FILES.FLAGS)
-                                applyChanges()
+                                if (flagValues["oem_dark_theme"] != true) {
+                                    setUpFlags()
+                                    setValue(true, "oem_dark_theme", Flags.FILES.FLAGS)
+                                    applyChanges()
+                                }
                             }
                             applyTheme(getSystemAutoTheme(), true)
                         }
@@ -452,6 +459,7 @@ class MainActivity : AppCompatActivity() {
 
                 themesViewModel.onNavigate(this) { id ->
                     navigate(controller, id)
+                    navigation.selectedItemId = id
                 }
             }
         }

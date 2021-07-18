@@ -39,11 +39,11 @@ fun File.copyInputStreamToFile(inputStream: InputStream) {
     }
 }
 
-fun File.readXML(): Map<String, Any> {
+fun File.readXML(string: String? = null): Map<String, Any> {
     val output = HashMap<String, Any>()
 
     val fileName = absolutePath
-    val content = SuFile(fileName).openStream()?.use {
+    val content = string ?: SuFile(fileName).openStream()?.use {
         it.bufferedReader().readText()
     }
 

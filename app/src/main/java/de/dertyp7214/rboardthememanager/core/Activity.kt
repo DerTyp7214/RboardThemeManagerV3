@@ -47,8 +47,8 @@ fun Activity.openDialog(
         .setPositiveButton(positiveText) { dialogInterface, _ -> positive(dialogInterface) }
         .apply {
             if (negative != null) setNegativeButton(negativeText) { dialogInterface, _ ->                negative.invoke(
-                    dialogInterface
-                )
+                dialogInterface
+            )
             }
         }
         .create().also { it.show() }
@@ -133,9 +133,9 @@ fun Activity.openInputDialog(
 }
 
 fun Activity.openLoadingDialog(@StringRes message: Int) =
-openDialog(R.layout.loading_dialog, false) {
-    findViewById<TextView>(R.id.message).setText(message)
-}
+    openDialog(R.layout.loading_dialog, false) {
+        findViewById<TextView>(R.id.message).setText(message)
+    }
 
 fun Activity.openDialog(
     @LayoutRes layout: Int,

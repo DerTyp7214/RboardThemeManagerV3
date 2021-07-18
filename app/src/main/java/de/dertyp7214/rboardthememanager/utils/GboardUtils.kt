@@ -20,4 +20,10 @@ object GboardUtils {
             ""
         }
     }
+    fun getGboardVersionCode(context: Context): Long {
+        return PackageUtils.getAppVersionCode(
+            GBOARD_PACKAGE_NAME,
+            context.packageManager
+        )
+    }
 }

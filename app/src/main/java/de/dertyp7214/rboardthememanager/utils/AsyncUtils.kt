@@ -5,12 +5,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-fun doInBackground(doInBackground: () -> Unit) {
-    CoroutineScope(Dispatchers.Main).launch {
-        withContext(Dispatchers.Default) { doInBackground() }
-    }
-}
-
 fun <T> doAsync(doInBackground: () -> T, getResult: (result: T) -> Unit) {
     CoroutineScope(Dispatchers.Main).launch {
         withContext(Dispatchers.Default) {

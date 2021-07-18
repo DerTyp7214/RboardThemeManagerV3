@@ -15,7 +15,7 @@ object Config {
     const val MODULE_PATH = "$MODULES_PATH/$MODULE_ID"
     const val GBOARD_PACKAGE_NAME = "com.google.android.inputmethod.latin"
     const val RBOARD_THEME_CREATOR_PACKAGE_NAME = "de.dertyp7214.rboardthemecreator"
-    
+
     val MODULE_META = ModuleMeta(
         MODULE_ID,
         "Rboard Themes",
@@ -24,9 +24,9 @@ object Config {
         "RKBDI & DerTyp7214",
         "Module for Rboard Themes app"
     )
-    
+
     val IS_MIUI = "ro.miui.ui.version.name".getSystemProperty().isNotEmpty()
-    
+
     val GBOARD_PREFS_PATH: String
         get() {
             return newGboard.let {

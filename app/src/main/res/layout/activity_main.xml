@@ -32,8 +32,9 @@
             android:layout_height="52dp"
             android:layout_marginBottom="62dp"
             android:background="?android:attr/colorBackground"
+            android:elevation="0dp"
             android:minHeight="0dp"
-            android:translationZ="5dp"
+            android:translationZ="0dp"
             app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/selected_themes_menu" />

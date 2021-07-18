@@ -58,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="@android:string/cancel"
+                android:visibility="gone"
                 app:cornerRadius="@dimen/roundCorners" />
 
             <com.google.android.material.button.MaterialButton

@@ -24,8 +24,6 @@ import de.dertyp7214.rboardthememanager.utils.ColorUtils
 import de.dertyp7214.rboardthememanager.utils.TraceWrapper
 import de.dertyp7214.rboardthememanager.utils.doAsync
 import de.dertyp7214.rboardthememanager.utils.getActiveTheme
-import java.util.*
-import kotlin.collections.ArrayList
 
 class ThemeAdapter(
     private val context: Context,
@@ -129,7 +127,6 @@ class ThemeAdapter(
         notifyDataChanged()
     }
 
-
     @Suppress("MemberVisibilityCanBePrivate")
     fun getSelected(): List<ThemeDataClass> {
         return selected.mapIndexed { index, value -> Pair(themes[index], value) }
@@ -147,9 +144,7 @@ class ThemeAdapter(
         notifyDataSetChanged()
         activeTheme = getActiveTheme()
             .removePrefix("assets:theme_package_metadata_")
-            .removeSuffix(".binarypb").let {
-                if (it.isBlank()) "dynamic_color" else it
-            }
+            .removeSuffix(".binarypb").ifBlank { "dynamic_color" }
     }
 
     operator fun set(index: Int, value: Boolean) {
