@@ -26,7 +26,8 @@ import de.dertyp7214.rboardthememanager.core.start
 import de.dertyp7214.rboardthememanager.screens.ReposActivity
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 
-class Settings(private val activity: Activity) : AbstractPreference() {    enum class TYPE {
+class Settings(private val activity: Activity) : AbstractPreference() {
+    enum class TYPE {
         BOOLEAN,
         STRING,
         INT,
@@ -35,6 +36,7 @@ class Settings(private val activity: Activity) : AbstractPreference() {    enum 
         GROUP,
         SELECT
     }
+
     @Suppress("UNCHECKED_CAST")
     enum class SETTINGS(
         val key: String,
@@ -170,46 +172,58 @@ class Settings(private val activity: Activity) : AbstractPreference() {    enum 
     override fun getExtraView(): View? = null
 
     override fun preferences(builder: PreferenceScreen.Builder) {
-        SETTINGS.values().forEach { item ->
-            val pref: Preference = when (item.type) {
-                TYPE.BOOLEAN -> builder.switch(item.key) {
-                    defaultValue = item.defaultValue as Boolean
-                    onCheckedChange {
-                        item.onClick(activity, it)
-                        true
+        SETTINGS.values()
+            .filter { !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) }
+            .forEach { item ->
+                val pref: Preference = when (item.type) {
+                    TYPE.BOOLEAN -> builder.switch(item.key) {
+                        defaultValue = item.defaultValue as Boolean
+                        onCheckedChange {
+                            item.onClick(activity, it)
+                            true
+                        }
+                    }
+                    TYPE.INT, TYPE.LONG, TYPE.FLOAT -> builder.pref(item.key) {}
+                    TYPE.GROUP -> builder.categoryHeader(item.key) {
+                        titleRes = item.title
+                        summaryRes = item.summary
+                        iconRes = item.icon
+                    }.let { Preference("") }
+                    TYPE.STRING -> builder.pref(item.key) {}
+                    TYPE.SELECT -> builder.singleChoice(item.key, item.items) {
+                        initialSelection = item.items.last().key
+                        onSelectionChange {
+                            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                                when (it) {
+                                    "dark" -> {
+                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                                    }
+                                    "light" -> {
+                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                                    }
+                                    "system_theme" -> {
+                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_UNSPECIFIED)
+                                    }
+                                }
+                            } else
+                                when (it) {
+                                    "dark" -> {
+                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                                    }
+                                    "light" -> {
+                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                                    }
+                                }
+                            true
+                        }
                     }
                 }
-                TYPE.INT, TYPE.LONG, TYPE.FLOAT -> builder.pref(item.key) {}
-                TYPE.GROUP -> builder.categoryHeader(item.key) {
+                pref.apply {
                     titleRes = item.title
                     summaryRes = item.summary
                     iconRes = item.icon
-                }.let { Preference("") }
-                TYPE.STRING -> builder.pref(item.key) {}
-                TYPE.SELECT -> builder.singleChoice(item.key, item.items) {
-                    initialSelection = item.items.last().key
-                    onSelectionChange {
-                        when (it) {
-                            "dark" -> {
-                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                            }
-                            "light" -> {
-                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                            }
-                            "system_auto" -> {
-                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_UNSPECIFIED)
-                            }
-                        }
-                        true
-                    }
+                    onClick { item.onClick(activity, false); false }
                 }
             }
-            pref.apply {
-                titleRes = item.title
-                summaryRes = item.summary
-                iconRes = item.icon
-                onClick { item.onClick(activity, false); false }
-            }
-        }
     }
 }

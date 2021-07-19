@@ -29,7 +29,13 @@ class SafeJSON(private val json: JSONObject) {
             defaultValue
         }
     }
-
+    fun getInt(name: String, defaultValue: Int = 0): Int {
+        return try {
+            json.getInt(name)
+        } catch (e: Exception) {
+            defaultValue
+        }
+    }
     fun getJSONArray(name: String, defaultValue: JSONArray = JSONArray()): JSONArray {
         return try {
             json.getJSONArray(name)

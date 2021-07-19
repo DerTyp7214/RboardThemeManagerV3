@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.DrawableRes
@@ -60,6 +61,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
         val file: FILES = FILES.NONE,
         val valueMap: Map<Any?, Any?>? = null,
         val visible: Boolean = true,
+        val minSdk: Int = 0,
         val linkedKeys: List<String> = listOf(),
         val onClick: () -> Unit = {}
     ) {
@@ -103,6 +105,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
         val file: FILES = FILES.NONE,
         val valueMap: Map<Any?, Any?>? = null,
         val visible: Boolean = true,
+        val minSdk: Int = 0,
         val linkedKeys: List<String> = listOf(),
         val onClick: () -> Unit = {}
     ) {
@@ -116,6 +119,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
             enum.file,
             enum.valueMap,
             enum.visible,
+            enum.minSdk,
             enum.linkedKeys,
             enum.onClick
         )
@@ -188,7 +192,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
                 titleRes = item.title
                 summaryRes = item.summary
                 iconRes = item.icon
-                visible = item.visible
+                visible = item.visible && item.minSdk <= Build.VERSION.SDK_INT
                 if (item.summary == -1) summary = item.key
             }
             preferences[item.key] = pref
@@ -332,8 +336,9 @@ class Flags(val activity: Activity) : AbstractPreference() {
                                     else -> it
                                 }
                             })
-                        }.toMap().let { map -> if (map.isEmpty()) null else map },
+                        }.toMap().ifEmpty { null },
                         o.getBoolean("visible", true),
+                        o.getInt("minSdk", 0),
                         o.getJSONArray("linkedKeys").toList()
                     )
                 )

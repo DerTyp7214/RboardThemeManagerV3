@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -134,12 +135,15 @@ object ThemeUtils {
         }.apply { if (this != null) Config.themeCount = size } ?: ArrayList()).let {
             val themes = arrayListOf<ThemeDataClass>()
             val context = Application.context
-            if (context?.let { ctx ->
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q && context?.let { ctx ->
                     Settings.SETTINGS.SHOW_SYSTEM_THEME.getValue(
                         ctx,
                         true
                     )
-                } == true) getSystemAutoTheme()?.let { theme -> themes.add(theme) }
+                } == true) {
+                if (Flags.values.monet) getDynamicColorsTheme()?.let { theme -> themes.add(theme) }
+                themes.add(getSystemAutoTheme())
+            }
             if (context?.let { ctx ->
                     Settings.SETTINGS.SHOW_PREINSTALLED_THEMES.getValue(
                         ctx,

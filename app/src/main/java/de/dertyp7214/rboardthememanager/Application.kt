@@ -72,7 +72,7 @@ class Application : Application() {
                     }
                 }
             } else
-                when (getString("app_theme", "dark")) {
+                when (getString("app_theme", "light")) {
                     "dark" -> {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                     }
