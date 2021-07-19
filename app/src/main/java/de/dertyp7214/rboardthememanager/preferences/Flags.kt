@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.DrawableRes
@@ -189,7 +190,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
                 titleRes = item.title
                 summaryRes = item.summary
                 iconRes = item.icon
-                visible = item.visible
+                visible = item.visible && item.minSdk <= Build.VERSION.SDK_INT
                 if (item.summary == -1) summary = item.key
             }
             preferences[item.key] = pref
