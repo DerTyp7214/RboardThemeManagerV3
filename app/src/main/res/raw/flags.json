@@ -1,5 +1,5 @@
 {
-  "time": "1625787536201",
+  "time": "1626724310334",
   "flags": [
     {
       "key": "general",
@@ -220,6 +220,7 @@
       "icon": "ic_monet",
       "defaultValue": false,
       "type": "BOOLEAN",
+      "minSdk": 31,
       "linkedKeys": [
         "use_silk_theme_by_default",
         "silk_on_all_pixel",

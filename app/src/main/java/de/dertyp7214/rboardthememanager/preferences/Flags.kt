@@ -30,7 +30,6 @@ import de.dertyp7214.rboardthememanager.utils.FileUtils
 import org.json.JSONObject
 import java.io.File
 import java.util.*
-import kotlin.collections.ArrayList
 
 class Flags(val activity: Activity) : AbstractPreference() {
     enum class FILES(val filePath: String) {
@@ -60,6 +59,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
         val file: FILES = FILES.NONE,
         val valueMap: Map<Any?, Any?>? = null,
         val visible: Boolean = true,
+        val minSdk: Int = 0,
         val linkedKeys: List<String> = listOf(),
         val onClick: () -> Unit = {}
     ) {
@@ -103,6 +103,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
         val file: FILES = FILES.NONE,
         val valueMap: Map<Any?, Any?>? = null,
         val visible: Boolean = true,
+        val minSdk: Int = 0,
         val linkedKeys: List<String> = listOf(),
         val onClick: () -> Unit = {}
     ) {
@@ -116,6 +117,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
             enum.file,
             enum.valueMap,
             enum.visible,
+            enum.minSdk,
             enum.linkedKeys,
             enum.onClick
         )
@@ -332,8 +334,9 @@ class Flags(val activity: Activity) : AbstractPreference() {
                                     else -> it
                                 }
                             })
-                        }.toMap().let { map -> if (map.isEmpty()) null else map },
+                        }.toMap().ifEmpty { null },
                         o.getBoolean("visible", true),
+                        o.getInt("minSdk", 0),
                         o.getJSONArray("linkedKeys").toList()
                     )
                 )
