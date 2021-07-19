@@ -4,6 +4,7 @@ package de.dertyp7214.rboardthememanager.preferences
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Handler
 import android.view.View
 import android.os.Looper
@@ -127,11 +128,18 @@ class Settings(private val activity: Activity) : AbstractPreference() {    enum 
             -1,
             "",
             TYPE.SELECT,
-            listOf(
-                SelectionItem("dark", R.string.dark, -1),
-                SelectionItem("light", R.string.light, -1),
-                SelectionItem("system_theme", R.string.system_theme, -1)
-            )
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                listOf(
+                    SelectionItem("dark", R.string.dark, -1),
+                    SelectionItem("light", R.string.light, -1),
+                    SelectionItem("system_theme", R.string.system_theme, -1)
+                )
+            } else {
+                listOf(
+                    SelectionItem("dark", R.string.dark, -1),
+                    SelectionItem("light", R.string.light, -1)
+                )
+            }
         ),
         UNINSTALL(
             "uninstall",
