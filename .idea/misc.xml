@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/debug/res/drawable/ic_launcher_background.xml" value="0.3725" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/debug/res/drawable/ic_launcher_foreground.xml" value="0.3725" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/debug/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3725" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/debug/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.169" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable-night/ic_keyboard.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/app_widget_background.xml" value="0.3725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/app_widget_inner_view_background.xml" value="0.3725" />
