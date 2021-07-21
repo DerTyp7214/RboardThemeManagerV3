@@ -44,10 +44,10 @@
                 android:pathData="M283.969,265.9L293.873,265.9A5,5 0,0 1,298.873 270.9L298.873,281.032A5,5 0,0 1,293.873 286.032L283.969,286.032A5,5 0,0 1,278.969 281.032L278.969,270.9A5,5 0,0 1,283.969 265.9z"
                 tools:fillColor="@color/foreground_icon_debug" />
             <path
-                android:fillColor="@color/white"
+                android:fillColor="@color/foreground_icon_debug"
                 android:fillType="evenOdd"
                 android:pathData="M169.27,132.338v76.547l47.03,39.403 47.496,-39.487 0.375,-76.463L169.27,132.338zM164.27,112.338h104.926c8.313,0 15.04,6.761 15,15.074l-0.411,83.817a15.001,15.001 0,0 1,-5.411 11.461l-58.915,48.981a5,5 0,0 1,-6.407 -0.013l-58.416,-48.941a15.001,15.001 0,0 1,-5.366 -11.498v-83.881c0,-8.284 6.715,-15 15,-15z"
-                tools:fillColor="@color/white" />
+                tools:fillColor="@color/foreground_icon_debug" />
         </group>
     </group>
 </vector>
