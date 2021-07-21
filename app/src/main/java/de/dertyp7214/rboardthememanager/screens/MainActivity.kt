@@ -332,7 +332,7 @@ class MainActivity : AppCompatActivity() {
                                 )
                             )
                             MagiskUtils.updateModule(MODULE_META, files)
-                            //"setprop persist.gboard_${if (dark) "d_" else ""}theme ${File(theme.fileName).name}".runAsCommand() TODO: add when overlay is ready
+                            "resetprop ro.com.google.ime.${if (dark) "d_" else ""}theme_file ${File(theme.fileName).name}".runAsCommand()
                             Flags.run {
                                 if (flagValues["oem_dark_theme"] != true) {
                                     setUpFlags()
