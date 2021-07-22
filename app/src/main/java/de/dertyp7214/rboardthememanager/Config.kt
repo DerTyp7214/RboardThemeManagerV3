@@ -49,4 +49,7 @@ object Config {
         "https://raw.githubusercontent.com/GboardThemes/Soundpack/master/download_sounds.json"
 
     var themeCount: Int? = null
+
+    var darkTheme: String? = null
+    var lightTheme: String? = null
 }

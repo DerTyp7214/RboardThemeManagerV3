@@ -28,6 +28,7 @@ import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.OutputMetadata
+import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 import de.dertyp7214.rboardthememanager.screens.ShareFlags
 import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
@@ -157,6 +158,21 @@ class AppStartUp(private val activity: AppCompatActivity) {
             val data = intent.data
 
             Config.useMagisk = preferences.getBoolean("useMagisk", false)
+
+            "getprop ro.com.google.ime.d_theme_file".runAsCommand {
+                if (it.first().isNotEmpty()) Config.darkTheme = it.first()
+            }
+            "getprop ro.com.google.ime.theme_file".runAsCommand {
+                if (it.first().isNotEmpty()) Config.lightTheme = it.first()
+            }
+
+            GboardUtils.loadBackupFlags { flags ->
+                isReady = true
+                openDialog(R.string.load_flags_long, R.string.load_flags) {
+                    SuFile(Flags.FILES.FLAGS.filePath).writeFile(flags.trim())
+                }
+            }
+
 
             when {
                 initialized && scheme != "content" && data != null -> {

@@ -26,16 +26,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
+                android:drawablePadding="8dp"
                 android:padding="16dp"
-                android:text="@string/apply_dark" />
+                android:text="@string/apply_dark"
+                app:drawableStartCompat="@drawable/ic_dark_mode" />
 
             <TextView
                 android:id="@+id/light_theme"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/selectableItemBackground"
+                android:drawablePadding="8dp"
                 android:padding="16dp"
-                android:text="@string/apply_light" />
+                android:text="@string/apply_light"
+                app:drawableStartCompat="@drawable/ic_light_mode" />
         </LinearLayout>
 
         <LinearLayout

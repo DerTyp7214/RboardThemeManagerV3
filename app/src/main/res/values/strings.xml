@@ -145,4 +145,6 @@
     <string name="import_flags_title">Import flags (%o)</string>
     <string name="model">Model</string>
     <string name="processing_flags">Processing Flags</string>
+    <string name="load_flags">Load flags</string>
+    <string name="load_flags_long">Old flags backup found. Do you want to load it?</string>
 </resources> 
