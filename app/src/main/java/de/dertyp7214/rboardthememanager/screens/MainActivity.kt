@@ -332,7 +332,13 @@ class MainActivity : AppCompatActivity() {
                                 )
                             )
                             MagiskUtils.updateModule(MODULE_META, files)
-                            "resetprop ro.com.google.ime.${if (dark) "d_" else ""}theme_file ${File(theme.fileName).name}".runAsCommand()
+                            "resetprop ro.com.google.ime.${if (dark) "d_" else ""}theme_file ${
+                                File(
+                                    theme.fileName
+                                ).name
+                            }".runAsCommand()
+                            if (dark) Config.darkTheme = File(theme.fileName).name
+                            else Config.lightTheme = File(theme.fileName).name
                             Flags.run {
                                 if (flagValues["oem_dark_theme"] != true) {
                                     setUpFlags()

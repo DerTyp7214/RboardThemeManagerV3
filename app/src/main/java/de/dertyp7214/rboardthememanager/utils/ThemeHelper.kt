@@ -2,6 +2,7 @@ package de.dertyp7214.rboardthememanager.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
@@ -31,7 +32,6 @@ import de.dertyp7214.rboardthememanager.preferences.Settings
 import java.io.BufferedInputStream
 import java.net.URL
 import java.util.*
-import kotlin.collections.ArrayList
 
 @SuppressLint("SdCardPath")
 fun applyTheme(
@@ -222,19 +222,21 @@ object ThemeUtils {
                     .removePrefix("assets:theme_package_metadata_")
                     .removeSuffix(".binarypb")
                     .removeSuffix(":")
-            val image = Application.context?.let {
-                try {
-                    val inputStream = it.resources.openRawResource(
-                        FileUtils.getResourceId(
-                            it,
-                            imgName,
-                            "raw",
-                            it.packageName
+            val image = if (themeName.startsWith("system_auto:")) getSystemAutoImage() else {
+                Application.context?.let {
+                    try {
+                        val inputStream = it.resources.openRawResource(
+                            FileUtils.getResourceId(
+                                it,
+                                imgName,
+                                "raw",
+                                it.packageName
+                            )
                         )
-                    )
-                    BitmapFactory.decodeStream(BufferedInputStream(inputStream))
-                } catch (e: Exception) {
-                    null
+                        BitmapFactory.decodeStream(BufferedInputStream(inputStream))
+                    } catch (e: Exception) {
+                        null
+                    }
                 }
             }
             ThemeDataClass(
@@ -287,12 +289,31 @@ object ThemeUtils {
 
     fun getSystemAutoTheme(): ThemeDataClass {
         return ThemeDataClass(
-            Application.context?.let { context ->
-                BitmapFactory.decodeStream(BufferedInputStream(context.resources.openRawResource(R.raw.system_auto)))
-            },
+            getSystemAutoImage(),
             "system_auto:",
             "system_auto:"
         )
+    }
+
+    private fun getSystemAutoImage(): Bitmap? {
+        return Application.context?.let { context ->
+            (try {
+                SuFile(
+                    Config.MAGISK_THEME_LOC,
+                    ((context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES)
+                        .let { if (it) Config.darkTheme else Config.lightTheme }
+                        ?.removeSuffix(".zip")
+                ).decodeBitmap()
+            } catch (e: Exception) {
+                null
+            })?: BitmapFactory.decodeStream(
+                BufferedInputStream(
+                    context.resources.openRawResource(
+                        R.raw.system_auto
+                    )
+                )
+            )
+        }
     }
 
     @SuppressLint("InflateParams")
