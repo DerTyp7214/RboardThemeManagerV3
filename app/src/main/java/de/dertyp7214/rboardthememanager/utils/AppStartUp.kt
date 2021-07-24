@@ -211,8 +211,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                                             this,
                                             R.string.repo_added,
                                             Toast.LENGTH_SHORT
-                                        )
-                                            .show()
+                                        ).show()
                                     }
                                 }
                             }
@@ -234,15 +233,18 @@ class AppStartUp(private val activity: AppCompatActivity) {
                             }
                             finishAndRemoveTask()
                         }
+                    isReady = true
+                    val dialog = openLoadingDialog(R.string.processing_flags)
                     doAsync({
                         File(cacheDir, "flags.rboard").apply {
                             delete()
                             data.writeToFile(activity, this)
                         }.readXML()
                     }) {
-                        ShareFlags.flags = it
+                        dialog.dismiss()
                         ShareFlags::class.java.start(this, resultLauncher) {
                             putExtra("import", true)
+                            putExtra("flags", it)
                         }
                     }
                 }
@@ -268,12 +270,9 @@ class AppStartUp(private val activity: AppCompatActivity) {
                             } else listOf()
                         }
                     }) {
-                        resultLauncher.launch(
-                            Intent(
-                                this,
-                                InstallPackActivity::class.java
-                            ).putStringArrayListExtra("themes", ArrayList(it))
-                        )
+                        InstallPackActivity::class.java.start(this, resultLauncher) {
+                            putStringArrayListExtra("themes", ArrayList(it))
+                        }
                     }
                 }
                 else -> {

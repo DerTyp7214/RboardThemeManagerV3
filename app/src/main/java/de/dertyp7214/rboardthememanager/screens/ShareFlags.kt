@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ShareFlagsAdapter
 import de.dertyp7214.rboardthememanager.components.SearchBar
+import de.dertyp7214.rboardthememanager.core.getMapExtra
 import de.dertyp7214.rboardthememanager.core.setXmlValue
 import de.dertyp7214.rboardthememanager.core.share
 import de.dertyp7214.rboardthememanager.databinding.ActivityShareFlagsBinding
@@ -20,9 +21,7 @@ import java.io.File
 
 class ShareFlags : AppCompatActivity() {
 
-    companion object {
-        var flags: Map<String, Any> = mapOf()
-    }
+    private var flags: Map<String, Any> = mapOf()
 
     private lateinit var binding: ActivityShareFlagsBinding
     private lateinit var adapter: ShareFlagsAdapter
@@ -55,7 +54,8 @@ class ShareFlags : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = getString(titleRes, 0)
 
-        if (!import) flags = Flags.flagValues
+        flags = if (!import) Flags.flagValues
+        else intent.getMapExtra("flags")
         val orig = ArrayList(flags.map { it.key })
         val flagKeys = ArrayList(orig)
 
