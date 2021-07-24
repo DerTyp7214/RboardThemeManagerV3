@@ -18,7 +18,7 @@
     <string name="not_rooted">Your device is not rooted</string>
     <string name="channel_name">Push Notifications</string>
     <string name="default_notification_channel_id">push_channel</string>
-    <string name="channel_description">For updates and informations.</string>
+    <string name="channel_description">For updates and information.</string>
     <string name="channel_name_download">Download Notifications</string>
     <string name="download_notification_channel_id">download_channel</string>
     <string name="channel_description_download">For download notifications</string>
@@ -129,7 +129,7 @@
     <string name="show_system_theme_long">Show system themes in themes section</string>
     <string name="speedup_process">Speedup process</string>
     <string name="key">Key</string>
-    <string name="unreleased">This app is unreleased, some features may not work. Please dont report any errors to the main group.</string>
+    <string name="unreleased">This app is unreleased, some features may not work. Please don\'t report any errors to the main group.</string>
     <string name="notice">Notice</string>
     <string name="flags_applied">Flags applied</string>
     <string name="install_module">Existing themes path found, do you still want to install the module?</string>

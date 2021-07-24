@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.get
 import com.dertyp7214.logs.helpers.Logger
 import com.dertyp7214.preferencesplus.core.dp
 import com.dertyp7214.preferencesplus.core.setHeight
@@ -306,7 +307,7 @@ object ThemeUtils {
                 ).decodeBitmap()
             } catch (e: Exception) {
                 null
-            })?: BitmapFactory.decodeStream(
+            }) ?: BitmapFactory.decodeStream(
                 BufferedInputStream(
                     context.resources.openRawResource(
                         R.raw.system_auto
@@ -340,7 +341,9 @@ object ThemeUtils {
                 themeIcon.setImageBitmap(theme.image ?: defaultImage)
                 themeIcon.colorFilter = theme.colorFilter
 
-                val color = ColorUtils.dominantColor(themeIcon.drawable.getBitmap())
+                val color = themeIcon.drawable.getBitmap().let {
+                    it[0, it.height / 2]
+                }
                 val isDark = ColorUtils.isColorLight(color)
 
                 if (gradient != null) {
