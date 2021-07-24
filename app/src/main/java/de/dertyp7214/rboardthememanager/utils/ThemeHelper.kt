@@ -33,6 +33,7 @@ import java.io.BufferedInputStream
 import java.net.URL
 import java.util.*
 import android.content.res.Configuration
+import androidx.core.graphics.get
 import kotlin.collections.ArrayList
 
 @SuppressLint("SdCardPath")
@@ -307,7 +308,7 @@ object ThemeUtils {
                 ).decodeBitmap()
             } catch (e: Exception) {
                 null
-            })?: BitmapFactory.decodeStream(
+            }) ?: BitmapFactory.decodeStream(
                 BufferedInputStream(
                     context.resources.openRawResource(
                         R.raw.system_auto
@@ -341,7 +342,9 @@ object ThemeUtils {
                 themeIcon.setImageBitmap(theme.image ?: defaultImage)
                 themeIcon.colorFilter = theme.colorFilter
 
-                val color = ColorUtils.dominantColor(themeIcon.drawable.getBitmap())
+                val color = themeIcon.drawable.getBitmap().let {
+                    it[0, it.height / 2]
+                }
                 val isDark = ColorUtils.isColorLight(color)
 
                 if (gradient != null) {

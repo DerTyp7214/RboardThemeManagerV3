@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
@@ -157,7 +158,9 @@ class ThemeAdapter(
                 ImageView(context).let { view ->
                     view.setImageBitmap(themeDataClass.image ?: default)
                     view.colorFilter = themeDataClass.colorFilter
-                    val color = ColorUtils.dominantColor(view.drawable.getBitmap())
+                    val color = view.drawable.getBitmap().let {
+                        it[0, it.height / 2]
+                    }
                     Pair(color, ColorUtils.isColorLight(color))
                 }
             }, { colorCache[index] = it })
@@ -171,7 +174,9 @@ class ThemeAdapter(
         } ?: ImageView(context).let { view ->
             view.setImageBitmap(dataClass.image ?: default)
             view.colorFilter = dataClass.colorFilter
-            val color = ColorUtils.dominantColor(view.drawable.getBitmap())
+            val color = view.drawable.getBitmap().let {
+                it[0, it.height / 2]
+            }
             colorCache[position] = Pair(color, ColorUtils.isColorLight(color))
             color
         }
