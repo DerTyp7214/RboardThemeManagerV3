@@ -21,7 +21,7 @@ import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.utils.TraceWrapper
 import de.dertyp7214.rboardthememanager.utils.asyncInto
 import de.dertyp7214.rboardthememanager.utils.doAsync
-import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
+import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 
 class DownloadListFragment : Fragment() {
 
@@ -48,9 +48,9 @@ class DownloadListFragment : Fragment() {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val chipContainer = view.findViewById<ChipContainer>(R.id.chipContainer)
 
-        val themesViewModel = requireActivity()[ThemesViewModel::class.java]
+        val mainViewModel = requireActivity()[MainViewModel::class.java]
 
-        val originalThemePacks = ArrayList(themesViewModel.getThemePacks())
+        val originalThemePacks = ArrayList(mainViewModel.getThemePacks())
         val themePacks = arrayListOf(ThemePack.NONE, *originalThemePacks.toTypedArray())
 
         trace.addSplit("RESULT LAUNCHER")
@@ -58,8 +58,8 @@ class DownloadListFragment : Fragment() {
         val resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                 if (it.resultCode == Activity.RESULT_OK) {
-                    themesViewModel.setThemes()
-                    themesViewModel.navigate(R.id.navigation_themes)
+                    mainViewModel.setThemes()
+                    mainViewModel.navigate(R.id.navigation_themes)
                 }
             }
 
@@ -71,17 +71,20 @@ class DownloadListFragment : Fragment() {
 
         trace.addSplit("OBSERVERS")
 
-        themesViewModel.themePacksObserve(this) { packs ->
-            if (packs.isEmpty()) ThemeUtils::loadThemePacks asyncInto themesViewModel::setThemePacks
+        mainViewModel.themePacksObserve(this) { packs ->
+            if (packs.isEmpty()) ThemeUtils::loadThemePacks asyncInto mainViewModel::setThemePacks
             else
                 doAsync({
                     originalThemePacks.clear()
-                    originalThemePacks.add(ThemePack.NONE)
-                    originalThemePacks.addAll(packs)
-                    themePacks.clear()
-                    themePacks.addAll(originalThemePacks)
-                    packs.forEach { pack ->
-                        tags.addAll(pack.tags.filter { !tags.contains(it) })
+                    try {
+                        originalThemePacks.add(ThemePack.NONE)
+                        originalThemePacks.addAll(packs)
+                        themePacks.clear()
+                        themePacks.addAll(originalThemePacks)
+                        packs.forEach { pack ->
+                            tags.addAll(pack.tags.filter { !tags.contains(it) })
+                        }
+                    } catch (e: Exception) {
                     }
                 }) {
                     adapter.notifyDataSetChanged()
@@ -89,11 +92,14 @@ class DownloadListFragment : Fragment() {
                 }
         }
 
-        themesViewModel.observeFilter(this) { filter ->
+        mainViewModel.observeFilter(this) { filter ->
             doAsync({
                 val chipFilters = chipContainer.filters
                 themePacks.clear()
-                themePacks.addAll(filterThemePacks(originalThemePacks, chipFilters, filter))
+                try {
+                    themePacks.addAll(filterThemePacks(originalThemePacks, chipFilters, filter))
+                } catch (e: Exception) {
+                }
             }) {
                 adapter.notifyDataSetChanged()
             }
@@ -109,9 +115,12 @@ class DownloadListFragment : Fragment() {
 
         chipContainer.setOnFilterToggle { filters ->
             doAsync({
-                val searchFilter = themesViewModel.getFilter()
+                val searchFilter = mainViewModel.getFilter()
                 themePacks.clear()
-                themePacks.addAll(filterThemePacks(originalThemePacks, filters, searchFilter))
+                try {
+                    themePacks.addAll(filterThemePacks(originalThemePacks, filters, searchFilter))
+                } catch (e: Exception) {
+                }
             }) {
                 adapter.notifyDataSetChanged()
             }
@@ -119,8 +128,8 @@ class DownloadListFragment : Fragment() {
 
         trace.addSplit("LOAD THEME PACKS")
 
-        if (themesViewModel.getThemePacks().isEmpty())
-            ThemeUtils::loadThemePacks asyncInto themesViewModel::setThemePacks
+        if (mainViewModel.getThemePacks().isEmpty())
+            ThemeUtils::loadThemePacks asyncInto mainViewModel::setThemePacks
 
         trace.end()
     }
