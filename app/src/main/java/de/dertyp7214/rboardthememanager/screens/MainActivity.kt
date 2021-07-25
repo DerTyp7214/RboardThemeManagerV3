@@ -33,6 +33,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dertyp7214.logs.helpers.Logger
 import com.dertyp7214.preferencesplus.core.dp
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -304,7 +305,12 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 themesViewModel.observerSelectedTheme(this) { theme ->
-                    secondaryContent.removeViewAt(0)
+                    secondaryContent.let {
+                        val view = it.findViewById<View>(R.id.current_theme_view)
+                        if (view != null) it.removeView(view).also {
+                            Logger.log(Logger.Companion.Type.DEBUG, "REMOVE VIEW", view.id)
+                        }
+                    }
                     if (theme != null) {
                         secondaryContent.addView(ThemeUtils.getThemeView(theme, this), 0)
                         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED

@@ -54,7 +54,7 @@ dependencies {
     implementation "com.github.topjohnwu.libsu:io:$libsuVersion"
     implementation "com.github.topjohnwu.libsu:busybox:$libsuVersion"
     //implementation 'de.maxr1998:modernandroidpreferences:2.0'
-    implementation 'dev.chrisbanes.insetter:insetter:0.5.0'
+    implementation 'dev.chrisbanes.insetter:insetter:0.6.0'
     implementation "androidx.core:core-ktx:1.6.0"
     //noinspection DifferentStdlibGradleVersion
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -67,7 +67,7 @@ dependencies {
     implementation 'com.jaredrummler:android-shell:1.0.0'
     implementation 'com.google.firebase:firebase-analytics:19.0.0'
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
-    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.google.code.gson:gson:2.8.7'
     implementation 'com.bignerdranch.android:simple-item-decoration:1.0.0'
     implementation 'de.dertyp7214:PRDownloader:v0.6.0'
     testImplementation 'junit:junit:4.13.2'
