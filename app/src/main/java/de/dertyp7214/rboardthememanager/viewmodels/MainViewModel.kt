@@ -6,14 +6,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
+import de.dertyp7214.rboardthememanager.data.SoundPack
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.data.ThemePack
 
-class ThemesViewModel : ViewModel() {
+class MainViewModel : ViewModel() {
     private val selectedTheme = MutableLiveData<ThemeDataClass?>()
     private val themePacks = MutableLiveData<List<ThemePack>>()
     private val themes = MutableLiveData<List<ThemeDataClass>>()
     private val filter = MutableLiveData<String>()
+    private val sounds = MutableLiveData<List<SoundPack>>()
     private val clearSearch = MutableLiveData<String>()
     private val refreshThemes = MutableLiveData<String>()
     private val selections = MutableLiveData<Pair<Boolean, ThemeAdapter?>>()
@@ -41,6 +43,18 @@ class ThemesViewModel : ViewModel() {
 
     fun themePacksObserve(owner: LifecycleOwner, observer: Observer<List<ThemePack>>) {
         themePacks.observe(owner, observer)
+    }
+
+    fun getSounds(): List<SoundPack> {
+        return sounds.value ?: listOf()
+    }
+
+    fun setSounds(list: List<SoundPack> = listOf()) {
+        sounds.value = list
+    }
+
+    fun soundsObserve(owner: LifecycleOwner, observer: Observer<List<SoundPack>>) {
+        sounds.observe(owner, observer)
     }
 
     fun getSelections(): Pair<Boolean, ThemeAdapter?> {

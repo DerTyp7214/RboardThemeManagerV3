@@ -15,7 +15,7 @@ import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.utils.asyncInto
-import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
+import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 import java.lang.Integer.max
 
 class ThemeListFragment : Fragment() {
@@ -43,25 +43,25 @@ class ThemeListFragment : Fragment() {
         val unfilteredThemeList = arrayListOf<ThemeDataClass>()
         val themeList = arrayListOf<ThemeDataClass>()
 
-        val themesViewModel = requireActivity()[ThemesViewModel::class.java]
+        val mainViewModel = requireActivity()[MainViewModel::class.java]
 
         val adapter = ThemeAdapter(requireContext(), themeList, null, { state, adapter ->
-            themesViewModel.setSelections(
+            mainViewModel.setSelections(
                 Pair(state == ThemeAdapter.SelectionState.SELECTING, adapter)
             )
-        }, themesViewModel::setSelectedTheme)
+        }, mainViewModel::setSelectedTheme)
 
-        themesViewModel.themesObserve(this) { themes ->
+        mainViewModel.themesObserve(this) { themes ->
             if (themes.isEmpty()) {
                 refreshLayout.isRefreshing = true
-                ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
+                ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
             } else {
                 unfilteredThemeList.clear()
                 unfilteredThemeList.addAll(themes)
                 themeList.clear()
                 themeList.addAll(unfilteredThemeList.filter {
                     it.name.contains(
-                        themesViewModel.getFilter(),
+                        mainViewModel.getFilter(),
                         true
                     )
                 })
@@ -108,11 +108,11 @@ class ThemeListFragment : Fragment() {
         recyclerView.setHasFixedSize(false)
         recyclerView.adapter = adapter
 
-        if (themesViewModel.getThemes().isEmpty()) {
+        if (mainViewModel.getThemes().isEmpty()) {
             refreshLayout.isRefreshing = true
-            ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
+            ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
         }
-        themesViewModel.observeFilter(this) { filter ->
+        mainViewModel.observeFilter(this) { filter ->
             themeList.clear()
             themeList.addAll(unfilteredThemeList.filter {
                 it.name.contains(filter, true)
@@ -120,15 +120,15 @@ class ThemeListFragment : Fragment() {
             adapter.notifyDataChanged()
         }
 
-        themesViewModel.onRefreshThemes(this) {
+        mainViewModel.onRefreshThemes(this) {
             adapter.notifyDataChanged()
         }
 
         refreshLayout.setOnRefreshListener {
             refreshLayout.isRefreshing = true
-            themesViewModel.setFilter()
-            themesViewModel.clearSearch()
-            ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
+            mainViewModel.setFilter()
+            mainViewModel.clearSearch()
+            ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
         }
 
        }

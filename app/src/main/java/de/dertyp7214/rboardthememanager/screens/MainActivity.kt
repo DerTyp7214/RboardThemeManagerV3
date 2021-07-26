@@ -33,8 +33,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dertyp7214.logs.helpers.Logger
 import com.dertyp7214.preferencesplus.core.dp
-import com.dertyp7214.preferencesplus.core.setMargins
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
@@ -50,7 +50,7 @@ import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils.getSystemAutoTheme
-import de.dertyp7214.rboardthememanager.viewmodels.ThemesViewModel
+import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 import dev.chrisbanes.insetter.applyInsetter
 import java.io.File
 
@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var downloadResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<NestedScrollView>
-    private lateinit var themesViewModel: ThemesViewModel
+    private lateinit var mainViewModel: MainViewModel
 
     private lateinit var binding: ActivityMainBinding
 
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        themesViewModel = this[ThemesViewModel::class.java]
+        mainViewModel = this[MainViewModel::class.java]
 
         val toolbar = binding.toolbar
         val searchBar = binding.searchBar
@@ -108,8 +108,8 @@ class MainActivity : AppCompatActivity() {
 
         val reloadThemesLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                themesViewModel.setThemes()
-                themesViewModel.setThemePacks()
+                mainViewModel.setThemes()
+                mainViewModel.setThemePacks()
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             }
 
@@ -198,8 +198,8 @@ class MainActivity : AppCompatActivity() {
                     BottomSheetBehavior.BottomSheetCallback() {
                     override fun onStateChanged(bottomSheet: View, newState: Int) {
                         if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                            if (themesViewModel.getSelectedTheme() != null)
-                                themesViewModel.setSelectedTheme()
+                            if (mainViewModel.getSelectedTheme() != null)
+                                mainViewModel.setSelectedTheme()
                         }
                     }
 
@@ -214,12 +214,12 @@ class MainActivity : AppCompatActivity() {
 
                 toolbar.navigationIcon =
                     ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)
-                toolbar.setNavigationOnClickListener { themesViewModel.getSelections().second?.clearSelection() }
+                toolbar.setNavigationOnClickListener { mainViewModel.getSelections().second?.clearSelection() }
 
                 toolbar.setOnMenuItemClickListener { item ->
                     when (item.itemId) {
                         R.id.share -> {
-                            val adapter = themesViewModel.getSelections().second
+                            val adapter = mainViewModel.getSelections().second
                             val themes = adapter?.getSelected()?.filter {
                                 it.path.isNotEmpty() && !it.path.startsWith("assets:") && !it.path.startsWith(
                                     "system_auto:"
@@ -264,7 +264,7 @@ class MainActivity : AppCompatActivity() {
                                 R.string.delete_theme
                             ) { dialog ->
                                 dialog.dismiss()
-                                val adapter = themesViewModel.getSelections().second
+                                val adapter = mainViewModel.getSelections().second
                                 if (adapter != null) {
                                     val themes = adapter.getSelected().filter {
                                         it.path.isNotEmpty() && !it.path.startsWith("assets:")
@@ -273,7 +273,7 @@ class MainActivity : AppCompatActivity() {
                                         themes.forEach { theme ->
                                             theme.delete()
                                         }
-                                        themesViewModel.setThemes()
+                                        mainViewModel.setThemes()
                                         adapter.clearSelection()
                                     } else {
                                         Toast.makeText(
@@ -286,13 +286,13 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                         R.id.select_all -> {
-                            themesViewModel.getSelections().second?.selectAll()
+                            mainViewModel.getSelections().second?.selectAll()
                         }
                     }
                     true
                 }
 
-                themesViewModel.observeSelections(this) { selections ->
+                mainViewModel.observeSelections(this) { selections ->
                     val originHeight = toolbar.marginBottom
                     val destinationHeight = if (selections.first) 8.dp(this) else 62.dp(this)
                     if (selections.first) toolbar.elevation = 5.dpToPx(this@MainActivity)
@@ -308,8 +308,13 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                themesViewModel.observerSelectedTheme(this) { theme ->
-                    secondaryContent.removeViewAt(0)
+                mainViewModel.observerSelectedTheme(this) { theme ->
+                    secondaryContent.let {
+                        val view = it.findViewById<View>(R.id.current_theme_view)
+                        if (view != null) it.removeView(view).also {
+                            Logger.log(Logger.Companion.Type.DEBUG, "REMOVE VIEW", view.id)
+                        }
+                    }
                     if (theme != null) {
                         secondaryContent.addView(ThemeUtils.getThemeView(theme, this), 0)
                         bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
@@ -321,8 +326,8 @@ class MainActivity : AppCompatActivity() {
                                 Toast.makeText(this, R.string.applied, Toast.LENGTH_SHORT).show()
                             else Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show()
                             delayed(150) {
-                                themesViewModel.setSelectedTheme()
-                                themesViewModel.refreshThemes()
+                                mainViewModel.setSelectedTheme()
+                                mainViewModel.refreshThemes()
                             }
                         })
                         fun applyTheme(dark: Boolean) {
@@ -367,8 +372,8 @@ class MainActivity : AppCompatActivity() {
                                         bottomSheetBehavior.state =
                                             BottomSheetBehavior.STATE_COLLAPSED
                                         delayed(150) {
-                                            themesViewModel.setSelectedTheme()
-                                            themesViewModel.refreshThemes()
+                                            mainViewModel.setSelectedTheme()
+                                            mainViewModel.refreshThemes()
                                         }
                                         openDialog(R.layout.auto_theme_select, true) { dialog ->
                                             findViewById<TextView>(R.id.dark_theme)?.setOnClickListener {
@@ -404,8 +409,8 @@ class MainActivity : AppCompatActivity() {
                                             Toast.LENGTH_SHORT
                                         ).show()
                                         delayed(150) {
-                                            themesViewModel.setSelectedTheme()
-                                            themesViewModel.setThemes(listOf())
+                                            mainViewModel.setSelectedTheme()
+                                            mainViewModel.setThemes(listOf())
                                         }
                                     }
                                 })
@@ -435,20 +440,20 @@ class MainActivity : AppCompatActivity() {
                 menuRecyclerView.adapter = menuAdapter
 
                 searchBar.setOnSearchListener { text ->
-                    themesViewModel.setFilter(text)
+                    mainViewModel.setFilter(text)
                 }
 
                 searchBar.setOnCloseListener {
-                    themesViewModel.setFilter()
+                    mainViewModel.setFilter()
                 }
 
-                themesViewModel.onClearSearch(this) {
+                mainViewModel.onClearSearch(this) {
                     searchBar.setText()
                 }
 
                 controller.addOnDestinationChangedListener { _, destination, _ ->
-                    themesViewModel.setFilter()
-                    themesViewModel.clearSearch()
+                    mainViewModel.setFilter()
+                    mainViewModel.clearSearch()
 
                     when (destination.id) {
                         R.id.action_themeListFragment_to_downloadListFragment -> {
@@ -464,7 +469,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
-                themesViewModel.onNavigate(this) { id ->
+                mainViewModel.onNavigate(this) { id ->
                     navigate(controller, id)
                     navigation.selectedItemId = id
                 }
@@ -481,6 +486,8 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_themes -> {
                 if (currentDestination == R.id.downloadListFragment) {
                     controller.navigate(R.id.action_downloadListFragment_to_themeListFragment)
+                } else if (currentDestination == R.id.soundsFragment) {
+                    controller.navigate(R.id.action_soundsFragment_to_themeListFragment)
                 }
             }
             R.id.navigation_downloads -> {
@@ -495,9 +502,16 @@ class MainActivity : AppCompatActivity() {
                 }
                 if (currentDestination == R.id.themeListFragment) {
                     controller.navigate(R.id.action_themeListFragment_to_downloadListFragment)
+                } else if (currentDestination == R.id.soundsFragment) {
+                    controller.navigate(R.id.action_soundsFragment_to_downloadListFragment)
                 }
             }
             R.id.navigation_sounds -> {
+                if (currentDestination == R.id.themeListFragment) {
+                    controller.navigate(R.id.action_themeListFragment_to_soundsFragment)
+                } else if (currentDestination == R.id.downloadListFragment) {
+                    controller.navigate(R.id.action_downloadListFragment_to_soundsFragment)
+                }
             }
         }
     }
@@ -507,7 +521,7 @@ class MainActivity : AppCompatActivity() {
         when {
             bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED ->
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            themesViewModel.getSelections().first -> themesViewModel.getSelections().second?.clearSelection()
+            mainViewModel.getSelections().first -> mainViewModel.getSelections().second?.clearSelection()
             searchBar.focus -> searchBar.setText()
             else -> super.onBackPressed()
         }
@@ -534,14 +548,14 @@ class MainActivity : AppCompatActivity() {
                         putBoolean("usageSet", true)
                     }
                     Config.useMagisk = false
-                    ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
+                    ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
                 }) {
                 preferenceManager.edit {
                     putBoolean("useMagisk", true)
                     putBoolean("usageSet", true)
                 }
                 Config.useMagisk = true
-                ThemeUtils::loadThemes asyncInto themesViewModel::setThemes
+                ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
                 if (ThemeUtils.checkForExistingThemes()) openDialog(
                     R.string.install_module,
                     R.string.module
