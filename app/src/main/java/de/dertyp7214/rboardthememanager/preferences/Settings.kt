@@ -134,6 +134,14 @@ class Settings(private val activity: Activity) : AbstractPreference() {
                 SelectionItem("system_theme", R.string.system_theme, -1)
             )
         ),
+        USE_BLUR(
+            "useBlur",
+            R.string.use_blur,
+            R.string.use_blur_long,
+            -1,
+            true,
+            TYPE.BOOLEAN
+        ),
         UNINSTALL(
             "uninstall",
             R.string.uninstall,

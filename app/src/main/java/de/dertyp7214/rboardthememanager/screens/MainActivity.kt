@@ -599,7 +599,7 @@ class MainActivity : AppCompatActivity() {
             setFinishListener { path, _ ->
                 finished = true
                 manager.cancel(notificationId)
-                content.setRenderEffect(
+                if (enableBlur) content.setRenderEffect(
                     RenderEffect.createBlurEffect(
                         10F,
                         10F,
@@ -607,7 +607,7 @@ class MainActivity : AppCompatActivity() {
                     )
                 )
                 PackageUtils.install(this@MainActivity, File(path), downloadResultLauncher) {
-                    content.setRenderEffect(null)
+                    if (enableBlur) content.setRenderEffect(null)
                     Toast.makeText(this@MainActivity, R.string.error, Toast.LENGTH_LONG).show()
                 }
             }

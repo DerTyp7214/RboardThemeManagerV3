@@ -148,4 +148,6 @@
     <string name="processing_flags">Processing Flags</string>
     <string name="load_flags">Load flags</string>
     <string name="load_flags_long">Old flags backup found. Do you want to load it?</string>
+    <string name="use_blur">Use blur</string>
+    <string name="use_blur_long">Use blur Rendereffects</string>
 </resources>

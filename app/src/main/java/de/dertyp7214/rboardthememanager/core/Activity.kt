@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.net.Uri
@@ -17,12 +18,21 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import de.dertyp7214.rboardthememanager.R
+
+val Activity.preferences: SharedPreferences
+    get() = PreferenceManager.getDefaultSharedPreferences(this)
 
 inline val Activity.content: View
     get() {
         return findViewById(android.R.id.content)
+    }
+
+inline val Activity.enableBlur: Boolean
+    get() {
+        return preferences.getBoolean("useBlur", true)
     }
 
 operator fun <T : ViewModel> FragmentActivity.get(modelClass: Class<T>): T =
@@ -41,13 +51,19 @@ fun Activity.openDialog(
     negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
     positive: (dialogInterface: DialogInterface) -> Unit
 ): AlertDialog {
-    content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
+    if (enableBlur) content.setRenderEffect(
+        RenderEffect.createBlurEffect(
+            10F,
+            10F,
+            Shader.TileMode.REPEAT
+        )
+    )
     return MaterialAlertDialogBuilder(this)
         .setCancelable(cancelable)
         .setMessage(message)
         .setTitle(title)
         .setPositiveButton(positiveText) { dialogInterface, _ -> positive(dialogInterface) }
-        .setOnDismissListener { content.setRenderEffect(null) }
+        .setOnDismissListener { if (enableBlur) content.setRenderEffect(null) }
         .apply {
             if (negative != null) setNegativeButton(negativeText) { dialogInterface, _ ->
                 negative.invoke(
@@ -144,12 +160,18 @@ fun Activity.openDialog(
     cancelable: Boolean = true,
     block: View.(DialogInterface) -> Unit
 ): AlertDialog {
-    content.setRenderEffect(RenderEffect.createBlurEffect(10F, 10F, Shader.TileMode.REPEAT))
+    if (enableBlur) content.setRenderEffect(
+        RenderEffect.createBlurEffect(
+            10F,
+            10F,
+            Shader.TileMode.REPEAT
+        )
+    )
     val view = layoutInflater.inflate(layout, null)
     return MaterialAlertDialogBuilder(this)
         .setCancelable(cancelable)
         .setView(view)
-        .setOnDismissListener { content.setRenderEffect(null) }
+        .setOnDismissListener { if (enableBlur) content.setRenderEffect(null) }
         .create().also { dialog ->
             block(view, dialog)
             dialog.show()
