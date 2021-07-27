@@ -21,6 +21,7 @@ fun ThemePack.download(activity: Activity, result: (themes: List<String>) -> Uni
             override fun onDownloadComplete() {
                 val pack = File(activity.cacheDir, "$name.pack")
                 val destination = SuFile(activity.cacheDir, name)
+                dialog.dismiss()
                 if (ZipHelper().unpackZip(destination.absolutePath, pack.absolutePath)) {
                     SuFile(destination, "pack.meta").writeFile(
                         "name=$title\nauthor=$author\n"
@@ -28,12 +29,11 @@ fun ThemePack.download(activity: Activity, result: (themes: List<String>) -> Uni
                     result(destination.listFiles { file -> file.extension == "zip" }
                         ?.map { it.absolutePath } ?: listOf())
                 } else result(listOf())
-                dialog.dismiss()
             }
 
             override fun onError(error: Error?) {
-                result(listOf())
                 dialog.dismiss()
+                result(listOf())
             }
         })
 }

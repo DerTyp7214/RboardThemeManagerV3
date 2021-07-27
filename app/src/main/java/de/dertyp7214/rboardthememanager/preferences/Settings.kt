@@ -143,6 +143,14 @@ class Settings(private val activity: Activity) : AbstractPreference() {
                 )
             }
         ),
+        USE_BLUR(
+            "useBlur",
+            R.string.use_blur,
+            R.string.use_blur_long,
+            -1,
+            true,
+            TYPE.BOOLEAN
+        ),
         UNINSTALL(
             "uninstall",
             R.string.uninstall,
@@ -173,7 +181,7 @@ class Settings(private val activity: Activity) : AbstractPreference() {
 
     override fun preferences(builder: PreferenceScreen.Builder) {
         SETTINGS.values()
-            .filter { !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) }
+            .filter { !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) && !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S)  }
             .forEach { item ->
                 val pref: Preference = when (item.type) {
                     TYPE.BOOLEAN -> builder.switch(item.key) {

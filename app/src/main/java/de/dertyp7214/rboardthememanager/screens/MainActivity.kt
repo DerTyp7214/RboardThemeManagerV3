@@ -6,6 +6,8 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.*
+import android.graphics.RenderEffect
+import android.graphics.Shader
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -604,7 +606,19 @@ class MainActivity : AppCompatActivity() {
             setFinishListener { path, _ ->
                 finished = true
                 manager.cancel(notificationId)
+                if (enableBlur) if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    content.setRenderEffect(
+                        RenderEffect.createBlurEffect(
+                            10F,
+                            10F,
+                            Shader.TileMode.REPEAT
+                        )
+                    )
+                }
                 PackageUtils.install(this@MainActivity, File(path), downloadResultLauncher) {
+                    if (enableBlur) if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        content.setRenderEffect(null)
+                    }
                     Toast.makeText(this@MainActivity, R.string.error, Toast.LENGTH_LONG).show()
                 }
             }
