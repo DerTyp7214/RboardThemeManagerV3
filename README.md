@@ -2,6 +2,6 @@
 [![Downloads](https://img.shields.io/github/downloads/DerTyp7214/RboardThemeManagerV3/total)](https://github.com/DerTyp7214/RboardThemeManagerV3/releases)
 [![Download Apk](https://img.shields.io/badge/dynamic/json.svg?label=download&url=https://api.github.com/repos/DerTyp7214/RboardThemeManagerV3/releases/latest&query=$.assets[0].name)](https://github.com/DerTyp7214/RboardThemeManagerV3/releases/latest/download/app-release.apk)
 [![LatestRelease](https://img.shields.io/github/v/release/DerTyp7214/RboardThemeManagerV3)](https://github.com/DerTyp7214/RboardThemeManagerV3/releases/latest)
-[![LatestPreRelease](https://img.shields.io/github/v/release/DerTyp7214/RboardThemeManagerV3?include_prereleases)](https://github.com/DerTyp7214/RboardThemeManagerV3/releases/latest)
+[![LatestPreRelease](https://img.shields.io/github/v/release/DerTyp7214/RboardThemeManagerV3?include_prereleases)](https://github.com/DerTyp7214/RboardThemeManagerV3/releases)
 [![Build Release](https://github.com/DerTyp7214/RboardThemeManagerV3/actions/workflows/buildRelease.yml/badge.svg)](https://github.com/DerTyp7214/RboardThemeManagerV3/actions/workflows/buildRelease.yml)
 [![Build Debug](https://github.com/DerTyp7214/RboardThemeManagerV3/actions/workflows/buildDebug.yml/badge.svg)](https://github.com/DerTyp7214/RboardThemeManagerV3/actions/workflows/buildDebug.yml)
