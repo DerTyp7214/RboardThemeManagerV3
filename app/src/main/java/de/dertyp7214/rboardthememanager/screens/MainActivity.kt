@@ -96,6 +96,7 @@ class MainActivity : AppCompatActivity() {
 
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
 
+        searchBar.instantSearch = true
         searchBar.applyInsetter {
             type(statusBars = true) {
                 margin()
@@ -450,7 +451,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 mainViewModel.onClearSearch(this) {
-                    searchBar.setText()
+                    searchBar.clearText()
                 }
 
                 controller.addOnDestinationChangedListener { _, destination, _ ->
@@ -524,7 +525,7 @@ class MainActivity : AppCompatActivity() {
             bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED ->
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
             mainViewModel.getSelections().first -> mainViewModel.getSelections().second?.clearSelection()
-            searchBar.focus -> searchBar.setText()
+            searchBar.focus -> searchBar.clearText()
             else -> super.onBackPressed()
         }
     }
@@ -566,7 +567,11 @@ class MainActivity : AppCompatActivity() {
                     MagiskUtils.installModule(this)
                 } else MagiskUtils.installModule(this)
             }
-        } else if (intent.getBooleanExtra("update", false)) {
+        } else if (intent.getBooleanExtra(
+                "update",
+                this@MainActivity.intent.getBooleanExtra("update", false)
+            )
+        ) {
             openDialog(R.string.update_ready, R.string.update) { update() }
         }
     }

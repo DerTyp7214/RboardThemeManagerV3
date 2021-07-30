@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
+import de.dertyp7214.rboardthememanager.components.LayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dertyp7214.preferencesplus.core.dp
@@ -104,7 +104,7 @@ class ThemeListFragment : Fragment() {
         refreshLayout.setProgressBackgroundColorSchemeColor(requireActivity().getAttr(R.attr.colorBackgroundFloating))
         refreshLayout.setColorSchemeColors(requireActivity().getAttr(R.attr.colorOnPrimary))
 
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = LayoutManager(requireContext())
         recyclerView.setHasFixedSize(false)
         recyclerView.adapter = adapter
 

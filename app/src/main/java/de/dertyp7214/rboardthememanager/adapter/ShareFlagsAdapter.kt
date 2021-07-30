@@ -14,8 +14,12 @@ import kotlin.collections.HashMap
 class ShareFlagsAdapter(val flags: List<String>, private val onClick: (key: String) -> Unit) :
     RecyclerView.Adapter<ShareFlagsAdapter.ViewHolder>() {
 
+    init {
+        setHasStableIds(true)
+    }
+
     private val states: HashMap<String, Boolean> by lazy {
-        HashMap(flags.map { Pair(it, false) }.toMap())
+        HashMap(flags.associateWith { false })
     }
 
     fun getSelectedFlags(): List<String> {
@@ -33,6 +37,10 @@ class ShareFlagsAdapter(val flags: List<String>, private val onClick: (key: Stri
         val title: TextView = v.findViewById(R.id.title)
         val summary: TextView = v.findViewById(R.id.summary)
         val checkBox: CheckBox = v.findViewById(R.id.checkBox)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return flags[position].hashCode().toLong()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

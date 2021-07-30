@@ -16,6 +16,7 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.MenuRes
+import androidx.core.widget.doOnTextChanged
 import androidx.appcompat.widget.PopupMenu
 import androidx.cardview.widget.CardView
 import de.dertyp7214.rboardthememanager.R
@@ -38,6 +39,25 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
     private val moreButton: ImageButton
     private val searchText: TextView
     private val searchEdit: EditText
+
+    var instantSearch: Boolean = false
+
+    var text: String = ""
+        set(value) {
+            field = value
+            if (value.isEmpty()) {
+                focus = false
+                searchButton.visibility = VISIBLE
+                backButton.visibility = GONE
+
+                searchText.visibility = VISIBLE
+                searchEdit.visibility = GONE
+            }
+
+            searchEdit.setText(value)
+            clearFocus(searchEdit)
+        }
+
 
     init {
         inflate(context, R.layout.search_bar, this)
@@ -90,6 +110,11 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
             popupMenu?.show()
         }
 
+        searchEdit.doOnTextChanged { text, _, _, _ ->
+            if (instantSearch) searchListener(text?.toString() ?: "")
+        }
+
+
         searchEdit.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 clearFocus(searchEdit)
@@ -111,19 +136,7 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
         else null
     }
 
-    fun setText(text: String = "") {
-        if (text.isEmpty()) {
-            focus = false
-            searchButton.visibility = VISIBLE
-            backButton.visibility = GONE
-
-            searchText.visibility = VISIBLE
-            searchEdit.visibility = GONE
-        }
-
-        searchEdit.setText(text)
-        clearFocus(searchEdit)
-    }
+    fun clearText() = ::text.set("")
 
     fun setOnSearchListener(listener: (text: String) -> Unit) {
         searchListener = listener
