@@ -560,7 +560,11 @@ class MainActivity : AppCompatActivity() {
                     MagiskUtils.installModule(this)
                 } else MagiskUtils.installModule(this)
             }
-        } else if (intent.getBooleanExtra("update", false)) {
+        } else if (intent.getBooleanExtra(
+                "update",
+                this@MainActivity.intent.getBooleanExtra("update", false)
+            )
+        ) {
             openDialog(R.string.update_ready, R.string.update) { update() }
         }
     }

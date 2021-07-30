@@ -177,7 +177,6 @@ class AppStartUp(private val activity: AppCompatActivity) {
             }
 
             when {
-                intent.hasExtra("update") -> block(intent)
                 initialized && scheme != "content" && data != null -> {
                     if (data.scheme == "file") {
                         val file = SuFile(data.path).let {
