@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.ChipContainer
+import de.dertyp7214.rboardthememanager.components.LayoutManager
 import de.dertyp7214.rboardthememanager.core.applyTransitions
 import de.dertyp7214.rboardthememanager.core.applyTransitionsViewCreated
 import de.dertyp7214.rboardthememanager.core.get
@@ -93,21 +93,15 @@ class DownloadListFragment : Fragment() {
         }
 
         mainViewModel.observeFilter(this) { filter ->
-            doAsync({
-                val chipFilters = chipContainer.filters
-                themePacks.clear()
-                try {
-                    themePacks.addAll(filterThemePacks(originalThemePacks, chipFilters, filter))
-                } catch (e: Exception) {
-                }
-            }) {
-                adapter.notifyDataSetChanged()
-            }
+            val chipFilters = chipContainer.filters
+            themePacks.clear()
+            themePacks.addAll(filterThemePacks(originalThemePacks, chipFilters, filter))
+            adapter.notifyDataSetChanged()
         }
 
         trace.addSplit("RECYCLERVIEW")
 
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = LayoutManager(requireContext())
         recyclerView.setHasFixedSize(false)
         recyclerView.adapter = adapter
 

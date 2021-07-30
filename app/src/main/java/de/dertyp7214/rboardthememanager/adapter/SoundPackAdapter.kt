@@ -25,11 +25,20 @@ class SoundPackAdapter(
     private val list: List<SoundPack>,
     private val activity: Activity
 ) : RecyclerView.Adapter<SoundPackAdapter.ViewHolder>() {
+
+    init {
+        setHasStableIds(true)
+    }
+
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val root: View = v.findViewById(R.id.root)
         val title: TextView = v.findViewById(R.id.title)
         val image: ImageView = v.findViewById(R.id.image)
         val author: TextView = v.findViewById(R.id.author)
+    }
+
+    override fun getItemId(position: Int): Long {
+        return list[position].hashCode().toLong()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

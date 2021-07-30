@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.SoundPackAdapter
+import de.dertyp7214.rboardthememanager.components.LayoutManager
 import de.dertyp7214.rboardthememanager.core.applyTransitions
 import de.dertyp7214.rboardthememanager.core.applyTransitionsViewCreated
 import de.dertyp7214.rboardthememanager.core.get
@@ -46,25 +46,19 @@ class SoundsFragment : Fragment() {
         val adapter = SoundPackAdapter(soundList, requireActivity())
 
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = LayoutManager(requireContext())
         recyclerView.adapter = adapter
 
         val mainViewModel = requireActivity()[MainViewModel::class.java]
 
         mainViewModel.observeFilter(this) { filter ->
-            doAsync({
-                soundList.clear()
-                try {
-                    soundList.addAll(original.filter {
-                        it.author.contains(filter, true)
-                                || it.title.contains(filter, true)
-                                || filter.isNullOrEmpty()
-                    })
-                } catch (e: Exception) {
-                }
-            }) {
-                adapter.notifyDataSetChanged()
-            }
+            soundList.clear()
+            soundList.addAll(original.filter {
+                it.author.contains(filter, true)
+                        || it.title.contains(filter, true)
+                        || filter.isNullOrEmpty()
+            })
+            adapter.notifyDataSetChanged()
         }
 
         mainViewModel.soundsObserve(this) {

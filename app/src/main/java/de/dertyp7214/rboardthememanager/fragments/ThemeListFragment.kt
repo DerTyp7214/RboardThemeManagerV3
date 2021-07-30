@@ -3,12 +3,12 @@ package de.dertyp7214.rboardthememanager.fragments
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dertyp7214.preferencesplus.core.dp
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
+import de.dertyp7214.rboardthememanager.components.LayoutManager
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
@@ -96,7 +96,7 @@ class ThemeListFragment : Fragment() {
         refreshLayout.setProgressBackgroundColorSchemeColor(requireActivity().getAttr(R.attr.colorBackgroundFloating))
         refreshLayout.setColorSchemeColors(requireActivity().getAttr(R.attr.colorOnPrimary))
 
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.layoutManager = LayoutManager(requireContext())
         recyclerView.setHasFixedSize(false)
         recyclerView.adapter = adapter
 

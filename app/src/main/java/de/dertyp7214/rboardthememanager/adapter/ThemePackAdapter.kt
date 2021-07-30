@@ -22,6 +22,10 @@ class ThemePackAdapter(
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    init {
+        setHasStableIds(true)
+    }
+
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val root: View = v.findViewById(R.id.root)
         val title: TextView = v.findViewById(R.id.title)
@@ -30,6 +34,10 @@ class ThemePackAdapter(
 
     class NewsViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val newsCards: NewsCards = v as NewsCards
+    }
+
+    override fun getItemId(position: Int): Long {
+        return list[position].hashCode().toLong()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

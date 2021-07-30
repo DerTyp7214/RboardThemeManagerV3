@@ -63,7 +63,12 @@ class ThemeAdapter(
             ?: if (selected.any { it }) SelectionState.SELECTING else SelectionState.NONE
 
     init {
+        setHasStableIds(true)
         cacheColor()
+    }
+
+    override fun getItemId(position: Int): Long {
+        return themes[position].hashCode().toLong()
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {

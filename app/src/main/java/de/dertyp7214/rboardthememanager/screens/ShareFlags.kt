@@ -7,9 +7,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ShareFlagsAdapter
+import de.dertyp7214.rboardthememanager.components.LayoutManager
 import de.dertyp7214.rboardthememanager.components.SearchBar
 import de.dertyp7214.rboardthememanager.core.getMapExtra
 import de.dertyp7214.rboardthememanager.core.setXmlValue
@@ -63,10 +63,11 @@ class ShareFlags : AppCompatActivity() {
             title = getString(titleRes, adapter.getSelectedFlags().size)
         }
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = LayoutManager(this)
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
 
+        searchBar.instantSearch = true
         searchBar.setOnSearchListener { filter ->
             flagKeys.clear()
             flagKeys.addAll(orig.filter { it.contains(filter, true) || filter.isBlank() })
@@ -129,7 +130,7 @@ class ShareFlags : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (searchBar.focus) searchBar.setText()
+        if (searchBar.focus) searchBar.clearText()
         else super.onBackPressed()
     }
 
