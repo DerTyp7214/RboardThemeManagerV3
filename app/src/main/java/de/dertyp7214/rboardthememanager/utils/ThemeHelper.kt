@@ -157,7 +157,7 @@ object ThemeUtils {
     fun loadThemePacks(): List<ThemePack> {
         return try {
             val packs = arrayListOf<ThemePack>()
-            REPOS.forEach { repo ->
+            REPOS.filterActive().forEach { repo ->
                 try {
                     packs.addAll(
                         Gson().fromJson(

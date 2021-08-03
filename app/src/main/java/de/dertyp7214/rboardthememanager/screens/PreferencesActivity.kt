@@ -71,7 +71,6 @@ class PreferencesActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        preferences.onBackPressed()
+        preferences.onBackPressed { super.onBackPressed() }
     }
 }

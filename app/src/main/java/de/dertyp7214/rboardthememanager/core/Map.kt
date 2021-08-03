@@ -17,3 +17,7 @@ val Map<String, Any>.border: Boolean
     get() {
         return this["enable_key_border"] == true
     }
+
+fun Map<String, Boolean>.toSet(): Set<String> {
+    return map { (key, value) -> "${value.toString().lowercase()}:$key" }.toSet()
+}

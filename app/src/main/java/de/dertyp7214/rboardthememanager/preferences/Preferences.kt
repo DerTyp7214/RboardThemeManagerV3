@@ -1,6 +1,5 @@
 package de.dertyp7214.rboardthememanager.preferences
 
-import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
@@ -14,6 +13,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.dertyp7214.logs.helpers.DogbinUtils
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.helpers.categoryHeader
@@ -28,9 +28,10 @@ import de.dertyp7214.rboardthememanager.core.start
 import de.dertyp7214.rboardthememanager.screens.ReadMoreReadFast
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
+import de.dertyp7214.rboardthememanager.utils.Repos
 import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 
-class Preferences(private val activity: Activity, intent: Intent, onRequestReload: () -> Unit) :
+class Preferences(private val activity: AppCompatActivity, intent: Intent, onRequestReload: () -> Unit) :
     AbstractPreference() {
 
     private val type by lazy { intent.getStringExtra("type") }
@@ -68,18 +69,20 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
                 Flags.setUpFlags()
                 preference = Flags.AllFlags(activity, onRequestReload)
             }
+            "repos" -> {
+                preference = Repos(activity, onRequestReload)
+            }
             else -> {
                 preference = this
             }
         }
     }
 
-    fun onBackPressed() {
+    override fun onBackPressed(callback: () -> Unit) {
         when (type) {
-            "info" -> {
-            }
-            "settings" -> {
-            }
+            "info" -> callback()
+            "settings" -> callback()
+            "repos" -> preference.onBackPressed(callback)
             "flags", "all_flags" -> {
                 if (Flags.applyChanges()) {
                     Toast.makeText(activity, R.string.flags_applied, Toast.LENGTH_SHORT).show()
@@ -91,16 +94,16 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
                         }
                     }
                 }
+                callback()
             }
-            else -> {
-            }
+            else -> callback()
         }
     }
 
     val preferences: PreferenceScreen
         get() {
             return when (type) {
-                "info", "settings", "flags", "all_flags" -> screen(
+                "info", "settings", "flags", "all_flags", "repos" -> screen(
                     activity,
                     preference::preferences
                 )
@@ -115,6 +118,7 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
                 "settings" -> activity.getString(R.string.settings)
                 "flags" -> activity.getString(R.string.flags)
                 "all_flags" -> activity.getString(R.string.all_flags)
+                "repos" -> activity.getString(R.string.repos)
                 else -> ""
             }
         }
@@ -124,6 +128,9 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
             "info" -> {
                 if (menu != null)
                     menuInflater.inflate(R.menu.share, menu)
+            }
+            "repos" -> {
+                if (preference is AbstractMenuPreference) preference.loadMenu(menuInflater, menu)
             }
             "settings", "flags", "all_flags" -> {
             }
@@ -166,6 +173,10 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
                     true
                 }
                 else -> false
+            }
+            "repos" -> {
+                if (preference is AbstractMenuPreference) preference.onMenuClick(menuItem)
+                else false
             }
             "settings", "flags", "all_flags" -> false
             else -> false
@@ -251,4 +262,10 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
 abstract class AbstractPreference {
     internal abstract fun preferences(builder: PreferenceScreen.Builder)
     internal abstract fun getExtraView(): View?
+    internal abstract fun onBackPressed(callback: () -> Unit)
+}
+
+abstract class AbstractMenuPreference : AbstractPreference() {
+    internal abstract fun loadMenu(menuInflater: MenuInflater, menu: Menu?)
+    internal abstract fun onMenuClick(menuItem: MenuItem): Boolean
 }

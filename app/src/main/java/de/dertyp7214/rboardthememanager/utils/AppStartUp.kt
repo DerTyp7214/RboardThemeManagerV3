@@ -201,10 +201,13 @@ class AppStartUp(private val activity: AppCompatActivity) {
                                 when (it) {
                                     "add" -> {
                                         preferences.apply {
-                                            val repos = ArrayList(
-                                                getStringSet("repos", setOf())?.toList() ?: listOf()
+                                            val repos = HashMap(
+                                                ArrayList(
+                                                    getStringSet("repos", setOf())?.toList()
+                                                        ?: listOf()
+                                                ).toMap()
                                             )
-                                            repos.add(data.getQueryParameter("add"))
+                                            repos[data.getQueryParameter("add")] = true
                                             edit { putStringSet("repos", repos.toSet()) }
                                         }
                                         Toast.makeText(

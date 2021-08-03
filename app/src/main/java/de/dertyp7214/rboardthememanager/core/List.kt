@@ -14,3 +14,11 @@ operator fun <E> List<E>.times(times: Int): ArrayList<E> {
     for (i in 0..times) list.addAll(this)
     return list
 }
+
+fun List<String>.toMap(): Map<String, Boolean> {
+    return associate {
+        val bool = it.startsWith("true:")
+        val str = it.removePrefix("true:").removePrefix("false:")
+        Pair(str, bool)
+    }
+}

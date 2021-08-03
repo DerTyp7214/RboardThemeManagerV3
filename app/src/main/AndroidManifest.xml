@@ -60,10 +60,6 @@
         </receiver>
 
         <activity
-            android:name=".screens.ReposActivity"
-            android:exported="true"
-            android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />
-        <activity
             android:name=".screens.InstallPackActivity"
             android:exported="true"
             android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />
