@@ -1,4 +1,4 @@
-package de.dertyp7214.rboardthememanager.utils
+package de.dertyp7214.rboardthememanager.preferences
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
@@ -12,15 +12,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import de.Maxr1998.modernpreferences.PreferenceScreen
+import de.Maxr1998.modernpreferences.helpers.checkBox
 import de.Maxr1998.modernpreferences.helpers.onClick
-import de.Maxr1998.modernpreferences.helpers.switch
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.openDialog
-import de.dertyp7214.rboardthememanager.core.openInputDialog
-import de.dertyp7214.rboardthememanager.core.toMap
-import de.dertyp7214.rboardthememanager.core.toSet
-import de.dertyp7214.rboardthememanager.preferences.AbstractMenuPreference
+import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.screens.ManageRepo
+import de.dertyp7214.rboardthememanager.utils.doAsync
+import org.json.JSONArray
+import java.net.URL
 
 class Repos(private val activity: AppCompatActivity, private val onRequestReload: () -> Unit) :
     AbstractMenuPreference() {
@@ -42,14 +42,17 @@ class Repos(private val activity: AppCompatActivity, private val onRequestReload
                     it.data?.getStringExtra("key")?.also { key ->
                         when (it.data?.getStringExtra("action")) {
                             "delete" -> {
+                                modified = true
                                 repositories.remove(key)
                                 onRequestReload()
                             }
                             "disable" -> {
+                                modified = true
                                 repositories[key] = false
                                 onRequestReload()
                             }
                             "enable" -> {
+                                modified = true
                                 repositories[key] = true
                                 onRequestReload()
                             }
@@ -63,12 +66,19 @@ class Repos(private val activity: AppCompatActivity, private val onRequestReload
     }
 
     override fun preferences(builder: PreferenceScreen.Builder) {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
         repositories.forEach { (key, value) ->
-            builder.switch(key) {
+            prefs.edit { remove(key) }
+            builder.checkBox(key) {
+                val pref = this
                 title = key.replace("https://raw.githubusercontent.com/", "...")
                 defaultValue = value
                 onClick {
-                    TODO("Open Reposcreen with info like themes included and option to disable, remove or share")
+                    pref.checked = value
+                    ManageRepo::class.java.start(activity, resultLauncher) {
+                        putExtra("key", key)
+                        putExtra("enabled", value)
+                    }
                     false
                 }
             }
@@ -80,21 +90,40 @@ class Repos(private val activity: AppCompatActivity, private val onRequestReload
     }
 
     override fun onMenuClick(menuItem: MenuItem): Boolean {
-        when (menuItem.itemId) {
+        return when (menuItem.itemId) {
             R.id.add -> {
                 activity.openInputDialog(R.string.repository) { dialog, text ->
-                    repositories[text] = true
-                    onRequestReload()
-                    modified = true
-                    dialog.dismiss()
+                    doAsync({
+                        try {
+                            JSONArray(URL(text).getTextFromUrl())
+                            true
+                        } catch (e: Exception) {
+                            false
+                        }
+                    }) {
+                        dialog.dismiss()
+                        if (it) {
+                            repositories[text] = true
+                            onRequestReload()
+                            modified = true
+                        } else activity.openDialog(
+                            R.string.invalid_repo_long,
+                            R.string.invalid_repo,
+                            false,
+                            ::dismiss,
+                            ::dismiss
+                        )
+                    }
                 }
+                true
             }
             R.id.apply -> {
                 apply()
                 modified = false
+                true
             }
+            else -> false
         }
-        return true
     }
 
     override fun getExtraView(): View? = null

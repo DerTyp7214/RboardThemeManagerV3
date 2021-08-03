@@ -28,10 +28,13 @@ import de.dertyp7214.rboardthememanager.core.start
 import de.dertyp7214.rboardthememanager.screens.ReadMoreReadFast
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
-import de.dertyp7214.rboardthememanager.utils.Repos
 import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 
-class Preferences(private val activity: AppCompatActivity, intent: Intent, onRequestReload: () -> Unit) :
+class Preferences(
+    private val activity: AppCompatActivity,
+    intent: Intent,
+    onRequestReload: () -> Unit
+) :
     AbstractPreference() {
 
     private val type by lazy { intent.getStringExtra("type") }

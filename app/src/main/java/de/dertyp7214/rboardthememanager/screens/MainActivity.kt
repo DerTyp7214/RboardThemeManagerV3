@@ -386,7 +386,7 @@ class MainActivity : AppCompatActivity() {
                                     })
                             menuItems.add(
                                 MenuItem(
-                                    R.drawable.ic_delete_theme,
+                                    R.drawable.ic_delete,
                                     R.string.delete_theme
                                 ) {
                                     openDialog(R.string.q_delete_theme, R.string.delete_theme) {
