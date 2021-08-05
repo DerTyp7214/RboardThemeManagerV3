@@ -1,5 +1,5 @@
 {
-  "time": "1626724310334",
+  "time": "1628186912674",
   "flags": [
     {
       "key": "general",
@@ -82,6 +82,7 @@
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS",
+      "visible": false,
       "valueMap": [
         {
           "first": true,
@@ -292,14 +293,6 @@
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS"
-    },
-    {
-      "key": "empty",
-      "title": "",
-      "summary": "",
-      "icon": "",
-      "defaultValue": "",
-      "type": "GROUP"
     }
   ]
 }

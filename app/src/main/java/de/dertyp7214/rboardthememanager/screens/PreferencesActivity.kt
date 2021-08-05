@@ -49,6 +49,12 @@ class PreferencesActivity : AppCompatActivity() {
             }
         }
 
+        recyclerView.applyInsetter {
+            type(navigationBars = true) {
+                margin()
+            }
+        }
+
         recyclerView.layoutManager = LinearLayoutManager(this)
         doAsync({ PreferencesAdapter(preferences.preferences) }) {
             loadingPreferences.visibility = View.GONE
