@@ -34,6 +34,10 @@ import java.io.BufferedInputStream
 import java.net.URL
 import java.util.*
 
+enum class InternalThemeNames(val path: String) {
+    DOWNLOAD_THEMES("rboard:download_themes")
+}
+
 @SuppressLint("SdCardPath")
 fun applyTheme(
     theme: ThemeDataClass,
@@ -150,6 +154,21 @@ object ThemeUtils {
                     )
                 } == true) themes.addAll(buildPreinstalledThemesList())
             themes.addAll(it)
+            if (themes.isEmpty()) context?.let { ctx ->
+                themes.add(
+                    ThemeDataClass(
+                        BitmapFactory.decodeStream(
+                            BufferedInputStream(
+                                ctx.resources.openRawResource(
+                                    R.raw.system_auto
+                                )
+                            )
+                        ),
+                        ctx.getString(R.string.download_themes),
+                        InternalThemeNames.DOWNLOAD_THEMES.path
+                    )
+                )
+            }
             themes
         }
     }

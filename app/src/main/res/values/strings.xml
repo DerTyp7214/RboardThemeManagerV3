@@ -158,4 +158,5 @@
     <string name="themes">Themes</string>
     <string name="invalid_repo">Invalid repo</string>
     <string name="invalid_repo_long">Invalid repo. Please check the url again.</string>
+    <string name="download_themes">Download themes</string>
 </resources>
