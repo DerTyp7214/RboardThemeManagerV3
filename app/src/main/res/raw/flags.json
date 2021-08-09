@@ -1,5 +1,5 @@
 {
-  "time": "1628186912674",
+  "time": "1628378280360",
   "flags": [
     {
       "key": "general",
@@ -117,7 +117,8 @@
       "icon": "ic_popup_v2",
       "defaultValue": false,
       "type": "BOOLEAN",
-      "file": "FLAGS"
+      "file": "FLAGS",
+      "visible": false
     },
     {
       "key": "enable_key_border",

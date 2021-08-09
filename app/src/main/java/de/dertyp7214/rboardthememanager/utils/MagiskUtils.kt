@@ -45,7 +45,7 @@ object MagiskUtils {
         } else ArrayList()
     }
 
-    fun installModule(meta: ModuleMeta, files: Map<String, String?>) {
+    private fun installModule(meta: ModuleMeta, files: Map<String, String?>) {
         RootUtils.runWithRoot {
             val moduleDir = SuFile(MODULES_PATH, meta.id)
             moduleDir.mkdirs()
