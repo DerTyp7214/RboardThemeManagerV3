@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Rboard менеджер тем V3</string>
+    <string name="abc_search_hint">Поиск…</string>
+    <string name="hello_blank_fragment">Здравствуйте, пустой фрагмент</string>
+    <string name="please_open_app">Пожалуйста, откройте приложение!</string>
+    <string name="title_downloads">Скачать</string>
+    <string name="title_sounds">Звуки</string>
+    <string name="title_themes">Темы</string>
+    <string name="error">Произошла ошибка!</string>
+    <string name="update_ready">Обновление готово, вы хотите его установить?</string>
+    <string name="update">Обновление</string>
+    <string name="install_gboard">Вы хотите установить Gboard?</string>
+    <string name="gboard_not_installed">Gboard не установлен</string>
+    <string name="cant_use_app">Вы не можете использовать это приложение без root</string>
+    <string name="not_rooted">Ваше устройство не рутировано</string>
+    <string name="channel_name">Push уведомления</string>
+    <string name="channel_description">Для получения обновлений и информации.</string>
+    <string name="channel_name_download">Уведомления о загрузке</string>
+    <string name="channel_description_download">Для загрузки уведомлений</string>
+    <string name="download_update">Загрузка обновления</string>
+    <string name="download_update_progress">Загрузка обновления (%s)</string>
+    <string name="download_complete">Загрузка завершена</string>
+    <string name="download_error">Ошибка при загрузке</string>
+    <string name="reboot">Перезагрузить</string>
+    <string name="reboot_now">Перезагрузить сейчас?</string>
+    <string name="reboot_to_continue">Для работы модуля необходимо перезагрузить</string>
+    <string name="apply_theme">Применить тему</string>
+    <string name="apply_automatic_theme">Применить автоматическую тему</string>
+    <string name="applied">Тема применена</string>
+    <string name="delete_theme">Удалить тему</string>
+    <string name="q_delete_theme">Вы хотите удалить эту тему?</string>
+    <string name="theme_deleted">Тема удалена</string>
+    <string name="info">Информация</string>
+    <string name="theme_count">Количество тем</string>
+    <string name="theme_path">Путь к теме</string>
+    <string name="installation_method">Способ установки</string>
+</resources>
