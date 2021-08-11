@@ -54,6 +54,13 @@ class PreferencesActivity : AppCompatActivity() {
             }
         }
 
+        recyclerView.applyInsetter {
+            type(navigationBars = true) {
+                margin()
+            }
+        }
+
+
         recyclerView.layoutManager = LinearLayoutManager(this)
         doAsync({ PreferencesAdapter(preferences.preferences) }) {
             loadingPreferences.visibility = View.GONE
@@ -76,7 +83,6 @@ class PreferencesActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        preferences.onBackPressed()
+        preferences.onBackPressed { super.onBackPressed() }
     }
 }

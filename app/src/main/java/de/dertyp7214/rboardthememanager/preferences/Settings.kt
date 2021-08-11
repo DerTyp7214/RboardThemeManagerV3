@@ -23,7 +23,7 @@ import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.core.start
-import de.dertyp7214.rboardthememanager.screens.ReposActivity
+import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 
 class Settings(private val activity: Activity) : AbstractPreference() {
@@ -107,10 +107,9 @@ class Settings(private val activity: Activity) : AbstractPreference() {
             listOf(),
             {
                 Application.context?.let {
-                    ReposActivity::class.java.start(
-                        it
-                    ) {
+                    PreferencesActivity::class.java.start(it) {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        putExtra("type", "repos")
                     }
                 }
             }
@@ -178,6 +177,10 @@ class Settings(private val activity: Activity) : AbstractPreference() {
     }
 
     override fun getExtraView(): View? = null
+
+    override fun onBackPressed(callback: () -> Unit) {
+        callback()
+    }
 
     override fun preferences(builder: PreferenceScreen.Builder) {
         SETTINGS.values()

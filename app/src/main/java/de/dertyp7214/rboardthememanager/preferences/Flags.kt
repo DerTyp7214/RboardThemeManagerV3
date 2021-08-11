@@ -155,6 +155,11 @@ class Flags(val activity: Activity) : AbstractPreference() {
 
     override fun getExtraView(): View? = null
 
+    override fun onBackPressed(callback: () -> Unit) {
+        callback()
+    }
+
+
     override fun preferences(builder: PreferenceScreen.Builder) {
         val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
         val preferences = hashMapOf<String, Preference>()
@@ -231,6 +236,10 @@ class Flags(val activity: Activity) : AbstractPreference() {
         }
 
         override fun getExtraView(): View = searchBar
+
+        override fun onBackPressed(callback: () -> Unit) {
+            callback()
+        }
 
         override fun preferences(builder: PreferenceScreen.Builder) {
             val prefs = PreferenceManager.getDefaultSharedPreferences(activity)

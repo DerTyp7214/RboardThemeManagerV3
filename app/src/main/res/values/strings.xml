@@ -37,7 +37,7 @@
     <string name="theme_deleted">Theme Deleted</string>
 
     <string name="info">Info</string>
-    <string name="theme_count">Installed themes count</string>
+    <string name="theme_count">Theme count</string>
     <string name="theme_path">Theme path</string>
     <string name="installation_method">Installation method</string>
     <string name="magisk">Magisk</string>
@@ -149,4 +149,13 @@
     <string name="load_flags_long">Old flags backup found. Do you want to load it?</string>
     <string name="use_blur">Use blur</string>
     <string name="use_blur_long">Use blur Rendereffects</string>
-</resources> 
+    <string name="remove_repo">Remove repository?</string>
+    <string name="remove_repo_long">Do you want to remove this Repository?</string>
+    <string name="manage_repo">Manage Repo</string>
+    <string name="address">Address</string>
+    <string name="enabled">Enabled</string>
+    <string name="themes">Themes</string>
+    <string name="invalid_repo">Invalid repo</string>
+    <string name="invalid_repo_long">Invalid repo. Please check the url again.</string>
+    <string name="download_themes">Download themes</string>
+</resources>

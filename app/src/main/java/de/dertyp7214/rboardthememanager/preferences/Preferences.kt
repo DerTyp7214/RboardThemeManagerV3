@@ -23,14 +23,19 @@ import de.Maxr1998.modernpreferences.helpers.screen
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
+import androidx.appcompat.app.AppCompatActivity
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.start
 import de.dertyp7214.rboardthememanager.screens.ReadMoreReadFast
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 
-class Preferences(private val activity: Activity, intent: Intent, onRequestReload: () -> Unit) :
-    AbstractPreference() {
+class Preferences(
+    private val activity: AppCompatActivity,
+    intent: Intent,
+    onRequestReload: () -> Unit
+) :    AbstractPreference() {
+
     private val type by lazy { intent.getStringExtra("type") }
 
     private val usingModule = MagiskUtils.getModules().any { it.id == Config.MODULE_ID }
@@ -47,6 +52,7 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
         } (${GboardUtils.getGboardVersionCode(activity)})",
         "unsupported_oem" to if (Config.IS_MIUI) R.string.yes else R.string.no
     )
+
     private val preference: AbstractPreference
 
     init {
@@ -65,25 +71,27 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
                 Flags.setUpFlags()
                 preference = Flags.AllFlags(activity, onRequestReload)
             }
+            "repos" -> {
+                preference = Repos(activity, onRequestReload)
+            }
             else -> {
                 preference = this
             }
         }
     }
 
-    fun onBackPressed() {
+    override fun onBackPressed(callback: () -> Unit) {
         when (type) {
-            "info" -> {
-            }
-            "settings" -> {
-            }
+            "info" -> callback()
+            "settings" -> callback()
+            "repos" -> preference.onBackPressed(callback)
             "flags", "all_flags" -> {
                 if (Flags.applyChanges()) {
                     Toast.makeText(activity, R.string.flags_applied, Toast.LENGTH_SHORT).show()
                 }
+                callback()
             }
-            else -> {
-            }
+            else -> callback()
         }
     }
 
@@ -91,7 +99,7 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
         @RequiresApi(Build.VERSION_CODES.R)
         get() {
             return when (type) {
-                "info", "settings", "flags", "all_flags" -> screen(
+                "info", "settings", "flags", "all_flags", "repos" -> screen(
                     activity,
                     preference::preferences
                 )
@@ -108,6 +116,7 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
                 "settings" -> activity.getString(R.string.settings)
                 "flags" -> activity.getString(R.string.flags)
                 "all_flags" -> activity.getString(R.string.all_flags)
+                "repos" -> activity.getString(R.string.repos)
                 else -> ""
             }
         }
@@ -117,6 +126,9 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
             "info" -> {
                 if (menu != null)
                     menuInflater.inflate(R.menu.share, menu)
+            }
+            "repos" -> {
+                if (preference is AbstractMenuPreference) preference.loadMenu(menuInflater, menu)
             }
             "settings", "flags", "all_flags" -> {
             }
@@ -159,6 +171,10 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
                     true
                 }
                 else -> false
+            }
+            "repos" -> {
+                if (preference is AbstractMenuPreference) preference.onMenuClick(menuItem)
+                else false
             }
             "settings", "flags", "all_flags" -> false
             else -> false
@@ -247,4 +263,10 @@ class Preferences(private val activity: Activity, intent: Intent, onRequestReloa
 abstract class AbstractPreference {
     internal abstract fun preferences(builder: PreferenceScreen.Builder)
     internal abstract fun getExtraView(): View?
+    internal abstract fun onBackPressed(callback: () -> Unit)
+}
+
+abstract class AbstractMenuPreference : AbstractPreference() {
+    internal abstract fun loadMenu(menuInflater: MenuInflater, menu: Menu?)
+    internal abstract fun onMenuClick(menuItem: MenuItem): Boolean
 }

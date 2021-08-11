@@ -36,6 +36,11 @@ import android.content.res.Configuration
 import androidx.core.graphics.get
 import kotlin.collections.ArrayList
 
+enum class InternalThemeNames(val path: String) {
+    DOWNLOAD_THEMES("rboard:download_themes")
+}
+
+
 @SuppressLint("SdCardPath")
 fun applyTheme(
     theme: ThemeDataClass,
@@ -153,6 +158,21 @@ object ThemeUtils {
                     )
                 } == true) themes.addAll(buildPreinstalledThemesList())
             themes.addAll(it)
+            if (themes.isEmpty()) context?.let { ctx ->
+                themes.add(
+                    ThemeDataClass(
+                        BitmapFactory.decodeStream(
+                            BufferedInputStream(
+                                ctx.resources.openRawResource(
+                                    R.raw.system_auto
+                                )
+                            )
+                        ),
+                        ctx.getString(R.string.download_themes),
+                        InternalThemeNames.DOWNLOAD_THEMES.path
+                    )
+                )
+            }
             themes
         }
     }
@@ -160,7 +180,7 @@ object ThemeUtils {
     fun loadThemePacks(): List<ThemePack> {
         return try {
             val packs = arrayListOf<ThemePack>()
-            REPOS.forEach { repo ->
+            REPOS.filterActive().forEach { repo ->
                 try {
                     packs.addAll(
                         Gson().fromJson(

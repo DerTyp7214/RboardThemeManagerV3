@@ -44,7 +44,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
         "https://play.google.com/store/apps/details?id=${Config.GBOARD_PACKAGE_NAME}"
     }
     private val flagsUrl by lazy {
-        "https://raw.githubusercontent.com/AkosPaha/Rboard-ColorsTheme/master/flags-R.json"
+        "https://raw.githubusercontent.com/GboardThemes/Packs/master/flags.json"
     }
 
     private var checkedForUpdate = false
@@ -199,10 +199,13 @@ class AppStartUp(private val activity: AppCompatActivity) {
                                 when (it) {
                                     "add" -> {
                                         preferences.apply {
-                                            val repos = ArrayList(
-                                                getStringSet("repos", setOf())?.toList() ?: listOf()
+                                            val repos = HashMap(
+                                                ArrayList(
+                                                    getStringSet("repos", setOf())?.toList()
+                                                        ?: listOf()
+                                                ).toMap()
                                             )
-                                            repos.add(data.getQueryParameter("add"))
+                                            repos[data.getQueryParameter("add")] = true
                                             edit { putStringSet("repos", repos.toSet()) }
                                         }
                                         Toast.makeText(

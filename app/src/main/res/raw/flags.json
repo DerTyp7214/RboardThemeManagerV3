@@ -1,5 +1,5 @@
 {
-  "time": "1626724310334",
+  "time": "1628378280360",
   "flags": [
     {
       "key": "general",
@@ -82,6 +82,7 @@
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS",
+      "visible": false,
       "valueMap": [
         {
           "first": true,
@@ -116,7 +117,8 @@
       "icon": "ic_popup_v2",
       "defaultValue": false,
       "type": "BOOLEAN",
-      "file": "FLAGS"
+      "file": "FLAGS",
+      "visible": false
     },
     {
       "key": "enable_key_border",
@@ -292,14 +294,6 @@
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS"
-    },
-    {
-      "key": "empty",
-      "title": "",
-      "summary": "",
-      "icon": "",
-      "defaultValue": "",
-      "type": "GROUP"
     }
   ]
 }

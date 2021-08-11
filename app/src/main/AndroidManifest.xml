@@ -53,10 +53,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".screens.ReposActivity"
+            android:name=".screens.ManageRepo"
             android:exported="true"
             android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />
-        <activity
+       <activity
             android:name=".screens.InstallPackActivity"
             android:exported="true"
             android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />

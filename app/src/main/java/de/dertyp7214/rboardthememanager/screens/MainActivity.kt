@@ -226,7 +226,7 @@ class MainActivity : AppCompatActivity() {
                             val themes = adapter?.getSelected()?.filter {
                                 it.path.isNotEmpty() && !it.path.startsWith("assets:") && !it.path.startsWith(
                                     "system_auto:"
-                                )
+                                ) && !it.path.startsWith("rboard:")
                             }
                             if (!themes.isNullOrEmpty()) {
                                 openShareThemeDialog { dialog, name, author ->
@@ -270,7 +270,9 @@ class MainActivity : AppCompatActivity() {
                                 val adapter = mainViewModel.getSelections().second
                                 if (adapter != null) {
                                     val themes = adapter.getSelected().filter {
-                                        it.path.isNotEmpty() && !it.path.startsWith("assets:")
+                                        it.path.isNotEmpty() && !it.path.startsWith("assets:") && !it.path.startsWith(
+                                            "rboard:"
+                                        )
                                     }
                                     if (themes.isNotEmpty()) {
                                         themes.forEach { theme ->
@@ -312,97 +314,33 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 mainViewModel.observerSelectedTheme(this) { theme ->
-                    secondaryContent.let {
-                        val view = it.findViewById<View>(R.id.current_theme_view)
-                        if (view != null) it.removeView(view).also {
-                            Logger.log(Logger.Companion.Type.DEBUG, "REMOVE VIEW", view.id)
-                        }
-                    }
-                    if (theme != null) {
-                        secondaryContent.addView(ThemeUtils.getThemeView(theme, this), 0)
-                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-                        searchBar.clearFocus()
-                        menuItems.clear()
-                        menuItems.add(MenuItem(R.drawable.ic_apply_theme, R.string.apply_theme) {
-                            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-                            if (applyTheme(theme, true))
-                                Toast.makeText(this, R.string.applied, Toast.LENGTH_SHORT).show()
-                            else Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show()
-                            delayed(150) {
-                                mainViewModel.setSelectedTheme()
-                                mainViewModel.refreshThemes()
+                    if (theme?.path?.startsWith("rboard:") == true) {
+                        mainViewModel.navigate(R.id.navigation_downloads)
+                    } else {
+                        secondaryContent.let {
+                            val view = it.findViewById<View>(R.id.current_theme_view)
+                            if (view != null) it.removeView(view).also {
+                                Logger.log(Logger.Companion.Type.DEBUG, "REMOVE VIEW", view.id)
                             }
-                        })
-                        fun applyTheme(dark: Boolean) {
-                            val files = mapOf(
-                                Pair(
-                                    "system.prop",
-                                    "ro.com.google.ime.${if (dark) "d_" else ""}theme_file=${
-                                        File(
-                                            theme.fileName
-                                        ).name
-                                    }"
-                                )
-                            )
-                            MagiskUtils.updateModule(MODULE_META, files)
-                            "resetprop ro.com.google.ime.${if (dark) "d_" else ""}theme_file ${
-                                File(
-                                    theme.fileName
-                                ).name
-                            }".runAsCommand()
-                            if (dark) Config.darkTheme = File(theme.fileName).name
-                            else Config.lightTheme = File(theme.fileName).name
-                            Flags.run {
-                                if (flagValues["oem_dark_theme"] != true) {
-                                    setUpFlags()
-                                    setValue(true, "oem_dark_theme", Flags.FILES.FLAGS)
-                                    applyChanges()
-                                }
-                            }
-                            applyTheme(getSystemAutoTheme(), true)
                         }
-                        if (theme.path.isNotEmpty() && !theme.path.startsWith("assets:") && !theme.path.startsWith(
-                                "system_auto:"
-                            )
-                        ) {
-                            if (Config.useMagisk)
+                        if (theme != null) {
+                            secondaryContent.addView(ThemeUtils.getThemeView(theme, this), 0)
+                            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                            searchBar.clearFocus()
+                            menuItems.clear()
+                            if (!theme.path.startsWith("rboard:")) {
                                 menuItems.add(
                                     MenuItem(
-                                        R.drawable.ic_auto_theme,
-                                        R.string.apply_automatic_theme,
+                                        R.drawable.ic_apply_theme,
+                                        R.string.apply_theme,
                                         Build.VERSION.SDK_INT > Build.VERSION_CODES.P
                                     ) {
                                         bottomSheetBehavior.state =
                                             BottomSheetBehavior.STATE_COLLAPSED
-                                        delayed(150) {
-                                            mainViewModel.setSelectedTheme()
-                                            mainViewModel.refreshThemes()
-                                        }
-                                        openDialog(R.layout.auto_theme_select, true) { dialog ->
-                                            findViewById<TextView>(R.id.dark_theme)?.setOnClickListener {
-                                                applyTheme(true)
-                                                dialog.dismiss()
-                                            }
-                                            findViewById<TextView>(R.id.light_theme)?.setOnClickListener {
-                                                applyTheme(false)
-                                                dialog.dismiss()
-                                            }
-                                            findViewById<MaterialButton>(R.id.cancel)?.setOnClickListener { dialog.dismiss() }
-                                            findViewById<MaterialButton>(R.id.ok)?.setOnClickListener { dialog.dismiss() }
-                                        }
-                                    })
-                            menuItems.add(
-                                MenuItem(
-                                    R.drawable.ic_delete_theme,
-                                    R.string.delete_theme
-                                ) {
-                                    openDialog(R.string.q_delete_theme, R.string.delete_theme) {
-                                        bottomSheetBehavior.state =
-                                            BottomSheetBehavior.STATE_COLLAPSED
-                                        if (SuFile(theme.path).delete())
+                                        if (applyTheme(theme, true))
                                             Toast.makeText(
                                                 this,
-                                                R.string.theme_deleted,
+                                                R.string.applied,
                                                 Toast.LENGTH_SHORT
                                             )
                                                 .show()
@@ -413,22 +351,112 @@ class MainActivity : AppCompatActivity() {
                                         ).show()
                                         delayed(150) {
                                             mainViewModel.setSelectedTheme()
-                                            mainViewModel.setThemes(listOf())
+                                            mainViewModel.refreshThemes()
+                                        }
+                                    })
+                                fun applyTheme(dark: Boolean) {
+                                    val files = mapOf(
+                                        Pair(
+                                            "system.prop",
+                                            "ro.com.google.ime.${if (dark) "d_" else ""}theme_file=${
+                                                File(
+                                                    theme.fileName
+                                                ).name
+                                            }"
+                                        )
+                                    )
+                                    MagiskUtils.updateModule(MODULE_META, files)
+                                    "resetprop ro.com.google.ime.${if (dark) "d_" else ""}theme_file ${
+                                        File(
+                                            theme.fileName
+                                        ).name
+                                    }".runAsCommand()
+                                    if (dark) Config.darkTheme = File(theme.fileName).name
+                                    else Config.lightTheme = File(theme.fileName).name
+                                    Flags.run {
+                                        if (flagValues["oem_dark_theme"] != true) {
+                                            setUpFlags()
+                                            setValue(true, "oem_dark_theme", Flags.FILES.FLAGS)
+                                            applyChanges()
                                         }
                                     }
-                                })
+                                    applyTheme(getSystemAutoTheme(), true)
+                                }
+                                if (theme.path.isNotEmpty() && !theme.path.startsWith("assets:") && !theme.path.startsWith(
+                                        "system_auto:"
+                                    )
+                                ) {
+                                    if (Config.useMagisk)
+                                        menuItems.add(
+                                            MenuItem(
+                                                R.drawable.ic_auto_theme,
+                                                R.string.apply_automatic_theme
+                                            ) {
+                                                bottomSheetBehavior.state =
+                                                    BottomSheetBehavior.STATE_COLLAPSED
+                                                delayed(150) {
+                                                    mainViewModel.setSelectedTheme()
+                                                    mainViewModel.refreshThemes()
+                                                }
+                                                openDialog(
+                                                    R.layout.auto_theme_select,
+                                                    true
+                                                ) { dialog ->
+                                                    findViewById<TextView>(R.id.dark_theme)?.setOnClickListener {
+                                                        applyTheme(true)
+                                                        dialog.dismiss()
+                                                    }
+                                                    findViewById<TextView>(R.id.light_theme)?.setOnClickListener {
+                                                        applyTheme(false)
+                                                        dialog.dismiss()
+                                                    }
+                                                    findViewById<MaterialButton>(R.id.cancel)?.setOnClickListener { dialog.dismiss() }
+                                                    findViewById<MaterialButton>(R.id.ok)?.setOnClickListener { dialog.dismiss() }
+                                                }
+                                            })
+                                    menuItems.add(
+                                        MenuItem(
+                                            R.drawable.ic_delete,
+                                            R.string.delete_theme
+                                        ) {
+                                            openDialog(
+                                                R.string.q_delete_theme,
+                                                R.string.delete_theme
+                                            ) {
+                                                bottomSheetBehavior.state =
+                                                    BottomSheetBehavior.STATE_COLLAPSED
+                                                if (SuFile(theme.path).delete())
+                                                    Toast.makeText(
+                                                        this,
+                                                        R.string.theme_deleted,
+                                                        Toast.LENGTH_SHORT
+                                                    )
+                                                        .show()
+                                                else Toast.makeText(
+                                                    this,
+                                                    R.string.error,
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
+                                                delayed(150) {
+                                                    mainViewModel.setSelectedTheme()
+                                                    mainViewModel.setThemes(listOf())
+                                                }
+                                            }
+                                        })
+                                }
+                            }
+                        } else {
+                            secondaryContent.addView(
+                                ThemeUtils.getThemeView(
+                                    ThemeUtils.getActiveThemeData(),
+                                    this
+                                ), 0
+                            )
+                            menuItems.clear()
+                            menuItems.addAll(mainMenuItems)
                         }
-                    } else {
-                        secondaryContent.addView(
-                            ThemeUtils.getThemeView(
-                                ThemeUtils.getActiveThemeData(),
-                                this
-                            ), 0
-                        )
-                        menuItems.clear()
-                        menuItems.addAll(mainMenuItems)
+                        menuAdapter.notifyDataSetChanged()
                     }
-                    menuAdapter.notifyDataSetChanged()
                 }
 
                 secondaryContent.addView(
