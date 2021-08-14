@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
@@ -27,6 +28,7 @@ class InstallPackActivity : AppCompatActivity() {
         binding = ActivityInstallPackBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val fab = binding.fab
         val toolbar = binding.toolbar
         val recyclerview = binding.recyclerview
 
@@ -47,17 +49,21 @@ class InstallPackActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
-        toolbar.setOnMenuItemClickListener { item ->
-            if (item.itemId == R.id.install_theme) {
-                val success = adapter.getSelected().map { it.install() }
-                if (success.contains(false)) Toast.makeText(this, R.string.error, Toast.LENGTH_LONG)
-                    .show()
-                else Toast.makeText(this, R.string.themes_installed, Toast.LENGTH_LONG).show()
-                setResult(RESULT_OK)
-                finish()
-            }
-            true
+
+        fab.setOnClickListener {
+            val success = adapter.getSelected().map { it.install() }
+            if (success.contains(false)) Toast.makeText(this, R.string.error, Toast.LENGTH_LONG)
+                .show()
+            else Toast.makeText(this, R.string.themes_installed, Toast.LENGTH_LONG).show()
+            setResult(RESULT_OK)
+            finish()
         }
+
+        recyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                if (dy > 0) fab.hide() else if (dy < 0) fab.show()
+            }
+        })
 
         doAsync({
             intent.getStringArrayListExtra("themes")?.let { paths ->
