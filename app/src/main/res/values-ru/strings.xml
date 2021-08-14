@@ -152,4 +152,5 @@
     <string name="download_themes">Скачать темы</string>
     <string name="theme_pack_count">Количество пакетов тем</string>
     <string name="theme_packs">Тематические пакеты</string>
+    <string name="app_updated">Приложение обновлено</string>
 </resources>
