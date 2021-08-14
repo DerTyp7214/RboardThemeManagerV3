@@ -1,9 +1,5 @@
 <resources>
     <string name="search">Поиск</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Привет пустой фрагмент</string>
-    <string name="please_open_app">Откройте приложение</string>
-
 
     <string name="title_themes">Темы</string>
     <string name="title_downloads">Загрузки</string>
@@ -69,6 +65,7 @@
     <string name="enable_sharing">Иконка поделиться</string>
     <string name="themed_nav_bar_style">Цвет панели навигации</string>
     <string name="enable_email_provider_completion">Поставщик почты</string>
+    <string name="enable_popup_view_v2">Выскакивать v2</string>
     <string name="enable_key_border">Включить контуры клавиш</string>
     <string name="enable_secondary_symbols">Включить вторые символы</string>
     <string name="show_suggestions">Показать подсказки</string>
@@ -77,8 +74,10 @@
     <string name="all_flags">Все флаги</string>
     <string name="loading_preferences">Загрузка настроек</string>
     <string name="use_silk_theme_by_default">Использовать silk тему по умолчанию</string>
+    <string name="monet">Моне</string>
     <string name="silk_on_all_pixel">Silk на всех Pixel</string>
     <string name="silk_theme">Silk тема</string>
+    <string name="android_12">Android 12</string>
     <string name="general">Основное</string>
     <string name="show_branding_on_space">Показывать брэндинг на пробеле</string>
     <string name="enable_auto_float_keyboard_in_multi_window">Включать всплывающую клавиатуру автоматически в режиме окна</string>
@@ -151,4 +150,6 @@
     <string name="invalid_repo">Неверный репозиторий</string>
     <string name="invalid_repo_long">Не верный репозиторий, проверьте ссылку и попробуйте снова.</string>
     <string name="download_themes">Скачать темы</string>
+    <string name="theme_pack_count">Количество пакетов тем</string>
+    <string name="theme_packs">Тематические пакеты</string>
 </resources>

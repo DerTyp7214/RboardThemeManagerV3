@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources translatable="false">
+    <string name="app_name">Rboard Theme Manager V3</string>
+
+    <string name="pref_gboard">Gboard</string>
+    <string name="magisk">Magisk</string>
+    <string name="default_notification_channel_id">push_channel</string>
+    <string name="download_notification_channel_id">download_channel</string>
+</resources>

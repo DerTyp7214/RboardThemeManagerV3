@@ -1,10 +1,5 @@
 <resources>
-    <string name="app_name">Rboard Theme Manager V3</string>
     <string name="search">Search</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="please_open_app">Please open the app</string>
-
 
     <string name="title_themes">Themes</string>
     <string name="title_downloads">Downloads</string>
@@ -17,10 +12,8 @@
     <string name="cant_use_app">You cannot use this app without root</string>
     <string name="not_rooted">Your device is not rooted</string>
     <string name="channel_name">Push Notifications</string>
-    <string name="default_notification_channel_id">push_channel</string>
     <string name="channel_description">For updates and information.</string>
     <string name="channel_name_download">Download Notifications</string>
-    <string name="download_notification_channel_id">download_channel</string>
     <string name="channel_description_download">For download notifications</string>
     <string name="download_update">Downloading Update</string>
     <string name="download_update_progress">Downloading Update (%s)</string>
@@ -40,7 +33,6 @@
     <string name="theme_count">Theme count</string>
     <string name="theme_path">Theme path</string>
     <string name="installation_method">Installation method</string>
-    <string name="magisk">Magisk</string>
     <string name="other">Other</string>
     <string name="rboard_app_version">Rboard app version</string>
     <string name="device">Device</string>
@@ -139,7 +131,6 @@
     <string name="use_module">Module</string>
     <string name="use_magisk">Use Magisk</string>
     <string name="gboard">Use Gboard</string>
-    <string name="pref_gboard">Gboard</string>
     <string name="show_only_disabled">Show only disabled flags</string>
     <string name="share_flags">Share flags</string>
     <string name="share_flags_title">Share flags (%o)</string>
@@ -159,4 +150,6 @@
     <string name="invalid_repo">Invalid repo</string>
     <string name="invalid_repo_long">Invalid repo. Please check the url again.</string>
     <string name="download_themes">Download themes</string>
+    <string name="theme_pack_count">Theme Pack Count</string>
+    <string name="theme_packs">Theme Packs</string>
 </resources>

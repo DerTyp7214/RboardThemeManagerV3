@@ -56,35 +56,35 @@
             android:textColor="?attr/colorOnPrimary"
             tools:text="This is a very long text to test the multiline capability of this textView" />
 
-        <Space
+        <androidx.legacy.widget.Space
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/theme_count"
+            android:text="@string/theme_pack_count"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="?attr/colorSecondary"
             android:textSize="12sp"
             tools:ignore="TextContrastCheck" />
 
         <TextView
-            android:id="@+id/theme_count"
+            android:id="@+id/theme_pack_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="?attr/colorOnPrimary"
             tools:text="20" />
 
-        <Space
+        <androidx.legacy.widget.Space
             android:layout_width="match_parent"
             android:layout_height="8dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/themes"
+            android:text="@string/theme_packs"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="?attr/colorSecondary"
             android:textSize="12sp" />
@@ -100,7 +100,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        tools:listitem="@layout/manage_repo_theme_pack" >
+        tools:ignore="SpeakableTextPresentCheck"
+        tools:listitem="@layout/manage_repo_theme_pack">
 
     </androidx.recyclerview.widget.RecyclerView>
 

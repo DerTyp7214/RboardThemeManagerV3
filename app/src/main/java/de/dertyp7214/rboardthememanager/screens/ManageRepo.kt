@@ -79,7 +79,7 @@ class ManageRepo : AppCompatActivity() {
                 e.printStackTrace()
                 listOf()
             }
-            binding.themeCount.text = themes.size.toString()
+            binding.themePackCount.text = themes.size.toString()
             items.clear()
             items.addAll(themes)
             adapter.notifyDataSetChanged()
