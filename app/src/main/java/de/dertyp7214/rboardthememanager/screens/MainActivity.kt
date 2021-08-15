@@ -332,8 +332,7 @@ class MainActivity : AppCompatActivity() {
                                 menuItems.add(
                                     MenuItem(
                                         R.drawable.ic_apply_theme,
-                                        R.string.apply_theme,
-                                        Build.VERSION.SDK_INT > Build.VERSION_CODES.P
+                                        R.string.apply_theme
                                     ) {
                                         bottomSheetBehavior.state =
                                             BottomSheetBehavior.STATE_COLLAPSED
@@ -390,7 +389,8 @@ class MainActivity : AppCompatActivity() {
                                         menuItems.add(
                                             MenuItem(
                                                 R.drawable.ic_auto_theme,
-                                                R.string.apply_automatic_theme
+                                                R.string.apply_automatic_theme,
+                                                Build.VERSION.SDK_INT > Build.VERSION_CODES.P
                                             ) {
                                                 bottomSheetBehavior.state =
                                                     BottomSheetBehavior.STATE_COLLAPSED
