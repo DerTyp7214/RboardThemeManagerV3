@@ -11,9 +11,9 @@
     <string name="gboard_not_installed">Gboard не установлен</string>
     <string name="cant_use_app">Вы не можете использовать приложение без рут</string>
     <string name="not_rooted">Ваше устройство не рутировано</string>
-    <string name="channel_name">Всплывающие Уведомления</string>
+    <string name="channel_name">Всплывающие уведомления</string>
     <string name="channel_description">Для обновлений и информации.</string>
-    <string name="channel_name_download">Уведомления Загрузки</string>
+    <string name="channel_name_download">Уведомления загрузки</string>
     <string name="channel_description_download">Для уведомлений о загрузке</string>
     <string name="download_update">Скачивание обновления</string>
     <string name="download_update_progress">Скачивание обновления (%s)</string>
@@ -144,7 +144,7 @@
     <string name="remove_repo">Удалить репозиторий?</string>
     <string name="remove_repo_long">Вы хотите удалить этот репозиторий?</string>
     <string name="manage_repo">Управление репозиторием</string>
-    <string name="address">Адрем</string>
+    <string name="address">Адрес</string>
     <string name="enabled">Включено</string>
     <string name="themes">Темы</string>
     <string name="invalid_repo">Неверный репозиторий</string>
