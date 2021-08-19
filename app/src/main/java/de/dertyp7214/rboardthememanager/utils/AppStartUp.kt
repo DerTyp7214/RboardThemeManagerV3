@@ -173,6 +173,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 isReady = true
                 openDialog(R.string.load_flags_long, R.string.load_flags) {
                     SuFile(Flags.FILES.FLAGS.filePath).writeFile(flags.trim())
+                    "am force-stop ${Config.GBOARD_PACKAGE_NAME}".runAsCommand()
                 }
             }
 
