@@ -47,8 +47,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0-alpha06'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.0-alpha06'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.0-alpha07'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.0-alpha07'
     implementation 'org.apache.commons:commons-text:1.9'
 
     implementation "com.github.topjohnwu.libsu:core:$libsuVersion"
@@ -60,11 +60,11 @@ dependencies {
     //noinspection DifferentStdlibGradleVersion
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.4.0-alpha03'
-    implementation 'com.google.android.material:material:1.5.0-alpha01'
+    implementation 'com.google.android.material:material:1.5.0-alpha02'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation 'androidx.activity:activity-ktx:1.3.1'
-    implementation 'androidx.fragment:fragment-ktx:1.4.0-alpha06'
+    implementation 'androidx.fragment:fragment-ktx:1.4.0-alpha07'
     implementation 'com.jaredrummler:android-shell:1.0.0'
     implementation 'com.google.firebase:firebase-analytics:19.0.0'
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
@@ -78,6 +78,6 @@ dependencies {
     implementation 'de.dertyp7214:PreferencesPlus:1.1'
     implementation(fileTree(dir: 'libs', include: ['*.jar', '*.aar']))
 
-    debugImplementation 'androidx.compose.ui:ui-tooling:1.1.0-alpha01'
+    debugImplementation 'androidx.compose.ui:ui-tooling:1.1.0-alpha02'
     debugImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }
