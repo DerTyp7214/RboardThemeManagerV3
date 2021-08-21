@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="bottomBarHeight">70dp</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">0dp</dimen>
+    <dimen name="roundCorners">@android:dimen/system_app_widget_background_radius</dimen>
+    <dimen name="roundCornersInner">@android:dimen/system_app_widget_inner_radius</dimen>
+</resources>
