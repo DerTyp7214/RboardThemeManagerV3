@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.Window
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -123,6 +124,9 @@ class MainActivity : AppCompatActivity() {
 
         downloadResultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    content.setRenderEffect(null)
+                }
             }
 
         AppStartUp(this).apply {
