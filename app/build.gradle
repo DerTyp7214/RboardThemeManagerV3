@@ -15,8 +15,8 @@ android {
         applicationId "de.dertyp7214.rboardthememanager"
         minSdkVersion 31
         targetSdkVersion 31
-        versionCode 326005
-        versionName "3.2.6"
+        versionCode 327000
+        versionName "3.2.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -65,7 +65,7 @@ dependencies {
     implementation 'androidx.activity:activity-ktx:1.3.1'
     implementation 'androidx.fragment:fragment-ktx:1.3.6'
     implementation 'com.jaredrummler:android-shell:1.0.0'
-    implementation 'com.google.firebase:firebase-analytics:19.0.0'
+    implementation 'com.google.firebase:firebase-analytics:19.0.1'
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
     implementation 'com.google.code.gson:gson:2.8.7'
     implementation 'com.bignerdranch.android:simple-item-decoration:1.0.0'
