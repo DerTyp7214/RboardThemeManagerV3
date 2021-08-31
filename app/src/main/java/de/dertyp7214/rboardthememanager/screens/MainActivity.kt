@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -97,7 +98,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.root.applyInsetter {
+        findViewById<FrameLayout>(R.id.frameLayout).applyInsetter {
             type(navigationBars = true) {
                 margin()
             }
