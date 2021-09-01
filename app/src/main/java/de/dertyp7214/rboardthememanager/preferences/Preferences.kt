@@ -1,6 +1,8 @@
 package de.dertyp7214.rboardthememanager.preferences
 
 import android.app.Activity
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.Intent
 import android.content.Intent.ACTION_SEND
 import android.content.Intent.EXTRA_TEXT
@@ -29,6 +31,7 @@ import de.dertyp7214.rboardthememanager.core.start
 import de.dertyp7214.rboardthememanager.screens.ReadMoreReadFast
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
+import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 
 class Preferences(
     private val activity: AppCompatActivity,
@@ -88,6 +91,13 @@ class Preferences(
             "flags", "all_flags" -> {
                 if (Flags.applyChanges()) {
                     Toast.makeText(activity, R.string.flags_applied, Toast.LENGTH_SHORT).show()
+                    AppWidgetManager.getInstance(activity).let { appWidgetManager ->
+                        appWidgetManager.getAppWidgetIds(
+                            ComponentName(activity, FlagsWidget::class.java)
+                        ).forEach { id ->
+                            FlagsWidget.updateAppWidget(activity, appWidgetManager, id)
+                        }
+                    }
                 }
                 callback()
             }

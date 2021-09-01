@@ -52,6 +52,19 @@
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
+
+        <receiver
+            android:name=".widgets.FlagsWidget"
+            android:exported="true"
+            android:enabled="@bool/is_post_api_31">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/flags_widget_info" />
+        </receiver>
         <activity
             android:name=".screens.ManageRepo"
             android:exported="true"

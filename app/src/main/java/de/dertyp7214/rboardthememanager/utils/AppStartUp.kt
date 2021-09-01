@@ -31,6 +31,7 @@ import de.dertyp7214.rboardthememanager.data.OutputMetadata
 import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 import de.dertyp7214.rboardthememanager.screens.ShareFlags
+import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
 import org.json.JSONObject
 import java.io.File
@@ -109,6 +110,11 @@ class AppStartUp(private val activity: AppCompatActivity) {
 
             doInBackground {
                 AppWidgetManager.getInstance(this).let { appWidgetManager ->
+                    appWidgetManager.getAppWidgetIds(
+                        ComponentName(this, FlagsWidget::class.java)
+                    ).forEach { id ->
+                        FlagsWidget.updateAppWidget(this, appWidgetManager, id)
+                    }
                     appWidgetManager.getAppWidgetIds(
                         ComponentName(this, SwitchKeyboardWidget::class.java)
                     ).forEach { id ->

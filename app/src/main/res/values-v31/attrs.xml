@@ -1,0 +1,4 @@
+<resources>
+    <bool name="is_pre_api_31">false</bool>
+    <bool name="is_post_api_31">true</bool>
+</resources>

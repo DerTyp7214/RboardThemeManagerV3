@@ -28,6 +28,7 @@ import de.dertyp7214.rboardthememanager.components.SearchBar
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.utils.FileUtils
+import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import org.json.JSONObject
 import java.io.File
 import java.util.*
@@ -378,9 +379,12 @@ class Flags(val activity: Activity) : AbstractPreference() {
 
         @SuppressLint("SdCardPath")
         fun applyChanges(): Boolean {
+            if (!changes) return false
+            changes = false
             FILES.values().filter { it != FILES.NONE }.forEach { file ->
                 val fileName = file.filePath
                 flagsString[file]?.let {
+                    if (file == FILES.FLAGS) GboardUtils.updateCurrentFlags(it)
                     SuFile(fileName).writeFile(it.trim())
                 }
             }
@@ -403,7 +407,6 @@ class Flags(val activity: Activity) : AbstractPreference() {
             if (file == FILES.NONE) return true
             changes = true
             flagsString[file] = flagsString[file]?.setXmlValue(value, key)
-
             return true
         }
     }

@@ -5,5 +5,5 @@
     <corners android:radius="@dimen/roundCorners" />
     <size
         android:width="30.0dip"
-        android:height="4.0dip" />
+        android:height="3.0dip" />
 </shape>
