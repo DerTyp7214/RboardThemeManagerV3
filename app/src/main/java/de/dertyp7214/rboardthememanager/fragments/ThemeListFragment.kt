@@ -100,7 +100,7 @@ class ThemeListFragment : Fragment() {
         recyclerView.setHasFixedSize(false)
         recyclerView.adapter = adapter
 
-        if (mainViewModel.getThemes().isEmpty()) {
+        if (mainViewModel.getThemes().isEmpty() && mainViewModel.loaded()) {
             refreshLayout.isRefreshing = true
             ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
         }

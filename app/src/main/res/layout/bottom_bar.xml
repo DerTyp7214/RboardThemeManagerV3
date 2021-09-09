@@ -11,6 +11,7 @@
     tools:backgroundTint="@android:color/darker_gray">
 
     <LinearLayout
+        android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -25,13 +26,14 @@
             tools:ignore="ContentDescription" />
 
         <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/navigation"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/bottomBarHeight"
                 android:alpha="1"
                 android:background="@android:color/transparent"
                 app:elevation="0dp"

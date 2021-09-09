@@ -16,3 +16,10 @@ fun Context.getAttr(@AttrRes attr: Int): Int {
     theme.resolveAttribute(attr, typedValue, true)
     return typedValue.data
 }
+
+fun Context.getNavigationBarHeight(): Int {
+    val resourceId: Int = resources.getIdentifier("navigation_bar_height", "dimen", "android")
+    return if (resourceId > 0) {
+        resources.getDimensionPixelSize(resourceId)
+    } else 0
+}
