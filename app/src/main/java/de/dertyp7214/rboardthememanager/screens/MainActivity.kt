@@ -39,6 +39,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dertyp7214.logs.helpers.Logger
 import com.dertyp7214.preferencesplus.core.dp
+import com.dertyp7214.preferencesplus.core.setHeight
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
@@ -57,6 +58,7 @@ import de.dertyp7214.rboardthememanager.utils.ThemeUtils.getSystemAutoTheme
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 import dev.chrisbanes.insetter.applyInsetter
 import java.io.File
+import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
@@ -103,11 +105,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.root.applyInsetter {
+        findViewById<LinearLayout>(R.id.bottomLayout).applyInsetter {
             type(navigationBars = true) {
                 margin()
             }
         }
+
+        navigation.setHeight((resources.getDimension(R.dimen.bottomBarHeight) + getNavigationBarHeight()).roundToInt())
 
         val reloadThemesLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -132,6 +136,14 @@ class MainActivity : AppCompatActivity() {
             setUp()
             onCreate { intent ->
                 checkModuleAndUpdate(intent)
+
+                mainViewModel.observeLoaded(this) {
+                    navigate(controller, R.id.action_placeholder_to_themeListFragment)
+                    delayed(200) {
+                        ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
+                    }
+                }
+                mainViewModel.setLoaded(true)
 
                 val mainMenuItems = arrayListOf(
                     MenuItem(
@@ -188,16 +200,17 @@ class MainActivity : AppCompatActivity() {
 
                 val menuAdapter = MenuAdapter(menuItems, this)
 
-                findViewById<View>(R.id.fragmentContainerView).setMargin(
+                binding.fragmentContainerView.setMargin(
                     bottomMargin = resources.getDimension(R.dimen.bottomBarHeight)
                         .toInt() + 18.dpToPx(this)
-                        .toInt()
+                        .toInt() + getNavigationBarHeight()
                 )
 
                 bottomSheetBehavior.isFitToContents = true
                 bottomSheetBehavior.skipCollapsed = true
                 bottomSheetBehavior.peekHeight =
-                    resources.getDimension(R.dimen.bottomBarHeight).toInt() + 8.dpToPx(this).toInt()
+                    resources.getDimension(R.dimen.bottomBarHeight).toInt() + 8.dpToPx(this)
+                        .toInt() + getNavigationBarHeight()
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
                 bottomSheetBehavior.addBottomSheetCallback(object :

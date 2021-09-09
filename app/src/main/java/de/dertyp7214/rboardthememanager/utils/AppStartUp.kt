@@ -96,7 +96,9 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 setInitializers(BusyBoxInstaller::class.java)
             })
 
-            doInBackground {
+            rootAccess = hasRoot()
+
+            if (rootAccess) doInBackground {
                 "rm -rf ${cacheDir.absolutePath}/*".runAsCommand()
                 val files = ArrayList<File>()
                 files.forEach {
@@ -165,19 +167,21 @@ class AppStartUp(private val activity: AppCompatActivity) {
 
             Config.useMagisk = preferences.getBoolean("useMagisk", false)
 
-            "getprop ro.com.google.ime.d_theme_file".runAsCommand {
-                if (it.first().isNotEmpty()) Config.darkTheme = it.first()
-            }
-            "getprop ro.com.google.ime.theme_file".runAsCommand {
-                if (it.first().isNotEmpty()) Config.lightTheme = it.first()
-            }
+            if (rootAccess) {
+                "getprop ro.com.google.ime.d_theme_file".runAsCommand {
+                    if (it.first().isNotEmpty()) Config.darkTheme = it.first()
+                }
+                "getprop ro.com.google.ime.theme_file".runAsCommand {
+                    if (it.first().isNotEmpty()) Config.lightTheme = it.first()
+                }
 
-            GboardUtils.loadBackupFlags { flags ->
-                isReady = true
-                openDialog(R.string.load_flags_long, R.string.load_flags) {
-                    SuFile(Flags.FILES.FLAGS.filePath).writeFile(flags.trim())
-                    GboardUtils.updateCurrentFlags(flags)
-                    "am force-stop ${Config.GBOARD_PACKAGE_NAME}".runAsCommand()
+                GboardUtils.loadBackupFlags { flags ->
+                    isReady = true
+                    openDialog(R.string.load_flags_long, R.string.load_flags) {
+                        SuFile(Flags.FILES.FLAGS.filePath).writeFile(flags.trim())
+                        GboardUtils.updateCurrentFlags(flags)
+                        "am force-stop ${Config.GBOARD_PACKAGE_NAME}".runAsCommand()
+                    }
                 }
             }
 
@@ -285,7 +289,6 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     }
                 }
                 else -> {
-                    rootAccess = Shell.rootAccess()
                     gboardInstalled =
                         PackageUtils.isPackageInstalled(Config.GBOARD_PACKAGE_NAME, packageManager)
 

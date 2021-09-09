@@ -23,7 +23,6 @@
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3">
-        <item name="android:navigationBarColor">@color/foreground</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Info" parent="Theme.RboardThemeManagerV3">
