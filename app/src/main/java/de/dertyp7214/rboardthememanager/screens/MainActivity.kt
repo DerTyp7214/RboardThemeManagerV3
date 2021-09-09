@@ -131,7 +131,9 @@ class MainActivity : AppCompatActivity() {
 
                 mainViewModel.observeLoaded(this) {
                     navigate(controller, R.id.action_placeholder_to_themeListFragment)
-                    mainViewModel.refreshThemes()
+                    delayed(200) {
+                        ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
+                    }
                 }
                 mainViewModel.setLoaded(true)
 
@@ -189,10 +191,10 @@ class MainActivity : AppCompatActivity() {
 
                 val menuAdapter = MenuAdapter(menuItems, this)
 
-                findViewById<View>(R.id.fragmentContainerView).setMargin(
+                binding.fragmentContainerView.setMargin(
                     bottomMargin = resources.getDimension(R.dimen.bottomBarHeight)
                         .toInt() + 18.dpToPx(this)
-                        .toInt()
+                        .toInt() + getNavigationBarHeight()
                 )
 
                 bottomSheetBehavior.isFitToContents = true
