@@ -344,7 +344,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
 
     private fun validApp(activity: AppCompatActivity, callback: (valid: Boolean) -> Unit) {
         preferences.apply {
-            var valid = getBoolean("verified", false)
+            var valid = getBoolean("verified", true)
             if (valid) callback(valid)
             else activity.openDialog(R.string.unreleased, R.string.notice, false, {
                 it.dismiss()
