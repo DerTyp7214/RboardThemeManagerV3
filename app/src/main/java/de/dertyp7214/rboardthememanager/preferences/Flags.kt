@@ -195,9 +195,9 @@ class Flags(val activity: Activity) : AbstractPreference() {
                 }
             }
             pref.apply {
-                titleRes = item.title
-                summaryRes = item.summary
-                iconRes = item.icon
+                titleRes = item.title.safeString
+                summaryRes = item.summary.safeString
+                iconRes = item.icon.safeIcon
                 visible = item.visible && item.minSdk <= Build.VERSION.SDK_INT
                 if (item.summary == -1) summary = item.key
             }

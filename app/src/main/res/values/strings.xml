@@ -154,4 +154,5 @@
     <string name="theme_pack_count">Theme Pack Count</string>
     <string name="theme_packs">Theme Packs</string>
     <string name="keyboard_redesign_forbid_key_shadows">Keyboard Redesign Forbid Key Shadows</string>
+    <string name="none">None</string>
 </resources>
