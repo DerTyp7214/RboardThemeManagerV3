@@ -16,10 +16,10 @@ fun lerp(a: Int, b: Int, f: Float): Float = a + (f * (a - b).toFloat())
 
 val Int.safeString: Int
     get() {
-        return if (this < 1) R.string.none else this
+        return if (this == 0x0) R.string.none else this
     }
 
 val Int.safeIcon: Int
     get() {
-        return if (this < 1) R.drawable.empty else this
+        return if (this == 0x0) R.drawable.empty else this
     }
