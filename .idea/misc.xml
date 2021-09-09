@@ -29,6 +29,7 @@
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_more_vert_24.xml" value="0.20364583333333333" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_outlined_flag_24.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.3651041666666667" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_box_shadow.xml" value="0.3625" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_creator.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_dark_mode.xml" value="0.3625" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/ic_delete_theme.xml" value="0.3651041666666667" />
@@ -82,7 +83,7 @@
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/drawable/theme.xml" value="0.3651041666666667" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/activity_info.xml" value="0.33489583333333334" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/activity_install_pack.xml" value="0.365625" />
-        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/activity_main.xml" value="0.33489583333333334" />
+        <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/activity_manage_repo.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/activity_preferences.xml" value="0.3489583333333333" />
         <entry key="..\:/Users/lengw/AndroidStudioProjects/RboardThemeManagerV3/app/src/main/res/layout/activity_read_more_read_fast.xml" value="0.19791666666666666" />
