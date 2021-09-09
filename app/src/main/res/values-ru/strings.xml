@@ -153,4 +153,5 @@
     <string name="theme_pack_count">Количество пакетов тем</string>
     <string name="theme_packs">Тематические пакеты</string>
     <string name="app_updated">Приложение обновлено</string>
+    <string name="keyboard_redesign_forbid_key_shadows">Редизайн клавиатуры Запретить тени клавиш</string>
 </resources>

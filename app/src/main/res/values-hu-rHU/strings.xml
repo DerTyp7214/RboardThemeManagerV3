@@ -152,4 +152,5 @@
     <string name="download_themes">Témák letöltése</string>
     <string name="theme_pack_count">Témacsomagok száma</string>
     <string name="theme_packs">Témacsomagok</string>
+    <string name="keyboard_redesign_forbid_key_shadows">Billentyűzet újratervezése tiltsa meg a kulcsárnyékokat</string>
 </resources>

@@ -1,5 +1,5 @@
 {
-  "time": "1628378280360",
+  "time": "1631193059171",
   "flags": [
     {
       "key": "general",
@@ -291,6 +291,15 @@
       "title": "enable_auto_float_keyboard_in_multi_window",
       "summary": "",
       "icon": "ic_float",
+      "defaultValue": false,
+      "type": "BOOLEAN",
+      "file": "FLAGS"
+    },
+    {
+      "key": "keyboard_redesign_forbid_key_shadows",
+      "title": "keyboard_redesign_forbid_key_shadows",
+      "summary": "",
+      "icon": "ic_box_shadow",
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS"
