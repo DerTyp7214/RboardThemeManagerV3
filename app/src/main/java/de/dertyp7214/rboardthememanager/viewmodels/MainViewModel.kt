@@ -20,6 +20,7 @@ class MainViewModel : ViewModel() {
     private val refreshThemes = MutableLiveData<String>()
     private val selections = MutableLiveData<Pair<Boolean, ThemeAdapter?>>()
     private val navigate = MutableLiveData<@IdRes Int>()
+    private val loaded = MutableLiveData<Boolean>()
 
     fun getSelectedTheme(): ThemeDataClass? {
         return selectedTheme.value
@@ -115,5 +116,17 @@ class MainViewModel : ViewModel() {
 
     fun onNavigate(owner: LifecycleOwner, observer: Observer<Int>) {
         navigate.observe(owner, observer)
+    }
+
+    fun loaded(): Boolean {
+        return loaded.value == true
+    }
+
+    fun setLoaded(loaded: Boolean) {
+        this.loaded.value = loaded
+    }
+
+    fun observeLoaded(owner: LifecycleOwner, observer: Observer<Boolean>) {
+        loaded.observe(owner, observer)
     }
 }
