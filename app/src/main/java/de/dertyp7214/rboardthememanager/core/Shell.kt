@@ -5,12 +5,10 @@ import java.io.IOException
 
 fun hasRoot(): Boolean {
     return try {
-        /*ProcessBuilder().run {
+        ProcessBuilder().run {
             command("su")
             start()
-        }.inputStream.let {
-            Log.d("Check Root", it.bufferedReader().readText())
-        }*/
+        }
         rootAccess()
     }catch (e: IOException) {
         false
