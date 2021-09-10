@@ -148,7 +148,7 @@ object ThemeUtils {
                         true
                     )
                 } == true) {
-                if (Flags.values.monet) getDynamicColorsTheme()?.let { theme -> themes.add(theme) }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && Flags.values.monet) getDynamicColorsTheme()?.let { theme -> themes.add(theme) }
                 themes.add(getSystemAutoTheme())
             }
             if (context?.let { ctx ->
