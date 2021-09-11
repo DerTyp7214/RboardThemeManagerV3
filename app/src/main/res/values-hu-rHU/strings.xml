@@ -65,7 +65,7 @@
     <string name="do_you_want_to_delete_theme">Törli ezeket a témákat?</string>
     <string name="show_preinstalled_themes">Előre telepített témák megjelenítése</string>
     <string name="emoji_compat_app_whitelist">Emoji kompatibilis javítás</string>
-    <string name="flags">Zászlók</string>
+    <string name="flags">Gboard  Zászlók</string>
     <string name="themes_header">Témák</string>
     <string name="show_system_theme">Rendszertéma megjelenítése</string>
     <string name="enable_joystick_delete">Joystick törlés</string>
@@ -154,4 +154,5 @@
     <string name="theme_packs">Témacsomagok</string>
     <string name="keyboard_redesign_forbid_key_shadows">Billentyűzet újratervezése tiltsa meg a kulcsárnyékokat</string>
     <string name="none">Egyik sem</string>
+    <string name="enable_bitmoji_contextual_category_icon">Bitmoji engedélyezése</string>
 </resources>

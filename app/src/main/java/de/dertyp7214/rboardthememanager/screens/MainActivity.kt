@@ -86,6 +86,7 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar = binding.toolbar
         val searchBar = binding.searchBar
+        val mainContent = binding.mainContent
         val bottomSheet = findViewById<NestedScrollView>(R.id.bottom_bar)
         val navigationHolder =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
@@ -97,6 +98,8 @@ class MainActivity : AppCompatActivity() {
         val secondaryContent = findViewById<LinearLayout>(R.id.secondaryContent)
 
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+
+        mainContent.foreground.alpha = 0
 
         searchBar.instantSearch = true
         searchBar.applyInsetter {
@@ -228,6 +231,8 @@ class MainActivity : AppCompatActivity() {
 
                         if (navigation.alpha == 0F) navigation.visibility = GONE
                         else if (navigation.visibility == GONE) navigation.visibility = VISIBLE
+
+                        mainContent.foreground.alpha = (slideOffset * 255).toInt()
                     }
                 })
 

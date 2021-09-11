@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package de.dertyp7214.rboardthememanager.core
 
 import android.graphics.Color
