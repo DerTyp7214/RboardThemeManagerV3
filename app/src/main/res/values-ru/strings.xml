@@ -57,7 +57,7 @@
     <string name="do_you_want_to_delete_theme">Вы хотите удалить эти темы?</string>
     <string name="show_preinstalled_themes">Показать предустановленные темы</string>
     <string name="emoji_compat_app_whitelist">Фикс эмодзи</string>
-    <string name="flags">Флаги</string>
+    <string name="flags">Gboard Флаги</string>
     <string name="themes_header">Темы</string>
     <string name="show_system_theme">Показать системную тему</string>
     <string name="enable_joystick_delete">Удаление джойстика</string>
@@ -153,4 +153,6 @@
     <string name="theme_pack_count">Количество пакетов тем</string>
     <string name="theme_packs">Тематические пакеты</string>
     <string name="keyboard_redesign_forbid_key_shadows">Редизайн клавиатуры Запретить тени клавиш</string>
+    <string name="none">None</string>
+    <string name="enable_bitmoji_contextual_category_icon">Включить Bitmoji</string>
 </resources>

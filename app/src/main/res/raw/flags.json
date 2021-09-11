@@ -1,5 +1,5 @@
 {
-  "time": "1631193059171",
+  "time": "1631389173239",
   "flags": [
     {
       "key": "general",
@@ -39,7 +39,8 @@
       "icon": "ic_backspace",
       "defaultValue": false,
       "type": "BOOLEAN",
-      "file": "FLAGS"
+      "file": "FLAGS",
+      "visible": false
     },
     {
       "key": "deprecate_search",
@@ -264,6 +265,15 @@
       "title": "pill_shaped_key",
       "summary": "",
       "icon": "ic_pill",
+      "defaultValue": false,
+      "type": "BOOLEAN",
+      "file": "FLAGS"
+    },
+    {
+      "key": "enable_bitmoji_contextual_category_icon",
+      "title": "enable_bitmoji_contextual_category_icon",
+      "summary": "",
+      "icon": "ic_bitmoji",
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS"
