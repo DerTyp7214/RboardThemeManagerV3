@@ -33,6 +33,7 @@ import java.io.BufferedInputStream
 import java.net.URL
 import java.util.*
 import android.content.res.Configuration
+import android.graphics.Color.alpha
 import androidx.core.graphics.get
 import kotlin.collections.ArrayList
 
@@ -387,7 +388,7 @@ object ThemeUtils {
                 setHeight(1.dp(context) / 2)
                 setWidth(LinearLayout.LayoutParams.MATCH_PARENT)
                 setBackgroundColor(context.getAttr(R.attr.colorOnPrimary))
-                alpha = .6F
+                alpha = .7F
             })
         }
     }
