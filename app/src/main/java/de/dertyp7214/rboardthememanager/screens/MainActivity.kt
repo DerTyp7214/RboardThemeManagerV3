@@ -108,6 +108,14 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.demo.let { demo ->
+            if (preferences.getBoolean("demo_shown", false)) demo.visibility = GONE
+            demo.setOnClickListener {
+                demo.visibility = GONE
+                preferences.edit { putBoolean("demo_shown", true) }
+            }
+        }
+
         navigation.setHeight((resources.getDimension(R.dimen.bottomBarHeight) + getNavigationBarHeight()).roundToInt())
 
         val reloadThemesLauncher =
@@ -537,7 +545,23 @@ class MainActivity : AppCompatActivity() {
                 binding.searchBar.setMenu(R.menu.menu_downloads) {
                     when (it.itemId) {
                         R.id.downloads_filter_settings -> {
-                            TODO()
+                            openDialog(
+                                R.string.do_not_report,
+                                R.string.error,
+                                R.string.share,
+                                android.R.string.cancel
+                            ) {
+                                Intent().apply {
+                                    action = ACTION_SEND
+                                    putExtra(
+                                        Intent.EXTRA_TEXT,
+                                        getString(R.string.i_have_not_read_this_text)
+                                    )
+                                    type = "text/plain"
+                                }.let { intent ->
+                                    Intent.createChooser(intent, getString(R.string.share))
+                                }.also(::startActivity)
+                            }
                             true
                         }
                         else -> false

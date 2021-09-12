@@ -1,5 +1,5 @@
 {
-  "time": "1631389173239",
+  "time": "1631469286300",
   "flags": [
     {
       "key": "general",
@@ -276,7 +276,8 @@
       "icon": "ic_bitmoji",
       "defaultValue": false,
       "type": "BOOLEAN",
-      "file": "FLAGS"
+      "file": "FLAGS",
+      "visible": false
     },
     {
       "key": "enable_clipboard_screenshot_paste",

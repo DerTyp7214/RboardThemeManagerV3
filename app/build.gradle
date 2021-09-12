@@ -15,7 +15,7 @@ android {
         applicationId "de.dertyp7214.rboardthememanager"
         minSdkVersion 31
         targetSdkVersion 31
-        versionCode 328004
+        versionCode 328005
         versionName "3.2.8"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -67,7 +67,7 @@ dependencies {
     implementation 'com.jaredrummler:android-shell:1.0.0'
     implementation 'com.google.firebase:firebase-analytics:19.0.1'
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
-    implementation 'com.google.code.gson:gson:2.8.7'
+    implementation 'com.google.code.gson:gson:2.8.8'
     implementation 'com.bignerdranch.android:simple-item-decoration:1.0.0'
     implementation 'de.dertyp7214:PRDownloader:v0.6.0'
     testImplementation 'junit:junit:4.13.2'
@@ -77,6 +77,6 @@ dependencies {
     implementation 'de.dertyp7214:PreferencesPlus:1.1'
     implementation(fileTree(dir: 'libs', include: ['*.jar', '*.aar']))
 
-    debugImplementation "androidx.compose.ui:ui-tooling:1.0.1"
+    debugImplementation "androidx.compose.ui:ui-tooling:1.0.2"
     debugImplementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }
