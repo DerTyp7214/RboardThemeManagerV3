@@ -5,10 +5,6 @@ import java.io.IOException
 
 fun hasRoot(): Boolean {
     return try {
-        ProcessBuilder().run {
-            command("su")
-            start()
-        }
         rootAccess()
     }catch (e: IOException) {
         false

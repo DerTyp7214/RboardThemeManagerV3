@@ -17,6 +17,10 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.Window
 import android.widget.FrameLayout
+import com.skydoves.balloon.ArrowOrientation
+import com.skydoves.balloon.BalloonAnimation
+import com.skydoves.balloon.BalloonSizeSpec
+import com.skydoves.balloon.createBalloon
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -114,13 +118,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        binding.demo.let { demo ->
-            if (preferences.getBoolean("demo_shown", false)) demo.visibility = GONE
-            demo.setOnClickListener {
-                demo.visibility = GONE
-                preferences.edit { putBoolean("demo_shown", true) }
-            }
-        }
+        searchBar.menuVisible = !preferences.getBoolean("demo_shown", false)
 
         navigation.setHeight((resources.getDimension(R.dimen.bottomBarHeight) + getNavigationBarHeight()).roundToInt())
 
@@ -156,6 +154,30 @@ class MainActivity : AppCompatActivity() {
                 }
                 mainViewModel.setLoaded(true)
 
+                searchBar.setOnMenuListener {
+                    preferences.edit { putBoolean("demo_shown", true) }
+                    searchBar.menuVisible = false
+                    createBalloon(this) {
+                        setWidth(BalloonSizeSpec.WRAP)
+                        setHeight(BalloonSizeSpec.WRAP)
+                        setPadding(10)
+                        setMargin(8)
+                        setArrowPosition(.15f)
+                        setArrowOrientation(ArrowOrientation.BOTTOM)
+                        setCornerRadius(resources.getDimension(R.dimen.roundCornersInner))
+                        setText(getString(R.string.menu_moved))
+                        setTextColor(getAttr(R.attr.colorOnPrimary))
+                        setTextSize(12f)
+                        setBackgroundColor(getAttr(R.attr.colorPrimary))
+                        setBalloonAnimation(BalloonAnimation.FADE)
+                        setDismissWhenClicked(true)
+                        setOnBalloonDismissListener {
+                            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                        }
+                        setLifecycleOwner(lifecycleOwner)
+                    }.showAlignBottom(it)
+                }
+
                 val mainMenuItems = arrayListOf(
                     MenuItem(
                         R.drawable.ic_info,
@@ -178,8 +200,7 @@ class MainActivity : AppCompatActivity() {
                     },
                     MenuItem(
                         R.drawable.ic_baseline_outlined_flag_24,
-                        R.string.flags,
-                        Build.VERSION.SDK_INT > Build.VERSION_CODES.O
+                        R.string.flags
                     ) {
                         PreferencesActivity::class.java.start(
                             this,

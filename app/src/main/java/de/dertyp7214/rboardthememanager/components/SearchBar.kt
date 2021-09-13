@@ -28,6 +28,7 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
     private var searchListener: (text: String) -> Unit = {}
     private var closeListener: () -> Unit = {}
     private var focusListener: () -> Unit = {}
+    private var menuListener: (ImageButton) -> Unit = {}
 
     private var popupMenu: PopupMenu? = null
     private var menuItemClickListener: PopupMenu.OnMenuItemClickListener? = null
@@ -58,6 +59,12 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
             clearFocus(searchEdit)
         }
 
+    var menuVisible: Boolean = true
+        set(value) {
+            field = value
+            if (value) searchButton.setImageResource(R.drawable.ic_hamburger)
+            else searchButton.setImageResource(R.drawable.ic_baseline_search_24)
+        }
 
     init {
         inflate(context, R.layout.search_bar, this)
@@ -122,6 +129,10 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
                 true
             } else false
         }
+        searchButton.setOnClickListener {
+            if (menuVisible) menuListener(searchButton)
+            else searchBar.callOnClick()
+        }
     }
 
     fun setMenu(
@@ -148,6 +159,10 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
 
     fun setOnFocusListener(listener: () -> Unit) {
         focusListener = listener
+    }
+
+    fun setOnMenuListener(listener: (ImageButton) -> Unit) {
+        menuListener = listener
     }
 
     override fun clearFocus() {
