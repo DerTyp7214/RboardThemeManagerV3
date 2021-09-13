@@ -156,4 +156,5 @@
     <string name="none">None</string>
     <string name="enable_bitmoji_contextual_category_icon">Enable Bitmoji</string>
     <string name="do_not_report">Do not report this error.</string>
+    <string name="menu_moved">Menu is now in the bottom sheet.</string>
 </resources>

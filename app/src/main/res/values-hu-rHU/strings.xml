@@ -154,4 +154,6 @@
     <string name="keyboard_redesign_forbid_key_shadows">Billentyűzet újratervezése tiltsa meg a kulcsárnyékokat</string>
     <string name="none">None</string>
     <string name="enable_bitmoji_contextual_category_icon">Bitmoji engedélyezése</string>
+    <string name="do_not_report">Ne jelentse ezt a hibát.</string>
+    <string name="menu_moved">A menü most az alsó lapon található.</string>
 </resources>

@@ -155,4 +155,6 @@
     <string name="keyboard_redesign_forbid_key_shadows">Редизайн клавиатуры Запретить тени клавиш</string>
     <string name="none">None</string>
     <string name="enable_bitmoji_contextual_category_icon">Включить Bitmoji</string>
+    <string name="do_not_report">Не сообщайте об этой ошибке.</string>
+    <string name="menu_moved">Меню теперь находится на нижнем листе.</string>
 </resources>
