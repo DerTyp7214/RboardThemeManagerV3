@@ -8,10 +8,10 @@ import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import java.io.File
 
 fun ThemeDataClass.delete(): Boolean {
-    if (image != null) "rm -rf ${path.removeSuffix(".zip")}".runAsCommand { image ->
+    if (image != null) "rm -rf \"${path.removeSuffix(".zip")}\"".runAsCommand { image ->
         Logger.log(Logger.Companion.Type.INFO, "DELETE THEME IMAGE", image.contentToString())
     }
-    return "rm -rf $path".runAsCommand {
+    return "rm -rf \"$path\"".runAsCommand {
         Logger.log(Logger.Companion.Type.INFO, "DELETE THEME", it.contentToString())
     }
 }
@@ -33,13 +33,13 @@ fun ThemeDataClass.install(overrideTheme: Boolean = true): Boolean {
     return if (installPath.exists() && !overrideTheme) true
     else arrayListOf(
         "mkdir -p ${Config.MAGISK_THEME_LOC}",
-        "cp $path ${installPath.absolutePath}",
-        "chmod 644 ${installPath.absolutePath}"
+        "cp \"$path\" \"${installPath.absolutePath}\"",
+        "chmod 644 \"${installPath.absolutePath}\""
     ).apply {
         if (imageFile.exists()) addAll(
             listOf(
-                "cp ${imageFile.absolutePath} ${installPath.absolutePath.removeSuffix(".zip")}",
-                "chmod 644 ${installPath.absolutePath.removeSuffix(".zip")}"
+                "cp \"${imageFile.absolutePath}\" \"${installPath.absolutePath.removeSuffix(".zip")}\"",
+                "chmod 644 \"${installPath.absolutePath.removeSuffix(".zip")}\""
             )
         )
     }.runAsCommand()

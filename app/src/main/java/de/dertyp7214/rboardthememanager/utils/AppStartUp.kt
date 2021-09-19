@@ -96,7 +96,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
             rootAccess = hasRoot()
 
             if (rootAccess) doInBackground {
-                "rm -rf ${cacheDir.absolutePath}/*".runAsCommand()
+                "rm -rf \"${cacheDir.absolutePath}/*\"".runAsCommand()
                 val files = ArrayList<File>()
                 files.forEach {
                     SuFile(it.absolutePath).deleteRecursive()
@@ -188,9 +188,9 @@ class AppStartUp(private val activity: AppCompatActivity) {
                         val file = SuFile(data.path).let {
                             File(filesDir, "theme.pack").apply {
                                 ProcessBuilder().su(
-                                    "rm $absolutePath",
-                                    "cp ${it.absolutePath} $absolutePath",
-                                    "chmod 644 $absolutePath"
+                                    "rm \"$absolutePath\"",
+                                    "cp \"${it.absolutePath}\" \"$absolutePath\"",
+                                    "chmod 644 \"$absolutePath\""
                                 ).logs("File Import", false)
                             }
                         }
