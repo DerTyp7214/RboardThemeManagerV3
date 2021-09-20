@@ -2,8 +2,11 @@ name: Build Debug
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
+    paths:
+      - 'app/**'
+      - 'gradle.properties'
+      - '.github/workflows/**'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,6 +18,25 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            !~/.gradle/caches/build-cache-*
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}
+          restore-keys: ${{ runner.os }}-gradle-
+
+      - name: Cache build cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ${{ github.workspace }}/.ccache
+            ~/.gradle/caches/build-cache-*
+          key: ${{ runner.os }}-build-cache-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-build-cache-
 
       - name: Build apk
         id: buildAllApks

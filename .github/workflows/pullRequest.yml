@@ -1,12 +1,8 @@
-name: Build Release
+name: Build Pull Request
 
 on:
-  push:
+  pull_request:
     branches: [ master ]
-    paths:
-      - 'app/**'
-      - 'gradle.properties'
-      - '.github/workflows/**'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -83,43 +79,3 @@ jobs:
         with:
           name: Release Artifact
           path: app/build/outputs/apk/release/app-release.apk
-
-
-      - name: Send Notification
-        uses: fjogeleit/http-request-action@master
-        with:
-          url: 'https://fcm.googleapis.com/fcm/send'
-          method: 'POST'
-          customHeaders: '{"Authorization":"key=${{ secrets.FCM_KEY }}"}'
-          data: '{"to": "/topics/update-v3-release","data": {"version": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},"type": "update","notification": {"body": "Update available. ${{ github.event.head_commit.message }}","title": "Update"}}}'
-
-      - name: Upload Assets
-        id: upload_assets
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: latest-release
-          prerelease: false
-          title: Release Build
-          files: |
-            app/build/outputs/apk/release/app-release.apk
-            app/build/outputs/apk/release/output-metadata.json
-
-      - name: Dispatch Fdroid Repo
-        uses: peter-evans/repository-dispatch@v1
-        with:
-          token: ${{ secrets.DISPATCH_GITHUB_TOKEN }}
-          repository: GboardThemes/Fdroid
-          event-type: update-repo
-
-      - name: Create new Release
-        id: create_release
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
-          prerelease: false
-          title: Release Build
-          files: |
-            app/build/outputs/apk/release/app-release.apk
-            app/build/outputs/apk/release/output-metadata.json
