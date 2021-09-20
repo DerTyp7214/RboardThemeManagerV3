@@ -6,7 +6,8 @@ on:
     paths:
       - 'app/**'
       - 'gradle.properties'
-      - '.github/workflows/**'
+      - '.github/workflows/buildDebug.yml'
+      - '.github/workflows/buildRelease.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
