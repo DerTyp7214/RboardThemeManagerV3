@@ -1,6 +1,9 @@
 package de.dertyp7214.rboardthememanager
 
+import android.app.Activity
 import android.app.Application
+import android.content.Context
+import android.content.ContextWrapper
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatDelegate
@@ -22,6 +25,13 @@ class Application : Application() {
 
         var uiHandler: Handler? = null
             private set
+
+        fun getTopActivity(context: Context? = this.context): Activity? {
+            return if (context is ContextWrapper) {
+                if (context is Activity) context
+                else getTopActivity(context.baseContext)
+            } else null
+        }
     }
 
     override fun onCreate() {

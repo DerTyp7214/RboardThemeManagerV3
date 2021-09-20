@@ -49,6 +49,13 @@ class InstallPackActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             onBackPressed()
         }
+        toolbar.setOnMenuItemClickListener {
+            if (it.itemId == R.id.select_all) {
+                if (adapter.getSelected().size == themes.size) adapter.clearSelection()
+                else adapter.selectAll()
+            }
+            true
+        }
 
         fab.setOnClickListener {
             val success = adapter.getSelected().map { it.install() }

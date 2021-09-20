@@ -6,6 +6,7 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
@@ -22,6 +23,7 @@ import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.core.start
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
+import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 
 class Settings(private val activity: Activity) : AbstractPreference() {
@@ -140,6 +142,23 @@ class Settings(private val activity: Activity) : AbstractPreference() {
             -1,
             true,
             TYPE.BOOLEAN
+        ),
+        FIX_FLAGS(
+            "fix_flags",
+            R.string.fix_flags,
+            R.string.fix_flags_long,
+            -1,
+            "",
+            TYPE.STRING,
+            listOf(),
+            {
+                listOf(
+                    "rm \"${Flags.FILES.FLAGS.filePath}\"",
+                    "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
+                ).runAsCommand()
+                GboardUtils.updateCurrentFlags("")
+                Toast.makeText(this, R.string.flags_fixed, Toast.LENGTH_LONG).show()
+            }
         ),
         UNINSTALL(
             "uninstall",
