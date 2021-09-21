@@ -156,4 +156,9 @@
     <string name="enable_bitmoji_contextual_category_icon">Bitmoji engedélyezése</string>
     <string name="do_not_report">Ne jelentse ezt a hibát.</string>
     <string name="menu_moved">A menü most az alsó lapon található.</string>
+    <string name="fix_flags">Zászlók javítása</string>
+    <string name="flags_fixed">Zászlók javítva</string>
+    <string name="fix_flags_long">Törli a zászlókat, és kényszeríti a Gboard bezárását.</string>
+    <string name="try_fix_flags">Próbálja meg a beállításokat, és kattintson a \"Zászlók javítása\"</string>
+    <string name="flags_corrupted">Úgy tűnik, hogy a zászlók sérültek</string>
 </resources>
