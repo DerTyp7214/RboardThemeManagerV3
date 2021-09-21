@@ -12,22 +12,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.3
+        uses: actions/checkout@v2.3.4
 
       - name: Setup JDK
         uses: actions/setup-java@v1
         with:
           java-version: 11
 
-  - name: Cache Gradle dependencies
-      uses: actions/cache@v2
-      with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-          !~/.gradle/caches/build-cache-*
-        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}
-        restore-keys: ${{ runner.os }}-gradle-
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            !~/.gradle/caches/build-cache-*
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}
+          restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
         uses: actions/cache@v2
@@ -37,7 +37,6 @@ jobs:
             ~/.gradle/caches/build-cache-*
           key: ${{ runner.os }}-build-cache-${{ github.sha }}
           restore-keys: ${{ runner.os }}-build-cache-
-
 
       - name: Build apk
         id: buildAllApks
