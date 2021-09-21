@@ -5,6 +5,7 @@ import com.topjohnwu.superuser.io.SuFileInputStream
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 import org.xml.sax.InputSource
 import java.io.File
+import de.dertyp7214.rboardthememanager.Application
 import android.app.Activity
 import android.content.Intent
 import androidx.core.app.ShareCompat
@@ -56,22 +57,29 @@ fun File.readXML(string: String? = null): Map<String, Any> {
         return output
     }
 
-    if (map.length > 0)
-        for (item in map.item(0).childNodes) {
-            if (item.nodeName != "set" && !item.nodeName.startsWith("#")) {
-                val name = item.attributes?.getNamedItem("name")?.nodeValue
-                val value = item.attributes?.getNamedItem("value")?.nodeValue?.let {
-                    when (item.nodeName) {
-                        "long" -> it.toLong()
-                        "boolean" -> it.toBooleanStrict()
-                        "float" -> it.toFloat()
-                        "integer" -> it.toInt()
-                        else -> it
+    try {
+        if (map.length > 0)
+            for (item in map.item(0).childNodes) {
+                if (item.nodeName != "set" && !item.nodeName.startsWith("#")) {
+                    val name = item.attributes?.getNamedItem("name")?.nodeValue
+                    val value = item.attributes?.getNamedItem("value")?.nodeValue?.let {
+                        when (item.nodeName) {
+                            "long" -> it.toLong()
+                            "boolean" -> it.toBooleanStrict()
+                            "float" -> it.toFloat()
+                            "integer" -> it.toInt()
+                            else -> it
+                        }
                     }
+                    if (name != null) output[name] = value ?: item.textContent ?: ""
                 }
-                if (name != null) output[name] = value ?: item.textContent ?: ""
             }
+    } catch (e: Exception) {
+        e.printStackTrace()
+        Application.getTopActivity()?.openDialog(R.string.try_fix_flags, R.string.flags_corrupted) {
+            it.dismiss()
         }
+    }
 
     return output
 }

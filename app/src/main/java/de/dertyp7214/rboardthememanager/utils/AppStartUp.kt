@@ -276,6 +276,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                         if (!zip.exists()) listOf()
                         else {
                             val destination = File(cacheDir, zip.nameWithoutExtension)
+                            SuFile(destination.absolutePath).deleteRecursive()
                             if (ZipHelper().unpackZip(destination.absolutePath, zip.absolutePath)) {
                                 destination.listFiles { file -> file.extension == "zip" }
                                     ?.map { it.absolutePath }

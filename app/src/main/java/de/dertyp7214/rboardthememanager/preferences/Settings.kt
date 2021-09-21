@@ -8,6 +8,8 @@ import android.os.Build
 import android.os.Handler
 import android.view.View
 import android.os.Looper
+import android.widget.Toast
+import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
@@ -149,6 +151,23 @@ class Settings(private val activity: Activity) : AbstractPreference() {
             -1,
             true,
             TYPE.BOOLEAN
+        ),
+        FIX_FLAGS(
+            "fix_flags",
+            R.string.fix_flags,
+            R.string.fix_flags_long,
+            -1,
+            "",
+            TYPE.STRING,
+            listOf(),
+            {
+                listOf(
+                    "rm \"${Flags.FILES.FLAGS.filePath}\"",
+                    "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
+                ).runAsCommand()
+                GboardUtils.updateCurrentFlags("")
+                Toast.makeText(this, R.string.flags_fixed, Toast.LENGTH_LONG).show()
+            }
         ),
         UNINSTALL(
             "uninstall",

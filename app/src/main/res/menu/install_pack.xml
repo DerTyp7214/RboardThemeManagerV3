@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/install_theme"
-        android:icon="@drawable/ic_baseline_check_24"
-        android:title="@string/install"
+        android:id="@+id/select_all"
+        android:icon="@drawable/ic_select_all"
+        android:title="@string/select_all"
         app:showAsAction="always" />
 </menu>
