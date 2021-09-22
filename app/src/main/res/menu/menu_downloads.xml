@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/downloads_filter_settings"
-        android:title="@string/filter_settings" />
+        android:id="@+id/sort_by_date"
+        android:checkable="true"
+        android:checked="false"
+        android:title="@string/sort_by_date" />
 </menu>

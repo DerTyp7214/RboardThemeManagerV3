@@ -162,4 +162,5 @@
     <string name="fix_flags_long">Törli a zászlókat, és kényszeríti a Gboard bezárását.</string>
     <string name="try_fix_flags">Próbálja meg a beállításokat, és kattintson a \"Zászlók javítása\"</string>
     <string name="flags_corrupted">Úgy tűnik, hogy a zászlók sérültek</string>
+    <string name="sort_by_date">Rendezés dátum szerint</string>
 </resources>

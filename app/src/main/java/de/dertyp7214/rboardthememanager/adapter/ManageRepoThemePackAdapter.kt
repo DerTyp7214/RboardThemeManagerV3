@@ -26,7 +26,7 @@ class ManageRepoThemePackAdapter(private val items: List<ThemePack>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
 
-        holder.title.text = item.title
+        holder.title.text = item.name
         holder.author.text = item.author
     }
 

@@ -45,7 +45,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
         "https://play.google.com/store/apps/details?id=${Config.GBOARD_PACKAGE_NAME}"
     }
     private val flagsUrl by lazy {
-        "https://raw.githubusercontent.com/GboardThemes/Packs/master/flags.json"
+        "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/flags.json"
     }
 
     private var checkedForUpdate = false
@@ -97,6 +97,14 @@ class AppStartUp(private val activity: AppCompatActivity) {
             })
 
             rootAccess = hasRoot()
+
+            Config.REPOS.apply {
+                val tmp = this.toSet()
+                clear()
+                addAll(
+                    preferences.getStringSet("repos", tmp) ?: tmp
+                )
+            }
 
             if (rootAccess) doInBackground {
                 "rm -rf \"${cacheDir.absolutePath}/*\"".runAsCommand()

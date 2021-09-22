@@ -158,4 +158,10 @@
     <string name="enable_bitmoji_contextual_category_icon">Включить Bitmoji</string>
     <string name="do_not_report">Не сообщайте об этой ошибке.</string>
     <string name="menu_moved">Меню теперь находится на нижнем листе.</string>
+    <string name = "fix_flags">Исправить флаги </string>
+    <string name = "fix_flags_long">Удаляет флаги и принудительно закрывает gboard. </string>
+    <string name = "flags_fixed">Флаги исправлены </string>
+    <string name = "try_fix_flags">Попробуйте зайти в настройки и нажать \"Исправить флаги\" </string>
+    <string name = "flags_corrupted">Флаги повреждены </string>
+    <string name = "sort_by_date">Сортировать по дате </string>
 </resources>

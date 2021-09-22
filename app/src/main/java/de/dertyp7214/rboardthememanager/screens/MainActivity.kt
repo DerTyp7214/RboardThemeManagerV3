@@ -575,24 +575,9 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_downloads -> {
                 binding.searchBar.setMenu(R.menu.menu_downloads) {
                     when (it.itemId) {
-                        R.id.downloads_filter_settings -> {
-                            openDialog(
-                                R.string.do_not_report,
-                                R.string.error,
-                                R.string.share,
-                                android.R.string.cancel
-                            ) {
-                                Intent().apply {
-                                    action = ACTION_SEND
-                                    putExtra(
-                                        Intent.EXTRA_TEXT,
-                                        getString(R.string.i_have_not_read_this_text)
-                                    )
-                                    type = "text/plain"
-                                }.let { intent ->
-                                    Intent.createChooser(intent, getString(R.string.share))
-                                }.also(::startActivity)
-                            }
+                        R.id.sort_by_date -> {
+                            it.isChecked = !it.isChecked
+                            mainViewModel.setPacksSortByDate(it.isChecked)
                             true
                         }
                         else -> false
