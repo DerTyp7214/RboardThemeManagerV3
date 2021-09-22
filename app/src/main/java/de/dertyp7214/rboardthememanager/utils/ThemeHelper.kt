@@ -187,7 +187,7 @@ object ThemeUtils {
                 } catch (_: Exception) {
                 }
             }
-            packs
+            packs.sortedBy { it.name.lowercase() }
         } catch (_: Exception) {
             listOf()
         }

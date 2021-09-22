@@ -12,7 +12,7 @@ import java.io.File
 
 fun ThemePack.download(activity: Activity, result: (themes: List<String>) -> Unit) {
     val dialog = activity.openLoadingDialog(R.string.downloading_pack)
-    val name = title.replace(" ", "_")
+    val name = name.replace(" ", "_")
     PRDownloader.download(url, activity.cacheDir.absolutePath, "$name.pack").build()
         .setOnStartOrResumeListener { }
         .setOnCancelListener { }
@@ -24,7 +24,7 @@ fun ThemePack.download(activity: Activity, result: (themes: List<String>) -> Uni
                 dialog.dismiss()
                 if (ZipHelper().unpackZip(destination.absolutePath, pack.absolutePath)) {
                     SuFile(destination, "pack.meta").writeFile(
-                        "name=$title\nauthor=$author\n"
+                        "name=$name\nauthor=$author\n"
                     )
                     result(destination.listFiles { file -> file.extension == "zip" }
                         ?.map { it.absolutePath } ?: listOf())

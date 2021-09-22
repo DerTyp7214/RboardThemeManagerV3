@@ -135,7 +135,7 @@ class DownloadListFragment : Fragment() {
     ): List<ThemePack> {
         return packs.filter { pack ->
             pack.none ||
-                    ((pack.title.contains(
+                    ((pack.name.contains(
                         filter,
                         true
                     ) || pack.author.contains(

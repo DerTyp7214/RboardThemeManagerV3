@@ -18,7 +18,7 @@ import java.net.URL
 
 class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
 
-    private val newsFeedUrl = "https://raw.githubusercontent.com/GboardThemes/Packs/master/top.json"
+    private val newsFeedUrl = "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/top.json"
 
     companion object {
         val cards: ArrayList<CardElement> = arrayListOf()

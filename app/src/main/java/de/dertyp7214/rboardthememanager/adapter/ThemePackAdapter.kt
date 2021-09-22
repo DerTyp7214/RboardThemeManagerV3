@@ -49,7 +49,7 @@ class ThemePackAdapter(
         val themePack = list[position]
 
         if (holder is ViewHolder) {
-            holder.title.text = themePack.title
+            holder.title.text = themePack.name
             holder.author.text = themePack.author
 
             holder.root.setOnClickListener {

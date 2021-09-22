@@ -41,9 +41,12 @@ object Config {
             else if (!THEME_LOCATION.startsWith("/system")) THEME_LOCATION else "$MODULE_PATH$THEME_LOCATION"
         }
 
-    const val PACKS_URL =
-        "true:https://raw.githubusercontent.com/GboardThemes/Packs/master/download_list.json"
-    val REPOS = arrayListOf(PACKS_URL)
+    val PACKS_URLS =
+        listOf(
+            "true:https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/list.json",
+            "true:https://raw.githubusercontent.com/AkosPaha/PackRepoBeta/main/list.json"
+        )
+    val REPOS = ArrayList(PACKS_URLS)
 
     const val SOUNDS_PACKS_URL =
         "https://raw.githubusercontent.com/GboardThemes/Soundpack/master/download_sounds.json"
