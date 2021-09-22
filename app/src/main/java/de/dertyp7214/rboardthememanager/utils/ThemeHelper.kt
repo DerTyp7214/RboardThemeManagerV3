@@ -33,6 +33,7 @@ import de.dertyp7214.rboardthememanager.preferences.Settings
 import java.io.BufferedInputStream
 import java.net.URL
 import java.util.*
+import kotlin.collections.ArrayList
 
 enum class InternalThemeNames(val path: String) {
     DOWNLOAD_THEMES("rboard:download_themes")
@@ -187,7 +188,7 @@ object ThemeUtils {
                 } catch (_: Exception) {
                 }
             }
-            packs.sortedBy { it.name.lowercase() }
+            ArrayList(packs.sortedBy { it.name.lowercase() })
         } catch (_: Exception) {
             listOf()
         }

@@ -162,4 +162,5 @@
     <string name="flags_fixed">Flags fixed</string>
     <string name="try_fix_flags">Try to go to settings and click on \"Fix flags\"</string>
     <string name="flags_corrupted">Flags seems to be corrupted</string>
+    <string name="sort_by_date">Sort by Date</string>
 </resources>

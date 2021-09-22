@@ -9,7 +9,8 @@ data class ThemePack(
     val name: String,
     val tags: List<String>,
     val description: String? = null,
-    val none: Boolean = false
+    val none: Boolean = false,
+    val date: Long = Long.MAX_VALUE
 ) {
 
     companion object {

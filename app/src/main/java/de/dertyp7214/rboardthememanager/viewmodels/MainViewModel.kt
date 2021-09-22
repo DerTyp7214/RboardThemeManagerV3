@@ -21,6 +21,7 @@ class MainViewModel : ViewModel() {
     private val selections = MutableLiveData<Pair<Boolean, ThemeAdapter?>>()
     private val navigate = MutableLiveData<@IdRes Int>()
     private val loaded = MutableLiveData<Boolean>()
+    private val packsSortByDate = MutableLiveData<Boolean>()
 
     fun getSelectedTheme(): ThemeDataClass? {
         return selectedTheme.value
@@ -128,5 +129,17 @@ class MainViewModel : ViewModel() {
 
     fun observeLoaded(owner: LifecycleOwner, observer: Observer<Boolean>) {
         loaded.observe(owner, observer)
+    }
+
+    fun packsSortByDate(): Boolean {
+        return packsSortByDate.value ?: false
+    }
+
+    fun setPacksSortByDate(value: Boolean) {
+        packsSortByDate.value = value
+    }
+
+    fun observePacksSortByDate(owner: LifecycleOwner, observer: Observer<Boolean>) {
+        packsSortByDate.observe(owner, observer)
     }
 }

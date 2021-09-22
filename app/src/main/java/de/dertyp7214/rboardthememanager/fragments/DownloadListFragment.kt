@@ -3,6 +3,7 @@ package de.dertyp7214.rboardthememanager.fragments
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -94,8 +95,22 @@ class DownloadListFragment : Fragment() {
 
         mainViewModel.observeFilter(this) { filter ->
             val chipFilters = chipContainer.filters
+            val sortByDate = mainViewModel.packsSortByDate()
             themePacks.clear()
-            themePacks.addAll(filterThemePacks(originalThemePacks, chipFilters, filter))
+            themePacks.addAll(filterThemePacks(originalThemePacks, chipFilters, filter, sortByDate))
+            adapter.notifyDataSetChanged()
+        }
+
+        mainViewModel.observePacksSortByDate(this) { sortByDate ->
+            themePacks.clear()
+            themePacks.addAll(
+                filterThemePacks(
+                    originalThemePacks,
+                    chipContainer.filters,
+                    mainViewModel.getFilter(),
+                    sortByDate
+                )
+            )
             adapter.notifyDataSetChanged()
         }
 
@@ -110,9 +125,17 @@ class DownloadListFragment : Fragment() {
         chipContainer.setOnFilterToggle { filters ->
             doAsync({
                 val searchFilter = mainViewModel.getFilter()
+                val sortByDate = mainViewModel.packsSortByDate()
                 themePacks.clear()
                 try {
-                    themePacks.addAll(filterThemePacks(originalThemePacks, filters, searchFilter))
+                    themePacks.addAll(
+                        filterThemePacks(
+                            originalThemePacks,
+                            filters,
+                            searchFilter,
+                            sortByDate
+                        )
+                    )
                 } catch (e: Exception) {
                 }
             }) {
@@ -131,7 +154,8 @@ class DownloadListFragment : Fragment() {
     private fun filterThemePacks(
         packs: List<ThemePack>,
         filters: List<String>,
-        filter: String
+        filter: String,
+        sortByDate: Boolean
     ): List<ThemePack> {
         return packs.filter { pack ->
             pack.none ||
@@ -146,6 +170,9 @@ class DownloadListFragment : Fragment() {
                             it
                         )
                     }))
+        }.let {
+            if (sortByDate) it.sortedByDescending { item -> item.date }
+            else it
         }
     }
 }
