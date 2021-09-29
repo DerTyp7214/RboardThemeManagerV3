@@ -29,3 +29,14 @@ fun Number.dpToPx(context: Context): Float {
 fun Number.pxToDp(context: Context): Float {
     return this.toFloat() / (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
 }
+
+fun Long.format(currentDate: Long): String {
+    val diff = currentDate - this
+    return (diff / (1000 * 60 * 60 * 24)).toInt().let {
+        when (it) {
+            0 -> "today"
+            1 -> "$it day ago"
+            else -> "$it days ago"
+        }
+    }
+}
