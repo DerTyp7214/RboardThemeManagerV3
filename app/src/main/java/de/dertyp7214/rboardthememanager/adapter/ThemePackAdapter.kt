@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.core.download
+import de.dertyp7214.rboardthememanager.core.format
 import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
@@ -30,6 +31,7 @@ class ThemePackAdapter(
         val root: View = v.findViewById(R.id.root)
         val title: TextView = v.findViewById(R.id.title)
         val author: TextView = v.findViewById(R.id.author)
+        val lastUpdate: TextView = v.findViewById(R.id.lastUpdate)
     }
 
     class NewsViewHolder(v: View) : RecyclerView.ViewHolder(v) {
@@ -51,6 +53,7 @@ class ThemePackAdapter(
         if (holder is ViewHolder) {
             holder.title.text = themePack.name
             holder.author.text = themePack.author
+            holder.lastUpdate.text = themePack.date.format(System.currentTimeMillis())
 
             holder.root.setOnClickListener {
                 themePack.download(activity) {
