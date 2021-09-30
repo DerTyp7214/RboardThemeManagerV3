@@ -2,6 +2,11 @@ package de.dertyp7214.rboardthememanager.core
 
 import com.dertyp7214.logs.helpers.Logger
 import com.topjohnwu.superuser.Shell
+import de.dertyp7214.rboardthememanager.Application
+import de.dertyp7214.rboardthememanager.R
+import org.xml.sax.InputSource
+import java.io.StringReader
+import javax.xml.parsers.DocumentBuilderFactory
 
 fun String.runAsCommand(callback: (result: Array<String>) -> Unit = {}): Boolean {
     return Shell.su(this).exec().apply {
@@ -91,4 +96,43 @@ fun <T> String.setXmlValue(value: T, key: String): String {
             }
         }
     }
+}
+
+fun String.readXML(): Map<String, Any> {
+    val output = HashMap<String, Any>()
+
+    val map = try {
+        DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(
+            InputSource(StringReader(this))
+        ).getElementsByTagName("map")
+    } catch (e: Exception) {
+        e.printStackTrace()
+        return output
+    }
+
+    try {
+        if (map.length > 0)
+            for (item in map.item(0).childNodes) {
+                if (item.nodeName != "set" && !item.nodeName.startsWith("#")) {
+                    val name = item.attributes?.getNamedItem("name")?.nodeValue
+                    val value = item.attributes?.getNamedItem("value")?.nodeValue?.let {
+                        when (item.nodeName) {
+                            "long" -> it.toLong()
+                            "boolean" -> it.toBooleanStrict()
+                            "float" -> it.toFloat()
+                            "integer" -> it.toInt()
+                            else -> it
+                        }
+                    }
+                    if (name != null) output[name] = value ?: item.textContent ?: ""
+                }
+            }
+    } catch (e: Exception) {
+        e.printStackTrace()
+        Application.getTopActivity()?.openDialog(R.string.try_fix_flags, R.string.flags_corrupted) {
+            it.dismiss()
+        }
+    }
+
+    return output
 }

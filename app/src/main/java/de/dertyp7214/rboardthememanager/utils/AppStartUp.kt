@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
@@ -53,6 +54,21 @@ class AppStartUp(private val activity: AppCompatActivity) {
     private var isReady = false
 
     private val preferences by lazy { PreferenceManager.getDefaultSharedPreferences(activity) }
+
+    private fun AppCompatActivity.openImportFlags(
+        resultLauncher: ActivityResultLauncher<Intent>,
+        block: () -> Map<String, Any>
+    ) {
+        isReady = true
+        val dialog = openLoadingDialog(R.string.processing_flags)
+        doAsync(block) {
+            dialog.dismiss()
+            ShareFlags::class.java.start(this, resultLauncher) {
+                putExtra("import", true)
+                putExtra("flags", it)
+            }
+        }
+    }
 
     fun setUp() {
         activity.splashScreen.setOnExitAnimationListener { splashScreenView ->
@@ -180,11 +196,32 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     if (it.first().isNotEmpty()) Config.lightTheme = it.first()
                 }
 
+                val importFlagsResultLauncher =
+                    registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                        val resultData = result.data
+                        if (result.resultCode == AppCompatActivity.RESULT_OK && resultData != null) {
+                            val size = resultData.getIntExtra("size", 0)
+                            Toast.makeText(
+                                this,
+                                getString(R.string.flags_loaded, size),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
                 GboardUtils.loadBackupFlags { flags ->
                     isReady = true
                     openDialog(R.string.load_flags_long, R.string.load_flags) {
+                        val oldFlags = flags.readXML()
+                        val newFlags = HashMap<String, Any>()
+                        SuFile(Flags.FILES.FLAGS.filePath).readXML().forEach { (key, value) ->
+                            if (!oldFlags.containsKey(key)) newFlags[key] = value
+                        }
                         SuFile(Flags.FILES.FLAGS.filePath).writeFile(flags.trim())
                         GboardUtils.updateCurrentFlags(flags)
+                        openImportFlags(importFlagsResultLauncher) {
+                            newFlags
+                        }
                         "am force-stop ${Config.GBOARD_PACKAGE_NAME}".runAsCommand()
                     }
                 }
@@ -250,19 +287,11 @@ class AppStartUp(private val activity: AppCompatActivity) {
                             }
                             finishAndRemoveTask()
                         }
-                    isReady = true
-                    val dialog = openLoadingDialog(R.string.processing_flags)
-                    doAsync({
+                    openImportFlags(resultLauncher) {
                         File(cacheDir, "flags.rboard").apply {
                             delete()
                             data.writeToFile(activity, this)
                         }.readXML()
-                    }) {
-                        dialog.dismiss()
-                        ShareFlags::class.java.start(this, resultLauncher) {
-                            putExtra("import", true)
-                            putExtra("flags", it)
-                        }
                     }
                 }
                 initialized && data != null -> {

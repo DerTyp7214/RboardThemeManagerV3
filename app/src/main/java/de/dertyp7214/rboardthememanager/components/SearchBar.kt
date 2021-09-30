@@ -76,6 +76,8 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
         searchText = findViewById(R.id.search_text)
         searchEdit = findViewById(R.id.search)
 
+        moreButton.visibility = INVISIBLE
+
         searchBar.setOnClickListener {
             if (!focus) {
                 focus = true
@@ -132,12 +134,17 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
         @MenuRes menu: Int? = null,
         itemClickListener: PopupMenu.OnMenuItemClickListener? = null
     ) {
-        popupMenu = if (menu != null)
+        popupMenu = if (menu != null) {
+            moreButton.visibility = VISIBLE
             PopupMenu(context, moreButton).also { popup ->
                 popup.menuInflater.inflate(menu, popup.menu)
                 popup.setOnMenuItemClickListener(itemClickListener)
             }
-        else null
+        }
+        else {
+            moreButton.visibility = INVISIBLE
+            null
+        }
     }
 
     fun clearText() = ::text.set("")
