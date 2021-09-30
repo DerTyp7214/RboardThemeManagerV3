@@ -20,7 +20,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 26
         targetSdk = 31
-        versionCode = 333000
+        versionCode = 333001
         versionName = "3.3.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -67,7 +67,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk7", kotlinVersion))
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     implementation("androidx.preference:preference-ktx:1.1.1")
     implementation("androidx.activity:activity-ktx:1.3.1")
     implementation("androidx.fragment:fragment-ktx:1.3.6")
@@ -85,6 +85,6 @@ dependencies {
     implementation("de.dertyp7214:PreferencesPlus:1.1")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.0.2")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.0.3")
     implementation(kotlin("reflect", kotlinVersion))
 }

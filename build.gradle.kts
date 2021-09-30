@@ -7,7 +7,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.1.0-alpha12")
+        classpath("com.android.tools.build:gradle:7.1.0-alpha13")
         //noinspection DifferentKotlinGradleVersion
         classpath(kotlin("gradle-plugin", version = "1.5.31"))
         classpath("com.google.gms:google-services:4.3.10")
