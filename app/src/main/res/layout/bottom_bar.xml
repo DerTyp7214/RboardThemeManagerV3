@@ -37,7 +37,9 @@
                 android:alpha="1"
                 android:background="@android:color/transparent"
                 app:elevation="0dp"
+                app:itemRippleColor="@android:color/transparent"
                 app:labelVisibilityMode="selected"
+                app:itemIconTint="?attr/colorOnSecondary"
                 app:menu="@menu/navigation">
 
             </com.google.android.material.bottomnavigation.BottomNavigationView>

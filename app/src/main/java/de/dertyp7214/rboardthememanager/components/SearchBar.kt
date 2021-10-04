@@ -15,8 +15,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.MenuRes
 import androidx.appcompat.widget.PopupMenu
-import androidx.cardview.widget.CardView
 import androidx.core.widget.doOnTextChanged
+import com.google.android.material.card.MaterialCardView
 import de.dertyp7214.rboardthememanager.R
 
 @SuppressLint("ResourceType")
@@ -32,7 +32,7 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
     private var popupMenu: PopupMenu? = null
     private var menuItemClickListener: PopupMenu.OnMenuItemClickListener? = null
 
-    private val searchBar: CardView
+    private val searchBar: MaterialCardView
     private val searchButton: ImageButton
     private val backButton: ImageButton
     private val moreButton: ImageButton

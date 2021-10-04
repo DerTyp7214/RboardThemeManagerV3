@@ -3,10 +3,39 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_download.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_download_two_tone.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_downloads_state.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_sounds.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_sounds_state.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_sounds_two_tone.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_style.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_style_state.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_style_two_tone.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/small_line.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/activity_install_pack.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/activity_main.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/bottom_bar.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/chip_container.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/fragment_theme_list.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/input_dialog.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/loading_dialog.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/news_card.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/news_item.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/pack_item.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/repo_item.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/search_bar.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/share_flag_item.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/share_popup.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/single_theme_item.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/soundpack_dialog.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/switch_keyboard_widget_configure.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/theme_grid_item_single.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/menu/install_pack.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/menu/menu_downloads.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/menu/navigation.xml" value="0.34479166666666666" />
       </map>
     </option>
   </component>

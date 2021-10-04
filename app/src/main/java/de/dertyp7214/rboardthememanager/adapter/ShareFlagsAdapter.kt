@@ -4,9 +4,9 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.checkbox.MaterialCheckBox
 import de.dertyp7214.rboardthememanager.R
 import java.util.*
 import kotlin.collections.HashMap
@@ -36,7 +36,7 @@ class ShareFlagsAdapter(val flags: List<String>, private val onClick: (key: Stri
         val main: View = v
         val title: TextView = v.findViewById(R.id.title)
         val summary: TextView = v.findViewById(R.id.summary)
-        val checkBox: CheckBox = v.findViewById(R.id.checkBox)
+        val checkBox: MaterialCheckBox = v.findViewById(R.id.checkBox)
     }
 
     override fun getItemId(position: Int): Long {

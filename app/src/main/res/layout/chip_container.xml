@@ -6,12 +6,12 @@
 
     <com.google.android.material.chip.Chip
         android:id="@+id/clear_tags"
-        style="@style/Widget.MaterialComponents.Chip.Filter"
+        style="@style/Widget.Material3.Chip.Filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:checkedIconVisible="false"
         app:chipBackgroundColor="?android:attr/colorBackground"
-        app:chipEndPadding="-10dp"
+        app:chipEndPadding="-5dp"
         app:chipIcon="@drawable/ic_baseline_close_24"
         app:chipIconVisible="true"
         app:chipStrokeColor="?attr/colorBackgroundFloating"
@@ -37,7 +37,7 @@
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroup"
-            style="@style/Widget.MaterialComponents.Chip.Filter"
+            style="@style/Widget.Material3.Chip.Filter"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:singleLine="true" />
