@@ -16,7 +16,7 @@
         <item name="colorOnSecondary">@color/text</item>
 
         <item name="android:statusBarColor" tools:targetApi="l">@color/app_background</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/foreground</item>
 
         <item name="popupMenuStyle">@style/PopupStyle</item>
         <item name="alertDialogTheme">@style/Dialog.RboardThemeManagerV3.MaterialAlertDialog</item>
@@ -27,6 +27,7 @@
 
     <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3">
 	        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+            <item name="android:navigationBarColor">@color/foreground</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Info" parent="Theme.RboardThemeManagerV3">
