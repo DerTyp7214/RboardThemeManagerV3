@@ -4,7 +4,8 @@
     <color name="app_background">#F5F5F5</color>
     <color name="foreground">#ffffff</color>
     <color name="accent">#7AACFF</color>
-    <color name="accent_2">#7AACFF</color>
+    <color name="accent_2">#c7dcff</color>
+    <color name="md3">#e5e5e5</color>
     <color name="background_icon">#7AACFF</color>
     <color name="background_icon_debug">#FFD15C</color>
     <color name="foreground_icon">#183A71</color>

@@ -11,7 +11,7 @@
 
         <item name="colorSecondary">@color/accent</item>
         <item name="colorSecondaryVariant">@color/accent</item>
-        <item name="colorSecondaryContainer">@color/accent_2</item>
+        <item name="colorSecondaryContainer">@color/md3</item>
         <item name="colorOnSecondary">@color/text</item>
 
         <item name="android:statusBarColor">?android:attr/colorBackground</item>
