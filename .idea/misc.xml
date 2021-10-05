@@ -3,9 +3,36 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/background_gradient.xml" value="0.1995" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_download_two_tone.xml" value="0.3495" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_sounds_two_tone.xml" value="0.3495" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_style_two_tone.xml" value="0.3495" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout-v31/activity_install_pack.xml" value="0.22" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/activity_install_pack.xml" value="0.2957427536231884" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/bottom_bar.xml" value="0.2957427536231884" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/chip_container.xml" value="0.2957427536231884" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/fragment_theme_list.xml" value="0.2957427536231884" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/input_dialog.xml" value="0.2957427536231884" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/loading_dialog.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/news_card.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/news_item.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/search_bar.xml" value="0.2957427536231884" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/share_flag_item.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/share_popup.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/single_theme_item.xml" value="0.2957427536231884" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/switch_keyboard_widget.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/switch_keyboard_widget_configure.xml" value="0.25" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/theme_grid_item_single.xml" value="0.2957427536231884" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/menu_downloads.xml" value="0.371875" />
       </map>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.2957427536231884" />
+      </ProjectState>
+    </option>
+  </component>
 </project>

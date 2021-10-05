@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
+import com.google.android.material.card.MaterialCardView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.get
 import androidx.recyclerview.widget.GridLayoutManager
@@ -109,7 +109,7 @@ class ThemeAdapter(
         val themeName: TextView = v.findViewById(R.id.theme_name)
         val themeNameSelect: TextView = v.findViewById(R.id.theme_name_selected)
         val selectOverlay: ViewGroup = v.findViewById(R.id.select_overlay)
-        val card: CardView = v.findViewById(R.id.card)
+        val card: MaterialCardView = v.findViewById(R.id.card)
         val gradient: View? = try {
             v.findViewById(R.id.gradient)
         } catch (e: Exception) {

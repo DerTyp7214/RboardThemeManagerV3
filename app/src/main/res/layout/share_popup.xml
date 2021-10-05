@@ -5,8 +5,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/colorBackground">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/editTextName"

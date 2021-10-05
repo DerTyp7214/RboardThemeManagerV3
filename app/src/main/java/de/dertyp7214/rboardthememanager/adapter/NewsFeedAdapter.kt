@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.data.ThemePack
@@ -21,7 +21,7 @@ class NewsFeedAdapter(
 ) :
     RecyclerView.Adapter<NewsFeedAdapter.ViewHolder>() {
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        val card: CardView = v.findViewById(R.id.card)
+        val card: MaterialCardView = v.findViewById(R.id.card)
         val imageView: ImageView = v.findViewById(R.id.image)
         val name: TextView = v.findViewById(R.id.name)
         val author: TextView = v.findViewById(R.id.author)

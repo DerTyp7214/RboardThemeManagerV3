@@ -11,7 +11,7 @@
         <item name="android:clipToOutline">true</item>
     </style>
 
-    <style name="Dialog.RboardThemeManagerV3.MaterialAlertDialog" parent="@style/ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+    <style name="Dialog.RboardThemeManagerV3.MaterialAlertDialog" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Dialog.Rounded
         </item>
     </style>

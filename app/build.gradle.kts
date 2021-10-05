@@ -20,8 +20,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 26
         targetSdk = 31
-        versionCode = 333001
-        versionName = "3.3.3"
+        versionCode = 334000
+        versionName = "3.3.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -66,7 +66,7 @@ dependencies {
     //noinspection DifferentStdlibGradleVersion
     implementation(kotlin("stdlib-jdk7", kotlinVersion))
     implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("com.google.android.material:material:1.4.0")
+    implementation("com.google.android.material:material:1.5.0-alpha04")
     implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     implementation("androidx.preference:preference-ktx:1.1.1")
     implementation("androidx.activity:activity-ktx:1.3.1")

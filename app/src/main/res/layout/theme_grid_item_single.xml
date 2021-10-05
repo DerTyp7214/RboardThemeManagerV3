@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="0dp"
-        app:cardElevation="0dp">
+        app:cardCornerRadius="5dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp">
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -94,5 +95,5 @@
                     tools:text="Theme Name" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </FrameLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

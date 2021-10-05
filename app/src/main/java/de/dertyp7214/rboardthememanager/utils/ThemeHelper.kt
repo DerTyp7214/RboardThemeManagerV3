@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.cardview.widget.CardView
+import com.google.android.material.card.MaterialCardView
 import androidx.core.content.ContextCompat
 import com.dertyp7214.logs.helpers.Logger
 import com.dertyp7214.preferencesplus.core.dp
@@ -348,7 +348,7 @@ object ThemeUtils {
             addView(LayoutInflater.from(context).inflate(R.layout.single_theme_item, null).apply {
                 val themeName = findViewById<TextView>(R.id.theme_name)
                 val themeIcon = findViewById<ImageView>(R.id.theme_image)
-                val card: CardView = findViewById(R.id.card)
+                val card: MaterialCardView = findViewById(R.id.card)
                 val gradient: View? = try {
                     findViewById(R.id.gradient)
                 } catch (e: Exception) {

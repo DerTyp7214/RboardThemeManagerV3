@@ -19,6 +19,8 @@ import de.dertyp7214.rboardthememanager.databinding.ActivityInstallPackBinding
 import de.dertyp7214.rboardthememanager.utils.doAsync
 import java.io.File
 import java.util.regex.Pattern
+import com.dertyp7214.preferencesplus.core.dp
+import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
 
 class InstallPackActivity : AppCompatActivity() {
 
@@ -127,5 +129,6 @@ class InstallPackActivity : AppCompatActivity() {
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.setHasFixedSize(true)
         recyclerview.adapter = adapter
+        recyclerview.addItemDecoration(MarginItemDecoration(2.dp(this), all = true))
     }
 }

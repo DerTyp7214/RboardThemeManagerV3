@@ -166,7 +166,7 @@ class MainActivity : AppCompatActivity() {
                         setArrowOrientation(ArrowOrientation.BOTTOM)
                         setCornerRadius(resources.getDimension(R.dimen.roundCornersInner))
                         setText(getString(R.string.menu_moved))
-                        setTextColor(getAttr(R.attr.colorOnPrimary))
+                        setTextColor(getAttr(R.attr.colorBackgroundFloating))
                         setTextSize(12f)
                         setBackgroundColor(getAttr(R.attr.colorPrimary))
                         setBalloonAnimation(BalloonAnimation.FADE)

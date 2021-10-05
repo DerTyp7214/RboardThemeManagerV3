@@ -4,6 +4,7 @@
     <color name="background">#000000</color>
     <color name="foreground">#1c1c1c</color>
     <color name="accent">#7AACFF</color>
+    <color name="accent_2">#183A71</color>
     <color name="background_icon">#183A71</color>
     <color name="background_icon_debug">#7C3111</color>
     <color name="foreground_icon">#7AACFF</color>

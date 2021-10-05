@@ -1,20 +1,21 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.RboardThemeManagerV3" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.RboardThemeManagerV3" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:colorBackground">@color/app_background</item>
         <item name="colorBackgroundFloating">@color/foreground</item>
         <item name="android:windowLightStatusBar">true</item>
 
         <item name="colorPrimary">@color/accent</item>
         <item name="colorPrimaryVariant">@color/accent</item>
+        <item name="colorPrimaryContainer">@color/accent_2</item>
         <item name="colorOnPrimary">@color/text</item>
 
         <item name="colorSecondary">@color/accent</item>
         <item name="colorSecondaryVariant">@color/accent</item>
+        <item name="colorSecondaryContainer">@color/accent_2</item>
         <item name="colorOnSecondary">@color/text</item>
 
-        <item name="android:statusBarColor" tools:targetApi="l">@color/app_background
-        </item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/app_background</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
         <item name="popupMenuStyle">@style/PopupStyle</item>

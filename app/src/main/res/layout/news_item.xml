@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card"
@@ -8,6 +8,7 @@
     android:layout_margin="12dp"
     android:background="?attr/colorBackgroundFloating"
     android:elevation="0dp"
+    app:strokeColor="?attr/colorOnPrimary"
     app:cardCornerRadius="@dimen/roundCorners"
     app:cardElevation="0dp">
 
@@ -47,4 +48,4 @@
                 tools:text="by Author" />
         </LinearLayout>
     </FrameLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

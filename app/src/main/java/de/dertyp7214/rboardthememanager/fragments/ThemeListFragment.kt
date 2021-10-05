@@ -11,12 +11,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dertyp7214.preferencesplus.core.dp
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
+import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.utils.asyncInto
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 import java.lang.Integer.max
+import kotlin.math.roundToInt
 
 class ThemeListFragment : Fragment() {
 
@@ -107,6 +109,7 @@ class ThemeListFragment : Fragment() {
         recyclerView.layoutManager = LayoutManager(requireContext())
         recyclerView.setHasFixedSize(false)
         recyclerView.adapter = adapter
+        recyclerView.addItemDecoration(MarginItemDecoration(2.1.dpToPxRounded(requireContext())))
 
         if (mainViewModel.getThemes().isEmpty() && mainViewModel.loaded()) {
             refreshLayout.isRefreshing = true
