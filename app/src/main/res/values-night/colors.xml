@@ -6,6 +6,8 @@
     <color name="accent">#7AACFF</color>
     <color name="accent_2">#c7dcff</color>
     <color name="md3">#363636</color>
+    <color name="switch_thumb">#404040</color>
+    <color name="switch_track">#8f8f8f</color>
     <color name="background_icon">#183A71</color>
     <color name="background_icon_debug">#7C3111</color>
     <color name="foreground_icon">#7AACFF</color>

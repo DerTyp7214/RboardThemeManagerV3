@@ -4,10 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/background_gradient.xml" value="0.1995" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.342" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_download_two_tone.xml" value="0.3495" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_sounds_two_tone.xml" value="0.3495" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_style_state.xml" value="0.342" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/ic_style_two_tone.xml" value="0.3495" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/switch_thumb.xml" value="0.342" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/drawable/switch_track.xml" value="0.342" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout-v31/activity_install_pack.xml" value="0.22" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/activity_install_pack.xml" value="0.2957427536231884" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/activity_main.xml" value="0.28894927536231885" />
@@ -20,6 +23,7 @@
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/menu_item.xml" value="0.28894927536231885" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/news_card.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/news_item.xml" value="0.371875" />
+        <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/pack_item.xml" value="0.18085106382978725" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/search_bar.xml" value="0.2957427536231884" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/share_flag_item.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/share_popup.xml" value="0.371875" />

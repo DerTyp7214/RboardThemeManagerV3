@@ -21,6 +21,17 @@
         <item name="materialAlertDialogTheme">
             @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
         </item>
+        <item name="switchStyle">@style/Widget.App.Switch</item>
+    </style>
+    <style name="Widget.App.Switch" parent="Widget.Material3.CompoundButton.Switch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Switch" parent="Theme.RboardThemeManagerV3">
+        <item name="colorPrimary">@android:color/system_accent2_200</item>
+        <item name="colorPrimaryContainer">@android:color/system_accent2_600</item>
+        <item name="colorOnSurface">@android:color/system_neutral1_100</item>
+        <item name="colorOutline">@android:color/system_neutral2_400</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3">

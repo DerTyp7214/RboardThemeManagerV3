@@ -43,8 +43,8 @@
                     android:id="@+id/author"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:textColor="?attr/colorSecondary"
                     android:layout_weight="1"
+                    android:textColor="?attr/colorSecondary"
                     android:textSize="13sp"
                     tools:text="Author" />
 
