@@ -20,7 +20,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 26
         targetSdk = 31
-        versionCode = 334001
+        versionCode = 334002
         versionName = "3.3.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -51,7 +51,7 @@ android {
 dependencies {
     implementation(platform("com.google.firebase:firebase-bom:28.2.0"))
     implementation("com.google.firebase:firebase-messaging-ktx:22.0.0")
-    implementation("com.google.firebase:firebase-analytics-ktx:19.0.1")
+    implementation("com.google.firebase:firebase-analytics-ktx:19.0.2")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
@@ -72,7 +72,7 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.3.1")
     implementation("androidx.fragment:fragment-ktx:1.3.6")
     implementation("com.jaredrummler:android-shell:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:19.0.1")
+    implementation("com.google.firebase:firebase-analytics:19.0.2")
     implementation("com.google.firebase:firebase-messaging:22.0.0")
     implementation("com.google.code.gson:gson:2.8.8")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")

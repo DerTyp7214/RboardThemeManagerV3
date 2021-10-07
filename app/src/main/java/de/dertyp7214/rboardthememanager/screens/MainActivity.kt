@@ -17,6 +17,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.Window
 import android.widget.FrameLayout
+import com.google.android.material.snackbar.Snackbar
 import com.skydoves.balloon.ArrowOrientation
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
@@ -76,7 +77,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "ShowToast")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -211,7 +212,7 @@ class MainActivity : AppCompatActivity() {
                         }
                     },
                     MenuItem(
-                        R.drawable.ic_creator,
+                        R.drawable.ic_theme_creator,
                         R.string.rboard_theme_creator
                     ) {
                         if (isPackageInstalled(
@@ -387,14 +388,15 @@ class MainActivity : AppCompatActivity() {
                                     ) {
                                         bottomSheetBehavior.state =
                                             BottomSheetBehavior.STATE_COLLAPSED
-                                        if (applyTheme(theme, true))
-                                            Toast.makeText(
-                                                this,
-                                                R.string.applied,
-                                                Toast.LENGTH_SHORT
+                                        if (applyTheme(theme, true)) {
+                                            Snackbar.make(
+                                                binding.fragmentContainerView,
+                                                R.string.theme_applied,
+                                                Snackbar.LENGTH_LONG
                                             )
-                                                .show()
-                                        else Toast.makeText(
+                                                .setAnchorView(bottomSheet)
+                                                .showMaterial()
+                                        } else Toast.makeText(
                                             this,
                                             R.string.error,
                                             Toast.LENGTH_SHORT

@@ -164,4 +164,7 @@
     <string name="try_fix_flags">Try to go to settings and click on \"Fix flags\"</string>
     <string name="flags_corrupted">Flags seems to be corrupted</string>
     <string name="sort_by_date">Sort by Date</string>
+    <string name="press_back_to_apply">To apply flags just press back</string>
+    <string name="sounds_applied">Sounds applied</string>
+    <string name="theme_applied">Theme applied</string>
 </resources>

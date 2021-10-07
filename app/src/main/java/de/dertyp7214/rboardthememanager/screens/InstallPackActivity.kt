@@ -61,11 +61,12 @@ class InstallPackActivity : AppCompatActivity() {
             true
         }
 
-        fab.setOnClickListener {
+        fab.setOnClickListener { _ ->
             val success = adapter.getSelected().map { it.install() }
             if (success.contains(false)) Toast.makeText(this, R.string.error, Toast.LENGTH_LONG)
-                .show()
-            else Toast.makeText(this, R.string.themes_installed, Toast.LENGTH_LONG).show()
+                .also { toast = it }.show()
+            else Toast.makeText(this, R.string.themes_installed, Toast.LENGTH_LONG)
+                .also { toast = it }.show()
             setResult(RESULT_OK)
             finish()
         }
@@ -130,5 +131,9 @@ class InstallPackActivity : AppCompatActivity() {
         recyclerview.setHasFixedSize(true)
         recyclerview.adapter = adapter
         recyclerview.addItemDecoration(MarginItemDecoration(2.dp(this), all = true))
+    }
+
+    companion object {
+        var toast: Toast? = null
     }
 }

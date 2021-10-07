@@ -9,14 +9,15 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
+import de.dertyp7214.rboardthememanager.Config.IS_MIUI
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.ChipContainer
 import de.dertyp7214.rboardthememanager.components.LayoutManager
-import de.dertyp7214.rboardthememanager.core.applyTransitions
-import de.dertyp7214.rboardthememanager.core.applyTransitionsViewCreated
-import de.dertyp7214.rboardthememanager.core.get
+import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemePack
+import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.utils.TraceWrapper
 import de.dertyp7214.rboardthememanager.utils.asyncInto
@@ -37,7 +38,7 @@ class DownloadListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_download_list, container, false)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "ShowToast")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         applyTransitionsViewCreated()
@@ -60,6 +61,21 @@ class DownloadListFragment : Fragment() {
                 if (it.resultCode == Activity.RESULT_OK) {
                     mainViewModel.setThemes()
                     mainViewModel.navigate(R.id.navigation_themes)
+                    InstallPackActivity.toast?.cancel()
+                    Snackbar.make(
+                        requireView(),
+                        R.string.themes_installed,
+                        Snackbar.LENGTH_LONG
+                    )
+                        .setAnchorView(requireActivity().findViewById(R.id.bottom_bar))
+                        .also { snackbar ->
+                            if (IS_MIUI)
+                                snackbar.setAction(
+                                    R.string.reboot
+                                ) {
+                                    "reboot".runAsCommand()
+                                }
+                        }.showMaterial()
                 }
             }
 

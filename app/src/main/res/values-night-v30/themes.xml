@@ -21,8 +21,26 @@
         <item name="materialAlertDialogTheme">
             @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
         </item>
+
         <item name="switchStyle">@style/Widget.App.Switch</item>
+        <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
+        <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView</item>
+        <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
     </style>
+
+    <style name="Widget.App.Snackbar" parent="Widget.Material3.Snackbar">
+        <item name="backgroundTint">?attr/colorBackgroundFloating</item>
+    </style>
+
+    <style name="Widget.App.SnackbarTextView" parent="Widget.Material3.Snackbar.TextView">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="Widget.App.SnackbarButton" parent="Widget.Material3.Button.TextButton.Snackbar">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">?attr/colorAccent</item>
+    </style>
+
     <style name="Widget.App.Switch" parent="Widget.Material3.CompoundButton.Switch">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
     </style>

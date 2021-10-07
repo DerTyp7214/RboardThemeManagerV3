@@ -163,4 +163,7 @@
     <string name="try_fix_flags">Próbálja meg a beállításokat, és kattintson a \"Zászlók javítása\"</string>
     <string name="flags_corrupted">Úgy tűnik, hogy a zászlók sérültek</string>
     <string name="sort_by_date">Rendezés dátum szerint</string>
+    <string name="press_back_to_apply">A zászlók alkalmazásához csak nyomja meg a vissza gombot</string>
+    <string name="sounds_applied">Hangok alkalmazva</string>
+    <string name="theme_applied">Téma alkalmazva</string>
 </resources>

@@ -27,6 +27,7 @@ import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import androidx.appcompat.app.AppCompatActivity
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.getSystemProp
 import de.dertyp7214.rboardthememanager.core.start
 import de.dertyp7214.rboardthememanager.screens.ReadMoreReadFast
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
@@ -41,7 +42,7 @@ class Preferences(
 
     private val type by lazy { intent.getStringExtra("type") }
 
-    private val usingModule = MagiskUtils.getModules().any { it.id == Config.MODULE_ID }
+    private val usingModule = MagiskUtils.isModuleInstalled(Config.MODULE_ID)
     private val infoData = mapOf(
         "theme_count" to (Config.themeCount?.toString() ?: "0"),
         "theme_path" to (if (!Config.useMagisk) Config.MAGISK_THEME_LOC else Config.THEME_LOCATION),
