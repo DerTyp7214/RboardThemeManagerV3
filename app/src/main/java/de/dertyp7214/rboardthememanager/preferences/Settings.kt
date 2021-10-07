@@ -84,9 +84,8 @@ class Settings(private val activity: Activity) : AbstractPreference() {
                 Config.useMagisk =
                     PreferenceManager.getDefaultSharedPreferences(this)
                         .getBoolean("useMagisk", false)
-                if (Config.useMagisk && !MagiskUtils.getModules()
-                        .any { module -> module.id == MODULE_ID }
-                ) MagiskUtils.installModule(this)
+                if (Config.useMagisk && !MagiskUtils.isModuleInstalled(MODULE_ID))
+                    MagiskUtils.installModule(this)
             }
         ),
         DOWNLOAD(

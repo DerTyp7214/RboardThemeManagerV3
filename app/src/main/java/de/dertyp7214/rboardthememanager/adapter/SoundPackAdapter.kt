@@ -10,12 +10,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.copyRecursively
-import de.dertyp7214.rboardthememanager.core.download
-import de.dertyp7214.rboardthememanager.core.openDialog
+import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.SoundPack
 import de.dertyp7214.rboardthememanager.utils.getSoundsDirectory
 import java.io.File
@@ -67,6 +66,17 @@ class SoundPackAdapter(
                                 deleteRecursive()
                                 SuFile(sounds.first()).parentFile
                                     ?.copyRecursively(this)
+                            }
+                            activity.findViewById<View>(R.id.bottom_bar)?.let { view ->
+                                Snackbar.make(
+                                    activity.window.decorView,
+                                    R.string.sounds_applied,
+                                    Snackbar.LENGTH_LONG
+                                ).setAnchorView(view).setAction(
+                                    R.string.reboot
+                                ) {
+                                    "reboot".runAsCommand()
+                                }.showMaterial()
                             }
                         }
                         dialog.dismiss()

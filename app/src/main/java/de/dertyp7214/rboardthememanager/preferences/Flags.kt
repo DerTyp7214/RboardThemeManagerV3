@@ -11,6 +11,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import com.google.android.material.snackbar.Snackbar
 import com.topjohnwu.superuser.io.SuFile
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
@@ -33,6 +34,7 @@ import org.json.JSONObject
 import java.io.File
 import java.util.*
 
+@SuppressLint("ShowToast")
 class Flags(val activity: Activity) : AbstractPreference() {
     enum class FILES(val filePath: String) {
         @SuppressLint("SdCardPath")
@@ -176,6 +178,11 @@ class Flags(val activity: Activity) : AbstractPreference() {
                             R.string.error,
                             Toast.LENGTH_SHORT
                         ).show()
+                        else Snackbar.make(
+                            activity.findViewById(android.R.id.content),
+                            R.string.press_back_to_apply,
+                            Snackbar.LENGTH_LONG
+                        ).showMaterial()
                         item.linkedKeys.forEach { key ->
                             preferences[key]?.let { preference ->
                                 if (preference is SwitchPreference) preference.checked = it
@@ -264,6 +271,11 @@ class Flags(val activity: Activity) : AbstractPreference() {
                             R.string.error,
                             Toast.LENGTH_SHORT
                         ).show()
+                        else Snackbar.make(
+                            activity.findViewById(android.R.id.content),
+                            R.string.press_back_to_apply,
+                            Snackbar.LENGTH_LONG
+                        ).showMaterial()
                         true
                     }
                 } else {

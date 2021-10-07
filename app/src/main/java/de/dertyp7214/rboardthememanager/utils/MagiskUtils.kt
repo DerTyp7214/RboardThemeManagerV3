@@ -1,3 +1,5 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package de.dertyp7214.rboardthememanager.utils
 
 import android.app.Activity
@@ -45,6 +47,18 @@ object MagiskUtils {
         } else ArrayList()
     }
 
+    fun getModule(moduleId: String): MagiskModule? {
+        return if (isMagiskInstalled()) {
+            val modulePath = SuFile(MODULES_PATH, moduleId)
+            val meta = SuFile(modulePath, "module.prop").parseModuleMeta()
+            MagiskModule(meta.id, modulePath, meta)
+        } else null
+    }
+
+    fun isModuleInstalled(moduleId: String): Boolean {
+        return getModule(moduleId)?.getSystemProp() != null
+    }
+
     private fun installModule(meta: ModuleMeta, files: Map<String, String?>) {
         RootUtils.runWithRoot {
             val moduleDir = SuFile(MODULES_PATH, meta.id)
@@ -64,7 +78,7 @@ object MagiskUtils {
             Pair(
                 "system.prop",
                 "# Default Theme and Theme-location\n" +
-                        "ro.com.google.ime.theme_file=veu.zip\n" +
+                        "ro.com.google.ime.theme_file=veulight.zip\n" +
                         "ro.com.google.ime.themes_dir=${Config.THEME_LOCATION}"
             ),
             Pair(Config.THEME_LOCATION, null)

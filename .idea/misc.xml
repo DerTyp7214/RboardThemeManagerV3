@@ -3,18 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/android_head.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_creator.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_download.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_download_two_tone.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_downloads_state.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_rboard.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_sounds.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_sounds_state.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_sounds_two_tone.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_style.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_style_state.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_style_two_tone.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_theme_creator.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_themes.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/small_line.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/switch_background.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/switch_thumb.xml" value="0.1765" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/switch_track.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/activity_install_pack.xml" value="0.34479166666666666" />
