@@ -152,7 +152,7 @@
     <string name="theme_pack_count">Témacsomagok száma</string>
     <string name="theme_packs">Témacsomagok</string>
     <string name="keyboard_redesign_forbid_key_shadows">Billentyűzet újratervezése tiltsa meg a kulcsárnyékokat</string>
-    <string name="none">None</string>
+    <string name="none">Egyik sem</string>
     <string name="enable_bitmoji_contextual_category_icon">Bitmoji engedélyezése</string>
     <string name="do_not_report">Ne jelentse ezt a hibát.</string>
     <string name="menu_moved">A menü most az alsó lapon található.</string>
@@ -161,4 +161,8 @@
     <string name="fix_flags_long">Törli a zászlókat, és kényszeríti a Gboard bezárását.</string>
     <string name="try_fix_flags">Próbálja meg a beállításokat, és kattintson a \"Zászlók javítása\"</string>
     <string name="flags_corrupted">Úgy tűnik, hogy a zászlók sérültek</string>
+    <string name="sort_by_date">Rendezés dátum szerint</string>
+    <string name="press_back_to_apply">A zászlók alkalmazásához csak nyomja meg a vissza gombot</string>
+    <string name="sounds_applied">Hangok alkalmazva</string>
+    <string name="theme_applied">Téma alkalmazva</string>
 </resources>
