@@ -98,6 +98,9 @@ jobs:
           message: "commit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})"
           document: app/build/outputs/apk/release/app-release.apk
 
+      - name: Send Telegram message
+        run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_TO_MAIN }}\",\"text\":\"commit:`${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Latest Android 12 Only\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-release/app-release.apk\"},{\"text\":\"Latest Android 12 and Below\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk\"}]]}}'"
+
       - name: Upload Assets
         id: upload_assets
         uses: marvinpinto/action-automatic-releases@latest
