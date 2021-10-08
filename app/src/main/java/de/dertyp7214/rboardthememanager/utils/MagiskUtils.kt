@@ -64,8 +64,12 @@ object MagiskUtils {
     fun getModule(moduleId: String): MagiskModule? {
         return if (isMagiskInstalled()) {
             val modulePath = SuFile(MODULES_PATH, moduleId)
-            val meta = SuFile(modulePath, "module.prop").parseModuleMeta()
-            MagiskModule(meta.id, modulePath, meta)
+            SuFile(modulePath, "module.prop").let {
+                if (it.exists()) {
+                    val meta = it.parseModuleMeta()
+                    MagiskModule(meta.id, modulePath, meta)
+                } else null
+            }
         } else null
     }
 

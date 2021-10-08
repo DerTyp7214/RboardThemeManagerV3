@@ -3,17 +3,13 @@ package de.dertyp7214.rboardthememanager.core
 import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
-import org.xml.sax.InputSource
 import java.io.File
-import de.dertyp7214.rboardthememanager.Application
 import android.app.Activity
 import android.content.Intent
 import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
 import de.dertyp7214.rboardthememanager.R
 import java.io.InputStream
-import java.io.StringReader
-import javax.xml.parsers.DocumentBuilderFactory
 import kotlin.text.Charsets.UTF_8
 
 fun File.parseModuleMeta(): ModuleMeta {
