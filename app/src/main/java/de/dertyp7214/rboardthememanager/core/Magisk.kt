@@ -11,7 +11,9 @@ fun ModuleMeta.getString(): String {
 
 fun MagiskModule.getSystemProp(): String? {
     return try {
-        SuFileInputStream.open(SuFile(path, "system.prop")).bufferedReader().readText()
+        val propsFile = SuFile(path, "system.prop")
+        if (propsFile.exists()) SuFileInputStream.open(propsFile).bufferedReader().readText()
+        else null
     } catch (e: Exception) {
         null
     }?.ifEmpty { null }
