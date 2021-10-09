@@ -12,7 +12,6 @@ import androidx.annotation.StringRes
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.google.android.material.snackbar.Snackbar
-import com.topjohnwu.superuser.io.SuFile
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.helpers.onCheckedChange
@@ -25,6 +24,8 @@ import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.SearchBar
+import de.dertyp7214.rboardthememanager.components.XMLEntry
+import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.screens.ShareFlags
@@ -82,6 +83,25 @@ class Flags(val activity: Activity) : AbstractPreference() {
                     ) {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
                         putExtra("type", "all_flags")
+                    }
+                }
+            }
+        ),
+        SHOW_ALL_PREFERENCES(
+            "show_all_preferences",
+            R.string.show_all_preferences,
+            R.string.show_all_preferences_long,
+            -1,
+            "",
+            TYPE.JUST_CLICK,
+            FILES.NONE,
+            onClick = {
+                Application.context?.let {
+                    PreferencesActivity::class.java.start(
+                        it
+                    ) {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        putExtra("type", "all_preferences")
                     }
                 }
             }
@@ -193,7 +213,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
                 }
                 TYPE.INT, TYPE.LONG, TYPE.FLOAT -> Preference(item.key)
                 TYPE.GROUP -> CategoryHeader(item.key)
-                TYPE.STRING -> Preference(item.key).apply {}
+                TYPE.STRING -> Preference(item.key)
                 TYPE.JUST_CLICK -> Preference(item.key).apply {
                     onClick { item.onClick(); false }
                 }
@@ -204,6 +224,33 @@ class Flags(val activity: Activity) : AbstractPreference() {
                 iconRes = item.icon.safeIcon
                 visible = item.visible && item.minSdk <= Build.VERSION.SDK_INT
                 if (item.summary == -1) summary = item.key
+                if (listOf(TYPE.INT, TYPE.LONG, TYPE.FLOAT, TYPE.STRING).contains(item.type))
+                    onClick {
+                        activity.openInputDialog(
+                            R.string.nothing,
+                            item.defaultValue.toString()
+                        ) { dialogInterface, text ->
+                            dialogInterface.dismiss()
+                            summary = text
+                            requestRebind()
+                            val xmlValue = flagsString[FILES.FLAGS]?.getValue(item.key)
+                            if (xmlValue != null) flagsString[FILES.FLAGS]?.setValue(
+                                XMLEntry(
+                                    xmlValue.name,
+                                    text,
+                                    xmlValue.type
+                                )
+                            )?.also {
+                                changes = true
+                                Snackbar.make(
+                                    activity.findViewById(android.R.id.content),
+                                    R.string.press_back_to_apply,
+                                    Snackbar.LENGTH_LONG
+                                ).showMaterial()
+                            }
+                        }
+                        false
+                    }
             }
             preferences[item.key] = pref
             builder.addPreferenceItem(pref)
@@ -288,6 +335,132 @@ class Flags(val activity: Activity) : AbstractPreference() {
                             }
                         }
                         summary = entry.value.toString()
+                        onClick {
+                            activity.openInputDialog(
+                                R.string.nothing,
+                                summary?.toString()
+                            ) { dialogInterface, text ->
+                                dialogInterface.dismiss()
+                                summary = text
+                                requestRebind()
+                                val xmlValue = flagsString[FILES.FLAGS]?.getValue(entry.key)
+                                if (xmlValue != null) flagsString[FILES.FLAGS]?.setValue(
+                                    XMLEntry(
+                                        xmlValue.name,
+                                        text,
+                                        xmlValue.type
+                                    ).setValue(text)
+                                )?.also {
+                                    changes = true
+                                    Snackbar.make(
+                                        activity.findViewById(android.R.id.content),
+                                        R.string.press_back_to_apply,
+                                        Snackbar.LENGTH_LONG
+                                    ).showMaterial()
+                                }
+                            }
+                            false
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    class AllPreferences(
+        private val activity: Activity,
+        private val requestReload: () -> Unit
+    ) : AbstractPreference() {
+
+        private var filter: String = ""
+        private var onlyDisabled: Boolean = false
+
+        private val searchBar = SearchBar(activity).apply {
+            setOnSearchListener {
+                filter = it
+                requestReload()
+            }
+            setOnCloseListener {
+                filter = ""
+                requestReload()
+            }
+        }
+
+        override fun getExtraView(): View = searchBar
+
+        override fun onBackPressed(callback: () -> Unit) {
+            callback()
+        }
+
+        override fun preferences(builder: PreferenceScreen.Builder) {
+            val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
+            getCurrentXmlValues(FILES.GBOARD_PREFERENCES.filePath, true).filter {
+                (filter.isEmpty() || it.key.contains(
+                    filter,
+                    true
+                )) && onlyDisabled.let { b -> if (b) it.value is Boolean && it.value == false else true }
+            }.forEach { entry ->
+                prefs.edit { remove(entry.key) }
+                if (entry.value is Boolean) builder.switch(entry.key) {
+                    title = entry.key.split("_").joinToString(" ") {
+                        it.replaceFirstChar { char ->
+                            if (char.isLowerCase()) char.titlecase(
+                                Locale.getDefault()
+                            ) else char.toString()
+                        }
+                    }
+                    summary = entry.key
+                    defaultValue = entry.value as Boolean
+                    onCheckedChange {
+                        if (!setValue(it, entry.key, FILES.GBOARD_PREFERENCES)) Toast.makeText(
+                            activity,
+                            R.string.error,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        else Snackbar.make(
+                            activity.findViewById(android.R.id.content),
+                            R.string.press_back_to_apply,
+                            Snackbar.LENGTH_LONG
+                        ).showMaterial()
+                        true
+                    }
+                } else {
+                    builder.pref(entry.key) {
+                        title = entry.key.split("_").joinToString(" ") {
+                            it.replaceFirstChar { char ->
+                                if (char.isLowerCase()) char.titlecase(
+                                    Locale.getDefault()
+                                ) else char.toString()
+                            }
+                        }
+                        summary = entry.value.toString()
+                        onClick {
+                            activity.openInputDialog(
+                                R.string.nothing,
+                                summary?.toString()
+                            ) { dialogInterface, text ->
+                                dialogInterface.dismiss()
+                                summary = text
+                                requestRebind()
+                                val xmlValue =
+                                    flagsString[FILES.GBOARD_PREFERENCES]?.getValue(entry.key)
+                                if (xmlValue != null) flagsString[FILES.GBOARD_PREFERENCES]?.setValue(
+                                    XMLEntry(
+                                        xmlValue.name,
+                                        text,
+                                        xmlValue.type
+                                    ).setValue(text)
+                                )?.also {
+                                    changes = true
+                                    Snackbar.make(
+                                        activity.findViewById(android.R.id.content),
+                                        R.string.press_back_to_apply,
+                                        Snackbar.LENGTH_LONG
+                                    ).showMaterial()
+                                }
+                            }
+                            false
+                        }
                     }
                 }
             }
@@ -298,7 +471,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
         private var changes: Boolean = false
 
         private val flags = arrayListOf<FlagItem>()
-        private var flagsString: EnumMap<FILES, String> = EnumMap(FILES::class.java)
+        private var flagsString: EnumMap<FILES, XMLFile> = EnumMap(FILES::class.java)
 
         fun getFlagItems(context: Context, refresh: Boolean = false): List<FlagItem> {
             if (!refresh && flags.isNotEmpty()) return flags
@@ -380,10 +553,10 @@ class Flags(val activity: Activity) : AbstractPreference() {
 
         @SuppressLint("SdCardPath")
         private fun getCurrentXmlValues(file: String, cached: Boolean = false): Map<String, Any> {
-            return SuFile(file).readXML(
-                if (cached) FILES.values().find { it.filePath == file }?.let { flagsString[it] }
-                else null
-            )
+            val xmlFileName = FILES.values().find { it.filePath == file }
+            val xmlFile = flagsString[xmlFileName]
+            return if (cached && xmlFile != null) xmlFile.simpleMap()
+            else XMLFile(file).also { flagsString[xmlFileName] = it }.simpleMap()
         }
 
         @SuppressLint("SdCardPath")
@@ -391,10 +564,9 @@ class Flags(val activity: Activity) : AbstractPreference() {
             if (!changes) return false
             changes = false
             FILES.values().filter { it != FILES.NONE }.forEach { file ->
-                val fileName = file.filePath
                 flagsString[file]?.let {
-                    if (file == FILES.FLAGS) GboardUtils.updateCurrentFlags(it)
-                    SuFile(fileName).writeFile(it.trim())
+                    if (file == FILES.FLAGS) GboardUtils.updateCurrentFlags(it.toString())
+                    it.writeFile()
                 }
             }
 
@@ -405,17 +577,14 @@ class Flags(val activity: Activity) : AbstractPreference() {
         fun setUpFlags() {
             changes = false
             FILES.values().filter { it != FILES.NONE }.forEach { file ->
-                val fileName = file.filePath
-                flagsString[file] = SuFile(fileName).openStream()?.use {
-                    it.bufferedReader().readText()
-                } ?: "<map></map>"
+                flagsString[file] = XMLFile(file.filePath)
             }
         }
 
         fun <T> setValue(value: T, key: String, file: FILES): Boolean {
             if (file == FILES.NONE) return true
             changes = true
-            flagsString[file] = flagsString[file]?.setXmlValue(value, key)
+            flagsString[file]?.setValue(XMLEntry.parse(key, value))
             return true
         }
     }

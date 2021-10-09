@@ -166,4 +166,7 @@
     <string name="press_back_to_apply">To apply flags just press back</string>
     <string name="sounds_applied">Sounds applied</string>
     <string name="theme_applied">Theme applied</string>
+    <string name="all_preferences">All preferences</string>
+    <string name="show_all_preferences">Show all preferences</string>
+    <string name="show_all_preferences_long">Show all Gboard preferences</string>
 </resources>

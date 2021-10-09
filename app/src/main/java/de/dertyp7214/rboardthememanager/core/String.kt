@@ -120,11 +120,21 @@ fun String.readXML(): Map<String, Any> {
                             "long" -> it.toLong()
                             "boolean" -> it.toBooleanStrict()
                             "float" -> it.toFloat()
-                            "integer" -> it.toInt()
+                            "double" -> it.toDouble()
+                            "integer", "int" -> it.toInt()
                             else -> it
                         }
                     }
                     if (name != null) output[name] = value ?: item.textContent ?: ""
+                } else if (item.nodeName == "set") {
+                    val name = item.attributes?.getNamedItem("name")?.nodeValue
+                    val value = item.childNodes?.toList()?.filter { !it.nodeName.startsWith("#") }
+                        ?.map {
+                            if (it.nodeName == "string") "<string>${it.textContent}</string>" else "<${it.nodeName} value=\"${
+                                item.attributes?.getNamedItem("value")?.nodeValue
+                            }\" />"
+                        }?.toSet() ?: setOf()
+                    if (name != null) output[name] = value
                 }
             }
     } catch (e: Exception) {
