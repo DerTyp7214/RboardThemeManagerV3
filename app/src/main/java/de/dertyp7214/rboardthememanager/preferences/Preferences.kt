@@ -75,6 +75,10 @@ class Preferences(
                 Flags.setUpFlags()
                 preference = Flags.AllFlags(activity, onRequestReload)
             }
+            "all_preferences" -> {
+                Flags.setUpFlags()
+                preference = Flags.AllPreferences(activity, onRequestReload)
+            }
             "repos" -> {
                 preference = Repos(activity, onRequestReload)
             }
@@ -89,7 +93,7 @@ class Preferences(
             "info" -> callback()
             "settings" -> callback()
             "repos" -> preference.onBackPressed(callback)
-            "flags", "all_flags" -> {
+            "flags", "all_flags", "all_preferences" -> {
                 if (Flags.applyChanges()) {
                     Toast.makeText(activity, R.string.flags_applied, Toast.LENGTH_SHORT).show()
                     AppWidgetManager.getInstance(activity).let { appWidgetManager ->
@@ -110,7 +114,7 @@ class Preferences(
         @RequiresApi(Build.VERSION_CODES.R)
         get() {
             return when (type) {
-                "info", "settings", "flags", "all_flags", "repos" -> screen(
+                "info", "settings", "flags", "all_flags", "all_preferences", "repos" -> screen(
                     activity,
                     preference::preferences
                 )
@@ -127,6 +131,7 @@ class Preferences(
                 "settings" -> activity.getString(R.string.settings)
                 "flags" -> activity.getString(R.string.flags)
                 "all_flags" -> activity.getString(R.string.all_flags)
+                "all_preferences" -> activity.getString(R.string.all_preferences)
                 "repos" -> activity.getString(R.string.repos)
                 else -> ""
             }
@@ -141,7 +146,7 @@ class Preferences(
             "repos" -> {
                 if (preference is AbstractMenuPreference) preference.loadMenu(menuInflater, menu)
             }
-            "settings", "flags", "all_flags" -> {
+            "settings", "flags", "all_flags", "all_preferences" -> {
             }
         }
     }
@@ -187,7 +192,7 @@ class Preferences(
                 if (preference is AbstractMenuPreference) preference.onMenuClick(menuItem)
                 else false
             }
-            "settings", "flags", "all_flags" -> false
+            "settings", "flags", "all_flags", "all_preferences" -> false
             else -> false
         }
     }

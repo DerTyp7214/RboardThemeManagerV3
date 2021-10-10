@@ -166,4 +166,7 @@
     <string name="press_back_to_apply">A zászlók alkalmazásához csak nyomja meg a vissza gombot</string>
     <string name="sounds_applied">Hangok alkalmazva</string>
     <string name="theme_applied">Téma alkalmazva</string>
+    <string name="all_preferences">Minden beállítás</string>
+    <string name="show_all_preferences">Az összes beállítás megjelenítése</string>
+    <string name="show_all_preferences_long">Az összes Gboard -beállítás megjelenítése</string>
 </resources>

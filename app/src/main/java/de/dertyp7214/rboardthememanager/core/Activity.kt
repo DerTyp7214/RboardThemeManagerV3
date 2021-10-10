@@ -147,11 +147,13 @@ fun Activity.openShareThemeDialog(
 @SuppressLint("InflateParams")
 fun Activity.openInputDialog(
     @StringRes hint: Int,
+    value: String? = null,
     negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },
     positive: (dialogInterface: DialogInterface, text: String) -> Unit
 ) = openDialog(R.layout.input_dialog, false) { dialog ->
     val input = findViewById<EditText>(R.id.editText)
     input.setHint(hint)
+    if (value != null) input.setText(value)
 
     findViewById<Button>(R.id.ok)?.setOnClickListener {
         positive(dialog, input?.text?.toString() ?: "")
