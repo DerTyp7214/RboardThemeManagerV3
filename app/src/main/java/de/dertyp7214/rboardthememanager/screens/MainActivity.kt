@@ -6,10 +6,8 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.ACTION_SEND
-import android.content.Intent.ACTION_VIEW
 import android.graphics.RenderEffect
 import android.graphics.Shader
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -55,7 +53,6 @@ import de.dertyp7214.rboardthememanager.data.MenuItem
 import de.dertyp7214.rboardthememanager.databinding.ActivityMainBinding
 import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.utils.*
-import de.dertyp7214.rboardthememanager.utils.PackageUtils.isPackageInstalled
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils.getSystemAutoTheme
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 import dev.chrisbanes.insetter.applyInsetter
@@ -173,14 +170,14 @@ class MainActivity : AppCompatActivity() {
 
                 val mainMenuItems = arrayListOf(
                     MenuItem(
-                        R.drawable.ic_info,
-                        R.string.info
+                        R.drawable.ic_about,
+                        R.string.about
                     ) {
                         PreferencesActivity::class.java.start(
                             this,
                             closeBottomSheetBehaviorLauncher
                         ) {
-                            putExtra("type", "info")
+                            putExtra("type", "about")
                         }
                     },
                     MenuItem(
@@ -201,8 +198,8 @@ class MainActivity : AppCompatActivity() {
                         ) {
                             putExtra("type", "flags")
                         }
-                    },
-                    MenuItem(
+                    }
+                    /*MenuItem(
                         R.drawable.ic_theme_creator,
                         R.string.rboard_theme_creator
                     ) {
@@ -218,7 +215,7 @@ class MainActivity : AppCompatActivity() {
                                 Uri.parse("https://github.com/DerTyp7214/RboardThemeCreator#readme")
                             )
                         )
-                    }
+                    }*/
                 )
 
                 val menuItems = ArrayList(mainMenuItems)

@@ -3,7 +3,6 @@ package de.dertyp7214.rboardthememanager.core
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.DialogInterface
-import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.RenderEffect
 import android.graphics.Shader
@@ -15,6 +14,8 @@ import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import androidx.browser.customtabs.CustomTabColorSchemeParams
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -39,7 +40,19 @@ operator fun <T : ViewModel> FragmentActivity.get(modelClass: Class<T>): T =
     run(::ViewModelProvider)[modelClass]
 
 fun Activity.openUrl(url: String) {
-    startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+    CustomTabsIntent.Builder()
+        .setShowTitle(true)
+        .setDefaultColorSchemeParams(
+            CustomTabColorSchemeParams
+                .Builder()
+                .setToolbarColor(getAttr(R.attr.colorBackgroundFloating))
+                .setNavigationBarColor(getAttr(R.attr.colorBackgroundFloating))
+                .setSecondaryToolbarColor(getAttr(R.attr.colorBackgroundFloating))
+                .setNavigationBarDividerColor(getAttr(R.attr.colorBackgroundFloating))
+                .build()
+        )
+        .build()
+        .launchUrl(this, Uri.parse(url))
 }
 
 fun Activity.openDialog(

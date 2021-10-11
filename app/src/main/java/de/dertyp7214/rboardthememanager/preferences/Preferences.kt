@@ -79,6 +79,9 @@ class Preferences(
             "repos" -> {
                 preference = Repos(activity, onRequestReload)
             }
+            "about" -> {
+                preference = About(activity)
+            }
             else -> {
                 preference = this
             }
@@ -89,7 +92,7 @@ class Preferences(
         when (type) {
             "info" -> callback()
             "settings" -> callback()
-            "repos" -> preference.onBackPressed(callback)
+            "repos", "about" -> preference.onBackPressed(callback)
             "flags", "all_flags", "all_preferences" -> {
                 if (Flags.applyChanges()) {
                     Toast.makeText(activity, R.string.flags_applied, Toast.LENGTH_SHORT).show()
@@ -110,7 +113,7 @@ class Preferences(
     val preferences: PreferenceScreen
         get() {
             return when (type) {
-                "info", "settings", "flags", "all_flags", "all_preferences", "repos" -> screen(
+                "info", "settings", "flags", "all_flags", "all_preferences", "repos", "about" -> screen(
                     activity,
                     preference::preferences
                 )
@@ -127,6 +130,7 @@ class Preferences(
                 "all_flags" -> activity.getString(R.string.all_flags)
                 "all_preferences" -> activity.getString(R.string.all_preferences)
                 "repos" -> activity.getString(R.string.repos)
+                "about" -> activity.getString(R.string.about)
                 else -> ""
             }
         }
@@ -140,7 +144,7 @@ class Preferences(
             "repos" -> {
                 if (preference is AbstractMenuPreference) preference.loadMenu(menuInflater, menu)
             }
-            "settings", "flags", "all_flags", "all_preferences" -> {
+            "settings", "flags", "all_flags", "all_preferences", "about" -> {
             }
         }
     }
@@ -186,7 +190,7 @@ class Preferences(
                 if (preference is AbstractMenuPreference) preference.onMenuClick(menuItem)
                 else false
             }
-            "settings", "flags", "all_flags", "all_preferences" -> false
+            "settings", "flags", "all_flags", "all_preferences", "about" -> false
             else -> false
         }
     }
