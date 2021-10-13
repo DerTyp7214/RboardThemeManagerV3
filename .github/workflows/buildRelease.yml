@@ -103,7 +103,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: latest-release
           prerelease: false
-          title: Release Build
+          title: Rboard Manager Release ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }}
           files: |
             app/build/outputs/apk/release/app-release.apk
             app/build/outputs/apk/release/output-metadata.json
@@ -122,7 +122,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
           prerelease: false
-          title: Release Build
+          title: Rboard Manager Release ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }}
           files: |
             app/build/outputs/apk/release/app-release.apk
             app/build/outputs/apk/release/output-metadata.json
