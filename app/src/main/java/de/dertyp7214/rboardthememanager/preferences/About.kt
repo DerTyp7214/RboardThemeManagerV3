@@ -88,6 +88,14 @@ class About(private val activity: AppCompatActivity) :
         builder.categoryHeader("links") {
             titleRes = R.string.links
         }
+        builder.pref("github_repo") {
+            titleRes = R.string.github_repo
+            iconRes = R.drawable.ic_github
+            onClick {
+                activity.openUrl(activity.getString(R.string.github_repo_url))
+                false
+            }
+        }
         builder.pref("telegram_channel") {
             titleRes = R.string.telegram_channel
             iconRes = R.drawable.ic_tg

@@ -179,4 +179,5 @@
     <string name="telegram_group">Telegram Group</string>
     <string name="about">About</string>
     <string name="xda_thread">XDA Thread</string>
+    <string name="github_repo">GitHub Repo</string>
 </resources>

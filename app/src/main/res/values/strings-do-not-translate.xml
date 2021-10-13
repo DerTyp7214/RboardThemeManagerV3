@@ -24,4 +24,5 @@
     <string name="dan_image">https://avatars.githubusercontent.com/u/32078304?v=4</string>
     <string name="dan_github">https://github.com/Magisk-Modules-Repo/HideNavBar</string>
     <string name="xda_thread_url">https://forum.xda-developers.com/t/app-rboard-theme-manager.4331445</string>
+    <string name="github_repo_url">https://github.com/DerTyp7214/RboardThemeManagerV3</string>
 </resources>
