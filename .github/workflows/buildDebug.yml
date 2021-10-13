@@ -111,7 +111,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: latest-debug
           prerelease: true
-          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }}
+          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
           files: |
             app/build/outputs/apk/debug/app-debug.apk
             app/build/outputs/apk/debug/output-metadata.json
@@ -123,7 +123,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-debug
           prerelease: true
-          title: Development Build
+          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
           files: |
             app/build/outputs/apk/debug/app-debug.apk
             app/build/outputs/apk/debug/output-metadata.json
