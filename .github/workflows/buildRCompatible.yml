@@ -108,7 +108,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: latest-rCompatible
           prerelease: true
-          title: Android R Compatible
+          title: Rboard Manager Android R Compatible ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
           files: |
             app/build/outputs/apk/release/app-release.apk
             app/build/outputs/apk/release/output-metadata.json
@@ -120,7 +120,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-rCompatible
           prerelease: true
-          title: Android R Compatible
+          title: Rboard Manager Android R Compatible ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
           files: |
             app/build/outputs/apk/release/app-release.apk
             app/build/outputs/apk/release/output-metadata.json

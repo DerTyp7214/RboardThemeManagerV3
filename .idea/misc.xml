@@ -35,10 +35,18 @@
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/layout/theme_grid_item_single.xml" value="0.2957427536231884" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/menu_downloads.xml" value="0.371875" />
         <entry key="..\:/AKOS/RboardThemeManagerV3/app/src/main/res/menu/navigation.xml" value="0.371875" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_about.xml" value="0.1" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_github.xml" value="0.332" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_groups.xml" value="0.1" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_info.xml" value="0.1" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_magisk.xml" value="0.1" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_person.xml" value="0.1" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_tg.xml" value="0.1" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_xda.xml" value="0.1" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK" />
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>

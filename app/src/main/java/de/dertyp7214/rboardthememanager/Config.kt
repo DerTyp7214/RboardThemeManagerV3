@@ -1,5 +1,6 @@
 package de.dertyp7214.rboardthememanager
 
+import android.graphics.drawable.Drawable
 import de.dertyp7214.rboardthememanager.core.getSystemProperty
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 

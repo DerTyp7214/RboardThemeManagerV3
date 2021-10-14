@@ -78,7 +78,7 @@ class Settings(private val activity: Activity) : AbstractPreference() {
             "useMagisk",
             R.string.use_magisk,
             R.string.gboard_magisk,
-            R.drawable.ic_keyboard_theme,
+            R.drawable.ic_magisk,
             false,
             TYPE.BOOLEAN,
             listOf(),
@@ -97,6 +97,22 @@ class Settings(private val activity: Activity) : AbstractPreference() {
             -1,
             "",
             TYPE.GROUP
+        ),
+        INFO(
+            "info",
+            R.string.info,
+            -1,
+            R.drawable.ic_info,
+            "",
+            TYPE.STRING,
+            listOf(), {
+                Application.context?.let {
+                    PreferencesActivity::class.java.start(it) {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        putExtra("type", "info")
+                    }
+                }
+            }
         ),
         REPOS(
             "repos",

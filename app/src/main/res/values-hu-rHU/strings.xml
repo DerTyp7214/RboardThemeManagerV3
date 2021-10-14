@@ -169,4 +169,15 @@
     <string name="all_preferences">Minden beállítás</string>
     <string name="show_all_preferences">Az összes beállítás megjelenítése</string>
     <string name="show_all_preferences_long">Az összes Gboard -beállítás megjelenítése</string>
+    <string name="team">Csapat</string>
+    <string name="owner_themer">Tulajdonos &amp; Themer</string>
+    <string name="developer_themer">Fejlesztő &amp; Themer</string>
+    <string name="developer">Vezető fejlesztő</string>
+    <string name="moderator">Csoportmoderátor</string>
+    <string name="links">Linkek</string>
+    <string name="telegram_channel">"Telegram Csatorna "</string>
+    <string name="telegram_group">Telegram csoport</string>
+    <string name="about">Alkalmazásról</string>
+    <string name="xda_thread">XDA Thread</string>
+    <string name="github_repo">GitHub Könyvtár</string>
 </resources>

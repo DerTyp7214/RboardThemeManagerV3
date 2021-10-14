@@ -181,14 +181,14 @@ class MainActivity : AppCompatActivity() {
 
                 val mainMenuItems = arrayListOf(
                     MenuItem(
-                        R.drawable.ic_info,
-                        R.string.info
+                        R.drawable.ic_about,
+                        R.string.about
                     ) {
                         PreferencesActivity::class.java.start(
                             this,
                             closeBottomSheetBehaviorLauncher
                         ) {
-                            putExtra("type", "info")
+                            putExtra("type", "about")
                         }
                     },
                     MenuItem(
@@ -210,24 +210,24 @@ class MainActivity : AppCompatActivity() {
                         ) {
                             putExtra("type", "flags")
                         }
-                    },
-                    MenuItem(
-                        R.drawable.ic_theme_creator,
-                        R.string.rboard_theme_creator
-                    ) {
-                        if (isPackageInstalled(
-                                Config.RBOARD_THEME_CREATOR_PACKAGE_NAME,
-                                packageManager
-                            )
-                        )
-                            startActivity(packageManager.getLaunchIntentForPackage(Config.RBOARD_THEME_CREATOR_PACKAGE_NAME))
-                        else startActivity(
-                            Intent(
-                                ACTION_VIEW,
-                                Uri.parse("https://github.com/DerTyp7214/RboardThemeCreator#readme")
-                            )
-                        )
                     }
+                    /*MenuItem(
+                       R.drawable.ic_theme_creator,
+                       R.string.rboard_theme_creator
+                   ) {
+                       if (isPackageInstalled(
+                               Config.RBOARD_THEME_CREATOR_PACKAGE_NAME,
+                               packageManager
+                           )
+                       )
+                           startActivity(packageManager.getLaunchIntentForPackage(Config.RBOARD_THEME_CREATOR_PACKAGE_NAME))
+                       else startActivity(
+                           Intent(
+                               ACTION_VIEW,
+                               Uri.parse("https://github.com/DerTyp7214/RboardThemeCreator#readme")
+                           )
+                       )
+                   }*/
                 )
 
                 val menuItems = ArrayList(mainMenuItems)

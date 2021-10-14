@@ -170,4 +170,15 @@
     <string name="all_preferences">All preferences</string>
     <string name="show_all_preferences">Show all preferences</string>
     <string name="show_all_preferences_long">Show all Gboard preferences</string>
+    <string name="team">Team</string>
+    <string name="owner_themer">Owner &amp; Themer</string>
+    <string name="developer_themer">Developer &amp; Themer</string>
+    <string name="developer">Lead Developer</string>
+    <string name="moderator">Group Moderator</string>
+    <string name="links">Links</string>
+    <string name="telegram_channel">Telegram Channel</string>
+    <string name="telegram_group">Telegram Group</string>
+    <string name="about">About</string>
+    <string name="xda_thread">XDA Thread</string>
+    <string name="github_repo">GitHub Repo</string>
 </resources>
