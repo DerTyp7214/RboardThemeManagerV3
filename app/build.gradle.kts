@@ -20,8 +20,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 31
-        versionCode = 335002
-        versionName = "3.3.5"
+        versionCode = 336000
+        versionName = "3.3.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -87,6 +87,6 @@ dependencies {
     implementation("de.dertyp7214:PreferencesPlus:1.1")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.0.3")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.0.4")
     implementation(kotlin("reflect", kotlinVersion))
 }
