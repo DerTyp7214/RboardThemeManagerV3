@@ -134,7 +134,6 @@
     <string name="gboard_magisk">Használja a Magisk Modult a témák Gboardba való betöltése helyett</string>
     <string name="use_magisk">Magisk használata</string>
     <string name="gboard">Gboard használata</string>
-    <string name="app_updated">Az alkalmazás frissítve</string>
     <string name="show_only_disabled">Csak a letiltott zászlók megjelenítése</string>
     <string name="share_flags">Zászlók megosztása</string>
     <string name="share_flags_title">Zászlók megosztása (%o)</string>
@@ -175,8 +174,8 @@
     <string name="developer">Vezető fejlesztő</string>
     <string name="moderator">Csoportmoderátor</string>
     <string name="links">Linkek</string>
-    <string name="telegram_channel">"Telegram Csatorna "</string>
-    <string name="telegram_group">Telegram csoport</string>
+    <string name="telegram_channel">Telegram Csatorna</string>
+    <string name="telegram_group">Telegram Csoport</string>
     <string name="about">Alkalmazásról</string>
     <string name="xda_thread">XDA Thread</string>
     <string name="github_repo">GitHub Könyvtár</string>

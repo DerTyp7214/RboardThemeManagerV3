@@ -2,6 +2,7 @@
 <resources translatable="false">
     <string name="app_name">Rboard Theme Manager V3</string>
 
+    <string name="app_updated">App updated</string>
     <string name="pref_gboard">Gboard</string>
     <string name="magisk">Magisk</string>
     <string name="nothing" />
