@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search">Поиск</string>
-
     <string name="title_themes">Темы</string>
     <string name="title_downloads">Загрузки</string>
     <string name="title_sounds">Звуки</string>
@@ -28,7 +28,6 @@
     <string name="delete_theme">Удалить тему</string>
     <string name="q_delete_theme">Вы хотите удалить эту тему?</string>
     <string name="theme_deleted">Тема удалена</string>
-
     <string name="info">Инфо</string>
     <string name="theme_count">Список тем</string>
     <string name="theme_path">Путь к темам</string>
@@ -157,4 +156,27 @@
     <string name="enable_bitmoji_contextual_category_icon">Включить Bitmoji</string>
     <string name="do_not_report">Не сообщайте об этой ошибке.</string>
     <string name="menu_moved">Меню теперь находится на нижнем листе.</string>
+    <string name="fix_flags">Fix flags</string>
+    <string name="fix_flags_long">Deletes flags and force closed gboard.</string>
+    <string name="flags_fixed">Flags fixed</string>
+    <string name="try_fix_flags">Try to go to settings and click on \"Fix flags\"</string>
+    <string name="flags_corrupted">Flags seems to be corrupted</string>
+    <string name="sort_by_date">Sort by Date</string>
+    <string name="press_back_to_apply">To apply flags just press back</string>
+    <string name="sounds_applied">Sounds applied</string>
+    <string name="theme_applied">Theme applied</string>
+    <string name="all_preferences">All preferences</string>
+    <string name="show_all_preferences">Show all preferences</string>
+    <string name="show_all_preferences_long">Show all Gboard preferences</string>
+    <string name="team">Team</string>
+    <string name="owner_themer">Owner &amp; Themer</string>
+    <string name="developer_themer">Developer &amp; Themer</string>
+    <string name="developer">Lead Developer</string>
+    <string name="moderator">Group Moderator</string>
+    <string name="links">Links</string>
+    <string name="telegram_channel">Telegram Channel</string>
+    <string name="telegram_group">Telegram Group</string>
+    <string name="about">About</string>
+    <string name="xda_thread">XDA Thread</string>
+    <string name="github_repo">GitHub Repo</string>
 </resources>
