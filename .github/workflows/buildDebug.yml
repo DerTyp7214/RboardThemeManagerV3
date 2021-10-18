@@ -87,6 +87,9 @@ jobs:
           name: Debug Artifact
           path: app/build/outputs/apk/debug/app-debug.apk
 
+      - name: Print json
+        run: echo ${{ toJSON(github.event.head_commit) }}
+
       - name: Send Notification
         uses: fjogeleit/http-request-action@master
         with:
