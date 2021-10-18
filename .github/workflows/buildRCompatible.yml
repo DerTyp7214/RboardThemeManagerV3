@@ -14,6 +14,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.4
 
+      - name: Get Commit Message
+        id: commitMessage
+        run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=json::${IN%%$'\n'*}"
+
       - name: Setup JDK
         uses: actions/setup-java@v1
         with:
@@ -57,6 +61,9 @@ jobs:
           content="${content//$'\r'/'%0D'}"
           echo "::set-output name=json::$content"
 
+      - name: List files
+        run: ls app/build/outputs/apk/release
+
       - name: Sign artifact
         id: signArtifact
         uses: r0adkll/sign-android-release@v1
@@ -81,13 +88,16 @@ jobs:
           name: Release artifact
           path: app/build/outputs/apk/release/app-release.apk
 
+      - name: Print json
+        run: echo ${{ github.event.head_commit }}
+
       - name: Send Notification
         uses: fjogeleit/http-request-action@master
         with:
           url: 'https://fcm.googleapis.com/fcm/send'
           method: 'POST'
           customHeaders: '{"Authorization":"key=${{ secrets.FCM_KEY }}"}'
-          data: '{"to": "/topics/update-v3-r-release","data": {"version": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},"type": "update","notification": {"body": "Update available. ${{ github.event.head_commit.message }}","title": "Update"}}}'
+          data: '{"to": "/topics/update-v3-r-release","data": {"version": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},"type": "update","notification": {"body": "Update available. ${{ steps.commitMessage.outputs.message }}","title": "Update"}}}'
 
       - name: Send Telegram message
         uses: appleboy/telegram-action@master
