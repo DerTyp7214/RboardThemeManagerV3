@@ -1,10 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search">Поиск</string>
-
     <string name="title_themes">Темы</string>
     <string name="title_downloads">Загрузки</string>
     <string name="title_sounds">Звуки</string>
-    <string name="error">Упс!</string>
+    <string name="error">Ууупс!</string>
     <string name="update_ready">Обновление готово, хотите установить?</string>
     <string name="update">Обновление</string>
     <string name="install_gboard">Хотите установить Gboard?</string>
@@ -28,7 +28,6 @@
     <string name="delete_theme">Удалить тему</string>
     <string name="q_delete_theme">Вы хотите удалить эту тему?</string>
     <string name="theme_deleted">Тема удалена</string>
-
     <string name="info">Инфо</string>
     <string name="theme_count">Список тем</string>
     <string name="theme_path">Путь к темам</string>
@@ -153,8 +152,31 @@
     <string name="theme_pack_count">Количество пакетов тем</string>
     <string name="theme_packs">Тематические пакеты</string>
     <string name="keyboard_redesign_forbid_key_shadows">Редизайн клавиатуры Запретить тени клавиш</string>
-    <string name="none">None</string>
+    <string name="none">Нет</string>
     <string name="enable_bitmoji_contextual_category_icon">Включить Bitmoji</string>
     <string name="do_not_report">Не сообщайте об этой ошибке.</string>
     <string name="menu_moved">Меню теперь находится на нижнем листе.</string>
+    <string name="fix_flags">Исправить флаги</string>
+    <string name="fix_flags_long">Удаляет флаги и заставляет закрытую доску.</string>
+    <string name="flags_fixed">Фиксированные флаги</string>
+    <string name="try_fix_flags">Попробуйте перейти к настройкам и нажать на \"Исправить флага\"</string>
+    <string name="flags_corrupted">Флаги повреждены</string>
+    <string name="sort_by_date">Сортировать по дате</string>
+    <string name="press_back_to_apply">Для применения флагов просто нажмите кнопку назад</string>
+    <string name="sounds_applied">Звуки применены</string>
+    <string name="theme_applied">Тема применена</string>
+    <string name="all_preferences">Все настройки</string>
+    <string name="show_all_preferences">Показать все настройки</string>
+    <string name="show_all_preferences_long">Показать все настройки Gboard</string>
+    <string name="team">Команда</string>
+    <string name="owner_themer">Владелец &amp; Тематика</string>
+    <string name="developer_themer">Разработчик &amp; Тематика</string>
+    <string name="developer">Ведущий разработчик</string>
+    <string name="moderator">Модератор групп</string>
+    <string name="links">Ссылки</string>
+    <string name="telegram_channel">Телеграмма канала</string>
+    <string name="telegram_group">Группа Telegram</string>
+    <string name="about">О программе</string>
+    <string name="xda_thread">Тема XDA</string>
+    <string name="github_repo">GitHub Repo</string>
 </resources>
