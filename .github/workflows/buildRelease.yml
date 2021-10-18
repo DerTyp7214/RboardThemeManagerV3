@@ -85,6 +85,9 @@ jobs:
           path: app/build/outputs/apk/release/app-release.apk
 
 
+      - name: Print json
+        run: echo ${{ github.event.head_commit }}
+
       - name: Send Notification
         uses: fjogeleit/http-request-action@master
         with:
