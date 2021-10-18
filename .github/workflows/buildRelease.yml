@@ -14,6 +14,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.3.4
 
+      - name: Get Commit Message
+        id: commitMessage
+        run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=json::${IN%%$'\n'*}"
+
       - name: Setup JDK
         uses: actions/setup-java@v1
         with:
@@ -94,7 +98,7 @@ jobs:
           url: 'https://fcm.googleapis.com/fcm/send'
           method: 'POST'
           customHeaders: '{"Authorization":"key=${{ secrets.FCM_KEY }}"}'
-          data: '{"to": "/topics/update-v3-release","data": {"version": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},"type": "update","notification": {"body": "Update available. ${{ github.event.head_commit.message }}","title": "Update"}}}'
+          data: '{"to": "/topics/update-v3-release","data": {"version": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},"type": "update","notification": {"body": "Update available. ${{ steps.commitMessage.outputs.message }}","title": "Update"}}}'
 
       - name: Send Telegram message
         run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_TO_MAIN }}\",\"text\":\"commit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Latest Android 12 Only\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-release/app-release.apk\"}],[{\"text\":\"Latest Android 12 and Below\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk\"}]]}}'"
