@@ -1,3 +1,5 @@
+@file:Suppress("SpellCheckingInspection")
+
 import org.jetbrains.kotlin.config.KotlinCompilerVersion
 
 plugins {
@@ -20,7 +22,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 31
-        versionCode = 336000
+        versionCode = 336001
         versionName = "3.3.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -85,6 +87,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.12.0")
     kapt("com.github.bumptech.glide:compiler:4.12.0")
     implementation("de.dertyp7214:PreferencesPlus:1.1")
+    implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.0.4")
