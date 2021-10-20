@@ -20,11 +20,11 @@ jobs:
           mkdir -p .tmp
           curl -LsS https://raw.githubusercontent.com/AkosPaha/AkosPaha/main/PULL_REQUEST_TEMPLATE.md -o .tmp/PULL_REQUEST_TEMPLATE.md
 
-
       - name: Create Pull Request
         uses: devops-infra/action-pull-request@v0.4.2
         with:
           github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          template: .tmp/PULL_REQUEST_TEMPLATE.md
           source_branch: rCompatible
           target_branch: staging_rCompatible
           title: ${{ github.event.commits[0].message }}
