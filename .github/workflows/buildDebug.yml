@@ -3,6 +3,13 @@ name: Build Debug
 on:
   push:
     branches: [ staging ]
+    paths:
+      - 'app/**'
+      - 'gradle/**'
+      - 'build.gradle.kts'
+      - 'gradle.properties'
+      - 'settings.gradle.kts'
+      - '.github/workflows/buildDebug.yml'
 
 jobs:
   build:
