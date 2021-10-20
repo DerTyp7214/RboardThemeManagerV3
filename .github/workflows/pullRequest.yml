@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    name: Build debug apk from current pull request
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -69,8 +70,8 @@ jobs:
           tag: ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
 
       - name: Add "conflict" label if version did not increase
-        uses: actions/labeler@v3
         if: steps.checkTag.outputs.exists
+        uses: actions/labeler@v3
         with:
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
 
