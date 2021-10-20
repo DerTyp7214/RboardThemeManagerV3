@@ -16,5 +16,5 @@ jobs:
           target_branch: staging
           title: Merge to Staging
           body: ${{ github.event.commits[0].message }}
-          assigne: DerTyp7214
+          assignee: DerTyp7214
           label: automatic,update
