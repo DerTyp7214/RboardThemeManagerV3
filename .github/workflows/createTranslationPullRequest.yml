@@ -24,8 +24,7 @@ jobs:
         with:
           github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
           template: .tmp/PULL_REQUEST_TEMPLATE.md
-          source_branch: master
-          target_branch: staging
+          target_branch: master
           title: ${{ github.event.commits[0].message }}
           label: automatic,update
           get_diff: true
