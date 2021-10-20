@@ -1,0 +1,31 @@
+name: Create Translation Pull Request
+
+on: [ pull_request ]
+
+jobs:
+  pull_request:
+    if: startWith(github.ref, 'refs/head/translate-')
+    name: Create Translation Pull Request
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Download Pull Request template
+        shell: bash
+        run: |
+          mkdir -p .tmp
+          curl -LsS https://raw.githubusercontent.com/DerTyp7214/DerTyp7214/main/PULL_REQUEST_TEMPLATE.md -o .tmp/PULL_REQUEST_TEMPLATE.md
+
+      - name: Create Pull Request
+        uses: devops-infra/action-pull-request@v0.4.2
+        with:
+          github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          template: .tmp/PULL_REQUEST_TEMPLATE.md
+          source_branch: master
+          target_branch: staging
+          title: ${{ github.event.commits[0].message }}
+          label: automatic,update
+          get_diff: true
