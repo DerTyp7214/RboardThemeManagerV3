@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    name: Build debug apk from current pull request
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -45,8 +46,39 @@ jobs:
           configuration-cache-enabled: true
           arguments: assembleDebug
 
+      - name: Get JSON
+        id: metadataJson
+        run: |
+          content=`cat app/build/outputs/apk/debug/output-metadata.json`
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          echo "::set-output name=json::$content"
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: Debug Artifact
           path: app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Check if release already exists
+        uses: mukunku/tag-exists-action@v1.0.0
+        id: checkTag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag: ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
+
+      - name: Add "conflict" label if version did not increase
+        if: steps.checkTag.outputs.exists
+        uses: actions/labeler@v3
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Comment if version name did not increase
+        if: steps.checkTag.outputs.exists
+        uses: unsplash/comment-on-pr@v1.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          msg: "**Version (${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}) already exists**"
