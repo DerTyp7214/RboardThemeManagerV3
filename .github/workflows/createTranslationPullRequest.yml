@@ -4,7 +4,7 @@ on: [ push ]
 
 jobs:
   pull_request:
-    if: startsWith(github.ref, 'refs/head/translate-')
+    #if: startsWith(github.ref, 'refs/head/translate-')
     name: Create Translation Pull Request
     runs-on: ubuntu-latest
     steps:
@@ -13,6 +13,7 @@ jobs:
         with:
           fetch-depth: 0
 
+      - run: echo ${{ github.ref }}
       - name: Download Pull Request template
         shell: bash
         run: |
