@@ -227,7 +227,7 @@ class ThemeAdapter(
 
         trace.addSplit("TEXT")
 
-        "${dataClass.readableName} ${if (dataClass.name == activeTheme) "(applied)" else ""}".let {
+        "${dataClass.readableName} ${if (dataClass.name == activeTheme) context.getString(R.string.applied_theme) else ""}".let {
             holder.themeName.text = it
             holder.themeNameSelect.text = it
         }
