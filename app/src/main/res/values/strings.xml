@@ -181,4 +181,5 @@
     <string name="xda_thread">XDA Thread</string>
     <string name="github_repo">GitHub Repo</string>
     <string name="translators">Translators</string>
+    <string name="applied_theme">(applied)</string>
 </resources>

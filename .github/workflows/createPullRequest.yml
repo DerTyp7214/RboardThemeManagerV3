@@ -23,7 +23,7 @@ jobs:
       - name: Create Pull Request
         uses: devops-infra/action-pull-request@v0.4.2
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
           template: .tmp/PULL_REQUEST_TEMPLATE.md
           source_branch: master
           target_branch: staging
