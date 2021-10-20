@@ -1,0 +1,32 @@
+name: Create Pull Request
+
+on:
+  push:
+    branches: [ rCompatible ]
+
+jobs:
+  pull_request:
+    name: Create Pull Request
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Download Pull Request template
+        shell: bash
+        run: |
+          mkdir -p .tmp
+          curl -LsS https://raw.githubusercontent.com/DerTyp7214/DerTyp7214/main/PULL_REQUEST_TEMPLATE.md -o .tmp/PULL_REQUEST_TEMPLATE.md
+
+
+      - name: Create Pull Request
+        uses: devops-infra/action-pull-request@v0.4.2
+        with:
+          github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          source_branch: rCompatible
+          target_branch: staging_rCompatible
+          title: ${{ github.event.commits[0].message }}
+          label: automatic,update
+          get_diff: true

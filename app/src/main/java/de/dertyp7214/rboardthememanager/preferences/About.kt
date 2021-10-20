@@ -6,6 +6,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.murgupluoglu.flagkit.FlagKit
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import de.Maxr1998.modernpreferences.PreferenceScreen
@@ -119,6 +120,39 @@ class About(private val activity: AppCompatActivity) :
                 activity.openUrl(activity.getString(R.string.xda_thread_url))
                 false
             }
+        }
+        builder.categoryHeader("translators") {
+            titleRes = R.string.translators
+        }
+        builder.pref("hu") {
+            titleRes = R.string.hungarian
+            summaryRes = R.string.akos_paha
+            useTint = false
+            iconRes = FlagKit.getResId(activity, "hu")
+        }
+        builder.pref("it") {
+            titleRes = R.string.italian
+            summaryRes = R.string.alessandro
+            useTint = false
+            iconRes = FlagKit.getResId(activity, "it")
+        }
+        builder.pref("pl") {
+            titleRes = R.string.polish
+            summaryRes = R.string.rkbdi
+            useTint = false
+            iconRes = FlagKit.getResId(activity, "pl")
+        }
+        builder.pref("ru") {
+            titleRes = R.string.russian
+            summaryRes = R.string.ruslan
+            useTint = false
+            iconRes = FlagKit.getResId(activity, "ru")
+        }
+        builder.pref("vi") {
+            titleRes = R.string.vietnamese
+            summaryRes = R.string.primal_pea
+            useTint = false
+            iconRes = FlagKit.getResId(activity, "vi")
         }
     }
 }

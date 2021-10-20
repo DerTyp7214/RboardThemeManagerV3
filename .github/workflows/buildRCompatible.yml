@@ -2,13 +2,18 @@ name: Build R Compatible
 
 on:
   push:
-    branches: [ rCompatible ]
+    branches: [ staging_rCompatible ]
     paths:
-        - 'app/**'
-        - 'gradle.properties'
-        - '.github/workflows/buildRCompatible.yml'
+      - 'app/**'
+      - 'gradle/**'
+      - 'build.gradle.kts'
+      - 'gradle.properties'
+      - 'settings.gradle.kts'
+      - '.github/workflows/buildRCompatible.yml'
+    
 jobs:
   build:
+    name: Build new rCompatible Release Apk
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

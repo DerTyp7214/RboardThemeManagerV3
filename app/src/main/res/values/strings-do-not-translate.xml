@@ -25,4 +25,12 @@
     <string name="dan_github">https://github.com/Magisk-Modules-Repo/HideNavBar</string>
     <string name="xda_thread_url">https://forum.xda-developers.com/t/app-rboard-theme-manager.4331445</string>
     <string name="github_repo_url">https://github.com/DerTyp7214/RboardThemeManagerV3</string>
+    <string name="hungarian">Hungarian</string>
+    <string name="italian">Italian</string>
+    <string name="alessandro">Alessandro Murru</string>
+    <string name="polish">Polish</string>
+    <string name="russian">Russian</string>
+    <string name="ruslan">Ruslan</string>
+    <string name="vietnamese">Vietnamese</string>
+    <string name="primal_pea">The Primal Pea</string>
 </resources>

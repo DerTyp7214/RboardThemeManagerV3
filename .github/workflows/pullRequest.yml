@@ -2,7 +2,8 @@ name: Build Pull Request rCompatible
 
 on:
   pull_request:
-    branches: [ rCompatible ]
+    branches: [ rCompatible, staging_rCompatible ]
+
 jobs:
   build:
     runs-on: ubuntu-latest
