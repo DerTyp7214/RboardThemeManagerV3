@@ -4,7 +4,7 @@ on: [ pull_request ]
 
 jobs:
   pull_request:
-    if: startWith(github.ref, 'refs/head/translate-')
+    if: startsWith(github.ref, 'refs/head/translate-')
     name: Create Translation Pull Request
     runs-on: ubuntu-latest
     steps:
