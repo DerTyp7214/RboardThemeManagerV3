@@ -22,5 +22,6 @@ jobs:
           title: Merge to Staging
           body: ${{ github.event.commits[0].message }}
           assignee: DerTyp7214
+          reviewer: DerTyp7214
           label: automatic,update
           get_diff: true
