@@ -3,6 +3,13 @@ name: Build Release
 on:
   push:
     branches: [ staging ]
+    paths:
+      - 'app/**'
+      - 'gradle/**'
+      - 'build.gradle.kts'
+      - 'gradle.properties'
+      - 'settings.gradle.kts'
+      - '.github/workflows/buildRelease.yml'
 
 jobs:
   build:
