@@ -7,6 +7,8 @@
 [![Build Debug](https://github.com/DerTyp7214/RboardThemeManagerV3/actions/workflows/buildDebug.yml/badge.svg)](https://github.com/DerTyp7214/RboardThemeManagerV3/actions/workflows/buildDebug.yml)
 
 Fdroid Repo
-`https://raw.githubusercontent.com/GboardThemes/Repo/master/repo?fingerprint=F6910227B3A8294F9F0739D9FC1A6A2EB27A041276DD0A1CA531318D680B6915`
+```
+https://raw.githubusercontent.com/GboardThemes/Repo/master/repo?fingerprint=F6910227B3A8294F9F0739D9FC1A6A2EB27A041276DD0A1CA531318D680B6915
+```
 
 ![QrCode](https://raw.githubusercontent.com/DerTyp7214/RboardThemeManagerV3/master/assets/qr_code.png)
