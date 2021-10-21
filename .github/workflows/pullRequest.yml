@@ -3,6 +3,13 @@ name: Build Pull Request rCompatible
 on:
   pull_request:
     branches: [ rCompatible, staging_rCompatible ]
+    paths:
+      - 'app/**'
+      - 'gradle/**'
+      - 'build.gradle.kts'
+      - 'gradle.properties'
+      - 'settings.gradle.kts'
+      - '.github/workflows/pullRequest.yml'
 
 jobs:
   build:
