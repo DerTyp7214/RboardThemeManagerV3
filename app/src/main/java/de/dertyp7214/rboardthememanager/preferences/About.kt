@@ -154,5 +154,11 @@ class About(private val activity: AppCompatActivity) :
             useTint = false
             iconRes = FlagKit.getResId(activity, "vi")
         }
+        builder.pref("zh") {
+            titleRes = R.string.chinese
+            summaryRes = R.string.contingency
+            useTint = false
+            iconRes = FlagKit.getResId(activity, "zh")
+        }
     }
 }
