@@ -158,7 +158,7 @@ class About(private val activity: AppCompatActivity) :
             titleRes = R.string.chinese
             summaryRes = R.string.contingency
             useTint = false
-            iconRes = FlagKit.getResId(activity, "zh")
+            iconRes = FlagKit.getResId(activity, "cn")
         }
     }
 }
