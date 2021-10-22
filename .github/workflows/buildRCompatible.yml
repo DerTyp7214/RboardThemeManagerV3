@@ -2,7 +2,7 @@ name: Build R Compatible
 
 on:
   push:
-    branches: [ staging_rCompatible ]
+    branches: [ rCompatible ]
     paths:
       - 'app/**'
       - 'gradle/**'
