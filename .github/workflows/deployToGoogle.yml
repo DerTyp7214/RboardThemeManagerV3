@@ -9,7 +9,7 @@ on:
       - 'build.gradle.kts'
       - 'gradle.properties'
       - 'settings.gradle.kts'
-      - '.github/workflows/buildRelease.yml'
+      - '.github/workflows/deployToGoogle.yml'
 
 jobs:
   build:
