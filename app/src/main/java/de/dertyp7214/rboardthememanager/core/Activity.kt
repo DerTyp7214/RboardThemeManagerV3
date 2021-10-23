@@ -39,6 +39,15 @@ inline val Activity.enableBlur: Boolean
 operator fun <T : ViewModel> FragmentActivity.get(modelClass: Class<T>): T =
     run(::ViewModelProvider)[modelClass]
 
+fun Activity.verifyInstallerId(): Boolean {
+    val validInstallers: List<String> =
+        listOf("com.android.vending", "com.google.android.feedback")
+
+    val installer = packageManager.getInstallSourceInfo(packageName).installingPackageName
+
+    return installer != null && validInstallers.contains(installer)
+}
+
 fun Activity.openUrl(url: String) {
     CustomTabsIntent.Builder()
         .setShowTitle(true)
