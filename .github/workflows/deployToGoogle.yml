@@ -76,6 +76,6 @@ jobs:
         with:
           serviceAccountJson: service_account.json
           packageName: de.dertyp7214.rboardthememanager
-          releaseFile: app/build/outputs/bundle/release/app-release.aab
+          releaseFiles: app/build/outputs/bundle/release/*.aab
           track: alpha
           whatsNewDirectory: distribution/
