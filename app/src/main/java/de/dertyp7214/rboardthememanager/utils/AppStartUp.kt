@@ -7,7 +7,6 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
@@ -36,7 +35,6 @@ import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
 import org.json.JSONObject
 import java.io.File
-import java.io.InputStream
 import java.net.URL
 
 class AppStartUp(private val activity: AppCompatActivity) {
@@ -328,7 +326,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     gboardInstalled =
                         PackageUtils.isPackageInstalled(Config.GBOARD_PACKAGE_NAME, packageManager)
 
-                    createNotificationChannels(this)
+                    if (!verifyInstallerId()) createNotificationChannels(this)
                     FirebaseMessaging.getInstance()
                         .subscribeToTopic("update-v3-${BuildConfig.BUILD_TYPE.lowercase()}")
 
@@ -369,6 +367,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 "lastCheck",
                 0
             ) + 5 * 60 * 100 > System.currentTimeMillis()
+            || activity.verifyInstallerId()
         ) callback(false)
         else doAsync(URL(checkUpdateUrl)::getTextFromUrl) { text ->
             try {
