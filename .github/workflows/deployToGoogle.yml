@@ -1,4 +1,4 @@
-name: Build Release
+name: Deploy to Google Play
 
 on:
   push:
@@ -13,7 +13,7 @@ on:
 
 jobs:
   build:
-    name: Build new Release Apk
+    name: Deploy to Google Play
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -64,6 +64,9 @@ jobs:
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
           BUILD_TOOLS_VERSION: 31.0.0
+
+      - name: Create whatsNew
+        run: mkdirs distribution/; echo '${{ github.event.head_commit.message }}' > whatsnew-en-US
 
       - name: Create service_account.json
         run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
