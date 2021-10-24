@@ -2,7 +2,7 @@ name: Deploy to Google Play
 
 on:
   push:
-    branches: [ staging, master ]
+    branches: [ staging ]
     paths:
       - 'app/**'
       - 'gradle/**'
@@ -43,8 +43,8 @@ jobs:
           key: ${{ runner.os }}-build-cache-${{ github.sha }}
           restore-keys: ${{ runner.os }}-build-cache-
 
-      - name: Build apk
-        id: buildAllApks
+      - name: Build Bundle
+        id: buildBundle
         uses: eskatos/gradle-command-action@v1.3.3
         with:
           gradle-version: current
