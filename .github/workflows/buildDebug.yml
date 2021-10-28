@@ -2,7 +2,7 @@ name: Build Debug
 
 on:
   push:
-    branches: [ master, staging ]
+    branches: [ master ]
     paths:
       - 'app/**'
       - 'gradle/**'
