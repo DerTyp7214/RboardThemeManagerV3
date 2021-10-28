@@ -41,6 +41,8 @@ class InstallPackActivity : AppCompatActivity() {
 
         val adapter =
             ThemeAdapter(this, themes, ThemeAdapter.SelectionState.SELECTING, { _, adapter ->
+                if (adapter.getSelected().isEmpty()) fab.isEnabled = false
+                else if (!fab.isEnabled) fab.isEnabled = true
                 toolbar.title =
                     getString(R.string.install_themes, adapter.getSelected().size.toString())
             }) {}

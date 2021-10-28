@@ -21,7 +21,7 @@ jobs:
 
       - name: Get Commit Message
         id: commitMessage
-        run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=json::${IN%%$'\n'*}"
+        run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=message::${IN%%$'\n'*}"
 
       - name: Setup JDK
         uses: actions/setup-java@v1

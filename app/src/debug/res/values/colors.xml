@@ -3,13 +3,13 @@
     <color name="background">#ffffff</color>
     <color name="app_background">#F5F5F5</color>
     <color name="foreground">#ffffff</color>
-    <color name="accent">#7AACFF</color>
-    <color name="accent_2">#c7dcff</color>
+    <color name="accent">#FF678C</color>
+    <color name="accent_2">#ffb4c6</color>
     <color name="md3">#e5e5e5</color>
     <color name="switch_thumb">#dbdbdb</color>
     <color name="switch_track">#8c8c8c</color>
-    <color name="background_icon">#7AACFF</color>
-    <color name="foreground_icon">#183A71</color>
+    <color name="background_icon_debug">#FF678C</color>
+    <color name="foreground_icon_debug">#580711</color>
     <color name="text">#000000</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
@@ -18,6 +18,6 @@
     <color name="light_blue_200">#FF81D4FA</color>
     <color name="light_blue_900">#FF01579B</color>
 
-    <color name="ic_launcher_background">@color/background_icon</color>
+    <color name="ic_launcher_background">@color/background_icon_debug</color>
     <color name="ic_launcher_foreground">@color/background</color>
 </resources>
