@@ -65,6 +65,12 @@ jobs:
         env:
           BUILD_TOOLS_VERSION: 31.0.0
 
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artifact
+          path: app/build/outputs/bundle/release/app-release.aab
+
       - name: Create whatsNew
         run: mkdir distribution/; echo '${{ github.event.head_commit.message }}' > whatsnew-en-US
 
