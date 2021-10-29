@@ -33,7 +33,7 @@
     </style>
 
     <style name="Widget.App.SnackbarTextView" parent="Widget.Material3.Snackbar.TextView">
-        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:textColor">@color/text</item>
     </style>
 
     <style name="Widget.App.SnackbarButton" parent="Widget.Material3.Button.TextButton.Snackbar">
@@ -70,6 +70,6 @@
         <item name="colorPrimary">@color/foreground</item>
         <item name="colorPrimaryVariant">@color/foreground</item>
         <item name="colorOnPrimary">@color/text</item>
-        <item name="android:textColorPrimary">?attr/colorOnPrimary</item>
+        <item name="android:textColorPrimary">@color/text</item>
     </style>
 </resources>

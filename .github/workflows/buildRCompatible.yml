@@ -49,7 +49,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: eskatos/gradle-command-action@v1.3.3
+        uses: eskatos/gradle-command-action@v2.0-rc.1
         with:
           gradle-version: current
           wrapper-cache-enabled: true
@@ -79,7 +79,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: 31.0.0
+          BUILD_TOOLS_VERSION: 32.0.0 rc1
 
       - name: List files
         run: ls app/build/outputs/apk/release
