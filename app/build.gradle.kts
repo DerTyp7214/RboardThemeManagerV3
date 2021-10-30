@@ -12,7 +12,7 @@ val kotlinVersion: String = KotlinCompilerVersion.VERSION
 
 android {
     compileSdk = 31
-    buildToolsVersion = "32.0.0 rc1"
+    buildToolsVersion = "31.0.0"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
 
