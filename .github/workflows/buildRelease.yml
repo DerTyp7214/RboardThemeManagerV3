@@ -49,12 +49,9 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: eskatos/gradle-command-action@v1.3.3
+        uses: eskatos/gradle-build-action@v2
         with:
-          gradle-version: current
-          wrapper-cache-enabled: true
-          dependencies-cache-enabled: true
-          configuration-cache-enabled: true
+          gradle-version: release-candidate
           arguments: assembleRelease
 
       - name: Get JSON
