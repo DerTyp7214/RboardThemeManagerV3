@@ -45,7 +45,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: eskatos/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v2
         with:
           gradle-version: release-candidate
           arguments: assembleDebug
