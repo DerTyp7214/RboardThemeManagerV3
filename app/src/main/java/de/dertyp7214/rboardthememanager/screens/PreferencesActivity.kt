@@ -67,7 +67,7 @@ class PreferencesActivity : AppCompatActivity() {
             recyclerView.adapter = it
         }
     }
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         preferences.loadMenu(menuInflater, menu)
         return true
     }
