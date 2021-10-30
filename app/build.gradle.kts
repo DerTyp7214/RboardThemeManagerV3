@@ -22,8 +22,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 31
-        versionCode = 337001
-        versionName = "3.3.7"
+        versionCode = 338000
+        versionName = "3.3.8"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -58,8 +58,8 @@ android {
 
 dependencies {
     implementation(platform("com.google.firebase:firebase-bom:28.2.0"))
-    implementation("com.google.firebase:firebase-messaging-ktx:22.0.0")
-    implementation("com.google.firebase:firebase-analytics-ktx:19.0.2")
+    implementation("com.google.firebase:firebase-messaging-ktx:23.0.0")
+    implementation("com.google.firebase:firebase-analytics-ktx:20.0.0")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
@@ -70,18 +70,18 @@ dependencies {
     implementation("com.github.topjohnwu.libsu:io:$libsuVersion")
     implementation("com.github.topjohnwu.libsu:busybox:$libsuVersion")
     implementation("dev.chrisbanes.insetter:insetter:0.6.0")
-    implementation("androidx.core:core-ktx:1.6.0")
+    implementation("androidx.core:core-ktx:1.7.0")
     //noinspection DifferentStdlibGradleVersion
     implementation(kotlin("stdlib-jdk7", kotlinVersion))
     implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("com.google.android.material:material:1.5.0-alpha04")
+    implementation("com.google.android.material:material:1.5.0-alpha05")
     implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     implementation("androidx.preference:preference-ktx:1.1.1")
-    implementation("androidx.activity:activity-ktx:1.3.1")
+    implementation("androidx.activity:activity-ktx:1.4.0")
     implementation("androidx.fragment:fragment-ktx:1.3.6")
     implementation("com.jaredrummler:android-shell:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:19.0.2")
-    implementation("com.google.firebase:firebase-messaging:22.0.0")
+    implementation("com.google.firebase:firebase-analytics:20.0.0")
+    implementation("com.google.firebase:firebase-messaging:23.0.0")
     implementation("com.google.code.gson:gson:2.8.8")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
