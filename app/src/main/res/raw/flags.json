@@ -1,5 +1,5 @@
 {
-  "time": "1635990231444",
+  "time": "1636056100001",
   "flags": [
     {
       "key": "general",
@@ -319,7 +319,7 @@
       "key": "keyboard_height_ratio",
       "title": "keyboard_height_ratio",
       "summary": "",
-      "icon": "//TODO: icon",
+      "icon": "ic_keyboard_height",
       "defaultValue": null,
       "type": "SELECT",
       "valueMap": [
