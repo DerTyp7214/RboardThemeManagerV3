@@ -17,12 +17,11 @@ import de.dertyp7214.rboardthememanager.components.XMLEntry
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
-import de.Maxr1998.modernpreferences.helpers.onCheckedChange
-import de.Maxr1998.modernpreferences.helpers.onClick
-import de.Maxr1998.modernpreferences.helpers.pref
-import de.Maxr1998.modernpreferences.helpers.switch
+import de.Maxr1998.modernpreferences.helpers.*
 import de.Maxr1998.modernpreferences.preferences.CategoryHeader
 import de.Maxr1998.modernpreferences.preferences.SwitchPreference
+import de.Maxr1998.modernpreferences.preferences.choice.SelectionItem
+import de.Maxr1998.modernpreferences.preferences.choice.SingleChoiceDialogPreference
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
@@ -52,6 +51,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
         LONG,
         FLOAT,
         GROUP,
+        SELECT,
         JUST_CLICK
     }
 
@@ -212,6 +212,26 @@ class Flags(val activity: Activity) : AbstractPreference() {
                             }
                         }
                         true
+                    }
+                }
+                TYPE.SELECT -> {
+                    SingleChoiceDialogPreference(item.key, item.valueMap?.map { (key, _) ->
+                        if (key is String) SelectionItem(
+                            key,
+                            FileUtils.getResourceId(
+                                activity,
+                                key,
+                                "string",
+                                activity.packageName
+                            ).safeString
+                        )
+                        else SelectionItem("", "")
+                    } ?: listOf()).apply {
+                        item.valueMap?.let { map ->
+                            map.flip()[flagsString[item.file]?.getValue(item.key)?.value
+                                ?: item.defaultValue].toString()
+                        }?.let { initialSelection = it }
+                        defaultOnSelectionChange(item::setValue)
                     }
                 }
                 TYPE.INT, TYPE.LONG, TYPE.FLOAT -> Preference(item.key)
@@ -520,6 +540,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
                                     "boolean" -> it.toString().toBooleanStrict()
                                     "float" -> it.toString().toFloat()
                                     "integer" -> it.toString().toInt()
+                                    "string" -> it.toString()
                                     else -> it
                                 }
                             }, ob.get("second").let {
@@ -528,6 +549,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
                                     "boolean" -> it.toString().toBooleanStrict()
                                     "float" -> it.toString().toFloat()
                                     "integer" -> it.toString().toInt()
+                                    "string" -> it.toString()
                                     else -> it
                                 }
                             })
@@ -587,7 +609,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
         fun <T> setValue(value: T, key: String, file: FILES): Boolean {
             if (file == FILES.NONE) return true
             changes = true
-            flagsString[file]?.setValue(XMLEntry.parse(key, value))
+            if (value != null) flagsString[file]?.setValue(XMLEntry.parse(key, value))
             return true
         }
     }

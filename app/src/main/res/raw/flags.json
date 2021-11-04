@@ -1,5 +1,5 @@
 {
-  "time": "1631469286300",
+  "time": "1636056100001",
   "flags": [
     {
       "key": "general",
@@ -294,6 +294,7 @@
       "summary": "",
       "icon": "ic_lens",
       "defaultValue": false,
+      "visible": false,
       "type": "BOOLEAN",
       "file": "FLAGS"
     },
@@ -314,6 +315,83 @@
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS"
+    },
+    {
+      "key": "keyboard_height_ratio",
+      "title": "keyboard_height_ratio",
+      "summary": "",
+      "icon": "ic_keyboard_height",
+      "defaultValue": null,
+      "type": "SELECT",
+      "valueMap": [
+        {
+          "first": "max_short",
+          "second": 0.5,
+          "type1": "string",
+          "type2": "string"
+        },
+        {
+          "first": "extra_extra_short",
+          "second": 0.65,
+          "type1": "string",
+          "type2": "string"
+        },
+        {
+          "first": "extra_short",
+          "second": 0.85,
+          "type1": "string",
+          "type2": "string"
+        },
+        {
+          "first": "key_short",
+          "second": 0.9,
+          "type1": "string",
+          "type2": "string"
+        },
+        {
+          "first": "mid_short",
+          "second": 0.95,
+          "type1": "string",
+          "type2": "string"
+        },
+        {
+          "first": "normal",
+          "second": 1,
+          "type1": "string",
+          "type2": "string"
+        },
+        {
+          "first": "mid_tall",
+          "second": 1.05,
+          "type1": "string",
+          "type2": "string"
+        },
+        {
+          "first": "tall",
+          "second": 1.1,
+          "type1": "string",
+          "type2": "string"
+        },
+        {
+          "first": "extra_tall",
+          "second": 1.15,
+          "type1": "string",
+          "type2": "string"
+        },
+        {
+          "first": "extra_extra_tall",
+          "second": 1.5,
+          "type1": "string",
+          "type2": "string"
+        },
+        {
+          "first": "max_tall",
+          "second": 2,
+          "type1": "string",
+          "type2": "string"
+        }
+      ],
+      "file": "GBOARD_PREFERENCES"
     }
   ]
 }

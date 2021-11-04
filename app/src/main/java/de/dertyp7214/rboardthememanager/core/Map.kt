@@ -32,3 +32,9 @@ fun <K, V> Map<K, V>.joinToString(
 ): String {
     return map { it }.joinToString(separator, prefix, postfix, limit, truncated, transform)
 }
+
+fun <A, B> Map<A, B>.flip(): Map<B, A> {
+    val tmp = HashMap<B, A>()
+    forEach { tmp[it.value] = it.key }
+    return tmp
+}

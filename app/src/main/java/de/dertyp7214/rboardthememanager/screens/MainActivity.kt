@@ -201,8 +201,7 @@ class MainActivity : AppCompatActivity() {
                     },
                     MenuItem(
                         R.drawable.ic_baseline_outlined_flag_24,
-                        R.string.flags,
-                        Build.VERSION.SDK_INT > Build.VERSION_CODES.O
+                        R.string.flags
                     ) {
                         PreferencesActivity::class.java.start(
                             this,

@@ -181,4 +181,16 @@
     <string name="github_repo">GitHub Könyvtár</string>
     <string name="translators">Fordítók</string>
     <string name ="applied_theme">(alkalmazva)</string>
+    <string name="keyboard_height_ratio">Billentyűzet magassági arány</string>
+    <string name="max_short">0,50 Max-alacsony</string>
+    <string name="extra_extra_short">0,65 Extra-extra-alacsony</string>
+    <string name="extra_short">0,85 Extra-alacsony</string>
+    <string name="key_short">0,90 Alacsony</string>
+    <string name="mid_short">0,95 Közép-alacsony</string>
+    <string name="normal">1,00 Normál</string>
+    <string name="mid_tall">1,05 Középmagas</string>
+    <string name="tall">1,10 Magas</string>
+    <string name="extra_tall">1,15 Extra-magas</string>
+    <string name="extra_extra_tall">1,50 Extra-extra-magas</string>
+    <string name="max_tall">2,00 Max-magas</string>
 </resources>
