@@ -10,6 +10,7 @@ import de.dertyp7214.rboardthememanager.data.SoundPack
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.data.ThemePack
 
+@Suppress("unused")
 class MainViewModel : ViewModel() {
     private val selectedTheme = MutableLiveData<ThemeDataClass?>()
     private val themePacks = MutableLiveData<List<ThemePack>>()
@@ -19,7 +20,7 @@ class MainViewModel : ViewModel() {
     private val clearSearch = MutableLiveData<String>()
     private val refreshThemes = MutableLiveData<String>()
     private val selections = MutableLiveData<Pair<Boolean, ThemeAdapter?>>()
-    private val navigate = MutableLiveData<@IdRes Int>()
+    private val navigate = MutableLiveData<Int>()
     private val loaded = MutableLiveData<Boolean>()
     private val packsSortByDate = MutableLiveData<Boolean>()
 
