@@ -57,7 +57,7 @@ android {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:28.2.0"))
+    implementation(platform("com.google.firebase:firebase-bom:29.0.0"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.0")
     implementation("com.google.firebase:firebase-analytics-ktx:20.0.0")
 
@@ -82,20 +82,20 @@ dependencies {
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:20.0.0")
     implementation("com.google.firebase:firebase-messaging:23.0.0")
-    implementation("com.google.code.gson:gson:2.8.8")
+    implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
-    implementation("com.github.skydoves:balloon:1.3.7")
+    implementation("com.github.skydoves:balloon:1.4.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-    implementation("androidx.browser:browser:1.3.0")
+    implementation("androidx.browser:browser:1.4.0")
     implementation("com.github.bumptech.glide:glide:4.12.0")
     kapt("com.github.bumptech.glide:compiler:4.12.0")
     implementation("de.dertyp7214:PreferencesPlus:1.1")
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.0.4")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.0.5")
     implementation(kotlin("reflect", kotlinVersion))
 }
