@@ -19,7 +19,7 @@ class MainViewModel : ViewModel() {
     private val clearSearch = MutableLiveData<String>()
     private val refreshThemes = MutableLiveData<String>()
     private val selections = MutableLiveData<Pair<Boolean, ThemeAdapter?>>()
-    private val navigate = MutableLiveData<@IdRes Int>()
+    private val navigate = MutableLiveData<Int>()
     private val loaded = MutableLiveData<Boolean>()
     private val packsSortByDate = MutableLiveData<Boolean>()
 

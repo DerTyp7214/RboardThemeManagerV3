@@ -194,4 +194,22 @@
     <string name="extra_tall">1.15 Extra-tall</string>
     <string name="extra_extra_tall">1.50 Extra-extra-tall</string>
     <string name="max_tall">2.00 Max-tall</string>
+    <string name="margins">Margins</string>
+    <string name="radius">Radius</string>
+    <string name="not_set">Not set</string>
+
+    <string name="kb_pad_land_b">Landscape-Bottom</string>
+    <string name="kb_pad_land_l">Landscape-Left</string>
+    <string name="kb_pad_land_r">Landscape-Right</string>
+    <string name="kb_pad_port_b">Portrait-Bottom</string>
+    <string name="kb_pad_port_l">Portrait-Left</string>
+    <string name="kb_pad_port_r">Portrait-Right</string>
+
+    <string name="corner_key_l">Corner-Radius-Left (Bottom)</string>
+    <string name="corner_key_r">Corner-Radius-Right (Bottom)</string>
+    <string name="props">Props</string>
+    <string name="other_props">Other Props</string>
+    <string name="other_props_long">Other Props set via resetprop</string>
+    <string name="prop_changed">Prop changed</string>
+    <string name="reset">Reset</string>
 </resources>

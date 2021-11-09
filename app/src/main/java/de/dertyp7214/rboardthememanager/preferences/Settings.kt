@@ -98,22 +98,6 @@ class Settings(private val activity: Activity) : AbstractPreference() {
             "",
             TYPE.GROUP
         ),
-        INFO(
-            "info",
-            R.string.info,
-            -1,
-            R.drawable.ic_info,
-            "",
-            TYPE.STRING,
-            listOf(), {
-                Application.context?.let {
-                    PreferencesActivity::class.java.start(it) {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                        putExtra("type", "info")
-                    }
-                }
-            }
-        ),
         REPOS(
             "repos",
             R.string.repos,
@@ -138,6 +122,22 @@ class Settings(private val activity: Activity) : AbstractPreference() {
             -1,
             "",
             TYPE.GROUP
+        ),
+        INFO(
+            "info",
+            R.string.info,
+            -1,
+            R.drawable.ic_info,
+            "",
+            TYPE.STRING,
+            listOf(), {
+                Application.context?.let {
+                    PreferencesActivity::class.java.start(it) {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        putExtra("type", "info")
+                    }
+                }
+            }
         ),
         APP_THEME(
             "app_theme",

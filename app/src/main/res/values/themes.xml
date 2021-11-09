@@ -16,7 +16,7 @@
         <item name="colorOnSecondary">@color/text</item>
 
         <item name="android:statusBarColor" tools:targetApi="l">@color/app_background</item>
-        <item name="android:navigationBarColor">@color/foreground</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
 
         <item name="popupMenuStyle">@style/PopupStyle</item>
         <item name="alertDialogTheme">@style/Dialog.RboardThemeManagerV3.MaterialAlertDialog</item>
@@ -55,22 +55,19 @@
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3">
-	        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
-            <item name="android:navigationBarColor">@color/foreground</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Info" parent="Theme.RboardThemeManagerV3">
         <item name="android:statusBarColor">@color/foreground</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:navigationBarColor">@color/foreground</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.InstallPack" parent="Theme.RboardThemeManagerV3">
         <item name="android:statusBarColor">@color/foreground</item>
-        <item name="android:navigationBarColor">@color/foreground</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
     </style>
     <style name="Theme.RboardThemeManagerV3.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorPrimary">@color/foreground</item>

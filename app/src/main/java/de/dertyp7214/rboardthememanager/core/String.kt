@@ -34,6 +34,9 @@ fun String.getSystemProperty(): String {
         ""
     }
 }
+fun String.setSystemProperty(value: String = "") =
+    "resetprop ${if (value.isEmpty()) "--delete " else ""}$this $value".runAsCommand()
+
 
 fun List<String>.runAsCommand(callback: (result: Array<String>) -> Unit = {}): Boolean {
     return Shell.su(*this.toTypedArray()).exec().apply {

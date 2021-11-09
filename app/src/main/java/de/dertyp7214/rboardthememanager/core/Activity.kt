@@ -161,6 +161,7 @@ fun Activity.openShareThemeDialog(
 fun Activity.openInputDialog(
     @StringRes hint: Int,
     value: String? = null,
+    @StringRes negativeText: Int = android.R.string.cancel,
     negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },
     positive: (dialogInterface: DialogInterface, text: String) -> Unit
 ) = openDialog(R.layout.input_dialog, false) { dialog ->
@@ -171,7 +172,10 @@ fun Activity.openInputDialog(
     findViewById<Button>(R.id.ok)?.setOnClickListener {
         positive(dialog, input?.text?.toString() ?: "")
     }
-    findViewById<Button>(R.id.cancel)?.setOnClickListener { negative(dialog) }
+    findViewById<Button>(R.id.cancel)?.let { button ->
+        button.setOnClickListener { negative(dialog) }
+        button.setText(negativeText)
+    }
 }
 
 fun Activity.openLoadingDialog(@StringRes message: Int) =
