@@ -1,6 +1,5 @@
 package de.dertyp7214.rboardthememanager
 
-import android.graphics.drawable.Drawable
 import android.os.Build
 import de.dertyp7214.rboardthememanager.core.getSystemProperty
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
@@ -31,16 +30,9 @@ object Config {
 
     val GBOARD_PREFS_PATH: String
         get() {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
             return newGboard.let {
-                if (it) "/data/user_de/0/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
+                if (it) "/data/user${if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) "_de" else ""}/0/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
                 else "/data/data/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
-                }
-            }else {
-                return newGboard.let {
-                    if (it) "/data/user/0/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
-                    else "/data/data/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
-                }
             }
         }
 
