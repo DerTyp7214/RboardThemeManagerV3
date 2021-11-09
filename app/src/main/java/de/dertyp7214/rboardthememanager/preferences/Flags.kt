@@ -106,6 +106,25 @@ class Flags(val activity: Activity) : AbstractPreference() {
                 }
             }
         ),
+        OTHER_PROPS(
+            "other_props",
+            R.string.other_props,
+            R.string.other_props_long,
+            -1,
+            "",
+            TYPE.JUST_CLICK,
+            FILES.NONE,
+            onClick = {
+                Application.context?.let {
+                    PreferencesActivity::class.java.start(
+                        it
+                    ) {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        putExtra("type", "props")
+                    }
+                }
+            }
+        ),
         EMPTY2(
             "empty2",
             -1,
