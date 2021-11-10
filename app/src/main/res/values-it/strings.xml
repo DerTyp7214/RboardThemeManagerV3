@@ -179,4 +179,19 @@
     <string name="about">Informazioni</string>
     <string name="xda_thread">Thread XDA</string>
     <string name="github_repo">Repo GitHub</string>
+    <string name="translators">Traduttori/string>
+    <string name="applied_theme">(applicato)</string>
+    <string name="installed_from_play">Installata dal PlayStore</string>
+    <string name="keyboard_height_ratio">Rapporto altezza tastiera</string>
+    <string name="max_short">0.50 bassissima</string>
+    <string name="extra_extra_short">0.65 molto molto bassa</string>
+    <string name="extra_short">0.85 molto bassa</string>
+    <string name="key_short">0.90 bassa</string>
+    <string name="mid_short">0.95 medio-bassa</string>
+    <string name="normal">1.00 normale</string>
+    <string name="mid_tall">1.05 medio-alta/string>
+    <string name="tall">1.10 alta</string>
+    <string name="extra_tall">1.15 molto alta</string>
+    <string name="extra_extra_tall">1.50 molto molto alta</string>
+    <string name="max_tall">2.00 altissima</string>
 </resources>
