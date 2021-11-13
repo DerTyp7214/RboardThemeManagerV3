@@ -11,9 +11,11 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
+import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.*
 import de.Maxr1998.modernpreferences.preferences.CategoryHeader
 import de.Maxr1998.modernpreferences.preferences.SwitchPreference
@@ -33,9 +35,12 @@ import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import org.json.JSONObject
 import java.io.File
 import java.util.*
+import kotlin.collections.component1
+import kotlin.collections.component2
+import kotlin.collections.set
 
 @SuppressLint("ShowToast")
-class Flags(val activity: Activity) : AbstractPreference() {
+class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
     enum class FILES(val filePath: String) {
         @SuppressLint("SdCardPath")
         FLAGS("/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/flag_value.xml"),
@@ -195,6 +200,11 @@ class Flags(val activity: Activity) : AbstractPreference() {
 
     override fun getExtraView(): View? = null
 
+    override fun onStart(recyclerView: RecyclerView, adapter: PreferencesAdapter) {
+        adapter.currentScreen.indexOf(args.getString("highlight"))
+            .let { if (it >= 0) recyclerView.scrollToPosition(it) }
+    }
+
     override fun onBackPressed(callback: () -> Unit) {
         callback()
     }
@@ -298,6 +308,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
 
     class AllFlags(
         private val activity: Activity,
+        private val args: SafeJSON,
         private val requestReload: () -> Unit
     ) : AbstractPreference() {
 
@@ -305,6 +316,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
         private var onlyDisabled: Boolean = false
 
         private val searchBar = SearchBar(activity).apply {
+            id = R.id.search_bar
             setOnSearchListener {
                 filter = it
                 requestReload()
@@ -327,6 +339,18 @@ class Flags(val activity: Activity) : AbstractPreference() {
         }
 
         override fun getExtraView(): View = searchBar
+
+        override fun onStart(recyclerView: RecyclerView, adapter: PreferencesAdapter) {
+            args.getString("input").let { input ->
+                if (input.isNotEmpty()) activity.findViewById<SearchBar>(R.id.search_bar).apply {
+                    text = input
+                    search()
+                }
+            }
+
+            adapter.currentScreen.indexOf(args.getString("highlight"))
+                .let { if (it >= 0) recyclerView.scrollToPosition(it) }
+        }
 
         override fun onBackPressed(callback: () -> Unit) {
             callback()
@@ -408,6 +432,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
 
     class AllPreferences(
         private val activity: Activity,
+        private val args: SafeJSON,
         private val requestReload: () -> Unit
     ) : AbstractPreference() {
 
@@ -415,6 +440,7 @@ class Flags(val activity: Activity) : AbstractPreference() {
         private var onlyDisabled: Boolean = false
 
         private val searchBar = SearchBar(activity).apply {
+            id = R.id.search_bar
             setOnSearchListener {
                 filter = it
                 requestReload()
@@ -426,6 +452,18 @@ class Flags(val activity: Activity) : AbstractPreference() {
         }
 
         override fun getExtraView(): View = searchBar
+
+        override fun onStart(recyclerView: RecyclerView, adapter: PreferencesAdapter) {
+            args.getString("input").let { input ->
+                if (input.isNotEmpty()) activity.findViewById<SearchBar>(R.id.search_bar).apply {
+                    text = input
+                    search()
+                }
+            }
+
+            adapter.currentScreen.indexOf(args.getString("highlight"))
+                .let { if (it >= 0) recyclerView.scrollToPosition(it) }
+        }
 
         override fun onBackPressed(callback: () -> Unit) {
             callback()

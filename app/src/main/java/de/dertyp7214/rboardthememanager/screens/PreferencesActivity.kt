@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.dertyp7214.rboardthememanager.databinding.ActivityPreferencesBinding
 import de.dertyp7214.rboardthememanager.preferences.Preferences
@@ -17,6 +18,7 @@ class PreferencesActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPreferencesBinding
     private lateinit var preferences: Preferences
+    private lateinit var recyclerView: RecyclerView
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +29,8 @@ class PreferencesActivity : AppCompatActivity() {
 
         val preferencesToolbar = binding.preferencesToolbar
         val loadingPreferences = binding.loadingPreferences
-        val recyclerView = binding.recyclerView
         val extraContent = binding.extraContent
+        recyclerView = binding.recyclerView
 
         preferences = Preferences(this, intent) {
             recyclerView.adapter.let { adapter ->
@@ -59,6 +61,7 @@ class PreferencesActivity : AppCompatActivity() {
         doAsync({ PreferencesAdapter(preferences.preferences) }) {
             loadingPreferences.visibility = View.GONE
             recyclerView.adapter = it
+            preferences.onStart(recyclerView, it)
         }
     }
 

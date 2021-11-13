@@ -11,22 +11,23 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.RecyclerView
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
+import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.*
 import de.Maxr1998.modernpreferences.preferences.choice.SelectionItem
 import de.dertyp7214.rboardthememanager.Application
+import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.openDialog
-import de.dertyp7214.rboardthememanager.core.runAsCommand
-import de.dertyp7214.rboardthememanager.core.start
+import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 
-class Settings(private val activity: Activity) : AbstractPreference() {
+class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
     enum class TYPE {
         BOOLEAN,
         STRING,
@@ -46,7 +47,8 @@ class Settings(private val activity: Activity) : AbstractPreference() {
         val defaultValue: Any,
         val type: TYPE,
         val items: List<SelectionItem> = listOf(),
-        val onClick: Activity.(Boolean) -> Unit = {}
+        val onClick: Activity.(Boolean) -> Unit = {},
+        val visible: Boolean = true
     ) {
         THEMES_HEADER(
             "themes_header",
@@ -175,6 +177,21 @@ class Settings(private val activity: Activity) : AbstractPreference() {
                 Toast.makeText(this, R.string.flags_fixed, Toast.LENGTH_LONG).show()
             }
         ),
+        DEEP_LINK(
+            "deep_link",
+            R.string.deep_link,
+            R.string.deep_link,
+            R.drawable.ic_link,
+            "",
+            TYPE.STRING,
+            listOf(),
+            {
+                packageManager.getLaunchIntentForPackage("de.dertyp7214.deeplinkrboard")
+                    ?.let(::startActivity)
+                    ?: openUrl("https://github.com/DerTyp7214/DeepLinkRboard")
+            },
+            BuildConfig.DEBUG
+        ),
         UNINSTALL(
             "uninstall",
             R.string.uninstall,
@@ -201,6 +218,11 @@ class Settings(private val activity: Activity) : AbstractPreference() {
         }
     }
 
+    override fun onStart(recyclerView: RecyclerView, adapter: PreferencesAdapter) {
+        adapter.currentScreen.indexOf(args.getString("highlight"))
+            .let { if (it >= 0) recyclerView.scrollToPosition(it) }
+    }
+
     override fun getExtraView(): View? = null
 
     override fun onBackPressed(callback: () -> Unit) {
@@ -208,7 +230,7 @@ class Settings(private val activity: Activity) : AbstractPreference() {
     }
 
     override fun preferences(builder: PreferenceScreen.Builder) {
-        SETTINGS.values().forEach { item ->
+        SETTINGS.values().filter { it.visible }.forEach { item ->
             val pref: Preference = when (item.type) {
                 TYPE.BOOLEAN -> builder.switch(item.key) {
                     defaultValue = item.defaultValue as Boolean

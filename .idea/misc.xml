@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/android_head.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/empty.xml" value="0.3465" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_about.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_app_theme.xml" value="0.3465" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_auto_theme.xml" value="0.3465" />
@@ -20,8 +21,15 @@
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_github.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_groups.xml" value="0.1765" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_info.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_kb_pad_land_b.xml" value="0.3465" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_kb_pad_land_l.xml" value="0.3465" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_kb_pad_land_r.xml" value="0.3465" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_kb_pad_port_b.xml" value="0.3465" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_kb_pad_port_l.xml" value="0.3465" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_kb_pad_port_r.xml" value="0.3465" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_key_border.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_keyboard_theme.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_link.xml" value="0.3465" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_magisk.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_person.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_playstore.xml" value="0.3455" />
@@ -39,6 +47,7 @@
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_themes.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_xda.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/small_line.xml" value="0.2265" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/snackbar_background.xml" value="0.3465" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/switch_background.xml" value="0.2265" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/switch_thumb.xml" value="0.1765" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/switch_track.xml" value="0.2265" />
@@ -47,9 +56,11 @@
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/activity_preferences.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/bottom_bar.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/chip_container.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/deep_link.xml" value="0.34375" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/fragment_theme_list.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/input_dialog.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/loading_dialog.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/menu_item.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/news_card.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/news_item.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/pack_item.xml" value="0.34479166666666666" />

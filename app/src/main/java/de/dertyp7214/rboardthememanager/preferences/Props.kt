@@ -6,7 +6,9 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import de.Maxr1998.modernpreferences.PreferenceScreen
+import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.categoryHeader
 import de.Maxr1998.modernpreferences.helpers.onClick
 import de.Maxr1998.modernpreferences.helpers.pref
@@ -15,12 +17,17 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.utils.FileUtils
 
-class Props(private val activity: AppCompatActivity) :
+class Props(private val activity: AppCompatActivity, private val args: SafeJSON) :
     AbstractMenuPreference() {
     override fun loadMenu(menuInflater: MenuInflater, menu: Menu?) {}
     override fun onMenuClick(menuItem: MenuItem): Boolean = false
     override fun onBackPressed(callback: () -> Unit) = callback()
     override fun getExtraView(): View? = null
+
+    override fun onStart(recyclerView: RecyclerView, adapter: PreferencesAdapter) {
+        adapter.currentScreen.indexOf(args.getString("highlight"))
+            .let { if (it >= 0) recyclerView.scrollToPosition(it) }
+    }
 
     override fun preferences(builder: PreferenceScreen.Builder) {
         val prefs = listOf(
@@ -47,6 +54,14 @@ class Props(private val activity: AppCompatActivity) :
                 activity.packageName
             )
         }
+        val getIcon = { key: String ->
+            FileUtils.getResourceId(
+                activity,
+                key,
+                "drawable",
+                activity.packageName
+            )
+        }
 
         prefs.forEach { key ->
             if (key.startsWith("ch_")) builder.categoryHeader(key) {
@@ -56,6 +71,7 @@ class Props(private val activity: AppCompatActivity) :
                 val value = "ro.com.google.ime.$key".getSystemProperty()
                 titleRes = getString(key).safeString
                 summary = value.ifBlank { activity.getString(R.string.not_set) }
+                iconRes = getIcon("ic_$key").safeIcon
                 onClick {
                     activity.openInputDialog(
                         getString(key).safeString,
@@ -72,7 +88,8 @@ class Props(private val activity: AppCompatActivity) :
                                 ).show()
                                 summary = activity.getString(R.string.not_set)
                                 requestRebind()
-                            } else Toast.makeText(activity, R.string.error, Toast.LENGTH_SHORT).show()
+                            } else Toast.makeText(activity, R.string.error, Toast.LENGTH_SHORT)
+                                .show()
                         }
                     ) { dialogInterface, text ->
                         dialogInterface.dismiss()

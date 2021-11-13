@@ -1,6 +1,5 @@
 package de.dertyp7214.rboardthememanager
 
-import android.graphics.drawable.Drawable
 import de.dertyp7214.rboardthememanager.core.getSystemProperty
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 
@@ -8,10 +7,15 @@ import de.dertyp7214.rboardthememanager.data.ModuleMeta
 object Config {
     var useMagisk = false
     var newGboard = true
-
     var THEME_LOCATION = "/system/etc/gboard_theme"
 
+    val PLAY_URL = { packageName: String ->
+        "https://play.google.com/store/apps/details?id=$packageName"
+    }
+
     const val MODULES_PATH = "/data/adb/modules"
+
+    const val MAGISK_PACKAGE_NAME = "com.topjohnwu.magisk"
     const val MODULE_ID = "rboard-themes"
     const val MODULE_PATH = "$MODULES_PATH/$MODULE_ID"
     const val GBOARD_PACKAGE_NAME = "com.google.android.inputmethod.latin"
