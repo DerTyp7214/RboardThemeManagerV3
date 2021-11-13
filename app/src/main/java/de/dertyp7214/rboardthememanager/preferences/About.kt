@@ -5,23 +5,31 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.murgupluoglu.flagkit.FlagKit
 import de.Maxr1998.modernpreferences.PreferenceScreen
+import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.categoryHeader
 import de.Maxr1998.modernpreferences.helpers.onClick
 import de.Maxr1998.modernpreferences.helpers.pref
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.SafeJSON
 import de.dertyp7214.rboardthememanager.core.openUrl
 
-class About(private val activity: AppCompatActivity) :
+class About(private val activity: AppCompatActivity, private val args: SafeJSON) :
     AbstractMenuPreference() {
     override fun loadMenu(menuInflater: MenuInflater, menu: Menu?) {}
     override fun onMenuClick(menuItem: MenuItem): Boolean = false
     override fun onBackPressed(callback: () -> Unit) = callback()
     override fun getExtraView(): View? = null
+
+    override fun onStart(recyclerView: RecyclerView, adapter: PreferencesAdapter) {
+        adapter.currentScreen.indexOf(args.getString("highlight"))
+            .let { if (it >= 0) recyclerView.scrollToPosition(it) }
+    }
 
     override fun preferences(builder: PreferenceScreen.Builder) {
         val options = RequestOptions

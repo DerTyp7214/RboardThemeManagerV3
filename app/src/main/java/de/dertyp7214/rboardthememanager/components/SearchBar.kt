@@ -51,6 +51,13 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
 
                 searchText.visibility = VISIBLE
                 searchEdit.visibility = GONE
+            } else {
+                focus = true
+                searchButton.visibility = GONE
+                backButton.visibility = VISIBLE
+
+                searchText.visibility = GONE
+                searchEdit.visibility = VISIBLE
             }
 
             searchEdit.setText(value)
@@ -140,11 +147,19 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
                 popup.menuInflater.inflate(menu, popup.menu)
                 popup.setOnMenuItemClickListener(itemClickListener)
             }
-        }
-        else {
+        } else {
             moreButton.visibility = INVISIBLE
             null
         }
+    }
+
+    fun focus() {
+        searchBar.performClick()
+    }
+
+    fun search() {
+        clearFocus(searchEdit)
+        searchListener(searchEdit.text.toString())
     }
 
     fun clearText() = ::text.set("")

@@ -11,7 +11,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.RecyclerView
 import de.Maxr1998.modernpreferences.PreferenceScreen
+import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.checkBox
 import de.Maxr1998.modernpreferences.helpers.onClick
 import de.dertyp7214.rboardthememanager.Config
@@ -22,7 +24,11 @@ import de.dertyp7214.rboardthememanager.utils.doAsync
 import org.json.JSONArray
 import java.net.URL
 
-class Repos(private val activity: AppCompatActivity, private val onRequestReload: () -> Unit) :
+class Repos(
+    private val activity: AppCompatActivity,
+    private val args: SafeJSON,
+    private val onRequestReload: () -> Unit
+) :
     AbstractMenuPreference() {
 
     private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(activity) }
@@ -127,6 +133,11 @@ class Repos(private val activity: AppCompatActivity, private val onRequestReload
     }
 
     override fun getExtraView(): View? = null
+
+    override fun onStart(recyclerView: RecyclerView, adapter: PreferencesAdapter) {
+        adapter.currentScreen.indexOf(args.getString("highlight"))
+            .let { if (it >= 0) recyclerView.scrollToPosition(it) }
+    }
 
     private fun apply() {
         sharedPreferences.edit {

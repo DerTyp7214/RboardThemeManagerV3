@@ -38,6 +38,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.install.InstallStateUpdatedListener
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.InstallStatus
+import com.google.android.play.core.install.model.UpdateAvailability
+import com.google.android.play.core.ktx.installStatus
 import com.skydoves.balloon.ArrowOrientation
 import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
@@ -60,6 +66,9 @@ import java.io.File
 import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
+
+    @Suppress("PrivatePropertyName")
+    private val PLAY_UPDATE_ID = 3117
 
     private val updateUrl by lazy {
         "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-${BuildConfig.BUILD_TYPE}/app-${BuildConfig.BUILD_TYPE}.apk"
@@ -600,6 +609,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("ShowToast")
     private fun checkModuleAndUpdate(intent: Intent) {
         if (ThemeUtils.checkForExistingThemes()) ThemeUtils.getThemesPathFromProps()
             ?.apply { Config.THEME_LOCATION = this }
@@ -643,6 +653,43 @@ class MainActivity : AppCompatActivity() {
             )
         ) {
             openDialog(R.string.update_ready, R.string.update) { update() }
+        } else if (verifyInstallerId()) {
+            val appUpdateManager = AppUpdateManagerFactory.create(this)
+            val appUpdateInfoTask = appUpdateManager.appUpdateInfo
+
+            fun updateSnackBar() {
+                Snackbar.make(
+                    binding.fragmentContainerView,
+                    R.string.update_downloaded,
+                    Snackbar.LENGTH_INDEFINITE
+                ).apply {
+                    setAction(R.string.restart) { appUpdateManager.completeUpdate() }
+                    setActionTextColor(android.R.attr.colorSecondary)
+                    showMaterial()
+                }
+            }
+
+            val listener = InstallStateUpdatedListener { state ->
+                if (state.installStatus == InstallStatus.DOWNLOADED) {
+                    updateSnackBar()
+                }
+            }
+
+            appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
+                if (appUpdateInfo.installStatus == InstallStatus.DOWNLOADED) updateSnackBar()
+                else if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE && appUpdateInfo.isUpdateTypeAllowed(
+                        AppUpdateType.FLEXIBLE
+                    )
+                ) {
+                    appUpdateManager.registerListener(listener)
+                    appUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        AppUpdateType.FLEXIBLE,
+                        this,
+                        PLAY_UPDATE_ID
+                    )
+                }
+            }
         }
     }
 
