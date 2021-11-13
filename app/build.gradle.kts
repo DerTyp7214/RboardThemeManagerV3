@@ -98,4 +98,8 @@ dependencies {
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.0.5")
     implementation(kotlin("reflect", kotlinVersion))
+
+
+    implementation("com.google.android.play:core:1.10.2")
+    implementation("com.google.android.play:core-ktx:1.8.1")
 }
