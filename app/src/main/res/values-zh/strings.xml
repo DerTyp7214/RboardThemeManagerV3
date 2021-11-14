@@ -4,7 +4,7 @@
     <string name="title_themes">主题</string>
     <string name="title_downloads">下载</string>
     <string name="title_sounds">声音</string>
-    <string name="error">糟糕！</string>
+    <string name="error">糟糕, 发生了一个错误！</string>
     <string name="update_ready">更新准备好了，您想要安装它吗？</string>
     <string name="update">更新</string>
     <string name="install_gboard">您想要安装Gboard吗？</string>
@@ -38,7 +38,7 @@
     <string name="android_version">Android 版本</string>
     <string name="root_version">Root 版本</string>
     <string name="gboard_version">Gboard 版本</string>
-    <string name="unsupported_oem">不支持的OEM</string>
+    <string name="unsupported_oem">不受支持的ROM</string>
     <string name="no">否</string>
     <string name="yes">是</string>
     <string name="share">分享</string>
@@ -60,11 +60,11 @@
     <string name="themes_header">主题</string>
     <string name="show_system_theme">显示系统主题</string>
     <string name="enable_joystick_delete">启用摇杆删除</string>
-    <string name="deprecate_search">谷歌图标</string>
+    <string name="deprecate_search">在工具栏上显示谷歌搜索</string>
     <string name="enable_sharing">分享图标</string>
     <string name="themed_nav_bar_style">导航栏颜色</string>
     <string name="enable_email_provider_completion">电子邮件提供商</string>
-    <string name="enable_popup_view_v2">Popup v2</string>
+    <string name="enable_popup_view_v2">按键气泡 v2</string>
     <string name="enable_key_border">启用按键边框</string>
     <string name="enable_secondary_symbols">启用次要符号</string>
     <string name="show_suggestions">显示建议</string>
@@ -73,7 +73,7 @@
     <string name="all_flags">所有flag值</string>
     <string name="loading_preferences">加载首选项</string>
     <string name="use_silk_theme_by_default">默认使用silk主题</string>
-    <string name="monet">Monet</string>
+    <string name="monet">Monet主题</string>
     <string name="silk_on_all_pixel">在所有像素上的丝绸模式</string>
     <string name="silk_theme">silk主题</string>
     <string name="android_12">Android 12</string>
@@ -86,10 +86,10 @@
     <string name="branding">品牌化</string>
     <string name="show_branding_interval_seconds">G标志显示间隔 秒</string>
     <string name="branding_fadeout_delay_ms">G标志淡出延迟</string>
-    <string name="monet_details">基于系统主题的键盘主题</string>
+    <string name="monet_details">基于系统主题改变键盘颜色</string>
     <string name="download_header">下载</string>
     <string name="repos">仓库管理</string>
-    <string name="repos_long">更改主题repos</string>
+    <string name="repos_long">更改主题仓库</string>
     <string name="apply">应用</string>
     <string name="add">添加</string>
     <string name="save_repos">您想要应用这些更改吗？</string>
@@ -151,7 +151,7 @@
     <string name="download_themes">下载主题</string>
     <string name="theme_pack_count">主题包数量</string>
     <string name="theme_packs">主题包</string>
-    <string name="keyboard_redesign_forbid_key_shadows">使用重新设计的按键阴影</string>
+    <string name="keyboard_redesign_forbid_key_shadows">使用新设计的键盘阴影</string>
     <string name="none">无</string>
     <string name="enable_bitmoji_contextual_category_icon">启用 Bitmoji</string>
     <string name="do_not_report">不报告此错误。</string>
@@ -166,8 +166,8 @@
     <string name="sounds_applied">声音已应用</string>
     <string name="theme_applied">主题已应用</string>
     <string name="all_preferences">所有首选项</string>
-    <string name="show_all_preferences">显示所有首选项</string>
-    <string name="show_all_preferences_long">显示所有Gboard首选项</string>
+    <string name="show_all_preferences">显示所有偏好设置</string>
+    <string name="show_all_preferences_long">显示所有Gboard偏好设置</string>
     <string name="team">团队</string>
     <string name="owner_themer">所有者 &amp; 主题</string>
     <string name="developer_themer">开发者 &amp; 主题</string>
@@ -179,4 +179,19 @@
     <string name="about">关于</string>
     <string name="xda_thread">XDA 讨论串</string>
     <string name="github_repo">GitHub 仓库</string>
+    <string name="translators">翻译者们</string>
+    <string name="applied_theme">(已应用)</string>
+    <string name="installed_from_play">从 PlayStore 安装</string>
+    <string name="keyboard_height_ratio">键盘高度</string>
+    <string name="max_short">0.50 最低</string>
+    <string name="extra_extra_short">0.65 极低</string>
+    <string name="extra_short">0.85 超低</string>
+    <string name="key_short">0.90 低</string>
+    <string name="mid_short">0.95 中等偏低</string>
+    <string name="normal">1.00 中</string>
+    <string name="mid_tall">1.05 中等偏高</string>
+    <string name="tall">1.10 高</string>
+    <string name="extra_tall">1.15 超高</string>
+    <string name="extra_extra_tall">1.50 极高</string>
+    <string name="max_tall">2.00 最高</string>
 </resources>
