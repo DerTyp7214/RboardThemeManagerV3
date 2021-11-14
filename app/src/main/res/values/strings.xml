@@ -182,4 +182,17 @@
     <string name="github_repo">GitHub Repo</string>
     <string name="translators">Translators</string>
     <string name="applied_theme">(applied)</string>
+    <string name="installed_from_play">Installed from PlayStore</string>
+    <string name="keyboard_height_ratio">Keyboard Height-ratio</string>
+    <string name="max_short">0.50 Max-short</string>
+    <string name="extra_extra_short">0.65 Extra-extra-short</string>
+    <string name="extra_short">0.85 Extra-short</string>
+    <string name="key_short">0.90 Short</string>
+    <string name="mid_short">0.95 Mid-short</string>
+    <string name="normal">1.00 Normal</string>
+    <string name="mid_tall">1.05 Mid-tall</string>
+    <string name="tall">1.10 Tall</string>
+    <string name="extra_tall">1.15 Extra-tall</string>
+    <string name="extra_extra_tall">1.50 Extra-extra-tall</string>
+    <string name="max_tall">2.00 Max-tall</string>
 </resources>

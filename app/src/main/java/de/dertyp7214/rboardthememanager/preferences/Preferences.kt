@@ -25,6 +25,7 @@ import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.start
+import de.dertyp7214.rboardthememanager.core.verifyInstallerId
 import de.dertyp7214.rboardthememanager.screens.ReadMoreReadFast
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
@@ -51,7 +52,8 @@ class Preferences(
         "gboard_version" to "${
             GboardUtils.getGboardVersion(activity).split("-").first()
         } (${GboardUtils.getGboardVersionCode(activity)})",
-        "unsupported_oem" to if (Config.IS_MIUI) R.string.yes else R.string.no
+        "unsupported_oem" to if (Config.IS_MIUI) R.string.yes else R.string.no,
+        "installed_from_play" to if (activity.verifyInstallerId()) R.string.yes else R.string.no
     )
 
     private val preference: AbstractPreference
@@ -266,6 +268,11 @@ class Preferences(
                 titleRes = R.string.unsupported_oem
                 summaryRes = infoData[key] as Int
                 iconRes = R.drawable.ic_trash
+            }
+            pref("installed_from_play") {
+                titleRes = R.string.installed_from_play
+                summaryRes = infoData[key] as Int
+                iconRes = R.drawable.ic_playstore
             }
         }
     }

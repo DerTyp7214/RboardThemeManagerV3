@@ -85,7 +85,7 @@ class ShareFlags : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         if (import) menuInflater.inflate(R.menu.import_flags, menu)
         else menuInflater.inflate(R.menu.share_flags, menu)
         return true

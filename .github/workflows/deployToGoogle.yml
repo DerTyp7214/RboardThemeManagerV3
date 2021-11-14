@@ -1,0 +1,84 @@
+name: Deploy to Google Play
+
+on:
+  push:
+    branches: [ staging ]
+    paths:
+      - 'app/**'
+      - 'gradle/**'
+      - 'build.gradle.kts'
+      - 'gradle.properties'
+      - 'settings.gradle.kts'
+      - '.github/workflows/deployToGoogle.yml'
+
+jobs:
+  build:
+    name: Deploy to Google Play
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            !~/.gradle/caches/build-cache-*
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}
+          restore-keys: ${{ runner.os }}-gradle-
+
+      - name: Cache build cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ${{ github.workspace }}/.ccache
+            ~/.gradle/caches/build-cache-*
+          key: ${{ runner.os }}-build-cache-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-build-cache-
+
+      - name: Build Bundle
+        id: buildBundle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: release-candidate
+          arguments: bundleRelease
+
+      - name: Sign artifact
+        id: signArtifact
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/bundle/release
+          alias: ${{ secrets.KEYALIAS }}
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: 31.0.0
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Artifact
+          path: app/build/outputs/bundle/release/app-release.aab
+
+      - name: Create whatsNew
+        run: mkdir distribution/; echo '${{ github.event.head_commit.message }}' > whatsnew-en-US
+
+      - name: Create service_account.json
+        run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
+
+      - name: Deploy to Production
+        uses: r0adkll/upload-google-play@v1.0.15
+        with:
+          serviceAccountJson: service_account.json
+          packageName: de.dertyp7214.rboardthememanager
+          releaseFiles: app/build/outputs/bundle/release/*.aab
+          track: production
+          whatsNewDirectory: distribution/
