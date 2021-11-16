@@ -204,7 +204,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                 openDialog(R.string.uninstall_long, R.string.uninstall, false) {
                     MagiskUtils.uninstallModule(MODULE_ID)
                     Handler(Looper.getMainLooper()).postDelayed({
-                        "reboot".runAsCommand()
+                        de.dertyp7214.rboardthememanager.utils.RootUtils.reboot()
                     }, 500)
                 }
             }

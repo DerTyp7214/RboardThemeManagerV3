@@ -13,6 +13,7 @@ import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.core.download
 import de.dertyp7214.rboardthememanager.core.format
 import de.dertyp7214.rboardthememanager.core.openDialog
+import de.dertyp7214.rboardthememanager.core.openUrl
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 
@@ -72,7 +73,11 @@ class ThemePackAdapter(
                         themePack.description ?: getString(R.string.theme_pack),
                         getString(R.string.description),
                         true,
-                        null
+                        R.string.download,
+                        {
+                            it.dismiss()
+                            openUrl(themePack.url)
+                        }
                     ) {
                         it.dismiss()
                     }
