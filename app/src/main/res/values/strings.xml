@@ -208,7 +208,7 @@
     <string name="kb_pad_port_r">Portrait-Right</string>
 
     <string name="corner_key_l">Corner-Radius-Left (Bottom)</string>
-    <string name="corner_key_r">Corner-Radius-Right (Bottom)</string>
+    <string name="corner_key_r">Corner-Radius (Bottom)</string>
     <string name="props">Props</string>
     <string name="other_props">Other Props</string>
     <string name="other_props_long">Other Props set via resetprop</string>
