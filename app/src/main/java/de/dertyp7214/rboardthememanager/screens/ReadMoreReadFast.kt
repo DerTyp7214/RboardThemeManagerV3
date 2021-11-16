@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.openDialog
-import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.core.su
+import de.dertyp7214.rboardthememanager.utils.RootUtils
 import de.dertyp7214.rboardthememanager.utils.doAsync
 
 class ReadMoreReadFast : AppCompatActivity() {
@@ -49,7 +49,7 @@ class ReadMoreReadFast : AppCompatActivity() {
             }
         }) {
             openDialog(R.string.reboot_now, R.string.reboot) {
-                "reboot".runAsCommand()
+                RootUtils.reboot()
             }
         }
     }

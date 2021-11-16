@@ -3,7 +3,6 @@ package de.dertyp7214.rboardthememanager.fragments
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,13 +15,13 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.ChipContainer
 import de.dertyp7214.rboardthememanager.components.LayoutManager
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.core.applyTransitions
+import de.dertyp7214.rboardthememanager.core.applyTransitionsViewCreated
+import de.dertyp7214.rboardthememanager.core.get
+import de.dertyp7214.rboardthememanager.core.showMaterial
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
-import de.dertyp7214.rboardthememanager.utils.ThemeUtils
-import de.dertyp7214.rboardthememanager.utils.TraceWrapper
-import de.dertyp7214.rboardthememanager.utils.asyncInto
-import de.dertyp7214.rboardthememanager.utils.doAsync
+import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 
 class DownloadListFragment : Fragment() {
@@ -74,7 +73,7 @@ class DownloadListFragment : Fragment() {
                                 snackbar.setAction(
                                     R.string.reboot
                                 ) {
-                                    "reboot".runAsCommand()
+                                    RootUtils.reboot()
                                 }
                         }.showMaterial()
                 }

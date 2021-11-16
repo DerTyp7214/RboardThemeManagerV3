@@ -75,6 +75,7 @@
     <string name="loading_preferences">Loading Preferences</string>
     <string name="use_silk_theme_by_default">Use silk theme by default</string>
     <string name="monet">Monet</string>
+    <string name="silk_on_all_devices">Silk on all Devices</string>
     <string name="silk_on_all_pixel">Silk on all Pixel</string>
     <string name="silk_theme">Silk theme</string>
     <string name="android_12">Android 12</string>
@@ -217,4 +218,5 @@
     <string name="restart">RESTART</string>
     <string name="invalid_link">Invalid Link</string>
     <string name="deep_link">Deep link</string>
+    <string name="download">Download</string>
 </resources>

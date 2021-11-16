@@ -1,5 +1,5 @@
 {
-  "time": "1636056100001",
+  "time": "1637003058455",
   "flags": [
     {
       "key": "general",
@@ -226,6 +226,7 @@
       "minSdk": 31,
       "linkedKeys": [
         "use_silk_theme_by_default",
+        "silk_on_all_devices",
         "silk_on_all_pixel",
         "silk_theme"
       ]
@@ -233,6 +234,16 @@
     {
       "key": "use_silk_theme_by_default",
       "title": "use_silk_theme_by_default",
+      "summary": "",
+      "icon": "ic_themes",
+      "defaultValue": false,
+      "type": "BOOLEAN",
+      "file": "FLAGS",
+      "visible": false
+    },
+    {
+      "key": "silk_on_all_devices",
+      "title": "silk_on_all_devices",
       "summary": "",
       "icon": "ic_themes",
       "defaultValue": false,
