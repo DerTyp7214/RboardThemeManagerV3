@@ -206,7 +206,7 @@
     <string name="kb_pad_port_r">Verticale-Destra</string>
 
     <string name="corner_key_l">Angolo-Raggio-Sinistro (Basso)</string>
-    <string name="corner_key_r">Angolo-Raggio-Destro (Basso)</string>
+    <string name="corner_key_r">Angolo-Raggio (Basso)</string>
     <string name="props">Props</string>
     <string name="other_props">Altre Props</string>
     <string name="other_props_long">Altre Props impostate via resetprop</string>
