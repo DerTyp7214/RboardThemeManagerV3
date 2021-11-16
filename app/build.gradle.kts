@@ -48,7 +48,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    // TODO: remove
+
     packagingOptions {
         jniLibs {
             useLegacyPackaging = true

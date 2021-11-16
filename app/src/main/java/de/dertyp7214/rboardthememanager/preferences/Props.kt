@@ -42,7 +42,6 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
 
             "ch_radius",
 
-            //"corner_key_l",
             "corner_key_r"
         )
 
