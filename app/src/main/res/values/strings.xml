@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="search">Search</string>
 
     <string name="title_themes">Themes</string>
@@ -198,7 +198,7 @@
     <string name="max_tall">2.00 Max-tall</string>
     <string name="margins">Margins</string>
     <string name="radius">Radius</string>
-    <string name="not_set">Not set</string>
+    <string name="not_set" tools:ignore="PrivateResource">Not set</string>
 
     <string name="kb_pad_land_b">Landscape-Bottom</string>
     <string name="kb_pad_land_l">Landscape-Left</string>
