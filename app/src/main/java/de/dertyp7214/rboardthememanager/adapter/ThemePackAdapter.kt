@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.openUrl
 import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.core.download
 import de.dertyp7214.rboardthememanager.core.format
@@ -73,7 +74,11 @@ class ThemePackAdapter(
                         themePack.description ?: getString(R.string.theme_pack),
                         getString(R.string.description),
                         true,
-                        null
+                        R.string.download,
+                        {
+                            it.dismiss()
+                            openUrl(themePack.url)
+                        }
                     ) {
                         it.dismiss()
                     }

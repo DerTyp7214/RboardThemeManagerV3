@@ -98,13 +98,14 @@ fun Activity.openDialog(
     message: String,
     title: String,
     cancelable: Boolean = false,
+    @StringRes negativeText: Int = android.R.string.cancel,
     negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
     positive: (dialogInterface: DialogInterface) -> Unit
 ): AlertDialog = openDialog(
     message,
     title,
     getString(android.R.string.ok),
-    getString(android.R.string.cancel),
+    getString(negativeText),
     cancelable,
     negative,
     positive
@@ -116,7 +117,7 @@ fun Activity.openDialog(
     cancelable: Boolean = false,
     negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
     positive: (dialogInterface: DialogInterface) -> Unit
-): AlertDialog = openDialog(getString(message), getString(title), cancelable, negative, positive)
+): AlertDialog = openDialog(getString(message), getString(title), cancelable, negative = negative, positive = positive)
 
 fun Activity.openDialog(
     @StringRes message: Int,

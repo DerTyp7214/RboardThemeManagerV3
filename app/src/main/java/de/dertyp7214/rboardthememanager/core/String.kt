@@ -6,6 +6,7 @@ import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.R
 import org.xml.sax.InputSource
 import java.io.StringReader
+import java.util.*
 import javax.xml.parsers.DocumentBuilderFactory
 
 fun String.runAsCommand(callback: (result: Array<String>) -> Unit = {}): Boolean {
@@ -22,6 +23,9 @@ fun String.runAsCommand(callback: (result: Array<String>) -> Unit = {}): Boolean
         Logger.log(Logger.Companion.Type.INFO, "RUN COMMAND", "${this@runAsCommand} -> $this")
     }
 }
+fun String.capitalize() =
+    replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+
 
 fun String.booleanOrNull(): Boolean? {
     return if (this == "true" || this == "false") toBoolean() else null

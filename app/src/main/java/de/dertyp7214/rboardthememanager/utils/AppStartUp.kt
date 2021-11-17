@@ -40,6 +40,7 @@ import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
 import org.json.JSONObject
 import java.io.File
+import org.json.JSONArray
 import java.net.URL
 
 
@@ -297,11 +298,30 @@ class AppStartUp(private val activity: AppCompatActivity) {
                             }
                             finishAndRemoveTask()
                         }
-                    openImportFlags(resultLauncher) {
-                        File(cacheDir, "flags.rboard").apply {
-                            delete()
-                            data.writeToFile(activity, this)
-                        }.readXML()
+                    val file = File(cacheDir, "flags.rboard").apply {
+                        delete()
+                        data.writeToFile(activity, this)
+                    }
+                    if (file.readText().startsWith("link=")) {
+                        val links = HashMap<Navigations.LINKS, JSONObject>()
+                        JSONArray().safeParse(file.readText().removePrefix("link="))
+                            .forEach<JSONObject> { json, _ ->
+                                val obj = SafeJSON(json)
+                                try {
+                                    links[Navigations.LINKS.valueOf(
+                                        obj.getString("screen").uppercase()
+                                    )] = obj.getJSONObject("args")
+                                } catch (e: Exception) {
+                                    Toast.makeText(
+                                        this,
+                                        R.string.invalid_link,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        Navigations(activity).deepLinkWithArgs(links)
+                    } else openImportFlags(resultLauncher) {
+                        file.readXML()
                     }
                 }
                 initialized && data != null -> {

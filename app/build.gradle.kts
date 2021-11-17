@@ -20,8 +20,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 31
-        versionCode = 339001
-        versionName = "3.3.9"
+        versionCode = 340000
+        versionName = "3.4.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -46,7 +46,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    // TODO: remove
+
     packagingOptions {
         jniLibs {
             useLegacyPackaging = true
@@ -67,12 +67,12 @@ dependencies {
     implementation("com.github.topjohnwu.libsu:core:$libsuVersion")
     implementation("com.github.topjohnwu.libsu:io:$libsuVersion")
     implementation("com.github.topjohnwu.libsu:busybox:$libsuVersion")
-    implementation("dev.chrisbanes.insetter:insetter:0.6.0")
+    implementation("dev.chrisbanes.insetter:insetter:0.6.1")
     implementation("androidx.core:core-ktx:1.7.0")
     //noinspection DifferentStdlibGradleVersion
     implementation(kotlin("stdlib-jdk7", kotlinVersion))
-    implementation("androidx.appcompat:appcompat:1.4.0-rc01")
-    implementation("com.google.android.material:material:1.5.0-alpha05")
+    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("com.google.android.material:material:1.5.0-beta01")
     implementation("androidx.constraintlayout:constraintlayout:2.1.1")
     implementation("androidx.preference:preference-ktx:1.2.0-alpha02")
     implementation("androidx.activity:activity-ktx:1.4.0")

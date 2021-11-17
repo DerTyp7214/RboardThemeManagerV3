@@ -52,7 +52,7 @@ class SafeJSON(private val json: JSONObject) {
         }
     }
 
-    fun get(name: String, defaultValue: Any = ""): Any {
+    operator fun get(name: String, defaultValue: Any = ""): Any {
         return try {
             json.get(name)
         } catch (e: Exception) {

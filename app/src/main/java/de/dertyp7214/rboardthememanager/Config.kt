@@ -8,9 +8,11 @@ import de.dertyp7214.rboardthememanager.data.ModuleMeta
 object Config {
     var useMagisk = false
     var newGboard = true
-
+    val PLAY_URL = { packageName: String ->
+        "https://play.google.com/store/apps/details?id=$packageName"
+    }
     var THEME_LOCATION = "/system/etc/gboard_theme"
-
+    const val MAGISK_PACKAGE_NAME = "com.topjohnwu.magisk"
     const val MODULES_PATH = "/data/adb/modules"
     const val MODULE_ID = "rboard-themes"
     const val MODULE_PATH = "$MODULES_PATH/$MODULE_ID"

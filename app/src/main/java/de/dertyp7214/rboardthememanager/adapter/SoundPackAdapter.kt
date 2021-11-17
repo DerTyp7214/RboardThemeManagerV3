@@ -14,8 +14,12 @@ import com.google.android.material.snackbar.Snackbar
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.core.copyRecursively
+import de.dertyp7214.rboardthememanager.core.download
+import de.dertyp7214.rboardthememanager.core.openDialog
+import de.dertyp7214.rboardthememanager.core.showMaterial
 import de.dertyp7214.rboardthememanager.data.SoundPack
+import de.dertyp7214.rboardthememanager.utils.RootUtils
 import de.dertyp7214.rboardthememanager.utils.getSoundsDirectory
 import java.io.File
 import java.io.FileInputStream
@@ -75,7 +79,7 @@ class SoundPackAdapter(
                                 ).setAnchorView(view).setAction(
                                     R.string.reboot
                                 ) {
-                                    "reboot".runAsCommand()
+                                    RootUtils.reboot()
                                 }.showMaterial()
                             }
                         }
