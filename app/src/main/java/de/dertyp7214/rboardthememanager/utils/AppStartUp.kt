@@ -112,7 +112,8 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 }
             })
 
-            Shell.enableVerboseLogging = BuildConfig.DEBUG
+            Shell.enableVerboseLogging = PreferenceManager.getDefaultSharedPreferences(this)
+                .getString("logMode", "VERBOSE") == "VERBOSE"
             Shell.setDefaultBuilder(Shell.Builder.create().apply {
                 setFlags(Shell.FLAG_MOUNT_MASTER)
                 setInitializers(BusyBoxInstaller::class.java)

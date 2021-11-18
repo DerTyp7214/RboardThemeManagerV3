@@ -36,7 +36,7 @@ object PackageUtils {
                         }
                         else -> {
                             intent = null
-                            if ("pm install ${file.absolutePath}".runAsCommand() || "pm install -r ${file.absolutePath}".runAsCommand()) Toast.makeText(
+                            if ("chmod 777 ${file.absolutePath}".runAsCommand() && "pm install ${file.absolutePath}".runAsCommand() || "chmod 777 ${file.absolutePath}".runAsCommand() && " pm install -r ${file.absolutePath}".runAsCommand()) Toast.makeText(
                                 context,
                                 R.string.app_updated,
                                 Toast.LENGTH_SHORT
