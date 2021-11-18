@@ -95,7 +95,8 @@ jobs:
 
       - name: Extract branch name
         shell: bash
-        run: echo "::set-env name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
+        run: echo "::set-output name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
+        id: extract_branch
 
       - name: Send Telegram message
         uses: appleboy/telegram-action@master
@@ -103,5 +104,5 @@ jobs:
           to: "@rboardci"
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
-          message: "#${{ BRANCH_NAME }}\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})"
+          message: "#${{ steps.extract_branch.outputs.BRANCH_NAME }}\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})"
           document: app/build/outputs/apk/debug/app-debug.apk
