@@ -3,15 +3,15 @@
 package de.dertyp7214.rboardthememanager.utils
 
 import android.app.Activity
-import de.dertyp7214.rboardthememanager.Config
-import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.*
 import com.dertyp7214.logs.helpers.Logger
 import com.jaredrummler.android.shell.Shell
 import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
 import com.topjohnwu.superuser.io.SuFileOutputStream
+import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.MODULES_PATH
+import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.MagiskModule
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 import java.nio.charset.Charset
@@ -47,20 +47,6 @@ object MagiskUtils {
         } else ArrayList()
     }
 
-    private fun installModule(meta: ModuleMeta, files: Map<String, String?>) {
-        RootUtils.runWithRoot {
-            val moduleDir = SuFile(MODULES_PATH, meta.id)
-            moduleDir.mkdirs()
-            writeSuFile(SuFile(moduleDir, "module.prop"), meta.getString())
-            files.forEach {
-                SuFile(moduleDir, it.key).apply {
-                    if (it.value != null) writeSuFile(this, it.value ?: "")
-                    else mkdirs()
-                }
-            }
-        }.catch { Logger.log(Logger.Companion.Type.ERROR, "INSTALL_MODULE", it) }
-    }
-
     fun getModule(moduleId: String): MagiskModule? {
         return if (isMagiskInstalled()) {
             val modulePath = SuFile(MODULES_PATH, moduleId)
@@ -75,6 +61,20 @@ object MagiskUtils {
 
     fun isModuleInstalled(moduleId: String): Boolean {
         return getModule(moduleId)?.getSystemProp() != null
+    }
+
+    private fun installModule(meta: ModuleMeta, files: Map<String, String?>) {
+        RootUtils.runWithRoot {
+            val moduleDir = SuFile(MODULES_PATH, meta.id)
+            moduleDir.mkdirs()
+            writeSuFile(SuFile(moduleDir, "module.prop"), meta.getString())
+            files.forEach {
+                SuFile(moduleDir, it.key).apply {
+                    if (it.value != null) writeSuFile(this, it.value ?: "")
+                    else mkdirs()
+                }
+            }
+        }.catch { Logger.log(Logger.Companion.Type.ERROR, "INSTALL_MODULE", it) }
     }
 
     fun installModule(activity: Activity) {
@@ -103,7 +103,6 @@ object MagiskUtils {
         }
     }
 
-
     fun updateModule(meta: ModuleMeta, files: Map<String, String?>) {
         RootUtils.runWithRoot {
             val moduleDir = SuFile(MODULES_PATH, meta.id)
@@ -122,7 +121,8 @@ object MagiskUtils {
                                 text.lines()
                                     .firstOrNull {
                                         file.value?.split("=")?.get(0).toString() in it
-                                    } ?: "", file.value ?: ""
+                                    } ?: "",
+                                file.value?.let { if (it.endsWith("=")) "" else it } ?: ""
                             )
                         } else {
                             text += "\n${file.value ?: ""}"

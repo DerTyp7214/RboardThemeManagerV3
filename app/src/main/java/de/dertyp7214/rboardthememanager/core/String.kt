@@ -3,7 +3,9 @@ package de.dertyp7214.rboardthememanager.core
 import com.dertyp7214.logs.helpers.Logger
 import com.topjohnwu.superuser.Shell
 import de.dertyp7214.rboardthememanager.Application
+import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import org.xml.sax.InputSource
 import java.io.StringReader
 import java.util.*
@@ -23,9 +25,9 @@ fun String.runAsCommand(callback: (result: Array<String>) -> Unit = {}): Boolean
         Logger.log(Logger.Companion.Type.INFO, "RUN COMMAND", "${this@runAsCommand} -> $this")
     }
 }
+
 fun String.capitalize() =
     replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-
 
 fun String.booleanOrNull(): Boolean? {
     return if (this == "true" || this == "false") toBoolean() else null
@@ -38,9 +40,19 @@ fun String.getSystemProperty(): String {
         ""
     }
 }
-fun String.setSystemProperty(value: String = "") =
-    "resetprop ${if (value.isEmpty()) "--delete " else ""}$this $value".runAsCommand()
 
+fun String.setSystemProperty(value: String = "", saveToModule: Boolean = false): Boolean {
+    if (saveToModule) {
+        val files = mapOf(
+            Pair(
+                "system.prop",
+                "$this=$value"
+            )
+        )
+        MagiskUtils.updateModule(Config.MODULE_META, files)
+    }
+    return "resetprop ${if (value.isEmpty()) "--delete " else ""}$this $value".runAsCommand()
+}
 
 fun List<String>.runAsCommand(callback: (result: Array<String>) -> Unit = {}): Boolean {
     return Shell.su(*this.toTypedArray()).exec().apply {
@@ -56,7 +68,6 @@ fun List<String>.runAsCommand(callback: (result: Array<String>) -> Unit = {}): B
         Logger.log(Logger.Companion.Type.INFO, "RUN COMMAND", "${this@runAsCommand} -> $this")
     }
 }
-
 
 fun <T> String.setXmlValue(value: T, key: String): String {
     return this.let { fileText ->
