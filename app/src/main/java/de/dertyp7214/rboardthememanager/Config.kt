@@ -1,6 +1,6 @@
 package de.dertyp7214.rboardthememanager
 
-import android.graphics.drawable.Drawable
+import android.os.Build
 import de.dertyp7214.rboardthememanager.core.getSystemProperty
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 
@@ -8,9 +8,11 @@ import de.dertyp7214.rboardthememanager.data.ModuleMeta
 object Config {
     var useMagisk = false
     var newGboard = true
-
+    val PLAY_URL = { packageName: String ->
+        "https://play.google.com/store/apps/details?id=$packageName"
+    }
     var THEME_LOCATION = "/system/etc/gboard_theme"
-
+    const val MAGISK_PACKAGE_NAME = "com.topjohnwu.magisk"
     const val MODULES_PATH = "/data/adb/modules"
     const val MODULE_ID = "rboard-themes"
     const val MODULE_PATH = "$MODULES_PATH/$MODULE_ID"
@@ -31,7 +33,7 @@ object Config {
     val GBOARD_PREFS_PATH: String
         get() {
             return newGboard.let {
-                if (it) "/data/user_de/0/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
+                if (it) "/data/user${if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) "_de" else ""}/0/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
                 else "/data/data/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
             }
         }

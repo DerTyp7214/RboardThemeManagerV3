@@ -91,7 +91,7 @@ object MagiskUtils {
         activity.openDialog(R.string.reboot_to_continue, R.string.reboot, false, {
             activity.finishAndRemoveTask()
         }) {
-            "reboot".runAsCommand()
+            RootUtils.reboot()
         }
     }
 

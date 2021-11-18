@@ -6,6 +6,7 @@ import android.content.ComponentName
 import android.content.Intent
 import android.content.Intent.ACTION_SEND
 import android.content.Intent.EXTRA_TEXT
+import androidx.recyclerview.widget.RecyclerView
 import android.os.Build
 import android.os.Handler
 import android.view.View
@@ -23,6 +24,7 @@ import de.Maxr1998.modernpreferences.helpers.onClick
 import de.Maxr1998.modernpreferences.helpers.pref
 import de.Maxr1998.modernpreferences.helpers.screen
 import de.dertyp7214.rboardthememanager.Application
+import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import androidx.appcompat.app.AppCompatActivity
@@ -33,6 +35,11 @@ import de.dertyp7214.rboardthememanager.screens.ReadMoreReadFast
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
+import de.dertyp7214.rboardthememanager.core.openUrl
+import de.dertyp7214.rboardthememanager.core.safeParse
+import de.dertyp7214.rboardthememanager.screens.MainActivity
+import de.dertyp7214.rboardthememanager.utils.Navigations
+import org.json.JSONObject
 
 class Preferences(
     private val activity: AppCompatActivity,
@@ -41,6 +48,7 @@ class Preferences(
 ) :    AbstractPreference() {
 
     private val type by lazy { intent.getStringExtra("type") }
+    private val args by lazy { JSONObject().safeParse(intent.getStringExtra("args") ?: "") }
 
     private val usingModule = MagiskUtils.isModuleInstalled(Config.MODULE_ID)
     private val infoData = mapOf(
@@ -65,25 +73,28 @@ class Preferences(
                 preference = this
             }
             "settings" -> {
-                preference = Settings(activity)
+                preference = Settings(activity, args)
             }
             "flags" -> {
                 Flags.setUpFlags()
-                preference = Flags(activity)
+                preference = Flags(activity, args)
             }
             "all_flags" -> {
                 Flags.setUpFlags()
-                preference = Flags.AllFlags(activity, onRequestReload)
+                preference = Flags.AllFlags(activity, args, onRequestReload)
             }
             "all_preferences" -> {
                 Flags.setUpFlags()
-                preference = Flags.AllPreferences(activity, onRequestReload)
+                preference = Flags.AllPreferences(activity, args, onRequestReload)
             }
             "repos" -> {
-                preference = Repos(activity, onRequestReload)
+                preference = Repos(activity, args, onRequestReload)
             }
             "about" -> {
-                preference = About(activity)
+                preference = About(activity, args)
+            }
+            "props" -> {
+                preference = Props(activity, args)
             }
             else -> {
                 preference = this
@@ -91,11 +102,22 @@ class Preferences(
         }
     }
 
+    override fun onStart(recyclerView: RecyclerView, adapter: PreferencesAdapter) {
+        when (type) {
+            "settings", "flags", "all_flags", "all_preferences", "repos", "about", "props" -> preference.onStart(
+                recyclerView,
+                adapter
+            )
+            else -> adapter.currentScreen.indexOf(args.getString("highlight"))
+                .let { if (it >= 0) recyclerView.scrollToPosition(it) }
+        }
+    }
+
     override fun onBackPressed(callback: () -> Unit) {
         when (type) {
             "info" -> callback()
             "settings" -> callback()
-            "repos", "about" -> preference.onBackPressed(callback)
+            "repos", "about", "props" -> preference.onBackPressed(callback)
             "flags", "all_flags", "all_preferences" -> {
                 if (Flags.applyChanges()) {
                     Toast.makeText(activity, R.string.flags_applied, Toast.LENGTH_SHORT).show()
@@ -117,7 +139,7 @@ class Preferences(
         @RequiresApi(Build.VERSION_CODES.R)
         get() {
             return when (type) {
-                "info", "settings", "flags", "all_flags", "all_preferences", "repos", "about" -> screen(
+                "info", "settings", "flags", "all_flags", "all_preferences", "repos", "about", "props" -> screen(
                     activity,
                     preference::preferences
                 )
@@ -137,6 +159,7 @@ class Preferences(
                 "all_preferences" -> activity.getString(R.string.all_preferences)
                 "repos" -> activity.getString(R.string.repos)
                 "about" -> activity.getString(R.string.about)
+                "props" -> activity.getString(R.string.props)
                 else -> ""
             }
         }
@@ -150,7 +173,8 @@ class Preferences(
             "repos" -> {
                 if (preference is AbstractMenuPreference) preference.loadMenu(menuInflater, menu)
             }
-            "settings", "flags", "all_flags", "all_preferences", "about" -> {            }
+            "settings", "flags", "all_flags", "all_preferences", "about", "props" -> {
+            }
         }
     }
 
@@ -195,7 +219,7 @@ class Preferences(
                 if (preference is AbstractMenuPreference) preference.onMenuClick(menuItem)
                 else false
             }
-            "settings", "flags", "all_flags", "all_preferences", "about" -> false
+            "settings", "flags", "all_flags", "all_preferences", "about", "props" -> false
             else -> false
         }
     }
@@ -207,6 +231,7 @@ class Preferences(
     override fun getExtraView(): View? = null
 
     override fun preferences(builder: PreferenceScreen.Builder) {
+        val navigations = Navigations(activity)
         builder.apply {
             pref("theme_count") {
                 titleRes = R.string.theme_count
@@ -265,11 +290,21 @@ class Preferences(
                     titleRes = R.string.root_version
                     summary = infoData[key] as String
                     iconRes = R.drawable.ic_root
+                    onClick {
+                        activity.packageManager.getLaunchIntentForPackage(
+                            Config.MAGISK_PACKAGE_NAME
+                        )?.let(activity::startActivity)
+                        false
+                    }
                 }
             pref("gboard_version") {
                 titleRes = R.string.gboard_version
                 summary = infoData[key] as String
                 iconRes = R.drawable.ic_gboard
+                onClick {
+                    activity.openUrl(Config.PLAY_URL(Config.GBOARD_PACKAGE_NAME))
+                    false
+                }
             }
             pref("unsupported_oem") {
                 titleRes = R.string.unsupported_oem
@@ -283,6 +318,7 @@ abstract class AbstractPreference {
     internal abstract fun preferences(builder: PreferenceScreen.Builder)
     internal abstract fun getExtraView(): View?
     internal abstract fun onBackPressed(callback: () -> Unit)
+    internal abstract fun onStart(recyclerView: RecyclerView, adapter: PreferencesAdapter)
 }
 
 abstract class AbstractMenuPreference : AbstractPreference() {

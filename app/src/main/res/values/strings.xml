@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="search">Search</string>
 
     <string name="title_themes">Themes</string>
@@ -75,6 +75,7 @@
     <string name="loading_preferences">Loading Preferences</string>
     <string name="use_silk_theme_by_default">Use silk theme by default</string>
     <string name="monet">Monet</string>
+    <string name="silk_on_all_devices">Silk on all Devices</string>
     <string name="silk_on_all_pixel">Silk on all Pixel</string>
     <string name="silk_theme">Silk theme</string>
     <string name="android_12">Android 12</string>
@@ -194,4 +195,25 @@
     <string name="extra_tall">1.15 Extra-tall</string>
     <string name="extra_extra_tall">1.50 Extra-extra-tall</string>
     <string name="max_tall">2.00 Max-tall</string>
+    <string name="margins">Margins</string>
+    <string name="radius">Radius</string>
+    <string name="not_set" tools:ignore="PrivateResource">Not set</string>
+
+    <string name="kb_pad_land_b">Landscape-Bottom</string>
+    <string name="kb_pad_land_l">Landscape-Left</string>
+    <string name="kb_pad_land_r">Landscape-Right</string>
+    <string name="kb_pad_port_b">Portrait-Bottom</string>
+    <string name="kb_pad_port_l">Portrait-Left</string>
+    <string name="kb_pad_port_r">Portrait-Right</string>
+
+    <string name="corner_key_l">Corner-Radius-Left (Bottom)</string>
+    <string name="corner_key_r">Corner-Radius (Bottom)</string>
+    <string name="props">Props</string>
+    <string name="other_props">Other Props</string>
+    <string name="other_props_long">Other Props set via resetprop</string>
+    <string name="prop_changed">Prop changed</string>
+    <string name="reset">Reset</string>
+    <string name="invalid_link">Invalid Link</string>
+    <string name="deep_link">Deep link</string>
+    <string name="download">Download</string>
 </resources>

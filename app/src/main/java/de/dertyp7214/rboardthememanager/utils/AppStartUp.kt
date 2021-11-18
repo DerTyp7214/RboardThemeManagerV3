@@ -1,13 +1,14 @@
 package de.dertyp7214.rboardthememanager.utils
 
 import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.view.View
 import android.view.ViewTreeObserver
@@ -17,6 +18,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
+import androidx.core.app.NotificationCompat
 import androidx.core.content.FileProvider
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
@@ -24,6 +26,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.topjohnwu.superuser.BusyBoxInstaller
 import com.topjohnwu.superuser.Shell
+import com.topjohnwu.superuser.internal.Utils.getContext
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
@@ -37,8 +40,9 @@ import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
 import org.json.JSONObject
 import java.io.File
-import java.io.InputStream
+import org.json.JSONArray
 import java.net.URL
+
 
 class AppStartUp(private val activity: AppCompatActivity) {
     private val checkUpdateUrl by lazy {
@@ -294,11 +298,30 @@ class AppStartUp(private val activity: AppCompatActivity) {
                             }
                             finishAndRemoveTask()
                         }
-                    openImportFlags(resultLauncher) {
-                        File(cacheDir, "flags.rboard").apply {
-                            delete()
-                            data.writeToFile(activity, this)
-                        }.readXML()
+                    val file = File(cacheDir, "flags.rboard").apply {
+                        delete()
+                        data.writeToFile(activity, this)
+                    }
+                    if (file.readText().startsWith("link=")) {
+                        val links = HashMap<Navigations.LINKS, JSONObject>()
+                        JSONArray().safeParse(file.readText().removePrefix("link="))
+                            .forEach<JSONObject> { json, _ ->
+                                val obj = SafeJSON(json)
+                                try {
+                                    links[Navigations.LINKS.valueOf(
+                                        obj.getString("screen").uppercase()
+                                    )] = obj.getJSONObject("args")
+                                } catch (e: Exception) {
+                                    Toast.makeText(
+                                        this,
+                                        R.string.invalid_link,
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        Navigations(activity).deepLinkWithArgs(links)
+                    } else openImportFlags(resultLauncher) {
+                        file.readXML()
                     }
                 }
                 initialized && data != null -> {
@@ -405,27 +428,30 @@ class AppStartUp(private val activity: AppCompatActivity) {
 
     private fun createNotificationChannels(activity: AppCompatActivity) {
         activity.apply {
-            val namePush = getString(R.string.channel_name)
-            val channelIdPush = getString(R.string.default_notification_channel_id)
-            val descriptionTextPush = getString(R.string.channel_description)
-            val importancePush = NotificationManager.IMPORTANCE_DEFAULT
-            val channelPush = NotificationChannel(channelIdPush, namePush, importancePush).apply {
-                description = descriptionTextPush
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val namePush = getString(R.string.channel_name)
+                val channelIdPush = getString(R.string.default_notification_channel_id)
+                val descriptionTextPush = getString(R.string.channel_description)
+                val importancePush = NotificationManager.IMPORTANCE_DEFAULT
+                val channelPush =
+                    NotificationChannel(channelIdPush, namePush, importancePush).apply {
+                        description = descriptionTextPush
+                    }
+
+                val nameDownload = getString(R.string.channel_name_download)
+                val channelIdDownload = getString(R.string.download_notification_channel_id)
+                val descriptionTextDownload = getString(R.string.channel_description_download)
+                val importanceDownload = NotificationManager.IMPORTANCE_LOW
+                val channelDownload =
+                    NotificationChannel(channelIdDownload, nameDownload, importanceDownload).apply {
+                        description = descriptionTextDownload
+                    }
+
+                val notificationManager: NotificationManager =
+                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                notificationManager.createNotificationChannel(channelPush)
+                notificationManager.createNotificationChannel(channelDownload)
             }
-
-            val nameDownload = getString(R.string.channel_name_download)
-            val channelIdDownload = getString(R.string.download_notification_channel_id)
-            val descriptionTextDownload = getString(R.string.channel_description_download)
-            val importanceDownload = NotificationManager.IMPORTANCE_LOW
-            val channelDownload =
-                NotificationChannel(channelIdDownload, nameDownload, importanceDownload).apply {
-                    description = descriptionTextDownload
-                }
-
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channelPush)
-            notificationManager.createNotificationChannel(channelDownload)
         }
     }
 }

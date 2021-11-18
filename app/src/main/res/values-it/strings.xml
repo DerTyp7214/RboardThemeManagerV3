@@ -179,4 +179,36 @@
     <string name="about">Informazioni</string>
     <string name="xda_thread">Thread XDA</string>
     <string name="github_repo">Repo GitHub</string>
+    <string name="translators">Traduttori</string>
+    <string name="applied_theme">(applicato)</string>
+    <string name="keyboard_height_ratio">Rapporto altezza tastiera</string>
+    <string name="max_short">0.50 bassissima</string>
+    <string name="extra_extra_short">0.65 molto molto bassa</string>
+    <string name="extra_short">0.85 molto bassa</string>
+    <string name="key_short">0.90 bassa</string>
+    <string name="mid_short">0.95 medio-bassa</string>
+    <string name="normal">1.00 normale</string>
+    <string name="mid_tall">1.05 medio-alta</string>
+    <string name="tall">1.10 alta</string>
+    <string name="extra_tall">1.15 molto alta</string>
+    <string name="extra_extra_tall">1.50 molto molto alta</string>
+    <string name="max_tall">2.00 altissima</string>
+    <string name="margins">Margini</string>
+    <string name="radius">Raggio</string>
+    <string name="not_set">Non impostato</string>
+
+    <string name="kb_pad_land_b">Orizzontale-Basso</string>
+    <string name="kb_pad_land_l">Orizzontale-Sinistra</string>
+    <string name="kb_pad_land_r">Orizzontale-Destra</string>
+    <string name="kb_pad_port_b">Verticale-Basso</string>
+    <string name="kb_pad_port_l">Verticale-Sinistra</string>
+    <string name="kb_pad_port_r">Verticale-Destra</string>
+
+    <string name="corner_key_l">Angolo-Raggio-Sinistro (Basso)</string>
+    <string name="corner_key_r">Angolo-Raggio (Basso)</string>
+    <string name="props">Props</string>
+    <string name="other_props">Altre Props</string>
+    <string name="other_props_long">Altre Props impostate via resetprop</string>
+    <string name="prop_changed">Prop modificate</string>
+    <string name="reset">Reset</string>
 </resources>

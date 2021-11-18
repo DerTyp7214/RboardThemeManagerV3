@@ -14,21 +14,22 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
+import androidx.recyclerview.widget.RecyclerView
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
+import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.*
 import de.Maxr1998.modernpreferences.preferences.choice.SelectionItem
 import de.dertyp7214.rboardthememanager.Application
+import de.dertyp7214.rboardthememanager.BuildConfig
+import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.Config
-import de.dertyp7214.rboardthememanager.core.openDialog
-import de.dertyp7214.rboardthememanager.core.runAsCommand
-import de.dertyp7214.rboardthememanager.core.start
+import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 
-class Settings(private val activity: Activity) : AbstractPreference() {
+class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
     enum class TYPE {
         BOOLEAN,
         STRING,
@@ -48,7 +49,8 @@ class Settings(private val activity: Activity) : AbstractPreference() {
         val defaultValue: Any,
         val type: TYPE,
         val items: List<SelectionItem> = listOf(),
-        val onClick: Activity.(Boolean) -> Unit = {}
+        val onClick: Activity.(Boolean) -> Unit = {},
+        val visible: Boolean = true
     ) {
         THEMES_HEADER(
             "themes_header",
@@ -98,22 +100,6 @@ class Settings(private val activity: Activity) : AbstractPreference() {
             "",
             TYPE.GROUP
         ),
-        INFO(
-            "info",
-            R.string.info,
-            -1,
-            R.drawable.ic_info,
-            "",
-            TYPE.STRING,
-            listOf(), {
-                Application.context?.let {
-                    PreferencesActivity::class.java.start(it) {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                        putExtra("type", "info")
-                    }
-                }
-            }
-        ),
         REPOS(
             "repos",
             R.string.repos,
@@ -138,6 +124,22 @@ class Settings(private val activity: Activity) : AbstractPreference() {
             -1,
             "",
             TYPE.GROUP
+        ),
+        INFO(
+            "info",
+            R.string.info,
+            -1,
+            R.drawable.ic_info,
+            "",
+            TYPE.STRING,
+            listOf(), {
+                Application.context?.let {
+                    PreferencesActivity::class.java.start(it) {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        putExtra("type", "info")
+                    }
+                }
+            }
         ),
         APP_THEME(
             "app_theme",
@@ -184,6 +186,21 @@ class Settings(private val activity: Activity) : AbstractPreference() {
                 Toast.makeText(this, R.string.flags_fixed, Toast.LENGTH_LONG).show()
             }
         ),
+        DEEP_LINK(
+            "deep_link",
+            R.string.deep_link,
+            R.string.deep_link,
+            R.drawable.ic_link,
+            "",
+            TYPE.STRING,
+            listOf(),
+            {
+                packageManager.getLaunchIntentForPackage("de.dertyp7214.deeplinkrboard")
+                    ?.let(::startActivity)
+                    ?: openUrl("https://github.com/DerTyp7214/DeepLinkRboard")
+            },
+            BuildConfig.DEBUG
+        ),
         UNINSTALL(
             "uninstall",
             R.string.uninstall,
@@ -196,7 +213,7 @@ class Settings(private val activity: Activity) : AbstractPreference() {
                 openDialog(R.string.uninstall_long, R.string.uninstall, false) {
                     MagiskUtils.uninstallModule(MODULE_ID)
                     Handler(Looper.getMainLooper()).postDelayed({
-                        "reboot".runAsCommand()
+                        de.dertyp7214.rboardthememanager.utils.RootUtils.reboot()
                     }, 500)
                 }
             }
@@ -210,6 +227,12 @@ class Settings(private val activity: Activity) : AbstractPreference() {
         }
     }
 
+    override fun onStart(recyclerView: RecyclerView, adapter: PreferencesAdapter) {
+        adapter.currentScreen.indexOf(args.getString("highlight"))
+            .let { if (it >= 0) recyclerView.scrollToPosition(it) }
+    }
+
+
     override fun getExtraView(): View? = null
 
     override fun onBackPressed(callback: () -> Unit) {
@@ -217,7 +240,7 @@ class Settings(private val activity: Activity) : AbstractPreference() {
     }
 
     override fun preferences(builder: PreferenceScreen.Builder) {
-        SETTINGS.values()
+        SETTINGS.values().filter { it.visible }
             .filter { !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) && !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S)  }
             .forEach { item ->
                 val pref: Preference = when (item.type) {

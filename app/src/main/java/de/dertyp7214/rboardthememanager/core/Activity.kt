@@ -98,13 +98,14 @@ fun Activity.openDialog(
     message: String,
     title: String,
     cancelable: Boolean = false,
+    @StringRes negativeText: Int = android.R.string.cancel,
     negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
     positive: (dialogInterface: DialogInterface) -> Unit
 ): AlertDialog = openDialog(
     message,
     title,
     getString(android.R.string.ok),
-    getString(android.R.string.cancel),
+    getString(negativeText),
     cancelable,
     negative,
     positive
@@ -116,7 +117,7 @@ fun Activity.openDialog(
     cancelable: Boolean = false,
     negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
     positive: (dialogInterface: DialogInterface) -> Unit
-): AlertDialog = openDialog(getString(message), getString(title), cancelable, negative, positive)
+): AlertDialog = openDialog(getString(message), getString(title), cancelable, negative = negative, positive = positive)
 
 fun Activity.openDialog(
     @StringRes message: Int,
@@ -161,6 +162,7 @@ fun Activity.openShareThemeDialog(
 fun Activity.openInputDialog(
     @StringRes hint: Int,
     value: String? = null,
+    @StringRes negativeText: Int = android.R.string.cancel,
     negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },
     positive: (dialogInterface: DialogInterface, text: String) -> Unit
 ) = openDialog(R.layout.input_dialog, false) { dialog ->
@@ -171,7 +173,10 @@ fun Activity.openInputDialog(
     findViewById<Button>(R.id.ok)?.setOnClickListener {
         positive(dialog, input?.text?.toString() ?: "")
     }
-    findViewById<Button>(R.id.cancel)?.setOnClickListener { negative(dialog) }
+    findViewById<Button>(R.id.cancel)?.let { button ->
+        button.setOnClickListener { negative(dialog) }
+        button.setText(negativeText)
+    }
 }
 
 fun Activity.openLoadingDialog(@StringRes message: Int) =
