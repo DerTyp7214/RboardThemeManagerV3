@@ -215,7 +215,7 @@
     <string name="prop_changed">Prop changed</string>
     <string name="reset">Reset</string>
     <string name="update_downloaded">An update has just been downloaded.</string>
-    <string name="restart">RESTART</string>
+    <string name="restart">Restart</string>
     <string name="invalid_link">Invalid Link</string>
     <string name="deep_link">Deep link</string>
     <string name="download">Download</string>

@@ -104,7 +104,8 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 }
             })
 
-            Shell.enableVerboseLogging = BuildConfig.DEBUG
+            Shell.enableVerboseLogging = PreferenceManager.getDefaultSharedPreferences(this)
+                .getString("logMode", "VERBOSE") == "VERBOSE"
             Shell.setDefaultBuilder(Shell.Builder.create().apply {
                 setFlags(Shell.FLAG_MOUNT_MASTER)
                 setInitializers(BusyBoxInstaller::class.java)
@@ -300,8 +301,8 @@ class AppStartUp(private val activity: AppCompatActivity) {
                                 val obj = SafeJSON(json)
                                 try {
                                     links[Navigations.LINKS.valueOf(
-                                            obj.getString("screen").uppercase()
-                                        )] = obj.getJSONObject("args")
+                                        obj.getString("screen").uppercase()
+                                    )] = obj.getJSONObject("args")
                                 } catch (e: Exception) {
                                     Toast.makeText(
                                         this,
