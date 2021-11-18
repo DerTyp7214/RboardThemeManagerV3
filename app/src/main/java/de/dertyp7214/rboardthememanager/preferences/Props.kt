@@ -78,7 +78,7 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
                         R.string.reset,
                         {
                             it.dismiss()
-                            "ro.com.google.ime.$key".setSystemProperty()
+                            "ro.com.google.ime.$key".setSystemProperty(saveToModule = true)
                             if ("am force-stop $GBOARD_PACKAGE_NAME".runAsCommand()) {
                                 Toast.makeText(
                                     activity,
@@ -92,7 +92,7 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
                         }
                     ) { dialogInterface, text ->
                         dialogInterface.dismiss()
-                        "ro.com.google.ime.$key".setSystemProperty(text)
+                        "ro.com.google.ime.$key".setSystemProperty(text, true)
                         if ("am force-stop $GBOARD_PACKAGE_NAME".runAsCommand()) {
                             Toast.makeText(
                                 activity,

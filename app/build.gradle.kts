@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
+import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 
 plugins {
     id("com.android.application")
@@ -8,7 +8,7 @@ plugins {
 }
 
 val libsuVersion = "3.1.2"
-val kotlinVersion: String = KotlinCompilerVersion.VERSION
+val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
     compileSdk = 31
@@ -20,8 +20,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 31
-        versionCode = 340000
-        versionName = "3.4.0"
+        versionCode = 341000
+        versionName = "3.4.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
