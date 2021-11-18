@@ -1,6 +1,6 @@
 @file:Suppress("SpellCheckingInspection")
 
-import org.jetbrains.kotlin.config.KotlinCompilerVersion
+import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 
 plugins {
     id("com.android.application")
@@ -10,7 +10,7 @@ plugins {
 }
 
 val libsuVersion = "3.1.2"
-val kotlinVersion: String = KotlinCompilerVersion.VERSION
+val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
     compileSdk = 31
@@ -22,8 +22,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 31
-        versionCode = 340000
-        versionName = "3.4.0"
+        versionCode = 341000
+        versionName = "3.4.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -69,7 +69,7 @@ dependencies {
     implementation("com.github.topjohnwu.libsu:core:$libsuVersion")
     implementation("com.github.topjohnwu.libsu:io:$libsuVersion")
     implementation("com.github.topjohnwu.libsu:busybox:$libsuVersion")
-    implementation("dev.chrisbanes.insetter:insetter:0.6.0")
+    implementation("dev.chrisbanes.insetter:insetter:0.6.1")
     implementation("androidx.core:core-ktx:1.7.0")
     //noinspection DifferentStdlibGradleVersion
     implementation(kotlin("stdlib-jdk7", kotlinVersion))

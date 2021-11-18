@@ -9,7 +9,7 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:7.2.0-alpha05")
         //noinspection DifferentKotlinGradleVersion
-        classpath(kotlin("gradle-plugin", version = "1.6.0-RC2"))
+        classpath(kotlin("gradle-plugin", version = "1.6.0"))
         classpath("com.google.gms:google-services:4.3.10")
     }
 }

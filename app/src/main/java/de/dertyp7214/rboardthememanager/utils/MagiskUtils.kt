@@ -121,7 +121,8 @@ object MagiskUtils {
                                 text.lines()
                                     .firstOrNull {
                                         file.value?.split("=")?.get(0).toString() in it
-                                    } ?: "", file.value ?: ""
+                                    } ?: "",
+                                file.value?.let { if (it.endsWith("=")) "" else it } ?: ""
                             )
                         } else {
                             text += "\n${file.value ?: ""}"
