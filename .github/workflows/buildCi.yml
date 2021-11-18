@@ -104,5 +104,5 @@ jobs:
           to: ${{ secrets.TELEGRAM_CHANNEL_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
-          message: "#${{ steps.extract_branch.outputs.BRANCH_NAME }}\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})"
+          message: "**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\n\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})"
           document: app/build/outputs/apk/debug/app-debug.apk
