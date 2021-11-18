@@ -1,4 +1,4 @@
-name: Build Debug
+name: Build CI
 
 on:
   push:
@@ -101,7 +101,7 @@ jobs:
       - name: Send Telegram message
         uses: appleboy/telegram-action@master
         with:
-          to: "@rboardci"
+          to: ${{ secrets.TELEGRAM_CHANNEL_ID }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           format: markdown
           message: "#${{ steps.extract_branch.outputs.BRANCH_NAME }}\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})"
