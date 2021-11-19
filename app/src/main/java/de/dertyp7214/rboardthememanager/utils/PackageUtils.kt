@@ -1,5 +1,6 @@
 package de.dertyp7214.rboardthememanager.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,11 +11,13 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentActivity
+import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.runAsCommand
 import java.io.File
 
 object PackageUtils {
+    @SuppressLint("SdCardPath")
     fun install(
         context: FragmentActivity,
         file: File,
@@ -36,7 +39,7 @@ object PackageUtils {
                         }
                         else -> {
                             intent = null
-                            if ("chmod 777 ${file.absolutePath}".runAsCommand() && "pm install ${file.absolutePath}".runAsCommand() || "chmod 777 ${file.absolutePath}".runAsCommand() && " pm install -r ${file.absolutePath}".runAsCommand()) Toast.makeText(
+                            if ("chmod 775 ${"/data/user/0/de.dertyp7214.rboardthememanager.debug/files/updater"}".runAsCommand() && "chmod 775 ${file.absolutePath}".runAsCommand() && "pm install ${file.absolutePath}".runAsCommand() || " pm install -r ${file.absolutePath}".runAsCommand()) Toast.makeText(
                                 context,
                                 R.string.app_updated,
                                 Toast.LENGTH_SHORT
