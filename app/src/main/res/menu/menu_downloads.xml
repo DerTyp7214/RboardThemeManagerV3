@@ -5,4 +5,9 @@
         android:checkable="true"
         android:checked="false"
         android:title="@string/sort_by_date" />
+    <item
+        android:id="@+id/include_theme_names"
+        android:checkable="true"
+        android:checked="false"
+        android:title="@string/include_theme_names" />
 </menu>
