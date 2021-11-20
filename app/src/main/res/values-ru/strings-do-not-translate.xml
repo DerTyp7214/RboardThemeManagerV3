@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources translatable="false">
+
+    <string name="i_have_not_read_this_text">Я не читал всплывающее уведомление и поделился этой "ошибкой". Пожалуйста, забаньте меня!</string>
+    <string name="hungarian">Венгерский</string>
+    <string name="italian">Итальянский</string>
+    <string name="polish">Польский</string>
+    <string name="russian">Русский</string>
+    <string name="vietnamese">Вьетнамский</string>
+    <string name="chinese">Китайский</string>
+</resources>
