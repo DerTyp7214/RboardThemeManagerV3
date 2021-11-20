@@ -39,6 +39,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.appupdate.testing.FakeAppUpdateManager
 import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
@@ -579,6 +580,11 @@ class MainActivity : AppCompatActivity() {
                             mainViewModel.setPacksSortByDate(it.isChecked)
                             true
                         }
+                        R.id.include_theme_names -> {
+                            it.isChecked = !it.isChecked
+                            mainViewModel.setIncludeThemeNames(it.isChecked)
+                            true
+                        }
                         else -> false
                     }
                 }
@@ -653,11 +659,18 @@ class MainActivity : AppCompatActivity() {
             )
         ) {
             openDialog(R.string.update_ready, R.string.update) { update() }
-        } else if (verifyInstallerId()) {
-            val appUpdateManager = AppUpdateManagerFactory.create(this)
+        } else if (verifyInstallerId() || BuildConfig.DEBUG) {
+            val appUpdateManager =
+                if (BuildConfig.DEBUG) FakeAppUpdateManager(applicationContext).apply {
+                    setUpdateAvailable(BuildConfig.VERSION_CODE + 1000)
+                }
+                else AppUpdateManagerFactory.create(applicationContext)
             val appUpdateInfoTask = appUpdateManager.appUpdateInfo
 
+            var listener: InstallStateUpdatedListener? = null
+
             fun updateSnackBar() {
+                listener?.let(appUpdateManager::unregisterListener)
                 Snackbar.make(
                     binding.fragmentContainerView,
                     R.string.update_downloaded,
@@ -669,10 +682,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            val listener = InstallStateUpdatedListener { state ->
-                if (state.installStatus == InstallStatus.DOWNLOADED) {
-                    updateSnackBar()
-                }
+            listener = InstallStateUpdatedListener { state ->
+                if (state.installStatus == InstallStatus.DOWNLOADED) updateSnackBar()
             }
 
             appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->

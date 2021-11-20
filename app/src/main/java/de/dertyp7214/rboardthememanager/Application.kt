@@ -7,6 +7,7 @@ import android.content.ContextWrapper
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.dertyp7214.logs.helpers.Logger
 import com.downloader.PRDownloader
@@ -41,6 +42,8 @@ class Application : Application() {
             if (!URL("https://bin.utwitch.net").isReachable())
                 Logger.customBin = "hastebin.com"
         }
+        PreferenceManager.getDefaultSharedPreferences(this)
+            .edit { putString("logMode", if (BuildConfig.DEBUG) "VERBOSE" else "ERROR") }
         Logger.init(this)
         Logger.extraData = {
             StringBuilder("Rooted: ")
