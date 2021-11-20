@@ -23,6 +23,7 @@ class MainViewModel : ViewModel() {
     private val navigate = MutableLiveData<Int>()
     private val loaded = MutableLiveData<Boolean>()
     private val packsSortByDate = MutableLiveData<Boolean>()
+    private val includeThemeNames = MutableLiveData<Boolean>()
 
     fun getSelectedTheme(): ThemeDataClass? {
         return selectedTheme.value
@@ -130,6 +131,18 @@ class MainViewModel : ViewModel() {
 
     fun observeLoaded(owner: LifecycleOwner, observer: Observer<Boolean>) {
         loaded.observe(owner, observer)
+    }
+
+    fun includeThemeNames(): Boolean {
+        return includeThemeNames.value ?: false
+    }
+
+    fun setIncludeThemeNames(value: Boolean) {
+        includeThemeNames.value = value
+    }
+
+    fun observeIncludeThemeNames(owner: LifecycleOwner, observer: Observer<Boolean>) {
+        includeThemeNames.observe(owner, observer)
     }
 
     fun packsSortByDate(): Boolean {

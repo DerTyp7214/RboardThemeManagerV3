@@ -580,6 +580,11 @@ class MainActivity : AppCompatActivity() {
                             mainViewModel.setPacksSortByDate(it.isChecked)
                             true
                         }
+                        R.id.include_theme_names -> {
+                            it.isChecked = !it.isChecked
+                            mainViewModel.setIncludeThemeNames(it.isChecked)
+                            true
+                        }
                         else -> false
                     }
                 }

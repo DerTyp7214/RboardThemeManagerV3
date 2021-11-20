@@ -111,8 +111,17 @@ class DownloadListFragment : Fragment() {
         mainViewModel.observeFilter(this) { filter ->
             val chipFilters = chipContainer.filters
             val sortByDate = mainViewModel.packsSortByDate()
+            val includeThemeNames = mainViewModel.includeThemeNames()
             themePacks.clear()
-            themePacks.addAll(filterThemePacks(originalThemePacks, chipFilters, filter, sortByDate))
+            themePacks.addAll(
+                filterThemePacks(
+                    originalThemePacks,
+                    chipFilters,
+                    filter,
+                    sortByDate,
+                    includeThemeNames
+                )
+            )
             adapter.notifyDataSetChanged()
         }
 
@@ -123,7 +132,22 @@ class DownloadListFragment : Fragment() {
                     originalThemePacks,
                     chipContainer.filters,
                     mainViewModel.getFilter(),
-                    sortByDate
+                    sortByDate,
+                    mainViewModel.includeThemeNames()
+                )
+            )
+            adapter.notifyDataSetChanged()
+        }
+
+        mainViewModel.observeIncludeThemeNames(this) { includeThemeNames ->
+            themePacks.clear()
+            themePacks.addAll(
+                filterThemePacks(
+                    originalThemePacks,
+                    chipContainer.filters,
+                    mainViewModel.getFilter(),
+                    mainViewModel.packsSortByDate(),
+                    includeThemeNames
                 )
             )
             adapter.notifyDataSetChanged()
@@ -141,6 +165,7 @@ class DownloadListFragment : Fragment() {
             doAsync({
                 val searchFilter = mainViewModel.getFilter()
                 val sortByDate = mainViewModel.packsSortByDate()
+                val includeThemeNames = mainViewModel.includeThemeNames()
                 themePacks.clear()
                 try {
                     themePacks.addAll(
@@ -148,7 +173,8 @@ class DownloadListFragment : Fragment() {
                             originalThemePacks,
                             filters,
                             searchFilter,
-                            sortByDate
+                            sortByDate,
+                            includeThemeNames
                         )
                     )
                 } catch (e: Exception) {
@@ -170,7 +196,8 @@ class DownloadListFragment : Fragment() {
         packs: List<ThemePack>,
         filters: List<String>,
         filter: String,
-        sortByDate: Boolean
+        sortByDate: Boolean,
+        includeThemeNames: Boolean
     ): List<ThemePack> {
         return packs.filter { pack ->
             pack.none ||
@@ -180,7 +207,12 @@ class DownloadListFragment : Fragment() {
                     ) || pack.author.contains(
                         filter,
                         true
-                    )) && (filters.isEmpty() || pack.tags.any {
+                    ) || (includeThemeNames && pack.themes?.any {
+                        it.contains(
+                            filter,
+                            true
+                        )
+                    } ?: false)) && (filters.isEmpty() || pack.tags.any {
                         filters.contains(
                             it
                         )
