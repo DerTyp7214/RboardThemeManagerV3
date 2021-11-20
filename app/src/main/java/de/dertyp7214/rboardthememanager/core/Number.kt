@@ -22,6 +22,14 @@ fun Any.equalsNumber(second: Any?): Boolean {
     }
 }
 
+fun <E> Int.zeroOrElse(block: (Int) -> E): E? {
+    return if (this > 0) block(this) else null
+}
+
+fun <E> Long.zeroOrElse(block: (Long) -> E): E? {
+    return if (this > 0) block(this) else null
+}
+
 fun Number.dpToPx(context: Context): Float {
     return this.toFloat() * (context.resources.displayMetrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)
 }

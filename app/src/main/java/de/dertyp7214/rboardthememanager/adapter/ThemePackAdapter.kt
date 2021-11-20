@@ -9,11 +9,8 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.openUrl
 import de.dertyp7214.rboardthememanager.components.NewsCards
-import de.dertyp7214.rboardthememanager.core.download
-import de.dertyp7214.rboardthememanager.core.format
-import de.dertyp7214.rboardthememanager.core.openDialog
+import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 
@@ -28,9 +25,9 @@ class ThemePackAdapter(
         setHasStableIds(true)
     }
 
-
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val root: View = v.findViewById(R.id.root)
+        val size: TextView = v.findViewById(R.id.size)
         val title: TextView = v.findViewById(R.id.title)
         val author: TextView = v.findViewById(R.id.author)
         val lastUpdate: TextView = v.findViewById(R.id.lastUpdate)
@@ -53,6 +50,8 @@ class ThemePackAdapter(
         val themePack = list[position]
 
         if (holder is ViewHolder) {
+            holder.size.text =
+                themePack.size.zeroOrElse { it.toHumanReadableBytes(activity) } ?: ""
             holder.title.text = themePack.name
             holder.author.text = themePack.author
             holder.lastUpdate.text = themePack.date.format(System.currentTimeMillis())

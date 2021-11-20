@@ -216,4 +216,5 @@
     <string name="invalid_link">Invalid Link</string>
     <string name="deep_link">Deep link</string>
     <string name="download">Download</string>
+    <string name="include_theme_names">Include Theme Names</string>
 </resources>

@@ -10,18 +10,20 @@ import de.dertyp7214.rboardthememanager.data.SoundPack
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.data.ThemePack
 
+@Suppress("unused")
 class MainViewModel : ViewModel() {
     private val selectedTheme = MutableLiveData<ThemeDataClass?>()
     private val themePacks = MutableLiveData<List<ThemePack>>()
     private val themes = MutableLiveData<List<ThemeDataClass>>()
-    private val filter = MutableLiveData<String>()
     private val sounds = MutableLiveData<List<SoundPack>>()
+    private val filter = MutableLiveData<String>()
     private val clearSearch = MutableLiveData<String>()
     private val refreshThemes = MutableLiveData<String>()
     private val selections = MutableLiveData<Pair<Boolean, ThemeAdapter?>>()
     private val navigate = MutableLiveData<Int>()
     private val loaded = MutableLiveData<Boolean>()
     private val packsSortByDate = MutableLiveData<Boolean>()
+    private val includeThemeNames = MutableLiveData<Boolean>()
 
     fun getSelectedTheme(): ThemeDataClass? {
         return selectedTheme.value
@@ -129,6 +131,18 @@ class MainViewModel : ViewModel() {
 
     fun observeLoaded(owner: LifecycleOwner, observer: Observer<Boolean>) {
         loaded.observe(owner, observer)
+    }
+
+    fun includeThemeNames(): Boolean {
+        return includeThemeNames.value ?: false
+    }
+
+    fun setIncludeThemeNames(value: Boolean) {
+        includeThemeNames.value = value
+    }
+
+    fun observeIncludeThemeNames(owner: LifecycleOwner, observer: Observer<Boolean>) {
+        includeThemeNames.observe(owner, observer)
     }
 
     fun packsSortByDate(): Boolean {
