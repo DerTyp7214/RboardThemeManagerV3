@@ -24,7 +24,7 @@ jobs:
         with:
           github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
           template: .tmp/PULL_REQUEST_TEMPLATE.md
-          source_branch: rComaptible-Dev
+          source_branch: rCompatible-Dev
           target_branch: rCompatible
           title: ${{ github.event.commits[0].message }}
           label: automatic,update
