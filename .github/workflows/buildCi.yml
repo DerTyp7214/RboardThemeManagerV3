@@ -218,7 +218,7 @@ jobs:
             app/build/outputs/apk/release/output-metadata.json
 
       - name: Create new Release
-        id: create_release
+        id: create_latest_release
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
