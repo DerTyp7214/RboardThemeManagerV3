@@ -15,6 +15,7 @@ import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
 import de.dertyp7214.rboardthememanager.core.decodeBitmap
 import de.dertyp7214.rboardthememanager.core.install
 import de.dertyp7214.rboardthememanager.core.isInstalled
+import de.dertyp7214.rboardthememanager.core.openPreviewDialog
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.ActivityInstallPackBinding
 import de.dertyp7214.rboardthememanager.utils.doAsync
@@ -44,7 +45,7 @@ class InstallPackActivity : AppCompatActivity() {
                 else if (!fab.isEnabled) fab.isEnabled = true
                 toolbar.title =
                     getString(R.string.install_themes, adapter.getSelected().size.toString())
-            }) {}
+            }, ::openPreviewDialog) {}
 
         toolbar.navigationIcon = ContextCompat.getDrawable(
             this,
