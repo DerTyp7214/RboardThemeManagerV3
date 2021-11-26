@@ -31,6 +31,7 @@ class ThemeAdapter(
     private val themes: List<ThemeDataClass>,
     private val forcedSelectionState: SelectionState? = null,
     private val onSelectionStateChange: (selectionState: SelectionState, adapter: ThemeAdapter) -> Unit,
+    private val customLongClickListener: ((theme: ThemeDataClass) -> Unit)? = null,
     private val onClickTheme: (theme: ThemeDataClass) -> Unit
 ) :
     RecyclerView.Adapter<ThemeAdapter.ViewHolder>() {
@@ -253,11 +254,13 @@ class ThemeAdapter(
             } else onClickTheme(dataClass)
         }
 
-        if (selectionState != SelectionState.NEVER)
+        if (selectionState != SelectionState.NEVER || customLongClickListener != null)
             holder.card.setOnLongClickListener {
-                selected[position] = true
-                holder.selectOverlay.animate().alpha(1F).setDuration(200).withEndAction {
-                    notifyDataChanged()
+                customLongClickListener?.invoke(dataClass) ?: run {
+                    selected[position] = true
+                    holder.selectOverlay.animate().alpha(1F).setDuration(200).withEndAction {
+                        notifyDataChanged()
+                    }
                 }
                 true
             }

@@ -9,7 +9,6 @@ import de.dertyp7214.rboardthememanager.components.LayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dertyp7214.preferencesplus.core.dp
-import com.google.android.material.snackbar.Snackbar
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
 import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
@@ -19,7 +18,6 @@ import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.utils.asyncInto
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 import java.lang.Integer.max
-import kotlin.math.roundToInt
 
 class ThemeListFragment : Fragment() {
 
@@ -52,7 +50,7 @@ class ThemeListFragment : Fragment() {
             mainViewModel.setSelections(
                 Pair(state == ThemeAdapter.SelectionState.SELECTING, adapter)
             )
-        }, mainViewModel::setSelectedTheme)
+        }, null, mainViewModel::setSelectedTheme)
 
         mainViewModel.themesObserve(this) { themes ->
             if (themes.isEmpty()) {
