@@ -26,5 +26,5 @@ jobs:
           template: .tmp/PULL_REQUEST_TEMPLATE.md
           target_branch: master
           title: ${{ github.event.commits[0].message }}
-          label: automatic,update
+          label: automatic,translation
           get_diff: true
