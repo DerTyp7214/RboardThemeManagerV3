@@ -182,7 +182,6 @@
     <string name="github_repo">Kho GitHub</string>
     <string name="translators">Phiên dịch viên</string>
     <string name="applied_theme">(đã áp dụng)</string>
-    <string name="installed_from_play">Đã cài đặt từ CH Play</string>
     <string name="keyboard_height_ratio">Tỉ lệ-Chiều cao Bàn phím</string>
     <string name="max_short">0.50 ngắn-tối đa</string>
     <string name="extra_extra_short">0.65 Ngắn-ngắn-thêm</string>
@@ -213,8 +212,6 @@
     <string name="other_props_long">Thuộc tính khác đặt qua resetprop</string>
     <string name="prop_changed">Thuộc tính đã được thay đổi</string>
     <string name="reset">Đặt lại</string>
-    <string name="update_downloaded">Một bản cập nhật đã được tải xuống.</string>
-    <string name="restart">Khởi động lại</string>
     <string name="invalid_link">Liên kết không hợp lệ</string>
     <string name="deep_link">Liên kết sâu</string>
     <string name="download">Tải xuống</string>
