@@ -10,6 +10,7 @@ import android.net.Uri
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
@@ -22,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 
 val Activity.preferences: SharedPreferences
     get() = PreferenceManager.getDefaultSharedPreferences(this)
@@ -119,7 +121,13 @@ fun Activity.openDialog(
     cancelable: Boolean = false,
     negative: ((dialogInterface: DialogInterface) -> Unit)? = { it.dismiss() },
     positive: (dialogInterface: DialogInterface) -> Unit
-): AlertDialog = openDialog(getString(message), getString(title), cancelable, negative = negative, positive = positive)
+): AlertDialog = openDialog(
+    getString(message),
+    getString(title),
+    cancelable,
+    negative = negative,
+    positive = positive
+)
 
 fun Activity.openDialog(
     @StringRes message: Int,
@@ -138,6 +146,11 @@ fun Activity.openDialog(
     negative,
     positive
 )
+
+fun Activity.openPreviewDialog(theme: ThemeDataClass): AlertDialog =
+    openDialog(R.layout.preview_dialog, true) {
+        findViewById<ImageView>(R.id.preview)?.setImageBitmap(theme.image)
+    }
 
 fun Activity.openShareThemeDialog(
     negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },

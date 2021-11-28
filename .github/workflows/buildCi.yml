@@ -105,6 +105,18 @@ jobs:
             app/build/outputs/apk/debug/app-debug.apk
             app/build/outputs/apk/debug/output-metadata.json
 
+      - name: Create new Release
+        id: create_latest_release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: latest-debug
+          prerelease: true
+          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
+          files: |
+            app/build/outputs/apk/debug/app-debug.apk
+            app/build/outputs/apk/debug/output-metadata.json
+
       - name: Send Telegram message
         run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_CHANNEL_ID }}\",\"text\":\"**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Download A12+\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-debug/app-debug.apk\"}]]}}'"
 
@@ -199,6 +211,18 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-rCompatible
+          prerelease: true
+          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
+          files: |
+            app/build/outputs/apk/release/app-release.apk
+            app/build/outputs/apk/release/output-metadata.json
+
+      - name: Create new Release
+        id: create_latest_release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: latest-rCompatible
           prerelease: true
           title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
           files: |

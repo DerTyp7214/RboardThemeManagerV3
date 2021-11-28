@@ -22,8 +22,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 31
-        versionCode = 342000
-        versionName = "3.4.2"
+        versionCode = 343000
+        versionName = "3.4.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -75,10 +75,10 @@ dependencies {
     implementation(kotlin("stdlib-jdk7", kotlinVersion))
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("com.google.android.material:material:1.5.0-beta01")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.1")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.2")
     implementation("androidx.preference:preference-ktx:1.1.1")
     implementation("androidx.activity:activity-ktx:1.4.0")
-    implementation("androidx.fragment:fragment-ktx:1.3.6")
+    implementation("androidx.fragment:fragment-ktx:1.4.0")
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:20.0.0")
     implementation("com.google.firebase:firebase-messaging:23.0.0")
