@@ -212,4 +212,10 @@
     <string name="other_props_long">Altre props impostate con resetprop</string>
     <string name="prop_changed">Props modificate</string>
     <string name="reset">Reset</string>
+    <string name="update_downloaded">Un aggiornamento è stato appena scaricato.</string>
+    <string name="restart">Riavvia</string>
+    <string name="invalid_link">Link non valido</string>
+    <string name="deep_link">Deep link</string>
+    <string name="download">Scarica</string>
+    <string name="include_theme_names">Includi nome temi</string>
 </resources>
