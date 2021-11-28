@@ -139,7 +139,7 @@
     <string name="load_flags">Carica flags</string>
     <string name="load_flags_long">Trovato un vecchio backup delle flags. Vuoi caricarlo?</string>
     <string name="use_blur">Usa sfocatura</string>
-    <string name="use_blur_long">Usa sfocatura nell'interfaccia dell\'app</string>
+    <string name="use_blur_long">Usa sfocatura nell\'interfaccia dell\'app</string>
     <string name="remove_repo">Rimuovere la repository?</string>
     <string name="remove_repo_long">Vuoi rimuovere questa repository?</string>
     <string name="manage_repo">Gestisci repository</string>
