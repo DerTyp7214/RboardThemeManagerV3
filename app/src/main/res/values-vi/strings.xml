@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="search">Tìm kiếm</string>
 
     <string name="title_themes">Chủ đề</string>
@@ -103,7 +103,7 @@
     <string name="flag_applied">Đã áp dụng cờ</string>
     <string name="theme_pack">Đây là một Gói Chủ Đề</string>
     <string name="description">Mô tả</string>
-    <string name="easter_egg">Top 1 cách tăng tốc hệ thống ¯\\_(ツ)_/¯</string>
+    <string name="easter_egg">Ngu thì chết, khóc lóc cl ¯\\\_(ツ)_/¯</string>
     <string name="filter_settings">Bộ lọc Cài đặt</string>
     <string name="settings">Cài đặt</string>
     <string name="select_all">Chọn tất cả</string>
@@ -119,7 +119,7 @@
     <string name="flags_loaded">%o Cờ đã tải</string>
     <string name="show_preinstalled_themes_long">Hiện chủ đề đã cài đặt trước trong phần chủ đề</string>
     <string name="show_system_theme_long">Hiện chủ đề hệ thống trong phần chủ đề</string>
-    <string name="speedup_process">Tăng tốc tiến trình</string>
+    <string name="speedup_process">Vô dụng thôi!</string>
     <string name="key">Phím</string>
     <string name="unreleased">Ứng dụng này chưa được phát hành, một số tính năng có thể không hoạt động. Vui lòng không báo cáo bất kì lỗi nào đến nhóm chính.</string>
     <string name="notice">Chú ý</string>
@@ -180,4 +180,40 @@
     <string name="about">Về</string>
     <string name="xda_thread">Chủ đề XDA</string>
     <string name="github_repo">Kho GitHub</string>
+    <string name="translators">Phiên dịch viên</string>
+    <string name="applied_theme">(đã áp dụng)</string>
+    <string name="keyboard_height_ratio">Tỉ lệ-Chiều cao Bàn phím</string>
+    <string name="max_short">0.50 ngắn-tối đa</string>
+    <string name="extra_extra_short">0.65 Ngắn-ngắn-thêm</string>
+    <string name="extra_short">0.85 Ngắn-thêm</string>
+    <string name="key_short">0.90 Ngắn</string>
+    <string name="mid_short">0.95 Ngắn-trung bình</string>
+    <string name="normal">1.00 Bình thường</string>
+    <string name="mid_tall">1.05 Cao-trung bình</string>
+    <string name="tall">1.10 Cao</string>
+    <string name="extra_tall">1.15 Cao-thêm</string>
+    <string name="extra_extra_tall">1.50 Cao-cao-thêm</string>
+    <string name="max_tall">2.00 Cao-tối đa</string>
+    <string name="margins">Căn lề</string>
+    <string name="radius">Bán kính</string>
+    <string name="not_set" tools:ignore="PrivateResource">Chưa đặt</string>
+
+    <string name="kb_pad_land_b">Ngang-Dưới cùng</string>
+    <string name="kb_pad_land_l">Ngang-Trái</string>
+    <string name="kb_pad_land_r">Ngang-Phải</string>
+    <string name="kb_pad_port_b">Dọc-Dưới cùng</string>
+    <string name="kb_pad_port_l">Dọc-Trái</string>
+    <string name="kb_pad_port_r">Dọc-Phải</string>
+
+    <string name="corner_key_l">Bán kính-Góc-Trái (Dưới cùng)</string>
+    <string name="corner_key_r">Bán kính-Góc (Dưới cùng)</string>
+    <string name="props">Thuộc tính</string>
+    <string name="other_props">Thuộc tính Khác</string>
+    <string name="other_props_long">Thuộc tính khác đặt qua resetprop</string>
+    <string name="prop_changed">Thuộc tính đã được thay đổi</string>
+    <string name="reset">Đặt lại</string>
+    <string name="invalid_link">Liên kết không hợp lệ</string>
+    <string name="deep_link">Liên kết sâu</string>
+    <string name="download">Tải xuống</string>
+    <string name="include_theme_names">Bao gồm Tên Chủ đề</string>
 </resources>
