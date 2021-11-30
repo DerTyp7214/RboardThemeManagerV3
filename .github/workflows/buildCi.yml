@@ -2,7 +2,7 @@ name: Build CI
 
 on:
   push:
-    branches: [ master, rCompatible ]
+    branches: [ master, rCompatible, rCompatible-Dev ]
     paths:
       - 'app/**'
       - 'gradle/**'
@@ -206,6 +206,7 @@ jobs:
           path: app/build/outputs/apk/release/app-release.apk
 
       - name: Create new Release
+        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
         id: create_release
         uses: marvinpinto/action-automatic-releases@latest
         with:
@@ -218,6 +219,7 @@ jobs:
             app/build/outputs/apk/release/output-metadata.json
 
       - name: Create new Release
+        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
         id: create_latest_release
         uses: marvinpinto/action-automatic-releases@latest
         with:
@@ -236,6 +238,7 @@ jobs:
         run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_TO_MAIN }}\",\"text\":\"commit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"PlayStore (Android 12 Only)\",\"url\":\"https://play.google.com/store/apps/details?id=de.dertyp7214.rboardthememanager\"}],[{\"text\":\"Latest Android 12 Only\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-release/app-release.apk\"}],[{\"text\":\"Latest Android 12 and Below\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk\"}]]}}'"
 
       - name: Send Notification
+        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
         uses: fjogeleit/http-request-action@master
         with:
           url: 'https://fcm.googleapis.com/fcm/send'
