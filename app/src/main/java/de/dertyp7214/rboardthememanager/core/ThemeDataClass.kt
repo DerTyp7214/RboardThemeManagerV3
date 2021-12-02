@@ -45,7 +45,9 @@ fun ThemeDataClass.install(overrideTheme: Boolean = true): Boolean {
     }.runAsCommand()
 }
 
-fun ThemeDataClass.isInstalled(): Boolean {
-    val installedPath = SuFile(Config.MAGISK_THEME_LOC, File(path).name)
-    return installedPath.exists()
-}
+fun ThemeDataClass.isInstalled() = SuFile(Config.MAGISK_THEME_LOC, File(path).name).exists()
+fun ThemeDataClass.getLocalTime(): Long =
+    if (isInstalled) SuFile(
+        Config.MAGISK_THEME_LOC,
+        File(path).name
+    ).lastModified() else Long.MAX_VALUE
