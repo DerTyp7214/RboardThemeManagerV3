@@ -128,6 +128,7 @@ fun getSoundsDirectory(): SuFile? {
 
 object ThemeUtils {
     fun loadThemes(): List<ThemeDataClass> {
+        val themePacks = loadThemePacks()
         val themeDir =
             SuFile(Config.MAGISK_THEME_LOC)
         return (themeDir.listFiles()?.filter {
@@ -142,6 +143,13 @@ object ThemeUtils {
             else ThemeDataClass(null, it.name.removeSuffix(".zip"), it.absolutePath)
         }.apply { if (this != null) Config.themeCount = size } ?: ArrayList()).let {
             val themes = arrayListOf<ThemeDataClass>()
+            it.forEach { theme ->
+                themePacks[theme]?.let { pack ->
+                    theme.packName = pack.name
+                    theme.isInstalled = theme.isInstalled()
+                    theme.updateAvailable = pack.date > theme.getLocalTime()
+                }
+            }
             val context = Application.context
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q && context?.let { ctx ->
                     Settings.SETTINGS.SHOW_SYSTEM_THEME.getValue(

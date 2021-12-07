@@ -14,9 +14,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.nio.charset.Charset
 
-fun SuFile.copy(newFile: File): Boolean {
-    return "\\cp $absolutePath ${newFile.absolutePath}".runAsCommand()
-}
+fun SuFile.copy(newFile: File) = "\\cp $absolutePath ${newFile.absolutePath}".runAsCommand()
 
 fun SuFile.copyRecursively(newFile: File): Boolean {
     if (!newFile.exists()) newFile.mkdirs()
@@ -56,9 +54,8 @@ fun SuFile.decodeBitmap(opts: BitmapFactory.Options? = null): Bitmap? {
     return bm
 }
 
-fun SuFile.tar(zip: File): Boolean {
-    return listOf("cd $absolutePath", "tar -cf ${zip.absolutePath} .").runAsCommand()
-}
+fun SuFile.tar(zip: File) =
+    listOf("cd $absolutePath", "tar -cf ${zip.absolutePath} .").runAsCommand()
 
 fun SuFile.writeFile(content: String) {
     if (exists()) SuFileOutputStream.open(this).writer(Charset.defaultCharset())

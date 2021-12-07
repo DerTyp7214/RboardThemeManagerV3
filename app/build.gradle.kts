@@ -55,7 +55,7 @@ android {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:29.0.0"))
+    implementation(platform("com.google.firebase:firebase-bom:29.0.1"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.0")
     implementation("com.google.firebase:firebase-analytics-ktx:20.0.0")
 
@@ -94,6 +94,6 @@ dependencies {
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.1.0-beta03")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.1.0-beta04")
     implementation(kotlin("reflect", kotlinVersion))
 }

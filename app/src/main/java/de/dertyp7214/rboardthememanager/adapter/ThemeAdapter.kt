@@ -7,6 +7,8 @@ import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
@@ -109,6 +111,7 @@ class ThemeAdapter(
         val themeImage: ImageView = v.findViewById(R.id.theme_image)
         val themeName: TextView = v.findViewById(R.id.theme_name)
         val themeNameSelect: TextView = v.findViewById(R.id.theme_name_selected)
+        val updateAvailable: TextView = v.findViewById(R.id.update_available)
         val selectOverlay: ViewGroup = v.findViewById(R.id.select_overlay)
         val card: MaterialCardView = v.findViewById(R.id.card)
         val gradient: View? = try {
@@ -207,6 +210,12 @@ class ThemeAdapter(
         holder.themeImage.setImageBitmap(dataClass.image ?: default)
         holder.themeImage.colorFilter = dataClass.colorFilter
         holder.themeImage.alpha = if (dataClass.image != null) 1F else .3F
+
+        holder.updateAvailable.text =
+            context.getString(R.string.update_available, dataClass.packName)
+        holder.updateAvailable.visibility =
+            if (dataClass.updateAvailable && dataClass.isInstalled) VISIBLE else INVISIBLE
+
 
         trace.addSplit("CALCULATE COLOR")
 
