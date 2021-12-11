@@ -7,11 +7,11 @@ plugins {
     kotlin("kapt")
 }
 
-val libsuVersion = "3.1.2"
+val libsuVersion = "3.2.0"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
-    compileSdk = 31
+    compileSdk = 32
     buildToolsVersion = "31.0.0"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
@@ -19,7 +19,7 @@ android {
     defaultConfig {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
-        targetSdk = 31
+        targetSdk = 32
         versionCode = 343000
         versionName = "3.4.3"
 
@@ -55,9 +55,9 @@ android {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:29.0.1"))
+    implementation(platform("com.google.firebase:firebase-bom:29.0.2"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.0")
-    implementation("com.google.firebase:firebase-analytics-ktx:20.0.0")
+    implementation("com.google.firebase:firebase-analytics-ktx:20.0.1")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.0-beta02")
@@ -78,7 +78,7 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.4.0")
     implementation("androidx.fragment:fragment-ktx:1.4.0")
     implementation("com.jaredrummler:android-shell:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:20.0.0")
+    implementation("com.google.firebase:firebase-analytics:20.0.1")
     implementation("com.google.firebase:firebase-messaging:23.0.0")
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
