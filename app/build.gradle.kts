@@ -7,7 +7,7 @@ plugins {
     kotlin("kapt")
 }
 
-val libsuVersion = "3.2.0"
+val libsuVersion = "3.2.1"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
