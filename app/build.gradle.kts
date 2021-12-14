@@ -22,8 +22,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 31
-        versionCode = 343000
-        versionName = "3.4.3"
+        versionCode = 344000
+        versionName = "3.4.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -59,7 +59,7 @@ android {
 dependencies {
     implementation(platform("com.google.firebase:firebase-bom:29.0.0"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.0")
-    implementation("com.google.firebase:firebase-analytics-ktx:20.0.0")
+    implementation("com.google.firebase:firebase-analytics-ktx:20.0.1")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
@@ -74,13 +74,13 @@ dependencies {
     //noinspection DifferentStdlibGradleVersion
     implementation(kotlin("stdlib-jdk7", kotlinVersion))
     implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("com.google.android.material:material:1.5.0-beta01")
+    implementation("com.google.android.material:material:1.6.0-alpha01")
     implementation("androidx.constraintlayout:constraintlayout:2.1.2")
     implementation("androidx.preference:preference-ktx:1.1.1")
     implementation("androidx.activity:activity-ktx:1.4.0")
     implementation("androidx.fragment:fragment-ktx:1.4.0")
     implementation("com.jaredrummler:android-shell:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:20.0.0")
+    implementation("com.google.firebase:firebase-analytics:20.0.1")
     implementation("com.google.firebase:firebase-messaging:23.0.0")
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")

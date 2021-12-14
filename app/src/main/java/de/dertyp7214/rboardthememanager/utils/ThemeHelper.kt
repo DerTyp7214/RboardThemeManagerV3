@@ -33,7 +33,6 @@ import de.dertyp7214.rboardthememanager.preferences.Settings
 import java.io.BufferedInputStream
 import java.net.URL
 import java.util.*
-import kotlin.collections.ArrayList
 
 enum class InternalThemeNames(val path: String) {
     DOWNLOAD_THEMES("rboard:download_themes")
@@ -124,6 +123,7 @@ fun getSoundsDirectory(): SuFile? {
 
 object ThemeUtils {
     fun loadThemes(): List<ThemeDataClass> {
+        val themePacks = loadThemePacks()
         val themeDir =
             SuFile(Config.MAGISK_THEME_LOC)
         return (themeDir.listFiles()?.filter {
@@ -137,6 +137,13 @@ object ThemeUtils {
             )
             else ThemeDataClass(null, it.name.removeSuffix(".zip"), it.absolutePath)
         }.apply { if (this != null) Config.themeCount = size } ?: ArrayList()).let {
+            it.forEach { theme ->
+                themePacks[theme]?.let { pack ->
+                    theme.packName = pack.name
+                    theme.isInstalled = theme.isInstalled()
+                    theme.updateAvailable = pack.date > theme.getLocalTime()
+                }
+            }
             val themes = arrayListOf<ThemeDataClass>()
             val context = Application.context
             if (context?.let { ctx ->

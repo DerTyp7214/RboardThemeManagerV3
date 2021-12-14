@@ -41,6 +41,8 @@ class PreferencesActivity : AppCompatActivity() {
 
         preferences.extraView?.let { extraContent.addView(it) }
 
+        preferences.handleFab(binding.floatingActionButton)
+
         setSupportActionBar(preferencesToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = preferences.title

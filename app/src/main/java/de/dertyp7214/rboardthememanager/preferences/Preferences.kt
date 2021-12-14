@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.dertyp7214.logs.helpers.DogbinUtils
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.categoryHeader
@@ -99,6 +100,10 @@ class Preferences(
                 preference = this
             }
         }
+    }
+
+    fun handleFab(fab: FloatingActionButton) {
+        if (preference is AbstractFabPreference) preference.handleFab(fab)
     }
 
     override fun onStart(recyclerView: RecyclerView, adapter: PreferencesAdapter) {
@@ -330,4 +335,8 @@ abstract class AbstractPreference {
 abstract class AbstractMenuPreference : AbstractPreference() {
     internal abstract fun loadMenu(menuInflater: MenuInflater, menu: Menu?)
     internal abstract fun onMenuClick(menuItem: MenuItem): Boolean
+}
+
+abstract class AbstractFabPreference : AbstractMenuPreference() {
+    internal abstract fun handleFab(fab: FloatingActionButton)
 }

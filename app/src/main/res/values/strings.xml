@@ -220,4 +220,6 @@
     <string name="deep_link">Deep link</string>
     <string name="download">Download</string>
     <string name="include_theme_names">Include Theme Names</string>
+    <string name="update_available">Update available (%s)</string>
+    <string name="help">Help</string>
 </resources>

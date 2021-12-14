@@ -22,6 +22,4 @@ fun <T> doAsync(doInBackground: () -> T, getResult: (result: T) -> Unit) {
     }
 }
 
-infix fun <T> (() -> T).asyncInto(into: (result: T) -> Unit) {
-    doAsync(this, into)
-}
+infix fun <T> (() -> T).asyncInto(into: (result: T) -> Unit) = doAsync(this, into)

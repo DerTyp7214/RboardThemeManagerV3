@@ -10,7 +10,9 @@ data class ThemeDataClass(
     val name: String,
     val path: String,
     val colorFilter: ColorFilter? = null,
-    var installed: Boolean = false
+    var packName: String = "",
+    var updateAvailable: Boolean = false,
+    var isInstalled: Boolean = false
 ) {
     val readableName = name.split("_").joinToString(" ") { s ->
         s.replaceFirstChar {
