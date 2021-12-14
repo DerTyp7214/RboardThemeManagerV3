@@ -213,4 +213,5 @@
     <string name="invalid_link">Érvénytelen hivatkozás</string>
     <string name="deep_link">Mélyhivatkozás</string>
     <string name="download">Letöltés</string>
+    <string name="help">Súgó</string>
 </resources>

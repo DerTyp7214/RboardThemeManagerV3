@@ -28,6 +28,7 @@ import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.getSystemProp
 import de.dertyp7214.rboardthememanager.core.start
@@ -66,6 +67,10 @@ class Preferences(
     )
 
     private val preference: AbstractPreference
+
+    fun handleFab(fab: FloatingActionButton) {
+        if (preference is AbstractFabPreference) preference.handleFab(fab)
+    }
 
     init {
         when (type) {
@@ -324,4 +329,8 @@ abstract class AbstractPreference {
 abstract class AbstractMenuPreference : AbstractPreference() {
     internal abstract fun loadMenu(menuInflater: MenuInflater, menu: Menu?)
     internal abstract fun onMenuClick(menuItem: MenuItem): Boolean
+}
+
+abstract class AbstractFabPreference : AbstractMenuPreference() {
+    internal abstract fun handleFab(fab: FloatingActionButton)
 }

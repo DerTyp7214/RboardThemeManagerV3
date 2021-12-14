@@ -246,6 +246,10 @@ class ThemeAdapter(
             if (colorCache[position]?.second == true) Color.BLACK else Color.WHITE
         )
 
+        holder.updateAvailable.setTextColor(
+            if (colorCache[position]?.second == true) Color.BLACK else Color.WHITE
+        )
+
         trace.addSplit("CLICK")
 
         if (selected[position])
