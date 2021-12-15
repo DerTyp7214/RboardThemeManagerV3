@@ -95,8 +95,9 @@
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/news_item.xml" value="0.1" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/pack_item.xml" value="0.25" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/preview_dialog.xml" value="0.3614583333333333" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/single_theme_item.xml" value="0.3619791666666667" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/soundpack_dialog.xml" value="0.1762917933130699" />
-        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/theme_grid_item_single.xml" value="0.1" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/theme_grid_item_single.xml" value="0.12" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/menu/all_flags.xml" value="0.1" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/menu/menu_downloads.xml" value="0.3625" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/menu/navigation.xml" value="0.3625" />
@@ -106,7 +107,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK" />
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>

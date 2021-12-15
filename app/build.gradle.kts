@@ -7,11 +7,11 @@ plugins {
     kotlin("kapt")
 }
 
-val libsuVersion = "3.1.2"
+val libsuVersion = "3.2.1"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
-    compileSdk = 31
+    compileSdk = 32
     buildToolsVersion = "31.0.0"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
@@ -19,9 +19,9 @@ android {
     defaultConfig {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
-        targetSdk = 31
-        versionCode = 343000
-        versionName = "3.4.3"
+        targetSdk = 32
+        versionCode = 344001
+        versionName = "3.4.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -55,9 +55,9 @@ android {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:29.0.0"))
+    implementation(platform("com.google.firebase:firebase-bom:29.0.2"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.0")
-    implementation("com.google.firebase:firebase-analytics-ktx:20.0.0")
+    implementation("com.google.firebase:firebase-analytics-ktx:20.0.1")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.4.0-beta02")
@@ -70,15 +70,15 @@ dependencies {
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
     implementation("androidx.core:core-ktx:1.7.0")
     //noinspection DifferentStdlibGradleVersion
-    implementation(kotlin("stdlib-jdk7", kotlinVersion))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10")
     implementation("androidx.appcompat:appcompat:1.3.1")
-    implementation("com.google.android.material:material:1.5.0-beta01")
+    implementation("com.google.android.material:material:1.6.0-alpha01")
     implementation("androidx.constraintlayout:constraintlayout:2.1.2")
     implementation("androidx.preference:preference-ktx:1.2.0-beta01")
     implementation("androidx.activity:activity-ktx:1.4.0")
     implementation("androidx.fragment:fragment-ktx:1.4.0")
     implementation("com.jaredrummler:android-shell:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:20.0.0")
+    implementation("com.google.firebase:firebase-analytics:20.0.1")
     implementation("com.google.firebase:firebase-messaging:23.0.0")
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
@@ -94,6 +94,6 @@ dependencies {
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.1.0-beta03")
-    implementation(kotlin("reflect", kotlinVersion))
+    debugImplementation("androidx.compose.ui:ui-tooling:1.1.0-beta04")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
 }

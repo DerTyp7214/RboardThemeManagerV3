@@ -6,6 +6,7 @@ import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.utils.ZipHelper
 import java.io.File
@@ -37,3 +38,6 @@ fun ThemePack.download(activity: Activity, result: (themes: List<String>) -> Uni
             }
         })
 }
+
+operator fun List<ThemePack>.get(theme: ThemeDataClass) =
+    find { it.themes?.contains(theme.name) == true }

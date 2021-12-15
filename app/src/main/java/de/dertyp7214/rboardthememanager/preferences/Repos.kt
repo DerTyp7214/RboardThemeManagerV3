@@ -9,9 +9,11 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.checkBox
@@ -19,20 +21,19 @@ import de.Maxr1998.modernpreferences.helpers.onClick
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.data.RboardRepo
 import de.dertyp7214.rboardthememanager.screens.ManageRepo
 import de.dertyp7214.rboardthememanager.utils.doAsync
-import org.json.JSONArray
-import java.net.URL
 
 class Repos(
     private val activity: AppCompatActivity,
     private val args: SafeJSON,
     private val onRequestReload: () -> Unit
 ) :
-    AbstractMenuPreference() {
+    AbstractFabPreference() {
 
     private val sharedPreferences by lazy { PreferenceManager.getDefaultSharedPreferences(activity) }
-    private val repositories = hashMapOf<String, Boolean>()
+    private val repositories = arrayListOf<RboardRepo>()
     private val resultLauncher: ActivityResultLauncher<Intent>
 
     private var modified = false
@@ -40,7 +41,14 @@ class Repos(
     init {
         val repos = sharedPreferences.getStringSet("repos", Config.REPOS.toSet())
 
-        repos?.let { repositories.putAll(it.toList().toMap()) }
+        repos?.let {
+            doAsync({
+                it.toList().map { url -> url.parseRepo() }
+            }, { data ->
+                repositories.addAll(data.filterNotNull())
+                onRequestReload()
+            })
+        }
 
         resultLauncher =
             activity.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -54,12 +62,12 @@ class Repos(
                             }
                             "disable" -> {
                                 modified = true
-                                repositories[key] = false
+                                repositories[key]?.active = false
                                 onRequestReload()
                             }
                             "enable" -> {
                                 modified = true
-                                repositories[key] = true
+                                repositories[key]?.active = true
                                 onRequestReload()
                             }
                             "share" -> {
@@ -73,17 +81,20 @@ class Repos(
 
     override fun preferences(builder: PreferenceScreen.Builder) {
         val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
-        repositories.forEach { (key, value) ->
+        repositories.forEach { repo ->
+            val key = repo.url
+            val active = repo.active
             prefs.edit { remove(key) }
             builder.checkBox(key) {
                 val pref = this
-                title = key.replace("https://raw.githubusercontent.com/", "...")
-                defaultValue = value
+                val fallbackName = key.replace("https://raw.githubusercontent.com/", "...")
+                title = repo.meta?.name?.ifEmpty { fallbackName } ?: fallbackName
+                defaultValue = active
                 onClick {
-                    pref.checked = value
+                    pref.checked = active
                     ManageRepo::class.java.start(activity, resultLauncher) {
                         putExtra("key", key)
-                        putExtra("enabled", value)
+                        putExtra("enabled", active)
                     }
                     false
                 }
@@ -95,32 +106,39 @@ class Repos(
         if (menu != null) menuInflater.inflate(R.menu.repos, menu)
     }
 
+    override fun handleFab(fab: FloatingActionButton) {
+        fab.visibility = View.VISIBLE
+        fab.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_baseline_add_24))
+        fab.setOnClickListener {
+            activity.openInputDialog(R.string.repository) { dialog, text ->
+                doAsync({
+                    try {
+                        "true:$text".parseRepo()
+                    } catch (e: Exception) {
+                        null
+                    }
+                }) {
+                    dialog.dismiss()
+                    if (it != null) {
+                        repositories.add(it)
+                        onRequestReload()
+                        modified = true
+                    } else activity.openDialog(
+                        R.string.invalid_repo_long,
+                        R.string.invalid_repo,
+                        false,
+                        ::dismiss,
+                        ::dismiss
+                    )
+                }
+            }
+        }
+    }
+
     override fun onMenuClick(menuItem: MenuItem): Boolean {
         return when (menuItem.itemId) {
-            R.id.add -> {
-                activity.openInputDialog(R.string.repository) { dialog, text ->
-                    doAsync({
-                        try {
-                            JSONArray(URL(text).getTextFromUrl())
-                            true
-                        } catch (e: Exception) {
-                            false
-                        }
-                    }) {
-                        dialog.dismiss()
-                        if (it) {
-                            repositories[text] = true
-                            onRequestReload()
-                            modified = true
-                        } else activity.openDialog(
-                            R.string.invalid_repo_long,
-                            R.string.invalid_repo,
-                            false,
-                            ::dismiss,
-                            ::dismiss
-                        )
-                    }
-                }
+            R.id.help -> {
+                activity.openUrl("https://github.com/GboardThemes/RepoTemplate#readme")
                 true
             }
             R.id.apply -> {
@@ -141,11 +159,11 @@ class Repos(
 
     private fun apply() {
         sharedPreferences.edit {
-            putStringSet("repos", repositories.toSet())
+            putStringSet("repos", repositories.toStringSet())
         }
         Config.REPOS.apply {
             clear()
-            addAll(repositories.toSet())
+            addAll(repositories.toStringSet())
         }
     }
 

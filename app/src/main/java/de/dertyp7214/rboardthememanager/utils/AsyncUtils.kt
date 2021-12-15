@@ -20,6 +20,4 @@ fun doInBackground(doInBackground: () -> Unit) {
         withContext(Dispatchers.Default) { doInBackground() }
     }
 }
-infix fun <T> (() -> T).asyncInto(into: (result: T) -> Unit) {
-    doAsync(this, into)
-}
+infix fun <T> (() -> T).asyncInto(into: (result: T) -> Unit) = doAsync(this, into)

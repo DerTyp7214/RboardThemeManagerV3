@@ -214,4 +214,6 @@
     <string name="deep_link">Прямая ссылка</string>
     <string name="download">Загрузить</string>
     <string name="include_theme_names">Включить названия тем</string>
+    <string name="update_available">Доступно обновление (%s)</string>
+    <string name="help">Помощь</string>
 </resources>
