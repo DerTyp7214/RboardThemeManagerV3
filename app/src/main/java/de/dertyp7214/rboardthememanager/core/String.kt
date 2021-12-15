@@ -10,6 +10,7 @@ import de.dertyp7214.rboardthememanager.data.RboardRepo
 import de.dertyp7214.rboardthememanager.data.RboardRepoMeta
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import org.xml.sax.InputSource
+import java.io.IOException
 import java.io.StringReader
 import java.net.URL
 import java.util.*
@@ -17,13 +18,15 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 typealias RepoUrl = String
 
-fun RepoUrl.parseRepo(): RboardRepo {
+fun RepoUrl.parseRepo(): RboardRepo? {
     val url = removePrefix("true:").removePrefix("false:")
     val meta = try {
         Gson().fromJson(
             URL(url.replace("list.json", "meta.json")).readText(),
             RboardRepoMeta::class.java
         )
+    } catch (e: IOException) {
+        return null
     } catch (e: Exception) {
         null
     }

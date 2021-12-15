@@ -45,7 +45,7 @@ class Repos(
             doAsync({
                 it.toList().map { url -> url.parseRepo() }
             }, { data ->
-                repositories.addAll(data)
+                repositories.addAll(data.filterNotNull())
                 onRequestReload()
             })
         }
