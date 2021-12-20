@@ -53,6 +53,8 @@ jobs:
         run: echo "::set-output name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
         id: extract_branch
 
+      - run: ls -la /home/runner/work/RboardThemeManagerV3/RboardThemeManagerV3
+
       - name: Build apk
         id: buildAllApks
         uses: gradle/gradle-build-action@v2
