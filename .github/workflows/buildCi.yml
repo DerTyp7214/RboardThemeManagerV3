@@ -57,7 +57,7 @@ jobs:
         id: buildAllApks
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: release-candidate
+          gradle-version: wrapper
           arguments: assembleDebug
 
       - name: Get JSON
@@ -172,7 +172,7 @@ jobs:
         id: buildAllApks
         uses: gradle/gradle-build-action@v2
         with:
-          gradle-version: release-candidate
+          gradle-version: wrapper
           arguments: assembleRelease
 
       - name: Get JSON
