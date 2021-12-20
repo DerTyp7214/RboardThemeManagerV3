@@ -43,6 +43,9 @@ jobs:
           key: ${{ runner.os }}-build-cache-${{ github.sha }}
           restore-keys: ${{ runner.os }}-build-cache-
 
+      - name: File Permissions
+        run: chmod +x gradlew
+
       - name: Build apk
         id: buildAllApks
         uses: gradle/gradle-build-action@v2
