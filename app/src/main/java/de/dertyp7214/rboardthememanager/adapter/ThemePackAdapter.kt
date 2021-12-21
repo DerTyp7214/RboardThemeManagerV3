@@ -1,5 +1,6 @@
 package de.dertyp7214.rboardthememanager.adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.view.LayoutInflater
@@ -33,8 +34,8 @@ class ThemePackAdapter(
         val lastUpdate: TextView = v.findViewById(R.id.lastUpdate)
     }
 
-    class NewsViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        val newsCards: NewsCards = v as NewsCards
+    class NewsViewHolder(v: NewsCards) : RecyclerView.ViewHolder(v) {
+        val newsCards: NewsCards = v
     }
 
     override fun getItemId(position: Int): Long {
@@ -46,12 +47,19 @@ class ThemePackAdapter(
         return ViewHolder(LayoutInflater.from(activity).inflate(R.layout.pack_item, parent, false))
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val themePack = list[position]
 
         if (holder is ViewHolder) {
             holder.size.text =
-                themePack.size.zeroOrElse { it.toHumanReadableBytes(activity) } ?: ""
+                "${themePack.themes?.size?.let { "($it)" } ?: ""} ${
+                    themePack.size.zeroOrElse {
+                        it.toHumanReadableBytes(
+                            activity
+                        )
+                    } ?: ""
+                }"
             holder.title.text = themePack.name
             holder.author.text = themePack.author
             holder.lastUpdate.text = themePack.date.format(System.currentTimeMillis())
@@ -98,7 +106,7 @@ class ThemePackAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int): Int = position
+    override fun getItemViewType(position: Int): Int = if (list[position].none) 0 else 1
 
     override fun getItemCount(): Int = list.size
 }

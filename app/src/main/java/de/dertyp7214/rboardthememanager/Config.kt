@@ -51,6 +51,9 @@ object Config {
         )
     val REPOS = ArrayList(PACKS_URLS)
 
+    // TODO: add repo button should load list of verified repos
+    const val REPOS_LIST_URL =
+        "https://raw.githubusercontent.com/GboardThemes/Repositories/main/repos.json"
     const val SOUNDS_PACKS_URL =
         "https://raw.githubusercontent.com/GboardThemes/Soundpack/master/download_sounds.json"
 

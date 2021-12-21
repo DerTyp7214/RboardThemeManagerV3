@@ -55,13 +55,13 @@ android {
 }
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:29.0.2"))
+    implementation(platform("com.google.firebase:firebase-bom:29.0.3"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.0")
-    implementation("com.google.firebase:firebase-analytics-ktx:20.0.1")
+    implementation("com.google.firebase:firebase-analytics-ktx:20.0.2")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.4.0-beta02")
-    implementation("androidx.navigation:navigation-ui-ktx:2.4.0-beta02")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.4.0-rc01")
+    implementation("androidx.navigation:navigation-ui-ktx:2.4.0-rc01")
     implementation("org.apache.commons:commons-text:1.9")
 
     implementation("com.github.topjohnwu.libsu:core:$libsuVersion")
@@ -71,19 +71,19 @@ dependencies {
     implementation("androidx.core:core-ktx:1.7.0")
     //noinspection DifferentStdlibGradleVersion
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10")
-    implementation("androidx.appcompat:appcompat:1.3.1")
+    implementation("androidx.core:core:1.7.0")
     implementation("com.google.android.material:material:1.6.0-alpha01")
     implementation("androidx.constraintlayout:constraintlayout:2.1.2")
-    implementation("androidx.preference:preference-ktx:1.2.0-beta01")
+    implementation("androidx.preference:preference-ktx:1.2.0-rc01")
     implementation("androidx.activity:activity-ktx:1.4.0")
     implementation("androidx.fragment:fragment-ktx:1.4.0")
     implementation("com.jaredrummler:android-shell:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:20.0.1")
+    implementation("com.google.firebase:firebase-analytics:20.0.2")
     implementation("com.google.firebase:firebase-messaging:23.0.0")
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
-    implementation("com.github.skydoves:balloon:1.4.0")
+    implementation("com.github.skydoves:balloon:1.4.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.4-alpha03")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0-alpha03")
@@ -94,6 +94,6 @@ dependencies {
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.1.0-beta04")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.1.0-rc01")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
 }
