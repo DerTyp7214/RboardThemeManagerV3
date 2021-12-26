@@ -83,7 +83,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.8.9")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
-    implementation("com.github.skydoves:balloon:1.4.1")
+    implementation("com.github.skydoves:balloon:1.4.2-SNAPSHOT")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.4-alpha03")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0-alpha03")
