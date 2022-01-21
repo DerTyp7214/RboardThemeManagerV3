@@ -19,7 +19,7 @@
     <string name="download_update_progress">Téléchargement de la mise à jour (%s)</string>
     <string name="download_complete">Téléchargement terminé</string>
     <string name="download_error">Erreur lors du téléchargement</string>
-    <string name="reboot">Reboot</string>
+    <string name="reboot">Redémarrer</string>
     <string name="reboot_now">Redémarrer maintenant ?</string>
     <string name="reboot_to_continue">Vous devez redémarrer pour que le module fonctionne.</string>
     <string name="apply_theme">Appliquer le thème</string>
@@ -36,7 +36,7 @@
     <string name="rboard_app_version">Version de l\'application Rboard</string>
     <string name="device">Appareil</string>
     <string name="android_version">Version d\'Android</string>
-    <string name="root_version">Version racine</string>
+    <string name="root_version">Version du root</string>
     <string name="gboard_version">Version de Gboard</string>
     <string name="unsupported_oem">OEM non pris en charge</string>
     <string name="no">Non</string>
@@ -134,7 +134,7 @@
     <string name="share_flags">Partager les drapeaux</string>
     <string name="share_flags_title">Partager les drapeaux (%o)</string>
     <string name="import_flags_title">Importer des drapeaux (%o)</string>
-    <string name="model">Modélisation</string>
+    <string name="model">Modèle</string>
     <string name="processing_flags">Traitement des drapeaux</string>
     <string name="load_flags">Drapeaux de chargement</string>
     <string name="load_flags_long">Ancienne sauvegarde des drapeaux trouvée. Voulez-vous le charger ?</string>
@@ -178,5 +178,5 @@
     <string name="telegram_group">Groupe Telegram</string>
     <string name="about">À propos de</string>
     <string name="xda_thread">Thread XDA</string>
-    <string name="github_repo">GitHub Repo</string>
+    <string name="github_repo">Dépôt GitHub</string>
 </resources>
