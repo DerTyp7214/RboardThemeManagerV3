@@ -1,12 +1,12 @@
 @file:Suppress("SpellCheckingInspection")
 
 import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
-import com.google.protobuf.gradle.*
+//import com.google.protobuf.gradle.*
 
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
-    id("com.google.protobuf")
+    //id("com.google.protobuf")
     id("kotlin-android-extensions")
     kotlin("android")
     kotlin("kapt")
@@ -59,7 +59,7 @@ android {
     }
 }
 
-protobuf {
+/*protobuf {
     protoc {
         artifact = "com.google.protobuf:protoc:3.10.0"
     }
@@ -81,10 +81,11 @@ protobuf {
             }
         }
     }
-}
+    generatedFilesBaseDir = "$projectDir/build/generated"
+}*/
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:29.0.3"))
+    implementation(platform("com.google.firebase:firebase-bom:29.0.4"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.0")
     implementation("com.google.firebase:firebase-analytics-ktx:20.0.2")
 
@@ -101,7 +102,7 @@ dependencies {
     //noinspection DifferentStdlibGradleVersion
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10")
     implementation("androidx.core:core:1.7.0")
-    implementation("com.google.android.material:material:1.6.0-alpha01")
+    implementation("com.google.android.material:material:1.6.0-alpha02")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.preference:preference-ktx:1.1.1")
     implementation("androidx.activity:activity-ktx:1.4.0")
@@ -129,7 +130,7 @@ dependencies {
     implementation("com.google.android.play:core:1.10.3")
     implementation("com.google.android.play:core-ktx:1.8.1")
 
-    var grpc_version = "1.25.0"
+    /*var grpc_version = "1.43.2"
     implementation("io.grpc:grpc-android:$grpc_version")
     implementation("io.grpc:grpc-okhttp:$grpc_version")
     implementation("io.grpc:grpc-protobuf-lite:$grpc_version")
@@ -138,5 +139,5 @@ dependencies {
     var javax_annotation_version = "1.3.2"
     implementation("javax.annotation:javax.annotation-api:$javax_annotation_version")
 
-    implementation("com.google.protobuf:protobuf-kotlin:3.17.0-rc-2")
+    implementation("com.google.protobuf:protobuf-kotlin:3.19.3")*/
 }
