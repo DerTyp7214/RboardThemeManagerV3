@@ -9,16 +9,17 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.NewsFeedAdapter
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.utils.doAsync
+import de.dertyp7214.rboardthememanager.utils.fromJsonList
 import java.net.URL
 
 class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
 
-    private val newsFeedUrl = "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/top.json"
+    private val newsFeedUrl =
+        "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/top.json"
 
     companion object {
         val cards: ArrayList<CardElement> = arrayListOf()
@@ -58,10 +59,7 @@ class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
 
     private fun fetchNewsFeed(): List<CardElement> {
         return try {
-            Gson().fromJson(
-                URL(newsFeedUrl).readText(),
-                object : TypeToken<List<CardElement>>() {}.type
-            )
+            Gson().fromJsonList(URL(newsFeedUrl).readText())
         } catch (e: Exception) {
             listOf()
         }
