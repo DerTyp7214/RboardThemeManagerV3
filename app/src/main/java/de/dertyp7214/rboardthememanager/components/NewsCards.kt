@@ -33,7 +33,7 @@ class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
     init {
         inflate(context, R.layout.news_card, this)
 
-        newsFeedAdapter = NewsFeedAdapter(cards, clickNewsListener)
+        newsFeedAdapter = NewsFeedAdapter(cards) { clickNewsListener(it) }
         recyclerView = findViewById(R.id.recyclerViewNews)
 
         val snapHelper = LinearSnapHelper()
