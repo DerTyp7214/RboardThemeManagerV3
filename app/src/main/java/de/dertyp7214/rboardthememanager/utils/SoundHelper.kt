@@ -9,7 +9,7 @@ import java.net.URL
 object SoundHelper {
     fun loadSoundPacks(): List<SoundPack> {
         return try {
-            Gson().fromJsonList(URL(SOUNDS_PACKS_URL).readText())
+            Gson().fromJson(URL(SOUNDS_PACKS_URL).readText(), TypeTokens<List<SoundPack>>())
         } catch (e: Exception) {
             listOf()
         }

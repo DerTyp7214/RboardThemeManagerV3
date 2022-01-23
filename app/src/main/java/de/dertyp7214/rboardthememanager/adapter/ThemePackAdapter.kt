@@ -3,6 +3,7 @@ package de.dertyp7214.rboardthememanager.adapter
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
+import de.dertyp7214.rboardthememanager.utils.doAsync
 
 class ThemePackAdapter(
     private val list: List<ThemePack>,
@@ -78,7 +80,11 @@ class ThemePackAdapter(
             holder.root.setOnLongClickListener {
                 activity.run {
                     openDialog(
-                        themePack.description ?: getString(R.string.theme_pack),
+                        TextUtils.concat(
+                            themePack.description ?: getString(R.string.theme_pack),
+                            "\n\n\n",
+                            "Unknown Repo".fontSize(.6f)
+                        ),
                         getString(R.string.description),
                         true,
                         R.string.download,
@@ -88,6 +94,15 @@ class ThemePackAdapter(
                         }
                     ) {
                         it.dismiss()
+                    }.apply {
+                        doAsync(themePack.repoUrl::parseRepo) { repo ->
+                            if (repo?.meta?.name != null) {
+                                val mainMessage =
+                                    themePack.description ?: getString(R.string.theme_pack)
+                                val footerSpan = repo.meta.name.fontSize(.6f)
+                                setMessage(TextUtils.concat(mainMessage, "\n\n\n", footerSpan))
+                            }
+                        }
                     }
                 }
                 false

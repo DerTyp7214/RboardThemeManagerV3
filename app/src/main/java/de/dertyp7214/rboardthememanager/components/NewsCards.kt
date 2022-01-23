@@ -12,8 +12,8 @@ import com.google.gson.Gson
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.NewsFeedAdapter
 import de.dertyp7214.rboardthememanager.data.ThemePack
+import de.dertyp7214.rboardthememanager.utils.TypeTokens
 import de.dertyp7214.rboardthememanager.utils.doAsync
-import de.dertyp7214.rboardthememanager.utils.fromJsonList
 import java.net.URL
 
 class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
@@ -59,7 +59,7 @@ class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
 
     private fun fetchNewsFeed(): List<CardElement> {
         return try {
-            Gson().fromJsonList(URL(newsFeedUrl).readText())
+            Gson().fromJson(URL(newsFeedUrl).readText(), TypeTokens<List<CardElement>>())
         } catch (e: Exception) {
             listOf()
         }

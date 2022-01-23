@@ -186,7 +186,13 @@ object ThemeUtils {
             REPOS.filterActive().forEach { repo ->
                 try {
                     packs.addAll(
-                        Gson().fromJsonList(URL(repo).readText())
+                        Gson().fromJson<Collection<ThemePack>?>(
+                            URL(repo).readText(),
+                            TypeTokens<List<ThemePack>>()
+                        ).map {
+                            it.repoUrl = repo
+                            it
+                        }
                     )
                 } catch (_: Exception) {
                 }

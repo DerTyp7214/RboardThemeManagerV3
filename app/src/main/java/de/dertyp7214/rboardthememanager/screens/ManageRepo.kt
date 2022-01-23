@@ -3,9 +3,11 @@ package de.dertyp7214.rboardthememanager.screens
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ManageRepoThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
@@ -13,8 +15,8 @@ import de.dertyp7214.rboardthememanager.core.getTextFromUrl
 import de.dertyp7214.rboardthememanager.core.safeParse
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.databinding.ActivityManageRepoBinding
+import de.dertyp7214.rboardthememanager.utils.TypeTokens
 import de.dertyp7214.rboardthememanager.utils.doAsync
-import de.dertyp7214.rboardthememanager.utils.fromJsonList
 import org.json.JSONObject
 import java.net.URL
 
@@ -73,7 +75,10 @@ class ManageRepo : AppCompatActivity() {
 
         doAsync(URL(key)::getTextFromUrl) { text ->
             val themes: List<ThemePack> = try {
-                Gson().fromJsonList(text)
+                Gson().fromJson(
+                    text,
+                    TypeTokens<List<ThemePack>>()
+                )
             } catch (e: Exception) {
                 e.printStackTrace()
                 listOf()
