@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package de.dertyp7214.rboardthememanager.proto;
+
+message List {
+  message ThemePack {
+    string url = 1;
+    string author = 2;
+    repeated string tags = 3;
+    repeated string themes = 4;
+    uint32 size = 5;
+    uint64 date = 6;
+    string name = 7;
+  }
+
+  repeated ThemePack items = 1;
+}

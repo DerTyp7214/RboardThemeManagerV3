@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import de.dertyp7214.rboardthememanager.components.LayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dertyp7214.preferencesplus.core.dp
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
+import de.dertyp7214.rboardthememanager.components.LayoutManager
 import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
@@ -78,7 +78,8 @@ class ThemeListFragment : Fragment() {
                     bottomMargin = max(
                         windowInsets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.ime()).bottom - 64.dp(
                             requireContext()
-                        ) - windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom, 2.dp(requireContext())
+                        ) - windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom,
+                        2.dp(requireContext())
                     )
                 )
             }
@@ -133,5 +134,5 @@ class ThemeListFragment : Fragment() {
             ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
         }
 
-       }
+    }
 }

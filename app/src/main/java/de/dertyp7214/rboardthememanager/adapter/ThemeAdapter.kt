@@ -13,11 +13,11 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
-import com.google.android.material.card.MaterialCardView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.getAttr
 import de.dertyp7214.rboardthememanager.core.getBitmap

@@ -1,7 +1,5 @@
 package de.dertyp7214.rboardthememanager.core
 
-import androidx.browser.customtabs.CustomTabColorSchemeParams
-import androidx.browser.customtabs.CustomTabsIntent
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.DialogInterface
@@ -18,6 +16,8 @@ import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import androidx.browser.customtabs.CustomTabColorSchemeParams
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -60,7 +60,7 @@ fun Activity.openUrl(url: String) {
 }
 
 fun Activity.openDialog(
-    message: String,
+    message: CharSequence,
     title: String,
     positiveText: String,
     negativeText: String,
@@ -83,21 +83,23 @@ fun Activity.openDialog(
         .setMessage(message)
         .setTitle(title)
         .setPositiveButton(positiveText) { dialogInterface, _ -> positive(dialogInterface) }
-        .setOnDismissListener { if (enableBlur) if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            content.setRenderEffect(null)
-        }
+        .setOnDismissListener {
+            if (enableBlur) if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                content.setRenderEffect(null)
+            }
         }
         .apply {
-            if (negative != null) setNegativeButton(negativeText) { dialogInterface, _ ->                negative.invoke(
-                dialogInterface
-            )
+            if (negative != null) setNegativeButton(negativeText) { dialogInterface, _ ->
+                negative.invoke(
+                    dialogInterface
+                )
             }
         }
         .create().also { it.show() }
 }
 
 fun Activity.openDialog(
-    message: String,
+    message: CharSequence,
     title: String,
     cancelable: Boolean = false,
     @StringRes negativeText: Int = android.R.string.cancel,
@@ -213,9 +215,10 @@ fun Activity.openDialog(
     return MaterialAlertDialogBuilder(this)
         .setCancelable(cancelable)
         .setView(view)
-        .setOnDismissListener { if (enableBlur) if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            content.setRenderEffect(null)
-        }
+        .setOnDismissListener {
+            if (enableBlur) if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                content.setRenderEffect(null)
+            }
         }
         .create().also { dialog ->
             block(view, dialog)

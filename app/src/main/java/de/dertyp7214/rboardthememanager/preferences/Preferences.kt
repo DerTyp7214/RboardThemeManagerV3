@@ -1,52 +1,48 @@
 package de.dertyp7214.rboardthememanager.preferences
 
-import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
 import android.content.Intent.ACTION_SEND
 import android.content.Intent.EXTRA_TEXT
-import androidx.recyclerview.widget.RecyclerView
 import android.os.Build
 import android.os.Handler
-import android.view.View
 import android.os.Looper
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.dertyp7214.logs.helpers.DogbinUtils
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import de.Maxr1998.modernpreferences.PreferenceScreen
-import de.Maxr1998.modernpreferences.helpers.onClick
+import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.categoryHeader
 import de.Maxr1998.modernpreferences.helpers.onClick
 import de.Maxr1998.modernpreferences.helpers.pref
 import de.Maxr1998.modernpreferences.helpers.screen
 import de.dertyp7214.rboardthememanager.Application
-import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
-import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.getSystemProp
+import de.dertyp7214.rboardthememanager.core.openUrl
+import de.dertyp7214.rboardthememanager.core.safeParse
 import de.dertyp7214.rboardthememanager.core.start
 import de.dertyp7214.rboardthememanager.screens.ReadMoreReadFast
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
-import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
-import de.dertyp7214.rboardthememanager.core.openUrl
-import de.dertyp7214.rboardthememanager.core.safeParse
-import de.dertyp7214.rboardthememanager.screens.MainActivity
 import de.dertyp7214.rboardthememanager.utils.Navigations
+import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 import org.json.JSONObject
 
 class Preferences(
     private val activity: AppCompatActivity,
     intent: Intent,
     onRequestReload: () -> Unit
-) :    AbstractPreference() {
+) : AbstractPreference() {
 
     private val type by lazy { intent.getStringExtra("type") }
     private val args by lazy { JSONObject().safeParse(intent.getStringExtra("args") ?: "") }
@@ -151,7 +147,6 @@ class Preferences(
                 else -> screen(activity) {}
             }
         }
-
 
 
     val title: String
@@ -319,6 +314,7 @@ class Preferences(
         }
     }
 }
+
 abstract class AbstractPreference {
     internal abstract fun preferences(builder: PreferenceScreen.Builder)
     internal abstract fun getExtraView(): View?

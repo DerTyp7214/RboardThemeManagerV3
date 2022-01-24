@@ -1,12 +1,10 @@
 package de.dertyp7214.rboardthememanager.utils
 
 import android.content.Context
-import android.content.pm.PackageManager
 import android.content.pm.PackageManager.GET_META_DATA
-import android.content.pm.PackageManager.NameNotFoundException
-import com.dertyp7214.logs.helpers.Logger
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
+import com.dertyp7214.logs.helpers.Logger
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
 
@@ -23,12 +21,14 @@ object GboardUtils {
             ""
         }
     }
+
     fun getGboardVersionCode(context: Context): Long {
         return PackageUtils.getAppVersionCode(
             GBOARD_PACKAGE_NAME,
             context.packageManager
         )
     }
+
     fun updateCurrentFlags(flags: String) {
         Application.context?.let { context ->
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)

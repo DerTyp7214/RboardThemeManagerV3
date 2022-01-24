@@ -2,7 +2,6 @@ package de.dertyp7214.rboardthememanager.components
 
 import android.graphics.Rect
 import android.view.View
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MarginItemDecoration(
