@@ -16,9 +16,11 @@
             android:layout_marginBottom="24dp"
             android:clickable="true"
             android:visibility="gone"
+            app:backgroundTint="?attr/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/ic_baseline_add_24"
+            app:tint="?attr/colorBackgroundFloating"
             tools:ignore="ContentDescription,SpeakableTextPresentCheck"
             tools:visibility="visible" />
 

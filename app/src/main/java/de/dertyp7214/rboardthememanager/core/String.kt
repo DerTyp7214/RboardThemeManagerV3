@@ -1,5 +1,8 @@
 package de.dertyp7214.rboardthememanager.core
 
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.RelativeSizeSpan
 import com.dertyp7214.logs.helpers.Logger
 import com.google.gson.Gson
 import com.topjohnwu.superuser.Shell
@@ -10,6 +13,7 @@ import de.dertyp7214.rboardthememanager.data.RboardRepo
 import de.dertyp7214.rboardthememanager.data.RboardRepoMeta
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import org.xml.sax.InputSource
+import java.io.IOException
 import java.io.StringReader
 import java.net.URL
 import java.util.*
@@ -17,17 +21,30 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 typealias RepoUrl = String
 
-fun RepoUrl.parseRepo(): RboardRepo {
+fun RepoUrl.parseRepo(): RboardRepo? {
     val url = removePrefix("true:").removePrefix("false:")
     val meta = try {
         Gson().fromJson(
             URL(url.replace("list.json", "meta.json")).readText(),
             RboardRepoMeta::class.java
         )
+    } catch (e: IOException) {
+        return null
     } catch (e: Exception) {
         null
     }
     return RboardRepo(url, startsWith("true:"), meta)
+}
+
+fun String.fontSize(relative: Float): CharSequence {
+    return SpannableString(this).apply {
+        setSpan(
+            RelativeSizeSpan(relative),
+            0,
+            length,
+            Spannable.SPAN_INCLUSIVE_INCLUSIVE
+        )
+    }
 }
 
 fun String.runAsCommand(callback: (result: Array<String>) -> Unit = {}): Boolean {

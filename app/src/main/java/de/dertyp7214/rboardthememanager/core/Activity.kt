@@ -67,7 +67,7 @@ fun Activity.openUrl(url: String) {
 }
 
 fun Activity.openDialog(
-    message: String,
+    message: CharSequence,
     title: String,
     positiveText: String,
     negativeText: String,
@@ -99,7 +99,7 @@ fun Activity.openDialog(
 }
 
 fun Activity.openDialog(
-    message: String,
+    message: CharSequence,
     title: String,
     cancelable: Boolean = false,
     @StringRes negativeText: Int = android.R.string.cancel,

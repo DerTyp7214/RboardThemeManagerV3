@@ -45,7 +45,7 @@ class Repos(
             doAsync({
                 it.toList().map { url -> url.parseRepo() }
             }, { data ->
-                repositories.addAll(data)
+                repositories.addAll(data.filterNotNull())
                 onRequestReload()
             })
         }
@@ -111,13 +111,7 @@ class Repos(
         fab.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_baseline_add_24))
         fab.setOnClickListener {
             activity.openInputDialog(R.string.repository) { dialog, text ->
-                doAsync({
-                    try {
-                        "true:$text".parseRepo()
-                    } catch (e: Exception) {
-                        null
-                    }
-                }) {
+                doAsync("true:$text"::parseRepo) {
                     dialog.dismiss()
                     if (it != null) {
                         repositories.add(it)

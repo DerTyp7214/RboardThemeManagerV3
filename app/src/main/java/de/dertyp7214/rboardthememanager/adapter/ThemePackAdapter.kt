@@ -1,7 +1,9 @@
 package de.dertyp7214.rboardthememanager.adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +15,7 @@ import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
+import de.dertyp7214.rboardthememanager.utils.doAsync
 
 class ThemePackAdapter(
     private val list: List<ThemePack>,
@@ -33,8 +36,8 @@ class ThemePackAdapter(
         val lastUpdate: TextView = v.findViewById(R.id.lastUpdate)
     }
 
-    class NewsViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        val newsCards: NewsCards = v as NewsCards
+    class NewsViewHolder(v: NewsCards) : RecyclerView.ViewHolder(v) {
+        val newsCards: NewsCards = v
     }
 
     override fun getItemId(position: Int): Long {
@@ -46,12 +49,19 @@ class ThemePackAdapter(
         return ViewHolder(LayoutInflater.from(activity).inflate(R.layout.pack_item, parent, false))
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val themePack = list[position]
 
         if (holder is ViewHolder) {
             holder.size.text =
-                themePack.size.zeroOrElse { it.toHumanReadableBytes(activity) } ?: ""
+                "${themePack.themes?.size?.let { "($it)" } ?: ""} ${
+                    themePack.size.zeroOrElse {
+                        it.toHumanReadableBytes(
+                            activity
+                        )
+                    } ?: ""
+                }"
             holder.title.text = themePack.name
             holder.author.text = themePack.author
             holder.lastUpdate.text = themePack.date.format(System.currentTimeMillis())
@@ -70,7 +80,11 @@ class ThemePackAdapter(
             holder.root.setOnLongClickListener {
                 activity.run {
                     openDialog(
-                        themePack.description ?: getString(R.string.theme_pack),
+                        TextUtils.concat(
+                            themePack.description ?: getString(R.string.theme_pack),
+                            "\n\n\n",
+                            "Unknown Repo".fontSize(.6f)
+                        ),
                         getString(R.string.description),
                         true,
                         R.string.download,
@@ -80,6 +94,15 @@ class ThemePackAdapter(
                         }
                     ) {
                         it.dismiss()
+                    }.apply {
+                        doAsync(themePack.repoUrl::parseRepo) { repo ->
+                            if (repo?.meta?.name != null) {
+                                val mainMessage =
+                                    themePack.description ?: getString(R.string.theme_pack)
+                                val footerSpan = repo.meta.name.fontSize(.6f)
+                                setMessage(TextUtils.concat(mainMessage, "\n\n\n", footerSpan))
+                            }
+                        }
                     }
                 }
                 false
@@ -98,7 +121,7 @@ class ThemePackAdapter(
         }
     }
 
-    override fun getItemViewType(position: Int): Int = position
+    override fun getItemViewType(position: Int): Int = if (list[position].none) 0 else 1
 
     override fun getItemCount(): Int = list.size
 }

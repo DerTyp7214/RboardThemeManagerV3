@@ -3,6 +3,7 @@ package de.dertyp7214.rboardthememanager.screens
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.gson.Gson
@@ -11,9 +12,12 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ManageRepoThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
 import de.dertyp7214.rboardthememanager.core.getTextFromUrl
+import de.dertyp7214.rboardthememanager.core.safeParse
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.databinding.ActivityManageRepoBinding
+import de.dertyp7214.rboardthememanager.utils.TypeTokens
 import de.dertyp7214.rboardthememanager.utils.doAsync
+import org.json.JSONObject
 import java.net.URL
 
 class ManageRepo : AppCompatActivity() {
@@ -73,7 +77,7 @@ class ManageRepo : AppCompatActivity() {
             val themes: List<ThemePack> = try {
                 Gson().fromJson(
                     text,
-                    object : TypeToken<List<ThemePack>>() {}.type
+                    TypeTokens<List<ThemePack>>()
                 )
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -83,6 +87,14 @@ class ManageRepo : AppCompatActivity() {
             items.clear()
             items.addAll(themes)
             adapter.notifyDataSetChanged()
+        }
+
+        doAsync(URL(key.replace("list.json", "meta.json"))::getTextFromUrl) { text ->
+            if (text.isNotEmpty()) {
+                JSONObject().safeParse(text).getString("name").let { name ->
+                    if (name.isNotEmpty()) toolbar.title = name
+                }
+            }
         }
     }
 

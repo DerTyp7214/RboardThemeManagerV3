@@ -18,7 +18,6 @@ import com.dertyp7214.preferencesplus.core.setHeight
 import com.dertyp7214.preferencesplus.core.setWidth
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
@@ -187,10 +186,13 @@ object ThemeUtils {
             REPOS.filterActive().forEach { repo ->
                 try {
                     packs.addAll(
-                        Gson().fromJson(
+                        Gson().fromJson<Collection<ThemePack>?>(
                             URL(repo).readText(),
-                            object : TypeToken<List<ThemePack>>() {}.type
-                        )
+                            TypeTokens<List<ThemePack>>()
+                        ).map {
+                            it.repoUrl = repo
+                            it
+                        }
                     )
                 } catch (_: Exception) {
                 }

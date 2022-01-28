@@ -12,3 +12,6 @@ https://raw.githubusercontent.com/GboardThemes/Repo/master/repo?fingerprint=F691
 ```
 
 ![QrCode](https://raw.githubusercontent.com/DerTyp7214/RboardThemeManagerV3/master/assets/qr_code.png)
+
+
+[Project-page](https://github.com/GboardThemes)
