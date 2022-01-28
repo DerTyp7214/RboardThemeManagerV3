@@ -1,6 +1,7 @@
 @file:Suppress("SpellCheckingInspection")
 
 import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
+
 //import com.google.protobuf.gradle.*
 
 plugins {
@@ -42,6 +43,10 @@ android {
         getByName("debug") {
             isDebuggable = true
             applicationIdSuffix = ".debug"
+        }
+        create("pro") {
+            initWith(getByName("release"))
+            applicationIdSuffix = ".pro"
         }
     }
     compileOptions {

@@ -62,6 +62,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:317045394384:android:3351071808f0db058d87d5",
+        "android_client_info": {
+          "package_name": "de.dertyp7214.rboardthememanager.pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "317045394384-f2fl4gbvhjs491ss94num4d733dau5kp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEHbRfATaDmcXL13JGk8dSPtPe4spySlU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "317045394384-f2fl4gbvhjs491ss94num4d733dau5kp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
