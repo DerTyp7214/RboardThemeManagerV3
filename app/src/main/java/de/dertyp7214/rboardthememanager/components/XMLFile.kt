@@ -3,6 +3,7 @@ package de.dertyp7214.rboardthememanager.components
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.core.joinToString
 import de.dertyp7214.rboardthememanager.core.readXML
+import de.dertyp7214.rboardthememanager.core.times
 import de.dertyp7214.rboardthememanager.core.writeFile
 
 class XMLFile(val path: String) {
@@ -35,7 +36,7 @@ class XMLFile(val path: String) {
 
     override fun toString(): String {
         return "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>\n<map>\n${
-            values.joinToString("\n") { "${" ".repeat(4)}${it.value}" }
+            values.joinToString("\n") { "${" " * 4}${it.value}" }
         }\n</map>"
     }
 }
@@ -73,7 +74,7 @@ class XMLEntry(val name: String, _value: Any, val type: XMLType) {
                 XMLType.LONG, XMLType.BOOLEAN, XMLType.INT, XMLType.DOUBLE, XMLType.FLOAT -> "<${type.identifier} name=\"$name\" value=\"$value\"/>"
                 XMLType.STRING -> "<string name=\"$name\">$value</string>"
                 XMLType.SET -> "<set name=\"$name\">\n${
-                    (value as Set<*>).joinToString("\n") { "${" ".repeat(4)}$it" }
+                    (value as Set<*>).joinToString("\n") { "${" " * 4}$it" }
                 }\n</set>"
             }
         } catch (e: Exception) {
