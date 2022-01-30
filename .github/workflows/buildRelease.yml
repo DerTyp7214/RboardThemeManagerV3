@@ -10,6 +10,7 @@ on:
       - 'gradle.properties'
       - 'settings.gradle.kts'
       - '.github/workflows/buildRelease.yml'
+  workflow_dispatch:
 
 jobs:
   build:

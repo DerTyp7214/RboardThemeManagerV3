@@ -27,10 +27,7 @@ import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.openUrl
-import de.dertyp7214.rboardthememanager.core.safeParse
-import de.dertyp7214.rboardthememanager.core.start
-import de.dertyp7214.rboardthememanager.core.verifyInstallerId
+import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.MainActivity
 import de.dertyp7214.rboardthememanager.screens.ReadMoreReadFast
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
@@ -55,7 +52,7 @@ class Preferences(
         "theme_count" to (Config.themeCount?.toString() ?: "0"),
         "theme_path" to (if (!Config.useMagisk) Config.MAGISK_THEME_LOC else Config.THEME_LOCATION),
         "installation_method" to (if (!Config.useMagisk) R.string.pref_gboard else if (usingModule) R.string.magisk else R.string.other),
-        "rboard_app_version" to "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE}) ${BuildConfig.BUILD_TYPE}",
+        "rboard_app_version" to "${BuildConfig.BUILD_TYPE.capitalize()}: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
         "phone_model" to Build.MODEL,
         "android_version" to Build.VERSION.RELEASE_OR_CODENAME,
         "root_version" to "Magisk: ${

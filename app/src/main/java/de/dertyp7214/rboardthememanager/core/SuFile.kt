@@ -12,7 +12,7 @@ import org.apache.commons.text.StringEscapeUtils
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
-import java.nio.charset.Charset
+import java.nio.charset.StandardCharsets.UTF_8
 
 fun SuFile.copy(newFile: File) = "\\cp $absolutePath ${newFile.absolutePath}".runAsCommand()
 
@@ -58,7 +58,7 @@ fun SuFile.tar(zip: File) =
     listOf("cd $absolutePath", "tar -cf ${zip.absolutePath} .").runAsCommand()
 
 fun SuFile.writeFile(content: String) {
-    if (exists()) SuFileOutputStream.open(this).writer(Charset.defaultCharset())
+    if (exists()) SuFileOutputStream.open(this).writer(UTF_8)
         .use { outputStreamWriter ->
             outputStreamWriter.write(content)
         }
