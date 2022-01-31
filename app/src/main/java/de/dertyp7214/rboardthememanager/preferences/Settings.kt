@@ -270,7 +270,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                                     }
                                     "system_theme" -> {
-                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_UNSPECIFIED)
+                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                                     }
                                 }
                             } else

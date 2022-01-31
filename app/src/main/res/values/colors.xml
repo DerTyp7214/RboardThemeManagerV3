@@ -14,9 +14,6 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="transparentBlack">#80000000</color>
-    <color name="light_blue_50">#FFE1F5FE</color>
-    <color name="light_blue_200">#FF81D4FA</color>
-    <color name="light_blue_900">#FF01579B</color>
 
     <color name="ic_launcher_background">@color/background_icon</color>
     <color name="ic_launcher_foreground">@color/background</color>

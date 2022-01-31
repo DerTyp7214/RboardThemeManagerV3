@@ -201,3 +201,5 @@ fun String.readXML(): Map<String, Any> {
 
     return output
 }
+
+operator fun String.times(other: Number): String = repeat(other.toInt())

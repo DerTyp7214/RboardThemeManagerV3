@@ -3,8 +3,8 @@ package de.dertyp7214.rboardthememanager.preferences
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
-import android.content.Intent.ACTION_SEND
-import android.content.Intent.EXTRA_TEXT
+import android.content.Intent.*
+import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
@@ -28,6 +28,7 @@ import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.capitalize
 import de.dertyp7214.rboardthememanager.core.openUrl
 import de.dertyp7214.rboardthememanager.core.safeParse
 import de.dertyp7214.rboardthememanager.core.start
@@ -37,6 +38,7 @@ import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.utils.Navigations
 import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 import org.json.JSONObject
+import java.io.File
 
 class Preferences(
     private val activity: AppCompatActivity,
@@ -52,10 +54,12 @@ class Preferences(
         "theme_count" to (Config.themeCount?.toString() ?: "0"),
         "theme_path" to (if (!Config.useMagisk) Config.MAGISK_THEME_LOC else Config.THEME_LOCATION),
         "installation_method" to (if (!Config.useMagisk) R.string.pref_gboard else if (usingModule) R.string.magisk else R.string.other),
-        "rboard_app_version" to "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
+        "rboard_app_version" to "${BuildConfig.BUILD_TYPE.capitalize()}: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
         "phone_model" to Build.MODEL,
         "android_version" to Build.VERSION.RELEASE,
-        "root_version" to "Magisk: ${MagiskUtils.getMagiskVersionString().removeSuffix(":MAGISK")}",
+        "root_version" to "Magisk: ${
+            MagiskUtils.getMagiskVersionFullString().replace(":MAGISK", "")
+        }",
         "gboard_version" to "${
             GboardUtils.getGboardVersion(activity).split("-").first()
         } (${GboardUtils.getGboardVersionCode(activity)})",
@@ -202,7 +206,7 @@ class Preferences(
                                     putExtra(EXTRA_TEXT, url)
                                     type = "text/plain"
                                 }.let {
-                                    Intent.createChooser(it, activity.getString(R.string.share))
+                                    createChooser(it, activity.getString(R.string.share))
                                 }.also(activity::startActivity)
                             }
 
@@ -242,6 +246,13 @@ class Preferences(
                 titleRes = R.string.theme_path
                 summary = infoData[key] as String
                 iconRes = R.drawable.ic_folder_open
+                onClick {
+                    Intent(ACTION_GET_CONTENT).apply {
+                        setDataAndType(Uri.fromFile(File(infoData[key] as String)), "application/*")
+                        activity.startActivity(this)
+                    }
+                    true
+                }
             }
             pref("installation_method") {
                 titleRes = R.string.installation_method
@@ -263,7 +274,7 @@ class Preferences(
                             .show()
                         Application.context?.let {
                             ReadMoreReadFast::class.java.start(it) {
-                                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                                flags = FLAG_ACTIVITY_NEW_TASK
                             }
                         }
                     }
