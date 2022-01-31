@@ -1,14 +1,14 @@
 package de.dertyp7214.rboardthememanager.core
 
-import com.topjohnwu.superuser.io.SuFile
-import com.topjohnwu.superuser.io.SuFileInputStream
-import de.dertyp7214.rboardthememanager.data.ModuleMeta
-import java.io.File
 import android.app.Activity
 import android.content.Intent
 import androidx.core.app.ShareCompat
 import androidx.core.content.FileProvider
+import com.topjohnwu.superuser.io.SuFile
+import com.topjohnwu.superuser.io.SuFileInputStream
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.data.ModuleMeta
+import java.io.File
 import java.io.InputStream
 import kotlin.text.Charsets.UTF_8
 

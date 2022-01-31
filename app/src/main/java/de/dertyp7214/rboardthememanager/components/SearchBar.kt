@@ -16,8 +16,8 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.MenuRes
-import androidx.core.widget.doOnTextChanged
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.widget.doOnTextChanged
 import com.google.android.material.card.MaterialCardView
 import de.dertyp7214.rboardthememanager.R
 
@@ -196,8 +196,7 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
             Handler(Looper.getMainLooper()).postDelayed({
                 editText.windowInsetsController?.hide(WindowInsets.Type.ime())
             }, 100)
-        }
-        else{
+        } else {
             editText.clearFocus()
             val imm: InputMethodManager =
                 context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

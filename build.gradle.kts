@@ -7,10 +7,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.2.0-alpha05")
+        classpath("com.android.tools.build:gradle:7.2.0-beta01")
         //noinspection DifferentKotlinGradleVersion
         classpath(kotlin("gradle-plugin", version = "1.6.0"))
         classpath("com.google.gms:google-services:4.3.10")
+        //classpath("com.google.protobuf:protobuf-gradle-plugin:0.8.10")
     }
 }
 
@@ -19,6 +20,7 @@ allprojects {
         google()
         mavenCentral()
         maven("https://jitpack.io")
+        maven("https://oss.sonatype.org/content/repositories/snapshots/")
     }
 }
 

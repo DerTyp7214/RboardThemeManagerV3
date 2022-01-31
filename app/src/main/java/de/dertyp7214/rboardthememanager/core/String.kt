@@ -1,5 +1,8 @@
 package de.dertyp7214.rboardthememanager.core
 
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.RelativeSizeSpan
 import com.dertyp7214.logs.helpers.Logger
 import com.google.gson.Gson
 import com.topjohnwu.superuser.Shell
@@ -31,6 +34,17 @@ fun RepoUrl.parseRepo(): RboardRepo? {
         null
     }
     return RboardRepo(url, startsWith("true:"), meta)
+}
+
+fun String.fontSize(relative: Float): CharSequence {
+    return SpannableString(this).apply {
+        setSpan(
+            RelativeSizeSpan(relative),
+            0,
+            length,
+            Spannable.SPAN_INCLUSIVE_INCLUSIVE
+        )
+    }
 }
 
 fun String.runAsCommand(callback: (result: Array<String>) -> Unit = {}): Boolean {
@@ -187,3 +201,5 @@ fun String.readXML(): Map<String, Any> {
 
     return output
 }
+
+operator fun String.times(other: Number): String = repeat(other.toInt())

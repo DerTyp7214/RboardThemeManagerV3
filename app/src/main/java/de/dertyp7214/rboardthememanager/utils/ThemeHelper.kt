@@ -2,6 +2,7 @@ package de.dertyp7214.rboardthememanager.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -10,14 +11,14 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.google.android.material.card.MaterialCardView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.get
 import com.dertyp7214.logs.helpers.Logger
 import com.dertyp7214.preferencesplus.core.dp
 import com.dertyp7214.preferencesplus.core.setHeight
 import com.dertyp7214.preferencesplus.core.setWidth
+import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
@@ -32,10 +33,6 @@ import de.dertyp7214.rboardthememanager.preferences.Settings
 import java.io.BufferedInputStream
 import java.net.URL
 import java.util.*
-import android.content.res.Configuration
-import android.graphics.Color.alpha
-import androidx.core.graphics.get
-import kotlin.collections.ArrayList
 
 enum class InternalThemeNames(val path: String) {
     DOWNLOAD_THEMES("rboard:download_themes")
@@ -157,7 +154,11 @@ object ThemeUtils {
                         true
                     )
                 } == true) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && Flags.values.monet) getDynamicColorsTheme()?.let { theme -> themes.add(theme) }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && Flags.values.monet) getDynamicColorsTheme()?.let { theme ->
+                    themes.add(
+                        theme
+                    )
+                }
                 themes.add(getSystemAutoTheme())
             }
             if (context?.let { ctx ->
@@ -192,10 +193,13 @@ object ThemeUtils {
             REPOS.filterActive().forEach { repo ->
                 try {
                     packs.addAll(
-                        Gson().fromJson(
+                        Gson().fromJson<Collection<ThemePack>?>(
                             URL(repo).readText(),
-                            object : TypeToken<List<ThemePack>>() {}.type
-                        )
+                            TypeTokens<List<ThemePack>>()
+                        ).map {
+                            it.repoUrl = repo
+                            it
+                        }
                     )
                 } catch (_: Exception) {
                 }
@@ -326,6 +330,7 @@ object ThemeUtils {
             "system_auto:"
         )
     }
+
     private fun getSystemAutoImage(): Bitmap? {
         return Application.context?.let { context ->
             (try {

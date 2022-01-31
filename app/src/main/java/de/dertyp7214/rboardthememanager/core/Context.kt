@@ -1,12 +1,12 @@
 package de.dertyp7214.rboardthememanager.core
 
 import android.content.Context
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.TypedValue
 import androidx.annotation.AttrRes
 import androidx.core.os.postDelayed
-import android.os.Build
 
 fun delayed(delay: Long, callback: () -> Unit) {
     Handler(Looper.getMainLooper()).postDelayed(delay) { callback() }

@@ -6,7 +6,7 @@ import java.io.IOException
 fun hasRoot(): Boolean {
     return try {
         rootAccess()
-    }catch (e: IOException) {
+    } catch (e: IOException) {
         false
     }
 }

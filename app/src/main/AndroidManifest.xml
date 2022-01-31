@@ -55,8 +55,8 @@
 
         <receiver
             android:name=".widgets.FlagsWidget"
-            android:exported="true"
-            android:enabled="@bool/is_post_api_31">
+            android:enabled="@bool/is_post_api_31"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -65,11 +65,12 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/flags_widget_info" />
         </receiver>
+
         <activity
             android:name=".screens.ManageRepo"
             android:exported="true"
             android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />
-       <activity
+        <activity
             android:name=".screens.InstallPackActivity"
             android:exported="true"
             android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />

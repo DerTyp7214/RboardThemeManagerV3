@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import de.dertyp7214.rboardthememanager.components.LayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.SoundPackAdapter
+import de.dertyp7214.rboardthememanager.components.LayoutManager
 import de.dertyp7214.rboardthememanager.core.applyTransitions
 import de.dertyp7214.rboardthememanager.core.applyTransitionsViewCreated
 import de.dertyp7214.rboardthememanager.core.get

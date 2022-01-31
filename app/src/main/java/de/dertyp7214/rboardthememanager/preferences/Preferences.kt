@@ -1,52 +1,50 @@
 package de.dertyp7214.rboardthememanager.preferences
 
-import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
-import android.content.Intent.ACTION_SEND
-import android.content.Intent.EXTRA_TEXT
-import androidx.recyclerview.widget.RecyclerView
+import android.content.Intent.*
+import android.net.Uri
 import android.os.Build
 import android.os.Handler
-import android.view.View
 import android.os.Looper
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.dertyp7214.logs.helpers.DogbinUtils
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import de.Maxr1998.modernpreferences.PreferenceScreen
-import de.Maxr1998.modernpreferences.helpers.onClick
+import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.categoryHeader
 import de.Maxr1998.modernpreferences.helpers.onClick
 import de.Maxr1998.modernpreferences.helpers.pref
 import de.Maxr1998.modernpreferences.helpers.screen
 import de.dertyp7214.rboardthememanager.Application
-import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
-import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.getSystemProp
+import de.dertyp7214.rboardthememanager.core.capitalize
+import de.dertyp7214.rboardthememanager.core.openUrl
+import de.dertyp7214.rboardthememanager.core.safeParse
 import de.dertyp7214.rboardthememanager.core.start
 import de.dertyp7214.rboardthememanager.screens.ReadMoreReadFast
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
-import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
-import de.dertyp7214.rboardthememanager.core.openUrl
-import de.dertyp7214.rboardthememanager.core.safeParse
-import de.dertyp7214.rboardthememanager.screens.MainActivity
 import de.dertyp7214.rboardthememanager.utils.Navigations
+import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 import org.json.JSONObject
+import java.io.File
 
 class Preferences(
     private val activity: AppCompatActivity,
     intent: Intent,
     onRequestReload: () -> Unit
-) :    AbstractPreference() {
+) : AbstractPreference() {
 
     private val type by lazy { intent.getStringExtra("type") }
     private val args by lazy { JSONObject().safeParse(intent.getStringExtra("args") ?: "") }
@@ -56,10 +54,12 @@ class Preferences(
         "theme_count" to (Config.themeCount?.toString() ?: "0"),
         "theme_path" to (if (!Config.useMagisk) Config.MAGISK_THEME_LOC else Config.THEME_LOCATION),
         "installation_method" to (if (!Config.useMagisk) R.string.pref_gboard else if (usingModule) R.string.magisk else R.string.other),
-        "rboard_app_version" to "${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
+        "rboard_app_version" to "${BuildConfig.BUILD_TYPE.capitalize()}: ${BuildConfig.VERSION_NAME} (${BuildConfig.VERSION_CODE})",
         "phone_model" to Build.MODEL,
         "android_version" to Build.VERSION.RELEASE,
-        "root_version" to "Magisk: ${MagiskUtils.getMagiskVersionString().removeSuffix(":MAGISK")}",
+        "root_version" to "Magisk: ${
+            MagiskUtils.getMagiskVersionFullString().replace(":MAGISK", "")
+        }",
         "gboard_version" to "${
             GboardUtils.getGboardVersion(activity).split("-").first()
         } (${GboardUtils.getGboardVersionCode(activity)})",
@@ -153,7 +153,6 @@ class Preferences(
         }
 
 
-
     val title: String
         get() {
             return when (type) {
@@ -207,7 +206,7 @@ class Preferences(
                                     putExtra(EXTRA_TEXT, url)
                                     type = "text/plain"
                                 }.let {
-                                    Intent.createChooser(it, activity.getString(R.string.share))
+                                    createChooser(it, activity.getString(R.string.share))
                                 }.also(activity::startActivity)
                             }
 
@@ -247,6 +246,13 @@ class Preferences(
                 titleRes = R.string.theme_path
                 summary = infoData[key] as String
                 iconRes = R.drawable.ic_folder_open
+                onClick {
+                    Intent(ACTION_GET_CONTENT).apply {
+                        setDataAndType(Uri.fromFile(File(infoData[key] as String)), "application/*")
+                        activity.startActivity(this)
+                    }
+                    true
+                }
             }
             pref("installation_method") {
                 titleRes = R.string.installation_method
@@ -268,7 +274,7 @@ class Preferences(
                             .show()
                         Application.context?.let {
                             ReadMoreReadFast::class.java.start(it) {
-                                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                                flags = FLAG_ACTIVITY_NEW_TASK
                             }
                         }
                     }
@@ -319,6 +325,7 @@ class Preferences(
         }
     }
 }
+
 abstract class AbstractPreference {
     internal abstract fun preferences(builder: PreferenceScreen.Builder)
     internal abstract fun getExtraView(): View?

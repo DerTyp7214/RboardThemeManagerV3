@@ -5,7 +5,8 @@
     android:viewportWidth="108"
     android:viewportHeight="108"
     tools:ignore="VectorRaster">
-    <group android:scaleX="0.25"
+    <group
+        android:scaleX="0.25"
         android:scaleY="0.25">
         <group>
             <path

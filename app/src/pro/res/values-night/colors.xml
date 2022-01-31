@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="app_background">#1B1013</color>
+    <color name="background">#1B1013</color>
+    <color name="foreground">#3A2228</color>
+    <color name="accent">#EC7301</color>
+    <color name="accent_2">#fea551</color>
+    <color name="md3">#5A353E</color>
+    <color name="switch_thumb">#5f3842</color>
+    <color name="switch_track">#8b5261</color>
+    <color name="background_icon_pro">#1B1013</color>
+    <color name="foreground_icon_pro">#EC7301</color>
+    <color name="text">#ffffff</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#ffffff</color>
+    <color name="transparentBlack">#80000000</color>
+
+    <color name="ic_launcher_background">@color/background_icon_pro</color>
+    <color name="ic_launcher_foreground">@color/background</color>
+</resources>

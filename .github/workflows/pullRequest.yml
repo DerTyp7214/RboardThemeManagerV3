@@ -42,11 +42,14 @@ jobs:
           key: ${{ runner.os }}-build-cache-${{ github.sha }}
           restore-keys: ${{ runner.os }}-build-cache-
 
+      - name: File Permissions
+        run: chmod +x gradlew
+
       - name: Build apk
         id: buildAllApks
         uses: eskatos/gradle-command-action@v1.3.3
         with:
-          gradle-version: current
+          gradle-version: wrapper
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true

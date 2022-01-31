@@ -1,6 +1,7 @@
 package de.dertyp7214.rboardthememanager.data
 
 import com.google.gson.annotations.SerializedName
+import de.dertyp7214.rboardthememanager.core.RepoUrl
 
 data class ThemePack(
     val author: String,
@@ -14,6 +15,8 @@ data class ThemePack(
     val none: Boolean = false,
     val date: Long = Long.MAX_VALUE
 ) {
+
+    var repoUrl: RepoUrl = ""
 
     override fun hashCode(): Int {
         return author.hashCode() + url.hashCode() + name.hashCode()

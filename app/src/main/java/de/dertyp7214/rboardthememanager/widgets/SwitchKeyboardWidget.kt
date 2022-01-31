@@ -4,21 +4,19 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.widget.RemoteViews
 import android.widget.Toast
-import android.util.Log
-import java.lang.Float.max
-import kotlin.math.min
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.dpToPx
 import de.dertyp7214.rboardthememanager.core.resize
 import de.dertyp7214.rboardthememanager.core.roundCorners
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.utils.applyTheme
-import android.content.ComponentName
+import kotlin.math.min
 
 class SwitchKeyboardWidget : AppWidgetProvider() {
 
@@ -28,7 +26,6 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
             "de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget"
         private const val PREF_PREFIX_KEY = "appwidget_"
 
-        
 
         internal fun updateAppWidget(
             context: Context,
@@ -36,13 +33,13 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
             appWidgetId: Int
         ) {
             loadThemePath(context, appWidgetId)?.let { themeName ->
-            val views = RemoteViews(context.packageName, R.layout.switch_keyboard_widget)
+                val views = RemoteViews(context.packageName, R.layout.switch_keyboard_widget)
 
                 val width = appWidgetManager.getAppWidgetOptions(appWidgetId)
                     .getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH).dpToPx(context).toInt()
 
                 var ratio = 1F
-                
+
                 val theme = ThemeUtils.getThemeData(themeName)
                 val themeImage = (theme.image ?: BitmapFactory.decodeResource(
                     context.resources,
@@ -91,7 +88,7 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
         appWidgetManager: AppWidgetManager,
         appWidgetIds: IntArray
     ) {
-        
+
         appWidgetIds.forEach { appWidgetId ->
             updateAppWidget(context, appWidgetManager, appWidgetId)
         }
@@ -112,7 +109,7 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
             if (applyTheme(theme, true))
                 Toast.makeText(context, R.string.applied, Toast.LENGTH_SHORT).show()
         }
-        
+
         AppWidgetManager.getInstance(context).let { appWidgetManager ->
             onUpdate(
                 context,

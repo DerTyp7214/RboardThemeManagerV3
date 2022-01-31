@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentActivity
-import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.runAsCommand
 import java.io.File
@@ -68,7 +67,7 @@ object PackageUtils {
         }
     }
 
-    fun getAppVersionCode(packageName: String, packageManager: PackageManager): Long{
+    fun getAppVersionCode(packageName: String, packageManager: PackageManager): Long {
         return try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 packageManager.getPackageInfo(packageName, 0).longVersionCode

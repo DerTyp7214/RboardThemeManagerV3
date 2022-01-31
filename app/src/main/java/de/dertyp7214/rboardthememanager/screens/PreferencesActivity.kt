@@ -8,7 +8,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.Maxr1998.modernpreferences.PreferencesAdapter
@@ -48,11 +47,11 @@ class PreferencesActivity : AppCompatActivity() {
 
         preferences.handleFab(binding.floatingActionButton)
 
-            binding.floatingActionButton.applyInsetter {
-                type( navigationBars = true) {
-                    margin()
-                }
+        binding.floatingActionButton.applyInsetter {
+            type(navigationBars = true) {
+                margin()
             }
+        }
 
         setSupportActionBar(preferencesToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

@@ -6,10 +6,9 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Handler
-import android.view.View
 import android.os.Looper
+import android.view.View
 import android.widget.Toast
-import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
@@ -27,6 +26,7 @@ import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
+import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 
 class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
@@ -241,7 +241,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
 
     override fun preferences(builder: PreferenceScreen.Builder) {
         SETTINGS.values().filter { it.visible }
-            .filter { !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) && !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S)  }
+            .filter { !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) && !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) }
             .forEach { item ->
                 val pref: Preference = when (item.type) {
                     TYPE.BOOLEAN -> builder.switch(item.key) {
@@ -270,7 +270,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                                     }
                                     "system_theme" -> {
-                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_UNSPECIFIED)
+                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                                     }
                                 }
                             } else

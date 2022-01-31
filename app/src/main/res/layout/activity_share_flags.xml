@@ -22,8 +22,8 @@
             android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:textAlignment="center"
-            app:menu="@menu/share_flags"
             android:theme="?attr/actionBarTheme"
+            app:menu="@menu/share_flags"
             app:titleCentered="true" />
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.checkbox.MaterialCheckBox
 import de.dertyp7214.rboardthememanager.R
 import java.util.*
-import kotlin.collections.HashMap
 
 class ShareFlagsAdapter(val flags: List<String>, private val onClick: (key: String) -> Unit) :
     RecyclerView.Adapter<ShareFlagsAdapter.ViewHolder>() {

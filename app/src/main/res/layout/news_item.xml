@@ -8,9 +8,9 @@
     android:layout_margin="12dp"
     android:background="?attr/colorBackgroundFloating"
     android:elevation="0dp"
-    app:strokeColor="?attr/colorOnPrimary"
     app:cardCornerRadius="@dimen/roundCorners"
-    app:cardElevation="0dp">
+    app:cardElevation="0dp"
+    app:strokeColor="?attr/colorOnPrimary">
 
     <FrameLayout
         android:layout_width="match_parent"
