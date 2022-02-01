@@ -181,4 +181,21 @@
     <string name="github_repo">Dépôt GitHub</string>
     <string name="other_props">Autres propriétés</string>
     <string name="other_props_long">Autres propriétés définies via resetprop</string>
+    <string name="translators">Traducteurs</string>
+    <string name="applied_theme">Thème appliqué</string>
+    <string name="installed_from_play">Installé depuis le PlayStore</string>
+    <string name="keyboard_height_ratio">Ratio de hauteur du clavier</string>
+    <string name="margins">Marges</string>
+    <string name="radius">Rayon</string>
+    <string name="not_set" tools:ignore="PrivateResource">Non défini</string>
+    <string name="props">Propriétés</string>
+    <string name="prop_changed">Propriété changée</string>
+    <string name="reset">Réinitialiser</string>
+    <string name="update_downloaded">Une mise à jour vient d'être téléchargée</string>
+    <string name="restart">Redémarrer</string>
+    <string name="invalid_link">Lien invalide</string>
+    <string name="download">Télécharger</string>
+    <string name="include_theme_names">Inclure les noms des thèmes</string>
+    <string name="update_available">Mise à jour disponible (%s)</string>
+    <string name="help">Aide</string>
 </resources>
