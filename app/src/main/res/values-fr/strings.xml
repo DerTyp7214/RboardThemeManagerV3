@@ -195,7 +195,7 @@
     <string name="restart">Redémarrer</string>
     <string name="invalid_link">Lien invalide</string>
     <string name="download">Télécharger</string>
-    <string name="include_theme_names">Inclure les noms des thèmes</string>
+    <string name="include_theme_names">Inclure le nom des thèmes</string>
     <string name="update_available">Mise à jour disponible (%s)</string>
     <string name="help">Aide</string>
 </resources>
