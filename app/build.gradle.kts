@@ -116,6 +116,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics:20.0.2")
     implementation("com.google.firebase:firebase-messaging:23.0.0")
     implementation("com.google.code.gson:gson:2.9.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
     implementation("com.github.skydoves:balloon:1.4.1")
