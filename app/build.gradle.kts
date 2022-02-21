@@ -17,7 +17,7 @@ val libsuVersion = "3.1.2"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
-    compileSdkPreview = "Tiramisu"
+    compileSdk = 32
     buildToolsVersion = "33.0.0-rc1"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
@@ -119,7 +119,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
-    implementation("com.github.skydoves:balloon:1.4.2")
+    implementation("com.github.skydoves:balloon:1.4.3-SNAPSHOT")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
