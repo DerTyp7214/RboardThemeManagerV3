@@ -17,7 +17,7 @@ val libsuVersion = "3.1.2"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
-    compileSdk = 32
+    compileSdkPreview = "Tiramisu"
     buildToolsVersion = "33.0.0-rc1"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
@@ -25,8 +25,8 @@ android {
     defaultConfig {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
-        targetSdkPreview = "Tiramisu"
-        versionCode = 345001
+        targetSdk = 32
+        versionCode = 345002
         versionName = "3.4.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
