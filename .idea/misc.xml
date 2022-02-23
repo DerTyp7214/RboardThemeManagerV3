@@ -40,12 +40,16 @@
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/debug/res/drawable/ic_launcher_background.xml" value="0.1935" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/debug/res/drawable/ic_launcher_foreground.xml" value="0.1935" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/debug/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3415" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/debug/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/debug/res/mipmap-anydpi-v31/ic_launcher.xml" value="0.3415" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/debug/res/mipmap-anydpi-v31/ic_launcher_round.xml" value="0.2545" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable-night-v23/ic_sounds.xml" value="0.183" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable-v23/ic_sounds.xml" value="0.183" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable-v24/ic_sounds.xml" value="0.183" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable-v31/ic_launcher_background.xml" value="0.1935" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable-v31/ic_launcher_foreground.xml" value="0.1935" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable-v33/ic_launcher_monochrome.xml" value="0.2545" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable-v33/ic_launvher_monochrome.xml" value="0.173" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/cn.xml" value="0.3505" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_about.xml" value="0.1" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_app_theme.xml" value="0.3505" />
@@ -67,6 +71,7 @@
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_launcher_2_background.xml" value="0.3415" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1935" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1935" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_launcher_monochrome.xml" value="0.173" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_magisk.xml" value="0.1" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_person.xml" value="0.1" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_playstore.xml" value="0.3625" />
@@ -93,6 +98,7 @@
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/fragment_theme_list.xml" value="0.1762917933130699" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/input_dialog.xml" value="0.3625" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/loading_dialog.xml" value="0.1762917933130699" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/manage_repo_theme_pack.xml" value="0.3625" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/menu_item.xml" value="0.33" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/news_card.xml" value="0.1" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/news_item.xml" value="0.1" />
