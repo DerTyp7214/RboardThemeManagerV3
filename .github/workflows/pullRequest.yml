@@ -45,6 +45,9 @@ jobs:
       - name: File Permissions
         run: chmod +x gradlew
 
+      - name: Accept Preview SDK License
+        run: echo -n -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > /usr/local/lib/android/sdk/licenses/android-sdk-preview-license
+        
       - name: Build apk
         id: buildAllApks
         uses: eskatos/gradle-command-action@v1.3.3
