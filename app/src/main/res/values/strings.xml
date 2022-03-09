@@ -66,8 +66,8 @@
     <string name="themed_nav_bar_style">Navbar color</string>
     <string name="enable_email_provider_completion">Email provider</string>
     <string name="enable_popup_view_v2">Popup v2</string>
-    <string name="enable_key_border">Enable key border</string>
-    <string name="enable_secondary_symbols">Enable secondary symbols</string>
+    <string name="enable_key_border">Key border</string>
+    <string name="enable_secondary_symbols">Secondary symbols</string>
     <string name="show_suggestions">Show suggestions</string>
     <string name="show_all_flags">Show all flags</string>
     <string name="show_all_flags_long">Shows all currently set flags</string>
@@ -81,9 +81,9 @@
     <string name="android_12">Android 12</string>
     <string name="general">General</string>
     <string name="show_branding_on_space">Show branding on space</string>
-    <string name="enable_auto_float_keyboard_in_multi_window">Enable auto float Keyboard in multi window</string>
+    <string name="enable_auto_float_keyboard_in_multi_window">Auto float Keyboard in multi window</string>
     <string name="pill_shaped_key">Pill shaped key</string>
-    <string name="enable_clipboard_screenshot_paste">Enable clipboard screenshot paste</string>
+    <string name="enable_clipboard_screenshot_paste">Clipboard screenshot paste</string>
     <string name="enable_lens">Enable lens</string>
     <string name="branding">Branding</string>
     <string name="show_branding_interval_seconds">Show branding interval seconds</string>
@@ -193,18 +193,22 @@
     <string name="mid_tall">1.05 Mid-tall</string>
     <string name="tall">1.10 Tall</string>
     <string name="extra_tall">1.15 Extra-tall</string>
+    <string name="more_tall">1.20 More-tall</string>
+    <string name="extra_more_tall">1.30 Extra-more-tall</string>
+    <string name="extra_mooore">1.40 Extra-mooore</string>
     <string name="extra_extra_tall">1.50 Extra-extra-tall</string>
     <string name="max_tall">2.00 Max-tall</string>
     <string name="margins">Margins</string>
+    <string name="margins_lanscape">Margins Landscape</string>
     <string name="radius">Radius</string>
     <string name="not_set" tools:ignore="PrivateResource">Not set</string>
 
-    <string name="kb_pad_land_b">Landscape-Bottom</string>
-    <string name="kb_pad_land_l">Landscape-Left</string>
-    <string name="kb_pad_land_r">Landscape-Right</string>
-    <string name="kb_pad_port_b">Portrait-Bottom</string>
-    <string name="kb_pad_port_l">Portrait-Left</string>
-    <string name="kb_pad_port_r">Portrait-Right</string>
+    <string name="kb_pad_land_b">Bottom</string>
+    <string name="kb_pad_land_l">Left</string>
+    <string name="kb_pad_land_r">Right</string>
+    <string name="kb_pad_port_b">Bottom</string>
+    <string name="kb_pad_port_l">Left</string>
+    <string name="kb_pad_port_r">Right</string>
 
     <string name="corner_key_l">Corner-Radius-Left (Bottom)</string>
     <string name="corner_key_r">Corner-Radius (Bottom)</string>
@@ -219,4 +223,12 @@
     <string name="include_theme_names">Include Theme Names</string>
     <string name="update_available">Update available (%s)</string>
     <string name="help">Help</string>
+    <string name="enable_get_bitmoji_card">Get Bitmoji Card</string>
+    <string name="translate_new_ui">Translate New UI</string>
+    <string name="enable_floating_keyboard_v2">Floating Keyboard V2</string>
+    <string name="silk_key_press">Silk Key Press</string>
+    <string name="silk_popup">Silk Popup</string>
+    <string name="silk">Silk Popup</string>
+    <string name="silk_details">Silk Popup</string>
+    <string name="keyboard_redesign_google_sans">Keyboard Redesign Google Sans</string>
 </resources>

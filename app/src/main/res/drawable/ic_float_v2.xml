@@ -11,9 +11,10 @@
     <path
         android:fillAlpha="0.7"
         android:fillColor="#FFFFFFFF"
-        android:pathData="M9 6h2v2H9V6ZM5 6h2v2H5V6Zm3 8h8v1H8v-1Zm5-8h2v2h-2V6Zm-4 4h2v2H9v-2Zm-4 0h2v2H5v-2Zm8 0h2v2h-2v-2Zm4-4h2v2h-2V6Zm0 4h2v2h-2v-2Z"/>
+        android:pathData="M19 22H5v1h14v-1Z"/>
     <path
         android:fillAlpha="0.7"
         android:fillColor="#FFFFFFFF"
-        android:pathData="M19 22H5v1h14v-1Z"/>
+        android:fillType="evenOdd"
+        android:pathData="M14.5 5.5l-1.25 2.75L10.5 9.5l2.75 1.25 1.25 2.75 1.25-2.75L18.5 9.5l-2.75-1.25L14.5 5.5Zm-6 4l-0.94 2.06L5.5 12.5l2.06 0.94 0.94 2.06 0.94-2.06 2.06-0.94-2.06-0.94L8.5 9.5Z"/>
 </vector>
