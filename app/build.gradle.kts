@@ -107,7 +107,7 @@ dependencies {
     //noinspection DifferentStdlibGradleVersion
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10")
     implementation("androidx.core:core:1.7.0")
-    implementation("com.google.android.material:material:1.6.0-alpha02")
+    implementation("com.google.android.material:material:1.6.0-alpha03")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.activity:activity-ktx:1.4.0")
@@ -130,7 +130,7 @@ dependencies {
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.1.0")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.1.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
 
     implementation("com.google.android.play:core:1.10.3")
