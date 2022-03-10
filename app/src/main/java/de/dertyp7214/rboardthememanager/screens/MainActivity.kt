@@ -117,6 +117,7 @@ class MainActivity : AppCompatActivity() {
         searchBar.menuVisible = !preferences.getBoolean("demo_shown", false)
 
         navigation.setHeight((resources.getDimension(R.dimen.bottomBarHeight) + getNavigationBarHeight()).roundToInt())
+        navigation.itemPaddingBottom = 8.dpToPx(this).toInt()
 
         val reloadThemesLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -230,14 +231,14 @@ class MainActivity : AppCompatActivity() {
 
                 binding.fragmentContainerView.setMargin(
                     bottomMargin = resources.getDimension(R.dimen.bottomBarHeight)
-                        .toInt() + 18.dpToPx(this)
+                        .toInt() + 28.dpToPx(this)
                         .toInt() + getNavigationBarHeight()
                 )
 
                 bottomSheetBehavior.isFitToContents = true
                 bottomSheetBehavior.skipCollapsed = true
                 bottomSheetBehavior.peekHeight =
-                    resources.getDimension(R.dimen.bottomBarHeight).toInt() + 8.dpToPx(this)
+                    resources.getDimension(R.dimen.bottomBarHeight).toInt() + 18.dpToPx(this)
                         .toInt() + getNavigationBarHeight()
                 bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 

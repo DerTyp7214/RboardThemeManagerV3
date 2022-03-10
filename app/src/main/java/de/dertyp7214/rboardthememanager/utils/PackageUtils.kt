@@ -7,16 +7,13 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentActivity
-import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.runAsCommand
 import java.io.File
 
 object PackageUtils {
-    @SuppressLint("SdCardPath")
+    @SuppressLint("SdCardPath", "SetWorldReadable")
     fun install(
         context: FragmentActivity,
         file: File,
@@ -28,26 +25,24 @@ object PackageUtils {
                 if (file.extension == "apk") {
                     val intent: Intent?
                     val downloadedApk = getFileUri(context, file)
+                    val newFile = File(context.getExternalFilesDir(""), "updater" + "/update.apk")
                     when {
-                        Build.VERSION.SDK_INT > Build.VERSION_CODES.O -> {
+                        Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> {
                             intent = Intent(Intent.ACTION_VIEW).setDataAndType(
                                 downloadedApk,
                                 "application/vnd.android.package-archive"
                             )
                             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            context.startActivity(intent)
                         }
                         else -> {
-                            intent = null
-                            if ("chmod 775 ${"/data/user/0/de.dertyp7214.rboardthememanager.debug/files/updater"}".runAsCommand() && "chmod 775 ${file.absolutePath}".runAsCommand() && "pm install ${file.absolutePath}".runAsCommand() || " pm install -r ${file.absolutePath}".runAsCommand()) Toast.makeText(
-                                context,
-                                R.string.app_updated,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            else error()
+                            intent = Intent(Intent.ACTION_VIEW).setDataAndType(
+                                Uri.fromFile(newFile),
+                                "application/vnd.android.package-archive");
+                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                            context.startActivity(intent)
                         }
-                    }
-                    intent?.let {
-                        resultLauncher?.launch(it) ?: context.startActivity(it)
                     }
                 } else error()
             } else error()

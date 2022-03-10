@@ -3,6 +3,8 @@
 package de.dertyp7214.rboardthememanager.utils
 
 import android.content.Context
+import android.os.Build
+import android.os.Environment
 import com.downloader.Error
 import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
@@ -17,7 +19,13 @@ class UpdateHelper(
 ) {
     companion object {
         private fun getPath(context: Context, folder: String): String {
-            return File(context.filesDir, folder).absolutePath
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                return File(context.filesDir, folder).absolutePath
+            }
+            else
+            {
+                return File(context.getExternalFilesDir(""), folder).absolutePath
+            }
         }
     }
 
