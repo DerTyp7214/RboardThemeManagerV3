@@ -5,15 +5,12 @@
     android:viewportWidth="24"
     android:viewportHeight="24">
     <path
-        android:fillAlpha="0.7"
         android:fillColor="#FFFFFFFF"
         android:pathData="M21 2H3C1.9 2 1 2.9 1 4v13c0 1.1 0.9 2 2 2h18c1.1 0 2-0.9 2-2V4c0-1.1-0.9-2-2-2Zm0 15H3V4h18v13Z"/>
     <path
-        android:fillAlpha="0.7"
         android:fillColor="#FFFFFFFF"
         android:pathData="M19 22H5v1h14v-1Z"/>
     <path
-        android:fillAlpha="0.7"
         android:fillColor="#FFFFFFFF"
         android:fillType="evenOdd"
         android:pathData="M14.5 5.5l-1.25 2.75L10.5 9.5l2.75 1.25 1.25 2.75 1.25-2.75L18.5 9.5l-2.75-1.25L14.5 5.5Zm-6 4l-0.94 2.06L5.5 12.5l2.06 0.94 0.94 2.06 0.94-2.06 2.06-0.94-2.06-0.94L8.5 9.5Z"/>
