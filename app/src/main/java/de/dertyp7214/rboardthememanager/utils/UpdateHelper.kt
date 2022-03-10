@@ -15,7 +15,7 @@ import kotlin.math.roundToLong
 class UpdateHelper(
     private val url: String,
     private val context: Context,
-    private val path: String = getPath(context, "updater"),
+    private val path: String = getPath(context, "updater")
 ) {
     companion object {
         private fun getPath(context: Context, folder: String): String {
