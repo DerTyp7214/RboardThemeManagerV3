@@ -33,12 +33,15 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
         val prefs = listOf(
             "ch_margins",
 
-            "kb_pad_land_b",
-            "kb_pad_land_l",
-            "kb_pad_land_r",
             "kb_pad_port_b",
             "kb_pad_port_l",
             "kb_pad_port_r",
+
+            "ch_margins_lanscape",
+
+            "kb_pad_land_b",
+            "kb_pad_land_l",
+            "kb_pad_land_r",
 
             "ch_radius",
 
