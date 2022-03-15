@@ -69,10 +69,15 @@
         <item name="android:statusBarColor">@color/foreground</item>
         <item name="android:navigationBarColor">@android:color/black</item>
     </style>
+    <style name="Theme.RboardThemeManagerV3.ShareFlags" parent="Theme.RboardThemeManagerV3">
+        <item name="android:statusBarColor">@color/foreground</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+    </style>
     <style name="Theme.RboardThemeManagerV3.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorPrimary">@color/foreground</item>
         <item name="colorPrimaryVariant">@color/foreground</item>
         <item name="colorOnPrimary">@color/text</item>
+        <item name="colorSurface">@color/app_background</item>
         <item name="android:textColorPrimary">@color/text</item>
     </style>
 

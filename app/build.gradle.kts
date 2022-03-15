@@ -59,7 +59,9 @@ android {
         jniLibs {
             useLegacyPackaging = true
         }
+        resources.excludes.add("META-INF/*")
     }
+    namespace = "de.dertyp7214.rboardthememanager"
 }
 
 /*protobuf {
@@ -87,8 +89,8 @@ android {
 }*/
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:29.1.0"))
-    implementation("com.google.firebase:firebase-messaging-ktx:23.0.0")
+    implementation(platform("com.google.firebase:firebase-bom:29.2.0"))
+    implementation("com.google.firebase:firebase-messaging-ktx:23.0.1")
     implementation("com.google.firebase:firebase-analytics-ktx:20.1.0")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
@@ -102,7 +104,7 @@ dependencies {
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
     implementation("androidx.core:core-ktx:1.9.0-alpha01")
     //noinspection DifferentStdlibGradleVersion
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.20-RC")
     implementation("androidx.core:core:1.9.0-alpha01")
     implementation("com.google.android.material:material:1.6.0-alpha03")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
@@ -111,7 +113,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.5.0-alpha03")
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:20.1.0")
-    implementation("com.google.firebase:firebase-messaging:23.0.0")
+    implementation("com.google.firebase:firebase-messaging:23.0.1")
     implementation("com.google.code.gson:gson:2.9.0")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
@@ -127,7 +129,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.2.0-alpha04")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.10")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.20-RC")
 
     /*var grpc_version = "1.44.1"
     implementation("io.grpc:grpc-android:$grpc_version")
