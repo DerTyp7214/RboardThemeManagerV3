@@ -231,4 +231,10 @@
     <string name="silk">Silk Popup</string>
     <string name="silk_details">Silk Popup</string>
     <string name="keyboard_redesign_google_sans">Keyboard Redesign Google Sans</string>
+    <string name="gboard_cache_cleared">Gboard cache cleared</string>
+    <string name="gboard_cache_clear">Gboard cache clear</string>
+    <string name="gboard_cache_clear_long">Deletes cache and force closed gboard.</string>
+    <string name="clear_recent_emojis">Clear recent used emojis</string>
+    <string name="clear_recent_emojis_long">Deletes recent used emojis and force closed gboard.</string>
+    <string name="recent_emojis_cleared">Recent used emojis cleared</string>
 </resources>
