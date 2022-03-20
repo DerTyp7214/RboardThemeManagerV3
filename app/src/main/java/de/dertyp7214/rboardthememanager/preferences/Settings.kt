@@ -33,7 +33,7 @@ import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
     enum class FILES(val Path: String) {
         @SuppressLint("SdCardPath")
-        CACHE("/data/${if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) "user_de" else "data"}/0/${Config.GBOARD_PACKAGE_NAME}/cache/auto_clean/"),
+        CACHE("/data/user${if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) "_de" else ""}/0/${Config.GBOARD_PACKAGE_NAME}/cache/auto_clean/"),
         @SuppressLint("SdCardPath")
         EMOJIS("/data/data/${Config.GBOARD_PACKAGE_NAME}/databases/expression-history.db")
 
