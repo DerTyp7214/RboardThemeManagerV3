@@ -1,5 +1,5 @@
 {
-  "time": "1646936790156",
+  "time": "1647889732082",
   "flags": [
     {
       "key": "general",
@@ -394,8 +394,7 @@
       "icon": "ic_box_shadow",
       "defaultValue": false,
       "type": "BOOLEAN",
-      "file": "FLAGS",
-      "visible": false
+      "file": "FLAGS"
     },
     {
       "key": "keyboard_height_ratio",
