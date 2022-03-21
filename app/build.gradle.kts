@@ -24,8 +24,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 32
-        versionCode = 346001
-        versionName = "3.4.6"
+        versionCode = 347000
+        versionName = "3.4.7"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -89,7 +89,7 @@ android {
 }*/
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:29.2.0"))
+    implementation(platform("com.google.firebase:firebase-bom:29.2.1"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.2")
     implementation("com.google.firebase:firebase-analytics-ktx:20.1.1")
 
