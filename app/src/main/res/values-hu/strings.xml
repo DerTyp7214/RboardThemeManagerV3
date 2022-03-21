@@ -151,7 +151,7 @@
     <string name="download_themes">Témák letöltése</string>
     <string name="theme_pack_count">Témacsomagok száma</string>
     <string name="theme_packs">Témacsomagok</string>
-    <string name="keyboard_redesign_forbid_key_shadows">Billentyűzet újratervezése tiltsa meg a kulcsárnyékokat</string>
+    <string name="keyboard_redesign_forbid_key_shadows">Billentyűárnyékok eltávolítása</string>
     <string name="none">Egyik sem</string>
     <string name="enable_bitmoji_contextual_category_icon">Bitmoji engedélyezése</string>
     <string name="do_not_report">Ne jelentse ezt a hibát.</string>
@@ -214,4 +214,18 @@
     <string name="deep_link">Mélyhivatkozás</string>
     <string name="download">Letöltés</string>
     <string name="help">Súgó</string>
+    <string name="enable_get_bitmoji_card">Bitmoji kártya beszerzése</string>
+    <string name="translate_new_ui">Új felhasználói felületű Forditó</string>
+    <string name="enable_floating_keyboard_v2">Lebegő Billentyűzet V2</string>
+    <string name="silk_key_press">Selyem Billlentyű Lenyomás</string>
+    <string name="silk_popup">Selyem Popup</string>
+    <string name="silk">Selyem Popup</string>
+    <string name="silk_details">Selyem Popup</string>
+    <string name="keyboard_redesign_google_sans">Billentyűzet újratervezése Google Sans</string>
+    <string name="gboard_cache_cleared">Gboard gyorsítótár törölve</string>
+    <string name="gboard_cache_clear">Gboard gyorsítótár törlés</string>
+    <string name="gboard_cache_clear_long">Törli a gyorsítótárat és kényszeríti a gboard bezárását.</string>
+    <string name="clear_recent_emojis">A legutóbb használt emojik törlése</string>
+    <string name="clear_recent_emojis_long">Törli a legutóbb használt emojikat és kényszeríti a gboard bezárását.</string>
+    <string name="recent_emojis_cleared">Legutóbb használt emojik törölve</string>
 </resources>

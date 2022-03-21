@@ -1,6 +1,7 @@
 package de.dertyp7214.rboardthememanager.preferences
 
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -30,6 +31,14 @@ import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 
 class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
+    enum class FILES(val Path: String) {
+        @SuppressLint("SdCardPath")
+        CACHE("/data/user${if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) "_de" else ""}/0/${Config.GBOARD_PACKAGE_NAME}/cache/auto_clean/"),
+        @SuppressLint("SdCardPath")
+        EMOJIS("/data/data/${Config.GBOARD_PACKAGE_NAME}/databases/expression-history.db")
+
+    }
+
     enum class TYPE {
         BOOLEAN,
         STRING,
@@ -184,6 +193,38 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                 ).runAsCommand()
                 GboardUtils.updateCurrentFlags("")
                 Toast.makeText(this, R.string.flags_fixed, Toast.LENGTH_LONG).show()
+            }
+        ),
+        GBOARD_CACHE_CLEAR(
+            "gboard_cache_clear",
+            R.string.gboard_cache_clear,
+            R.string.gboard_cache_clear_long,
+            R.drawable.ic_keyboard_theme,
+            "",
+            TYPE.STRING,
+            listOf(),
+            {
+                listOf(
+                    "rm -r \"${FILES.CACHE.Path}\"",
+                    "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
+                ).runAsCommand()
+                Toast.makeText(this, R.string.gboard_cache_cleared, Toast.LENGTH_LONG).show()
+            }
+        ),
+        CLEAR_RECENT_EMOJIS(
+            "clear_recent_emojis",
+            R.string.clear_recent_emojis,
+            R.string.clear_recent_emojis_long,
+            R.drawable.ic_emoji_compat,
+            "",
+            TYPE.STRING,
+            listOf(),
+            {
+                listOf(
+                    "rm \"${FILES.EMOJIS.Path}\"",
+                    "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
+                ).runAsCommand()
+                Toast.makeText(this, R.string.recent_emojis_cleared, Toast.LENGTH_LONG).show()
             }
         ),
         DEEP_LINK(
