@@ -239,7 +239,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 initialized && scheme != "content" && data != null -> {
                     if (data.scheme == "file") {
                         val file = SuFile(data.path).let {
-                            File(filesDir, "theme.pack").apply {
+                            File(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){filesDir}else{getExternalFilesDir("")}, "theme.pack").apply {
                                 ProcessBuilder().su(
                                     "rm \"$absolutePath\"",
                                     "cp \"${it.absolutePath}\" \"$absolutePath\"",
@@ -329,13 +329,13 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     isReady = true
                     openLoadingDialog(R.string.unpacking_themes)
                     doAsync({
-                        val zip = File(cacheDir, "themes.pack").apply {
+                        val zip = File(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){cacheDir}else{externalCacheDir},"themes.pack").apply {
                             delete()
                             data.writeToFile(activity, this)
                         }
                         if (!zip.exists()) listOf()
                         else {
-                            val destination = File(cacheDir, zip.nameWithoutExtension)
+                            val destination = File(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){cacheDir}else{externalCacheDir}, zip.nameWithoutExtension)
                             SuFile(destination.absolutePath).deleteRecursive()
                             if (ZipHelper().unpackZip(destination.absolutePath, zip.absolutePath)) {
                                 destination.listFiles { file -> file.extension == "zip" }
@@ -364,6 +364,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                             R.string.gboard_not_installed
                         ) {
                             openUrl(gboardPlayStoreUrl)
+                            finish()
                         }
                         !rootAccess -> openDialog(
                             R.string.cant_use_app,
