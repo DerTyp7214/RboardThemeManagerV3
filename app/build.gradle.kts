@@ -6,11 +6,11 @@ import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 
 plugins {
     id("com.android.application")
-    id("com.google.gms.google-services")
     //id("com.google.protobuf")
     id("kotlin-android-extensions")
     kotlin("android")
     kotlin("kapt")
+    id("com.google.gms.google-services")
 }
 
 val libsuVersion = "4.0.2"
@@ -90,9 +90,9 @@ android {
 }*/
 
 dependencies {
-    implementation(platform("com.google.firebase:firebase-bom:29.2.1"))
+    implementation(platform("com.google.firebase:firebase-bom:29.3.0"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.2")
-    implementation("com.google.firebase:firebase-analytics-ktx:20.1.1")
+    implementation("com.google.firebase:firebase-analytics-ktx:20.1.2")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.0-alpha03")
@@ -103,28 +103,28 @@ dependencies {
     implementation("com.github.topjohnwu.libsu:io:$libsuVersion")
     implementation("com.github.topjohnwu.libsu:busybox:$libsuVersion")
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
-    implementation("androidx.core:core-ktx:1.9.0-alpha01")
+    implementation("androidx.core:core-ktx:1.9.0-alpha02")
     //noinspection DifferentStdlibGradleVersion
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.20-RC")
-    implementation("androidx.core:core:1.9.0-alpha01")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.20-RC2")
+    implementation("androidx.core:core:1.9.0-alpha02")
 
-    implementation("com.google.android.material:material:1.6.0-alpha03")
+    implementation("com.google.android.material:material:1.6.0-beta01")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.5.0-alpha03")
-    implementation("androidx.fragment:fragment-ktx:1.5.0-alpha03")
+    implementation("androidx.activity:activity-ktx:1.6.0-alpha01")
+    implementation("androidx.fragment:fragment-ktx:1.5.0-alpha04")
     implementation("com.jaredrummler:android-shell:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:20.1.1")
+    implementation("com.google.firebase:firebase-analytics:20.1.2")
     implementation("com.google.firebase:firebase-messaging:23.0.2")
     implementation("com.google.code.gson:gson:2.9.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-alpha04")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0-alpha05")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
-    implementation("com.github.skydoves:balloon:1.4.3-SNAPSHOT")
+    implementation("com.github.skydoves:balloon:1.4.3")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.4-alpha04")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0-alpha04")
+    androidTestImplementation("androidx.test.ext:junit:1.1.4-alpha05")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0-alpha05")
     implementation("androidx.browser:browser:1.4.0")
     implementation("com.github.bumptech.glide:glide:4.13.1")
     kapt("com.github.bumptech.glide:compiler:4.13.1")
@@ -133,8 +133,8 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.2.0-alpha05")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.20-RC")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.2.0-alpha06")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.20-RC2")
 
 
     implementation("com.google.android.play:core:1.10.3")

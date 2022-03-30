@@ -203,6 +203,8 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
     override fun onStart(recyclerView: RecyclerView, adapter: PreferencesAdapter) {
         adapter.currentScreen.indexOf(args.getString("highlight"))
             .let { if (it >= 0) recyclerView.scrollToPosition(it) }
+
+
     }
 
     override fun onBackPressed(callback: () -> Unit) {
