@@ -222,7 +222,7 @@
     <string name="update_available">有更新可用 (%s)</string>
     <string name="help">帮助</string>
     
-     <string name="enable_get_bitmoji_card">获得Bitmoji卡片</string>
+    <string name="enable_get_bitmoji_card">获得Bitmoji卡片</string>
     <string name="translate_new_ui">启用「翻译」功能新界面</string>
     <string name="enable_floating_keyboard_v2">悬浮键盘V2版</string>
     <string name="silk_key_press">Silk主题的按键反馈</string>
