@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.FileProvider
@@ -38,7 +39,9 @@ object PackageUtils {
 
     fun isPackageInstalled(packageName: String, packageManager: PackageManager): Boolean {
         return try {
-            packageManager.getPackageInfo(packageName, 0)
+            if (Build.VERSION.SDK_INT >= 33)
+                packageManager.getPackageInfo(packageName, PackageManager.PackageInfoFlags.of(0L))
+            else packageManager.getPackageInfo(packageName, 0)
             true
         } catch (e: PackageManager.NameNotFoundException) {
             false
@@ -47,7 +50,12 @@ object PackageUtils {
 
     fun getAppVersionCode(packageName: String, packageManager: PackageManager): Long {
         return try {
-            packageManager.getPackageInfo(packageName, 0).longVersionCode
+            if (Build.VERSION.SDK_INT >= 33)
+                packageManager.getPackageInfo(
+                    packageName,
+                    PackageManager.PackageInfoFlags.of(0L)
+                ).longVersionCode
+            else packageManager.getPackageInfo(packageName, 0).longVersionCode
         } catch (e: PackageManager.NameNotFoundException) {
             -1
         }

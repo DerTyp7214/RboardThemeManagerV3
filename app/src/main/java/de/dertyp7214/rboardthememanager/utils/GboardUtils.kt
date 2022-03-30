@@ -1,7 +1,9 @@
 package de.dertyp7214.rboardthememanager.utils
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.content.pm.PackageManager.GET_META_DATA
+import android.os.Build
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.dertyp7214.logs.helpers.Logger
@@ -11,7 +13,18 @@ import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
 object GboardUtils {
     fun getGboardVersion(context: Context): String {
         return try {
-            context.packageManager.getPackageInfo(GBOARD_PACKAGE_NAME, GET_META_DATA).versionName
+            if (Build.VERSION.SDK_INT >= 33) {
+                context.packageManager.getPackageInfo(
+                    GBOARD_PACKAGE_NAME, PackageManager.PackageInfoFlags.of(
+                        GET_META_DATA.toLong()
+                    )
+                ).versionName
+            } else {
+                context.packageManager.getPackageInfo(
+                    GBOARD_PACKAGE_NAME,
+                    GET_META_DATA
+                ).versionName
+            }
         } catch (error: Exception) {
             Logger.log(
                 Logger.Companion.Type.ERROR,
