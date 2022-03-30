@@ -180,7 +180,7 @@
     <string name="about">关于</string>
     <string name="xda_thread">XDA 讨论串</string>
     <string name="github_repo">GitHub 仓库</string>
-    <string name="translators">翻译者们</string>
+    <string name="translators">翻译者</string>
     <string name="applied_theme">(已应用)</string>
     <string name="installed_from_play">从 PlayStore 安装</string>
     <string name="keyboard_height_ratio">键盘高度</string>
@@ -218,7 +218,23 @@
     <string name="invalid_link">无效的链接</string>
     <string name="deep_link">深层链接</string>
     <string name="download">下载</string>
-    <string name="include_theme_names">包含的主题 Names</string>
+    <string name="include_theme_names">包含的主题名字</string>
     <string name="update_available">有更新可用 (%s)</string>
     <string name="help">帮助</string>
+    
+     <string name="enable_get_bitmoji_card">获得Bitmoji卡片</string>
+    <string name="translate_new_ui">启用「翻译」功能新界面</string>
+    <string name="enable_floating_keyboard_v2">悬浮键盘V2版</string>
+    <string name="silk_key_press">Silk主题的按键反馈</string>
+    <string name="silk_popup">Silk主题气泡</string>
+    <string name="silk">Silk气泡</string>
+    <string name="silk_details">Silk主题的按键气泡</string>
+    <string name="keyboard_redesign_google_sans">在键盘上启用Google Sans字体</string>
+    <string name="gboard_cache_cleared">Gboard缓存已清除</string>
+    <string name="gboard_cache_clear">清除Gboard缓存文件</string>
+    <string name="gboard_cache_clear_long">清除缓存并强行关闭Gboard</string>
+    <string name="clear_recent_emojis">清除emoji历史</string>
+    <string name="clear_recent_emojis_long">清除最近使用过的emoji表情记录, 并强行关闭Gboard</string>
+    <string name="recent_emojis_cleared">emoji历史记录已清除</string>
+    
 </resources>
