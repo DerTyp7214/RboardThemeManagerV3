@@ -47,7 +47,8 @@ object Config {
     val PACKS_URLS =
         listOf(
             "true:https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/list.json",
-            "true:https://raw.githubusercontent.com/AkosPaha/PackRepoBeta/main/list.json"
+            "true:https://raw.githubusercontent.com/AkosPaha/PackRepoBeta/main/list.json",
+            "true:https://raw.githubusercontent.com/GboardThemes/RboardCommunityThemes/main/list.json"
         )
     val REPOS = ArrayList(PACKS_URLS)
 
