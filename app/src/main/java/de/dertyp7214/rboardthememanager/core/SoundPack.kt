@@ -1,6 +1,7 @@
 package de.dertyp7214.rboardthememanager.core
 
 import android.app.Activity
+import android.os.Build
 import com.downloader.Error
 import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
@@ -12,14 +13,20 @@ import java.io.File
 fun SoundPack.download(activity: Activity, result: (sounds: List<String>) -> Unit) {
     val dialog = activity.openLoadingDialog(R.string.downloading_pack)
     val name = title.replace(" ", "_")
-    PRDownloader.download(url, activity.cacheDir.absolutePath, "$name.zip").build()
+    PRDownloader.download(url,if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){activity.cacheDir.absolutePath}else{
+        activity.externalCacheDir?.absolutePath
+    }, "$name.zip").build()
         .setOnStartOrResumeListener { }
         .setOnCancelListener { }
         .setOnProgressListener { }
         .start(object : OnDownloadListener {
             override fun onDownloadComplete() {
-                val pack = File(activity.cacheDir, "$name.zip")
-                val destination = File(activity.cacheDir, name)
+                val pack = File(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){activity.cacheDir}else{
+                    activity.externalCacheDir
+                }, "$name.zip")
+                val destination = File(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){activity.cacheDir}else{
+                    activity.externalCacheDir
+                }, name)
                 dialog.dismiss()
                 if (ZipHelper().unpackZip(destination.absolutePath, pack.absolutePath))
                     result(destination.listFiles()?.map { it.absolutePath } ?: listOf())

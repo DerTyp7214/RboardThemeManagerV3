@@ -278,7 +278,9 @@ class MainActivity : AppCompatActivity() {
                             if (!themes.isNullOrEmpty()) {
                                 openShareThemeDialog { dialog, name, author ->
                                     val files = arrayListOf<File>()
-                                    File(cacheDir, "pack.meta").apply {
+                                    File(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){cacheDir}else{
+                                        externalCacheDir
+                                    }, "pack.meta").apply {
                                         files.add(this)
                                         writeText("name=$name\nauthor=$author\n")
                                     }
@@ -287,7 +289,9 @@ class MainActivity : AppCompatActivity() {
                                         files.add(File(it.path))
                                         if (image.exists()) files.add(image)
                                     }
-                                    val zip = File(cacheDir, "themes.pack")
+                                    val zip = File(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){cacheDir}else{
+                                        externalCacheDir
+                                    }, "themes.pack")
                                     zip.delete()
                                     ZipHelper().zip(files.map { it.absolutePath }, zip.absolutePath)
                                     files.forEach { it.delete() }
