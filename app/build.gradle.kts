@@ -16,7 +16,7 @@ val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
     compileSdkPreview = "Tiramisu"
-    buildToolsVersion = "33.0.0-rc2"
+    buildToolsVersion = "33.0.0-rc3"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
 
@@ -24,7 +24,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 32
-        versionCode = 348000
+        versionCode = 348001
         versionName = "3.4.8"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -109,7 +109,7 @@ dependencies {
     implementation("com.google.android.material:material:1.7.0-alpha01")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.6.0-alpha01")
+    implementation("androidx.activity:activity-ktx:1.5.0-beta01")
     implementation("androidx.fragment:fragment-ktx:1.5.0-beta01")
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:20.1.2")
@@ -117,7 +117,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.9.0")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
-    implementation("com.github.skydoves:balloon:1.4.4-SNAPSHOT")
+    implementation("com.github.skydoves:balloon:1.4.5-SNAPSHOT")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.4-alpha05")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0-alpha05")
