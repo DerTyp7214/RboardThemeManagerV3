@@ -13,12 +13,12 @@ plugins {
     id("com.google.gms.google-services")
 }
 
-val libsuVersion = "4.0.2"
+val libsuVersion = "4.0.3"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
     compileSdkPreview = "Tiramisu"
-    buildToolsVersion = "33.0.0 rc2"
+    buildToolsVersion = "33.0.0 rc3"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
 
@@ -26,7 +26,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 32
-        versionCode = 347000
+        versionCode = 348001
         versionName = "3.4.8"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -112,7 +112,7 @@ dependencies {
     implementation("com.google.android.material:material:1.7.0-alpha01")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.6.0-alpha01")
+    implementation("androidx.activity:activity-ktx:1.5.0-beta01")
     implementation("androidx.fragment:fragment-ktx:1.5.0-beta01")
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:20.1.2")
