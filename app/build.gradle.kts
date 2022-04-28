@@ -15,7 +15,7 @@ val libsuVersion = "4.0.3"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
-    compileSdkPreview = "Tiramisu"
+    compileSdkPreview = "TiramisuPrivacySandbox"
     buildToolsVersion = "33.0.0-rc3"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
@@ -102,10 +102,10 @@ dependencies {
     implementation("com.github.topjohnwu.libsu:io:$libsuVersion")
     implementation("com.github.topjohnwu.libsu:busybox:$libsuVersion")
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
-    implementation("androidx.core:core-ktx:1.9.0-alpha02")
+    implementation("androidx.core:core-ktx:1.8.0-beta01")
     //noinspection DifferentStdlibGradleVersion
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.6.21")
-    implementation("androidx.core:core:1.9.0-alpha02")
+    implementation("androidx.core:core:1.8.0-beta01")
     implementation("com.google.android.material:material:1.7.0-alpha01")
     implementation("androidx.constraintlayout:constraintlayout:2.1.3")
     implementation("androidx.preference:preference-ktx:1.2.0")
