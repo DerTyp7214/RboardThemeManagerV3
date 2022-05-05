@@ -170,8 +170,8 @@
     <string name="show_all_preferences">显示所有偏好设置</string>
     <string name="show_all_preferences_long">显示所有Gboard偏好设置</string>
     <string name="team">团队</string>
-    <string name="owner_themer">所有者 &amp; 主题</string>
-    <string name="developer_themer">开发者 &amp; 主题</string>
+    <string name="owner_themer">所有者 &amp; 主题设计</string>
+    <string name="developer_themer">开发者 &amp; 主题设计</string>
     <string name="developer">领导开发者</string>
     <string name="moderator">群组版主</string>
     <string name="links">链接</string>
@@ -192,10 +192,14 @@
     <string name="normal">1.00 中</string>
     <string name="mid_tall">1.05 中等偏高</string>
     <string name="tall">1.10 高</string>
-    <string name="extra_tall">1.15 超高</string>
+    <string name="extra_tall">1.15 加高</string>
+    <string name="more_tall">1.20 更高</string>
+    <string name="extra_more_tall">1.30 更加高</string>
+    <string name="extra_mooore">1.40 超高</string>
     <string name="extra_extra_tall">1.50 极高</string>
     <string name="max_tall">2.00 最高</string>
     <string name="margins">间距</string>
+    <string name="margins_lanscape">横屏间距</string>
     <string name="radius">圆角半径</string>
     <string name="not_set" tools:ignore="PrivateResource">未设置</string>
 
