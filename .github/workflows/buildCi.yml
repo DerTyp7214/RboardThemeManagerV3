@@ -86,7 +86,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: 31.0.0
+          BUILD_TOOLS_VERSION: "33.0.0-rc4"
 
       - name: Delete old APK
         run: rm app/build/outputs/apk/debug/app-debug.apk
@@ -207,7 +207,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: 31.0.0
+          BUILD_TOOLS_VERSION: "33.0.0-rc4"
 
       - name: Rename APK
         run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk
@@ -245,6 +245,11 @@ jobs:
             app/build/outputs/apk/release/output-metadata.json
 
       - name: Send Telegram message
+        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible-Dev'
+        run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_CHANNEL_ID }}\",\"text\":\"**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\"}}'"
+
+      - name: Send Telegram message
+        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
         run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_CHANNEL_ID }}\",\"text\":\"**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Download A6+\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk\"}]]}}'"
 
       - name: Send Telegram message
