@@ -15,6 +15,7 @@ import de.dertyp7214.rboardthememanager.core.readXML
 import de.dertyp7214.rboardthememanager.preferences.Flags
 
 object GboardUtils {
+    @Suppress("DEPRECATION")
     fun getGboardVersion(context: Context): String {
         return try {
             if (Build.VERSION.SDK_INT >= 33) {
@@ -57,6 +58,7 @@ object GboardUtils {
         }
     }
 
+    @Suppress("unused")
     fun loadBackupFlags(callback: (String) -> Unit) {
         Application.context?.let { context ->
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
