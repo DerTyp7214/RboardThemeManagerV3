@@ -49,7 +49,7 @@ class InstallPackActivity : AppCompatActivity() {
             R.drawable.ic_baseline_arrow_back_24
         )
         toolbar.setNavigationOnClickListener {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
         }
 
         toolbar.setOnMenuItemClickListener {

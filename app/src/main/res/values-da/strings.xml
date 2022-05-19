@@ -62,7 +62,7 @@
     <string name="enable_joystick_delete">Slet Joystick</string>
     <string name="deprecate_search">Google ikon</string>
     <string name="enable_sharing">Del Ikon</string>
-    <string name="themed_nav_bar_style">Navbjælke farve</string>
+    <string name="themed_nav_bar_all_devices">Navbjælke farve</string>
     <string name="enable_email_provider_completion">Email udbyder</string>
     <string name="enable_popup_view_v2">Popup v2</string>
     <string name="enable_key_border">Aktivér tastekant</string>

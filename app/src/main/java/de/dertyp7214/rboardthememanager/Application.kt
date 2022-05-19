@@ -13,6 +13,7 @@ import androidx.preference.PreferenceManager
 import com.dertyp7214.logs.helpers.Logger
 import com.downloader.PRDownloader
 import com.topjohnwu.superuser.Shell
+import de.dertyp7214.rboardthememanager.core.hasRoot
 import de.dertyp7214.rboardthememanager.core.isReachable
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
@@ -48,7 +49,7 @@ class Application : Application() {
         Logger.init(this)
         Logger.extraData = {
             StringBuilder("Rooted: ")
-                .append(if (Shell.rootAccess()) "yes" else "no").append("\n")
+                .append(if (hasRoot()) "yes" else "no").append("\n")
                 .append("Version-Code: ").append(BuildConfig.VERSION_CODE).append("\n")
                 .append("Gboard-Version-Code: ").append(GboardUtils.getGboardVersionCode(this))
                 .append("\n")

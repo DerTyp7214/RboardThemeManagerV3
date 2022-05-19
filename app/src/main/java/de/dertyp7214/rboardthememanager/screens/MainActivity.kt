@@ -17,6 +17,7 @@ import android.view.View.VISIBLE
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -137,6 +138,20 @@ class MainActivity : AppCompatActivity() {
                     content.setRenderEffect(null)
                 }
             }
+
+        onBackPressedDispatcher.addCallback(this, true) {
+            when {
+                bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED ->
+                    bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                mainViewModel.getSelections().first -> mainViewModel.getSelections().second?.clearSelection()
+                searchBar.focus -> searchBar.clearText()
+                else -> {
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                    isEnabled = true
+                }
+            }
+        }
 
         AppStartUp(this).apply {
             setUp()
@@ -602,17 +617,6 @@ class MainActivity : AppCompatActivity() {
                     controller.navigate(R.id.action_downloadListFragment_to_soundsFragment)
                 }
             }
-        }
-    }
-
-    override fun onBackPressed() {
-        val searchBar = binding.searchBar
-        when {
-            bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED ->
-                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-            mainViewModel.getSelections().first -> mainViewModel.getSelections().second?.clearSelection()
-            searchBar.focus -> searchBar.clearText()
-            else -> super.onBackPressed()
         }
     }
 

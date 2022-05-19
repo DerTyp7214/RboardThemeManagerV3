@@ -62,7 +62,7 @@
     <string name="enable_joystick_delete">حذف عصا التحكم</string>
     <string name="deprecate_search">أيقونة قوقل</string>
     <string name="enable_sharing">مشاركة الأيقونة</string>
-    <string name="themed_nav_bar_style">لون شريط التنقل</string>
+    <string name="themed_nav_bar_all_devices">لون شريط التنقل</string>
     <string name="enable_email_provider_completion">موفر البريد الإلكتروني</string>
     <string name="enable_popup_view_v2">Popup v2</string>
     <string name="enable_key_border">تمكين حدود المفتاح</string>

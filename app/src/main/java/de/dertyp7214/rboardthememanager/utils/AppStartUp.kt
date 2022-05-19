@@ -21,7 +21,6 @@ import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
-import com.topjohnwu.superuser.BusyBoxInstaller
 import com.topjohnwu.superuser.Shell
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.BuildConfig
@@ -52,7 +51,6 @@ class AppStartUp(private val activity: AppCompatActivity) {
     }
 
     private var checkedForUpdate = false
-    private var rootAccess = false
     private var gboardInstalled = false
     private var isReady = false
 
@@ -112,10 +110,22 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 .getString("logMode", "VERBOSE") == "VERBOSE"
             Shell.setDefaultBuilder(Shell.Builder.create().apply {
                 setFlags(Shell.FLAG_MOUNT_MASTER)
-                setInitializers(BusyBoxInstaller::class.java)
             })
 
-            rootAccess = hasRoot()
+            val importFlagsResultLauncher =
+                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                    val resultData = result.data
+                    if (result.resultCode == AppCompatActivity.RESULT_OK && resultData != null) {
+                        val size = resultData.getIntExtra("size", 0)
+                        Toast.makeText(
+                            this,
+                            getString(R.string.flags_loaded, size),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+
+            val rootAccess = hasRoot(this)
 
             Config.REPOS.apply {
                 val tmp = this.toSet()
@@ -202,21 +212,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     if (it.first().isNotEmpty()) Config.lightTheme = it.first()
                 }
 
-                val importFlagsResultLauncher =
-                    registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                        val resultData = result.data
-                        if (result.resultCode == AppCompatActivity.RESULT_OK && resultData != null) {
-                            val size = resultData.getIntExtra("size", 0)
-                            Toast.makeText(
-                                this,
-                                getString(R.string.flags_loaded, size),
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
-
-
-                GboardUtils.loadBackupFlags { flags ->
+                GboardUtils.flagsChanged { flags ->
                     isReady = true
                     openDialog(R.string.load_flags_long, R.string.load_flags) {
                         val oldFlags = flags.readXML()
@@ -337,7 +333,11 @@ class AppStartUp(private val activity: AppCompatActivity) {
                         else {
                             val destination = File(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){cacheDir}else{externalCacheDir}, zip.nameWithoutExtension)
                             SuFile(destination.absolutePath).deleteRecursive()
-                            if (ZipHelper().unpackZip(destination.absolutePath, zip.absolutePath)) {
+                            if (ZipHelper().unpackZip(
+                                    destination.absolutePath,
+                                    zip.absolutePath
+                                )
+                            ) {
                                 destination.listFiles { file -> file.extension == "zip" }
                                     ?.map { it.absolutePath }
                                     ?: listOf()
@@ -351,8 +351,10 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 }
                 else -> {
                     gboardInstalled =
-                        PackageUtils.isPackageInstalled(Config.GBOARD_PACKAGE_NAME, packageManager)
-
+                        PackageUtils.isPackageInstalled(
+                            Config.GBOARD_PACKAGE_NAME,
+                            packageManager
+                        )
                     createNotificationChannels(this)
                     FirebaseMessaging.getInstance()
                         .subscribeToTopic("update-v3-r-${BuildConfig.BUILD_TYPE.lowercase()}")

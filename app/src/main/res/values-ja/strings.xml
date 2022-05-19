@@ -62,7 +62,7 @@
     <string name="enable_joystick_delete">ジョイスティック削除</string>
     <string name="deprecate_search">Google アイコン</string>
     <string name="enable_sharing">アイコンを共有</string>
-    <string name="themed_nav_bar_style">ナビゲーションバーの色</string>
+    <string name="themed_nav_bar_all_devices">ナビゲーションバーの色</string>
     <string name="enable_email_provider_completion">メールプロバイダー</string>
     <string name="enable_popup_view_v2">Popup v2</string>
     <string name="enable_key_border">キーの枠線を有効にする</string>

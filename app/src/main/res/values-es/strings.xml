@@ -62,7 +62,7 @@
     <string name="enable_joystick_delete">Borrar joystick</string>
     <string name="deprecate_search">Icono de Google</string>
     <string name="enable_sharing">Compartir icono</string>
-    <string name="themed_nav_bar_style">Color Navbar</string>
+    <string name="themed_nav_bar_all_devices">Color Navbar</string>
     <string name="enable_email_provider_completion">Proveedor de email</string>
     <string name="enable_popup_view_v2">Popup v2</string>
     <string name="enable_key_border">Activar borde de teclas</string>

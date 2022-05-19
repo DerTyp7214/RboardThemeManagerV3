@@ -62,7 +62,7 @@
     <string name="enable_joystick_delete">Slett joystick</string>
     <string name="deprecate_search">Google ikon</string>
     <string name="enable_sharing">Del ikon</string>
-    <string name="themed_nav_bar_style">Farge på navigasjonsfelt</string>
+    <string name="themed_nav_bar_all_devices">Farge på navigasjonsfelt</string>
     <string name="enable_email_provider_completion">E-post leverandør</string>
     <string name="enable_popup_view_v2">Popup v2</string>
     <string name="enable_key_border">Aktiver bord nøkkel</string>
