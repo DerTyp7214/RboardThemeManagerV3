@@ -62,7 +62,7 @@
     <string name="enable_joystick_delete">Ștergere Joystick</string>
     <string name="deprecate_search">Pictogramă Google</string>
     <string name="enable_sharing">Distribuie pictograma</string>
-    <string name="themed_nav_bar_style">Culoare bară de navigare</string>
+    <string name="themed_nav_bar_all_devices">Culoare bară de navigare</string>
     <string name="enable_email_provider_completion">Furnizor de e-mail</string>
     <string name="enable_popup_view_v2">Popup v2</string>
     <string name="enable_key_border">Activare chei</string>

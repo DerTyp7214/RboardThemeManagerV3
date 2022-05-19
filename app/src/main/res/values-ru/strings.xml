@@ -64,7 +64,7 @@
     <string name="enable_joystick_delete">Удалить джойстик</string>
     <string name="deprecate_search">Иконка Google</string>
     <string name="enable_sharing">Иконка Поделиться</string>
-    <string name="themed_nav_bar_style">Цвет панели навигации</string>
+    <string name="themed_nav_bar_all_devices">Цвет панели навигации</string>
     <string name="enable_email_provider_completion">Email провайдер</string>
     <string name="enable_key_border">Включить контуры клавиш</string>
     <string name="enable_secondary_symbols">Включить дополнительные символы</string>

@@ -211,7 +211,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                         }
                     }
 
-                GboardUtils.loadBackupFlags { flags ->
+                GboardUtils.flagsChanged { flags ->
                     isReady = true
                     openDialog(R.string.load_flags_long, R.string.load_flags) {
                         val oldFlags = flags.readXML()

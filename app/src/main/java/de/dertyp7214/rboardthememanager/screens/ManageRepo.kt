@@ -3,11 +3,9 @@ package de.dertyp7214.rboardthememanager.screens
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ManageRepoThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
@@ -61,7 +59,7 @@ class ManageRepo : AppCompatActivity() {
         toolbar.menu.findItem(R.id.enabled).isChecked = enabled
         toolbar.navigationIcon =
             ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.delete -> finishWithAction(Action.DELETE)

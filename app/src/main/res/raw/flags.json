@@ -1,5 +1,5 @@
 {
-  "time": "1647889732082",
+  "time": "1652986081697",
   "flags": [
     {
       "key": "general",
@@ -86,31 +86,13 @@
       "file": "FLAGS"
     },
     {
-      "key": "themed_nav_bar_style",
-      "title": "themed_nav_bar_style",
+      "key": "themed_nav_bar_all_devices",
+      "title": "themed_nav_bar_all_devices",
       "summary": "",
       "icon": "ic_navbar",
       "defaultValue": false,
       "type": "BOOLEAN",
-      "file": "FLAGS",
-      "visible": false,
-      "valueMap": [
-        {
-          "first": true,
-          "second": 2,
-          "type2": "long"
-        },
-        {
-          "first": false,
-          "second": 1,
-          "type2": "long"
-        },
-        {
-          "first": null,
-          "second": 1,
-          "type2": "long"
-        }
-      ]
+      "file": "FLAGS"
     },
     {
       "key": "enable_email_provider_completion",
@@ -145,6 +127,15 @@
       "title": "enable_secondary_symbols",
       "summary": "",
       "icon": "ic_numeric",
+      "defaultValue": false,
+      "type": "BOOLEAN",
+      "file": "GBOARD_PREFERENCES"
+    },
+    {
+      "key": "show_language_switch_key",
+      "title": "show_language_switch_key",
+      "summary": "",
+      "icon": "ic_globe",
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "GBOARD_PREFERENCES"
