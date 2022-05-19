@@ -28,7 +28,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v3.3.0
         with:
-          java-version: 14
+          java-version: 17
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v3.0.2
@@ -150,7 +150,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v3.3.0
         with:
-          java-version: 14
+          java-version: 17
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v3.0.2
