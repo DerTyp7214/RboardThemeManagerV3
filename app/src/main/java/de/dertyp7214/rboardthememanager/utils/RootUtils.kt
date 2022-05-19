@@ -14,7 +14,7 @@ object RootUtils {
         val throwable = triple.first
         val callback = triple.second
         triple.third
-        if (Shell.rootAccess()) {
+        if (Shell.isAppGrantedRoot() == true) {
             run()
         } else {
             callback?.invoke("No root access!")

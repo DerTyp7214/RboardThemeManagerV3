@@ -13,7 +13,7 @@ plugins {
     id("com.google.gms.google-services")
 }
 
-val libsuVersion = "4.0.3"
+val libsuVersion = "5.0.1"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
@@ -26,8 +26,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 32
-        versionCode = 348002
-        versionName = "3.4.8"
+        versionCode = 349000
+        versionName = "3.4.9"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -101,7 +101,8 @@ dependencies {
 
     implementation("com.github.topjohnwu.libsu:core:$libsuVersion")
     implementation("com.github.topjohnwu.libsu:io:$libsuVersion")
-    implementation("com.github.topjohnwu.libsu:busybox:$libsuVersion")
+    implementation("com.github.topjohnwu.libsu:nio:$libsuVersion")
+    implementation("com.github.topjohnwu.libsu:busybox:5.0.0")
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
     implementation("androidx.core:core-ktx:1.9.0-alpha04")
     //noinspection DifferentStdlibGradleVersion
