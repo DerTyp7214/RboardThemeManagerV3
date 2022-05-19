@@ -18,7 +18,7 @@ val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
     compileSdkPreview = "Tiramisu"
-    buildToolsVersion = "33.0.0 rc3"
+    buildToolsVersion = "33.0.0 rc4"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
 
