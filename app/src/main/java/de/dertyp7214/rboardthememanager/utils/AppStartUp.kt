@@ -207,6 +207,19 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 "getprop ro.com.google.ime.theme_file".runAsCommand {
                     if (it.first().isNotEmpty()) Config.lightTheme = it.first()
                 }
+                
+                val importFlagsResultLauncher =
+                    registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                        val resultData = result.data
+                        if (result.resultCode == AppCompatActivity.RESULT_OK && resultData != null) {
+                            val size = resultData.getIntExtra("size", 0)
+                            Toast.makeText(
+                                this,
+                                getString(R.string.flags_loaded, size),
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
 
                 GboardUtils.flagsChanged { flags ->
                     isReady = true
