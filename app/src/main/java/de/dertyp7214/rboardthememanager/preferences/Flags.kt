@@ -637,7 +637,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
             val xmlFileName = FILES.values().find { it.filePath == file }
             val xmlFile = flagsString[xmlFileName]
             return if (cached && xmlFile != null) xmlFile.simpleMap()
-            else XMLFile(file).also { flagsString[xmlFileName] = it }.simpleMap()
+            else XMLFile(path = file).also { flagsString[xmlFileName] = it }.simpleMap()
         }
 
         @SuppressLint("SdCardPath")
@@ -658,7 +658,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
         fun setUpFlags() {
             changes = false
             FILES.values().filter { it != FILES.NONE }.forEach { file ->
-                flagsString[file] = XMLFile(file.filePath)
+                flagsString[file] = XMLFile(path = file.filePath)
             }
         }
 

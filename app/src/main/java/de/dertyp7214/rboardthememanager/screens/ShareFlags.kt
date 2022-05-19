@@ -7,12 +7,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ShareFlagsAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
 import de.dertyp7214.rboardthememanager.components.SearchBar
+import de.dertyp7214.rboardthememanager.core.addCallback
 import de.dertyp7214.rboardthememanager.core.getMapExtra
 import de.dertyp7214.rboardthememanager.core.setXmlValue
 import de.dertyp7214.rboardthememanager.core.share
@@ -30,6 +30,8 @@ class ShareFlags : AppCompatActivity() {
     private lateinit var searchBar: SearchBar
     private var import: Boolean = false
     private var titleRes: Int = R.string.share_flags_title
+
+    private val callbacks: ArrayList<OnBackPressedCallback> = arrayListOf()
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,7 +83,8 @@ class ShareFlags : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
 
-        onBackPressedDispatcher.addCallback(this, true) {
+        callbacks.forEach { it.remove() }
+        onBackPressedDispatcher.addCallback(this, true, callbacks::add) {
             if (searchBar.focus) searchBar.clearText()
             else {
                 isEnabled = false
@@ -141,6 +144,7 @@ class ShareFlags : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        callbacks.forEach { it.remove() }
         super.onDestroy()
         flags = mapOf()
     }

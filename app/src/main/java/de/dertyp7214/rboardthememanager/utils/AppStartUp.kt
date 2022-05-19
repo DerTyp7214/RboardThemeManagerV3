@@ -104,22 +104,10 @@ class AppStartUp(private val activity: AppCompatActivity) {
 
             Shell.enableVerboseLogging = PreferenceManager.getDefaultSharedPreferences(this)
                 .getString("logMode", "VERBOSE") == "VERBOSE"
-            Shell.setDefaultBuilder(Shell.Builder.create().apply {
-                setFlags(Shell.FLAG_MOUNT_MASTER)
-            })
-
-            val importFlagsResultLauncher =
-                registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                    val resultData = result.data
-                    if (result.resultCode == AppCompatActivity.RESULT_OK && resultData != null) {
-                        val size = resultData.getIntExtra("size", 0)
-                        Toast.makeText(
-                            this,
-                            getString(R.string.flags_loaded, size),
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }
-                }
+            if (Shell.getCachedShell() == null) Shell.setDefaultBuilder(
+                Shell.Builder.create().apply {
+                    setFlags(Shell.FLAG_MOUNT_MASTER)
+                })
 
             val rootAccess = hasRoot(this)
 

@@ -5,11 +5,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.Maxr1998.modernpreferences.PreferencesAdapter
+import de.dertyp7214.rboardthememanager.core.addCallback
 import de.dertyp7214.rboardthememanager.databinding.ActivityPreferencesBinding
 import de.dertyp7214.rboardthememanager.preferences.Preferences
 import de.dertyp7214.rboardthememanager.utils.doAsync
@@ -20,6 +21,8 @@ class PreferencesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPreferencesBinding
     private lateinit var preferences: Preferences
     private lateinit var recyclerView: RecyclerView
+
+    private val callbacks: ArrayList<OnBackPressedCallback> = arrayListOf()
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,7 +76,8 @@ class PreferencesActivity : AppCompatActivity() {
             preferences.onStart(recyclerView, it)
         }
 
-        onBackPressedDispatcher.addCallback(this, true) {
+        callbacks.forEach { it.remove() }
+        onBackPressedDispatcher.addCallback(this, true, callbacks::add) {
             preferences.onBackPressed {
                 isEnabled = false
                 onBackPressedDispatcher.onBackPressed()
@@ -81,7 +85,7 @@ class PreferencesActivity : AppCompatActivity() {
             }
         }
     }
-    
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         preferences.loadMenu(menuInflater, menu)
         return true
@@ -94,5 +98,10 @@ class PreferencesActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressedDispatcher.onBackPressed()
         return true
+    }
+
+    override fun onDestroy() {
+        callbacks.forEach { it.remove() }
+        super.onDestroy()
     }
 }
