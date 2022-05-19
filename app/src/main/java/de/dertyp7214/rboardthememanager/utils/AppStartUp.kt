@@ -195,7 +195,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 "getprop ro.com.google.ime.theme_file".runAsCommand {
                     if (it.first().isNotEmpty()) Config.lightTheme = it.first()
                 }
-
+                
                 val importFlagsResultLauncher =
                     registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                         val resultData = result.data
