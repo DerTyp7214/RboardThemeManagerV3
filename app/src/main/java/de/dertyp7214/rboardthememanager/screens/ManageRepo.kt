@@ -59,7 +59,7 @@ class ManageRepo : AppCompatActivity() {
         toolbar.menu.findItem(R.id.enabled).isChecked = enabled
         toolbar.navigationIcon =
             ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)
-        toolbar.setNavigationOnClickListener { onBackPressed() }
+        toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.delete -> finishWithAction(Action.DELETE)

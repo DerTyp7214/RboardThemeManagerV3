@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import de.dertyp7214.rboardthememanager.R
@@ -85,6 +86,15 @@ class ShareFlags : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
 
+        onBackPressedDispatcher.addCallback(this, true) {
+            if (searchBar.focus) searchBar.clearText()
+            else {
+                isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
+                isEnabled = true
+            }
+        }
+
         if (import) {
             adapter.selectAll()
             title = getString(titleRes, adapter.getSelectedFlags().size)
@@ -131,14 +141,10 @@ class ShareFlags : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 
-    override fun onBackPressed() {
-        if (searchBar.focus) searchBar.clearText()
-        else super.onBackPressed()
-    }
 
     override fun onDestroy() {
         super.onDestroy()

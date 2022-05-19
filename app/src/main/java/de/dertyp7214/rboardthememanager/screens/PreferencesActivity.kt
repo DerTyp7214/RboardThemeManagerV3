@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.addCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -76,6 +77,13 @@ class PreferencesActivity : AppCompatActivity() {
             recyclerView.adapter = it
             preferences.onStart(recyclerView, it)
         }
+        onBackPressedDispatcher.addCallback(this, true) {
+            preferences.onBackPressed {
+                isEnabled = false
+                onBackPressedDispatcher.onBackPressed()
+                isEnabled = true
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -89,11 +97,8 @@ class PreferencesActivity : AppCompatActivity() {
 
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        onBackPressedDispatcher.onBackPressed()
         return true
     }
 
-    override fun onBackPressed() {
-        preferences.onBackPressed { super.onBackPressed() }
-    }
 }

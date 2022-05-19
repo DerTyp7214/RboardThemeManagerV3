@@ -1,6 +1,6 @@
 package de.dertyp7214.rboardthememanager.utils
 
-import com.topjohnwu.superuser.Shell
+import de.dertyp7214.rboardthememanager.core.hasRoot
 import de.dertyp7214.rboardthememanager.core.runAsCommand
 
 @Retention(AnnotationRetention.SOURCE)
@@ -14,7 +14,7 @@ object RootUtils {
         val throwable = triple.first
         val callback = triple.second
         triple.third
-        if (Shell.rootAccess()) {
+        if (hasRoot()) {
             run()
         } else {
             callback?.invoke("No root access!")

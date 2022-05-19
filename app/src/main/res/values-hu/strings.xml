@@ -62,7 +62,7 @@
     <string name="enable_joystick_delete">Joystick törlés</string>
     <string name="deprecate_search">Google ikon</string>
     <string name="enable_sharing">Megosztás ikon</string>
-    <string name="themed_nav_bar_style">Navigációs sáv szín</string>
+    <string name="themed_nav_bar_all_devices">Navigációs sáv szín</string>
     <string name="enable_email_provider_completion">E-mail szolgáltató</string>
     <string name="enable_popup_view_v2">Popup v2</string>
     <string name="enable_key_border">Billentyű szegély engedélyezése</string>
@@ -228,4 +228,5 @@
     <string name="clear_recent_emojis">A legutóbb használt emojik törlése</string>
     <string name="clear_recent_emojis_long">Törli a legutóbb használt emojikat és kényszeríti a gboard bezárását.</string>
     <string name="recent_emojis_cleared">Legutóbb használt emojik törölve</string>
+    <string name="show_language_switch_key">Nyelvváltó gomb megjelenítése</string>
 </resources>

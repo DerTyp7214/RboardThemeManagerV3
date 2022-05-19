@@ -1,11 +1,14 @@
 package de.dertyp7214.rboardthememanager.core
 
 import android.content.Intent
+import android.os.Build
 
-@Suppress("UNCHECKED_CAST")
+@Suppress("UNCHECKED_CAST", "DEPRECATION")
 inline fun <reified T> Intent.getArrayExtra(name: String): Array<T> {
     return try {
-        getSerializableExtra(name) as Array<T>
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            getSerializableExtra(name, Array<T>::class.java) ?: arrayOf()
+        else getSerializableExtra(name) as Array<T>
     } catch (e: Exception) {
         arrayOf()
     }

@@ -63,7 +63,7 @@
     <string name="enable_joystick_delete">Xoá tay cầm</string>
     <string name="deprecate_search">Biểu tượng Google</string>
     <string name="enable_sharing">Chia sẻ biểu tượng</string>
-    <string name="themed_nav_bar_style">Màu thanh điều hướng</string>
+    <string name="themed_nav_bar_all_devices">Màu thanh điều hướng</string>
     <string name="enable_email_provider_completion">Nhà cung cấp Email</string>
     <string name="enable_popup_view_v2">Cửa sổ bật lên v2</string>
     <string name="enable_key_border">Bật đường viền chính</string>

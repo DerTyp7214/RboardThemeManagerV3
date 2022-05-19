@@ -62,7 +62,7 @@
     <string name="enable_joystick_delete">Διαγραφή χειριστηρίου</string>
     <string name="deprecate_search">Εικονίδιο Google</string>
     <string name="enable_sharing">Κοινή Χρήση Εικονιδίου</string>
-    <string name="themed_nav_bar_style">Χρώμα μπάρας πλοήγησης</string>
+    <string name="themed_nav_bar_all_devices">Χρώμα μπάρας πλοήγησης</string>
     <string name="enable_email_provider_completion">Πάροχος ηλεκτρονικού ταχυδρομείου</string>
     <string name="enable_popup_view_v2">Popup v2</string>
     <string name="enable_key_border">Ενεργοποίηση περιγράμματος κλειδιού</string>
