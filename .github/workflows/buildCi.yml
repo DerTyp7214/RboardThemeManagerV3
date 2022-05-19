@@ -86,7 +86,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: 33.0.0 rc3
+          BUILD_TOOLS_VERSION: 33-rc3
 
       - name: Delete old APK
         run: rm app/build/outputs/apk/debug/app-debug.apk
