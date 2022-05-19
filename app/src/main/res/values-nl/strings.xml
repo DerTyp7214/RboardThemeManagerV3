@@ -62,7 +62,7 @@
     <string name="enable_joystick_delete">Joystick verwijderen</string>
     <string name="deprecate_search">Google icoon</string>
     <string name="enable_sharing">Pictogram delen</string>
-    <string name="themed_nav_bar_style">Navigatiebalk kleur</string>
+    <string name="themed_nav_bar_all_devices">Navigatiebalk kleur</string>
     <string name="enable_email_provider_completion">E-mail provider</string>
     <string name="enable_popup_view_v2">Popup v2</string>
     <string name="enable_key_border">Inschakelen van sleutel rand</string>

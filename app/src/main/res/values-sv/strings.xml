@@ -62,7 +62,7 @@
     <string name="enable_joystick_delete">Joystick ta bort</string>
     <string name="deprecate_search">Google ikon</string>
     <string name="enable_sharing">Dela ikon</string>
-    <string name="themed_nav_bar_style">Navbar färg</string>
+    <string name="themed_nav_bar_all_devices">Navbar färg</string>
     <string name="enable_email_provider_completion">E-Post leverantör</string>
     <string name="enable_popup_view_v2">Popup v2</string>
     <string name="enable_key_border">Aktivera nyckelgräns</string>

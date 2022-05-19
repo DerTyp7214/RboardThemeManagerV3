@@ -62,7 +62,7 @@
     <string name="enable_joystick_delete">启用摇杆删除</string>
     <string name="deprecate_search">在工具栏上显示谷歌搜索</string>
     <string name="enable_sharing">分享图标</string>
-    <string name="themed_nav_bar_style">导航栏颜色</string>
+    <string name="themed_nav_bar_all_devices">导航栏颜色</string>
     <string name="enable_email_provider_completion">电子邮件提供商</string>
     <string name="enable_popup_view_v2">按键气泡 v2</string>
     <string name="enable_key_border">启用按键边框</string>

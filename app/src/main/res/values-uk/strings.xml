@@ -62,7 +62,7 @@
     <string name="enable_joystick_delete">Видалення джойстиків</string>
     <string name="deprecate_search">Іконка Google</string>
     <string name="enable_sharing">Значок Поділитися</string>
-    <string name="themed_nav_bar_style">Колір панелі навігації</string>
+    <string name="themed_nav_bar_all_devices">Колір панелі навігації</string>
     <string name="enable_email_provider_completion">Постачальник електронної пошти</string>
     <string name="enable_popup_view_v2">Popup v2</string>
     <string name="enable_key_border">Увімкнути границю кнопок</string>

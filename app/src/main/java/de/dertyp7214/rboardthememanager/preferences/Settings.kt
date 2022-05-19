@@ -204,7 +204,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             "clear_recent_emojis",
             R.string.clear_recent_emojis,
             R.string.clear_recent_emojis_long,
-            R.drawable.ic_emoji_compat,
+            R.drawable.ic_emoji,
             "",
             TYPE.STRING,
             listOf(),

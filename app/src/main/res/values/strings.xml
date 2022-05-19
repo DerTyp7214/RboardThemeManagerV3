@@ -63,7 +63,7 @@
     <string name="enable_joystick_delete">Joystick delete</string>
     <string name="deprecate_search">Google icon</string>
     <string name="enable_sharing">Share Icon</string>
-    <string name="themed_nav_bar_style">Navbar color</string>
+    <string name="themed_nav_bar_all_devices">Navbar color</string>
     <string name="enable_email_provider_completion">Email provider</string>
     <string name="enable_popup_view_v2">Popup v2</string>
     <string name="enable_key_border">Key border</string>
@@ -240,4 +240,5 @@
     <string name="clear_recent_emojis">Clear recent used emojis</string>
     <string name="clear_recent_emojis_long">Deletes recent used emojis and force closes gboard.</string>
     <string name="recent_emojis_cleared">Recent used emojis cleared</string>
+    <string name="show_language_switch_key">Show Language Switch Key</string>
 </resources>

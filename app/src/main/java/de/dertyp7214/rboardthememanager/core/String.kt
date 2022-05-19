@@ -47,6 +47,7 @@ fun String.fontSize(relative: Float): CharSequence {
     }
 }
 
+@Suppress("DEPRECATION")
 fun String.runAsCommand(callback: (result: Array<String>) -> Unit = {}): Boolean {
     return Shell.su(this).exec().apply {
         if (err.size > 0) Logger.log(
@@ -90,6 +91,7 @@ fun String.setSystemProperty(value: String = "", saveToModule: Boolean = false):
     return "resetprop ${if (value.isEmpty()) "--delete " else ""}$this $value".runAsCommand()
 }
 
+@Suppress("DEPRECATION")
 fun List<String>.runAsCommand(callback: (result: Array<String>) -> Unit = {}): Boolean {
     return Shell.su(*this.toTypedArray()).exec().apply {
         if (err.size > 0) Logger.log(

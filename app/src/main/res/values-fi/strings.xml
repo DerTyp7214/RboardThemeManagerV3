@@ -62,7 +62,7 @@
     <string name="enable_joystick_delete">Joystick poisto</string>
     <string name="deprecate_search">Googlen kuvake</string>
     <string name="enable_sharing">Jaa Kuvake</string>
-    <string name="themed_nav_bar_style">Navigointipalkin väri</string>
+    <string name="themed_nav_bar_all_devices">Navigointipalkin väri</string>
     <string name="enable_email_provider_completion">Sähköpostin tarjoaja</string>
     <string name="enable_popup_view_v2">Popup v2</string>
     <string name="enable_key_border">Ota avaimen raja käyttöön</string>
