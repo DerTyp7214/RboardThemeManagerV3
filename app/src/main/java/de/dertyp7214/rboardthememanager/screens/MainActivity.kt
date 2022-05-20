@@ -17,7 +17,7 @@ import android.view.View.VISIBLE
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -72,6 +72,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainViewModel: MainViewModel
 
     private lateinit var binding: ActivityMainBinding
+
+    private val callbacks: ArrayList<OnBackPressedCallback> = arrayListOf()
 
     @SuppressLint("NotifyDataSetChanged", "ShowToast")
     @RequiresApi(Build.VERSION_CODES.R)
@@ -139,7 +141,8 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-        onBackPressedDispatcher.addCallback(this, true) {
+        callbacks.forEach { it.remove() }
+        onBackPressedDispatcher.addCallback(this, true, callbacks::add) {
             when {
                 bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED ->
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -726,5 +729,9 @@ class MainActivity : AppCompatActivity() {
                 Log.d("ERROR", it?.serverErrorMessage ?: "NOO")
             }
         }.start()
+    }
+    override fun onDestroy() {
+        callbacks.forEach { it.remove() }
+        super.onDestroy()
     }
 }
