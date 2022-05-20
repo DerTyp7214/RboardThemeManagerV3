@@ -6,12 +6,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.addCallback
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.Maxr1998.modernpreferences.PreferencesAdapter
+import de.dertyp7214.rboardthememanager.core.addCallback
 import de.dertyp7214.rboardthememanager.databinding.ActivityPreferencesBinding
 import de.dertyp7214.rboardthememanager.preferences.Preferences
 import de.dertyp7214.rboardthememanager.utils.doAsync
@@ -22,6 +23,8 @@ class PreferencesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPreferencesBinding
     private lateinit var preferences: Preferences
     private lateinit var recyclerView: RecyclerView
+
+    private val callbacks: ArrayList<OnBackPressedCallback> = arrayListOf()
 
     @SuppressLint("NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.R)
@@ -77,7 +80,8 @@ class PreferencesActivity : AppCompatActivity() {
             recyclerView.adapter = it
             preferences.onStart(recyclerView, it)
         }
-        onBackPressedDispatcher.addCallback(this, true) {
+        callbacks.forEach { it.remove() }
+        onBackPressedDispatcher.addCallback(this, true, callbacks::add) {
             preferences.onBackPressed {
                 isEnabled = false
                 onBackPressedDispatcher.onBackPressed()
@@ -100,5 +104,8 @@ class PreferencesActivity : AppCompatActivity() {
         onBackPressedDispatcher.onBackPressed()
         return true
     }
-
+    override fun onDestroy() {
+        callbacks.forEach { it.remove() }
+        super.onDestroy()
+    }
 }
