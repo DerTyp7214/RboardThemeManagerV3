@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="search">Cerca</string>
     <string name="title_themes">Temi</string>
     <string name="title_downloads">Download</string>
@@ -74,6 +74,7 @@
     <string name="loading_preferences">Caricamento preferenze</string>
     <string name="use_silk_theme_by_default">Usa il tema silk come predefinito</string>
     <string name="monet">Monet</string>
+    <string name="silk_on_all_devices">Silk su tutti i dispositivi</string>
     <string name="silk_on_all_pixel">Silk su tutti i Pixel</string>
     <string name="silk_theme">Tema silk</string>
     <string name="android_12">Android 12</string>
@@ -191,11 +192,15 @@
     <string name="mid_tall">1.05 medio-alta</string>
     <string name="tall">1.10 alta</string>
     <string name="extra_tall">1.15 molto alta</string>
+    <string name="more_tall">1.20 più alto</string>
+    <string name="extra_more_tall">1.30 extra più alto</string>
+    <string name="extra_mooore">1.40 extra molto più alto</string>
     <string name="extra_extra_tall">1.50 molto molto alta</string>
     <string name="max_tall">2.00 altissima</string>
     <string name="margins">Margini</string>
+    <string name="margins_lanscape">Margini orizzontali</string>
     <string name="radius">Raggio</string>
-    <string name="not_set">Non impostato</string>
+    <string name="not_set" tools:ignore="PrivateResource">Non impostato</string>
 
     <string name="kb_pad_land_b">Orizzontale-Basso</string>
     <string name="kb_pad_land_l">Orizzontale-Sinistra</string>
@@ -215,4 +220,21 @@
     <string name="deep_link">Deep link</string>
     <string name="download">Scarica</string>
     <string name="include_theme_names">Includi nome temi</string>
+    <string name="update_available">Aggiornamento disponibile (%s)</string>
+    <string name="help">Aiuto</string>
+    <string name="enable_get_bitmoji_card">Ottieni Card Bitmoji</string>
+    <string name="translate_new_ui">Nuova UI traduttore</string>
+    <string name="enable_floating_keyboard_v2">Tastiera fluttuante V2</string>
+    <string name="silk_key_press">Pressione tasto Silk</string>
+    <string name="silk_popup">Popup Silk</string>
+    <string name="silk">Popup Silk</string>
+    <string name="silk_details">Popup Silk</string>
+    <string name="keyboard_redesign_google_sans">Redesign tastiera Google Sans</string>
+    <string name="gboard_cache_cleared">Cache Gboard eliminata</string>
+    <string name="gboard_cache_clear">Svuota cache Gboard</string>
+    <string name="gboard_cache_clear_long">Elimina la cache e forza la chiusura di Gboard.</string>
+    <string name="clear_recent_emojis">Cancella le emoji usate recentemente</string>
+    <string name="clear_recent_emojis_long">Elimina le emoji usate di recente e chiude forzatamente Gboard.</string>
+    <string name="recent_emojis_cleared">Emoji usate di recente cancellate</string>
+    <string name="show_language_switch_key">Mostra tasto cambia lingua</string>
 </resources>
