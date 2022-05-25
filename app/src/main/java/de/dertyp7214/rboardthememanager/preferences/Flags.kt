@@ -5,13 +5,18 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
@@ -193,7 +198,6 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
             }
         }
 
-
         @SuppressLint("SdCardPath")
         fun <T> setValue(v: T) =
             setValue(if (valueMap != null) valueMap[v] else v, key, file)
@@ -204,12 +208,13 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
     override fun onStart(recyclerView: RecyclerView, adapter: PreferencesAdapter) {
         adapter.currentScreen.indexOf(args.getString("highlight"))
             .let { if (it >= 0) recyclerView.scrollToPosition(it) }
+
+
     }
 
     override fun onBackPressed(callback: () -> Unit) {
         callback()
     }
-
 
     override fun preferences(builder: PreferenceScreen.Builder) {
         val prefs = PreferenceManager.getDefaultSharedPreferences(activity)
@@ -312,7 +317,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
         private val activity: Activity,
         private val args: SafeJSON,
         private val requestReload: () -> Unit
-    ) : AbstractPreference() {
+    ) : AbstractFabPreference() {
 
         private var filter: String = ""
         private var onlyDisabled: Boolean = false
@@ -337,6 +342,19 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                     R.id.share_flags -> ShareFlags::class.java.start(activity)
                 }
                 true
+            }
+        }
+
+        override fun loadMenu(menuInflater: MenuInflater, menu: Menu?) {}
+        override fun onMenuClick(menuItem: MenuItem): Boolean = false
+
+        override fun handleFab(fab: FloatingActionButton) {
+            fab.visibility = View.VISIBLE
+            fab.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_baseline_add_24))
+            fab.setOnClickListener {
+                activity.openXMLEntryDialog { xmlEntry ->
+                    setValue(xmlEntry, FILES.FLAGS)
+                }
             }
         }
 
@@ -436,7 +454,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
         private val activity: Activity,
         private val args: SafeJSON,
         private val requestReload: () -> Unit
-    ) : AbstractPreference() {
+    ) : AbstractFabPreference() {
 
         private var filter: String = ""
         private var onlyDisabled: Boolean = false
@@ -450,6 +468,32 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
             setOnCloseListener {
                 filter = ""
                 requestReload()
+            }
+            setMenu(R.menu.all_prefs) {
+                when (it.itemId) {
+                    R.id.only_disabled -> {
+                        it.isChecked = !it.isChecked
+                        onlyDisabled = it.isChecked
+                        requestReload()
+                    }
+                    R.id.share_prefs -> ShareFlags::class.java.start(activity) {
+                        putExtra("isFlags", false)
+                    }
+                }
+                true
+            }
+        }
+
+        override fun loadMenu(menuInflater: MenuInflater, menu: Menu?) {}
+        override fun onMenuClick(menuItem: MenuItem): Boolean = false
+
+        override fun handleFab(fab: FloatingActionButton) {
+            fab.visibility = View.VISIBLE
+            fab.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_baseline_add_24))
+            fab.setOnClickListener {
+                activity.openXMLEntryDialog { xmlEntry ->
+                    setValue(xmlEntry, FILES.GBOARD_PREFERENCES)
+                }
             }
         }
 
@@ -548,6 +592,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
 
     companion object {
         private var changes: Boolean = false
+
         private val flags = arrayListOf<FlagItem>()
         private var flagsString: EnumMap<FILES, XMLFile> = EnumMap(FILES::class.java)
 
@@ -583,7 +628,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                             "drawable",
                             context.packageName
                         ),
-                        o.get("defaultValue"),
+                        o["defaultValue"],
                         TYPE.valueOf(o.getString("type").uppercase()),
                         o.getString("file").let { file ->
                             if (file.isNotEmpty()) FILES.valueOf(file.uppercase())
@@ -626,19 +671,26 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                         getCurrentXmlValues(FILES.FLAGS.filePath)
             }
 
-        val flagValues: Map<String, Any>
+        val flagValues: XMLFile
             get() {
-                return getCurrentXmlValues(FILES.FLAGS.filePath)
+                return getCurrentXmlFile(FILES.FLAGS.filePath)
             }
 
+        val prefValues: XMLFile
+            get() {
+                return getCurrentXmlFile(FILES.GBOARD_PREFERENCES.filePath)
+            }
 
-        @SuppressLint("SdCardPath")
-        private fun getCurrentXmlValues(file: String, cached: Boolean = false): Map<String, Any> {
+        private fun getCurrentXmlFile(file: String, cached: Boolean = false): XMLFile {
             val xmlFileName = FILES.values().find { it.filePath == file }
             val xmlFile = flagsString[xmlFileName]
-            return if (cached && xmlFile != null) xmlFile.simpleMap()
-            else XMLFile(path = file).also { flagsString[xmlFileName] = it }.simpleMap()
+            return if (cached && xmlFile != null) xmlFile
+            else XMLFile(path = file).also { flagsString[xmlFileName] = it }
         }
+
+        @SuppressLint("SdCardPath")
+        private fun getCurrentXmlValues(file: String, cached: Boolean = false) =
+            getCurrentXmlFile(file, cached).simpleMap()
 
         @SuppressLint("SdCardPath")
         fun applyChanges(): Boolean {
@@ -666,6 +718,13 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
             if (file == FILES.NONE) return true
             changes = true
             if (value != null) flagsString[file]?.setValue(XMLEntry.parse(key, value))
+            return true
+        }
+
+        fun setValue(value: XMLEntry, file: FILES): Boolean {
+            if (file == FILES.NONE) return true
+            changes = true
+            flagsString[file]?.setValue(value)
             return true
         }
     }

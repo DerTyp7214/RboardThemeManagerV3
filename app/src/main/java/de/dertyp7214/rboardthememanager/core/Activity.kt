@@ -22,8 +22,12 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.textfield.TextInputLayout
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.components.XMLEntry
+import de.dertyp7214.rboardthememanager.components.XMLType
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 
 val Activity.preferences: SharedPreferences
@@ -195,6 +199,53 @@ fun Activity.openInputDialog(
 fun Activity.openLoadingDialog(@StringRes message: Int) =
     openDialog(R.layout.loading_dialog, false) {
         findViewById<TextView>(R.id.message).setText(message)
+    }
+
+fun Activity.openXMLEntryDialog(block: DialogInterface.(XMLEntry) -> Unit) =
+    openDialog(R.layout.xml_entry_dialog_layout) { dialog ->
+        val xmlNameInput = findViewById<TextInputLayout>(R.id.xmlName)
+        val xmlValueInput = findViewById<TextInputLayout>(R.id.xmlValue)
+        val xmlTypeInput = findViewById<TextInputLayout>(R.id.xmlType)
+
+        val positiveButton = findViewById<MaterialButton>(R.id.positive)
+        val negativeButton = findViewById<MaterialButton>(R.id.negative)
+
+        fun validate(inputLayout: TextInputLayout) =
+            if (inputLayout.value.isNullOrEmpty()) {
+                inputLayout.error = getString(R.string.not_empty)
+                false
+            } else true
+
+        fun getValues(inputLayouts: Map<String, TextInputLayout>): Map<String, String>? =
+            if (inputLayouts.all { validate(it.value) }) inputLayouts.map {
+                Pair(
+                    it.key,
+                    it.value.value ?: ""
+                )
+            }.toMap()
+            else null
+
+        positiveButton.setOnClickListener {
+            getValues(
+                mapOf(
+                    "name" to xmlNameInput,
+                    "value" to xmlValueInput,
+                    "type" to xmlTypeInput
+                )
+            )?.let {
+                block(
+                    dialog,
+                    XMLEntry(
+                        it["name"] ?: "",
+                        it["value"] ?: "",
+                        XMLType.parseType(it["type"]) ?: XMLType.STRING
+                    )
+                )
+                dialog.dismiss()
+            }
+        }
+
+        negativeButton.setOnClickListener { dialog.dismiss() }
     }
 
 fun Activity.openDialog(

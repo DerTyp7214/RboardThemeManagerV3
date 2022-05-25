@@ -14,6 +14,7 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ShareFlagsAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
 import de.dertyp7214.rboardthememanager.components.SearchBar
+import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.addCallback
 import de.dertyp7214.rboardthememanager.core.getMapExtra
 import de.dertyp7214.rboardthememanager.core.setXmlValue
@@ -25,12 +26,13 @@ import java.io.File
 
 class ShareFlags : AppCompatActivity() {
 
-    private var flags: Map<String, Any> = mapOf()
+    private var flags: XMLFile = XMLFile()
 
     private lateinit var binding: ActivityShareFlagsBinding
     private lateinit var adapter: ShareFlagsAdapter
     private lateinit var searchBar: SearchBar
     private var import: Boolean = false
+    private var isFlags: Boolean = true
     private var titleRes: Int = R.string.share_flags_title
 
     private val callbacks: ArrayList<OnBackPressedCallback> = arrayListOf()
@@ -47,6 +49,7 @@ class ShareFlags : AppCompatActivity() {
         setContentView(binding.root)
 
         import = intent.getBooleanExtra("import", false)
+        isFlags = intent.getBooleanExtra("isFlags", true)
 
         val toolbar = binding.toolbar
         searchBar = binding.searchBar
@@ -58,15 +61,18 @@ class ShareFlags : AppCompatActivity() {
             }
         }
 
-        if (import) titleRes = R.string.import_flags_title
+        if (!isFlags) titleRes = R.string.share_prefs_title
+        if (import) titleRes =
+            if (isFlags) R.string.import_flags_title else R.string.import_prefs_title
+
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         title = getString(titleRes, 0)
 
-        flags = if (!import) Flags.flagValues
-        else intent.getMapExtra("flags")
-        val orig = ArrayList(flags.map { it.key })
+        flags = if (!import) if (isFlags) Flags.flagValues else Flags.prefValues
+        else XMLFile(initMap = intent.getMapExtra("flags"))
+        val orig = ArrayList(flags.simpleMap().map { it.key })
         val flagKeys = ArrayList(orig)
 
         adapter = ShareFlagsAdapter(flagKeys) {
@@ -114,12 +120,12 @@ class ShareFlags : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.share -> {
-                var xml = "<map/>"
+                val xml = XMLFile()
                 adapter.getSelectedFlags().forEach {
-                    xml = xml.setXmlValue(flags[it], it)
+                    flags.getValue(it)?.let { entry -> xml.setValue(entry) }
                 }
                 val file = File(filesDir, "flags.rboard")
-                file.writeText(xml)
+                file.writeText(xml.toString(if (isFlags) "FLAGS" else "PREFS"))
                 file.share(this, "text/xml", ACTION_SEND, R.string.share_flags)
                 true
             }
@@ -133,7 +139,11 @@ class ShareFlags : AppCompatActivity() {
                 Flags.setUpFlags()
                 val selectedFlags = adapter.getSelectedFlags()
                 selectedFlags.forEach {
-                    Flags.setValue(flags[it], it, Flags.FILES.FLAGS)
+                    Flags.setValue(
+                        flags[it],
+                        it,
+                        if (isFlags) Flags.FILES.FLAGS else Flags.FILES.GBOARD_PREFERENCES
+                    )
                 }
                 Flags.applyChanges()
                 setResult(RESULT_OK, Intent().putExtra("size", selectedFlags.size))
@@ -153,6 +163,6 @@ class ShareFlags : AppCompatActivity() {
     override fun onDestroy() {
         callbacks.forEach { it.remove() }
         super.onDestroy()
-        flags = mapOf()
+        flags = XMLFile()
     }
 }

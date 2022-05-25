@@ -136,6 +136,8 @@
     <string name="share_flags">Share flags</string>
     <string name="share_flags_title">Share flags (%o)</string>
     <string name="import_flags_title">Import flags (%o)</string>
+    <string name="share_prefs_title">Share prefs (%o)</string>
+    <string name="import_prefs_title">Import prefs (%o)</string>
     <string name="model">Model</string>
     <string name="processing_flags">Processing Flags</string>
     <string name="load_flags">Load flags</string>
@@ -238,4 +240,9 @@
     <string name="clear_recent_emojis_long">Deletes recent used emojis and force closes gboard.</string>
     <string name="recent_emojis_cleared">Recent used emojis cleared</string>
     <string name="show_language_switch_key">Show Language Switch Key</string>
+    <string name="value">Value</string>
+    <string name="type">Type</string>
+    <string name="not_empty">Can\'t be empty</string>
+    <string name="show_only_disabled_prefs">Show only disabled prefs</string>
+    <string name="share_prefs">Share prefs</string>
 </resources>
