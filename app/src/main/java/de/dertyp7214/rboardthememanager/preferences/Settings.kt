@@ -32,10 +32,12 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
     enum class FILES(val Path: String) {
         @SuppressLint("SdCardPath")
         CACHE("/data/user_de/0/${Config.GBOARD_PACKAGE_NAME}/cache/auto_clean/"),
+
         @SuppressLint("SdCardPath")
         EMOJIS("/data/data/${Config.GBOARD_PACKAGE_NAME}/databases/expression-history.db")
 
     }
+
     enum class TYPE {
         BOOLEAN,
         STRING,
@@ -116,7 +118,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             listOf(),
             {
                 Application.context?.let {
-                    PreferencesActivity::class.java.start(it) {
+                    PreferencesActivity::class.java[it] = {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
                         putExtra("type", "repos")
                     }
@@ -140,7 +142,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(), {
                 Application.context?.let {
-                    PreferencesActivity::class.java.start(it) {
+                    PreferencesActivity::class.java[it] = {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
                         putExtra("type", "info")
                     }
@@ -184,7 +186,8 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                 GboardUtils.updateCurrentFlags("")
                 Toast.makeText(this, R.string.flags_fixed, Toast.LENGTH_LONG).show()
             }
-        ), GBOARD_CACHE_CLEAR(
+        ),
+        GBOARD_CACHE_CLEAR(
             "gboard_cache_clear",
             R.string.gboard_cache_clear,
             R.string.gboard_cache_clear_long,

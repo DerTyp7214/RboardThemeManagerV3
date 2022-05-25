@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.get
 import com.dertyp7214.logs.helpers.Logger
 import com.dertyp7214.preferencesplus.core.dp
@@ -104,19 +105,6 @@ fun getActiveTheme(): String {
     } catch (error: Exception) {
         Logger.log(Logger.Companion.Type.ERROR, "ActiveTheme", error.message)
         ""
-    }
-}
-
-@Suppress("unused")
-fun getSoundsDirectory(): SuFile? {
-    val productMedia = SuFile("/system/product/media/audio/ui/KeypressStandard.ogg")
-    val systemMedia = SuFile("/system/media/audio/ui/KeypressStandard.ogg")
-    return if (productMedia.exists() && productMedia.isFile) {
-        SuFile("/system/product/media")
-    } else if (systemMedia.exists() && systemMedia.isFile) {
-        SuFile("/system/media")
-    } else {
-        null
     }
 }
 
@@ -365,12 +353,12 @@ object ThemeUtils {
                 val defaultImage = ContextCompat.getDrawable(
                     context,
                     R.drawable.ic_keyboard
-                )!!.getBitmap()
+                )!!.toBitmap()
 
                 themeIcon.setImageBitmap(theme.image ?: defaultImage)
                 themeIcon.colorFilter = theme.colorFilter
 
-                val color = themeIcon.drawable.getBitmap().let {
+                val color = themeIcon.drawable.toBitmap().let {
                     it[0, it.height / 2]
                 }
                 val isDark = ColorUtils.isColorLight(color)

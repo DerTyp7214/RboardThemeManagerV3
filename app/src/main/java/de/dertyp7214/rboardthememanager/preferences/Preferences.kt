@@ -272,7 +272,7 @@ class Preferences(
                         Toast.makeText(Application.context, R.string.easter_egg, Toast.LENGTH_SHORT)
                             .show()
                         Application.context?.let {
-                            ReadMoreReadFast::class.java.start(it) {
+                            ReadMoreReadFast::class.java[it] = {
                                 flags = FLAG_ACTIVITY_NEW_TASK
                             }
                         }

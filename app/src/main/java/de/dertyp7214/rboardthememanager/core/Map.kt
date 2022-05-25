@@ -1,6 +1,5 @@
 package de.dertyp7214.rboardthememanager.core
 
-
 val Map<String, Any>.monet: Boolean
     get() {
         return this["use_silk_theme_by_default"] != false
