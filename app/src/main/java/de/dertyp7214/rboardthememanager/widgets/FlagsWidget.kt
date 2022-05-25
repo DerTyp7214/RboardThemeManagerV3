@@ -95,13 +95,8 @@ class FlagsWidget : AppWidgetProvider() {
         }
     }
 
-    override fun onEnabled(context: Context) {
-
-    }
-
-    override fun onDisabled(context: Context) {
-
-    }
+    override fun onEnabled(context: Context) {}
+    override fun onDisabled(context: Context) {}
 
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)

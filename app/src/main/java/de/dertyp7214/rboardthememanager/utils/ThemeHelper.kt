@@ -5,13 +5,13 @@ import android.content.Context
 import android.content.res.Configuration
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.get
 import com.dertyp7214.logs.helpers.Logger
 import com.dertyp7214.preferencesplus.core.dp
@@ -37,7 +37,6 @@ import java.util.*
 enum class InternalThemeNames(val path: String) {
     DOWNLOAD_THEMES("rboard:download_themes")
 }
-
 
 @SuppressLint("SdCardPath")
 fun applyTheme(
@@ -94,7 +93,6 @@ fun applyTheme(
 
 @SuppressLint("SdCardPath")
 fun getActiveTheme(): String {
-    val inputPackageName = "com.google.android.inputmethod.latin"
     val fileLol =
         SuFile(Config.GBOARD_PREFS_PATH)
     return try {
@@ -107,19 +105,6 @@ fun getActiveTheme(): String {
     } catch (error: Exception) {
         Logger.log(Logger.Companion.Type.ERROR, "ActiveTheme", error.message)
         ""
-    }
-}
-
-@Suppress("unused")
-fun getSoundsDirectory(): SuFile? {
-    val productMedia = SuFile("/system/product/media/audio/ui/KeypressStandard.ogg")
-    val systemMedia = SuFile("/system/media/audio/ui/KeypressStandard.ogg")
-    return if (productMedia.exists() && productMedia.isFile) {
-        SuFile("/system/product/media")
-    } else if (systemMedia.exists() && systemMedia.isFile) {
-        SuFile("/system/media")
-    } else {
-        null
     }
 }
 
@@ -139,7 +124,6 @@ object ThemeUtils {
             )
             else ThemeDataClass(null, it.name.removeSuffix(".zip"), it.absolutePath)
         }.apply { if (this != null) Config.themeCount = size } ?: ArrayList()).let {
-            val themes = arrayListOf<ThemeDataClass>()
             it.forEach { theme ->
                 themePacks[theme]?.let { pack ->
                     theme.packName = pack.name
@@ -147,18 +131,15 @@ object ThemeUtils {
                     theme.updateAvailable = pack.date > theme.getLocalTime()
                 }
             }
+            val themes = arrayListOf<ThemeDataClass>()
             val context = Application.context
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q && context?.let { ctx ->
+            if (context?.let { ctx ->
                     Settings.SETTINGS.SHOW_SYSTEM_THEME.getValue(
                         ctx,
                         true
                     )
                 } == true) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && Flags.values.monet) getDynamicColorsTheme()?.let { theme ->
-                    themes.add(
-                        theme
-                    )
-                }
+                if (Flags.values.monet) getDynamicColorsTheme()?.let { theme -> themes.add(theme) }
                 themes.add(getSystemAutoTheme())
             }
             if (context?.let { ctx ->
@@ -253,11 +234,12 @@ object ThemeUtils {
     fun getActiveThemeData(): ThemeDataClass = getThemeData(getActiveTheme())
 
     fun getThemeData(themeName: String): ThemeDataClass {
-        return if (themeName.startsWith("assets:") && Application.context != null) {
+        return if ((themeName.startsWith("assets:") || themeName.startsWith("system_auto:")) && Application.context != null) {
             val imgName =
                 themeName
                     .removePrefix("assets:theme_package_metadata_")
                     .removeSuffix(".binarypb")
+                    .removeSuffix(":")
             val image = if (themeName.startsWith("system_auto:")) getSystemAutoImage() else {
                 Application.context?.let {
                     try {
@@ -371,12 +353,12 @@ object ThemeUtils {
                 val defaultImage = ContextCompat.getDrawable(
                     context,
                     R.drawable.ic_keyboard
-                )!!.getBitmap()
+                )!!.toBitmap()
 
                 themeIcon.setImageBitmap(theme.image ?: defaultImage)
                 themeIcon.colorFilter = theme.colorFilter
 
-                val color = themeIcon.drawable.getBitmap().let {
+                val color = themeIcon.drawable.toBitmap().let {
                     it[0, it.height / 2]
                 }
                 val isDark = ColorUtils.isColorLight(color)
@@ -401,7 +383,7 @@ object ThemeUtils {
                 setHeight(1.dp(context) / 2)
                 setWidth(LinearLayout.LayoutParams.MATCH_PARENT)
                 setBackgroundColor(context.getAttr(R.attr.colorOnPrimary))
-                alpha = .7F
+                alpha = .6F
             })
         }
     }

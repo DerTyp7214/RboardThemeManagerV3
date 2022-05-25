@@ -1,3 +1,5 @@
+@file:Suppress("unused", "SameParameterValue")
+
 package de.dertyp7214.rboardthememanager.screens
 
 import android.annotation.SuppressLint

@@ -26,6 +26,7 @@ import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.OutputMetadata
 import de.dertyp7214.rboardthememanager.preferences.Flags
@@ -65,7 +66,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
         val dialog = openLoadingDialog(R.string.processing_flags)
         doAsync(block) {
             dialog.dismiss()
-            ShareFlags::class.java.start(this, resultLauncher) {
+            ShareFlags::class.java[this, resultLauncher] = {
                 putExtra("import", true)
                 putExtra("flags", it)
                 putExtra("isFlags", !isPrefs)
@@ -217,17 +218,13 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 GboardUtils.flagsChanged { flags ->
                     isReady = true
                     openDialog(R.string.load_flags_long, R.string.load_flags) {
-                        val oldFlags = flags.readXML()
-                        val newFlags = HashMap<String, Any>()
-                        SuFile(Flags.FILES.FLAGS.filePath).readXML().forEach { (key, value) ->
-                            if (!oldFlags.containsKey(key)) newFlags[key] = value
-                        }
-                        SuFile(Flags.FILES.FLAGS.filePath).writeFile(flags.trim())
-                        GboardUtils.updateCurrentFlags(flags)
+                        val oldFlags = XMLFile(initString = flags)
+                        val newFlags = XMLFile(path = Flags.FILES.FLAGS.filePath, empty = true)
+                        val currentFlags = XMLFile(path = Flags.FILES.FLAGS.filePath)
+                        oldFlags.filter(currentFlags::entryNotEquals).forEach(newFlags::setValue)
                         openImportFlags(importFlagsResultLauncher) {
-                            newFlags
+                            newFlags.simpleMap()
                         }
-                        "am force-stop ${Config.GBOARD_PACKAGE_NAME}".runAsCommand()
                     }
                 }
             }
@@ -346,7 +343,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                             } else listOf()
                         }
                     }) {
-                        InstallPackActivity::class.java.start(this, resultLauncher) {
+                        InstallPackActivity::class.java[this, resultLauncher] = {
                             putStringArrayListExtra("themes", ArrayList(it))
                         }
                     }
@@ -414,15 +411,13 @@ class AppStartUp(private val activity: AppCompatActivity) {
 
     private fun validApp(activity: AppCompatActivity, callback: (valid: Boolean) -> Unit) {
         preferences.apply {
-            var valid = getBoolean("verified", true)
-            if (valid) callback(valid)
+            if (getBoolean("verified", true)) callback(true)
             else activity.openDialog(R.string.unreleased, R.string.notice, false, {
                 it.dismiss()
-                callback(valid)
+                callback(false)
             }) {
                 it.dismiss()
-                valid = true
-                callback(valid)
+                callback(true)
                 edit { putBoolean("verified", true) }
             }
         }

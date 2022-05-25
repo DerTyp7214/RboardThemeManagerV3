@@ -28,10 +28,7 @@ import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.capitalize
-import de.dertyp7214.rboardthememanager.core.openUrl
-import de.dertyp7214.rboardthememanager.core.safeParse
-import de.dertyp7214.rboardthememanager.core.start
+import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.ReadMoreReadFast
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
@@ -273,7 +270,7 @@ class Preferences(
                         Toast.makeText(Application.context, R.string.easter_egg, Toast.LENGTH_SHORT)
                             .show()
                         Application.context?.let {
-                            ReadMoreReadFast::class.java.start(it) {
+                            ReadMoreReadFast::class.java[it] = {
                                 flags = FLAG_ACTIVITY_NEW_TASK
                             }
                         }

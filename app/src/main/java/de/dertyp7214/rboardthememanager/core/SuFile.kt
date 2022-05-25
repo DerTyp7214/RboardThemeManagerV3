@@ -54,9 +54,6 @@ fun SuFile.decodeBitmap(opts: BitmapFactory.Options? = null): Bitmap? {
     return bm
 }
 
-fun SuFile.tar(zip: File) =
-    listOf("cd $absolutePath", "tar -cf ${zip.absolutePath} .").runAsCommand()
-
 fun SuFile.writeFile(content: String) {
     if (exists()) SuFileOutputStream.open(this).writer(UTF_8)
         .use { outputStreamWriter ->

@@ -100,7 +100,7 @@ class DownloadListFragment : Fragment() {
                         packs.forEach { pack ->
                             tags.addAll(pack.tags.filter { !tags.contains(it) })
                         }
-                    } catch (e: Exception) {
+                    } catch (_: Exception) {
                     }
                 }) {
                     adapter.notifyDataSetChanged()
@@ -177,7 +177,7 @@ class DownloadListFragment : Fragment() {
                             includeThemeNames
                         )
                     )
-                } catch (e: Exception) {
+                } catch (_: Exception) {
                 }
             }) {
                 adapter.notifyDataSetChanged()

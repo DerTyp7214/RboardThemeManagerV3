@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package de.dertyp7214.rboardthememanager.core
 
 import android.content.Context
@@ -22,11 +24,11 @@ fun Any.equalsNumber(second: Any?): Boolean {
     }
 }
 
-fun <E> Int.zeroOrElse(block: (Int) -> E): E? {
+fun <E> Int.zeroOrNull(block: (Int) -> E): E? {
     return if (this > 0) block(this) else null
 }
 
-fun <E> Long.zeroOrElse(block: (Long) -> E): E? {
+fun <E> Long.zeroOrNull(block: (Long) -> E): E? {
     return if (this > 0) block(this) else null
 }
 

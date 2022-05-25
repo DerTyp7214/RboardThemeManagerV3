@@ -14,13 +14,13 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.getAttr
-import de.dertyp7214.rboardthememanager.core.getBitmap
 import de.dertyp7214.rboardthememanager.core.setAll
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.utils.ColorUtils
@@ -48,7 +48,7 @@ class ThemeAdapter(
         ContextCompat.getDrawable(
             context,
             R.drawable.ic_keyboard
-        )!!.getBitmap()
+        )!!.toBitmap()
     }
     private val selectedBackground by lazy {
         ColorDrawable(context.getAttr(R.attr.colorBackgroundFloating)).apply { alpha = 187 }
@@ -167,7 +167,7 @@ class ThemeAdapter(
                 ImageView(context).let { view ->
                     view.setImageBitmap(themeDataClass.image ?: default)
                     view.colorFilter = themeDataClass.colorFilter
-                    val color = view.drawable.getBitmap().let {
+                    val color = view.drawable.toBitmap().let {
                         it[0, it.height / 2]
                     }
                     Pair(color, ColorUtils.isColorLight(color))
@@ -183,7 +183,7 @@ class ThemeAdapter(
         } ?: ImageView(context).let { view ->
             view.setImageBitmap(dataClass.image ?: default)
             view.colorFilter = dataClass.colorFilter
-            val color = view.drawable.getBitmap().let {
+            val color = view.drawable.toBitmap().let {
                 it[0, it.height / 2]
             }
             colorCache[position] = Pair(color, ColorUtils.isColorLight(color))

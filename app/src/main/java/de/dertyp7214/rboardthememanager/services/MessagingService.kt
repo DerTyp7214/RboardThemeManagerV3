@@ -1,5 +1,6 @@
 package de.dertyp7214.rboardthememanager.services
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Intent
 import androidx.core.app.NotificationCompat
@@ -11,11 +12,9 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.screens.MainActivity
 import org.json.JSONObject
 
+@SuppressLint("MissingFirebaseInstanceTokenRefresh")
 class MessagingService : FirebaseMessagingService() {
     private val notificationId = 133769
-    override fun onNewToken(token: String) {
-        super.onNewToken(token)
-    }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)

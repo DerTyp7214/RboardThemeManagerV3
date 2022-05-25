@@ -75,7 +75,7 @@ object GboardUtils {
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             val oldFlags = XMLFile(initString = preferences.getString("flags", null))
             val newFlags = XMLFile(path = Flags.FILES.FLAGS.filePath)
-            if (oldFlags != newFlags) callback(newFlags.toString())
+            if (oldFlags != newFlags) callback(oldFlags.toString())
         }
     }
 }

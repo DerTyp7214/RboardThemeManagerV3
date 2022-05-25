@@ -119,7 +119,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             listOf(),
             {
                 Application.context?.let {
-                    PreferencesActivity::class.java.start(it) {
+                    PreferencesActivity::class.java[it] = {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
                         putExtra("type", "repos")
                     }
@@ -143,7 +143,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(), {
                 Application.context?.let {
-                    PreferencesActivity::class.java.start(it) {
+                    PreferencesActivity::class.java[it] = {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
                         putExtra("type", "info")
                     }

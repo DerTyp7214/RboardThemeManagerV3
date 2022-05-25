@@ -1,3 +1,5 @@
+@file:Suppress("MemberVisibilityCanBePrivate")
+
 package de.dertyp7214.rboardthememanager.components
 
 import com.topjohnwu.superuser.io.SuFile
@@ -9,17 +11,22 @@ import java.util.*
 import kotlin.collections.HashMap
 
 @Suppress("unused")
-class XMLFile(val path: String? = null, private val initMap: Map<String, Any>? = null) {
-    private val values: HashMap<String, XMLEntry> = hashMapOf()
+class XMLFile(
+    val path: String? = null,
+    private val initMap: Map<String, Any>? = null,
+    initValues: Map<String, XMLEntry> = hashMapOf(),
+    empty: Boolean = false
+) {
+    private val values: HashMap<String, XMLEntry> = HashMap(initValues)
 
     constructor(initMap: Map<String, Any>?) : this(null, initMap)
     constructor(initString: String?) : this(initString?.readXML())
     constructor(path: String, initString: String?) : this(path, initString?.readXML())
 
     init {
-        path.let { if (it != null) SuFile(it).readXML() else initMap ?: mapOf() }
+        if (!empty) path.let { if (it != null) SuFile(it).readXML() else initMap ?: mapOf() }
             .forEach { (key, value) ->
-                values[key] = XMLEntry.parse(key, value)
+                values[key] = XMLEntry[key, value]
             }
     }
 
@@ -42,11 +49,20 @@ class XMLFile(val path: String? = null, private val initMap: Map<String, Any>? =
         if (path != null) SuFile(path).writeFile(toString())
     }
 
+    fun forEach(block: (XMLEntry) -> Unit) = values.forEach { (_, entry) -> block(entry) }
+    fun filter(predicate: (XMLEntry) -> Boolean) =
+        XMLFile(initValues = values.filter { (_, entry) -> predicate(entry) })
+
+    fun has(name: String) = values.containsKey(name)
+    fun has(entry: XMLEntry) = has(entry.name)
+    fun hasNot(entry: XMLEntry) = !has(entry)
+    fun entryEquals(entry: XMLEntry) = values[entry.name]?.value == entry.value
+    fun entryNotEquals(entry: XMLEntry) = !entryEquals(entry)
     operator fun get(name: String): Any? = values[name]?.value
 
     fun toString(comment: String = ""): String {
-        return "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>\n${comment.let { if (it.isNotEmpty()) "<!--RBOARD:$comment-->" else "" }}\n<map>\n${
-            values.joinToString("\n") { "${" " * 4}${it.value}" }
+        return "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>\n${comment.let { if (it.isNotEmpty()) "<!--RBOARD:$comment-->\n" else "" }}<map>\n${
+            values.joinToString("\n") { it.value[4] }
         }\n</map>"
     }
 
@@ -54,7 +70,7 @@ class XMLFile(val path: String? = null, private val initMap: Map<String, Any>? =
 
     override fun equals(other: Any?): Boolean {
         if (other !is XMLFile) return false
-        return other.values.size == values.size && other.values.filter { it1 -> values.any { it2 -> it2.key == it1.key } }.size == values.size
+        return other.values.size == values.size && other.values.filter { (_, entry) -> values[entry.name] == entry }.size == values.size
     }
 
     override fun hashCode(): Int {
@@ -123,22 +139,34 @@ class XMLEntry(val name: String, _value: Any, val type: XMLType) {
             else -> getValue()
         }
 
-    override fun toString(): String {
-        return try {
-            when (type) {
-                XMLType.LONG, XMLType.BOOLEAN, XMLType.INT, XMLType.DOUBLE, XMLType.FLOAT -> "<${type.identifier} name=\"$name\" value=\"$value\"/>"
-                XMLType.STRING -> "<string name=\"$name\">$value</string>"
-                XMLType.SET -> "<set name=\"$name\">\n${
-                    (value as Set<*>).joinToString("\n") { "${" " * 4}$it" }
-                }\n</set>"
-            }
-        } catch (e: Exception) {
-            "<${type.identifier} name=\"$name\" />"
+    operator fun get(indent: Int) = try {
+        when (type) {
+            XMLType.LONG, XMLType.BOOLEAN, XMLType.INT, XMLType.DOUBLE, XMLType.FLOAT -> "${" " * indent}<${type.identifier} name=\"$name\" value=\"$value\"/>"
+            XMLType.STRING -> "${" " * indent}<string name=\"$name\">$value</string>"
+            XMLType.SET -> "${" " * indent}<set name=\"$name\">\n${
+                (value as Set<*>).joinToString("\n") { "${" " * (4 + indent)}$it" }
+            }\n${" " * indent}</set>"
         }
+    } catch (e: Exception) {
+        "${" " * indent}<${type.identifier} name=\"$name\" />"
+    }
+
+    override fun toString() = this[0]
+
+    override fun equals(other: Any?): Boolean {
+        if (other !is XMLEntry) return false
+        return other.value == value && other.name == name && other.type == type
+    }
+
+    override fun hashCode(): Int {
+        var result = name.hashCode()
+        result = 31 * result + type.hashCode()
+        result = 31 * result + value.hashCode()
+        return result
     }
 
     companion object {
-        fun <T> parse(name: String, value: T): XMLEntry {
+        operator fun <T> get(name: String, value: T): XMLEntry {
             val type = when (value) {
                 is Long -> XMLType.LONG
                 is Boolean -> XMLType.BOOLEAN

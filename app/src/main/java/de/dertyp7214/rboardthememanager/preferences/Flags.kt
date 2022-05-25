@@ -88,9 +88,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
             FILES.NONE,
             onClick = {
                 Application.context?.let {
-                    PreferencesActivity::class.java.start(
-                        it
-                    ) {
+                    PreferencesActivity::class.java[it] = {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
                         putExtra("type", "all_flags")
                     }
@@ -107,9 +105,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
             FILES.NONE,
             onClick = {
                 Application.context?.let {
-                    PreferencesActivity::class.java.start(
-                        it
-                    ) {
+                    PreferencesActivity::class.java[it] = {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
                         putExtra("type", "all_preferences")
                     }
@@ -126,9 +122,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
             FILES.NONE,
             onClick = {
                 Application.context?.let {
-                    PreferencesActivity::class.java.start(
-                        it
-                    ) {
+                    PreferencesActivity::class.java[it] = {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK
                         putExtra("type", "props")
                     }
@@ -339,7 +333,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                         onlyDisabled = it.isChecked
                         requestReload()
                     }
-                    R.id.share_flags -> ShareFlags::class.java.start(activity)
+                    R.id.share_flags -> ShareFlags::class.java[activity]
                 }
                 true
             }
@@ -476,7 +470,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                         onlyDisabled = it.isChecked
                         requestReload()
                     }
-                    R.id.share_prefs -> ShareFlags::class.java.start(activity) {
+                    R.id.share_prefs -> ShareFlags::class.java[activity] = {
                         putExtra("isFlags", false)
                     }
                 }
@@ -717,7 +711,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
         fun <T> setValue(value: T, key: String, file: FILES): Boolean {
             if (file == FILES.NONE) return true
             changes = true
-            if (value != null) flagsString[file]?.setValue(XMLEntry.parse(key, value))
+            if (value != null) flagsString[file]?.setValue(XMLEntry[key, value])
             return true
         }
 

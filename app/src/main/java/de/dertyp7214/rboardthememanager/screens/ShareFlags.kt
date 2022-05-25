@@ -17,7 +17,6 @@ import de.dertyp7214.rboardthememanager.components.SearchBar
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.addCallback
 import de.dertyp7214.rboardthememanager.core.getMapExtra
-import de.dertyp7214.rboardthememanager.core.setXmlValue
 import de.dertyp7214.rboardthememanager.core.share
 import de.dertyp7214.rboardthememanager.databinding.ActivityShareFlagsBinding
 import de.dertyp7214.rboardthememanager.preferences.Flags
