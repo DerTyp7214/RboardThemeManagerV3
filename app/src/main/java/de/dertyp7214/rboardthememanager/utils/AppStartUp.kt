@@ -56,6 +56,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
 
     private fun AppCompatActivity.openImportFlags(
         resultLauncher: ActivityResultLauncher<Intent>,
+        isPrefs: Boolean = false,
         block: () -> Map<String, Any>
     ) {
         isReady = true
@@ -65,6 +66,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
             ShareFlags::class.java.start(this, resultLauncher) {
                 putExtra("import", true)
                 putExtra("flags", it)
+                putExtra("isFlags", !isPrefs)
             }
         }
     }
@@ -310,7 +312,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                                 }
                             }
                         Navigations(activity).deepLinkWithArgs(links)
-                    } else openImportFlags(resultLauncher) {
+                    } else openImportFlags(resultLauncher, file.hasComment("PREFS")) {
                         file.readXML()
                     }
                 }
