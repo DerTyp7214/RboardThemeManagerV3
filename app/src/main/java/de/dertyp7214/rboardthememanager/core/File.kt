@@ -47,6 +47,8 @@ fun File.readXML(string: String? = null): Map<String, Any> {
     return content?.readXML() ?: output
 }
 
+fun File.hasComment(comment: String) = readText().contains("<!--RBOARD:$comment-->")
+
 fun File.share(
     activity: Activity,
     type: String = "*/*",

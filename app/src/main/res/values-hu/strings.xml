@@ -134,6 +134,8 @@
     <string name="share_flags">Zászlók megosztása</string>
     <string name="share_flags_title">Zászlók megosztása (%o)</string>
     <string name="import_flags_title">Zászlók importálása (%o)</string>
+    <string name="share_prefs_title">Preferenciák megosztása (%o)</string>
+    <string name="import_prefs_title">Preferenciák importálása (%o)</string>
     <string name="model">Modell</string>
     <string name="processing_flags">Zászlók feldolgozása</string>
     <string name="load_flags">Zászlók betöltése</string>
@@ -229,4 +231,9 @@
     <string name="clear_recent_emojis_long">Törli a legutóbb használt emojikat és kényszeríti a gboard bezárását.</string>
     <string name="recent_emojis_cleared">Legutóbb használt emojik törölve</string>
     <string name="show_language_switch_key">Nyelvváltó gomb megjelenítése</string>
+    <string name="value">Érték</string>
+    <string name="type">Típus</string>
+    <string name="not_empty">Nem lehet üres</string>
+    <string name="show_only_disabled_prefs">Csak a letiltott preferenciák megjelenítése</string>
+    <string name="share_prefs">Preferenciák megosztása</string>
 </resources>

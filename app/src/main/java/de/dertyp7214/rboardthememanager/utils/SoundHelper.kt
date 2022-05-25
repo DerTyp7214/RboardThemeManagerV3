@@ -14,16 +14,15 @@ object SoundHelper {
             listOf()
         }
     }
-
-    fun getSoundsDirectory(): SuFile? {
-        val productMedia = SuFile("/system/product/media/audio/ui/KeypressStandard.ogg")
-        val systemMedia = SuFile("/system/media/audio/ui/KeypressStandard.ogg")
-        return if (productMedia.exists() && productMedia.isFile) {
-            SuFile("/system/product/media")
-        } else if (systemMedia.exists() && systemMedia.isFile) {
-            SuFile("/system/media")
-        } else {
-            null
-        }
+}
+fun getSoundsDirectory(): SuFile? {
+    val productMedia = SuFile("/system/product/media/audio/ui/KeypressStandard.ogg")
+    val systemMedia = SuFile("/system/media/audio/ui/KeypressStandard.ogg")
+    return if (productMedia.exists() && productMedia.isFile) {
+        SuFile("/system/product/media")
+    } else if (systemMedia.exists() && systemMedia.isFile) {
+        SuFile("/system/media")
+    } else {
+        null
     }
 }

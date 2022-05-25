@@ -19,7 +19,7 @@ fun Context.getAttr(@AttrRes attr: Int): Int {
     return typedValue.data
 }
 
-@SuppressLint("DiscouragedApi")
+@SuppressLint("DiscouragedApi", "InternalInsetResource")
 fun Context.getNavigationBarHeight(): Int {
     val resourceId: Int = resources.getIdentifier("navigation_bar_height", "dimen", "android")
     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {

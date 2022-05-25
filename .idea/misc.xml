@@ -108,6 +108,7 @@
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_themes.xml" value="0.263" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_translate_new_ui.xml" value="0.2075" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/ic_xda.xml" value="0.1" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/menu_down.xml" value="0.341" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/switch_thumb.xml" value="0.3635" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/switch_track.xml" value="0.3635" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/drawable/theme.xml" value="0.3635" />
@@ -142,7 +143,10 @@
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/soundpack_dialog.xml" value="0.1762917933130699" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/switch_keyboard_widget.xml" value="0.3578125" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/theme_grid_item_single.xml" value="0.12" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/layout/xml_entry_dialog_layout.xml" value="0.3489583333333333" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/menu/all_flags.xml" value="0.1" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/menu/all_prefs.xml" value="0.3489583333333333" />
+        <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/menu/flags_add.xml" value="0.34791666666666665" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/menu/manage_repo.xml" value="0.3625" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/menu/menu_downloads.xml" value="0.3625" />
         <entry key="..\:/Akos/RboardThemeManagerV3/app/src/main/res/menu/navigation.xml" value="0.3625" />
