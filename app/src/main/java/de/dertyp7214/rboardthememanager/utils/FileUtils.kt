@@ -1,8 +1,10 @@
 package de.dertyp7214.rboardthememanager.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 
 object FileUtils {
+    @SuppressLint("DiscouragedApi")
     fun getResourceId(
         context: Context,
         variableName: String,

@@ -70,7 +70,7 @@ class SoundsFragment : Fragment() {
                     try {
                         original.addAll(it)
                         soundList.addAll(it)
-                    } catch (e: Exception) {
+                    } catch (_: Exception) {
                     }
                 }) {
                     adapter.notifyDataSetChanged()

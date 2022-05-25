@@ -3,7 +3,6 @@
 package de.dertyp7214.rboardthememanager.utils
 
 import android.app.Activity
-import com.dertyp7214.logs.helpers.Logger
 import com.jaredrummler.android.shell.Shell
 import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
@@ -64,17 +63,15 @@ object MagiskUtils {
     }
 
     private fun installModule(meta: ModuleMeta, files: Map<String, String?>) {
-        RootUtils.runWithRoot {
-            val moduleDir = SuFile(MODULES_PATH, meta.id)
-            moduleDir.mkdirs()
-            writeSuFile(SuFile(moduleDir, "module.prop"), meta.getString())
-            files.forEach {
-                SuFile(moduleDir, it.key).apply {
-                    if (it.value != null) writeSuFile(this, it.value ?: "")
-                    else mkdirs()
-                }
+        val moduleDir = SuFile(MODULES_PATH, meta.id)
+        moduleDir.mkdirs()
+        writeSuFile(SuFile(moduleDir, "module.prop"), meta.getString())
+        files.forEach {
+            SuFile(moduleDir, it.key).apply {
+                if (it.value != null) writeSuFile(this, it.value ?: "")
+                else mkdirs()
             }
-        }.catch { Logger.log(Logger.Companion.Type.ERROR, "INSTALL_MODULE", it) }
+        }
     }
 
     fun installModule(activity: Activity) {
@@ -96,55 +93,51 @@ object MagiskUtils {
     }
 
     fun uninstallModule(moduleId: String) {
-        RootUtils.runWithRoot {
-            val moduleDir = SuFile(MODULES_PATH, moduleId)
-            if (moduleDir.exists())
-                SuFile(moduleDir, "remove").writeFile("")
-        }
+        val moduleDir = SuFile(MODULES_PATH, moduleId)
+        if (moduleDir.exists())
+            SuFile(moduleDir, "remove").writeFile("")
     }
 
     fun updateModule(meta: ModuleMeta, files: Map<String, String?>) {
-        RootUtils.runWithRoot {
-            val moduleDir = SuFile(MODULES_PATH, meta.id)
-            moduleDir.mkdirs()
-            writeSuFile(
-                SuFile(moduleDir, "module.prop").apply { deleteRecursive() },
-                meta.getString()
-            )
-            files.forEach { file ->
-                if (SuFile(moduleDir, file.key).exists()) {
-                    SuFile(moduleDir, file.key).apply {
-                        var text = SuFileInputStream.open(this).bufferedReader().readText()
+        val moduleDir = SuFile(MODULES_PATH, meta.id)
+        moduleDir.mkdirs()
+        writeSuFile(
+            SuFile(moduleDir, "module.prop").apply { deleteRecursive() },
+            meta.getString()
+        )
+        files.forEach { file ->
+            if (SuFile(moduleDir, file.key).exists()) {
+                SuFile(moduleDir, file.key).apply {
+                    var text = SuFileInputStream.open(this).bufferedReader().readText()
 
-                        if (file.value?.split("=")?.get(0).toString() in text) {
-                            text = text.replace(
-                                text.lines()
-                                    .firstOrNull {
-                                        file.value?.split("=")?.get(0).toString() in it
-                                    } ?: "",
-                                file.value?.let { if (it.endsWith("=")) "" else it } ?: ""
-                            )
-                        } else {
-                            text += "\n${file.value ?: ""}"
-                        }
-
-                        if (text.lines().isEmpty()) {
-                            text = file.value ?: ""
-                        }
-
-                        SuFile(moduleDir, file.key).apply {
-                            deleteRecursive()
-                            writeSuFile(this, text)
-                        }
+                    if (file.value?.split("=")?.get(0).toString() in text) {
+                        text = text.replace(
+                            text.lines()
+                                .firstOrNull {
+                                    file.value?.split("=")?.get(0).toString() in it
+                                } ?: "",
+                            file.value?.let { if (it.endsWith("=")) "" else it } ?: ""
+                        )
+                    } else {
+                        text += "\n${file.value ?: ""}"
                     }
-                } else {
+
+                    if (text.lines().isEmpty()) {
+                        text = file.value ?: ""
+                    }
+
                     SuFile(moduleDir, file.key).apply {
-                        if (file.value != null) writeSuFile(this, file.value ?: "")
-                        else mkdirs()
+                        deleteRecursive()
+                        writeSuFile(this, text)
                     }
                 }
+            } else {
+                SuFile(moduleDir, file.key).apply {
+                    if (file.value != null) writeSuFile(this, file.value ?: "")
+                    else mkdirs()
+                }
             }
-        }.catch { Logger.log(Logger.Companion.Type.ERROR, "UPDATE_MODULE", it) }
+        }
     }
 
     private fun writeSuFile(file: SuFile, content: String) {

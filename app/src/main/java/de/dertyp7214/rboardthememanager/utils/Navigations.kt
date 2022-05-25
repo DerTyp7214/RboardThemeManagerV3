@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package de.dertyp7214.rboardthememanager.utils
 
 import android.app.Activity

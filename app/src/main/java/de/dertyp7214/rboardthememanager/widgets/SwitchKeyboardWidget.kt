@@ -8,7 +8,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.util.Log
 import android.widget.RemoteViews
 import android.widget.Toast
 import de.dertyp7214.rboardthememanager.R
@@ -17,7 +16,6 @@ import de.dertyp7214.rboardthememanager.core.resize
 import de.dertyp7214.rboardthememanager.core.roundCorners
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.utils.applyTheme
-import java.lang.Float.max
 import kotlin.math.min
 
 class SwitchKeyboardWidget : AppWidgetProvider() {
@@ -94,13 +92,8 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
         }
     }
 
-    override fun onEnabled(context: Context) {
-
-    }
-
-    override fun onDisabled(context: Context) {
-
-    }
+    override fun onEnabled(context: Context) {}
+    override fun onDisabled(context: Context) {}
 
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)

@@ -56,7 +56,7 @@ class ThemePackAdapter(
         if (holder is ViewHolder) {
             holder.size.text =
                 "${themePack.themes?.size?.let { "($it)" } ?: ""} ${
-                    themePack.size.zeroOrElse {
+                    themePack.size.zeroOrNull {
                         it.toHumanReadableBytes(
                             activity
                         )

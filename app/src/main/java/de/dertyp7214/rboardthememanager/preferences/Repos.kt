@@ -92,7 +92,7 @@ class Repos(
                 defaultValue = active
                 onClick {
                     pref.checked = active
-                    ManageRepo::class.java.start(activity, resultLauncher) {
+                    ManageRepo::class.java[activity, resultLauncher] = {
                         putExtra("key", key)
                         putExtra("enabled", active)
                     }

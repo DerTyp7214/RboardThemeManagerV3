@@ -202,10 +202,10 @@ class MainActivity : AppCompatActivity() {
                         R.drawable.ic_about,
                         R.string.about
                     ) {
-                        PreferencesActivity::class.java.start(
-                            this,
-                            closeBottomSheetBehaviorLauncher
-                        ) {
+                        PreferencesActivity::class.java[
+                                this,
+                                closeBottomSheetBehaviorLauncher
+                        ] = {
                             putExtra("type", "about")
                         }
                     },
@@ -213,7 +213,7 @@ class MainActivity : AppCompatActivity() {
                         R.drawable.ic_settings,
                         R.string.settings
                     ) {
-                        PreferencesActivity::class.java.start(this, reloadThemesLauncher) {
+                        PreferencesActivity::class.java[this, reloadThemesLauncher] = {
                             putExtra("type", "settings")
                         }
                     },
@@ -221,30 +221,13 @@ class MainActivity : AppCompatActivity() {
                         R.drawable.ic_baseline_outlined_flag_24,
                         R.string.flags
                     ) {
-                        PreferencesActivity::class.java.start(
-                            this,
-                            closeBottomSheetBehaviorLauncher
-                        ) {
+                        PreferencesActivity::class.java[
+                                this,
+                                closeBottomSheetBehaviorLauncher
+                        ] = {
                             putExtra("type", "flags")
                         }
                     }
-                    /*MenuItem(
-                        R.drawable.ic_theme_creator,
-                        R.string.rboard_theme_creator
-                    ) {
-                        if (isPackageInstalled(
-                                Config.RBOARD_THEME_CREATOR_PACKAGE_NAME,
-                                packageManager
-                            )
-                        )
-                            startActivity(packageManager.getLaunchIntentForPackage(Config.RBOARD_THEME_CREATOR_PACKAGE_NAME))
-                        else startActivity(
-                            Intent(
-                                ACTION_VIEW,
-                                Uri.parse("https://github.com/DerTyp7214/RboardThemeCreator#readme")
-                            )
-                        )
-                    }*/
                 )
 
                 val menuItems = ArrayList(mainMenuItems)

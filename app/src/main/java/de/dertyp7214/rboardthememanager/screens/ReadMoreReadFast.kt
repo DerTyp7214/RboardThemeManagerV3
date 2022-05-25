@@ -39,7 +39,7 @@ class ReadMoreReadFast : AppCompatActivity() {
             while (line != null) {
                 runOnUiThread {
                     linearLayout.addView(TextView(this).apply {
-                        text = "Deleting: ${line?.replace(Regex("[|]{0,}[|_]{0,}"), "")?.trim()}"
+                        text = "Deleting: ${line?.replace(Regex("[|]*[|_]*"), "")?.trim()}"
                     })
                     if (linearLayout.childCount > 100) linearLayout.removeViewAt(0)
                     scrollView.fullScroll(FOCUS_DOWN)
