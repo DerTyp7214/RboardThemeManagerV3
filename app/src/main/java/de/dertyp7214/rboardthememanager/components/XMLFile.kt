@@ -3,16 +3,21 @@ package de.dertyp7214.rboardthememanager.components
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.core.joinToString
 import de.dertyp7214.rboardthememanager.core.readXML
-import de.dertyp7214.rboardthememanager.core.writeFile
 import de.dertyp7214.rboardthememanager.core.times
+import de.dertyp7214.rboardthememanager.core.writeFile
 
-class XMLFile(val path: String) {
+@Suppress("unused")
+class XMLFile(val path: String? = null, private val initMap: Map<String, Any>? = null) {
     private val values: HashMap<String, XMLEntry> = hashMapOf()
 
+    constructor(initMap: Map<String, Any>?) : this(null, initMap)
+    constructor(initString: String?) : this(initString?.readXML())
+
     init {
-        SuFile(path).readXML().forEach { (key, value) ->
-            values[key] = XMLEntry.parse(key, value)
-        }
+        path.let { if (it != null) SuFile(it).readXML() else initMap ?: mapOf() }
+            .forEach { (key, value) ->
+                values[key] = XMLEntry.parse(key, value)
+            }
     }
 
     fun simpleMap(): Map<String, Any> {
@@ -31,13 +36,25 @@ class XMLFile(val path: String) {
     }
 
     fun writeFile() {
-        SuFile(path).writeFile(toString())
+        if (path != null) SuFile(path).writeFile(toString())
     }
 
     override fun toString(): String {
         return "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>\n<map>\n${
             values.joinToString("\n") { "${" " * 4}${it.value}" }
         }\n</map>"
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (other !is XMLFile) return false
+        return other.values == values
+    }
+
+    override fun hashCode(): Int {
+        var result = path?.hashCode() ?: 0
+        result = 31 * result + (initMap?.hashCode() ?: 0)
+        result = 31 * result + values.hashCode()
+        return result
     }
 }
 

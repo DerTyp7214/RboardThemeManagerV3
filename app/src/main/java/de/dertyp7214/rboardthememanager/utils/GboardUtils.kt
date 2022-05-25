@@ -10,6 +10,7 @@ import com.dertyp7214.logs.helpers.Logger
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
+import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.openStream
 import de.dertyp7214.rboardthememanager.core.readXML
 import de.dertyp7214.rboardthememanager.preferences.Flags
@@ -72,12 +73,9 @@ object GboardUtils {
     fun flagsChanged(callback: (String) -> Unit) {
         Application.context?.let { context ->
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-            val oldFlags = preferences.getString("flags", null)
-            val newFlags = SuFile(Flags.FILES.FLAGS.filePath).openStream()?.use {
-                it.bufferedReader().readText()
-            }
-            if (oldFlags != null && newFlags != null && oldFlags.readXML() != newFlags.readXML())
-                callback(newFlags)
+            val oldFlags = XMLFile(initString = preferences.getString("flags", null))
+            val newFlags = XMLFile(path = Flags.FILES.FLAGS.filePath)
+            if (oldFlags != newFlags) callback(newFlags.toString())
         }
     }
 }
