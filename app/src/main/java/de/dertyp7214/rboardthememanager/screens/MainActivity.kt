@@ -167,9 +167,7 @@ class MainActivity : AppCompatActivity() {
 
                 mainViewModel.observeLoaded(this) {
                     navigate(controller, R.id.action_placeholder_to_themeListFragment)
-                    delayed(200) {
-                        ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
-                    }
+                    ThemeUtils::loadThemes::asyncInto.delayed(200, mainViewModel::setThemes)
                 }
                 mainViewModel.setLoaded(true)
 

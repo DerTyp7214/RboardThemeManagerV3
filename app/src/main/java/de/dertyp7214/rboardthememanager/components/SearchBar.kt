@@ -4,8 +4,6 @@ package de.dertyp7214.rboardthememanager.components
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Handler
-import android.os.Looper
 import android.util.AttributeSet
 import android.view.WindowInsets
 import android.view.inputmethod.EditorInfo
@@ -18,6 +16,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.card.MaterialCardView
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.delayed
 
 @SuppressLint("ResourceType")
 class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
@@ -185,8 +184,6 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
     }
 
     private fun clearFocus(editText: EditText) {
-        Handler(Looper.getMainLooper()).postDelayed({
-            editText.windowInsetsController?.hide(WindowInsets.Type.ime())
-        }, 100)
+        editText.windowInsetsController?.let { it::hide.delayed(100, WindowInsets.Type.ime()) }
     }
 }

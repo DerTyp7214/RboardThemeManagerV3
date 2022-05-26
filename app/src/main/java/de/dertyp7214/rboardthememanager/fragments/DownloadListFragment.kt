@@ -90,17 +90,19 @@ class DownloadListFragment : Fragment() {
         mainViewModel.themePacksObserve(this) { packs ->
             if (packs.isEmpty()) ThemeUtils::loadThemePacks asyncInto mainViewModel::setThemePacks
             else
-                doAsync({
-                    originalThemePacks.clear()
-                    try {
-                        originalThemePacks.add(ThemePack.NONE)
-                        originalThemePacks.addAll(packs)
-                        themePacks.clear()
-                        themePacks.addAll(originalThemePacks)
-                        packs.forEach { pack ->
-                            tags.addAll(pack.tags.filter { !tags.contains(it) })
+                doAsyncCallback<Any?>({
+                    synchronized(originalThemePacks) {
+                        synchronized(themePacks) {
+                            originalThemePacks.clear()
+                            originalThemePacks.add(ThemePack.NONE)
+                            originalThemePacks.addAll(packs)
+                            themePacks.clear()
+                            themePacks.addAll(originalThemePacks)
+                            packs.forEach { pack ->
+                                tags.addAll(pack.tags.filter { !tags.contains(it) })
+                            }
+                            it(null)
                         }
-                    } catch (_: Exception) {
                     }
                 }) {
                     adapter.notifyDataSetChanged()
@@ -112,45 +114,51 @@ class DownloadListFragment : Fragment() {
             val chipFilters = chipContainer.filters
             val sortByDate = mainViewModel.packsSortByDate()
             val includeThemeNames = mainViewModel.includeThemeNames()
-            themePacks.clear()
-            themePacks.addAll(
-                filterThemePacks(
-                    originalThemePacks,
-                    chipFilters,
-                    filter,
-                    sortByDate,
-                    includeThemeNames
+            synchronized(themePacks) {
+                themePacks.clear()
+                themePacks.addAll(
+                    filterThemePacks(
+                        originalThemePacks,
+                        chipFilters,
+                        filter,
+                        sortByDate,
+                        includeThemeNames
+                    )
                 )
-            )
-            adapter.notifyDataSetChanged()
+                adapter.notifyDataSetChanged()
+            }
         }
 
         mainViewModel.observePacksSortByDate(this) { sortByDate ->
-            themePacks.clear()
-            themePacks.addAll(
-                filterThemePacks(
-                    originalThemePacks,
-                    chipContainer.filters,
-                    mainViewModel.getFilter(),
-                    sortByDate,
-                    mainViewModel.includeThemeNames()
+            synchronized(themePacks) {
+                themePacks.clear()
+                themePacks.addAll(
+                    filterThemePacks(
+                        originalThemePacks,
+                        chipContainer.filters,
+                        mainViewModel.getFilter(),
+                        sortByDate,
+                        mainViewModel.includeThemeNames()
+                    )
                 )
-            )
-            adapter.notifyDataSetChanged()
+                adapter.notifyDataSetChanged()
+            }
         }
 
         mainViewModel.observeIncludeThemeNames(this) { includeThemeNames ->
-            themePacks.clear()
-            themePacks.addAll(
-                filterThemePacks(
-                    originalThemePacks,
-                    chipContainer.filters,
-                    mainViewModel.getFilter(),
-                    mainViewModel.packsSortByDate(),
-                    includeThemeNames
+            synchronized(themePacks) {
+                themePacks.clear()
+                themePacks.addAll(
+                    filterThemePacks(
+                        originalThemePacks,
+                        chipContainer.filters,
+                        mainViewModel.getFilter(),
+                        mainViewModel.packsSortByDate(),
+                        includeThemeNames
+                    )
                 )
-            )
-            adapter.notifyDataSetChanged()
+                adapter.notifyDataSetChanged()
+            }
         }
 
         trace.addSplit("RECYCLERVIEW")
@@ -162,12 +170,12 @@ class DownloadListFragment : Fragment() {
         trace.addSplit("CHIP CONTAINER")
 
         chipContainer.setOnFilterToggle { filters ->
-            doAsync({
+            doAsyncCallback<Any?>({
                 val searchFilter = mainViewModel.getFilter()
                 val sortByDate = mainViewModel.packsSortByDate()
                 val includeThemeNames = mainViewModel.includeThemeNames()
-                themePacks.clear()
-                try {
+                synchronized(themePacks) {
+                    themePacks.clear()
                     themePacks.addAll(
                         filterThemePacks(
                             originalThemePacks,
@@ -177,7 +185,7 @@ class DownloadListFragment : Fragment() {
                             includeThemeNames
                         )
                     )
-                } catch (_: Exception) {
+                    it(null)
                 }
             }) {
                 adapter.notifyDataSetChanged()

@@ -16,7 +16,7 @@ import de.dertyp7214.rboardthememanager.core.get
 import de.dertyp7214.rboardthememanager.data.SoundPack
 import de.dertyp7214.rboardthememanager.utils.SoundHelper
 import de.dertyp7214.rboardthememanager.utils.asyncInto
-import de.dertyp7214.rboardthememanager.utils.doAsync
+import de.dertyp7214.rboardthememanager.utils.doAsyncCallback
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 
 class SoundsFragment : Fragment() {
@@ -52,25 +52,29 @@ class SoundsFragment : Fragment() {
         val mainViewModel = requireActivity()[MainViewModel::class.java]
 
         mainViewModel.observeFilter(this) { filter ->
-            soundList.clear()
-            soundList.addAll(original.filter {
-                it.author.contains(filter, true)
-                        || it.title.contains(filter, true)
-                        || filter.isNullOrEmpty()
-            })
-            adapter.notifyDataSetChanged()
+            synchronized(soundList) {
+                soundList.clear()
+                soundList.addAll(original.filter {
+                    it.author.contains(filter, true)
+                            || it.title.contains(filter, true)
+                            || filter.isNullOrEmpty()
+                })
+                adapter.notifyDataSetChanged()
+            }
         }
 
-        mainViewModel.soundsObserve(this) {
-            if (it.isEmpty()) SoundHelper::loadSoundPacks asyncInto mainViewModel::setSounds
+        mainViewModel.soundsObserve(this) { sounds ->
+            if (sounds.isEmpty()) SoundHelper::loadSoundPacks asyncInto mainViewModel::setSounds
             else
-                doAsync({
-                    original.clear()
-                    soundList.clear()
-                    try {
-                        original.addAll(it)
-                        soundList.addAll(it)
-                    } catch (_: Exception) {
+                doAsyncCallback<Any?>({
+                    synchronized(original) {
+                        synchronized(soundList) {
+                            original.clear()
+                            soundList.clear()
+                            original.addAll(sounds)
+                            soundList.addAll(sounds)
+                            it(null)
+                        }
                     }
                 }) {
                     adapter.notifyDataSetChanged()
