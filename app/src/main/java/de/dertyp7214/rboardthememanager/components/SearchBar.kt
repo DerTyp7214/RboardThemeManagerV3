@@ -20,6 +20,7 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.card.MaterialCardView
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.delayed
 
 @SuppressLint("ResourceType", "ServiceCast")
 class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
@@ -193,9 +194,7 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
 
     private fun clearFocus(editText: EditText) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            Handler(Looper.getMainLooper()).postDelayed({
-                editText.windowInsetsController?.hide(WindowInsets.Type.ime())
-            }, 100)
+            editText.windowInsetsController?.let { it::hide.delayed(100, WindowInsets.Type.ime()) }
         } else {
             editText.clearFocus()
             val imm: InputMethodManager =
