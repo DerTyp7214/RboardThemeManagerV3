@@ -15,15 +15,15 @@ val libsuVersion = "5.0.2"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
-    compileSdkPreview = "Tiramisu"
-    buildToolsVersion = "33.0.0-rc4"
+    compileSdk = 33
+    buildToolsVersion = "33.0.0"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
 
     defaultConfig {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 353000
         versionName = "3.5.3"
 
@@ -104,7 +104,7 @@ dependencies {
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
     implementation("androidx.core:core-ktx:1.9.0-alpha04")
     //noinspection DifferentStdlibGradleVersion
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.0-RC2")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.0")
     implementation("androidx.core:core:1.9.0-alpha04")
     implementation("com.google.android.material:material:1.7.0-alpha02")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha02")
@@ -129,7 +129,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.2.0-beta03")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0-RC2")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0")
 
     /*var grpc_version = "1.45.0"
     implementation("io.grpc:grpc-android:$grpc_version")
