@@ -17,7 +17,7 @@ val libsuVersion = "5.0.1"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
-    compileSdk = 33
+    compileSdkPreview = "Tiramisu"
     buildToolsVersion = "33.0.0"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
