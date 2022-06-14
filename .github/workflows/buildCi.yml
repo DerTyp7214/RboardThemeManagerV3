@@ -32,7 +32,7 @@ jobs:
           java-version: 17
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.0.2
+        uses: actions/cache@v3.0.4
         if: ${{ false }}
         with:
           path: |
@@ -43,7 +43,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3.0.2
+        uses: actions/cache@v3.0.4
         with:
           path: |
             ${{ github.workspace }}/.ccache
@@ -64,7 +64,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2.1.6
+        uses: gradle/gradle-build-action@v2.2.0
         with:
           gradle-version: wrapper
           arguments: assembleDebug
@@ -97,7 +97,7 @@ jobs:
         run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.0.0
+        uses: actions/upload-artifact@v3.1.0
         with:
           name: Debug Artifact
           path: app/build/outputs/apk/debug/app-debug.apk
@@ -155,7 +155,7 @@ jobs:
           java-version: 17
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.0.2
+        uses: actions/cache@v3.0.4
         if: ${{ false }}
         with:
           path: |
@@ -166,7 +166,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3.0.2
+        uses: actions/cache@v3.0.4
         with:
           path: |
             ${{ github.workspace }}/.ccache
@@ -187,7 +187,7 @@ jobs:
         
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2.1.6
+        uses: gradle/gradle-build-action@v2.2.0
         with:
           gradle-version: wrapper
           arguments: assembleRelease
@@ -217,7 +217,7 @@ jobs:
         run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.0.0
+        uses: actions/upload-artifact@v3.1.0
         with:
           name: Debug Artifact
           path: app/build/outputs/apk/release/app-release.apk
