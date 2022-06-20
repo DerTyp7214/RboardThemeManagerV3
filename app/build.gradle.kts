@@ -46,6 +46,7 @@ android {
         create("pro") {
             initWith(getByName("release"))
             applicationIdSuffix = ".pro"
+            matchingFallbacks += listOf("")
         }
     }
     compileOptions {
@@ -78,16 +79,16 @@ dependencies {
     implementation("com.github.topjohnwu.libsu:io:$libsuVersion")
     implementation("com.github.topjohnwu.libsu:nio:$libsuVersion")
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
-    implementation("androidx.core:core-ktx:1.9.0-alpha04")
+    implementation("androidx.core:core-ktx:1.8.0")
     //noinspection DifferentStdlibGradleVersion
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.0")
-    implementation("androidx.core:core:1.9.0-alpha04")
+    implementation("androidx.core:core:1.8.0")
 
     implementation("com.google.android.material:material:1.7.0-alpha02")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.6.0-alpha04")
+    implementation("androidx.activity:activity-ktx:1.5.0-rc01")
     implementation("androidx.fragment:fragment-ktx:1.5.0-rc01")
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:21.0.0")
