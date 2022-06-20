@@ -4,7 +4,6 @@ import android.os.Build
 import android.os.Bundle
 import android.view.*
 import androidx.annotation.RequiresApi
-import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
