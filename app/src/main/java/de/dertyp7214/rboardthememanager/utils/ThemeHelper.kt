@@ -14,12 +14,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.get
 import com.dertyp7214.logs.helpers.Logger
-import com.dertyp7214.preferencesplus.core.dp
-import com.dertyp7214.preferencesplus.core.setHeight
-import com.dertyp7214.preferencesplus.core.setWidth
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import com.topjohnwu.superuser.io.SuFile
+import de.dertyp7214.colorutilsc.ColorUtilsC
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
@@ -359,9 +357,9 @@ object ThemeUtils {
                 themeIcon.colorFilter = theme.colorFilter
 
                 val color = themeIcon.drawable.toBitmap().let {
-                    it[0, it.height / 2]
+                    it[5, it.height / 2]
                 }
-                val isDark = ColorUtils.isColorLight(color)
+                val isDark = ColorUtilsC.calculateLuminance(color) > .4
 
                 if (gradient != null) {
                     val g = GradientDrawable(

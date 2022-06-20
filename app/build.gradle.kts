@@ -66,6 +66,7 @@ android {
 
 dependencies {
     implementation(project(":colorutilsc"))
+    //implementation(project(":composecomponents"))
     implementation(platform("com.google.firebase:firebase-bom:30.1.0"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.5")
     implementation("com.google.firebase:firebase-analytics-ktx:21.0.0")
@@ -104,7 +105,6 @@ dependencies {
     implementation("androidx.browser:browser:1.4.0")
     implementation("com.github.bumptech.glide:glide:4.13.2")
     kapt("com.github.bumptech.glide:compiler:4.13.2")
-    implementation("de.dertyp7214:PreferencesPlus:1.1")
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 

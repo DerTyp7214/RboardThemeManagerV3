@@ -35,3 +35,13 @@ fun View.parent(max: Int = Int.MAX_VALUE): View {
     while (p.parent is View && index++ < max) p = p.parent as View
     return p
 }
+
+fun View.setWidth(width: Int) {
+    if (layoutParams != null) layoutParams.width = width
+    else layoutParams = ViewGroup.LayoutParams(width, height)
+}
+
+fun View.setHeight(height: Int) {
+    if (layoutParams != null) layoutParams.height = height
+    else layoutParams = ViewGroup.LayoutParams(width, height)
+}
