@@ -23,7 +23,7 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: nttld/setup-ndk@v1.0.6
+      - uses: nttld/setup-ndk@v1
         with:
           ndk-version: r23
 
@@ -152,7 +152,7 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: nttld/setup-ndk@v1.0.6
+      - uses: nttld/setup-ndk@v1
         with:
           ndk-version: r23
 
