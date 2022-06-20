@@ -25,7 +25,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1.0.6
         with:
-          ndk-version: r24
+          ndk-version: r23
 
       - name: Get Commit Message
         id: commitMessage
@@ -154,7 +154,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1.0.6
         with:
-          ndk-version: r24
+          ndk-version: r23
 
       - name: Get Commit Message
         id: commitMessage
