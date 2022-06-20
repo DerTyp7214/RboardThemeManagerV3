@@ -23,7 +23,7 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: nttld/setup-ndk@v1
+      - uses: nttld/setup-ndk@v1.0.6
         with:
           ndk-version: r23
 
@@ -152,13 +152,7 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: nttld/setup-ndk@v1
-        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible-Dev'
-        with:
-          ndk-version: r23
-
-      - uses: nttld/setup-ndk@v1
-        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
+      - uses: nttld/setup-ndk@v1.0.6
         with:
           ndk-version: r23
 
