@@ -145,6 +145,7 @@ jobs:
   buildRCompatible:
     name: Build Ci APK from rCompatible
     if: startsWith(github.ref, 'refs/heads/rCompatible')
+        startsWith(github.ref, 'refs/heads/rCompatible-Dev')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
