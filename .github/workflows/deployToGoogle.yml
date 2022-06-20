@@ -23,6 +23,10 @@ jobs:
         with:
           submodules: recursive
 
+      - uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r23
+
       - name: Setup JDK
         uses: actions/setup-java@v1
         with:

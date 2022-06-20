@@ -22,6 +22,10 @@ jobs:
         with:
           submodules: recursive
 
+      - uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r23
+
       - name: Get Commit Message
         id: commitMessage
         run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=message::${IN%%$'\n'*}"
