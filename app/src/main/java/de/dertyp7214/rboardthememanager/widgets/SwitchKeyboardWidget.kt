@@ -66,7 +66,11 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
                 views.setImageViewBitmap(R.id.theme_image, themeImage)
                 views.setOnClickPendingIntent(R.id.theme_image, pendingIntent)
 
-                appWidgetManager.updateAppWidget(appWidgetId, views)
+                try {
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
         }
 

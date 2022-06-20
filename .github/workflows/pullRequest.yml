@@ -17,6 +17,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3.0.2
+        with:
+          submodules: recursive
+
+      - uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r23
 
       - name: Setup JDK
         uses: actions/setup-java@v3.3.0

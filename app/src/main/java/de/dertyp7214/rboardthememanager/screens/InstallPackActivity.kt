@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dertyp7214.preferencesplus.core.dp
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter

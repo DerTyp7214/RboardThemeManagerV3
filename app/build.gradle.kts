@@ -45,6 +45,7 @@ android {
         create("pro") {
             initWith(getByName("release"))
             applicationIdSuffix = ".pro"
+            matchingFallbacks += listOf("")
         }
     }
     compileOptions {
@@ -64,31 +65,10 @@ android {
     namespace = "de.dertyp7214.rboardthememanager"
 }
 
-/*protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:4.0.0-rc-2"
-    }
-
-    plugins {
-        id("javalite") {
-            artifact = "com.google.protobuf:protoc-gen-javalite:3.0.0"
-        }
-        id("grpc") {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.45.0"
-        }
-    }
-
-    generateProtoTasks {
-        all().forEach {
-            it.plugins {
-                id("javalite")
-                id("grpc")
-            }
-        }
-    }
-}*/
-
 dependencies {
+    implementation(project(":colorutilsc"))
+    implementation(project(":mathc"))
+
     implementation(platform("com.google.firebase:firebase-bom:30.1.0"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.5")
     implementation("com.google.firebase:firebase-analytics-ktx:21.0.0")
@@ -124,21 +104,9 @@ dependencies {
     implementation("androidx.browser:browser:1.4.0")
     implementation("com.github.bumptech.glide:glide:4.13.2")
     kapt("com.github.bumptech.glide:compiler:4.13.2")
-    implementation("de.dertyp7214:PreferencesPlus:1.1")
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.2.0-rc01")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0")
-
-    /*var grpc_version = "1.45.0"
-    implementation("io.grpc:grpc-android:$grpc_version")
-    implementation("io.grpc:grpc-okhttp:$grpc_version")
-    implementation("io.grpc:grpc-protobuf-lite:$grpc_version")
-    implementation("io.grpc:grpc-stub:$grpc_version")
-
-    var javax_annotation_version = "1.3.2"
-    implementation("javax.annotation:javax.annotation-api:$javax_annotation_version")
-
-    implementation("com.google.protobuf:protobuf-kotlin:3.20.0-rc-1")*/
 }
