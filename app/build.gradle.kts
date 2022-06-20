@@ -64,7 +64,6 @@ android {
 dependencies {
     implementation(project(":mathc"))
     implementation(project(":colorutilsc"))
-    //implementation(project(":composecomponents"))
     implementation(platform("com.google.firebase:firebase-bom:30.1.0"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.6")
     implementation("com.google.firebase:firebase-analytics-ktx:21.1.0")
