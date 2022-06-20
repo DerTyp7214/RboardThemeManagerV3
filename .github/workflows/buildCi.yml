@@ -145,7 +145,6 @@ jobs:
   buildRCompatible:
     name: Build Ci APK from rCompatible
     if: startsWith(github.ref, 'refs/heads/rCompatible')
-        startsWith(github.ref, 'refs/heads/rCompatible-Dev')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -154,6 +153,12 @@ jobs:
           submodules: recursive
 
       - uses: nttld/setup-ndk@v1
+        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible-Dev'
+        with:
+          ndk-version: r23
+
+      - uses: nttld/setup-ndk@v1
+        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
         with:
           ndk-version: r23
 
