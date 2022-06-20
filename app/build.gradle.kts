@@ -64,32 +64,8 @@ android {
     }
 }
 
-/*protobuf {
-    protoc {
-        artifact = "com.google.protobuf:protoc:3.10.0"
-    }
-
-    plugins {
-        id("javalite") {
-            artifact = "com.google.protobuf:protoc-gen-javalite:3.0.0"
-        }
-        id("grpc") {
-            artifact = "io.grpc:protoc-gen-grpc-java:1.25.0"
-        }
-    }
-
-    generateProtoTasks {
-        all().forEach {
-            it.plugins {
-                id("javalite")
-                id("grpc")
-            }
-        }
-    }
-    generatedFilesBaseDir = "$projectDir/build/generated"
-}*/
-
 dependencies {
+    implementation(project(":colorutilsc"))
     implementation(platform("com.google.firebase:firebase-bom:30.1.0"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.5")
     implementation("com.google.firebase:firebase-analytics-ktx:21.0.0")
@@ -139,15 +115,4 @@ dependencies {
 
     implementation("com.google.android.play:core:1.10.3")
     implementation("com.google.android.play:core-ktx:1.8.1")
-
-    /*var grpc_version = "1.43.2"
-    implementation("io.grpc:grpc-android:$grpc_version")
-    implementation("io.grpc:grpc-okhttp:$grpc_version")
-    implementation("io.grpc:grpc-protobuf-lite:$grpc_version")
-    implementation("io.grpc:grpc-stub:$grpc_version")
-
-    var javax_annotation_version = "1.3.2"
-    implementation("javax.annotation:javax.annotation-api:$javax_annotation_version")
-
-    implementation("com.google.protobuf:protobuf-kotlin:3.19.3")*/
 }
