@@ -2,12 +2,8 @@
 
 import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 
-//import com.google.protobuf.gradle.*
-
 plugins {
     id("com.android.application")
-    //id("com.google.protobuf")
-    id("kotlin-android-extensions")
     kotlin("android")
     kotlin("kapt")
     id("com.google.gms.google-services")
@@ -108,10 +104,8 @@ dependencies {
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-
     debugImplementation("androidx.compose.ui:ui-tooling:1.2.0-rc01")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0")
-
 
     implementation("com.google.android.play:core:1.10.3")
     implementation("com.google.android.play:core-ktx:1.8.1")
