@@ -1,9 +1,6 @@
 [submodule "colorutilsc"]
 	path = colorutilsc
 	url = git@github.com:DerTyp7214/ColorUtilsC.git
-[submodule "composecomponents"]
-	path = composecomponents
-	url = git@github.com:DerTyp7214/Composecomponents.git
 [submodule "mathc"]
 	path = mathc
 	url = git@github.com:DerTyp7214/MathC.git
