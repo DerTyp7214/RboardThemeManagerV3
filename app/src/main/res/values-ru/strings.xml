@@ -208,9 +208,6 @@
     <string name="corner_key_l">Радиус закругления слева (Внизу)</string>
     <string name="corner_key_r">Радиус загрузгления (Внизу)</string>
     <string name="other_props">Другие Props</string>
-    <string name="other_props_long">Other Props set via resetprop</string>
-    <string name="prop_changed">Prop changed</string>
-    <string name="reset">Reset</string>
     <string name="other_props_long">Другие Props, установленные с помощью resetprop</string>
     <string name="prop_changed">Prop изменён</string>
     <string name="reset">Сброс</string>
