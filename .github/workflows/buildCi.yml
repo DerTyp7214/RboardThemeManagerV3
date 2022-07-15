@@ -19,7 +19,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.3
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r23
 
       - name: Get Commit Message
         id: commitMessage
@@ -28,7 +34,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 14
+          java-version: 17
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v2
@@ -86,7 +92,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: 33.0.0-rc4
+          BUILD_TOOLS_VERSION: 33.0.0
 
       - name: Delete old APK
         run: rm app/build/outputs/apk/debug/app-debug.apk
@@ -140,7 +146,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.3
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
       - name: Get Commit Message
         id: commitMessage
@@ -149,7 +157,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 11
+          java-version: 17
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v2
@@ -204,7 +212,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: 31.0.0
+          BUILD_TOOLS_VERSION: 33.0.0
 
       - name: Rename APK
         run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk

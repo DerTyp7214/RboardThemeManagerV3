@@ -18,7 +18,7 @@ fun SuFile.copy(newFile: File) = "\\cp $absolutePath ${newFile.absolutePath}".ru
 
 fun SuFile.copyRecursively(newFile: File): Boolean {
     if (!newFile.exists()) newFile.mkdirs()
-    return "\\cp -a $absolutePath/. ${newFile.absolutePath}".runAsCommand()
+    return "\\cp -a ${absolutePath.escapePath}/. ${newFile.absolutePath.escapePath}".runAsCommand()
 }
 
 @SuppressLint("SdCardPath")

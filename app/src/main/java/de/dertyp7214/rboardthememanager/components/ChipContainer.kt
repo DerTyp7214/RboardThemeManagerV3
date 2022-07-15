@@ -35,10 +35,12 @@ class ChipContainer(context: Context, attrs: AttributeSet?) : LinearLayout(conte
     }
 
     fun setChips(chips: List<String>) {
-        this.chips.clear()
-        this.chips.addAll(chips.map { ChipData(it, false) }
-            .sortedBy { it.text.lowercase(Locale.getDefault()) })
-        refreshChips()
+        synchronized(this.chips) {
+            this.chips.clear()
+            this.chips.addAll(chips.map { ChipData(it, false) }
+                .sortedBy { it.text.lowercase(Locale.getDefault()) })
+            refreshChips()
+        }
     }
 
     fun setOnFilterToggle(listener: (filters: List<String>) -> Unit) {

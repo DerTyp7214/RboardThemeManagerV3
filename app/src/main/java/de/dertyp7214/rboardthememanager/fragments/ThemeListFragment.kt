@@ -5,7 +5,6 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.dertyp7214.preferencesplus.core.dp
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
@@ -54,17 +53,21 @@ class ThemeListFragment : Fragment() {
                 refreshLayout.isRefreshing = true
                 ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
             } else {
-                unfilteredThemeList.clear()
-                unfilteredThemeList.addAll(themes)
-                themeList.clear()
-                themeList.addAll(unfilteredThemeList.filter {
-                    it.name.contains(
-                        mainViewModel.getFilter(),
-                        true
-                    )
-                })
-                adapter.notifyDataChanged()
-                refreshLayout.isRefreshing = false
+                synchronized(unfilteredThemeList) {
+                    synchronized(themeList) {
+                        unfilteredThemeList.clear()
+                        unfilteredThemeList.addAll(themes)
+                        themeList.clear()
+                        themeList.addAll(unfilteredThemeList.filter {
+                            it.name.contains(
+                                mainViewModel.getFilter(),
+                                true
+                            )
+                        })
+                        adapter.notifyDataChanged()
+                        refreshLayout.isRefreshing = false
+                    }
+                }
             }
         }
 
@@ -108,11 +111,13 @@ class ThemeListFragment : Fragment() {
         }
 
         mainViewModel.observeFilter(this) { filter ->
-            themeList.clear()
-            themeList.addAll(unfilteredThemeList.filter {
-                it.name.contains(filter, true)
-            })
-            adapter.notifyDataChanged()
+            synchronized(themeList) {
+                themeList.clear()
+                themeList.addAll(unfilteredThemeList.filter {
+                    it.name.contains(filter, true)
+                })
+                adapter.notifyDataChanged()
+            }
         }
 
         mainViewModel.onRefreshThemes(this) {

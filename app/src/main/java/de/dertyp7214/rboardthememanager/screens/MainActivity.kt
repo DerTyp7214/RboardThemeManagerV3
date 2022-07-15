@@ -33,8 +33,6 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dertyp7214.logs.helpers.Logger
-import com.dertyp7214.preferencesplus.core.dp
-import com.dertyp7214.preferencesplus.core.setHeight
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
@@ -167,9 +165,7 @@ class MainActivity : AppCompatActivity() {
 
                 mainViewModel.observeLoaded(this) {
                     navigate(controller, R.id.action_placeholder_to_themeListFragment)
-                    delayed(200) {
-                        ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
-                    }
+                    ThemeUtils::loadThemes::asyncInto.delayed(200, mainViewModel::setThemes)
                 }
                 mainViewModel.setLoaded(true)
 
