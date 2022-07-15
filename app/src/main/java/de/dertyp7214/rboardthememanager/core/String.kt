@@ -36,6 +36,10 @@ fun RepoUrl.parseRepo(): RboardRepo? {
     return RboardRepo(url, startsWith("true:"), meta)
 }
 
+val String.escapePath: String
+    get() = replace("(", "\\(")
+        .replace(")", "\\)")
+
 fun String.fontSize(relative: Float): CharSequence {
     return SpannableString(this).apply {
         setSpan(

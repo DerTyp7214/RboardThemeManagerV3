@@ -11,6 +11,7 @@ plugins {
 val libsuVersion = "5.0.2"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
+@Suppress("UnstableApiUsage")
 android {
     compileSdk = 33
     buildToolsVersion = "33.0.0"
@@ -21,8 +22,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 33
-        versionCode = 353000
-        versionName = "3.5.3"
+        versionCode = 354000
+        versionName = "3.5.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -81,7 +82,7 @@ dependencies {
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
     implementation("androidx.core:core-ktx:1.9.0-alpha05")
     //noinspection DifferentStdlibGradleVersion
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.0")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10")
     implementation("androidx.core:core:1.9.0-alpha05")
     implementation("com.google.android.material:material:1.7.0-alpha02")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha03")
@@ -105,5 +106,5 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.3.0-alpha01")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.0")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.10")
 }
