@@ -25,13 +25,13 @@ jobs:
           ndk-version: r23
 
       - name: Setup JDK
-        uses: actions/setup-java@v3.4.0
+        uses: actions/setup-java@v3.4.1
         with:
           distribution: temurin
           java-version: 17
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.0.4
+        uses: actions/cache@v3.0.5
         with:
           path: |
             ~/.gradle/caches
@@ -41,7 +41,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3.0.4
+        uses: actions/cache@v3.0.5
         with:
           path: |
             ${{ github.workspace }}/.ccache
