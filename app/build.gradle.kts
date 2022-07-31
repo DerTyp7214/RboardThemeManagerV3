@@ -67,13 +67,13 @@ dependencies {
     implementation(project(":colorutilsc"))
     implementation(project(":mathc"))
 
-    implementation(platform("com.google.firebase:firebase-bom:30.2.0"))
+    implementation(platform("com.google.firebase:firebase-bom:30.3.1"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.6")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.0.0")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.1.0")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.0")
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.1")
+    implementation("androidx.navigation:navigation-ui-ktx:2.5.1")
     implementation("org.apache.commons:commons-text:1.9")
 
     implementation("com.github.topjohnwu.libsu:core:$libsuVersion")
@@ -88,9 +88,9 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha03")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.activity:activity-ktx:1.6.0-alpha05")
-    implementation("androidx.fragment:fragment-ktx:1.5.0")
+    implementation("androidx.fragment:fragment-ktx:1.6.0-alpha01")
     implementation("com.jaredrummler:android-shell:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:21.0.0")
+    implementation("com.google.firebase:firebase-analytics:21.1.0")
     implementation("com.google.firebase:firebase-messaging:23.0.6")
     implementation("com.google.code.gson:gson:2.9.0")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
@@ -105,6 +105,6 @@ dependencies {
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.3.0-alpha01")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.3.0-alpha02")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.10")
 }
