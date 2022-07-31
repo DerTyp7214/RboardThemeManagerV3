@@ -165,7 +165,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17_PREVIEW" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_18" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK" />
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
