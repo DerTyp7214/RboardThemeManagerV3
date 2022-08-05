@@ -248,4 +248,6 @@
     <string name="not_empty">Can\'t be empty</string>
     <string name="show_only_disabled_prefs">Show only disabled prefs</string>
     <string name="share_prefs">Share prefs</string>
+    <string name="patch">Patch</string>
+    <string name="share_theme">Share Theme</string>
 </resources>
