@@ -52,6 +52,7 @@ class SoundPackAdapter(
         val soundPack = list[position]
 
         holder.title.text = soundPack.title
+        holder.author.text = soundPack.author
 
         holder.image.setImageResource(R.drawable.ic_sounds)
 

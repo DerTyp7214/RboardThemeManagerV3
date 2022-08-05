@@ -465,7 +465,23 @@ class MainActivity : AppCompatActivity() {
                                             })
                                     menuItems.add(
                                         MenuItem(
-                                            R.drawable.ic_trash,
+                                            R.drawable.ic_patch,
+                                            R.string.patch
+                                        ) {
+                                            val themeFile = File(theme.path)
+                                            val imageFile = theme.image?.let { File(theme.path.removeSuffix(".zip")) }
+
+                                            val files = arrayListOf(themeFile)
+                                            if (imageFile != null) files.add(imageFile)
+
+                                            val pack = File(cacheDir, "export.pack")
+                                            ZipHelper().zip(files.map { it.absolutePath }, pack.absolutePath)
+                                            ThemeUtils.shareTheme(this, pack, true)
+                                        }
+                                    )
+                                    menuItems.add(
+                                        MenuItem(
+                                            R.drawable.ic_delete,
                                             R.string.delete_theme
                                         ) {
                                             openDialog(
