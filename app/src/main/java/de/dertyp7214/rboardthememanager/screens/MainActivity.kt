@@ -466,7 +466,8 @@ class MainActivity : AppCompatActivity() {
                                     menuItems.add(
                                         MenuItem(
                                             R.drawable.ic_patch,
-                                            R.string.patch
+                                            R.string.patch,
+                                            Build.VERSION.SDK_INT > Build.VERSION_CODES.N
                                         ) {
                                             val themeFile = File(theme.path)
                                             val imageFile = theme.image?.let { File(theme.path.removeSuffix(".zip")) }
