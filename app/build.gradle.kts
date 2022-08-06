@@ -22,8 +22,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 33
-        versionCode = 355000
-        versionName = "3.5.5"
+        versionCode = 356000
+        versionName = "3.5.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -82,7 +82,7 @@ dependencies {
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
     implementation("androidx.core:core-ktx:1.9.0-alpha05")
     //noinspection DifferentStdlibGradleVersion
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20-Beta")
     implementation("androidx.core:core:1.9.0-alpha05")
     implementation("com.google.android.material:material:1.7.0-alpha03")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha03")
@@ -106,5 +106,5 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.3.0-alpha02")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.10")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.20-Beta")
 }
