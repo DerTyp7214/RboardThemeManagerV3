@@ -52,6 +52,8 @@ import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.MODULE_META
+import de.dertyp7214.rboardthememanager.Config.PATCHER_PACKAGE
+import de.dertyp7214.rboardthememanager.Config.PLAY_URL
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.MenuAdapter
 import de.dertyp7214.rboardthememanager.core.*
@@ -463,6 +465,31 @@ class MainActivity : AppCompatActivity() {
                                                     findViewById<MaterialButton>(R.id.ok)?.setOnClickListener { dialog.dismiss() }
                                                 }
                                             })
+                                    menuItems.add(
+                                        MenuItem(
+                                            R.drawable.ic_patch,
+                                            R.string.patch
+                                        ) {
+                                            if (PackageUtils.isPackageInstalled(PATCHER_PACKAGE, packageManager)) {
+                                                val themeFile = File(theme.path)
+                                                val imageFile = theme.image?.let {
+                                                    File(
+                                                        theme.path.removeSuffix(".zip")
+                                                    )
+                                                }
+
+                                                val files = arrayListOf(themeFile)
+                                                if (imageFile != null) files.add(imageFile)
+
+                                                val pack = File(cacheDir, "export.pack")
+                                                ZipHelper().zip(
+                                                    files.map { it.absolutePath },
+                                                    pack.absolutePath
+                                                )
+                                                ThemeUtils.shareTheme(this, pack, true, PATCHER_PACKAGE)
+                                            } else openUrl(PLAY_URL(PATCHER_PACKAGE))
+                                        }
+                                    )
                                     menuItems.add(
                                         MenuItem(
                                             R.drawable.ic_delete,

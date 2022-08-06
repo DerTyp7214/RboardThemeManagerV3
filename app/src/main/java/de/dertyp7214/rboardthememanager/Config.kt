@@ -13,6 +13,8 @@ object Config {
         "https://play.google.com/store/apps/details?id=$packageName"
     }
 
+    const val PATCHER_PACKAGE = "de.dertyp7214.rboardpatcher"
+
     const val MODULES_PATH = "/data/adb/modules"
 
     const val MAGISK_PACKAGE_NAME = "com.topjohnwu.magisk"

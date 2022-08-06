@@ -1,7 +1,9 @@
 package de.dertyp7214.rboardthememanager.utils
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.graphics.*
 import android.graphics.drawable.GradientDrawable
@@ -10,7 +12,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.app.ShareCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.get
 import com.dertyp7214.logs.helpers.Logger
@@ -29,6 +33,7 @@ import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.preferences.Settings
 import java.io.BufferedInputStream
+import java.io.File
 import java.net.URL
 import java.util.*
 
@@ -384,5 +389,28 @@ object ThemeUtils {
                 alpha = .6F
             })
         }
+    }
+
+    fun shareTheme(activity: Activity, themePack: File, install: Boolean = true, packageName: String? = null) {
+        val uri = FileProvider.getUriForFile(
+            activity,
+            activity.packageName,
+            themePack
+        )
+        ShareCompat.IntentBuilder(activity)
+            .setStream(uri)
+            .setType("application/pack")
+            .intent
+            .setAction(if (install) Intent.ACTION_VIEW else Intent.ACTION_SEND)
+            .setDataAndType(uri, "application/pack")
+            .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION).apply {
+                packageName?.let { pkg -> setPackage(pkg) }
+                activity.startActivity(
+                    Intent.createChooser(
+                        this,
+                        activity.getString(R.string.share_theme)
+                    )
+                )
+            }
     }
 }

@@ -163,18 +163,22 @@
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_emoji_compat.xml" value="0.3465" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_globe.xml" value="0.3465" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_info.xml" value="0.3465" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_launcher_monochrome.xml" value="0.3465" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/ic_navbar.xml" value="0.3465" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/drawable/menu_down.xml" value="0.3455" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/activity_preferences.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/activity_share_flags.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/chip_container.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/input_dialog.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/map_preference_widget_new_switch.xml" value="0.3416666666666667" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/menu_item.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/layout/xml_entry_dialog_layout.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/menu/all_flags.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/menu/all_prefs.xml" value="0.34375" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/menu/flags_add.xml" value="0.34479166666666666" />
         <entry key="..\:/RboardThemeManagerV3/app/src/main/res/menu/repos.xml" value="0.34479166666666666" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/mipmap/ic_launcher.xml" value="0.3465" />
+        <entry key="..\:/RboardThemeManagerV3/app/src/main/res/mipmap/ic_launcher_round.xml" value="0.3465" />
       </map>
     </option>
   </component>
