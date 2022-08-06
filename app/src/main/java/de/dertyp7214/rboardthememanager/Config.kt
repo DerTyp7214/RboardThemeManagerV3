@@ -13,6 +13,7 @@ object Config {
     }
     var THEME_LOCATION = "/system/etc/gboard_theme"
     const val MAGISK_PACKAGE_NAME = "com.topjohnwu.magisk"
+    const val PATCHER_PACKAGE = "de.dertyp7214.rboardpatcher"
     const val MODULES_PATH = "/data/adb/modules"
     const val MODULE_ID = "rboard-themes"
     const val MODULE_PATH = "$MODULES_PATH/$MODULE_ID"

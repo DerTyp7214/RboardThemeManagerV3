@@ -11,9 +11,9 @@ buildscript {
         maven("https://oss.sonatype.org/content/repositories/snapshots/")
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:7.4.0-alpha08")
+        classpath("com.android.tools.build:gradle:7.4.0-alpha09")
         //noinspection DifferentKotlinGradleVersion
-        classpath(kotlin("gradle-plugin", version = "1.7.10"))
+        classpath(kotlin("gradle-plugin", version = "1.7.20-Beta"))
         classpath("com.google.gms:google-services:4.3.13")
         //classpath("com.google.protobuf:protobuf-gradle-plugin:0.8.18")
     }
