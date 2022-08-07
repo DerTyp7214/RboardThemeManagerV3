@@ -95,7 +95,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.9.1")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
-    implementation("com.github.skydoves:balloon:1.4.7-SNAPSHOT")
+    implementation("com.github.skydoves:balloon:1.4.8-SNAPSHOT")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.4-alpha07")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0-alpha07")
