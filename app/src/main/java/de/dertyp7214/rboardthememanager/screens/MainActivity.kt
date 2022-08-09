@@ -277,9 +277,13 @@ class MainActivity : AppCompatActivity() {
                             if (!themes.isNullOrEmpty()) {
                                 openShareThemeDialog { dialog, name, author ->
                                     val files = arrayListOf<File>()
-                                    File(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){cacheDir}else{
-                                        externalCacheDir
-                                    }, "pack.meta").apply {
+                                    File(
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                                            cacheDir
+                                        } else {
+                                            externalCacheDir
+                                        }, "pack.meta"
+                                    ).apply {
                                         files.add(this)
                                         writeText("name=$name\nauthor=$author\n")
                                     }
@@ -288,9 +292,13 @@ class MainActivity : AppCompatActivity() {
                                         files.add(File(it.path))
                                         if (image.exists()) files.add(image)
                                     }
-                                    val zip = File(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){cacheDir}else{
-                                        externalCacheDir
-                                    }, "themes.pack")
+                                    val zip = File(
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                                            cacheDir
+                                        } else {
+                                            externalCacheDir
+                                        }, "themes.pack"
+                                    )
                                     zip.delete()
                                     ZipHelper().zip(files.map { it.absolutePath }, zip.absolutePath)
                                     files.forEach { it.delete() }
@@ -471,7 +479,11 @@ class MainActivity : AppCompatActivity() {
                                             R.string.patch,
                                             Build.VERSION.SDK_INT > Build.VERSION_CODES.N
                                         ) {
-                                            if (PackageUtils.isPackageInstalled(PATCHER_PACKAGE, packageManager)) {
+                                            if (PackageUtils.isPackageInstalled(
+                                                    PATCHER_PACKAGE,
+                                                    packageManager
+                                                )
+                                            ) {
                                                 val themeFile = File(theme.path)
                                                 val imageFile = theme.image?.let {
                                                     File(
@@ -482,12 +494,23 @@ class MainActivity : AppCompatActivity() {
                                                 val files = arrayListOf(themeFile)
                                                 if (imageFile != null) files.add(imageFile)
 
-                                                val pack = File(cacheDir, "export.pack")
+                                                val pack = File(
+                                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                                                        cacheDir
+                                                    } else {
+                                                        externalCacheDir
+                                                    }, "export.pack"
+                                                )
                                                 ZipHelper().zip(
                                                     files.map { it.absolutePath },
                                                     pack.absolutePath
                                                 )
-                                                ThemeUtils.shareTheme(this, pack, true, PATCHER_PACKAGE)
+                                                ThemeUtils.shareTheme(
+                                                    this,
+                                                    pack,
+                                                    true,
+                                                    PATCHER_PACKAGE
+                                                )
                                             } else openUrl(PLAY_URL(PATCHER_PACKAGE))
                                         }
                                     )
@@ -737,6 +760,7 @@ class MainActivity : AppCompatActivity() {
             }
         }.start()
     }
+
     override fun onDestroy() {
         callbacks.forEach { it.remove() }
         super.onDestroy()
