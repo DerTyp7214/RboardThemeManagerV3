@@ -470,7 +470,18 @@ class MainActivity : AppCompatActivity() {
                                             R.drawable.ic_patch,
                                             R.string.patch
                                         ) {
-                                            if (PackageUtils.isPackageInstalled(PATCHER_PACKAGE, packageManager)) {
+                                            val patcherPackage =
+                                                if (PackageUtils.isPackageInstalled(
+                                                        PATCHER_PACKAGE, packageManager
+                                                    )
+                                                ) PATCHER_PACKAGE
+                                                else if (PackageUtils.isPackageInstalled(
+                                                        "$PATCHER_PACKAGE.debug",
+                                                        packageManager
+                                                    )
+                                                ) "$PATCHER_PACKAGE.debug"
+                                                else null
+                                            if (patcherPackage != null) {
                                                 val themeFile = File(theme.path)
                                                 val imageFile = theme.image?.let {
                                                     File(
@@ -486,7 +497,12 @@ class MainActivity : AppCompatActivity() {
                                                     files.map { it.absolutePath },
                                                     pack.absolutePath
                                                 )
-                                                ThemeUtils.shareTheme(this, pack, true, PATCHER_PACKAGE)
+                                                ThemeUtils.shareTheme(
+                                                    this,
+                                                    pack,
+                                                    true,
+                                                    patcherPackage
+                                                )
                                             } else openUrl(PLAY_URL(PATCHER_PACKAGE))
                                         }
                                     )
