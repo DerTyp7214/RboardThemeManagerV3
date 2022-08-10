@@ -22,8 +22,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 33
-        versionCode = 356000
-        versionName = "3.5.6"
+        versionCode = 357000
+        versionName = "3.5.7"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -68,7 +68,7 @@ dependencies {
     implementation(project(":mathc"))
 
     implementation(platform("com.google.firebase:firebase-bom:30.3.1"))
-    implementation("com.google.firebase:firebase-messaging-ktx:23.0.6")
+    implementation("com.google.firebase:firebase-messaging-ktx:23.0.7")
     implementation("com.google.firebase:firebase-analytics-ktx:21.1.0")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
@@ -91,7 +91,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.6.0-alpha01")
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:21.1.0")
-    implementation("com.google.firebase:firebase-messaging:23.0.6")
+    implementation("com.google.firebase:firebase-messaging:23.0.7")
     implementation("com.google.code.gson:gson:2.9.1")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")

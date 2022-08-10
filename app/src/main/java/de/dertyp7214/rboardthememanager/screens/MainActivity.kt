@@ -479,11 +479,18 @@ class MainActivity : AppCompatActivity() {
                                             R.string.patch,
                                             Build.VERSION.SDK_INT > Build.VERSION_CODES.N
                                         ) {
-                                            if (PackageUtils.isPackageInstalled(
-                                                    PATCHER_PACKAGE,
-                                                    packageManager
-                                                )
-                                            ) {
+                                            val patcherPackage =
+                                                if (PackageUtils.isPackageInstalled(
+                                                        PATCHER_PACKAGE, packageManager
+                                                    )
+                                                ) PATCHER_PACKAGE
+                                                else if (PackageUtils.isPackageInstalled(
+                                                        "$PATCHER_PACKAGE.debug",
+                                                        packageManager
+                                                    )
+                                                ) "$PATCHER_PACKAGE.debug"
+                                                else null
+                                            if (patcherPackage != null) {
                                                 val themeFile = File(theme.path)
                                                 val imageFile = theme.image?.let {
                                                     File(
@@ -509,7 +516,7 @@ class MainActivity : AppCompatActivity() {
                                                     this,
                                                     pack,
                                                     true,
-                                                    PATCHER_PACKAGE
+                                                    patcherPackage
                                                 )
                                             } else openUrl(PLAY_URL(PATCHER_PACKAGE))
                                         }
