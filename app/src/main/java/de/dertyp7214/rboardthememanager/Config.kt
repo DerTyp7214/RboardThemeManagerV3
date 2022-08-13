@@ -20,6 +20,8 @@ object Config {
     const val GBOARD_PACKAGE_NAME = "com.google.android.inputmethod.latin"
     const val RBOARD_THEME_CREATOR_PACKAGE_NAME = "de.dertyp7214.rboardthemecreator"
 
+    const val FLAG_PATH = "/data/data/$GBOARD_PACKAGE_NAME/shared_prefs/flag_value.xml"
+
     val MODULE_META = ModuleMeta(
         MODULE_ID,
         "Rboard Themes",
