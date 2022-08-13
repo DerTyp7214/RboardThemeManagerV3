@@ -52,7 +52,7 @@ class Application : Application() {
         }
         PreferenceManager.getDefaultSharedPreferences(this)
             .edit { putString("logMode", if (BuildConfig.DEBUG) "VERBOSE" else "ERROR") }
-        Logger.init(this, getAttr(R.attr.colorPrimary), getAttr(R.attr.colorAccent))
+        Logger.init(this)
         Logger.extraData = {
             StringBuilder("Rooted: ")
                 .append(if (hasRoot()) "yes" else "no").append("\n")
