@@ -14,6 +14,7 @@ import com.dertyp7214.logs.helpers.Logger
 import com.downloader.PRDownloader
 import com.topjohnwu.superuser.Shell
 import de.dertyp7214.colorutilsc.ColorUtilsC
+import de.dertyp7214.rboardthememanager.core.getAttr
 import de.dertyp7214.rboardthememanager.core.hasRoot
 import de.dertyp7214.rboardthememanager.core.isReachable
 import de.dertyp7214.rboardthememanager.utils.GboardUtils

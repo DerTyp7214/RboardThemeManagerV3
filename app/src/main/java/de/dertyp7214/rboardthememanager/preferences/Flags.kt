@@ -48,7 +48,7 @@ import kotlin.collections.set
 class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
     enum class FILES(val filePath: String) {
         @SuppressLint("SdCardPath")
-        FLAGS("/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/flag_value.xml"),
+        FLAGS("/data/data/${Config.GBOARD_PACKAGE_NAME}/shared_prefs/flag_override.xml"),
         GBOARD_PREFERENCES(Config.GBOARD_PREFS_PATH),
         NONE("")
     }

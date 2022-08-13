@@ -8,8 +8,8 @@
     <color name="md3">#e5e5e5</color>
     <color name="switch_thumb">#dbdbdb</color>
     <color name="switch_track">#8c8c8c</color>
-    <color name="background_icon">#7AACFF</color>
-    <color name="foreground_icon">#183A71</color>
+    <color name="background_icon">#362A33</color>
+    <color name="foreground_icon">#ffffff</color>
     <color name="text">#000000</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>

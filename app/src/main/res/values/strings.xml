@@ -163,6 +163,7 @@
     <string name="fix_flags">Fix flags</string>
     <string name="fix_flags_long">Deletes flags and force closes gboard.</string>
     <string name="flags_fixed">Flags fixed</string>
+    <string name="flags_copied">Flags copied</string>
     <string name="try_fix_flags">Try to go to settings and click on \"Fix flags\"</string>
     <string name="flags_corrupted">Flags seems to be corrupted</string>
     <string name="sort_by_date">Sort by Date</string>
@@ -247,4 +248,8 @@
     <string name="share_prefs">Share prefs</string>
     <string name="patch">Patch</string>
     <string name="share_theme">Share Theme</string>
+    <string name="logs">Logs</string>
+    <string name="logs_long">Open Logs page</string>
+    <string name="copy_flags">Copy flags</string>
+    <string name="copy_flags_long"><![CDATA[Copy \"flag_value.xml\" -> \"flag_override.xml\"]]></string>
 </resources>

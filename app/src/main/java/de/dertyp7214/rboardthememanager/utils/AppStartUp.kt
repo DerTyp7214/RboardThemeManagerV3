@@ -7,6 +7,7 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.view.View
 import android.view.ViewTreeObserver
@@ -234,7 +235,13 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 initialized && scheme != "content" && data != null -> {
                     if (data.scheme == "file") {
                         val file = SuFile(data.path).let {
-                            File(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){filesDir}else{getExternalFilesDir("")}, "theme.pack").apply {
+                            File(
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                                    filesDir
+                                } else {
+                                    getExternalFilesDir("")
+                                }, "theme.pack"
+                            ).apply {
                                 ProcessBuilder().su(
                                     "rm \"$absolutePath\"",
                                     "cp \"${it.absolutePath}\" \"$absolutePath\"",
@@ -290,7 +297,13 @@ class AppStartUp(private val activity: AppCompatActivity) {
                             }
                             finishAndRemoveTask()
                         }
-                    val file = File(cacheDir, "flags.rboard").apply {
+                    val file = File(
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                            cacheDir
+                        } else {
+                            externalCacheDir
+                        }, "flags.rboard"
+                    ).apply {
                         delete()
                         data.writeToFile(activity, this)
                     }
@@ -324,13 +337,25 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     isReady = true
                     openLoadingDialog(R.string.unpacking_themes)
                     doAsync({
-                        val zip = File(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){cacheDir}else{externalCacheDir},"themes.pack").apply {
+                        val zip = File(
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                                cacheDir
+                            } else {
+                                externalCacheDir
+                            }, "themes.pack"
+                        ).apply {
                             delete()
                             data.writeToFile(activity, this)
                         }
                         if (!zip.exists()) listOf()
                         else {
-                            val destination = File(if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){cacheDir}else{externalCacheDir}, zip.nameWithoutExtension)
+                            val destination = File(
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                                    cacheDir
+                                } else {
+                                    externalCacheDir
+                                }, zip.nameWithoutExtension
+                            )
                             SuFile(destination.absolutePath).deleteRecursive()
                             if (ZipHelper().unpackZip(
                                     destination.absolutePath,
