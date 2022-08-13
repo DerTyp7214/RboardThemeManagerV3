@@ -117,6 +117,7 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.rboard" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.rboard" />
                 <data android:scheme="content" />
+                <data android:scheme="file" />
             </intent-filter>
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
@@ -132,8 +133,9 @@
                     android:scheme="https" />
             </intent-filter>
         </activity>
-        <activity android:name="com.dertyp7214.logs.helpers.CrashReportDialog" />
-        <activity android:name="com.dertyp7214.logs.screens.Logs" />
+        <activity
+            android:name="com.dertyp7214.logs.helpers.CrashReportDialog"
+            android:exported="false" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

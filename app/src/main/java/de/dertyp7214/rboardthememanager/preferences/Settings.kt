@@ -13,6 +13,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dertyp7214.logs.screens.Logs
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
@@ -21,6 +22,7 @@ import de.Maxr1998.modernpreferences.preferences.choice.SelectionItem
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
+import de.dertyp7214.rboardthememanager.Config.FLAG_PATH
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
@@ -180,11 +182,28 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             listOf(),
             {
                 listOf(
+                    "rm \"$FLAG_PATH\"",
                     "rm \"${Flags.FILES.FLAGS.filePath}\"",
                     "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
                 ).runAsCommand()
                 GboardUtils.updateCurrentFlags("")
                 Toast.makeText(this, R.string.flags_fixed, Toast.LENGTH_LONG).show()
+            }
+        ),
+        COPY_FLAGS(
+            "copy_flags",
+            R.string.copy_flags,
+            R.string.copy_flags_long,
+            R.drawable.ic_flag_copy,
+            "",
+            TYPE.STRING,
+            listOf(),
+            {
+                listOf(
+                    "\\cp \"$FLAG_PATH\" \"${Flags.FILES.FLAGS.filePath}\"",
+                    "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
+                ).runAsCommand()
+                Toast.makeText(this, R.string.flags_copied, Toast.LENGTH_LONG).show()
             }
         ),
         GBOARD_CACHE_CLEAR(
@@ -250,6 +269,19 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                     }, 500)
                 }
             }
+        ),
+        LOGS(
+            "LOGS",
+            R.string.logs,
+            R.string.logs_long,
+            -1,
+            "",
+            TYPE.STRING,
+            listOf(),
+            {
+                Logs::class.java[this]
+            },
+            BuildConfig.DEBUG
         );
 
         inline fun <reified T> getValue(context: Context, defaultValue: T? = null): T? {
