@@ -32,6 +32,7 @@ import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.preferences.Settings
+import de.dertyp7214.rboardthememanager.proto.My
 import java.io.BufferedInputStream
 import java.io.File
 import java.net.URL
@@ -176,7 +177,20 @@ object ThemeUtils {
             val packs = arrayListOf<ThemePack>()
             REPOS.filterActive().forEach { repo ->
                 try {
-                    packs.addAll(
+                    val rboardRepo = repo.parseRepo()
+                    val protoListPath = rboardRepo?.meta?.protoList
+                    if (protoListPath != null) {
+                        val protoListUrl = rboardRepo.url.replace("list.json", protoListPath)
+
+                        val protoList = URL(protoListUrl).readBytes()
+
+                        packs.addAll(
+                            My.ObjectList.parseFrom(protoList).objectsList.toPackList().map {
+                                it.repoUrl = repo
+                                it
+                            }
+                        )
+                    } else packs.addAll(
                         Gson().fromJson<Collection<ThemePack>?>(
                             URL(repo).readText(),
                             TypeTokens<List<ThemePack>>()
@@ -391,7 +405,12 @@ object ThemeUtils {
         }
     }
 
-    fun shareTheme(activity: Activity, themePack: File, install: Boolean = true, packageName: String? = null) {
+    fun shareTheme(
+        activity: Activity,
+        themePack: File,
+        install: Boolean = true,
+        packageName: String? = null
+    ) {
         val uri = FileProvider.getUriForFile(
             activity,
             activity.packageName,
