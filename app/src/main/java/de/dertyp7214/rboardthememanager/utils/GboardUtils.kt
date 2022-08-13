@@ -1,5 +1,6 @@
 package de.dertyp7214.rboardthememanager.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.GET_META_DATA
@@ -7,9 +8,12 @@ import android.os.Build
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.dertyp7214.logs.helpers.Logger
+import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.Application
+import de.dertyp7214.rboardthememanager.Config.FLAG_PATH
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
 import de.dertyp7214.rboardthememanager.components.XMLFile
+import de.dertyp7214.rboardthememanager.core.copy
 import de.dertyp7214.rboardthememanager.preferences.Flags
 
 object GboardUtils {
@@ -67,8 +71,11 @@ object GboardUtils {
         }
     }
 
+    @SuppressLint("SdCardPath")
     fun flagsChanged(callback: (String) -> Unit) {
         Application.context?.let { context ->
+            val overrideFile = SuFile(Flags.FILES.FLAGS.filePath)
+            if (!overrideFile.exists()) SuFile(FLAG_PATH).copy(overrideFile)
             val preferences = PreferenceManager.getDefaultSharedPreferences(context)
             val oldFlags = XMLFile(initString = preferences.getString("flags", null))
             val newFlags = XMLFile(path = Flags.FILES.FLAGS.filePath)
