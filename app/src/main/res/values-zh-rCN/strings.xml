@@ -220,7 +220,7 @@
     <string name="update_downloaded">更新已下载.</string>
     <string name="restart">重启</string>
     <string name="invalid_link">无效的链接</string>
-    <string name="deep_link">深层链接</string>
+    <string name="deep_link">深链接</string>
     <string name="download">下载</string>
     <string name="include_theme_names">包含的主题名字</string>
     <string name="update_available">有更新可用 (%s)</string>
@@ -250,4 +250,8 @@
     <string name="patch">主题修饰</string>
     <string name="share_theme">分享主题</string>
     
+    <string name="logs">日志</string>
+    <string name="logs_long">打开日志页</string>
+    <string name="copy_flags">复制flag值文件</string>
+    <string name="copy_flags_long"><![CDATA[复制 \"flag_value.xml\" -> \"flag_override.xml\"]]></string>
 </resources>
