@@ -252,4 +252,6 @@
     <string name="logs_long">Open Logs page</string>
     <string name="copy_flags">Copy flags</string>
     <string name="copy_flags_long"><![CDATA[Copy \"flag_value.xml\" -> \"flag_override.xml\"]]></string>
+    <string name="app_style">App Style</string>
+    <string name="style_default">Default</string>
 </resources>

@@ -43,6 +43,25 @@ inline val Activity.enableBlur: Boolean
         return preferences.getBoolean("useBlur", true)
     }
 
+fun Activity.applyTheme(
+    main: Boolean = false,
+    info: Boolean = false,
+    shareFlags: Boolean = false,
+    installPack: Boolean = false
+) {
+    setTheme(
+        when (preferences.getString("app_style", "default")) {
+            // TODO: akos check for different themes
+            else -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main
+                info -> R.style.Theme_RboardThemeManagerV3_Info
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack
+                else -> R.style.Theme_RboardThemeManagerV3
+            }
+        }
+    )
+}
 
 operator fun <T : ViewModel> FragmentActivity.get(modelClass: Class<T>): T =
     run(::ViewModelProvider)[modelClass]

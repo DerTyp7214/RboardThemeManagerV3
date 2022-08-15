@@ -171,6 +171,18 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                 )
             }
         ),
+        APP_STYLE(
+          "app_style",
+          R.string.app_style,
+          -1,
+          R.drawable.ic_theme,
+            "default",
+            TYPE.SELECT,
+            listOf(
+                SelectionItem("default", R.string.style_default, -1)
+            // TODO: akos add items
+            )
+        ),
         USE_BLUR(
             "useBlur",
             R.string.use_blur,
