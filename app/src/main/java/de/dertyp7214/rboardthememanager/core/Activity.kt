@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.FragmentActivity
@@ -51,7 +52,34 @@ fun Activity.applyTheme(
 ) {
     setTheme(
         when (preferences.getString("app_style", "default")) {
-            // TODO: akos check for different themes
+            "pink" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main
+                info -> R.style.Theme_RboardThemeManagerV3_Info
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack
+                else -> R.style.Theme_RboardThemeManagerV3
+            }
+            "red" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main
+                info -> R.style.Theme_RboardThemeManagerV3_Info
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack
+                else -> R.style.Theme_RboardThemeManagerV3
+            }
+            "green" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_Green
+                info -> R.style.Theme_RboardThemeManagerV3_Info_Green
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Green
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Green
+                else -> R.style.Theme_RboardThemeManagerV3_Green
+            }
+            "yellow" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main
+                info -> R.style.Theme_RboardThemeManagerV3_Info
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack
+                else -> R.style.Theme_RboardThemeManagerV3
+            }
             else -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main
                 info -> R.style.Theme_RboardThemeManagerV3_Info

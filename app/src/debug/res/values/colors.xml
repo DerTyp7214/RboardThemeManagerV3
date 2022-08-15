@@ -20,4 +20,9 @@
 
     <color name="ic_launcher_background">@color/background_icon_debug</color>
     <color name="ic_launcher_foreground">@color/background</color>
+    <color name="app_background_green">#0F1C1A</color>
+    <color name="foreground_green">#325B56</color>
+    <color name="accent_green">#3bdbc4</color>
+    <color name="accent_green_2">#aff0e7</color>
+    <color name="md3_green">#68AEA4</color>
 </resources>

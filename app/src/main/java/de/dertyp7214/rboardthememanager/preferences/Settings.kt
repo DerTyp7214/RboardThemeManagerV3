@@ -179,7 +179,11 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             "default",
             TYPE.SELECT,
             listOf(
-                SelectionItem("default", R.string.style_default, -1)
+                SelectionItem("default", R.string.style_default, -1),
+                SelectionItem("green", R.string.style_green, -1),
+                SelectionItem("red", R.string.style_red, -1),
+                SelectionItem("yellow", R.string.style_yellow, -1),
+                SelectionItem("pink", R.string.style_pink, -1)
             // TODO: akos add items
             )
         ),
@@ -325,7 +329,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
 
     override fun preferences(builder: PreferenceScreen.Builder) {
         SETTINGS.values().filter { it.visible }
-            .filter { !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) && !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) }
+            .filter { !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) && !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) && !(it == SETTINGS.APP_STYLE && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) }
             .forEach { item ->
                 val pref: Preference = when (item.type) {
                     TYPE.BOOLEAN -> builder.switch(item.key) {

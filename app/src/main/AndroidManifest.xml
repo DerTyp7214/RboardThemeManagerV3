@@ -25,8 +25,7 @@
         tools:ignore="AllowBackup">
         <activity
             android:name=".screens.ShareFlags"
-            android:exported="true"
-            android:theme="@style/Theme.RboardThemeManagerV3.ShareFlags" />
+            android:exported="true" />
         <activity
             android:name=".screens.ReadMoreReadFast"
             android:exported="true" />
@@ -66,20 +65,16 @@
 
         <activity
             android:name=".screens.ManageRepo"
-            android:exported="true"
-            android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />
+            android:exported="true" />
         <activity
             android:name=".screens.InstallPackActivity"
-            android:exported="true"
-            android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />
+            android:exported="true" />
         <activity
             android:name=".screens.PreferencesActivity"
-            android:exported="true"
-            android:theme="@style/Theme.RboardThemeManagerV3.Info" />
+            android:exported="true" />
         <activity
             android:name=".screens.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.RboardThemeManagerV3.Main"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
