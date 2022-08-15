@@ -35,6 +35,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
     enum class FILES(val Path: String) {
         @SuppressLint("SdCardPath")
         CACHE("/data/user${if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) "_de" else ""}/0/${Config.GBOARD_PACKAGE_NAME}/cache/auto_clean/"),
+
         @SuppressLint("SdCardPath")
         EMOJIS("/data/data/${Config.GBOARD_PACKAGE_NAME}/databases/expression-history.db")
 
@@ -172,10 +173,10 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             }
         ),
         APP_STYLE(
-          "app_style",
-          R.string.app_style,
-          -1,
-          R.drawable.ic_theme,
+            "app_style",
+            R.string.app_style,
+            -1,
+            R.drawable.ic_theme,
             "default",
             TYPE.SELECT,
             listOf(
@@ -184,7 +185,6 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                 SelectionItem("red", R.string.style_red, -1),
                 SelectionItem("yellow", R.string.style_yellow, -1),
                 SelectionItem("pink", R.string.style_pink, -1)
-            // TODO: akos add items
             )
         ),
         USE_BLUR(
@@ -349,8 +349,8 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                     TYPE.SELECT -> builder.singleChoice(item.key, item.items) {
                         initialSelection = item.items.last().key
                         onSelectionChange {
-                            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
-                                when (it) {
+                            when (item.key) {
+                                "app_theme" -> when (it) {
                                     "dark" -> {
                                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                                     }
@@ -358,18 +358,17 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                                     }
                                     "system_theme" -> {
-                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
+                                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                                     }
                                 }
-                            } else
-                                when (it) {
-                                    "dark" -> {
-                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                                "app_style" -> {
+                                    PreferencesActivity::class.java[activity] = {
+                                        putExtra("type", "settings")
                                     }
-                                    "light" -> {
-                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                                    }
+                                    activity.finish()
                                 }
+                            }
                             true
                         }
                     }
