@@ -71,7 +71,7 @@
         <item name="android:statusBarColor">@color/foreground_green</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.AppBarLayouts_Green" parent="Widget.Material3.AppBarLayout">
+    <style name="Widget.Material3.AppBarLayout_Green" parent="">
         <item name="colorPrimary">@color/foreground_green</item>
         <item name="colorPrimaryVariant">@color/foreground_green</item>
         <item name="colorOnPrimary">@color/text</item>

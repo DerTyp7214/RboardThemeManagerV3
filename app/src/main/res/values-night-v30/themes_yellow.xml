@@ -70,7 +70,7 @@
         <item name="android:statusBarColor">@color/foreground_yellow</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.AppBarLayouts_Yellow" parent="Widget.Material3.AppBarLayout">
+    <style name="Widget.Material3.AppBarLayout_Yellow" parent="">
         <item name="colorPrimary">@color/foreground_yellow</item>
         <item name="colorPrimaryVariant">@color/foreground_yellow</item>
         <item name="colorOnPrimary">@color/text</item>
