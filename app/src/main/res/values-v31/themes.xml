@@ -70,7 +70,7 @@
         <item name="android:statusBarColor">?attr/colorBackgroundFloating</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="Theme.RboardThemeManagerV3.AppBarLayout" parent="Widget.Material3.AppBarLayout">
         <item name="colorPrimary">@android:color/system_neutral1_50</item>
         <item name="colorPrimaryVariant">@android:color/system_neutral1_50</item>
         <item name="colorOnPrimary">@android:color/system_neutral1_900</item>

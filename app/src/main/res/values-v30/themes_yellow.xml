@@ -15,7 +15,7 @@
         <item name="colorSecondaryContainer">@color/md3_yellow</item>
         <item name="colorOnSecondary">@color/text</item>
 
-        <item name="android:statusBarColor" tools:targetApi="l">@color/app_background_yellow</item>
+        <item name="android:statusBarColor">?android:attr/colorBackground</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
         <item name="popupMenuStyle">@style/PopupStyle</item>
@@ -55,26 +55,20 @@
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Main_Yellow" parent="Theme.RboardThemeManagerV3_Yellow">
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Info_Yellow" parent="Theme.RboardThemeManagerV3_Yellow">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:navigationBarColor">@color/foreground_yellow</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.InstallPack_Yellow" parent="Theme.RboardThemeManagerV3_Yellow">
         <item name="android:statusBarColor">@color/foreground_yellow</item>
-        <item name="android:navigationBarColor">@color/foreground_yellow</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
     <style name="Theme.RboardThemeManagerV3.ShareFlags_Yellow" parent="Theme.RboardThemeManagerV3_Yellow">
         <item name="android:statusBarColor">@color/foreground_yellow</item>
-        <item name="android:navigationBarColor">@color/foreground_yellow</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.AppBarLayouts_Yellow" parent="Widget.Material3.AppBarLayout">

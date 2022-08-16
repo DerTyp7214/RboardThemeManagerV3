@@ -78,7 +78,7 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
     </style>
 
-    <style name="Widget.Material3.AppBarLayout" parent="">
+    <style name="Theme.RboardThemeManagerV3.AppBarLayout" parent="Widget.Material3.AppBarLayout">
         <item name="colorPrimary">@color/foreground</item>
         <item name="colorPrimaryVariant">@color/foreground</item>
         <item name="colorOnPrimary">@color/text</item>

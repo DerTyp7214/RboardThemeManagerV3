@@ -52,6 +52,13 @@ fun Activity.applyTheme(
 ) {
     setTheme(
         when (preferences.getString("app_style", "default")) {
+            "default" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main
+                info -> R.style.Theme_RboardThemeManagerV3_Info
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack
+                else -> R.style.Theme_RboardThemeManagerV3
+            }
             "red" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Red
                 info -> R.style.Theme_RboardThemeManagerV3_Info_Red
@@ -66,19 +73,12 @@ fun Activity.applyTheme(
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Green
                 else -> R.style.Theme_RboardThemeManagerV3_Green
             }
-            "yellow" -> when {
+            else -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Yellow
                 info -> R.style.Theme_RboardThemeManagerV3_Info_Yellow
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Yellow
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Yellow
                 else -> R.style.Theme_RboardThemeManagerV3_Yellow
-            }
-            else -> when {
-                main -> R.style.Theme_RboardThemeManagerV3_Main
-                info -> R.style.Theme_RboardThemeManagerV3_Info
-                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags
-                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack
-                else -> R.style.Theme_RboardThemeManagerV3
             }
         }
     )
