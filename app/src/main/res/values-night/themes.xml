@@ -72,7 +72,8 @@
         <item name="android:statusBarColor">@color/foreground</item>
         <item name="android:navigationBarColor">@android:color/black</item>
     </style>
-    <style name="Theme.RboardThemeManagerV3.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <style name="Widget.Material3.AppBarLayout" parent="">
         <item name="colorPrimary">@color/foreground</item>
         <item name="colorPrimaryVariant">@color/foreground</item>
         <item name="colorOnPrimary">@color/text</item>

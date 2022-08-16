@@ -17,4 +17,25 @@
 
     <color name="ic_launcher_background">@color/background_icon_debug</color>
     <color name="ic_launcher_foreground">@color/background</color>
+
+    <!-- Green Theme -->
+    <color name="app_background_green">#0F1C1A</color>
+    <color name="foreground_green">#325B56</color>
+    <color name="accent_green">#3bdbc4</color>
+    <color name="accent_green_2">#aff0e7</color>
+    <color name="md3_green">#68AEA4</color>
+
+    <!-- Red Theme -->
+    <color name="app_background_red">#1C0F11</color>
+    <color name="foreground_red">#5B3237</color>
+    <color name="accent_red">#DB3B52</color>
+    <color name="accent_red_2">#F0AFB8</color>
+    <color name="md3_red">#AE6872</color>
+
+    <!-- Yellow Theme -->
+    <color name="app_background_yellow">#1C190F</color>
+    <color name="foreground_yellow">#5B5232</color>
+    <color name="accent_yellow">#DBB43B</color>
+    <color name="accent_yellow_2">#F0E1AF</color>
+    <color name="md3_yellow">#AE9D68</color>
 </resources>

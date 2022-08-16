@@ -27,7 +27,7 @@ import de.dertyp7214.rboardthememanager.Config.FLAG_PATH
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
-import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
+import de.dertyp7214.rboardthememanager.screens.*
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 
@@ -183,8 +183,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                 SelectionItem("default", R.string.style_default, -1),
                 SelectionItem("green", R.string.style_green, -1),
                 SelectionItem("red", R.string.style_red, -1),
-                SelectionItem("yellow", R.string.style_yellow, -1),
-                SelectionItem("pink", R.string.style_pink, -1)
+                SelectionItem("yellow", R.string.style_yellow, -1)
             )
         ),
         USE_BLUR(
@@ -329,7 +328,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
 
     override fun preferences(builder: PreferenceScreen.Builder) {
         SETTINGS.values().filter { it.visible }
-            .filter { !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) && !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) && !(it == SETTINGS.APP_STYLE && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) }
+            .filter { !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) && !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) && !(it == SETTINGS.APP_STYLE && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && BuildConfig.BUILD_TYPE.equals("release")) }
             .forEach { item ->
                 val pref: Preference = when (item.type) {
                     TYPE.BOOLEAN -> builder.switch(item.key) {
@@ -365,6 +364,21 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                                 "app_style" -> {
                                     PreferencesActivity::class.java[activity] = {
                                         putExtra("type", "settings")
+                                    }
+                                    InstallPackActivity::class.java[activity] = {
+                                        putExtra("type", "packs")
+                                    }
+                                    ManageRepo::class.java[activity] = {
+                                        putExtra("type", "repo")
+                                    }
+                                    ShareFlags::class.java[activity] = {
+                                        putExtra("type", "shareflags")
+                                    }
+                                    ReadMoreReadFast::class.java[activity] = {
+                                        putExtra("type", "readmorefast")
+                                    }
+                                    MainActivity::class.java[activity] = {
+                                        putExtra("type", "main")
                                     }
                                     activity.finish()
                                 }

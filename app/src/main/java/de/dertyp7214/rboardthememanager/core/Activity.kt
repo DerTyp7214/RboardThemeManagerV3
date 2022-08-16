@@ -52,19 +52,12 @@ fun Activity.applyTheme(
 ) {
     setTheme(
         when (preferences.getString("app_style", "default")) {
-            "pink" -> when {
-                main -> R.style.Theme_RboardThemeManagerV3_Main
-                info -> R.style.Theme_RboardThemeManagerV3_Info
-                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags
-                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack
-                else -> R.style.Theme_RboardThemeManagerV3
-            }
             "red" -> when {
-                main -> R.style.Theme_RboardThemeManagerV3_Main
-                info -> R.style.Theme_RboardThemeManagerV3_Info
-                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags
-                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack
-                else -> R.style.Theme_RboardThemeManagerV3
+                main -> R.style.Theme_RboardThemeManagerV3_Main_Red
+                info -> R.style.Theme_RboardThemeManagerV3_Info_Red
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Red
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Red
+                else -> R.style.Theme_RboardThemeManagerV3_Red
             }
             "green" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Green
@@ -74,11 +67,11 @@ fun Activity.applyTheme(
                 else -> R.style.Theme_RboardThemeManagerV3_Green
             }
             "yellow" -> when {
-                main -> R.style.Theme_RboardThemeManagerV3_Main
-                info -> R.style.Theme_RboardThemeManagerV3_Info
-                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags
-                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack
-                else -> R.style.Theme_RboardThemeManagerV3
+                main -> R.style.Theme_RboardThemeManagerV3_Main_Yellow
+                info -> R.style.Theme_RboardThemeManagerV3_Info_Yellow
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Yellow
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Yellow
+                else -> R.style.Theme_RboardThemeManagerV3_Yellow
             }
             else -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main
