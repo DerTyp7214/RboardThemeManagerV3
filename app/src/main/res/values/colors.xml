@@ -22,21 +22,49 @@
     <!-- Green Theme -->
     <color name="app_background_green">#DBECE9</color>
     <color name="foreground_green">#9CC9C3</color>
-    <color name="accent_green">#3bdbc4</color>
-    <color name="accent_green_2">#aff0e7</color>
+    <color name="accent_green">#22B9A3</color>
+    <color name="accent_green_2">#8EEADD</color>
     <color name="md3_green">#4D8F85</color>
 
     <!-- Red Theme -->
     <color name="app_background_red">#ECDBDE</color>
     <color name="foreground_red">#C99CA2</color>
-    <color name="accent_red">#DB3B52</color>
-    <color name="accent_red_2">#F0AFB8</color>
+    <color name="accent_red">#B92238</color>
+    <color name="accent_red_2">#EA8E9B</color>
     <color name="md3_red">#8F4D57</color>
 
     <!-- Yellow Theme -->
     <color name="app_background_yellow">#ECE7DB</color>
     <color name="foreground_yellow">#C9BF9C</color>
-    <color name="accent_yellow">#DBB43B</color>
-    <color name="accent_yellow_2">#F0E1AF</color>
+    <color name="accent_yellow">#B99422</color>
+    <color name="accent_yellow_2">#EAD48E</color>
     <color name="md3_yellow">#8F7E4D</color>
+
+    <!-- Blue Theme -->
+    <color name="app_background_blue">#DBE5EC</color>
+    <color name="foreground_blue">#9CB4C9</color>
+    <color name="accent_blue">#2274B9</color>
+    <color name="accent_blue_2">#8EC0EA</color>
+    <color name="md3_blue">#4D718F</color>
+
+    <!-- Lime Theme -->
+    <color name="app_background_lime">#E6ECDB</color>
+    <color name="foreground_lime">#B9C99C</color>
+    <color name="accent_lime">#83B922</color>
+    <color name="accent_lime_2">#C9EA8E</color>
+    <color name="md3_lime">#788F4D</color>
+
+    <!-- Orange Theme -->
+    <color name="app_background_orange">#ECE2DB</color>
+    <color name="foreground_orange">#C9B19C</color>
+    <color name="accent_orange">#B93A22</color>
+    <color name="accent_orange_2">#EA9C8E</color>
+    <color name="md3_orange">#8F6B4D</color>
+
+    <!-- Pink Theme -->
+    <color name="app_background_pink">#ECDBE3</color>
+    <color name="foreground_pink">#C99CAF</color>
+    <color name="accent_pink">#B92265</color>
+    <color name="accent_pink_2">#EA8EB7</color>
+    <color name="md3_pink">#8F4D6B</color>
 </resources>

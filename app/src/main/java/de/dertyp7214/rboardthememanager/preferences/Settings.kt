@@ -181,9 +181,13 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.SELECT,
             listOf(
                 SelectionItem("default", R.string.style_default, -1),
+                SelectionItem("blue", R.string.style_blue, -1),
                 SelectionItem("green", R.string.style_green, -1),
                 SelectionItem("red", R.string.style_red, -1),
-                SelectionItem("yellow", R.string.style_yellow, -1)
+                SelectionItem("yellow", R.string.style_yellow, -1),
+                SelectionItem("orange", R.string.style_orange, -1),
+                SelectionItem("pink", R.string.style_pink, -1),
+                SelectionItem("lime", R.string.style_lime, -1)
             )
         ),
         USE_BLUR(

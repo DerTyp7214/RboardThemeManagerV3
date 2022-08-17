@@ -1,0 +1,81 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.RboardThemeManagerV3_Blue" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:colorBackground">@color/app_background_blue</item>
+        <item name="colorBackgroundFloating">@color/foreground_blue</item>
+
+        <item name="colorPrimary">@color/accent_blue</item>
+        <item name="colorPrimaryVariant">@color/accent_blue</item>
+        <item name="colorPrimaryContainer">@color/accent_blue_2</item>
+        <item name="colorOnPrimary">@color/text</item>
+
+        <item name="colorSecondary">@color/accent_blue</item>
+        <item name="colorSecondaryVariant">@color/accent_blue</item>
+        <item name="colorSecondaryContainer">@color/md3_blue</item>
+        <item name="colorOnSecondary">@color/text</item>
+
+        <item name="android:statusBarColor">?android:attr/colorBackground</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+
+        <item name="popupMenuStyle">@style/PopupStyle</item>
+        <item name="alertDialogTheme">@style/Dialog.RboardThemeManagerV3.MaterialAlertDialog</item>
+        <item name="materialAlertDialogTheme">
+            @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
+        </item>
+
+        <item name="switchStyle">@style/Widget.App.Switch_Blue</item>
+        <item name="snackbarStyle">@style/Widget.App.Snackbar_Blue</item>
+        <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView_Blue</item>
+        <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton_Blue</item>
+    </style>
+
+    <style name="Widget.App.Snackbar_Blue" parent="Widget.Material3.Snackbar">
+        <item name="backgroundTint">?attr/colorBackgroundFloating</item>
+    </style>
+
+    <style name="Widget.App.SnackbarTextView_Blue" parent="Widget.Material3.Snackbar.TextView">
+        <item name="android:textColor">@color/text</item>
+    </style>
+
+    <style name="Widget.App.SnackbarButton_Blue" parent="Widget.Material3.Button.TextButton.Snackbar">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">?attr/colorAccent</item>
+    </style>
+
+    <style name="Widget.App.Switch_Blue" parent="Widget.Material3.CompoundButton.Switch">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch_Blue</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Switch_Blue" parent="Theme.RboardThemeManagerV3_Blue">
+        <item name="colorPrimary">@color/accent_blue_2</item>
+        <item name="colorPrimaryContainer">@color/accent_blue</item>
+        <item name="colorOnSurface">@color/switch_track</item>
+        <item name="colorOutline">@color/switch_thumb</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.Main_Blue" parent="Theme.RboardThemeManagerV3_Blue">
+
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.Info_Blue" parent="Theme.RboardThemeManagerV3_Blue">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.InstallPack_Blue" parent="Theme.RboardThemeManagerV3_Blue">
+        <item name="android:statusBarColor">@color/foreground_blue</item>
+    </style>
+    <style name="Theme.RboardThemeManagerV3.ShareFlags_Blue" parent="Theme.RboardThemeManagerV3_Blue">
+        <item name="android:statusBarColor">@color/foreground_blue</item>
+    </style>
+
+    <style name="Widget.Material3.AppBarLayout_Blue" parent="">
+        <item name="colorPrimary">@color/foreground_blue</item>
+        <item name="colorPrimaryVariant">@color/foreground_blue</item>
+        <item name="colorOnPrimary">@color/text</item>
+        <item name="colorSurface">@color/app_background_blue</item>
+        <item name="android:textColorPrimary">@color/text</item>
+    </style>
+
+</resources>
