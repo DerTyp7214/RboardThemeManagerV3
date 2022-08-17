@@ -20,6 +20,13 @@
         android:theme="@style/Theme.RboardThemeManagerV3"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".screens.Logs"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".screens.ManageRepo"
             android:exported="true"
             android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />

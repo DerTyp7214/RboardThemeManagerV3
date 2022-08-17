@@ -7,5 +7,7 @@ data class RboardRepo(
 )
 
 data class RboardRepoMeta(
-    val name: String = ""
+    val name: String = "",
+    val proto: String? = null,
+    val protoList: String? = null
 )

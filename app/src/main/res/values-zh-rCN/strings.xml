@@ -51,7 +51,7 @@
     <string name="downloading_pack">正在下载包</string>
     <string name="install_themes">安装主题 (%s)</string>
     <string name="install">安装</string>
-    <string name="themes_installed">已安装的主题</string>
+    <string name="themes_installed">主题已安装</string>
     <string name="unpacking_themes">解压主题</string>
     <string name="do_you_want_to_delete_theme">您想要删除这些主题吗？</string>
     <string name="show_preinstalled_themes">显示预安装的主题</string>
@@ -84,7 +84,7 @@
     <string name="pill_shaped_key">药丸形按键</string>
     <string name="enable_clipboard_screenshot_paste">启用剪贴板截图</string>
     <string name="enable_lens">启用智能镜头</string>
-    <string name="branding">品牌化</string>
+    <string name="branding">Google品牌</string>
     <string name="show_branding_interval_seconds">G标志显示间隔 秒</string>
     <string name="branding_fadeout_delay_ms">G标志淡出延迟</string>
     <string name="monet_details">基于系统主题改变键盘颜色</string>
@@ -220,7 +220,7 @@
     <string name="update_downloaded">更新已下载.</string>
     <string name="restart">重启</string>
     <string name="invalid_link">无效的链接</string>
-    <string name="deep_link">深层链接</string>
+    <string name="deep_link">深链接</string>
     <string name="download">下载</string>
     <string name="include_theme_names">包含的主题名字</string>
     <string name="update_available">有更新可用 (%s)</string>
@@ -240,5 +240,18 @@
     <string name="clear_recent_emojis">清除emoji历史</string>
     <string name="clear_recent_emojis_long">清除最近使用过的emoji表情记录, 并强行关闭Gboard</string>
     <string name="recent_emojis_cleared">emoji历史记录已清除</string>
+
+    <string name="show_language_switch_key">显示语言切换键</string>
+    <string name="value">值</string>
+    <string name="type">类型</string>
+    <string name="not_empty">此项不能为空</string>
+    <string name="show_only_disabled_prefs">只显示已禁用偏好项</string>
+    <string name="share_prefs">分享偏好项</string>
+    <string name="patch">主题修饰</string>
+    <string name="share_theme">分享主题</string>
     
+    <string name="logs">日志</string>
+    <string name="logs_long">打开日志页</string>
+    <string name="copy_flags">复制flag值文件</string>
+    <string name="copy_flags_long"><![CDATA[复制 \"flag_value.xml\" -> \"flag_override.xml\"]]></string>
 </resources>
