@@ -67,6 +67,19 @@ class MainActivity : AppCompatActivity() {
         "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk"
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
+    companion object {
+        private val instances = arrayListOf<MainActivity>()
+
+        fun clearInstances() {
+            while (instances.isNotEmpty()) popInstance()
+        }
+
+        fun popInstance() {
+            instances.removeLast().finish()
+        }
+    }
+
     private lateinit var downloadResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<NestedScrollView>
     private lateinit var mainViewModel: MainViewModel
@@ -85,6 +98,8 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.setDecorFitsSystemWindows(false)
         }
+
+        instances.add(this)
 
         mainViewModel = this[MainViewModel::class.java]
 
@@ -720,7 +735,7 @@ class MainActivity : AppCompatActivity() {
                 }
         val manager = NotificationManagerCompat.from(this).apply {
             builder.setProgress(maxProgress, 0, false)
-            notify(notificationId, builder.build())
+            notify(this, notificationId, builder.build())
         }
         var finished = false
         UpdateHelper(updateUrl, this).apply {
@@ -736,7 +751,7 @@ class MainActivity : AppCompatActivity() {
                             )
                         )
                         .setProgress(maxProgress, progress.toInt(), false)
-                    manager.notify(notificationId, builder.build())
+                    notify(manager, notificationId, builder.build())
                 }
             }
             setFinishListener { path, _ ->
@@ -762,7 +777,7 @@ class MainActivity : AppCompatActivity() {
                 finished = true
                 builder.setContentText(getString(R.string.download_error))
                     .setProgress(0, 0, false)
-                manager.notify(notificationId, builder.build())
+                notify(manager, notificationId, builder.build())
                 it?.connectionException?.printStackTrace()
                 Log.d("ERROR", it?.serverErrorMessage ?: "NOO")
             }

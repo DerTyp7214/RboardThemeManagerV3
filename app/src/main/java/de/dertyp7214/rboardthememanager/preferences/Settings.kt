@@ -27,7 +27,9 @@ import de.dertyp7214.rboardthememanager.Config.FLAG_PATH
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
-import de.dertyp7214.rboardthememanager.screens.*
+import de.dertyp7214.rboardthememanager.screens.Logs
+import de.dertyp7214.rboardthememanager.screens.MainActivity
+import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 
@@ -257,7 +259,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(),
             {
-                com.dertyp7214.logs.screens.Logs::class.java[this]
+                Logs::class.java[this]
             },
             BuildConfig.DEBUG
         ),
@@ -332,7 +334,11 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
 
     override fun preferences(builder: PreferenceScreen.Builder) {
         SETTINGS.values().filter { it.visible }
-            .filter { !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) && !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) && !(it == SETTINGS.APP_STYLE && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && BuildConfig.BUILD_TYPE.equals("release")) }
+            .filter {
+                !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) &&
+                        !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) &&
+                        !(it == SETTINGS.APP_STYLE && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !BuildConfig.DEBUG)
+            }
             .forEach { item ->
                 val pref: Preference = when (item.type) {
                     TYPE.BOOLEAN -> builder.switch(item.key) {
@@ -361,30 +367,18 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                                     }
                                     "system_theme" -> {
-                                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
-                                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                                     }
                                 }
                                 "app_style" -> {
-                                    PreferencesActivity::class.java[activity] = {
-                                        putExtra("type", "settings")
+                                    if (item.getValue(activity, "") != it) {
+                                        MainActivity.clearInstances()
+                                        MainActivity::class.java[activity]
+                                        PreferencesActivity::class.java[activity] = {
+                                            putExtra("type", "settings")
+                                        }
+                                        activity.finish()
                                     }
-                                    InstallPackActivity::class.java[activity] = {
-                                        putExtra("type", "packs")
-                                    }
-                                    ManageRepo::class.java[activity] = {
-                                        putExtra("type", "repo")
-                                    }
-                                    ShareFlags::class.java[activity] = {
-                                        putExtra("type", "shareflags")
-                                    }
-                                    ReadMoreReadFast::class.java[activity] = {
-                                        putExtra("type", "readmorefast")
-                                    }
-                                    MainActivity::class.java[activity] = {
-                                        putExtra("type", "main")
-                                    }
-                                    activity.finish()
                                 }
                             }
                             true

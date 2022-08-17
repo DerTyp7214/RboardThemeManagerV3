@@ -24,6 +24,13 @@
         android:theme="@style/Theme.RboardThemeManagerV3"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".screens.Logs"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".screens.ShareFlags"
             android:exported="true" />
         <activity
@@ -146,6 +153,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
         <service
             android:name=".services.MessagingService"
             android:exported="false">
@@ -157,9 +165,9 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_notification" />
-
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="@string/default_notification_channel_id" />
     </application>
+
 </manifest>

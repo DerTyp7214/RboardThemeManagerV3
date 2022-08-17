@@ -71,6 +71,8 @@ dependencies {
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.7")
     implementation("com.google.firebase:firebase-analytics-ktx:21.1.0")
 
+    implementation("com.github.DerTyp7214:PreferencesPlus:1.0")
+
     implementation("com.google.protobuf:protobuf-kotlin:3.21.5")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
@@ -98,6 +100,7 @@ dependencies {
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
     implementation("com.github.skydoves:balloon:1.4.8-SNAPSHOT")
+    implementation("androidx.appcompat:appcompat:1.5.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.4-alpha07")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0-alpha07")

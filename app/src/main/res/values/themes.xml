@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.RboardThemeManagerV3" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:colorBackground">@color/app_background</item>
@@ -15,7 +15,7 @@
         <item name="colorSecondaryContainer">@color/md3</item>
         <item name="colorOnSecondary">@color/text</item>
 
-        <item name="android:statusBarColor" tools:targetApi="l">@color/app_background</item>
+        <item name="android:statusBarColor">@color/app_background</item>
         <item name="android:navigationBarColor">@android:color/black</item>
 
         <item name="popupMenuStyle">@style/PopupStyle</item>
@@ -69,6 +69,7 @@
         <item name="android:statusBarColor">@color/foreground</item>
         <item name="android:navigationBarColor">@android:color/black</item>
     </style>
+
     <style name="Theme.RboardThemeManagerV3.ShareFlags" parent="Theme.RboardThemeManagerV3">
         <item name="android:statusBarColor">@color/foreground</item>
         <item name="android:navigationBarColor">@android:color/black</item>

@@ -16,7 +16,6 @@ import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.fragment.app.FragmentActivity
@@ -52,13 +51,6 @@ fun Activity.applyTheme(
 ) {
     setTheme(
         when (preferences.getString("app_style", "default")) {
-            "default" -> when {
-                main -> R.style.Theme_RboardThemeManagerV3_Main
-                info -> R.style.Theme_RboardThemeManagerV3_Info
-                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags
-                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack
-                else -> R.style.Theme_RboardThemeManagerV3
-            }
             "blue" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Blue
                 info -> R.style.Theme_RboardThemeManagerV3_Info_Blue
@@ -101,12 +93,19 @@ fun Activity.applyTheme(
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Red
                 else -> R.style.Theme_RboardThemeManagerV3_Red
             }
-            else -> when {
+            "yellow" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Yellow
                 info -> R.style.Theme_RboardThemeManagerV3_Info_Yellow
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Yellow
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Yellow
                 else -> R.style.Theme_RboardThemeManagerV3_Yellow
+            }
+            else -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main
+                info -> R.style.Theme_RboardThemeManagerV3_Info
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack
+                else -> R.style.Theme_RboardThemeManagerV3
             }
         }
     )
