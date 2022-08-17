@@ -13,7 +13,6 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
-import com.dertyp7214.logs.screens.Logs
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
@@ -26,6 +25,7 @@ import de.dertyp7214.rboardthememanager.Config.FLAG_PATH
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.screens.Logs
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
