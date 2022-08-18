@@ -6,9 +6,8 @@
     android:layout_width="300dp"
     android:layout_height="187dp"
     android:layout_margin="12dp"
-    android:background="?attr/colorBackgroundFloating"
     android:elevation="0dp"
-    app:strokeColor="?attr/colorOnPrimary"
+    app:strokeColor="?attr/colorOnSurface"
     app:cardCornerRadius="@dimen/roundCorners"
     app:cardElevation="0dp">
 

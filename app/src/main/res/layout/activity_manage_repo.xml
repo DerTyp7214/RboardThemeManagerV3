@@ -10,7 +10,6 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.RboardThemeManagerV3.AppBarOverlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,7 +18,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
             android:minHeight="?attr/actionBarSize"
             android:textAlignment="center"
             android:theme="?attr/actionBarTheme"
@@ -53,7 +51,7 @@
             android:layout_height="wrap_content"
             android:singleLine="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="?attr/colorOnPrimary"
+            android:textColor="?attr/colorOnSurface"
             tools:text="This is a very long text to test the multiline capability of this textView" />
 
         <androidx.legacy.widget.Space
@@ -74,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="?attr/colorOnPrimary"
+            android:textColor="?attr/colorOnSurface"
             tools:text="20" />
 
         <androidx.legacy.widget.Space
@@ -104,5 +102,4 @@
         tools:listitem="@layout/manage_repo_theme_pack">
 
     </androidx.recyclerview.widget.RecyclerView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
