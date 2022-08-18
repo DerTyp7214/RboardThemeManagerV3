@@ -21,4 +21,13 @@
     <style name="PopupStyle" parent="@style/Widget.AppCompat.PopupMenu">
         <item name="android:popupBackground">@drawable/popup_background</item>
     </style>
+
+    <style name="BottomNavigationView.ActiveIndicator" parent="">
+        <item name="android:width">@dimen/m3_bottom_nav_item_active_indicator_width</item>
+        <item name="android:height">@dimen/m3_bottom_nav_item_active_indicator_height</item>
+        <item name="marginHorizontal">@dimen/m3_bottom_nav_item_active_indicator_margin_horizontal
+        </item>
+        <item name="shapeAppearance">@style/ShapeAppearance.Material3.Corner.Full</item>
+        <item name="android:color">?android:attr/textColorHighlightInverse</item>
+    </style>
 </resources>

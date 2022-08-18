@@ -19,7 +19,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorBackgroundFloating"
             android:minHeight="?attr/actionBarSize"
             android:textAlignment="center"
             app:menu="@menu/manage_repo"
@@ -52,7 +51,7 @@
             android:layout_height="wrap_content"
             android:singleLine="false"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="?attr/colorOnPrimary"
+            android:textColor="?attr/colorOnSurface"
             tools:text="This is a very long text to test the multiline capability of this textView" />
 
         <androidx.legacy.widget.Space
@@ -73,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="?attr/colorOnPrimary"
+            android:textColor="?attr/colorOnSurface"
             tools:text="20" />
 
         <androidx.legacy.widget.Space

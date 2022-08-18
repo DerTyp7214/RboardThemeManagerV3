@@ -402,7 +402,7 @@ object ThemeUtils {
             addView(View(context).apply {
                 setHeight(1.dp(context) / 2)
                 setWidth(LinearLayout.LayoutParams.MATCH_PARENT)
-                setBackgroundColor(context.getAttr(R.attr.colorOnPrimary))
+                setBackgroundColor(context.getAttr(R.attr.colorOnSurface))
                 alpha = .6F
             })
         }

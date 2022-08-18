@@ -80,9 +80,10 @@
                 android:layout_height="match_parent"
                 android:alpha="0"
                 android:background="?attr/colorBackgroundFloating"
-                android:gravity="center">
+                android:gravity="center"
+                tools:alpha="1">
 
-                <ImageView
+            <ImageView
                     android:id="@+id/imageView4"
                     android:layout_width="110dp"
                     android:layout_height="40dp"
@@ -91,6 +92,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/ic_selected_theme_grid"
+                app:tint="?android:attr/textColorLink"
                     tools:ignore="ContentDescription" />
 
                 <TextView
@@ -100,7 +102,7 @@
                     android:layout_marginStart="14dp"
                     android:layout_marginTop="14dp"
                     android:textAlignment="viewStart"
-                    android:textColor="?attr/colorOnPrimary"
+                    android:textColor="?android:attr/textColorLink"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
+        app:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
             android:fitsSystemWindows="true"
-            app:contentScrim="?attr/colorBackgroundFloating"
+            app:contentScrim="?attr/colorSurfaceVariant"
             app:expandedTitleTextAppearance="?attr/textAppearanceHeadlineMedium"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
@@ -44,11 +45,9 @@
         android:layout_marginBottom="24dp"
         android:clickable="true"
         android:visibility="gone"
-        app:backgroundTint="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_24"
-        app:tint="?android:attr/colorBackground"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck"
         tools:visibility="visible" />
     <androidx.constraintlayout.widget.ConstraintLayout

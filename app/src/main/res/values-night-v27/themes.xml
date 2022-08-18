@@ -23,7 +23,6 @@
             @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
         </item>
 
-        <item name="switchStyle">@style/Widget.App.Switch</item>
         <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
         <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView</item>
         <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
@@ -40,17 +39,6 @@
     <style name="Widget.App.SnackbarButton" parent="Widget.Material3.Button.TextButton.Snackbar">
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">?attr/colorAccent</item>
-    </style>
-
-    <style name="Widget.App.Switch" parent="Widget.Material3.CompoundButton.Switch">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Switch</item>
-    </style>
-
-    <style name="ThemeOverlay.App.Switch" parent="Theme.RboardThemeManagerV3">
-        <item name="colorPrimary">@color/accent_2</item>
-        <item name="colorPrimaryContainer">@color/accent</item>
-        <item name="colorOnSurface">@color/switch_track</item>
-        <item name="colorOutline">@color/switch_thumb</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3">
