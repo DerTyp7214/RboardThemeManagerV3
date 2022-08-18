@@ -1,21 +1,9 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Theme.RboardThemeManagerV3" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:colorBackground">@color/app_background</item>
-        <item name="colorBackgroundFloating">@color/foreground</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
 
-        <item name="colorPrimary">@color/accent</item>
-        <item name="colorPrimaryVariant">@color/accent</item>
-        <item name="colorPrimaryContainer">@color/accent_2</item>
-        <item name="colorOnPrimary">@color/text</item>
-
-        <item name="colorSecondary">@color/accent</item>
-        <item name="colorSecondaryVariant">@color/accent</item>
-        <item name="colorSecondaryContainer">@color/md3</item>
-        <item name="colorOnSecondary">@color/text</item>
-
-        <item name="android:statusBarColor">@color/app_background</item>
+        <item name="android:statusBarColor">?android:attr/colorBackground</item>
         <item name="android:navigationBarColor">@android:color/black</item>
 
         <item name="popupMenuStyle">@style/PopupStyle</item>
@@ -30,7 +18,7 @@
     </style>
 
     <style name="Widget.App.Snackbar" parent="Widget.Material3.Snackbar">
-        <item name="backgroundTint">?attr/colorBackgroundFloating</item>
+        <item name="backgroundTint">?attr/colorSurfaceVariant</item>
     </style>
 
     <style name="Widget.App.SnackbarTextView" parent="Widget.Material3.Snackbar.TextView">
@@ -54,21 +42,13 @@
     </style>
 
     <style name="Theme.RboardThemeManagerV3.InstallPack" parent="Theme.RboardThemeManagerV3">
-        <item name="android:statusBarColor">@color/foreground</item>
+        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
         <item name="android:navigationBarColor">@android:color/black</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.ShareFlags" parent="Theme.RboardThemeManagerV3">
-        <item name="android:statusBarColor">@color/foreground</item>
+        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
         <item name="android:navigationBarColor">@android:color/black</item>
-    </style>
-
-    <style name="Widget.Material3.AppBarLayout" parent="">
-        <item name="colorPrimary">@color/foreground</item>
-        <item name="colorPrimaryVariant">@color/foreground</item>
-        <item name="colorOnPrimary">@color/text</item>
-        <item name="colorSurface">@color/app_background</item>
-        <item name="android:textColorPrimary">@color/text</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">

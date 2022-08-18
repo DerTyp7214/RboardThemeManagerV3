@@ -1,19 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.RboardThemeManagerV3_Red" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="android:colorBackground">@color/app_background_red</item>
-        <item name="colorBackgroundFloating">@color/foreground_red</item>
-        <item name="android:windowLightStatusBar">true</item>
-
-        <item name="colorPrimary">@color/accent_red</item>
-        <item name="colorPrimaryVariant">@color/accent_red</item>
-        <item name="colorPrimaryContainer">@color/accent_red_2</item>
-        <item name="colorOnPrimary">@color/text</item>
-
-        <item name="colorSecondary">@color/accent_red</item>
-        <item name="colorSecondaryVariant">@color/accent_red</item>
-        <item name="colorSecondaryContainer">@color/md3_red</item>
-        <item name="colorOnSecondary">@color/text</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
 
         <item name="android:statusBarColor">?android:attr/colorBackground</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
@@ -53,17 +41,10 @@
     </style>
 
     <style name="Theme.RboardThemeManagerV3.InstallPack_Red" parent="Theme.RboardThemeManagerV3_Red">
-        <item name="android:statusBarColor">@color/foreground_red</item>
-    </style>
-    <style name="Theme.RboardThemeManagerV3.ShareFlags_Red" parent="Theme.RboardThemeManagerV3_Red">
-        <item name="android:statusBarColor">@color/foreground_red</item>
+        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
     </style>
 
-    <style name="Widget.Material3.AppBarLayout_Red" parent="">
-        <item name="colorPrimary">@color/foreground_red</item>
-        <item name="colorPrimaryVariant">@color/foreground_red</item>
-        <item name="colorOnPrimary">@color/text</item>
-        <item name="colorSurface">@color/app_background_red</item>
-        <item name="android:textColorPrimary">@color/text</item>
+    <style name="Theme.RboardThemeManagerV3.ShareFlags_Red" parent="Theme.RboardThemeManagerV3_Red">
+        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
     </style>
 </resources>
