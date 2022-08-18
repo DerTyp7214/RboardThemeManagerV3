@@ -1,8 +1,7 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.RboardThemeManagerV3_Green" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
-
 
         <item name="android:statusBarColor">?android:attr/colorBackground</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
@@ -31,9 +30,7 @@
         <item name="android:textColor">?attr/colorAccent</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.Main_Green" parent="Theme.RboardThemeManagerV3_Green">
-
-    </style>
+    <style name="Theme.RboardThemeManagerV3.Main_Green" parent="Theme.RboardThemeManagerV3_Green" />
 
     <style name="Theme.RboardThemeManagerV3.Info_Green" parent="Theme.RboardThemeManagerV3_Green">
         <item name="android:statusBarColor">@android:color/transparent</item>

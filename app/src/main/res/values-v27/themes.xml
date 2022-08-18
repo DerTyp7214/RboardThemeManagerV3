@@ -3,11 +3,11 @@
     <style name="Theme.RboardThemeManagerV3" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
 
-        <item name="android:statusBarColor" tools:targetApi="l">?android:attr/colorBackground</item>
+        <item name="android:statusBarColor">?android:attr/colorBackground</item>
         <item name="android:navigationBarColor">?attr/colorSurfaceVariant</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">?attr/isLightTheme</item>
 
         <item name="popupMenuStyle">@style/PopupStyle</item>
-        <item name="alertDialogTheme">@style/Dialog.RboardThemeManagerV3.MaterialAlertDialog</item>
         <item name="materialAlertDialogTheme">
             @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
         </item>
@@ -30,28 +30,19 @@
         <item name="android:textColor">?attr/colorAccent</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3">
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">?attr/isLightTheme</item>
-        <item name="android:navigationBarColor">?attr/colorSurfaceVariant</item>
-    </style>
+    <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3" />
 
     <style name="Theme.RboardThemeManagerV3.Info" parent="Theme.RboardThemeManagerV3">
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:navigationBarColor">?attr/colorSurfaceVariant</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">?attr/isLightTheme</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.InstallPack" parent="Theme.RboardThemeManagerV3">
         <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
-        <item name="android:navigationBarColor">?attr/colorSurfaceVariant</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">?attr/isLightTheme</item>
     </style>
     <style name="Theme.RboardThemeManagerV3.ShareFlags" parent="Theme.RboardThemeManagerV3">
         <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
-        <item name="android:navigationBarColor">?attr/colorSurfaceVariant</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">?attr/isLightTheme</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">

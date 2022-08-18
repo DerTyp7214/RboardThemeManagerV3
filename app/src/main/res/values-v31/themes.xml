@@ -29,9 +29,7 @@
         <item name="android:textColor">?attr/colorAccent</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3">
-
-    </style>
+    <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3" />
 
     <style name="Theme.RboardThemeManagerV3.Info" parent="Theme.RboardThemeManagerV3">
         <item name="android:statusBarColor">@android:color/transparent</item>

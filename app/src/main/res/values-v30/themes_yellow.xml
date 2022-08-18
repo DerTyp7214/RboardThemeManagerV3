@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.RboardThemeManagerV3_Yellow" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
@@ -7,7 +7,6 @@
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
         <item name="popupMenuStyle">@style/PopupStyle</item>
-        <item name="alertDialogTheme">@style/Dialog.RboardThemeManagerV3.MaterialAlertDialog</item>
         <item name="materialAlertDialogTheme">
             @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
         </item>
@@ -30,9 +29,7 @@
         <item name="android:textColor">?attr/colorAccent</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.Main_Yellow" parent="Theme.RboardThemeManagerV3_Yellow">
-
-    </style>
+    <style name="Theme.RboardThemeManagerV3.Main_Yellow" parent="Theme.RboardThemeManagerV3_Yellow" />
 
     <style name="Theme.RboardThemeManagerV3.Info_Yellow" parent="Theme.RboardThemeManagerV3_Yellow">
         <item name="android:statusBarColor">@android:color/transparent</item>
