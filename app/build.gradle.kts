@@ -24,8 +24,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 33
-        versionCode = 361000
-        versionName = "3.6.1"
+        versionCode = 362000
+        versionName = "3.6.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
