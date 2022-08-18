@@ -48,7 +48,11 @@ fun applyTheme(
     withBorders: Boolean = false
 ): Boolean {
     val name =
-        if (theme.path.isEmpty() || theme.path.startsWith("assets:") || theme.path.startsWith("system_auto:")) theme.path
+        if (
+            theme.path.startsWith("silk:") ||
+            theme.path.startsWith("assets:") ||
+            theme.path.startsWith("system_auto:")
+        ) theme.path
         else "${if (Config.useMagisk) "system:" else "files:themes/"}${theme.name}.zip"
     val inputPackageName = GBOARD_PACKAGE_NAME
     val fileName = Config.GBOARD_PREFS_PATH
@@ -184,10 +188,11 @@ object ThemeUtils {
 
                         val protoList = URL(protoListUrl).readBytes()
 
-                        ThemePackList.ObjectList.parseFrom(protoList).objectsList?.toPackList()?.map {
-                            it.repoUrl = repo
-                            it
-                        }?.let(packs::addAll)
+                        ThemePackList.ObjectList.parseFrom(protoList).objectsList?.toPackList()
+                            ?.map {
+                                it.repoUrl = repo
+                                it
+                            }?.let(packs::addAll)
                     } else packs.addAll(
                         Gson().fromJson<Collection<ThemePack>?>(
                             URL(repo).readText(),
@@ -282,6 +287,8 @@ object ThemeUtils {
                     }
                 }, themeName
             )
+        } else if (themeName.startsWith("silk:")) {
+            getDynamicColorsTheme() ?: ThemeDataClass(null, "", "")
         } else if (themeName.isNotEmpty()) {
             val name = themeName.split("/").last()
             val image = SuFile(Config.MAGISK_THEME_LOC, name.removeSuffix(".zip"))
@@ -291,7 +298,7 @@ object ThemeUtils {
                 SuFile(Config.MAGISK_THEME_LOC, name).absolutePath
             )
         } else {
-            getDynamicColorsTheme() ?: ThemeDataClass(null, "", "")
+            ThemeDataClass(null, "", "")
         }
     }
 
@@ -310,8 +317,8 @@ object ThemeUtils {
             }
             ThemeDataClass(
                 image,
-                "dynamic_color",
-                "",
+                "silk:",
+                "silk:",
                 colorFilter = PorterDuffColorFilter(
                     Application.context!!.getAttr(android.R.attr.colorAccent),
                     PorterDuff.Mode.OVERLAY

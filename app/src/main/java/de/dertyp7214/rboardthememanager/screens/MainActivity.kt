@@ -437,7 +437,7 @@ class MainActivity : AppCompatActivity() {
                                     }
                                     applyTheme(getSystemAutoTheme(), true)
                                 }
-                                if (theme.path.isNotEmpty() && !theme.path.startsWith("assets:") && !theme.path.startsWith(
+                                if (!theme.path.startsWith("silk:") && !theme.path.startsWith("assets:") && !theme.path.startsWith(
                                         "system_auto:"
                                     )
                                 ) {
