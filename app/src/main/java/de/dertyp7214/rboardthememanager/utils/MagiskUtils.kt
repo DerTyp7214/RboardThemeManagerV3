@@ -79,7 +79,6 @@ object MagiskUtils {
             Pair(
                 "system.prop",
                 "# Default Theme and Theme-location\n" +
-                        "ro.com.google.ime.theme_file=veulight.zip\n" +
                         "ro.com.google.ime.themes_dir=${Config.THEME_LOCATION}"
             ),
             Pair(Config.THEME_LOCATION, null)

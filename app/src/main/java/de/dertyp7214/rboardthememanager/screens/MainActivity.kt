@@ -368,10 +368,14 @@ class MainActivity : AppCompatActivity() {
                         mainViewModel.navigate(R.id.navigation_downloads)
                     } else {
                         secondaryContent.let {
-                            val view = it.findViewById<View>(R.id.current_theme_view)
-                            if (view != null) it.removeView(view).also {
-                                Logger.log(Logger.Companion.Type.DEBUG, "REMOVE VIEW", view.id)
+                            fun removeCurrentThemeView() {
+                                val view = it.findViewById<View>(R.id.current_theme_view)
+                                if (view != null) it.removeView(view).also {
+                                    Logger.log(Logger.Companion.Type.DEBUG, "REMOVE VIEW", view.id)
+                                    removeCurrentThemeView()
+                                }
                             }
+                            removeCurrentThemeView()
                         }
                         if (theme != null) {
                             secondaryContent.addView(ThemeUtils.getThemeView(theme, this), 0)
@@ -433,7 +437,7 @@ class MainActivity : AppCompatActivity() {
                                     }
                                     applyTheme(getSystemAutoTheme(), true)
                                 }
-                                if (theme.path.isNotEmpty() && !theme.path.startsWith("assets:") && !theme.path.startsWith(
+                                if (!theme.path.startsWith("silk:") && !theme.path.startsWith("assets:") && !theme.path.startsWith(
                                         "system_auto:"
                                     )
                                 ) {
