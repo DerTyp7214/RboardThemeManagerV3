@@ -226,6 +226,7 @@ object ThemeUtils {
 
     private fun buildPreinstalledThemesList(): List<ThemeDataClass> {
         val themes = arrayListOf<ThemeDataClass>()
+
         val themeNames = listOf(
             "color_black", "color_blue", "color_blue_grey", "color_brown", "color_cyan",
             "color_deep_purple", "color_green", "color_light_pink", "color_pink", "color_red",
