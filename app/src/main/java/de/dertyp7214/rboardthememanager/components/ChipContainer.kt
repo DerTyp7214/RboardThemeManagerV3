@@ -1,14 +1,12 @@
 package de.dertyp7214.rboardthememanager.components
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.widget.LinearLayout
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.dpToPx
-import de.dertyp7214.rboardthememanager.core.getAttr
 import java.util.*
 
 class ChipContainer(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
@@ -55,26 +53,10 @@ class ChipContainer(context: Context, attrs: AttributeSet?) : LinearLayout(conte
     private fun refreshChips() {
         chipGroup.removeAllViews()
 
-        val backgroundColor = context.getAttr(android.R.attr.colorBackground)
-        val strokeColor = context.getAttr(R.attr.colorBackgroundFloating)
-        val rippleColor = context.getAttr(R.attr.colorBackgroundFloating)
-        val textColor = context.getAttr(R.attr.colorOnPrimary)
-
-        val backgroundColorSelected = context.getAttr(R.attr.colorBackgroundFloating)
-        val strokeColorSelected = context.getAttr(R.attr.colorOnPrimary)
-        val rippleColorSelected = context.getAttr(R.attr.colorOnPrimary)
-
         chips.forEachIndexed { index, it ->
             val chip = Chip(context)
-            chip.rippleColor =
-                ColorStateList.valueOf(if (it.selected) rippleColorSelected else rippleColor)
-            chip.chipBackgroundColor =
-                ColorStateList.valueOf(if (it.selected) backgroundColorSelected else backgroundColor)
-            chip.chipStrokeColor =
-                ColorStateList.valueOf(if (it.selected) strokeColorSelected else strokeColor)
             chip.chipStrokeWidth = 1.dpToPx(context)
             chip.text = it.text
-            chip.setTextColor(textColor)
             chip.setOnClickListener {
                 toggleChip(index)
             }

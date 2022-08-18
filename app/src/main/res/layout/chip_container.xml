@@ -10,18 +10,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:checkedIconVisible="false"
-        app:chipBackgroundColor="?android:attr/colorBackground"
         app:chipEndPadding="-5dp"
         app:chipIcon="@drawable/ic_baseline_close_24"
         app:chipIconVisible="true"
-        app:chipStrokeColor="?attr/colorBackgroundFloating"
         app:chipStrokeWidth="1dp"
         app:closeIconEnabled="true"
         app:closeIconVisible="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="?attr/colorBackgroundFloating" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <HorizontalScrollView
         android:layout_width="0dp"

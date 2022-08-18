@@ -10,7 +10,6 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.RboardThemeManagerV3.AppBarOverlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,11 +18,11 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="?android:attr/statusBarColor"
             android:minHeight="?attr/actionBarSize"
             android:textAlignment="center"
-            app:menu="@menu/share_flags"
             android:theme="?attr/actionBarTheme"
+            app:menu="@menu/share_flags"
             app:titleCentered="true" />
 
     </com.google.android.material.appbar.AppBarLayout>

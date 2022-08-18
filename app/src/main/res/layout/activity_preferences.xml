@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:theme="@style/Theme.RboardThemeManagerV3.AppBarOverlay"
+        app:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/foreground"
+            app:contentScrim="?attr/colorSurfaceVariant"
             app:expandedTitleTextAppearance="?attr/textAppearanceHeadlineMedium"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@+id/toolbar">
@@ -35,7 +35,6 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
@@ -45,13 +44,12 @@
         android:layout_marginBottom="24dp"
         android:clickable="true"
         android:visibility="gone"
-        app:backgroundTint="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_baseline_add_24"
-        app:tint="?attr/colorBackgroundFloating"
         tools:ignore="ContentDescription,SpeakableTextPresentCheck"
         tools:visibility="visible" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -61,7 +59,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         tools:context="de.dertyp7214.rboardthememanager.screens.InfoScreen">
-
 
         <TextView
             android:id="@+id/loadingPreferences"
@@ -93,6 +90,4 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/extraContent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

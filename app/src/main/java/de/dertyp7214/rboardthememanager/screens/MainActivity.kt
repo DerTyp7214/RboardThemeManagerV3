@@ -747,7 +747,7 @@ class MainActivity : AppCompatActivity() {
                 }
         val manager = NotificationManagerCompat.from(this).apply {
             builder.setProgress(maxProgress, 0, false)
-            notify(notificationId, builder.build())
+            notify(this, notificationId, builder.build())
         }
         var finished = false
         UpdateHelper(updateUrl, this).apply {
@@ -763,7 +763,7 @@ class MainActivity : AppCompatActivity() {
                             )
                         )
                         .setProgress(maxProgress, progress.toInt(), false)
-                    manager.notify(notificationId, builder.build())
+                    notify(manager, notificationId, builder.build())
                 }
             }
             setFinishListener { path, _ ->
@@ -785,7 +785,7 @@ class MainActivity : AppCompatActivity() {
                 finished = true
                 builder.setContentText(getString(R.string.download_error))
                     .setProgress(0, 0, false)
-                manager.notify(notificationId, builder.build())
+                notify(manager, notificationId, builder.build())
                 it?.connectionException?.printStackTrace()
                 Log.d("ERROR", it?.serverErrorMessage ?: "NOO")
             }

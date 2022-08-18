@@ -162,11 +162,11 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
             useTint = false
             iconRes = FlagKit.getResId(activity, "ru")
         }
-        builder.pref("vi") {
+        builder.pref("vn") {
             titleRes = R.string.vietnamese
             summaryRes = R.string.primal_pea
             useTint = false
-            iconRes = FlagKit.getResId(activity, "vi")
+            iconRes = FlagKit.getResId(activity, "vn")
         }
         builder.pref("zh") {
             titleRes = R.string.chinese

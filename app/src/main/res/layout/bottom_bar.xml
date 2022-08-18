@@ -7,8 +7,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_sheet_background"
     app:behavior_hideable="false"
-    app:layout_behavior="@string/bottom_sheet_behavior"
-    tools:backgroundTint="@android:color/darker_gray">
+    app:layout_behavior="@string/bottom_sheet_behavior">
 
     <LinearLayout
         android:id="@+id/bottomLayout"
@@ -23,6 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             app:srcCompat="@drawable/small_line"
+            app:tint="?attr/colorOnSurface"
             tools:ignore="ContentDescription" />
 
         <FrameLayout
@@ -37,9 +37,9 @@
                 android:alpha="1"
                 android:background="@android:color/transparent"
                 app:elevation="0dp"
+                app:itemActiveIndicatorStyle="@style/BottomNavigationView.ActiveIndicator"
                 app:itemRippleColor="@android:color/transparent"
                 app:labelVisibilityMode="selected"
-                app:itemIconTint="?attr/colorOnSecondary"
                 app:menu="@menu/navigation">
 
             </com.google.android.material.bottomnavigation.BottomNavigationView>
