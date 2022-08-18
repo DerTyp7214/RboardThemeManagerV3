@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.RboardThemeManagerV3" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.RboardThemeManagerV3" parent="Theme.RboardThemeManager.Colors">
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
 
         <item name="android:statusBarColor">?android:attr/colorBackground</item>

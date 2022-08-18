@@ -1,14 +1,12 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Theme.RboardThemeManagerV3" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.RboardThemeManagerV3" parent="Theme.RboardThemeManager.Colors">
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
-
 
         <item name="android:statusBarColor">?android:attr/colorBackground</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
         <item name="popupMenuStyle">@style/PopupStyle</item>
-        <item name="alertDialogTheme">@style/Dialog.RboardThemeManagerV3.MaterialAlertDialog</item>
         <item name="materialAlertDialogTheme">
             @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
         </item>
