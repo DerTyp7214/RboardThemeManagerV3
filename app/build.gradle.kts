@@ -18,6 +18,8 @@ android {
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
 
+    namespace = "de.dertyp7214.rboardthememanager"
+
     defaultConfig {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31

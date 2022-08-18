@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="?attr/colorSurfaceVariant" />
-    <corners
-        android:topLeftRadius="@dimen/roundCorners"
-        android:topRightRadius="@dimen/roundCorners" />
-</shape>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <solid android:color="?attr/colorSurface" />
+            <corners
+                android:topLeftRadius="@dimen/roundCorners"
+                android:topRightRadius="@dimen/roundCorners" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="@color/m3_appbar_overlay_color" />
+            <corners
+                android:topLeftRadius="@dimen/roundCorners"
+                android:topRightRadius="@dimen/roundCorners" />
+        </shape>
+    </item>
+</layer-list>
