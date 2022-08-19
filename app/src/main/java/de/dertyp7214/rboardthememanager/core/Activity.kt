@@ -115,15 +115,16 @@ operator fun <T : ViewModel> FragmentActivity.get(modelClass: Class<T>): T =
     run(::ViewModelProvider)[modelClass]
 
 fun Activity.openUrl(url: String) {
+    val color = getAttr(com.google.android.material.R.attr.colorSurface)
     CustomTabsIntent.Builder()
         .setShowTitle(true)
         .setDefaultColorSchemeParams(
             CustomTabColorSchemeParams
                 .Builder()
-                .setToolbarColor(getAttr(R.attr.colorBackgroundFloating))
-                .setNavigationBarColor(getAttr(R.attr.colorBackgroundFloating))
-                .setSecondaryToolbarColor(getAttr(R.attr.colorBackgroundFloating))
-                .setNavigationBarDividerColor(getAttr(R.attr.colorBackgroundFloating))
+                .setToolbarColor(color)
+                .setNavigationBarColor(color)
+                .setSecondaryToolbarColor(color)
+                .setNavigationBarDividerColor(color)
                 .build()
         )
         .build()

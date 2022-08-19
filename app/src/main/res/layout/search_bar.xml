@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:background="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="?attr/colorSurfaceVariant"
+    app:cardBackgroundColor="@color/color_primary_0_10_overlay"
     app:cardCornerRadius="@dimen/roundCorners"
     app:cardElevation="0dp"
     app:strokeWidth="0dp">

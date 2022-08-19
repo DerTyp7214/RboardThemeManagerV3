@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         app:checkedIconVisible="false"
         app:chipEndPadding="-5dp"
+        android:checkable="false"
         app:chipIcon="@drawable/ic_baseline_close_24"
         app:chipIconVisible="true"
         app:chipStrokeWidth="1dp"

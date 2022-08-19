@@ -9,6 +9,7 @@
         <item name="android:statusBarColor">?android:attr/colorBackground</item>
         <item name="android:navigationBarColor">@android:color/black</item>
 
+        <item name="floatingActionButtonStyle">?floatingActionButtonSecondaryStyle</item>
         <item name="popupMenuStyle">@style/PopupStyle</item>
         <item name="alertDialogTheme">@style/Dialog.RboardThemeManagerV3.MaterialAlertDialog</item>
         <item name="materialAlertDialogTheme">
@@ -18,19 +19,6 @@
         <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
         <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView</item>
         <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
-    </style>
-
-    <style name="Widget.App.Snackbar" parent="Widget.Material3.Snackbar">
-        <item name="backgroundTint">?attr/colorSurfaceVariant</item>
-    </style>
-
-    <style name="Widget.App.SnackbarTextView" parent="Widget.Material3.Snackbar.TextView">
-        <item name="android:textColor">@color/text</item>
-    </style>
-
-    <style name="Widget.App.SnackbarButton" parent="Widget.Material3.Button.TextButton.Snackbar">
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">?attr/colorAccent</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3" />
@@ -49,12 +37,4 @@
         <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">
-        <item name="appWidgetRadius">16dp</item>
-        <item name="appWidgetInnerRadius">16dp</item>
-    </style>
-
-    <style name="Theme.RboardThemeManagerV3.AppWidgetContainer" parent="Theme.RboardThemeManagerV3.AppWidgetContainerParent">
-        <item name="appWidgetPadding">@dimen/roundCorners</item>
-    </style>
 </resources>
