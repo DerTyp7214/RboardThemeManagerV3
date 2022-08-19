@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import de.dertyp7214.rboardthememanager.R
@@ -49,8 +50,9 @@ fun Activity.applyTheme(
     shareFlags: Boolean = false,
     installPack: Boolean = false
 ) {
+    val style = preferences.getString("app_style", "default")
     setTheme(
-        when (preferences.getString("app_style", "default")) {
+        when (style) {
             "blue" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Blue
                 info -> R.style.Theme_RboardThemeManagerV3_Info_Blue
@@ -109,6 +111,7 @@ fun Activity.applyTheme(
             }
         }
     )
+    if (style == "default") DynamicColors.applyToActivityIfAvailable(this)
 }
 
 operator fun <T : ViewModel> FragmentActivity.get(modelClass: Class<T>): T =

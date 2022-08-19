@@ -41,22 +41,9 @@
             @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
         </item>
 
-        <item name="snackbarStyle">@style/Widget.App.Snackbar_Orange</item>
-        <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView_Orange</item>
-        <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton_Orange</item>
-    </style>
-
-    <style name="Widget.App.Snackbar_Orange" parent="Widget.Material3.Snackbar">
-        <item name="backgroundTint">?attr/colorBackgroundFloating</item>
-    </style>
-
-    <style name="Widget.App.SnackbarTextView_Orange" parent="Widget.Material3.Snackbar.TextView">
-        <item name="android:textColor">@color/text</item>
-    </style>
-
-    <style name="Widget.App.SnackbarButton_Orange" parent="Widget.Material3.Button.TextButton.Snackbar">
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">?attr/colorAccent</item>
+        <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
+        <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView</item>
+        <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Main_Orange" parent="Theme.RboardThemeManagerV3_Orange" />

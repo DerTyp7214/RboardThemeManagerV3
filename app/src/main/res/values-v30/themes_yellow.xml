@@ -1,4 +1,5 @@
 <resources>
+
     <style name="Theme.RboardThemeManager.Colors_yellow" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/yellow_md_theme_light_primary</item>
         <item name="colorOnPrimary">@color/yellow_md_theme_light_onPrimary</item>
@@ -7,11 +8,13 @@
         <item name="colorSecondary">@color/yellow_md_theme_light_secondary</item>
         <item name="colorOnSecondary">@color/yellow_md_theme_light_onSecondary</item>
         <item name="colorSecondaryContainer">@color/yellow_md_theme_light_secondaryContainer</item>
-        <item name="colorOnSecondaryContainer">@color/yellow_md_theme_light_onSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/yellow_md_theme_light_onSecondaryContainer
+        </item>
         <item name="colorTertiary">@color/yellow_md_theme_light_tertiary</item>
         <item name="colorOnTertiary">@color/yellow_md_theme_light_onTertiary</item>
         <item name="colorTertiaryContainer">@color/yellow_md_theme_light_tertiaryContainer</item>
-        <item name="colorOnTertiaryContainer">@color/yellow_md_theme_light_onTertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/yellow_md_theme_light_onTertiaryContainer
+        </item>
         <item name="colorError">@color/yellow_md_theme_light_error</item>
         <item name="colorErrorContainer">@color/yellow_md_theme_light_errorContainer</item>
         <item name="colorOnError">@color/yellow_md_theme_light_onError</item>
@@ -41,22 +44,9 @@
             @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
         </item>
 
-        <item name="snackbarStyle">@style/Widget.App.Snackbar_Yellow</item>
-        <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView_Yellow</item>
-        <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton_Yellow</item>
-    </style>
-
-    <style name="Widget.App.Snackbar_Yellow" parent="Widget.Material3.Snackbar">
-        <item name="backgroundTint">?attr/colorBackgroundFloating</item>
-    </style>
-
-    <style name="Widget.App.SnackbarTextView_Yellow" parent="Widget.Material3.Snackbar.TextView">
-        <item name="android:textColor">@color/text</item>
-    </style>
-
-    <style name="Widget.App.SnackbarButton_Yellow" parent="Widget.Material3.Button.TextButton.Snackbar">
-        <item name="android:textAllCaps">true</item>
-        <item name="android:textColor">?attr/colorAccent</item>
+        <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
+        <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView</item>
+        <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Main_Yellow" parent="Theme.RboardThemeManagerV3_Yellow" />
@@ -70,8 +60,8 @@
     <style name="Theme.RboardThemeManagerV3.InstallPack_Yellow" parent="Theme.RboardThemeManagerV3_Yellow">
         <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
     </style>
+
     <style name="Theme.RboardThemeManagerV3.ShareFlags_Yellow" parent="Theme.RboardThemeManagerV3_Yellow">
         <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
     </style>
-
 </resources>

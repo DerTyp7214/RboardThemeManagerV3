@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="green_seed">3BDBC4</color>
+    <color name="green_seed">#3BDBC4</color>
     <color name="green_md_theme_light_primary">#006B5E</color>
     <color name="green_md_theme_light_onPrimary">#FFFFFF</color>
     <color name="green_md_theme_light_primaryContainer">#63FAE2</color>
