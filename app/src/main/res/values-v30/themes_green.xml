@@ -37,10 +37,11 @@
 
         <item name="floatingActionButtonStyle">?floatingActionButtonSecondaryStyle</item>
         <item name="popupMenuStyle">@style/PopupStyle</item>
-        <item name="alertDialogTheme">@style/Dialog.RboardThemeManagerV3.MaterialAlertDialog</item>
         <item name="materialAlertDialogTheme">
             @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
         </item>
+
+        <item name="collapsingToolbarLayoutStyle">@style/Widget.CollapsingToolbar</item>
 
         <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
         <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView</item>
