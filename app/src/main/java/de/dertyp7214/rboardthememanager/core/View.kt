@@ -6,24 +6,25 @@ import androidx.constraintlayout.widget.ConstraintLayout
 
 fun View.setMargin(
     leftMargin: Int? = null, topMargin: Int? = null,
-    rightMargin: Int? = null, bottomMargin: Int? = null
+    rightMargin: Int? = null, bottomMargin: Int? = null,
+    all: Int? = null
 ) {
     if (layoutParams is ConstraintLayout.LayoutParams) {
         val params = layoutParams as ConstraintLayout.LayoutParams
         params.setMargins(
-            leftMargin ?: params.leftMargin,
-            topMargin ?: params.topMargin,
-            rightMargin ?: params.rightMargin,
-            bottomMargin ?: params.bottomMargin
+            leftMargin ?: all ?: params.leftMargin,
+            topMargin ?: all ?: params.topMargin,
+            rightMargin ?: all ?: params.rightMargin,
+            bottomMargin ?: all ?: params.bottomMargin
         )
         layoutParams = params
     } else if (layoutParams is ViewGroup.MarginLayoutParams) {
         val params = layoutParams as ViewGroup.MarginLayoutParams
         params.setMargins(
-            leftMargin ?: params.leftMargin,
-            topMargin ?: params.topMargin,
-            rightMargin ?: params.rightMargin,
-            bottomMargin ?: params.bottomMargin
+            leftMargin ?: all ?: params.leftMargin,
+            topMargin ?: all ?: params.topMargin,
+            rightMargin ?: all ?: params.rightMargin,
+            bottomMargin ?: all ?: params.bottomMargin
         )
         layoutParams = params
     }
