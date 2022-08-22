@@ -1,0 +1,30 @@
+<resources>
+    <style name="Theme.RboardThemeManager.Colors_blue" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/blue_md_theme_dark_primary</item>
+        <item name="colorOnPrimary">@color/blue_md_theme_dark_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/blue_md_theme_dark_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/blue_md_theme_dark_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/blue_md_theme_dark_secondary</item>
+        <item name="colorOnSecondary">@color/blue_md_theme_dark_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/blue_md_theme_dark_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/blue_md_theme_dark_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/blue_md_theme_dark_tertiary</item>
+        <item name="colorOnTertiary">@color/blue_md_theme_dark_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/blue_md_theme_dark_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/blue_md_theme_dark_onTertiaryContainer</item>
+        <item name="colorError">@color/blue_md_theme_dark_error</item>
+        <item name="colorErrorContainer">@color/blue_md_theme_dark_errorContainer</item>
+        <item name="colorOnError">@color/blue_md_theme_dark_onError</item>
+        <item name="colorOnErrorContainer">@color/blue_md_theme_dark_onErrorContainer</item>
+        <item name="android:colorBackground">@color/blue_md_theme_dark_background</item>
+        <item name="colorOnBackground">@color/blue_md_theme_dark_onBackground</item>
+        <item name="colorSurface">@color/blue_md_theme_dark_surface</item>
+        <item name="colorOnSurface">@color/blue_md_theme_dark_onSurface</item>
+        <item name="colorSurfaceVariant">@color/blue_md_theme_dark_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/blue_md_theme_dark_onSurfaceVariant</item>
+        <item name="colorOutline">@color/blue_md_theme_dark_outline</item>
+        <item name="colorOnSurfaceInverse">@color/blue_md_theme_dark_inverseOnSurface</item>
+        <item name="colorSurfaceInverse">@color/blue_md_theme_dark_inverseSurface</item>
+        <item name="colorPrimaryInverse">@color/blue_md_theme_dark_inversePrimary</item>
+    </style>
+</resources>

@@ -7,7 +7,6 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.view.View
 import android.view.ViewTreeObserver
@@ -80,12 +79,12 @@ class AppStartUp(private val activity: AppCompatActivity) {
             activity.splashScreen.setOnExitAnimationListener { splashScreenView ->
                 val slideUp = ObjectAnimator.ofFloat(
                     splashScreenView,
-                    View.TRANSLATION_Y,
-                    0f,
-                    -splashScreenView.height.toFloat()
+                    View.ALPHA,
+                    1f,
+                    0f
                 )
                 slideUp.interpolator = AnticipateInterpolator()
-                slideUp.duration = 200L
+                slideUp.duration = 600L
 
                 slideUp.doOnEnd { splashScreenView.remove() }
 

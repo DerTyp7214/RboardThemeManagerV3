@@ -1,5 +1,7 @@
 @file:Suppress("UNUSED_VARIABLE")
 
+val appcompatVersion by extra("1.6.0-beta01")
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     repositories {

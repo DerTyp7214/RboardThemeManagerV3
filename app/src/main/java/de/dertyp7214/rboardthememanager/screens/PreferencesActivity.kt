@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.dertyp7214.rboardthememanager.core.addCallback
+import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.databinding.ActivityPreferencesBinding
 import de.dertyp7214.rboardthememanager.preferences.Preferences
 import de.dertyp7214.rboardthememanager.utils.doAsync
@@ -29,6 +30,7 @@ class PreferencesActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
+        applyTheme(info = true)
         super.onCreate(savedInstanceState)
         binding = ActivityPreferencesBinding.inflate(layoutInflater)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -72,7 +74,6 @@ class PreferencesActivity : AppCompatActivity() {
                 margin()
             }
         }
-
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         doAsync({ PreferencesAdapter(preferences.preferences) }) {

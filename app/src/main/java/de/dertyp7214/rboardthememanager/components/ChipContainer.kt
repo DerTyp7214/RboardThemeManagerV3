@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.widget.LinearLayout
+import androidx.core.view.children
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.dpToPx
+import de.dertyp7214.rboardthememanager.core.filterIt
+import de.dertyp7214.rboardthememanager.core.forEachIndexedIt
 import de.dertyp7214.rboardthememanager.core.getAttr
 import java.util.*
 
@@ -26,10 +29,12 @@ class ChipContainer(context: Context, attrs: AttributeSet?) : LinearLayout(conte
         clearTags = findViewById(R.id.clear_tags)
 
         clearTags.setOnClickListener {
-            chips.forEachIndexed { index, _ ->
+            chips.forEachIndexedIt { index, _ ->
                 chips[index].selected = false
             }
-            refreshChips()
+            chipGroup.children.forEach {
+                if (it is Chip) it.isChecked = false
+            }
             filterToggleListener(chips.map { it.text })
         }
     }
@@ -49,32 +54,27 @@ class ChipContainer(context: Context, attrs: AttributeSet?) : LinearLayout(conte
 
     val filters: List<String>
         get() {
-            return chips.filter { it.selected }.map { it.text }
+            return chips.filterIt { it.selected }.map { it.text }
         }
 
     private fun refreshChips() {
         chipGroup.removeAllViews()
 
-        val backgroundColor = context.getAttr(android.R.attr.colorBackground)
-        val strokeColor = context.getAttr(R.attr.colorBackgroundFloating)
-        val rippleColor = context.getAttr(R.attr.colorBackgroundFloating)
-        val textColor = context.getAttr(R.attr.colorOnPrimary)
+        val colorSurfaceVariant = context.getAttr(R.attr.colorSurfaceVariant)
+        val textColorLink = context.getAttr(android.R.attr.textColorLink)
 
-        val backgroundColorSelected = context.getAttr(R.attr.colorBackgroundFloating)
-        val strokeColorSelected = context.getAttr(R.attr.colorOnPrimary)
-        val rippleColorSelected = context.getAttr(R.attr.colorOnPrimary)
-
-        chips.forEachIndexed { index, it ->
+        chips.forEachIndexedIt { index, it ->
             val chip = Chip(context)
-            chip.rippleColor =
-                ColorStateList.valueOf(if (it.selected) rippleColorSelected else rippleColor)
-            chip.chipBackgroundColor =
-                ColorStateList.valueOf(if (it.selected) backgroundColorSelected else backgroundColor)
-            chip.chipStrokeColor =
-                ColorStateList.valueOf(if (it.selected) strokeColorSelected else strokeColor)
+            chip.isCheckable = true
+
+            if (it.selected) {
+                chip.rippleColor = ColorStateList.valueOf(textColorLink)
+                chip.chipBackgroundColor = ColorStateList.valueOf(colorSurfaceVariant)
+                chip.chipStrokeColor = ColorStateList.valueOf(textColorLink)
+            }
+
             chip.chipStrokeWidth = 1.dpToPx(context)
             chip.text = it.text
-            chip.setTextColor(textColor)
             chip.setOnClickListener {
                 toggleChip(index)
             }
@@ -85,9 +85,8 @@ class ChipContainer(context: Context, attrs: AttributeSet?) : LinearLayout(conte
 
     private fun toggleChip(index: Int) {
         chips[index].selected = !chips[index].selected
-        refreshChips()
 
-        filterToggleListener(chips.filter { it.selected }.map { it.text })
+        filterToggleListener(chips.filterIt { it.selected }.map { it.text })
     }
 
     private data class ChipData(val text: String, var selected: Boolean)

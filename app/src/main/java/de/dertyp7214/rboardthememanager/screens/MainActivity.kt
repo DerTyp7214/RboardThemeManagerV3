@@ -67,17 +67,33 @@ class MainActivity : AppCompatActivity() {
         "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk"
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
+    companion object {
+        private val instances = arrayListOf<MainActivity>()
+
+        fun clearInstances() {
+            while (instances.isNotEmpty()) popInstance()
+        }
+
+        fun popInstance() {
+            instances.removeLast().finish()
+        }
+    }
+
     private lateinit var downloadResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<NestedScrollView>
     private lateinit var mainViewModel: MainViewModel
 
     private lateinit var binding: ActivityMainBinding
 
+    private val searchBar by lazy { binding.searchToolbar.searchBar }
+
     private val callbacks: ArrayList<OnBackPressedCallback> = arrayListOf()
 
     @SuppressLint("NotifyDataSetChanged", "ShowToast")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
+        applyTheme(main = true)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -85,10 +101,11 @@ class MainActivity : AppCompatActivity() {
             window.setDecorFitsSystemWindows(false)
         }
 
+        instances.add(this)
+
         mainViewModel = this[MainViewModel::class.java]
 
-        val toolbar = binding.toolbar
-        val searchBar = binding.searchBar
+        val searchToolBar = binding.searchToolbar
         val mainContent = binding.mainContent
         val bottomSheet = findViewById<NestedScrollView>(R.id.bottom_bar)
         val navigationHolder =
@@ -105,7 +122,7 @@ class MainActivity : AppCompatActivity() {
         mainContent.foreground.alpha = 0
 
         searchBar.instantSearch = true
-        searchBar.applyInsetter {
+        searchToolBar.applyInsetter {
             type(statusBars = true) {
                 margin()
             }
@@ -261,11 +278,11 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
 
-                toolbar.navigationIcon =
+                searchToolBar.navigationIcon =
                     ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)
-                toolbar.setNavigationOnClickListener { mainViewModel.getSelections().second?.clearSelection() }
+                searchToolBar.setNavigationOnClickListener { mainViewModel.getSelections().second?.clearSelection() }
 
-                toolbar.setOnMenuItemClickListener { item ->
+                searchToolBar.setOnMenuItemClickListener { item ->
                     when (item.itemId) {
                         R.id.share -> {
                             val adapter = mainViewModel.getSelections().second
@@ -356,19 +373,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 mainViewModel.observeSelections(this) { selections ->
-                    val originHeight = toolbar.marginBottom
-                    val destinationHeight = if (selections.first) 8.dp(this) else 62.dp(this)
-                    if (selections.first) toolbar.elevation = 5.dpToPx(this@MainActivity)
-                    ValueAnimator.ofInt(originHeight, destinationHeight).apply {
-                        addUpdateListener {
-                            toolbar.setMargin(bottomMargin = it.animatedValue as Int)
-                        }
-                        duration = 150
-                        doOnEnd {
-                            if (!selections.first) toolbar.elevation = 0F
-                        }
-                        start()
-                    }
+                    searchToolBar.searchOpen = !selections.first
                 }
 
                 mainViewModel.observerSelectedTheme(this) { theme ->
@@ -376,10 +381,14 @@ class MainActivity : AppCompatActivity() {
                         mainViewModel.navigate(R.id.navigation_downloads)
                     } else {
                         secondaryContent.let {
-                            val view = it.findViewById<View>(R.id.current_theme_view)
-                            if (view != null) it.removeView(view).also {
-                                Logger.log(Logger.Companion.Type.DEBUG, "REMOVE VIEW", view.id)
+                            fun removeCurrentThemeView() {
+                                val view = it.findViewById<View>(R.id.current_theme_view)
+                                if (view != null) it.removeView(view).also {
+                                    Logger.log(Logger.Companion.Type.DEBUG, "REMOVE VIEW", view.id)
+                                    removeCurrentThemeView()
+                                }
                             }
+                            removeCurrentThemeView()
                         }
                         if (theme != null) {
                             secondaryContent.addView(ThemeUtils.getThemeView(theme, this), 0)
@@ -440,7 +449,7 @@ class MainActivity : AppCompatActivity() {
                                     }
                                     applyTheme(getSystemAutoTheme(), true)
                                 }
-                                if (theme.path.isNotEmpty() && !theme.path.startsWith("assets:") && !theme.path.startsWith(
+                                if (!theme.path.startsWith("silk:") && !theme.path.startsWith("assets:") && !theme.path.startsWith(
                                         "system_auto:"
                                     )
                                 ) {
@@ -618,7 +627,7 @@ class MainActivity : AppCompatActivity() {
     private fun navigate(controller: NavController, id: Int) {
         val currentDestination = controller.currentDestination?.id ?: -1
 
-        binding.searchBar.setMenu()
+        searchBar.setMenu()
 
         when (id) {
             R.id.navigation_themes -> {
@@ -629,7 +638,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             R.id.navigation_downloads -> {
-                binding.searchBar.setMenu(R.menu.menu_downloads) {
+                searchBar.setMenu(R.menu.menu_downloads) {
                     when (it.itemId) {
                         R.id.sort_by_date -> {
                             it.isChecked = !it.isChecked
@@ -719,7 +728,7 @@ class MainActivity : AppCompatActivity() {
                 }
         val manager = NotificationManagerCompat.from(this).apply {
             builder.setProgress(maxProgress, 0, false)
-            notify(notificationId, builder.build())
+            notify(this, notificationId, builder.build())
         }
         var finished = false
         UpdateHelper(updateUrl, this).apply {
@@ -735,7 +744,7 @@ class MainActivity : AppCompatActivity() {
                             )
                         )
                         .setProgress(maxProgress, progress.toInt(), false)
-                    manager.notify(notificationId, builder.build())
+                    notify(manager, notificationId, builder.build())
                 }
             }
             setFinishListener { path, _ ->
@@ -761,7 +770,7 @@ class MainActivity : AppCompatActivity() {
                 finished = true
                 builder.setContentText(getString(R.string.download_error))
                     .setProgress(0, 0, false)
-                manager.notify(notificationId, builder.build())
+                notify(manager, notificationId, builder.build())
                 it?.connectionException?.printStackTrace()
                 Log.d("ERROR", it?.serverErrorMessage ?: "NOO")
             }

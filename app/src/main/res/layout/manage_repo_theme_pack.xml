@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="?attr/colorOnPrimary"
+        android:textColor="?attr/colorOnSurface"
         tools:text="Title" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="?attr/colorSecondary"
+        android:textColor="?attr/colorPrimary"
         android:textSize="12sp"
         tools:ignore="TextContrastCheck"
         tools:text="Author" />

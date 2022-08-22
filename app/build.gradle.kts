@@ -22,8 +22,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 33
-        versionCode = 359000
-        versionName = "3.5.9"
+        versionCode = 363000
+        versionName = "3.6.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -40,18 +40,13 @@ android {
             isDebuggable = true
             applicationIdSuffix = ".debug"
         }
-        create("pro") {
-            initWith(getByName("release"))
-            applicationIdSuffix = ".pro"
-            matchingFallbacks += listOf("")
-        }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_15
+        targetCompatibility = JavaVersion.VERSION_15
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = JavaVersion.VERSION_15.toString()
     }
 
     packagingOptions {
@@ -70,6 +65,8 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:30.3.2"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.7")
     implementation("com.google.firebase:firebase-analytics-ktx:21.1.0")
+
+    implementation("com.github.DerTyp7214:PreferencesPlus:1.0")
 
     implementation("com.google.protobuf:protobuf-kotlin:3.21.5")
 
@@ -98,6 +95,7 @@ dependencies {
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
     implementation("com.github.skydoves:balloon:1.4.8-SNAPSHOT")
+    implementation("androidx.appcompat:appcompat:${rootProject.extra["appcompatVersion"]}")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.4-alpha07")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0-alpha07")

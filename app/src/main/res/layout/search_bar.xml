@@ -1,77 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/search_bar"
+
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:background="?android:attr/selectableItemBackground"
-    app:cardBackgroundColor="?attr/colorBackgroundFloating"
-    app:cardCornerRadius="@dimen/roundCorners"
-    app:cardElevation="0dp"
-    app:strokeWidth="0dp">
+    android:layout_height="?android:attr/actionBarSize">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal|center_vertical"
-        android:orientation="horizontal"
-        android:padding="2dp">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/sb_search_bar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        android:background="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/color_primary_0_10_overlay"
+        app:cardCornerRadius="@dimen/roundCorners"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:strokeWidth="0dp">
 
-        <ImageButton
-            android:id="@+id/search_button"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_baseline_search_24"
-            tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal"
+            android:padding="2dp">
 
-        <ImageButton
-            android:id="@+id/back_button"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:background="@android:color/transparent"
-            android:visibility="gone"
-            app:srcCompat="@drawable/ic_baseline_arrow_back_24"
-            tools:ignore="ContentDescription,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+            <ImageButton
+                android:id="@+id/search_button"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/ic_baseline_search_24"
+                tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
-        <EditText
-            android:id="@+id/search"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:background="@null"
-            android:ems="10"
-            android:hint="@string/search"
-            android:imeOptions="actionSearch"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:visibility="gone"
-            tools:ignore="LabelFor,TouchTargetSizeCheck,TextContrastCheck" />
+            <ImageButton
+                android:id="@+id/back_button"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="@android:color/transparent"
+                android:visibility="gone"
+                app:srcCompat="@drawable/ic_baseline_arrow_back_24"
+                tools:ignore="ContentDescription,TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-        <TextView
-            android:id="@+id/search_text"
-            android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="2dp"
-            android:layout_weight="1"
-            android:alpha=".8"
-            android:background="@null"
-            android:ems="10"
-            android:gravity="center_vertical"
-            android:importantForAutofill="no"
-            android:text="@string/search"
-            android:textSize="18sp"
-            tools:ignore="LabelFor,TouchTargetSizeCheck,TextContrastCheck" />
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:ems="10"
+                android:hint="@string/search"
+                android:imeOptions="actionSearch"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:visibility="gone"
+                tools:ignore="LabelFor,TouchTargetSizeCheck,TextContrastCheck" />
 
-        <ImageButton
-            android:id="@+id/more_button"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:background="@android:color/transparent"
-            app:srcCompat="@drawable/ic_baseline_more_vert_24"
-            tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-    </LinearLayout>
-</com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/search_text"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="2dp"
+                android:layout_weight="1"
+                android:alpha=".8"
+                android:background="@null"
+                android:ems="10"
+                android:gravity="center_vertical"
+                android:importantForAutofill="no"
+                android:text="@string/search"
+                android:textSize="18sp"
+                tools:ignore="LabelFor,TouchTargetSizeCheck,TextContrastCheck" />
+
+            <ImageButton
+                android:id="@+id/more_button"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:background="@android:color/transparent"
+                app:srcCompat="@drawable/ic_baseline_more_vert_24"
+                tools:ignore="ContentDescription,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

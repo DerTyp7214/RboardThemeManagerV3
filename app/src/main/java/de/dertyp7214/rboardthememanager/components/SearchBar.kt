@@ -34,8 +34,7 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
     private var popupMenu: PopupMenu? = null
     private var menuItemClickListener: PopupMenu.OnMenuItemClickListener? = null
 
-
-    private val searchBar: MaterialCardView
+    internal val searchBar: MaterialCardView
     private val searchButton: ImageButton
     private val backButton: ImageButton
     private val moreButton: ImageButton
@@ -77,7 +76,7 @@ class SearchBar(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
     init {
         inflate(context, R.layout.search_bar, this)
 
-        searchBar = findViewById(R.id.search_bar)
+        searchBar = findViewById(R.id.sb_search_bar)
 
         searchButton = findViewById(R.id.search_button)
         backButton = findViewById(R.id.back_button)

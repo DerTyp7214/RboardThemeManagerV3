@@ -17,6 +17,15 @@ fun List<String>.toMap(): Map<String, Boolean> {
     }
 }
 
+inline fun <E> List<E>.forEachIt(action: (E) -> Unit) = iterator().forEach(action)
+
+inline fun <E> List<E>.forEachIndexedIt(action: (Int, E) -> Unit) =
+    iterator().withIndex().forEach { action(it.index, it.value) }
+
+inline fun <E> List<E>.filterIt(to: ArrayList<E> = ArrayList(), predicate: (E) -> Boolean) =
+    to.also { list ->
+        forEachIt { if (predicate(it)) list.add(it) }
+    }
 fun List<ThemePackList.Object>.toPackList() = map {
     ThemePack(
         it.getAuthor(),

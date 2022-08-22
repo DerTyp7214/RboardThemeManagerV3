@@ -29,6 +29,7 @@ import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.screens.MainActivity
 import de.dertyp7214.rboardthememanager.screens.ReadMoreReadFast
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
@@ -238,6 +239,10 @@ class Preferences(
                 titleRes = R.string.theme_count
                 summary = infoData[key] as String
                 iconRes = R.drawable.ic_themes
+                onClick {
+                    navigations.goBackTo(MainActivity::class.java)
+                    false
+                }
             }
             pref("theme_path") {
                 titleRes = R.string.theme_path
