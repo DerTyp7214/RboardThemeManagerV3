@@ -86,6 +86,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private val searchBar by lazy { binding.searchToolbar.searchBar }
+
     private val callbacks: ArrayList<OnBackPressedCallback> = arrayListOf()
 
     @SuppressLint("NotifyDataSetChanged", "ShowToast")
@@ -103,8 +105,7 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel = this[MainViewModel::class.java]
 
-        val toolbar = binding.toolbar
-        val searchBar = binding.searchBar
+        val searchToolBar = binding.searchToolbar
         val mainContent = binding.mainContent
         val bottomSheet = findViewById<NestedScrollView>(R.id.bottom_bar)
         val navigationHolder =
@@ -121,7 +122,7 @@ class MainActivity : AppCompatActivity() {
         mainContent.foreground.alpha = 0
 
         searchBar.instantSearch = true
-        searchBar.applyInsetter {
+        searchToolBar.applyInsetter {
             type(statusBars = true) {
                 margin()
             }
@@ -277,11 +278,11 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
 
-                toolbar.navigationIcon =
+                searchToolBar.navigationIcon =
                     ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)
-                toolbar.setNavigationOnClickListener { mainViewModel.getSelections().second?.clearSelection() }
+                searchToolBar.setNavigationOnClickListener { mainViewModel.getSelections().second?.clearSelection() }
 
-                toolbar.setOnMenuItemClickListener { item ->
+                searchToolBar.setOnMenuItemClickListener { item ->
                     when (item.itemId) {
                         R.id.share -> {
                             val adapter = mainViewModel.getSelections().second
@@ -372,19 +373,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 mainViewModel.observeSelections(this) { selections ->
-                    val originHeight = toolbar.marginBottom
-                    val destinationHeight = if (selections.first) 8.dp(this) else 62.dp(this)
-                    if (selections.first) toolbar.elevation = 5.dpToPx(this@MainActivity)
-                    ValueAnimator.ofInt(originHeight, destinationHeight).apply {
-                        addUpdateListener {
-                            toolbar.setMargin(bottomMargin = it.animatedValue as Int)
-                        }
-                        duration = 150
-                        doOnEnd {
-                            if (!selections.first) toolbar.elevation = 0F
-                        }
-                        start()
-                    }
+                    searchToolBar.searchOpen = !selections.first
                 }
 
                 mainViewModel.observerSelectedTheme(this) { theme ->
@@ -638,7 +627,7 @@ class MainActivity : AppCompatActivity() {
     private fun navigate(controller: NavController, id: Int) {
         val currentDestination = controller.currentDestination?.id ?: -1
 
-        binding.searchBar.setMenu()
+        searchBar.setMenu()
 
         when (id) {
             R.id.navigation_themes -> {
@@ -649,7 +638,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             R.id.navigation_downloads -> {
-                binding.searchBar.setMenu(R.menu.menu_downloads) {
+                searchBar.setMenu(R.menu.menu_downloads) {
                     when (it.itemId) {
                         R.id.sort_by_date -> {
                             it.isChecked = !it.isChecked

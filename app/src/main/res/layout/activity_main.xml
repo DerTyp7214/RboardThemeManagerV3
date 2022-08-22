@@ -23,34 +23,25 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchBar"
+            app:layout_constraintTop_toBottomOf="@+id/search_toolbar"
             app:navGraph="@navigation/home"
             tools:layout="@layout/fragment_theme_list" />
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginBottom="62dp"
-            android:background="?attr/colorSurface"
-            android:elevation="0dp"
-            android:minHeight="0dp"
-            android:translationZ="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/selected_themes_menu" />
-
-        <de.dertyp7214.rboardthememanager.components.SearchBar
-            android:id="@+id/searchBar"
+        <de.dertyp7214.rboardthememanager.components.SearchToolbar
+            android:id="@+id/search_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:background="?android:attr/colorBackground"
             android:translationZ="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/selected_themes_menu"
+            app:searchOpen="true" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <include layout="@layout/bottom_bar" />
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
