@@ -11,6 +11,7 @@ on:
       - 'settings.gradle.kts'
       - 'mathc/**'
       - 'colorutilsc/**'
+      - 'rboardcomponents/**'
       - '.github/workflows/buildCi.yml'
   workflow_dispatch:
 
