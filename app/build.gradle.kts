@@ -28,6 +28,15 @@ android {
         versionName = "3.6.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        resourceConfigurations += listOf(
+            "af", "cs", "da", "de",
+            "el", "en", "es", "fi",
+            "fr", "hi", "hu", "id",
+            "it", "ja", "nl", "no",
+            "pl", "pt", "ro", "ru",
+            "sv", "uk", "vi"
+        )
     }
 
     buildTypes {
@@ -61,6 +70,8 @@ android {
 dependencies {
     implementation(project(":mathc"))
     implementation(project(":colorutilsc"))
+    implementation(project(":rboardcomponents"))
+
     implementation(platform("com.google.firebase:firebase-bom:30.3.2"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.7")
     implementation("com.google.firebase:firebase-analytics-ktx:21.1.0")

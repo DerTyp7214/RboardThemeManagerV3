@@ -17,7 +17,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.RboardThemeManagerV3"
-        tools:ignore="AllowBackup">
+        android:localeConfig="@xml/locale_config"
+        tools:ignore="AllowBackup"
+        tools:targetApi="tiramisu">
         <activity
             android:name=".screens.Logs"
             android:exported="false">

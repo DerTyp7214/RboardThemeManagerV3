@@ -27,7 +27,7 @@
             app:navGraph="@navigation/home"
             tools:layout="@layout/fragment_theme_list" />
 
-        <de.dertyp7214.rboardthememanager.components.SearchToolbar
+        <de.dertyp7214.rboardcomponents.components.SearchToolbar
             android:id="@+id/search_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

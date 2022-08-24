@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/colorutilsc" />
             <option value="$PROJECT_DIR$/mathc" />
+            <option value="$PROJECT_DIR$/rboardcomponents" />
           </set>
         </option>
       </GradleProjectSettings>
