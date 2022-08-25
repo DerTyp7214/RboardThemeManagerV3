@@ -26,6 +26,15 @@ android {
         versionName = "3.6.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        resourceConfigurations += listOf(
+            "af", "cs", "da", "de",
+            "el", "en", "es", "fi",
+            "fr", "hi", "hu", "id",
+            "it", "ja", "nl", "no",
+            "pl", "pt", "ro", "ru",
+            "sv", "uk", "vi"
+        )
     }
 
     buildTypes {
@@ -61,6 +70,7 @@ android {
 dependencies {
     implementation(project(":colorutilsc"))
     implementation(project(":mathc"))
+    implementation(project(":rboardcomponents"))
 
     implementation(platform("com.google.firebase:firebase-bom:30.3.2"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.7")
@@ -79,15 +89,15 @@ dependencies {
     implementation("com.github.topjohnwu.libsu:io:$libsuVersion")
     implementation("com.github.topjohnwu.libsu:nio:$libsuVersion")
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
-    implementation("androidx.core:core-ktx:1.9.0-beta01")
+    implementation("androidx.core:core-ktx:1.9.0-rc01")
     //noinspection DifferentStdlibGradleVersion
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20-Beta")
-    implementation("androidx.core:core:1.9.0-beta01")
+    implementation("androidx.core:core:1.9.0-rc01")
     implementation("com.google.android.material:material:1.7.0-beta01")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha03")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.6.0-beta01")
-    implementation("androidx.fragment:fragment-ktx:1.6.0-alpha01")
+    implementation("androidx.activity:activity-ktx:1.6.0-rc01")
+    implementation("androidx.fragment:fragment-ktx:1.6.0-alpha02")
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:21.1.0")
     implementation("com.google.firebase:firebase-messaging:23.0.7")
@@ -105,6 +115,6 @@ dependencies {
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.3.0-alpha03")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.3.0-beta01")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.20-Beta")
 }

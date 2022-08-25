@@ -29,7 +29,6 @@ import de.Maxr1998.modernpreferences.preferences.choice.SingleChoiceDialogPrefer
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.components.SearchBar
 import de.dertyp7214.rboardthememanager.components.XMLEntry
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.*
@@ -37,6 +36,7 @@ import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.screens.ShareFlags
 import de.dertyp7214.rboardthememanager.utils.FileUtils
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
+import de.dertyp7214.rboardcomponents.components.SearchBar
 import org.json.JSONObject
 import java.io.File
 import java.util.*

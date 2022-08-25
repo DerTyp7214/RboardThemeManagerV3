@@ -60,6 +60,10 @@ class XMLFile(
     fun entryNotEquals(entry: XMLEntry) = !entryEquals(entry)
     operator fun get(name: String): Any? = values[name]?.value
 
+    val entries: List<XMLEntry>
+        get() = values.values.toList()
+
+
     fun toString(comment: String = ""): String {
         return "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>\n${comment.let { if (it.isNotEmpty()) "<!--RBOARD:$comment-->\n" else "" }}<map>\n${
             values.joinToString("\n") { it.value[4] }

@@ -17,6 +17,7 @@ import de.dertyp7214.rboardthememanager.core.copy
 import de.dertyp7214.rboardthememanager.core.openStream
 import de.dertyp7214.rboardthememanager.core.readXML
 import de.dertyp7214.rboardthememanager.preferences.Flags
+import de.dertyp7214.rboardthememanager.components.XMLEntry
 
 object GboardUtils {
     @Suppress("DEPRECATION")
@@ -74,14 +75,13 @@ object GboardUtils {
     }
 
     @SuppressLint("SdCardPath")
-    fun flagsChanged(callback: (String) -> Unit) {
-        Application.context?.let { context ->
-            val overrideFile = SuFile(Flags.FILES.FLAGS.filePath)
-            if (!overrideFile.exists()) SuFile(FLAG_PATH).copy(overrideFile)
-            val preferences = PreferenceManager.getDefaultSharedPreferences(context)
-            val oldFlags = XMLFile(initString = preferences.getString("flags", null))
-            val newFlags = XMLFile(path = Flags.FILES.FLAGS.filePath)
-            if (oldFlags != newFlags) callback(oldFlags.toString())
+    fun flagsChanged(callback: (List<XMLEntry>) -> Unit) {
+        val overrideFile = SuFile(Flags.FILES.FLAGS.filePath)
+        if (!overrideFile.exists()) SuFile(FLAG_PATH).copy(overrideFile)
+        val gboardFlags = XMLFile(path = FLAG_PATH)
+        val overrideFlags = XMLFile(path = Flags.FILES.FLAGS.filePath)
+        gboardFlags.filter { !overrideFlags.has(it) }.entries.let {
+            if (it.isNotEmpty()) callback(it)
         }
     }
 }

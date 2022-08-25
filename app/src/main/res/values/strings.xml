@@ -261,4 +261,5 @@
     <string name="style_blue">Blue</string>
     <string name="style_orange">Orange</string>
     <string name="style_lime">Lime</string>
+    <string name="new_flags_long">New flags found.</string>
 </resources>

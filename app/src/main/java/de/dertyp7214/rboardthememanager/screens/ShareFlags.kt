@@ -13,7 +13,6 @@ import androidx.core.view.WindowCompat
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ShareFlagsAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
-import de.dertyp7214.rboardthememanager.components.SearchBar
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.addCallback
 import de.dertyp7214.rboardthememanager.core.applyTheme
@@ -21,6 +20,7 @@ import de.dertyp7214.rboardthememanager.core.getMapExtra
 import de.dertyp7214.rboardthememanager.core.share
 import de.dertyp7214.rboardthememanager.databinding.ActivityShareFlagsBinding
 import de.dertyp7214.rboardthememanager.preferences.Flags
+import de.dertyp7214.rboardcomponents.components.SearchBar
 import dev.chrisbanes.insetter.applyInsetter
 import java.io.File
 
