@@ -18,6 +18,7 @@ import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.*
 import de.Maxr1998.modernpreferences.preferences.choice.SelectionItem
+import de.dertyp7214.rboardcomponents.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
@@ -173,16 +174,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             R.drawable.ic_theme,
             "default",
             TYPE.SELECT,
-            listOf(
-                SelectionItem("blue", R.string.style_blue, -1),
-                SelectionItem("green", R.string.style_green, -1),
-                SelectionItem("red", R.string.style_red, -1),
-                SelectionItem("yellow", R.string.style_yellow, -1),
-                SelectionItem("orange", R.string.style_orange, -1),
-                SelectionItem("pink", R.string.style_pink, -1),
-                SelectionItem("lime", R.string.style_lime, -1),
-                SelectionItem("default", R.string.style_default, -1)
-            )
+            ThemeUtils.APP_THEMES.map {
+                SelectionItem(it.value, it.key, -1)
+            }
         ),
         USE_BLUR(
             "useBlur",
