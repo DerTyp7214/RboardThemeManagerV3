@@ -15,9 +15,9 @@
         android:extractNativeLibs="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:localeConfig="@xml/locale_config"
         android:supportsRtl="true"
         android:theme="@style/Theme.RboardThemeManagerV3"
-        android:localeConfig="@xml/locale_config"
         tools:ignore="AllowBackup"
         tools:targetApi="tiramisu">
         <activity
@@ -160,6 +160,15 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".services.AppThemeService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="de.dertyp7214.rboard.Theme" />
             </intent-filter>
         </service>
 

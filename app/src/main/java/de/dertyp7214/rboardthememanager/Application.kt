@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.ContextWrapper
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatDelegate
@@ -12,9 +11,11 @@ import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.dertyp7214.logs.helpers.Logger
 import com.downloader.PRDownloader
-import com.google.android.material.color.DynamicColors
 import de.dertyp7214.colorutilsc.ColorUtilsC
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardcomponents.utils.ThemeUtils
+import de.dertyp7214.rboardthememanager.core.getAttr
+import de.dertyp7214.rboardthememanager.core.hasRoot
+import de.dertyp7214.rboardthememanager.core.isReachable
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.utils.doInBackground
@@ -43,6 +44,7 @@ class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        ThemeUtils.registerActivityLifecycleCallbacks(this)
         PRDownloader.initialize(this)
         doInBackground {
             if (!URL("https://bin.utwitch.net").isReachable())
@@ -89,35 +91,5 @@ class Application : Application() {
                 }
             }
         }
-
-        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
-            override fun onActivityPreCreated(activity: Activity, savedInstanceState: Bundle?) {
-                applyThemeOverlay(activity)
-            }
-
-            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
-            override fun onActivityStarted(activity: Activity) {}
-            override fun onActivityResumed(activity: Activity) {}
-            override fun onActivityPaused(activity: Activity) {}
-            override fun onActivityStopped(activity: Activity) {}
-            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
-            override fun onActivityDestroyed(activity: Activity) {}
-        })
-    }
-
-    private fun applyThemeOverlay(activity: Activity) {
-        val style = activity.preferences.getString("app_style", "default")
-        val themeOverlay = when (style) {
-            "blue" -> R.style.ThemeOverlay_RboardThemeManager_Colors_blue
-            "green" -> R.style.ThemeOverlay_RboardThemeManager_Colors_green
-            "lime" -> R.style.ThemeOverlay_RboardThemeManager_Colors_lime
-            "orange" -> R.style.ThemeOverlay_RboardThemeManager_Colors_orange
-            "pink" -> R.style.ThemeOverlay_RboardThemeManager_Colors_pink
-            "red" -> R.style.ThemeOverlay_RboardThemeManager_Colors_red
-            "yellow" -> R.style.ThemeOverlay_RboardThemeManager_Colors_yellow
-            else -> null
-        }
-        if (style == "default") DynamicColors.applyToActivityIfAvailable(activity)
-        else if (themeOverlay != null) activity.applyThemeOverlay(themeOverlay)
     }
 }
