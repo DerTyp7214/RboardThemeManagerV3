@@ -345,8 +345,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
         SETTINGS.values().filter { it.visible }
             .filter {
                 !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) &&
-                        !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) &&
-                        !(it == SETTINGS.APP_STYLE && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !BuildConfig.DEBUG)
+                        !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
             }
             .forEach { item ->
                 val pref: Preference = when (item.type) {
@@ -376,7 +375,8 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                                     }
                                     "system_theme" -> {
-                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
+                                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                                     }
                                 }
                                 "app_style" -> {
