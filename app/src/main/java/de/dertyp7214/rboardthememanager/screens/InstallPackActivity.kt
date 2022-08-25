@@ -23,7 +23,6 @@ class InstallPackActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInstallPackBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        applyTheme(installPack = true)
         super.onCreate(savedInstanceState)
         binding = ActivityInstallPackBinding.inflate(layoutInflater)
         setContentView(binding.root)

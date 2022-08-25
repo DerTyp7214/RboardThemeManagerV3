@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.content.ContextWrapper
 import android.os.Build
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatDelegate
@@ -14,11 +15,17 @@ import com.dertyp7214.logs.helpers.Logger
 import com.downloader.PRDownloader
 import com.google.android.material.color.DynamicColors
 import de.dertyp7214.colorutilsc.ColorUtilsC
+import de.dertyp7214.rboardcomponents.core.applyThemeOverlay
+import de.dertyp7214.rboardcomponents.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.core.hasRoot
 import de.dertyp7214.rboardthememanager.core.isReachable
+import de.dertyp7214.rboardthememanager.core.preferences
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.utils.doInBackground
+import de.dertyp7214.rboardthememanager.core.getAttr
+import de.dertyp7214.rboardthememanager.core.hasRoot
+import de.dertyp7214.rboardthememanager.core.isReachable
 import java.net.URL
 
 class Application : Application() {
@@ -44,7 +51,7 @@ class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        DynamicColors.applyToActivitiesIfAvailable(this)
+        ThemeUtils.registerActivityLifecycleCallbacks(this)
         PRDownloader.initialize(this)
         doInBackground {
             if (!URL("https://bin.utwitch.net").isReachable())

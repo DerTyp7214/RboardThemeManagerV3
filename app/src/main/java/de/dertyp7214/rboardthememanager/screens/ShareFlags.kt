@@ -15,7 +15,6 @@ import de.dertyp7214.rboardthememanager.adapter.ShareFlagsAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.addCallback
-import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.core.getMapExtra
 import de.dertyp7214.rboardthememanager.core.share
 import de.dertyp7214.rboardthememanager.databinding.ActivityShareFlagsBinding
@@ -39,7 +38,6 @@ class ShareFlags : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
-        applyTheme(shareFlags = true)
         super.onCreate(savedInstanceState)
         binding = ActivityShareFlagsBinding.inflate(layoutInflater)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
