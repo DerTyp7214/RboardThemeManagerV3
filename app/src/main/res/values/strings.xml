@@ -256,4 +256,16 @@
     <string name="copy_flags">Copy flags</string>
     <string name="copy_flags_long"><![CDATA[Copy \"flag_value.xml\" -> \"flag_override.xml\"]]></string>
     <string name="new_flags_long">New flags found.</string>
+
+    <string name="app_style">App Style</string>
+    <string name="style_default">Default</string>
+    <string name="style_green">Green</string>
+    <string name="style_yellow">Yellow</string>
+    <string name="style_pink">Pink</string>
+    <string name="style_red">Red</string>
+    <string name="style_blue">Blue</string>
+    <string name="style_orange">Orange</string>
+    <string name="style_lime">Lime</string>
+    <string name="ime_test">IME Test</string>
+    <string name="ime_test_long">Rboard IME Test</string>
 </resources>

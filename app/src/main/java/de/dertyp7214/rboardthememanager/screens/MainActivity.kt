@@ -73,6 +73,19 @@ class MainActivity : AppCompatActivity() {
         "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-${BuildConfig.BUILD_TYPE}/app-${BuildConfig.BUILD_TYPE}.apk"
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
+    companion object {
+        private val instances = arrayListOf<MainActivity>()
+
+        fun clearInstances() {
+            while (instances.isNotEmpty()) popInstance()
+        }
+
+        fun popInstance() {
+            instances.removeLast().finish()
+        }
+    }
+
     private lateinit var downloadResultLauncher: ActivityResultLauncher<Intent>
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<NestedScrollView>
     private lateinit var mainViewModel: MainViewModel

@@ -23,9 +23,11 @@ import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.FLAG_PATH
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
+import de.dertyp7214.rboardthememanager.Config.PLAY_URL
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.Logs
+import de.dertyp7214.rboardthememanager.screens.MainActivity
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
@@ -164,6 +166,24 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                 SelectionItem("system_theme", R.string.system_theme, -1)
             )
         ),
+        APP_STYLE(
+            "app_style",
+            R.string.app_style,
+            -1,
+            R.drawable.ic_theme,
+            "default",
+            TYPE.SELECT,
+            listOf(
+                SelectionItem("blue", R.string.style_blue, -1),
+                SelectionItem("green", R.string.style_green, -1),
+                SelectionItem("red", R.string.style_red, -1),
+                SelectionItem("yellow", R.string.style_yellow, -1),
+                SelectionItem("orange", R.string.style_orange, -1),
+                SelectionItem("pink", R.string.style_pink, -1),
+                SelectionItem("lime", R.string.style_lime, -1),
+                SelectionItem("default", R.string.style_default, -1)
+            )
+        ),
         USE_BLUR(
             "useBlur",
             R.string.use_blur,
@@ -253,6 +273,20 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             },
             BuildConfig.DEBUG
         ),
+        IME_TEST(
+            "ime_test",
+            R.string.ime_test,
+            R.string.ime_test_long,
+            -1,
+            "",
+            TYPE.STRING,
+            listOf(),
+            {
+                packageManager.getLaunchIntentForPackage("de.dertyp7214.rboardimetester")
+                    ?.let(::startActivity)
+                    ?: openUrl(PLAY_URL("de.dertyp7214.rboardimetester"))
+            }
+        ),
         UNINSTALL(
             "uninstall",
             R.string.uninstall,
@@ -323,15 +357,27 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                 TYPE.SELECT -> builder.singleChoice(item.key, item.items) {
                     initialSelection = item.items.last().key
                     onSelectionChange {
-                        when (it) {
-                            "dark" -> {
-                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                        when (item.key) {
+                            "app_theme" -> when (it) {
+                                "dark" -> {
+                                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                                }
+                                "light" -> {
+                                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                                }
+                                "system_theme" -> {
+                                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                                }
                             }
-                            "light" -> {
-                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                            }
-                            "system_theme" -> {
-                                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                            "app_style" -> {
+                                if (item.getValue(activity, "") != it) {
+                                    MainActivity.clearInstances()
+                                    MainActivity::class.java[activity]
+                                    PreferencesActivity::class.java[activity] = {
+                                        putExtra("type", "settings")
+                                    }
+                                    activity.finish()
+                                }
                             }
                         }
                         true

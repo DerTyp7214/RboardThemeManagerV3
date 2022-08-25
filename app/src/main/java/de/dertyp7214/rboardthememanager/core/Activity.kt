@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.DialogInterface
 import android.content.SharedPreferences
+import android.content.res.Resources.Theme
 import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.net.Uri
@@ -270,4 +271,17 @@ fun Activity.openDialog(
             block(view, dialog)
             dialog.show()
         }
+}
+
+fun Activity.getWindowDecorViewTheme(): Theme? {
+    if (window != null) {
+        val decorView = window.peekDecorView()
+        if (decorView != null) {
+            val context = decorView.context
+            if (context != null) {
+                return context.theme
+            }
+        }
+    }
+    return null
 }
