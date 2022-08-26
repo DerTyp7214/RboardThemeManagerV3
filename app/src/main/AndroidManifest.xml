@@ -83,6 +83,7 @@
             android:exported="true" />
         <activity
             android:name=".screens.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>

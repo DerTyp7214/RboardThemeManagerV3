@@ -180,7 +180,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             "app_style",
             R.string.app_style,
             -1,
-            R.drawable.ic_theme,
+            R.drawable.ic_theme_settings,
             "default",
             TYPE.SELECT,
             ThemeUtils.APP_THEMES.map {
@@ -293,7 +293,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             "ime_test",
             R.string.ime_test,
             R.string.ime_test_long,
-            -1,
+            R.drawable.ic_ime_tester,
             "",
             TYPE.STRING,
             listOf(),
@@ -375,8 +375,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                                     }
                                     "system_theme" -> {
-                                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P)
-                                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                                     }
                                 }
                                 "app_style" -> {
