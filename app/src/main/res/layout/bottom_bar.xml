@@ -7,8 +7,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bottom_sheet_background"
     app:behavior_hideable="false"
-    app:layout_behavior="@string/bottom_sheet_behavior"
-    tools:backgroundTint="@android:color/darker_gray">
+    app:layout_behavior="@string/bottom_sheet_behavior">
 
     <LinearLayout
         android:id="@+id/bottomLayout"
