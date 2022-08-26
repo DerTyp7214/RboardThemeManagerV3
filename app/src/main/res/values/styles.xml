@@ -1,5 +1,12 @@
 <resources>
 
+    <style name="AppTheme.FullScreenDialog" parent="Theme.Material3.DayNight.Dialog">
+        <item name="android:statusBarColor">?attr/colorSurface</item>
+        <item name="android:navigationBarColor">?attr/colorSurface</item>
+        <item name="android:windowBackground">?attr/colorSurface</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
     <style name="Widget.CollapsingToolbar" parent="Widget.Material3.CollapsingToolbar">
         <item name="contentScrim">@drawable/color_surface_overlay_background</item>
     </style>

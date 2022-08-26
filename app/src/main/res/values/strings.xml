@@ -259,4 +259,21 @@
     <string name="app_style">App Style</string>
     <string name="ime_test">IME Test</string>
     <string name="ime_test_long">Rboard IME Test</string>
+    <string name="why_no_root">Why are you not rooted?</string>
+    <string name="get_magisk">Get magisk</string>
+    <string name="no_magisk_detected">No Magisk detected</string>
+    <string name="root_explanation">Without root it\'s not possible yet. That means no adb trocks no nothing. We tried everything but doesn\'t work.</string>
+    <string name="install_methods">We are providing two installation methods.\nYou can change this anytime in the settings.</string>
+    <string name="magisk_module">Module</string>
+    <string name="inside_gboard">Inside Gboard</string>
+    <string name="module_1">Separate theme for light and dark</string>
+    <string name="module_2">Editing corners and padding props</string>
+    <string name="module_3">Changing sounds</string>
+    <string name="module_4">Does not work on Color OS</string>
+    <string name="module_5">Problems on MIUI roms</string>
+    <string name="gboard_1">Basic downloading and installing themes</string>
+    <string name="gboard_2">Does not require magisk module</string>
+    <string name="gboard_3">Changing sounds won\'t work</string>
+    <string name="gboard_4">Themes won\'t appear in gboard settings</string>
+    <string name="gboard_5">Compatibility</string>
 </resources>

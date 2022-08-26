@@ -28,6 +28,7 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.OutputMetadata
+import de.dertyp7214.rboardthememanager.dialogs.NoRootDialog
 import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 import de.dertyp7214.rboardthememanager.screens.ShareFlags
@@ -362,14 +363,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                         ) {
                             openUrl(gboardPlayStoreUrl)
                         }
-                        !rootAccess -> openDialog(
-                            R.string.cant_use_app,
-                            R.string.not_rooted,
-                            false,
-                            null
-                        ) {
-                            finishAndRemoveTask()
-                        }
+                        !rootAccess -> NoRootDialog.open(this)
                         else -> checkForUpdate { update ->
                             checkedForUpdate = true
                             isReady = true

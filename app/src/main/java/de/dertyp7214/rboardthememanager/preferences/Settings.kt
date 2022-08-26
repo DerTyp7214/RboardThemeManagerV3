@@ -171,7 +171,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             "app_style",
             R.string.app_style,
             -1,
-            R.drawable.ic_theme,
+            R.drawable.ic_theme_settings,
             "default",
             TYPE.SELECT,
             ThemeUtils.APP_THEMES.map {
@@ -271,7 +271,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             "ime_test",
             R.string.ime_test,
             R.string.ime_test_long,
-            -1,
+            R.drawable.ic_ime_tester,
             "",
             TYPE.STRING,
             listOf(),
