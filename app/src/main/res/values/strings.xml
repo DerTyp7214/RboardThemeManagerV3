@@ -262,7 +262,7 @@
     <string name="why_no_root">Why are you not rooted?</string>
     <string name="get_magisk">Get magisk</string>
     <string name="no_magisk_detected">No Magisk detected</string>
-    <string name="root_explanation">Without root it\'s not possible yet. That means no adb trocks no nothing. We tried everything but doesn\'t work.</string>
+    <string name="root_explanation">Without root it\'s not possible yet. That means no adb tricks no nothing. We tried everything but doesn\'t work.</string>
     <string name="install_methods">We are providing two installation methods.\nYou can change this anytime in the settings.</string>
     <string name="magisk_module">Module</string>
     <string name="inside_gboard">Inside Gboard</string>
