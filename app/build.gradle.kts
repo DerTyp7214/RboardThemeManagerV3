@@ -22,8 +22,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 33
-        versionCode = 365000
-        versionName = "3.6.5"
+        versionCode = 366000
+        versionName = "3.6.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -72,9 +72,9 @@ dependencies {
     implementation(project(":mathc"))
     implementation(project(":rboardcomponents"))
 
-    implementation(platform("com.google.firebase:firebase-bom:30.3.2"))
-    implementation("com.google.firebase:firebase-messaging-ktx:23.0.7")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.1.0")
+    implementation(platform("com.google.firebase:firebase-bom:30.4.0"))
+    implementation("com.google.firebase:firebase-messaging-ktx:23.0.8")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.1.1")
 
     implementation("com.github.DerTyp7214:PreferencesPlus:1.0")
 
@@ -93,14 +93,14 @@ dependencies {
     //noinspection DifferentStdlibGradleVersion
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.20-Beta")
     implementation("androidx.core:core:1.9.0-rc01")
-    implementation("com.google.android.material:material:1.7.0-beta01")
+    implementation("com.google.android.material:material:1.8.0-alpha01")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha03")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.activity:activity-ktx:1.6.0-rc01")
     implementation("androidx.fragment:fragment-ktx:1.6.0-alpha02")
     implementation("com.jaredrummler:android-shell:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:21.1.0")
-    implementation("com.google.firebase:firebase-messaging:23.0.7")
+    implementation("com.google.firebase:firebase-analytics:21.1.1")
+    implementation("com.google.firebase:firebase-messaging:23.0.8")
     implementation("com.google.code.gson:gson:2.9.1")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
