@@ -24,8 +24,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 33
-        versionCode = 365000
-        versionName = "3.6.5"
+        versionCode = 366000
+        versionName = "3.6.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -72,9 +72,9 @@ dependencies {
     implementation(project(":colorutilsc"))
     implementation(project(":rboardcomponents"))
 
-    implementation(platform("com.google.firebase:firebase-bom:30.3.2"))
-    implementation("com.google.firebase:firebase-messaging-ktx:23.0.7")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.1.0")
+    implementation(platform("com.google.firebase:firebase-bom:30.4.0"))
+    implementation("com.google.firebase:firebase-messaging-ktx:23.0.8")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.1.1")
 
     implementation("com.github.DerTyp7214:PreferencesPlus:1.0")
 
@@ -95,14 +95,14 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10")
     implementation("androidx.core:core:1.9.0-rc01")
 
-    implementation("com.google.android.material:material:1.7.0-beta01")
+    implementation("com.google.android.material:material:1.8.0-alpha01")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha03")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.6.0-beta01")
+    implementation("androidx.activity:activity-ktx:1.6.0-rc01")
     implementation("androidx.fragment:fragment-ktx:1.5.2")
     implementation("com.jaredrummler:android-shell:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:21.1.0")
-    implementation("com.google.firebase:firebase-messaging:23.0.7")
+    implementation("com.google.firebase:firebase-analytics:21.1.1")
+    implementation("com.google.firebase:firebase-messaging:23.0.8")
     implementation("com.google.code.gson:gson:2.9.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-alpha01")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
@@ -118,7 +118,7 @@ dependencies {
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.3.0-alpha03")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.3.0-beta01")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.10")
 
     implementation("com.google.android.play:core:1.10.3")
