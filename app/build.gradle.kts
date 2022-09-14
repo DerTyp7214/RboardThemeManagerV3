@@ -8,7 +8,7 @@ plugins {
     kotlin("kapt")
 }
 
-val libsuVersion = "5.0.2"
+val libsuVersion = "5.0.3"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 @Suppress("UnstableApiUsage")
@@ -72,7 +72,7 @@ dependencies {
     implementation(project(":mathc"))
     implementation(project(":rboardcomponents"))
 
-    implementation(platform("com.google.firebase:firebase-bom:30.4.0"))
+    implementation(platform("com.google.firebase:firebase-bom:30.4.1"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.0.8")
     implementation("com.google.firebase:firebase-analytics-ktx:21.1.1")
 
