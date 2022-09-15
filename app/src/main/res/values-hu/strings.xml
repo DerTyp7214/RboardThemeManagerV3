@@ -250,7 +250,7 @@
     <string name="logs">Naplók</string>
     <string name="logs_long">Naplók oldal megnyitása</string>
     <string name="copy_flags">Zászlók másolása</string>
-    <string name="copy_flags_long"><![CDATA[Copy \"flag_value.xml\" -> \"flag_override.xml\"]]></string>
+    <string name="copy_flags_long"><![CDATA[Másolja \"flag_value.xml\" -> \"flag_override.xml\"]]></string>
     <string name="app_style">Alkalmazás stílus</string>
     <string name="ime_test">IME Teszt</string>
     <string name="ime_test_long">Rboard IME Teszt</string>

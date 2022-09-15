@@ -173,9 +173,10 @@
         <service
             android:name=".services.AppThemeService"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:process=":remote">
             <intent-filter>
-                <action android:name="de.dertyp7214.rboard.Theme" />
+                <action android:name="de.dertyp7214.rboard.IAppTheme" />
             </intent-filter>
         </service>
 
