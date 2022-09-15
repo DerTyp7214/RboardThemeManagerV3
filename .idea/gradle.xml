@@ -7,13 +7,14 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="Android Studio default JDK" />
+        <option name="gradleJvm" value="openjdk-18" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/colorutilsc" />
             <option value="$PROJECT_DIR$/mathc" />
+            <option value="$PROJECT_DIR$/rboardcomponents" />
           </set>
         </option>
       </GradleProjectSettings>

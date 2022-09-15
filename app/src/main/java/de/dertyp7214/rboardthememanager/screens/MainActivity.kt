@@ -56,6 +56,7 @@ import de.dertyp7214.rboardthememanager.adapter.MenuAdapter
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.MenuItem
 import de.dertyp7214.rboardthememanager.databinding.ActivityMainBinding
+import de.dertyp7214.rboardthememanager.dialogs.UsageDialog
 import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils.getSystemAutoTheme
@@ -71,6 +72,19 @@ class MainActivity : AppCompatActivity() {
 
     private val updateUrl by lazy {
         "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-${BuildConfig.BUILD_TYPE}/app-${BuildConfig.BUILD_TYPE}.apk"
+    }
+
+    @Suppress("MemberVisibilityCanBePrivate")
+    companion object {
+        private val instances = arrayListOf<MainActivity>()
+
+        fun clearInstances() {
+            while (instances.isNotEmpty()) popInstance()
+        }
+
+        fun popInstance() {
+            instances.removeLast().finish()
+        }
     }
 
     private lateinit var downloadResultLauncher: ActivityResultLauncher<Intent>
@@ -642,23 +656,17 @@ class MainActivity : AppCompatActivity() {
 
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
 
-        if (!preferenceManager.getBoolean("usageSet", false)
-        ) {
-            openDialog(
-                R.string.use_gboard,
-                R.string.module,
-                R.string.use_module,
-                R.string.gboard,
-                false,
-                {
-                    it.dismiss()
-                    preferenceManager.edit {
-                        putBoolean("useMagisk", false)
-                        putBoolean("usageSet", true)
-                    }
-                    Config.useMagisk = false
-                    ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
-                }) {
+        if (!preferenceManager.getBoolean("usageSet", false)) {
+            UsageDialog.open(this, onGboard = {
+                it.dismiss()
+                preferenceManager.edit {
+                    putBoolean("useMagisk", false)
+                    putBoolean("usageSet", true)
+                }
+                Config.useMagisk = false
+                ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
+            }, onMagisk = {
+                it.dismiss()
                 preferenceManager.edit {
                     putBoolean("useMagisk", true)
                     putBoolean("usageSet", true)
@@ -672,7 +680,7 @@ class MainActivity : AppCompatActivity() {
                     it.dismiss()
                     MagiskUtils.installModule(this)
                 } else MagiskUtils.installModule(this)
-            }
+            })
         } else if (intent.getBooleanExtra(
                 "update",
                 this@MainActivity.intent.getBooleanExtra("update", false)
