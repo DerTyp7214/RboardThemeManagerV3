@@ -109,40 +109,6 @@ jobs:
           name: Debug Artifact
           path: app/build/outputs/apk/debug/app-debug.apk
 
-      - name: Create new Release
-        id: create_release
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-debug
-          prerelease: true
-          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
-          files: |
-            app/build/outputs/apk/debug/app-debug.apk
-            app/build/outputs/apk/debug/output-metadata.json
-
-      - name: Create new Release
-        id: create_latest_release
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: latest-debug
-          prerelease: true
-          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
-          files: |
-            app/build/outputs/apk/debug/app-debug.apk
-            app/build/outputs/apk/debug/output-metadata.json
-
-      - name: Send Telegram message
-        run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_CHANNEL_ID }}\",\"text\":\"**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Download A12+\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-debug/app-debug.apk\"}]]}}'"
-
-      - name: Send Notification
-        uses: fjogeleit/http-request-action@master
-        with:
-          url: 'https://fcm.googleapis.com/fcm/send'
-          method: 'POST'
-          customHeaders: '{"Authorization":"key=${{ secrets.FCM_KEY }}"}'
-          data: '{"to": "/topics/update-v3-debug","data": {"version": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},"type": "update","notification": {"body": "Update available. ${{ steps.commitMessage.outputs.message }}","title": "Update"}}}'
   buildRCompatible:
     name: Build Ci APK from rCompatible
     if: startsWith(github.ref, 'refs/heads/rCompatible')
@@ -225,41 +191,3 @@ jobs:
         with:
           name: Debug Artifact
           path: app/build/outputs/apk/release/app-release.apk
-
-      - name: Create new Release
-        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
-        id: create_release
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-rCompatible
-          prerelease: true
-          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
-          files: |
-            app/build/outputs/apk/release/app-release.apk
-            app/build/outputs/apk/release/output-metadata.json
-
-      - name: Create new Release
-        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
-        id: create_latest_release
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: latest-rCompatible
-          prerelease: true
-          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
-          files: |
-            app/build/outputs/apk/release/app-release.apk
-            app/build/outputs/apk/release/output-metadata.json
-
-      - name: Send Telegram message
-        run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_CHANNEL_ID }}\",\"text\":\"**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Download A6+\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk\"}]]}}'"
-
-      - name: Send Notification
-        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
-        uses: fjogeleit/http-request-action@master
-        with:
-          url: 'https://fcm.googleapis.com/fcm/send'
-          method: 'POST'
-          customHeaders: '{"Authorization":"key=${{ secrets.FCM_KEY }}"}'
-          data: '{"to": "/topics/update-v3-r-release","data": {"version": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},"type": "update","notification": {"body": "Update available. ${{ steps.commitMessage.outputs.message }}","title": "Update"}}}'
