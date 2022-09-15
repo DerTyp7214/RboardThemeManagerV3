@@ -1,4 +1,5 @@
 <resources>
+
     <style name="Theme.RboardThemeManagerV3" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
 
@@ -16,6 +17,8 @@
         <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
         <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView</item>
         <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
+
+        <item name="android:windowSplashScreenBrandingImage">@drawable/dertyp_branding</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3" />
