@@ -22,6 +22,8 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.topjohnwu.superuser.Shell
 import com.topjohnwu.superuser.io.SuFile
+import de.dertyp7214.rboardcomponents.utils.doAsync
+import de.dertyp7214.rboardcomponents.utils.doInBackground
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R

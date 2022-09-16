@@ -23,7 +23,7 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.RboardRepo
 import de.dertyp7214.rboardthememanager.screens.ManageRepo
-import de.dertyp7214.rboardthememanager.utils.doAsync
+import de.dertyp7214.rboardcomponents.utils.doAsync
 
 class Repos(
     private val activity: AppCompatActivity,

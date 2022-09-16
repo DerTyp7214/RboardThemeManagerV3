@@ -13,7 +13,7 @@ import com.google.android.material.card.MaterialCardView
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.data.ThemePack
-import de.dertyp7214.rboardthememanager.utils.asyncInto
+import de.dertyp7214.rboardcomponents.utils.asyncInto
 
 class NewsFeedAdapter(
     private val news: List<NewsCards.CardElement>,

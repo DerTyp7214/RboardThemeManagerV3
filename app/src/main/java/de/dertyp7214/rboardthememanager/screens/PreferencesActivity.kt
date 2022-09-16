@@ -13,7 +13,7 @@ import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.dertyp7214.rboardthememanager.core.addCallback
 import de.dertyp7214.rboardthememanager.databinding.ActivityPreferencesBinding
 import de.dertyp7214.rboardthememanager.preferences.Preferences
-import de.dertyp7214.rboardthememanager.utils.doAsync
+import de.dertyp7214.rboardcomponents.utils.doAsync
 import dev.chrisbanes.insetter.applyInsetter
 
 class PreferencesActivity : AppCompatActivity() {
