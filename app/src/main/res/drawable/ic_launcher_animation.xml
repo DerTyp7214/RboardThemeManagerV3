@@ -5,7 +5,7 @@
         <aapt:attr name="android:animation">
             <set android:ordering="together">
                 <objectAnimator
-                    android:duration="234"
+                    android:duration="164"
                     android:pathData="M 150,206.75C 150,202.987 150,189.08599999999998 150,180.791"
                     android:propertyName="translateXY"
                     android:propertyXName="translateX"
@@ -16,12 +16,12 @@
                     </aapt:attr>
                 </objectAnimator>
                 <objectAnimator
-                    android:duration="768"
+                    android:duration="538"
                     android:pathData="M 150,180.791C 150,173.078 150,131.779 150,125.5"
                     android:propertyName="translateXY"
                     android:propertyXName="translateX"
                     android:propertyYName="translateY"
-                    android:startOffset="734">
+                    android:startOffset="664">
                     <aapt:attr name="android:interpolator">
                         <pathInterpolator android:pathData="M 0.0,0.0 c0.333,0 0.702,1 1.0,1.0" />
                     </aapt:attr>
@@ -33,7 +33,7 @@
         <aapt:attr name="android:animation">
             <set android:ordering="together">
                 <objectAnimator
-                    android:duration="1001"
+                    android:duration="701"
                     android:propertyName="scaleX"
                     android:startOffset="500"
                     android:valueFrom="0.11086"
@@ -44,7 +44,7 @@
                     </aapt:attr>
                 </objectAnimator>
                 <objectAnimator
-                    android:duration="1001"
+                    android:duration="701"
                     android:propertyName="scaleY"
                     android:startOffset="500"
                     android:valueFrom="0.11086"
@@ -61,7 +61,7 @@
         <aapt:attr name="android:animation">
             <set android:ordering="together">
                 <objectAnimator
-                    android:duration="1001"
+                    android:duration="701"
                     android:propertyName="scaleX"
                     android:startOffset="500"
                     android:valueFrom="1"
@@ -72,7 +72,7 @@
                     </aapt:attr>
                 </objectAnimator>
                 <objectAnimator
-                    android:duration="1001"
+                    android:duration="701"
                     android:propertyName="scaleY"
                     android:startOffset="500"
                     android:valueFrom="1"
@@ -89,7 +89,7 @@
         <aapt:attr name="android:animation">
             <set android:ordering="together">
                 <objectAnimator
-                    android:duration="401"
+                    android:duration="281"
                     android:propertyName="scaleX"
                     android:startOffset="500"
                     android:valueFrom="1"
@@ -100,7 +100,7 @@
                     </aapt:attr>
                 </objectAnimator>
                 <objectAnimator
-                    android:duration="401"
+                    android:duration="281"
                     android:propertyName="scaleY"
                     android:startOffset="500"
                     android:valueFrom="1"
@@ -117,7 +117,7 @@
         <aapt:attr name="android:animation">
             <set android:ordering="together">
                 <objectAnimator
-                    android:duration="401"
+                    android:duration="281"
                     android:propertyName="scaleX"
                     android:startOffset="500"
                     android:valueFrom="1"
@@ -128,7 +128,7 @@
                     </aapt:attr>
                 </objectAnimator>
                 <objectAnimator
-                    android:duration="401"
+                    android:duration="281"
                     android:propertyName="scaleY"
                     android:startOffset="500"
                     android:valueFrom="1"
@@ -145,7 +145,7 @@
         <aapt:attr name="android:animation">
             <set android:ordering="together">
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="105"
                     android:propertyName="scaleX"
                     android:startOffset="500"
                     android:valueFrom="1"
@@ -156,7 +156,7 @@
                     </aapt:attr>
                 </objectAnimator>
                 <objectAnimator
-                    android:duration="150"
+                    android:duration="105"
                     android:propertyName="scaleY"
                     android:startOffset="500"
                     android:valueFrom="1"
@@ -173,7 +173,7 @@
         <aapt:attr name="android:animation">
             <set android:ordering="together">
                 <objectAnimator
-                    android:duration="1700"
+                    android:duration="1500"
                     android:propertyName="translateX"
                     android:startOffset="0"
                     android:valueFrom="0"
