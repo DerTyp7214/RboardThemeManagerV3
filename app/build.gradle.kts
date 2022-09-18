@@ -78,7 +78,7 @@ dependencies {
 
     implementation("com.github.DerTyp7214:PreferencesPlus:1.0")
 
-    implementation("com.google.protobuf:protobuf-kotlin:3.21.5")
+    implementation("com.google.protobuf:protobuf-kotlin:3.21.6")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0-alpha01")

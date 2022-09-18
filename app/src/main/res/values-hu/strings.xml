@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="search">Keresés</string>
     <string name="title_themes">Témák</string>
     <string name="title_downloads">Letöltések</string>
@@ -184,7 +184,7 @@
     <string name="xda_thread">XDA Thread</string>
     <string name="github_repo">GitHub Könyvtár</string>
     <string name="translators">Fordítók</string>
-    <string name ="applied_theme">(alkalmazva)</string>
+    <string name="applied_theme">(alkalmazva)</string>
     <string name="keyboard_height_ratio">Billentyűzet magassági arány</string>
     <string name="max_short">0,50 Max-alacsony</string>
     <string name="extra_extra_short">0,65 Extra-extra-alacsony</string>

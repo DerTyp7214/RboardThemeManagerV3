@@ -3,10 +3,10 @@
     <string name="app_name">Rboard Theme Manager V3</string>
 
     <string name="app_updated">App updated</string>
+    <string name="nothing" />
+
     <string name="pref_gboard">Gboard</string>
     <string name="magisk">Magisk</string>
-    <string name="nothing" />
-    <string name="magisk_github_url">https://github.com/topjohnwu/Magisk</string>
     <string name="default_notification_channel_id">push_channel</string>
     <string name="download_notification_channel_id">download_channel</string>
     <string name="i_have_not_read_this_text">I have not read the popup and still shared this "error". Please ban me!</string>
@@ -26,9 +26,10 @@
     <string name="dan_github">https://github.com/Magisk-Modules-Repo/HideNavBar</string>
     <string name="xda_thread_url">https://forum.xda-developers.com/t/app-rboard-theme-manager.4331445</string>
     <string name="github_repo_url">https://github.com/DerTyp7214/RboardThemeManagerV3</string>
+    <string name="magisk_github_url">https://github.com/topjohnwu/Magisk</string>
     <string name="hungarian">Hungarian</string>
     <string name="italian">Italian</string>
-    <string name="alessandro">Alessandro Murru</string>
+    <string name="alpha4041">Alpha4041</string>
     <string name="polish">Polish</string>
     <string name="russian">Russian</string>
     <string name="ruslan">Ruslan</string>

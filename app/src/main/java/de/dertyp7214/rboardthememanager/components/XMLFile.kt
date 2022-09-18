@@ -8,7 +8,6 @@ import de.dertyp7214.rboardthememanager.core.readXML
 import de.dertyp7214.rboardthememanager.core.times
 import de.dertyp7214.rboardthememanager.core.writeFile
 import java.util.*
-import kotlin.collections.HashMap
 
 @Suppress("unused")
 class XMLFile(

@@ -2,7 +2,6 @@
 
 package de.dertyp7214.rboardthememanager.screens
 
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.ACTION_SEND
@@ -20,14 +19,11 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.animation.doOnEnd
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
-import androidx.core.view.marginBottom
 import androidx.core.widget.NestedScrollView
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -92,7 +88,6 @@ class MainActivity : AppCompatActivity() {
     private val callbacks: ArrayList<OnBackPressedCallback> = arrayListOf()
 
     @SuppressLint("NotifyDataSetChanged", "ShowToast")
-    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

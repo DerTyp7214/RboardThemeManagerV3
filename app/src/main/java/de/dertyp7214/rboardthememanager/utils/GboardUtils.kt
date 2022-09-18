@@ -12,12 +12,10 @@ import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config.FLAG_PATH
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
+import de.dertyp7214.rboardthememanager.components.XMLEntry
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.copy
-import de.dertyp7214.rboardthememanager.core.openStream
-import de.dertyp7214.rboardthememanager.core.readXML
 import de.dertyp7214.rboardthememanager.preferences.Flags
-import de.dertyp7214.rboardthememanager.components.XMLEntry
 
 object GboardUtils {
     @Suppress("DEPRECATION")

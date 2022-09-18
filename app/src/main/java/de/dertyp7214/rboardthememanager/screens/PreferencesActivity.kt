@@ -103,6 +103,7 @@ class PreferencesActivity : AppCompatActivity() {
         onBackPressedDispatcher.onBackPressed()
         return true
     }
+
     override fun onDestroy() {
         callbacks.forEach { it.remove() }
         super.onDestroy()

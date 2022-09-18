@@ -1,4 +1,5 @@
 <resources>
+
     <style name="Theme.RboardThemeManager.Colors" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer</item>
         <item name="colorOnError">@color/md_theme_light_onError</item>
@@ -33,7 +34,7 @@
 
         <item name="android:statusBarColor">?android:attr/colorBackground</item>
         <item name="android:navigationBarColor">?attr/colorSurfaceVariant</item>
-        <item name="android:windowLightNavigationBar" >?attr/isLightTheme</item>
+        <item name="android:windowLightNavigationBar">?attr/isLightTheme</item>
 
         <item name="floatingActionButtonStyle">?floatingActionButtonSecondaryStyle</item>
         <item name="popupMenuStyle">@style/PopupStyle</item>

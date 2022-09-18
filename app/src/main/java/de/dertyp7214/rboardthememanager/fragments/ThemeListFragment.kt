@@ -107,7 +107,10 @@ class ThemeListFragment : Fragment() {
             5.dpToPx(requireContext()).toInt()
         )
         refreshLayout.setProgressBackgroundColorSchemeColor(requireActivity().getAttr(R.attr.colorBackgroundFloating))
-        refreshLayout.setColorSchemeColors(requireActivity().getAttr(R.attr.colorPrimary), requireActivity().getAttr(R.attr.colorTertiary))
+        refreshLayout.setColorSchemeColors(
+            requireActivity().getAttr(R.attr.colorPrimary),
+            requireActivity().getAttr(R.attr.colorTertiary)
+        )
 
         recyclerView.layoutManager = LayoutManager(requireContext())
         recyclerView.setHasFixedSize(false)

@@ -30,7 +30,8 @@ class UsageDialog(
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context = requireContext()
-        return ComponentDialog(context,
+        return ComponentDialog(
+            context,
             ThemeUtils.getTheme(context)
                 ?: com.google.android.material.R.attr.dynamicColorThemeOverlay
         )

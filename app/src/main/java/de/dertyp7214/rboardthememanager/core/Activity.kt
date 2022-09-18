@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.DialogInterface
 import android.content.SharedPreferences
-import android.content.res.Resources
 import android.graphics.RenderEffect
 import android.graphics.Shader
 import android.net.Uri
@@ -24,7 +23,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.color.DynamicColors
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
 import de.dertyp7214.rboardthememanager.R
@@ -85,7 +83,6 @@ fun Activity.openDialog(
     }
     return MaterialAlertDialogBuilder(this)
         .setCancelable(cancelable)
-        .setCancelable(false)
         .setMessage(message)
         .setTitle(title)
         .setPositiveButton(positiveText) { dialogInterface, _ -> positive(dialogInterface) }

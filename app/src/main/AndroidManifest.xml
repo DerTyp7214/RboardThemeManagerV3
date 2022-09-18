@@ -87,8 +87,8 @@
             android:theme="@style/Theme.RboardThemeManagerV3.Info" />
         <activity
             android:name=".screens.MainActivity"
-            android:screenOrientation="portrait"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.RboardThemeManagerV3.Main"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>

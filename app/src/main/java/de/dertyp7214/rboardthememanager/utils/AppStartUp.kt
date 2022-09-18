@@ -40,7 +40,6 @@ import org.json.JSONObject
 import java.io.File
 import java.net.URL
 
-
 class AppStartUp(private val activity: AppCompatActivity) {
     private val checkUpdateUrl by lazy {
         "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/output-metadata.json"
@@ -203,6 +202,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 "getprop ro.com.google.ime.theme_file".runAsCommand {
                     if (it.first().isNotEmpty()) Config.lightTheme = it.first()
                 }
+
                 val importFlagsResultLauncher =
                     registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                         val resultData = result.data
@@ -227,7 +227,6 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     }
                 }
             }
-
 
             when {
                 initialized && scheme != "content" && data != null -> {
@@ -390,7 +389,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                             openUrl(gboardPlayStoreUrl)
                             finish()
                         }
-                        ! rootAccess -> NoRootDialog.open(this)
+                        !rootAccess -> NoRootDialog.open(this)
                         else -> checkForUpdate { update ->
                             checkedForUpdate = true
                             isReady = true

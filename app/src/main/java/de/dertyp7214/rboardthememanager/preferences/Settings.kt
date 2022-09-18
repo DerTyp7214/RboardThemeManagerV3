@@ -1,6 +1,5 @@
 package de.dertyp7214.rboardthememanager.preferences
 
-
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
@@ -245,19 +244,6 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                 Toast.makeText(this, R.string.gboard_cache_cleared, Toast.LENGTH_LONG).show()
             }
         ),
-        LOGS(
-            "LOGS",
-            R.string.logs,
-            R.string.logs_long,
-            -1,
-            "",
-            TYPE.STRING,
-            listOf(),
-            {
-                Logs::class.java[this]
-            },
-            BuildConfig.DEBUG
-        ),
         CLEAR_RECENT_EMOJIS(
             "clear_recent_emojis",
             R.string.clear_recent_emojis,
@@ -319,6 +305,19 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                     }, 500)
                 }
             }
+        ),
+        LOGS(
+            "LOGS",
+            R.string.logs,
+            R.string.logs_long,
+            -1,
+            "",
+            TYPE.STRING,
+            listOf(),
+            {
+                Logs::class.java[this]
+            },
+            BuildConfig.DEBUG
         );
 
         inline fun <reified T> getValue(context: Context, defaultValue: T? = null): T? {
@@ -334,7 +333,6 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             .let { if (it >= 0) recyclerView.scrollToPosition(it) }
     }
 
-
     override fun getExtraView(): View? = null
 
     override fun onBackPressed(callback: () -> Unit) {
@@ -345,7 +343,8 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
         SETTINGS.values().filter { it.visible }
             .filter {
                 !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) &&
-                        !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
+                        !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) &&
+                        !(it == SETTINGS.APP_STYLE && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q)
             }
             .forEach { item ->
                 val pref: Preference = when (item.type) {
