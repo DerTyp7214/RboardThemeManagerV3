@@ -6,26 +6,20 @@
             <set android:ordering="together">
                 <objectAnimator
                     android:duration="164"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
                     android:pathData="M 150,206.75C 150,202.987 150,189.08599999999998 150,180.791"
                     android:propertyName="translateXY"
                     android:propertyXName="translateX"
                     android:propertyYName="translateY"
-                    android:startOffset="500">
-                    <aapt:attr name="android:interpolator">
-                        <pathInterpolator android:pathData="M 0.0,0.0 c0.333,0 0.667,1 1.0,1.0" />
-                    </aapt:attr>
-                </objectAnimator>
+                    android:startOffset="500" />
                 <objectAnimator
                     android:duration="538"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
                     android:pathData="M 150,180.791C 150,173.078 150,131.779 150,125.5"
                     android:propertyName="translateXY"
                     android:propertyXName="translateX"
                     android:propertyYName="translateY"
-                    android:startOffset="664">
-                    <aapt:attr name="android:interpolator">
-                        <pathInterpolator android:pathData="M 0.0,0.0 c0.333,0 0.702,1 1.0,1.0" />
-                    </aapt:attr>
-                </objectAnimator>
+                    android:startOffset="664" />
             </set>
         </aapt:attr>
     </target>
@@ -34,26 +28,20 @@
             <set android:ordering="together">
                 <objectAnimator
                     android:duration="701"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
                     android:propertyName="scaleX"
                     android:startOffset="500"
                     android:valueFrom="0.11086"
                     android:valueTo="1"
-                    android:valueType="floatType">
-                    <aapt:attr name="android:interpolator">
-                        <pathInterpolator android:pathData="M 0.0,0.0 c0.333,0 0.667,1 1.0,1.0" />
-                    </aapt:attr>
-                </objectAnimator>
+                    android:valueType="floatType" />
                 <objectAnimator
                     android:duration="701"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
                     android:propertyName="scaleY"
                     android:startOffset="500"
                     android:valueFrom="0.11086"
                     android:valueTo="1"
-                    android:valueType="floatType">
-                    <aapt:attr name="android:interpolator">
-                        <pathInterpolator android:pathData="M 0.0,0.0 c0.333,0 0.667,1 1.0,1.0" />
-                    </aapt:attr>
-                </objectAnimator>
+                    android:valueType="floatType" />
             </set>
         </aapt:attr>
     </target>
@@ -62,26 +50,20 @@
             <set android:ordering="together">
                 <objectAnimator
                     android:duration="701"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
                     android:propertyName="scaleX"
                     android:startOffset="500"
                     android:valueFrom="1"
                     android:valueTo="0"
-                    android:valueType="floatType">
-                    <aapt:attr name="android:interpolator">
-                        <pathInterpolator android:pathData="M 0.0,0.0 c0.333,0 0.667,1 1.0,1.0" />
-                    </aapt:attr>
-                </objectAnimator>
+                    android:valueType="floatType" />
                 <objectAnimator
                     android:duration="701"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
                     android:propertyName="scaleY"
                     android:startOffset="500"
                     android:valueFrom="1"
                     android:valueTo="0"
-                    android:valueType="floatType">
-                    <aapt:attr name="android:interpolator">
-                        <pathInterpolator android:pathData="M 0.0,0.0 c0.333,0 0.667,1 1.0,1.0" />
-                    </aapt:attr>
-                </objectAnimator>
+                    android:valueType="floatType" />
             </set>
         </aapt:attr>
     </target>
@@ -90,26 +72,20 @@
             <set android:ordering="together">
                 <objectAnimator
                     android:duration="281"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
                     android:propertyName="scaleX"
                     android:startOffset="500"
                     android:valueFrom="1"
                     android:valueTo="0"
-                    android:valueType="floatType">
-                    <aapt:attr name="android:interpolator">
-                        <pathInterpolator android:pathData="M 0.0,0.0 c0.333,0 0.667,1 1.0,1.0" />
-                    </aapt:attr>
-                </objectAnimator>
+                    android:valueType="floatType" />
                 <objectAnimator
                     android:duration="281"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
                     android:propertyName="scaleY"
                     android:startOffset="500"
                     android:valueFrom="1"
                     android:valueTo="0"
-                    android:valueType="floatType">
-                    <aapt:attr name="android:interpolator">
-                        <pathInterpolator android:pathData="M 0.0,0.0 c0.333,0 0.667,1 1.0,1.0" />
-                    </aapt:attr>
-                </objectAnimator>
+                    android:valueType="floatType" />
             </set>
         </aapt:attr>
     </target>
@@ -118,26 +94,20 @@
             <set android:ordering="together">
                 <objectAnimator
                     android:duration="281"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
                     android:propertyName="scaleX"
                     android:startOffset="500"
                     android:valueFrom="1"
                     android:valueTo="0"
-                    android:valueType="floatType">
-                    <aapt:attr name="android:interpolator">
-                        <pathInterpolator android:pathData="M 0.0,0.0 c0.333,0 0.667,1 1.0,1.0" />
-                    </aapt:attr>
-                </objectAnimator>
+                    android:valueType="floatType" />
                 <objectAnimator
                     android:duration="281"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
                     android:propertyName="scaleY"
                     android:startOffset="500"
                     android:valueFrom="1"
                     android:valueTo="0"
-                    android:valueType="floatType">
-                    <aapt:attr name="android:interpolator">
-                        <pathInterpolator android:pathData="M 0.0,0.0 c0.333,0 0.667,1 1.0,1.0" />
-                    </aapt:attr>
-                </objectAnimator>
+                    android:valueType="floatType" />
             </set>
         </aapt:attr>
     </target>
@@ -146,26 +116,20 @@
             <set android:ordering="together">
                 <objectAnimator
                     android:duration="105"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
                     android:propertyName="scaleX"
                     android:startOffset="500"
                     android:valueFrom="1"
                     android:valueTo="0"
-                    android:valueType="floatType">
-                    <aapt:attr name="android:interpolator">
-                        <pathInterpolator android:pathData="M 0.0,0.0 c0.333,0 0.667,1 1.0,1.0" />
-                    </aapt:attr>
-                </objectAnimator>
+                    android:valueType="floatType" />
                 <objectAnimator
                     android:duration="105"
+                    android:interpolator="@android:anim/accelerate_decelerate_interpolator"
                     android:propertyName="scaleY"
                     android:startOffset="500"
                     android:valueFrom="1"
                     android:valueTo="0"
-                    android:valueType="floatType">
-                    <aapt:attr name="android:interpolator">
-                        <pathInterpolator android:pathData="M 0.0,0.0 c0.333,0 0.667,1 1.0,1.0" />
-                    </aapt:attr>
-                </objectAnimator>
+                    android:valueType="floatType" />
             </set>
         </aapt:attr>
     </target>
