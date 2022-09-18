@@ -19,6 +19,7 @@
         <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
 
         <item name="android:windowSplashScreenBrandingImage">@drawable/dertyp_branding</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_animation</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3" />

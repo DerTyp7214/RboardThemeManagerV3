@@ -15,7 +15,7 @@ import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
-import de.dertyp7214.rboardthememanager.utils.doAsync
+import de.dertyp7214.rboardcomponents.utils.doAsync
 
 class ThemePackAdapter(
     private val list: List<ThemePack>,

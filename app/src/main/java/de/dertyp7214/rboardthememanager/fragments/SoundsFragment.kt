@@ -15,8 +15,8 @@ import de.dertyp7214.rboardthememanager.core.applyTransitionsViewCreated
 import de.dertyp7214.rboardthememanager.core.get
 import de.dertyp7214.rboardthememanager.data.SoundPack
 import de.dertyp7214.rboardthememanager.utils.SoundHelper
-import de.dertyp7214.rboardthememanager.utils.asyncInto
-import de.dertyp7214.rboardthememanager.utils.doAsyncCallback
+import de.dertyp7214.rboardcomponents.utils.asyncInto
+import de.dertyp7214.rboardcomponents.utils.doAsyncCallback
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 
 class SoundsFragment : Fragment() {
