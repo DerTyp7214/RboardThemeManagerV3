@@ -7,7 +7,6 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
-import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.SwitchKeyboardWidgetConfigureBinding
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
@@ -19,7 +18,6 @@ class SwitchKeyboardWidgetConfigureActivity : Activity() {
     private lateinit var binding: SwitchKeyboardWidgetConfigureBinding
 
     public override fun onCreate(icicle: Bundle?) {
-        this.applyTheme()
         super.onCreate(icicle)
 
         setResult(RESULT_CANCELED)

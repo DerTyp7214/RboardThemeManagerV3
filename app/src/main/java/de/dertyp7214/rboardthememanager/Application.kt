@@ -12,8 +12,8 @@ import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.dertyp7214.logs.helpers.Logger
 import com.downloader.PRDownloader
-import com.google.android.material.color.DynamicColors
 import de.dertyp7214.colorutilsc.ColorUtilsC
+import de.dertyp7214.rboardcomponents.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.core.hasRoot
 import de.dertyp7214.rboardthememanager.core.isReachable
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
@@ -44,7 +44,7 @@ class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        DynamicColors.applyToActivitiesIfAvailable(this)
+        ThemeUtils.registerActivityLifecycleCallbacks(this)
         PRDownloader.initialize(this)
         doInBackground {
             if (!URL("https://bin.utwitch.net").isReachable())

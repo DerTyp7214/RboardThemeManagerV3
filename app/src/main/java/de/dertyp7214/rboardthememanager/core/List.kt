@@ -9,14 +9,6 @@ operator fun <E> List<E>.times(times: Int): ArrayList<E> {
     return list
 }
 
-fun List<String>.toMap(): Map<String, Boolean> {
-    return associate {
-        val bool = it.startsWith("true:")
-        val str = it.removePrefix("true:").removePrefix("false:")
-        Pair(str, bool)
-    }
-}
-
 inline fun <E> List<E>.forEachIt(action: (E) -> Unit) = iterator().forEach(action)
 
 inline fun <E> List<E>.forEachIndexedIt(action: (Int, E) -> Unit) =
@@ -26,6 +18,15 @@ inline fun <E> List<E>.filterIt(to: ArrayList<E> = ArrayList(), predicate: (E) -
     to.also { list ->
         forEachIt { if (predicate(it)) list.add(it) }
     }
+
+fun List<String>.toMap(): Map<String, Boolean> {
+    return associate {
+        val bool = it.startsWith("true:")
+        val str = it.removePrefix("true:").removePrefix("false:")
+        Pair(str, bool)
+    }
+}
+
 fun List<ThemePackList.Object>.toPackList() = map {
     ThemePack(
         it.getAuthor(),

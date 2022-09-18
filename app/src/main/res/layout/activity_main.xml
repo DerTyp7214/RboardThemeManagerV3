@@ -27,12 +27,11 @@
             app:navGraph="@navigation/home"
             tools:layout="@layout/fragment_theme_list" />
 
-        <de.dertyp7214.rboardthememanager.components.SearchToolbar
+        <de.dertyp7214.rboardcomponents.components.SearchToolbar
             android:id="@+id/search_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:background="?android:attr/colorBackground"
             android:translationZ="2dp"
             app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView"
             app:layout_constraintEnd_toEndOf="parent"

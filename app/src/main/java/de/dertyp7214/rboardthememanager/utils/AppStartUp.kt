@@ -29,6 +29,7 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.OutputMetadata
+import de.dertyp7214.rboardthememanager.dialogs.NoRootDialog
 import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 import de.dertyp7214.rboardthememanager.screens.ShareFlags
@@ -38,7 +39,6 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 import java.net.URL
-
 
 class AppStartUp(private val activity: AppCompatActivity) {
     private val checkUpdateUrl by lazy {
@@ -202,6 +202,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 "getprop ro.com.google.ime.theme_file".runAsCommand {
                     if (it.first().isNotEmpty()) Config.lightTheme = it.first()
                 }
+
                 val importFlagsResultLauncher =
                     registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                         val resultData = result.data
@@ -217,18 +218,15 @@ class AppStartUp(private val activity: AppCompatActivity) {
 
                 GboardUtils.flagsChanged { flags ->
                     isReady = true
-                    openDialog(R.string.load_flags_long, R.string.load_flags) {
-                        val oldFlags = XMLFile(initString = flags)
+                    openDialog(R.string.new_flags_long, R.string.load_flags) {
                         val newFlags = XMLFile(path = Flags.FILES.FLAGS.filePath, empty = true)
-                        val currentFlags = XMLFile(path = Flags.FILES.FLAGS.filePath)
-                        oldFlags.filter(currentFlags::entryNotEquals).forEach(newFlags::setValue)
+                        flags.forEach(newFlags::setValue)
                         openImportFlags(importFlagsResultLauncher) {
                             newFlags.simpleMap()
                         }
                     }
                 }
             }
-
 
             when {
                 initialized && scheme != "content" && data != null -> {
@@ -391,14 +389,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                             openUrl(gboardPlayStoreUrl)
                             finish()
                         }
-                        !rootAccess -> openDialog(
-                            R.string.cant_use_app,
-                            R.string.not_rooted,
-                            false,
-                            null
-                        ) {
-                            finishAndRemoveTask()
-                        }
+                        !rootAccess -> NoRootDialog.open(this)
                         else -> checkForUpdate { update ->
                             checkedForUpdate = true
                             isReady = true

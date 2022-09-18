@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="Theme.RboardThemeManager.Colors" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorOnErrorContainer">@color/md_theme_dark_onErrorContainer</item>
         <item name="colorOnError">@color/md_theme_dark_onError</item>

@@ -282,7 +282,8 @@
       "type": "BOOLEAN",
       "file": "FLAGS",
       "visible": false
-    },{
+    },
+    {
       "key": "silk",
       "title": "silk",
       "summary": "silk_details",

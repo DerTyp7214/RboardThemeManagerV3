@@ -23,7 +23,6 @@ class InstallPackActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInstallPackBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        applyTheme(installPack = true)
         super.onCreate(savedInstanceState)
         binding = ActivityInstallPackBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -51,7 +50,6 @@ class InstallPackActivity : AppCompatActivity() {
         toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
-
         toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.select_all) {
                 if (adapter.getSelected().size == themes.size) adapter.clearSelection()
@@ -69,6 +67,7 @@ class InstallPackActivity : AppCompatActivity() {
             setResult(RESULT_OK)
             finish()
         }
+
         recyclerview.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (dy > 0) fab.hide() else if (dy < 0) fab.show()
@@ -94,7 +93,7 @@ class InstallPackActivity : AppCompatActivity() {
                 list
             } ?: listOf()
         }) {
-            val meta = SuFile(SuFile(it.firstOrNull()?.path ?: "").parent, "pack.meta")
+            val meta = File(File(it.firstOrNull()?.path ?: "").parent, "pack.meta")
             themes.clear()
             themes.addAll(it)
             adapter.notifyDataChanged()
@@ -107,7 +106,7 @@ class InstallPackActivity : AppCompatActivity() {
             if (meta.exists()) {
                 var name: String? = null
                 var author: String? = null
-                meta.readString().apply {
+                meta.readText().apply {
                     val matcher = Pattern.compile("(name|author)=(.*)\\n").matcher(this)
                     while (matcher.find()) {
                         when (matcher.group(1)) {

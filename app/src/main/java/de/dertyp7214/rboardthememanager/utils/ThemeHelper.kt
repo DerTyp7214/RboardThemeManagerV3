@@ -19,10 +19,10 @@ import androidx.core.content.FileProvider
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.get
 import com.dertyp7214.logs.helpers.Logger
-import de.dertyp7214.colorutilsc.ColorUtilsC
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import com.topjohnwu.superuser.io.SuFile
+import de.dertyp7214.colorutilsc.ColorUtilsC
 import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
@@ -231,6 +231,7 @@ object ThemeUtils {
 
     private fun buildPreinstalledThemesList(): List<ThemeDataClass> {
         val themes = arrayListOf<ThemeDataClass>()
+
         val themeNames = listOf(
             "color_black", "color_blue", "color_blue_grey", "color_brown", "color_cyan",
             "color_deep_purple", "color_green", "color_light_pink", "color_pink", "color_red",
@@ -414,12 +415,14 @@ object ThemeUtils {
             })
         }
     }
+
     fun shareTheme(
         activity: Activity,
         themePack: File,
         install: Boolean = true,
         packageName: String? = null
-    ) {        val uri = FileProvider.getUriForFile(
+    ) {
+        val uri = FileProvider.getUriForFile(
             activity,
             activity.packageName,
             themePack

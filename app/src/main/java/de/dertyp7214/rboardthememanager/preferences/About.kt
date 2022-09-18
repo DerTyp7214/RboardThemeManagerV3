@@ -146,7 +146,7 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
         }
         builder.pref("it") {
             titleRes = R.string.italian
-            summaryRes = R.string.alessandro
+            summaryRes = R.string.alpha4041
             useTint = false
             iconRes = FlagKit.getResId(activity, "it")
         }

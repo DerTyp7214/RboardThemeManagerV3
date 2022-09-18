@@ -1,4 +1,5 @@
 <resources>
+
     <style name="Theme.RboardThemeManager.Colors" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorOnErrorContainer">@color/md_theme_light_onErrorContainer</item>
         <item name="colorOnError">@color/md_theme_light_onError</item>
@@ -58,10 +59,11 @@
     </style>
 
     <style name="Theme.RboardThemeManagerV3.InstallPack" parent="Theme.RboardThemeManagerV3">
-        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
+        <item name="android:statusBarColor">@color/color_primary_0_10_overlay</item>
     </style>
+
     <style name="Theme.RboardThemeManagerV3.ShareFlags" parent="Theme.RboardThemeManagerV3">
-        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
+        <item name="android:statusBarColor">@color/color_primary_0_10_overlay</item>
     </style>
 
 </resources>

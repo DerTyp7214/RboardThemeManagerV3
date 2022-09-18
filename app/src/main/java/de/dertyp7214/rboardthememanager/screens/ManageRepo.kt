@@ -11,7 +11,6 @@ import com.google.gson.Gson
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ManageRepoThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
-import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.core.getTextFromUrl
 import de.dertyp7214.rboardthememanager.core.safeParse
 import de.dertyp7214.rboardthememanager.data.ThemePack
@@ -37,7 +36,6 @@ class ManageRepo : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
-        applyTheme(installPack = true)
         super.onCreate(savedInstanceState)
         binding = ActivityManageRepoBinding.inflate(layoutInflater)
         setContentView(binding.root)

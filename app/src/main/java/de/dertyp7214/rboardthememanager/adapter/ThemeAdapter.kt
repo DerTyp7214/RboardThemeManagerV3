@@ -19,6 +19,7 @@ import androidx.core.graphics.get
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.color.MaterialColors
 import de.dertyp7214.colorutilsc.ColorUtilsC
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.getAttr
@@ -167,9 +168,11 @@ class ThemeAdapter(
                 ImageView(context).let { view ->
                     view.setImageBitmap(themeDataClass.image ?: default)
                     view.colorFilter = themeDataClass.colorFilter
-                    val color = view.drawable.toBitmap().let {
-                        it[0, it.height / 2]
-                    }
+                    val color = MaterialColors.harmonizeWithPrimary(
+                        context, view.drawable.toBitmap().let {
+                            it[0, it.height / 2]
+                        }
+                    )
                     Pair(color, ColorUtilsC.calculateLuminance(color) > .4)
                 }
             }, { colorCache[index] = it })
@@ -183,9 +186,11 @@ class ThemeAdapter(
         } ?: ImageView(context).let { view ->
             view.setImageBitmap(dataClass.image ?: default)
             view.colorFilter = dataClass.colorFilter
-            val color = view.drawable.toBitmap().let {
-                it[0, it.height / 2]
-            }
+            val color = MaterialColors.harmonizeWithPrimary(
+                context, view.drawable.toBitmap().let {
+                    it[0, it.height / 2]
+                }
+            )
             colorCache[position] = Pair(color, ColorUtilsC.calculateLuminance(color) > .4)
             color
         }

@@ -4,5 +4,6 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/colorutilsc" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/mathc" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/rboardcomponents" vcs="Git" />
   </component>
 </project>

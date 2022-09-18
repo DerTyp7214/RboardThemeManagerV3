@@ -8,7 +8,6 @@ import de.dertyp7214.rboardthememanager.core.readXML
 import de.dertyp7214.rboardthememanager.core.times
 import de.dertyp7214.rboardthememanager.core.writeFile
 import java.util.*
-import kotlin.collections.HashMap
 
 @Suppress("unused")
 class XMLFile(
@@ -59,6 +58,9 @@ class XMLFile(
     fun entryEquals(entry: XMLEntry) = values[entry.name]?.value == entry.value
     fun entryNotEquals(entry: XMLEntry) = !entryEquals(entry)
     operator fun get(name: String): Any? = values[name]?.value
+
+    val entries: List<XMLEntry>
+        get() = values.values.toList()
 
     fun toString(comment: String = ""): String {
         return "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>\n${comment.let { if (it.isNotEmpty()) "<!--RBOARD:$comment-->\n" else "" }}<map>\n${

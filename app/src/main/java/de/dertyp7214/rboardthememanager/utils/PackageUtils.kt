@@ -38,8 +38,10 @@ object PackageUtils {
                         else -> {
                             intent = Intent(Intent.ACTION_VIEW).setDataAndType(
                                 Uri.fromFile(newFile),
-                                "application/vnd.android.package-archive");
-                            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
+                                "application/vnd.android.package-archive"
+                            );
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                             context.startActivity(intent)
                         }

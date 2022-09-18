@@ -4,45 +4,45 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108"
-    tools:ignore="VectorRaster" >
+    tools:ignore="VectorRaster">
     <path
         android:fillAlpha=".8"
         android:fillColor="@color/foreground_icon"
         android:pathData="M39.14 63.58c0-0.5 0.4-0.9 0.9-0.9h1.78c0.5 0 0.9 0.4 0.9 0.9v1.82c0 0.5-0.4 0.9-0.9 0.9h-1.78c-0.5 0-0.9-0.4-0.9-0.9v-1.82Z"
-        tools:fillColor="@color/foreground_icon"/>
+        tools:fillColor="@color/foreground_icon" />
     <path
         android:fillAlpha=".8"
         android:fillColor="@color/foreground_icon"
         android:pathData="M42.9 70.1c0-0.5 0.4-0.9 0.9-0.9h20.4c0.5 0 0.9 0.4 0.9 0.9v2c0 0.5-0.4 0.9-0.9 0.9H43.8c-0.5 0-0.9-0.4-0.9-0.9v-2Z"
-        tools:fillColor="@color/foreground_icon"/>
+        tools:fillColor="@color/foreground_icon" />
     <path
         android:fillAlpha=".8"
         android:fillColor="@color/foreground_icon"
         android:pathData="M46.66 62.68c-0.5 0-0.9 0.4-0.9 0.9v1.82c0 0.5 0.4 0.9 0.9 0.9h1.79c0.5 0 0.9-0.4 0.9-0.9v-1.82c0-0.5-0.4-0.9-0.9-0.9h-1.79Z"
-        tools:fillColor="@color/foreground_icon"/>
+        tools:fillColor="@color/foreground_icon" />
     <path
         android:fillAlpha=".8"
         android:fillColor="@color/foreground_icon"
         android:pathData="M58.65 63.58c0-0.5 0.4-0.9 0.9-0.9h1.78c0.5 0 0.9 0.4 0.9 0.9v1.82c0 0.5-0.4 0.9-0.9 0.9h-1.78c-0.5 0-0.9-0.4-0.9-0.9v-1.82Z"
-        tools:fillColor="@color/foreground_icon"/>
+        tools:fillColor="@color/foreground_icon" />
     <path
         android:fillAlpha=".8"
         android:fillColor="@color/foreground_icon"
         android:pathData="M66.18 62.68c-0.5 0-0.9 0.4-0.9 0.9v1.82c0 0.5 0.4 0.9 0.9 0.9h1.78c0.5 0 0.9-0.4 0.9-0.9v-1.82c0-0.5-0.4-0.9-0.9-0.9h-1.78Z"
-        tools:fillColor="@color/foreground_icon"/>
+        tools:fillColor="@color/foreground_icon" />
     <path
         android:fillAlpha=".8"
         android:fillColor="@color/foreground_icon"
         android:pathData="M39.14 57.3c0-0.5 0.4-0.9 0.9-0.9h1.78c0.5 0 0.9 0.4 0.9 0.9v1.82c0 0.5-0.4 0.9-0.9 0.9h-1.78c-0.5 0-0.9-0.4-0.9-0.9V57.3Z"
-        tools:fillColor="@color/foreground_icon"/>
+        tools:fillColor="@color/foreground_icon" />
     <path
         android:fillAlpha=".8"
         android:fillColor="@color/foreground_icon"
         android:pathData="M66.18 56.4c-0.5 0-0.9 0.4-0.9 0.9v1.82c0 0.5 0.4 0.9 0.9 0.9h1.78c0.5 0 0.9-0.4 0.9-0.9V57.3c0-0.5-0.4-0.9-0.9-0.9h-1.78Z"
-        tools:fillColor="@color/foreground_icon"/>
+        tools:fillColor="@color/foreground_icon" />
     <path
         android:fillColor="@color/foreground_icon"
         android:fillType="evenOdd"
         android:pathData="M45.56 38.61v13.84l8.36 7.12 8.45-7.14 0.07-13.82H45.56ZM44.66 35h18.67c1.48 0 2.68 1.22 2.67 2.72l-0.07 15.15c0 0.8-0.36 1.56-0.97 2.07L54.5 63.8c-0.34 0.28-0.82 0.28-1.14 0l-10.4-8.84c-0.6-0.52-0.95-1.28-0.95-2.08V37.7c0-1.5 1.2-2.71 2.67-2.71Z"
-        tools:fillColor="@color/foreground_icon"/>
+        tools:fillColor="@color/foreground_icon" />
 </vector>

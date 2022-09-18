@@ -8,6 +8,9 @@ on:
       - 'gradle/**'
       - 'build.gradle.kts'
       - 'gradle.properties'
+      - 'mathc/**'
+      - 'colorutilsc/**'
+      - 'rboardcomponents/**'
       - 'settings.gradle.kts'
       - '.github/workflows/buildCi.yml'
   workflow_dispatch:

@@ -4,3 +4,6 @@
 [submodule "mathc"]
 	path = mathc
 	url = git@github.com:DerTyp7214/MathC.git
+[submodule "rboardcomponents"]
+	path = rboardcomponents
+	url = git@github.com:DerTyp7214/RboardComponents.git

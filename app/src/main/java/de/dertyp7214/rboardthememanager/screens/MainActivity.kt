@@ -2,7 +2,6 @@
 
 package de.dertyp7214.rboardthememanager.screens
 
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.ACTION_SEND
@@ -20,14 +19,11 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.animation.doOnEnd
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
-import androidx.core.view.marginBottom
 import androidx.core.widget.NestedScrollView
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -53,6 +49,7 @@ import de.dertyp7214.rboardthememanager.adapter.MenuAdapter
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.MenuItem
 import de.dertyp7214.rboardthememanager.databinding.ActivityMainBinding
+import de.dertyp7214.rboardthememanager.dialogs.UsageDialog
 import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils.getSystemAutoTheme
@@ -91,9 +88,7 @@ class MainActivity : AppCompatActivity() {
     private val callbacks: ArrayList<OnBackPressedCallback> = arrayListOf()
 
     @SuppressLint("NotifyDataSetChanged", "ShowToast")
-    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
-        applyTheme(main = true)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -675,23 +670,17 @@ class MainActivity : AppCompatActivity() {
 
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
 
-        if (!preferenceManager.getBoolean("usageSet", false)
-        ) {
-            openDialog(
-                R.string.use_gboard,
-                R.string.module,
-                R.string.use_module,
-                R.string.gboard,
-                false,
-                {
-                    it.dismiss()
-                    preferenceManager.edit {
-                        putBoolean("useMagisk", false)
-                        putBoolean("usageSet", true)
-                    }
-                    Config.useMagisk = false
-                    ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
-                }) {
+        if (!preferenceManager.getBoolean("usageSet", false)) {
+            UsageDialog.open(this, onGboard = {
+                it.dismiss()
+                preferenceManager.edit {
+                    putBoolean("useMagisk", false)
+                    putBoolean("usageSet", true)
+                }
+                Config.useMagisk = false
+                ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
+            }, onMagisk = {
+                it.dismiss()
                 preferenceManager.edit {
                     putBoolean("useMagisk", true)
                     putBoolean("usageSet", true)
@@ -705,7 +694,7 @@ class MainActivity : AppCompatActivity() {
                     it.dismiss()
                     MagiskUtils.installModule(this)
                 } else MagiskUtils.installModule(this)
-            }
+            })
         } else if (intent.getBooleanExtra(
                 "update",
                 this@MainActivity.intent.getBooleanExtra("update", false)

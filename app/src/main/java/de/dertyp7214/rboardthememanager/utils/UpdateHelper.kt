@@ -4,7 +4,6 @@ package de.dertyp7214.rboardthememanager.utils
 
 import android.content.Context
 import android.os.Build
-import android.os.Environment
 import com.downloader.Error
 import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader

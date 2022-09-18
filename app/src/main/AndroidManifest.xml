@@ -20,9 +20,11 @@
         android:extractNativeLibs="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:localeConfig="@xml/locale_config"
         android:supportsRtl="true"
         android:theme="@style/Theme.RboardThemeManagerV3"
-        tools:ignore="AllowBackup">
+        tools:ignore="AllowBackup"
+        tools:targetApi="tiramisu">
         <activity
             android:name=".screens.Logs"
             android:exported="false">
@@ -32,7 +34,8 @@
         </activity>
         <activity
             android:name=".screens.ShareFlags"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.RboardThemeManagerV3.ShareFlags" />
         <activity
             android:name=".screens.ReadMoreReadFast"
             android:exported="true" />
@@ -72,16 +75,21 @@
 
         <activity
             android:name=".screens.ManageRepo"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />
         <activity
             android:name=".screens.InstallPackActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />
         <activity
             android:name=".screens.PreferencesActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.RboardThemeManagerV3.Info" />
         <activity
             android:name=".screens.MainActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.RboardThemeManagerV3.Main"
             android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -159,6 +167,16 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name=".services.AppThemeService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote">
+            <intent-filter>
+                <action android:name="de.dertyp7214.rboard.IAppTheme" />
             </intent-filter>
         </service>
 

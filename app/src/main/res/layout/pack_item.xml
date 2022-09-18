@@ -72,7 +72,6 @@
                     android:textSize="13sp"
                     tools:text="3 days ago" />
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 </layout>
