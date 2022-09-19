@@ -4,6 +4,7 @@ package de.dertyp7214.rboardthememanager.screens
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -17,6 +18,7 @@ import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.databinding.ActivityManageRepoBinding
 import de.dertyp7214.rboardthememanager.utils.TypeTokens
 import de.dertyp7214.rboardcomponents.utils.doAsync
+import de.dertyp7214.rboardthememanager.core.applyTheme
 import org.json.JSONObject
 import java.net.URL
 
@@ -36,6 +38,9 @@ class ManageRepo : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            applyTheme(installPack = true)
+        }
         super.onCreate(savedInstanceState)
         binding = ActivityManageRepoBinding.inflate(layoutInflater)
         setContentView(binding.root)

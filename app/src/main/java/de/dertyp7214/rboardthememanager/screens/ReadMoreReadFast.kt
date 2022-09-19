@@ -1,6 +1,7 @@
 package de.dertyp7214.rboardthememanager.screens
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.view.View.FOCUS_DOWN
 import android.widget.LinearLayout
@@ -13,10 +14,14 @@ import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.core.su
 import de.dertyp7214.rboardthememanager.utils.RootUtils
 import de.dertyp7214.rboardcomponents.utils.doAsync
+import de.dertyp7214.rboardthememanager.core.applyTheme
 
 class ReadMoreReadFast : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            applyTheme(installPack = true)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_read_more_read_fast)
 

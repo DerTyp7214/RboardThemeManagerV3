@@ -246,7 +246,74 @@ fun Activity.openXMLEntryDialog(block: DialogInterface.(XMLEntry) -> Unit) =
 
         negativeButton.setOnClickListener { dialog.dismiss() }
     }
-
+fun Activity.applyTheme(
+    main: Boolean = false,
+    info: Boolean = false,
+    shareFlags: Boolean = false,
+    installPack: Boolean = false
+) {
+    val style = preferences.getString("app_style", "default_style")
+    setTheme(
+        when (style) {
+            "blue_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_Blue
+                info -> R.style.Theme_RboardThemeManagerV3_Info_Blue
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Blue
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Blue
+                else -> R.style.Theme_RboardThemeManagerV3_Blue
+            }
+            "green_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_Green
+                info -> R.style.Theme_RboardThemeManagerV3_Info_Green
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Green
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Green
+                else -> R.style.Theme_RboardThemeManagerV3_Green
+            }
+            "lime_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_Lime
+                info -> R.style.Theme_RboardThemeManagerV3_Info_Lime
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Lime
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Lime
+                else -> R.style.Theme_RboardThemeManagerV3_Lime
+            }
+            "orange_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_Orange
+                info -> R.style.Theme_RboardThemeManagerV3_Info_Orange
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Orange
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Orange
+                else -> R.style.Theme_RboardThemeManagerV3_Orange
+            }
+            "pink_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_Pink
+                info -> R.style.Theme_RboardThemeManagerV3_Info_Pink
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Pink
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Pink
+                else -> R.style.Theme_RboardThemeManagerV3_Pink
+            }
+            "red_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_Red
+                info -> R.style.Theme_RboardThemeManagerV3_Info_Red
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Red
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Red
+                else -> R.style.Theme_RboardThemeManagerV3_Red
+            }
+            "yellow_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_Yellow
+                info -> R.style.Theme_RboardThemeManagerV3_Info_Yellow
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Yellow
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Yellow
+                else -> R.style.Theme_RboardThemeManagerV3_Yellow
+            }
+            else -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main
+                info -> R.style.Theme_RboardThemeManagerV3_Info
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack
+                else -> R.style.Theme_RboardThemeManagerV3
+            }
+        }
+    )
+}
 fun Activity.openDialog(
     @LayoutRes layout: Int,
     cancelable: Boolean = true,

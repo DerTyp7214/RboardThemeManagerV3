@@ -1,5 +1,6 @@
 package de.dertyp7214.rboardthememanager.screens
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -23,6 +24,9 @@ class InstallPackActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInstallPackBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            applyTheme(installPack = true)
+        }
         super.onCreate(savedInstanceState)
         binding = ActivityInstallPackBinding.inflate(layoutInflater)
         setContentView(binding.root)

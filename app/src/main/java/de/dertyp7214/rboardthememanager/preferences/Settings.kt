@@ -182,8 +182,21 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             R.drawable.ic_theme_settings,
             "default",
             TYPE.SELECT,
-            ThemeUtils.APP_THEMES.map {
-                SelectionItem(it.value, it.key, -1)
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+                listOf(
+                    SelectionItem("blue_style", R.string.blue_style, -1),
+                    SelectionItem("green_style", R.string.green_style, -1),
+                    SelectionItem("red_style", R.string.red_style, -1),
+                    SelectionItem("yellow_style", R.string.yellow_style, -1),
+                    SelectionItem("orange_style", R.string.orange_style, -1),
+                    SelectionItem("pink_style", R.string.pink_style, -1),
+                    SelectionItem("lime_style", R.string.lime_style,-1),
+                    SelectionItem("default_style", R.string.default_style, -1)
+                )
+            } else {
+                ThemeUtils.APP_THEMES.map {
+                    SelectionItem(it.value, it.key, -1)
+                }
             }
         ),
         USE_BLUR(
@@ -343,8 +356,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
         SETTINGS.values().filter { it.visible }
             .filter {
                 !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) &&
-                        !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) &&
-                        !(it == SETTINGS.APP_STYLE && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q)
+                        !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
             }
             .forEach { item ->
                 val pref: Preference = when (item.type) {
