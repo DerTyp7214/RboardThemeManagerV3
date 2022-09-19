@@ -20,6 +20,9 @@
 
         <item name="android:windowSplashScreenBrandingImage">@drawable/dertyp_branding</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_animation</item>
+        <item name="android:windowSplashScreenAnimationDuration">
+            @integer/splashAnimationDuration
+        </item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3" />
