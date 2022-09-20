@@ -273,7 +273,7 @@
     <string name="gboard_3">Changing sounds won\'t work</string>
     <string name="gboard_4">Themes won\'t appear in gboard settings</string>
     <string name="gboard_5">Compatibility</string>
-    <string name="default_style">Default Purple</string>
+    <string name="default_style">Default</string>
     <string name="green_style">Green</string>
     <string name="yellow_style">Yellow</string>
     <string name="pink_style">Pink</string>
