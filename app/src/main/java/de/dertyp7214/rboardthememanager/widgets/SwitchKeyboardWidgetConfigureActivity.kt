@@ -22,7 +22,7 @@ class SwitchKeyboardWidgetConfigureActivity : Activity() {
 
     public override fun onCreate(icicle: Bundle?) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            applyTheme(installPack = true)
+            this.applyTheme()
         }
         super.onCreate(icicle)
 

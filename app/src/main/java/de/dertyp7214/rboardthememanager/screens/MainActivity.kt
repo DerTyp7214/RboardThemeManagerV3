@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged", "ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            applyTheme(installPack = true)
+            applyTheme(main = true)
         }
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

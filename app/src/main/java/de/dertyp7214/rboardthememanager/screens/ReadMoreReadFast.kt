@@ -20,7 +20,7 @@ class ReadMoreReadFast : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            applyTheme(installPack = true)
+            applyTheme()
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_read_more_read_fast)

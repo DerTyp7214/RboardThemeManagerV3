@@ -13,7 +13,7 @@ class Logs : AppCompatActivity() {
     @SuppressLint("CommitTransaction")
     override fun onCreate(savedInstanceState: Bundle?) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            applyTheme(installPack = true)
+            applyTheme(main = true)
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_logs)
