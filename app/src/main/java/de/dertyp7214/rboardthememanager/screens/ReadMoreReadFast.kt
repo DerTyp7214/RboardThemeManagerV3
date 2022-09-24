@@ -14,7 +14,7 @@ import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.core.su
 import de.dertyp7214.rboardthememanager.utils.RootUtils
-import de.dertyp7214.rboardthememanager.utils.doAsync
+import de.dertyp7214.rboardcomponents.utils.doAsync
 
 class ReadMoreReadFast : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
