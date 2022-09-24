@@ -57,11 +57,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.InstallPack_Red" parent="Theme.RboardThemeManagerV3">
+    <style name="Theme.RboardThemeManagerV3.InstallPack_Red" parent="Theme.RboardThemeManagerV3_Red">
         <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.ShareFlags_Red" parent="Theme.RboardThemeManagerV3">
+    <style name="Theme.RboardThemeManagerV3.ShareFlags_Red" parent="Theme.RboardThemeManagerV3_Red">
         <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
     </style>
 
