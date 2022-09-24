@@ -51,7 +51,6 @@ import de.dertyp7214.rboardthememanager.data.MenuItem
 import de.dertyp7214.rboardthememanager.databinding.ActivityMainBinding
 import de.dertyp7214.rboardthememanager.dialogs.UsageDialog
 import de.dertyp7214.rboardthememanager.preferences.Flags
-import de.dertyp7214.rboardcomponents.utils.asyncInto
 import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils.getSystemAutoTheme
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
@@ -91,7 +90,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged", "ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            applyTheme(installPack = true)
+            applyTheme(main = true)
         }
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

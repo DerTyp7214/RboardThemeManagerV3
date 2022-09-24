@@ -40,7 +40,7 @@ class ShareFlags : AppCompatActivity() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            applyTheme(installPack = true)
+            applyTheme(shareFlags = true)
         }
         super.onCreate(savedInstanceState)
         binding = ActivityShareFlagsBinding.inflate(layoutInflater)

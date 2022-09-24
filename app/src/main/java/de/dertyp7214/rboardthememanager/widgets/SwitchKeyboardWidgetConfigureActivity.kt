@@ -8,11 +8,12 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
+import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.SwitchKeyboardWidgetConfigureBinding
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
-import de.dertyp7214.rboardcomponents.utils.doAsync
-import de.dertyp7214.rboardthememanager.core.applyTheme
+import de.dertyp7214.rboardthememanager.utils.applyTheme
+import de.dertyp7214.rboardthememanager.utils.doAsync
 
 class SwitchKeyboardWidgetConfigureActivity : Activity() {
     private var appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
@@ -21,7 +22,7 @@ class SwitchKeyboardWidgetConfigureActivity : Activity() {
 
     public override fun onCreate(icicle: Bundle?) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            applyTheme(installPack = true)
+            this.applyTheme()
         }
         super.onCreate(icicle)
 

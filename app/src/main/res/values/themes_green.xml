@@ -57,12 +57,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.InstallPack_Green" parent="Theme.RboardThemeManagerV3_Green">
-        <item name="android:statusBarColor">@color/color_primary_0_10_overlay</item>
+    <style name="Theme.RboardThemeManagerV3.InstallPack_Green" parent="Theme.RboardThemeManagerV3">
+        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.ShareFlags_Green" parent="Theme.RboardThemeManagerV3_Green">
-        <item name="android:statusBarColor">@color/color_primary_0_10_overlay</item>
+    <style name="Theme.RboardThemeManagerV3.ShareFlags_Green" parent="Theme.RboardThemeManagerV3">
+        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
     </style>
 
 </resources>

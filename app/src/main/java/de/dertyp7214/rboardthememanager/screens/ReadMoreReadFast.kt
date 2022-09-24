@@ -10,17 +10,17 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.core.su
 import de.dertyp7214.rboardthememanager.utils.RootUtils
-import de.dertyp7214.rboardcomponents.utils.doAsync
-import de.dertyp7214.rboardthememanager.core.applyTheme
+import de.dertyp7214.rboardthememanager.utils.doAsync
 
 class ReadMoreReadFast : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            applyTheme(installPack = true)
+            applyTheme()
         }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_read_more_read_fast)
