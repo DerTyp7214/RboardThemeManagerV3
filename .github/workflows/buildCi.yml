@@ -147,7 +147,7 @@ jobs:
           data: '{"to": "/topics/update-v3-debug","data": {"version": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},"type": "update","notification": {"body": "Update available. ${{ steps.commitMessage.outputs.message }}","title": "Update"}}}'
   buildRCompatible:
     name: Build Ci APK from rCompatible
-    if: startsWith(github.ref, 'refs/heads/rCompatible')
+    if: github.ref == 'refs/heads/rCompatible'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
