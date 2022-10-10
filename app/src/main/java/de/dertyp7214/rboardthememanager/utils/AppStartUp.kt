@@ -44,8 +44,13 @@ import java.net.URL
 
 class AppStartUp(private val activity: AppCompatActivity) {
     private val checkUpdateUrl by lazy {
-        "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/output-metadata.json"
-    }
+        if (BuildConfig.DEBUG){
+        "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible-debug/output-metadata.json"
+        }
+        else{
+            "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/output-metadata.json"
+        }
+}
     private val gboardPlayStoreUrl by lazy {
         "https://play.google.com/store/apps/details?id=${Config.GBOARD_PACKAGE_NAME}"
     }

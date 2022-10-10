@@ -263,9 +263,128 @@ jobs:
             app/build/outputs/apk/release/app-release.apk
             app/build/outputs/apk/release/output-metadata.json
 
+  buildRCompatible-Dev:
+    name: Build Ci APK from rCompatible-Dev
+    if: startsWith(github.ref, 'refs/heads/rCompatible-Dev')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.1.0
+        with:
+          submodules: recursive
+
+      - uses: nttld/setup-ndk@v1.0.6
+        with:
+          ndk-version: r25b
+
+      - name: Get Commit Message
+        id: commitMessage
+        run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=message::${IN%%$'\n'*}"
+
+      - name: Setup JDK
+        uses: actions/setup-java@v3.5.1
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v3.0.10
+        if: ${{ false }}
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            !~/.gradle/caches/build-cache-*
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}
+          restore-keys: ${{ runner.os }}-gradle-
+
+      - name: Cache build cache
+        uses: actions/cache@v3.0.10
+        with:
+          path: |
+            ${{ github.workspace }}/.ccache
+            ~/.gradle/caches/build-cache-*
+          key: ${{ runner.os }}-build-cache-${{ github.sha }}
+          restore-keys: ${{ runner.os }}-build-cache-
+
+      - name: Extract branch name
+        shell: bash
+        run: echo "::set-output name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
+        id: extract_branch
+
+      - name: File Permissions
+        run: chmod +x gradlew
+
+      - name: Accept Preview SDK License
+        run: echo -n -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > /usr/local/lib/android/sdk/licenses/android-sdk-preview-license
+
+      - name: Build apk
+        id: buildAllApks
+        uses: gradle/gradle-build-action@v2.3.2
+        with:
+          gradle-version: wrapper
+          arguments: assembleDebug
+
+      - name: Get JSON
+        id: metadataJson
+        run: |
+          content=`cat app/build/outputs/apk/debug/output-metadata.json`
+          content="${content//'%'/'%25'}"
+          content="${content//$'\n'/'%0A'}"
+          content="${content//$'\r'/'%0D'}"
+          echo "::set-output name=json::$content"
+
+
+      - name: Sign artifact
+        id: signArtifact
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: app/build/outputs/apk/debug
+          alias: ${{ secrets.KEYALIAS }}
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
+          BUILD_TOOLS_VERSION: "33.0.0"
+
+      - name: Rename APK
+        run: mv app/build/outputs/apk/release/app-debug-unsigned-signed.apk app/build/outputs/apk/release/app-debug.apk
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3.1.0
+        with:
+          name: Debug Artifact
+          path: app/build/outputs/apk/debug/app-debug.apk
+
+      - name: Create new Release
+        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible-Dev'
+        id: create_release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-rCompatible-debug
+          prerelease: true
+          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
+          files: |
+            app/build/outputs/apk/debug/app-debug.apk
+            app/build/outputs/apk/debug/output-metadata.json
+
+      - name: Create new Release
+        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible-Dev'
+        id: create_latest_release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: latest-rCompatible-debug
+          prerelease: true
+          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}
+          files: |
+            app/build/outputs/apk/debug/app-debug.apk
+            app/build/outputs/apk/debug/output-metadata.json
+
       - name: Send Telegram message
         if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible-Dev'
-        run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_CHANNEL_ID }}\",\"text\":\"**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\"}}'"
+        run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_CHANNEL_ID }}\",\"text\":\"**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Download A6+\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible-debug/app-debug.apk\"}]]}}'"
 
       - name: Send Telegram message
         if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
@@ -283,3 +402,12 @@ jobs:
           method: 'POST'
           customHeaders: '{"Authorization":"key=${{ secrets.FCM_KEY }}"}'
           data: '{"to": "/topics/update-v3-r-release","data": {"version": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},"type": "update","notification": {"body": "Update available. ${{ steps.commitMessage.outputs.message }}","title": "Update"}}}'
+
+      - name: Send Notification
+        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible-Dev'
+        uses: fjogeleit/http-request-action@master
+        with:
+          url: 'https://fcm.googleapis.com/fcm/send'
+          method: 'POST'
+          customHeaders: '{"Authorization":"key=${{ secrets.FCM_KEY }}"}'
+          data: '{"to": "/topics/update-v3-r-debug","data": {"version": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},"type": "update","notification": {"body": "Update available. ${{ steps.commitMessage.outputs.message }}","title": "Update"}}}'
