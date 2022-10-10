@@ -263,6 +263,23 @@ jobs:
             app/build/outputs/apk/release/app-release.apk
             app/build/outputs/apk/release/output-metadata.json
 
+      - name: Send Telegram message
+        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
+        run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_CHANNEL_ID }}\",\"text\":\"**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Download A6+\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk\"}]]}}'"
+
+      - name: Send Telegram message
+        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
+        run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_TO_MAIN }}\",\"text\":\"commit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Latest Android 12 Only\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-release/app-release.apk\"}],[{\"text\":\"Latest Android 12 and Below\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk\"}]]}}'"
+
+      - name: Send Notification
+        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
+        uses: fjogeleit/http-request-action@master
+        with:
+          url: 'https://fcm.googleapis.com/fcm/send'
+          method: 'POST'
+          customHeaders: '{"Authorization":"key=${{ secrets.FCM_KEY }}"}'
+          data: '{"to": "/topics/update-v3-r-release","data": {"version": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},"type": "update","notification": {"body": "Update available. ${{ steps.commitMessage.outputs.message }}","title": "Update"}}}'
+
   buildRCompatible-Dev:
     name: Build Ci APK from rCompatible-Dev
     if: startsWith(github.ref, 'refs/heads/rCompatible-Dev')
@@ -348,7 +365,7 @@ jobs:
           BUILD_TOOLS_VERSION: "33.0.0"
 
       - name: Rename APK
-        run: mv app/build/outputs/apk/release/app-debug-unsigned-signed.apk app/build/outputs/apk/release/app-debug.apk
+        run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3.1.0
@@ -385,23 +402,6 @@ jobs:
       - name: Send Telegram message
         if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible-Dev'
         run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_CHANNEL_ID }}\",\"text\":\"**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Download A6+\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible-debug/app-debug.apk\"}]]}}'"
-
-      - name: Send Telegram message
-        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
-        run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_CHANNEL_ID }}\",\"text\":\"**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Download A6+\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk\"}]]}}'"
-
-      - name: Send Telegram message
-        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
-        run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_TO_MAIN }}\",\"text\":\"commit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Latest Android 12 Only\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-release/app-release.apk\"}],[{\"text\":\"Latest Android 12 and Below\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk\"}]]}}'"
-
-      - name: Send Notification
-        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'
-        uses: fjogeleit/http-request-action@master
-        with:
-          url: 'https://fcm.googleapis.com/fcm/send'
-          method: 'POST'
-          customHeaders: '{"Authorization":"key=${{ secrets.FCM_KEY }}"}'
-          data: '{"to": "/topics/update-v3-r-release","data": {"version": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},"type": "update","notification": {"body": "Update available. ${{ steps.commitMessage.outputs.message }}","title": "Update"}}}'
 
       - name: Send Notification
         if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible-Dev'
