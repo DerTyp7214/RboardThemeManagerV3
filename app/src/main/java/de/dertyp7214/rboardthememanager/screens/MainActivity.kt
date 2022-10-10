@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     private val updateUrl by lazy {
         if (BuildConfig.DEBUG){
-            "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible-debug/app-release.apk"
+            "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible-debug/app-debug.apk"
         }
         else{
             "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk"
