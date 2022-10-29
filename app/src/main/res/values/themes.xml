@@ -20,6 +20,7 @@
         <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView</item>
         <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
 
+        <item name="android:windowSplashScreenBackground">?attr/colorSurface</item>
         <item name="android:windowSplashScreenBrandingImage">@drawable/dertyp_branding</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_animation</item>
         <item name="android:windowSplashScreenAnimationDuration">
