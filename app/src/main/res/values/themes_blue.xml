@@ -32,6 +32,8 @@
     <style name="Theme.RboardThemeManagerV3_Blue" parent="Theme.RboardThemeManager.Colors_blue">
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
 
+        <item name="fontFamily">@font/google_sans_text_400</item>
+
         <item name="android:statusBarColor">?android:attr/colorBackground</item>
         <item name="android:navigationBarColor">@android:color/black</item>
 
