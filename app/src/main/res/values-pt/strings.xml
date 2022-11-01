@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="search">Search</string>
+    <string name="search">Pesquisar</string>
     <string name="title_themes">Temas</string>
     <string name="title_downloads">Downloads</string>
     <string name="title_sounds">Sons</string>
