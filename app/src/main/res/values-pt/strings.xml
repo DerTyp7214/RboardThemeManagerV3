@@ -28,7 +28,6 @@
     <string name="delete_theme">Excluir tema</string>
     <string name="q_delete_theme">Deseja excluir este tema?</string>
     <string name="theme_deleted">Tema excluído</string>
-
     <string name="info">Informações</string>
     <string name="theme_count">Número de temas</string>
     <string name="theme_path">Caminho de temas</string>
