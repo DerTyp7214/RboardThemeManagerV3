@@ -67,11 +67,4 @@
         <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.TextAppearanceHeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
-        <item name="fontFamily">@font/google_sans_text_500</item>
-    </style>
-
-    <style name="Theme.RboardThemeManagerV3.TextAppearanceHeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
-        <item name="fontFamily">@font/google_sans_text_400</item>
-    </style>
 </resources>
