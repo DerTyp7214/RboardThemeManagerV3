@@ -10,7 +10,7 @@ import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.SwitchKeyboardWidgetConfigureBinding
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
-import de.dertyp7214.rboardthememanager.utils.doAsync
+import de.dertyp7214.rboardcomponents.utils.doAsync
 
 class SwitchKeyboardWidgetConfigureActivity : Activity() {
     private var appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID

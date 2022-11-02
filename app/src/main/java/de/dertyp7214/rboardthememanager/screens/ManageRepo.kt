@@ -16,7 +16,7 @@ import de.dertyp7214.rboardthememanager.core.safeParse
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.databinding.ActivityManageRepoBinding
 import de.dertyp7214.rboardthememanager.utils.TypeTokens
-import de.dertyp7214.rboardthememanager.utils.doAsync
+import de.dertyp7214.rboardcomponents.utils.doAsync
 import org.json.JSONObject
 import java.net.URL
 

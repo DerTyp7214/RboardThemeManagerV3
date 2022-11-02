@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="300"
+    android:viewportHeight="300">
+    <group
+        android:name="_R_G"
+        android:scaleX=".7"
+        android:scaleY=".7"
+        android:translateX="45"
+        android:translateY="45">
+        <group android:name="_R_G_L_5_G">
+            <group
+                android:name="_R_G_L_5_G_L_6_G"
+                android:translateX="-73"
+                android:translateY="20.125">
+                <group android:name="_R_G_L_5_G_L_6_C_0_G">
+                    <clip-path
+                        android:name="_R_G_L_5_G_L_6_C_0"
+                        android:pathData=" M145.05 139.94 C145.05,139.94 154.95,139.94 154.95,139.94 C157.71,139.94 159.95,142.17 159.95,144.94 C159.95,144.94 159.95,155.07 159.95,155.07 C159.95,157.83 157.71,160.07 154.95,160.07 C154.95,160.07 145.05,160.07 145.05,160.07 C142.29,160.07 140.05,157.83 140.05,155.07 C140.05,155.07 140.05,144.94 140.05,144.94 C140.05,142.17 142.29,139.94 145.05,139.94c " />
+                    <group android:name="_R_G_L_5_G_L_6_C_0_G_G">
+                        <path
+                            android:name="_R_G_L_5_G_L_6_G_G_0_S"
+                            android:fillColor="@color/ic_launcher_foreground"
+                            android:pathData="M0,0 L300,0 L300,300 L0,300z" />
+                    </group>
+                </group>
+            </group>
+            <group
+                android:name="_R_G_L_5_G_L_5_G"
+                android:translateX="-72.875"
+                android:translateY="44">
+                <group android:name="_R_G_L_5_G_L_5_C_0_G">
+                    <clip-path
+                        android:name="_R_G_L_5_G_L_5_C_0"
+                        android:pathData=" M145.05 152.44 C145.05,152.44 154.95,152.44 154.95,152.44 C157.71,152.44 159.95,154.67 159.95,157.44 C159.95,157.44 159.95,167.57 159.95,167.57 C159.95,170.33 157.71,172.57 154.95,172.57 C154.95,172.57 145.05,172.57 145.05,172.57 C142.29,172.57 140.05,170.33 140.05,167.57 C140.05,167.57 140.05,157.44 140.05,157.44 C140.05,154.67 142.29,152.44 145.05,152.44c " />
+                    <group android:name="_R_G_L_5_G_L_5_C_0_G_G">
+                        <path
+                            android:name="_R_G_L_5_G_L_5_G_G_0_S"
+                            android:fillColor="@color/ic_launcher_foreground"
+                            android:pathData="M0,0 L300,0 L300,300 L0,300z" />
+                    </group>
+                </group>
+            </group>
+            <group
+                android:name="_R_G_L_5_G_L_4_G"
+                android:translateX="-36.25"
+                android:translateY="56.25">
+                <group android:name="_R_G_L_5_G_L_4_C_0_G">
+                    <clip-path
+                        android:name="_R_G_L_5_G_L_4_C_0"
+                        android:pathData=" M145.05 139.94 C145.05,139.94 154.95,139.94 154.95,139.94 C157.71,139.94 159.95,142.17 159.95,144.94 C159.95,144.94 159.95,155.07 159.95,155.07 C159.95,157.83 157.71,160.07 154.95,160.07 C154.95,160.07 145.05,160.07 145.05,160.07 C142.29,160.07 140.05,157.83 140.05,155.07 C140.05,155.07 140.05,144.94 140.05,144.94 C140.05,142.17 142.29,139.94 145.05,139.94c " />
+                    <group android:name="_R_G_L_5_G_L_4_C_0_G_G">
+                        <path
+                            android:name="_R_G_L_5_G_L_4_G_G_0_S"
+                            android:fillColor="@color/ic_launcher_foreground"
+                            android:pathData="M0,0 L300,0 L300,300 L0,300z" />
+                    </group>
+                </group>
+            </group>
+            <group
+                android:name="_R_G_L_5_G_L_3_G"
+                android:translateX="36"
+                android:translateY="56.25">
+                <group android:name="_R_G_L_5_G_L_3_C_0_G">
+                    <clip-path
+                        android:name="_R_G_L_5_G_L_3_C_0"
+                        android:pathData=" M145.05 139.94 C145.05,139.94 154.95,139.94 154.95,139.94 C157.71,139.94 159.95,142.17 159.95,144.94 C159.95,144.94 159.95,155.07 159.95,155.07 C159.95,157.83 157.71,160.07 154.95,160.07 C154.95,160.07 145.05,160.07 145.05,160.07 C142.29,160.07 140.05,157.83 140.05,155.07 C140.05,155.07 140.05,144.94 140.05,144.94 C140.05,142.17 142.29,139.94 145.05,139.94c " />
+                    <group android:name="_R_G_L_5_G_L_3_C_0_G_G">
+                        <path
+                            android:name="_R_G_L_5_G_L_3_G_G_0_S"
+                            android:fillColor="@color/ic_launcher_foreground"
+                            android:pathData="M0,0 L300,0 L300,300 L0,300z" />
+                    </group>
+                </group>
+            </group>
+            <group
+                android:name="_R_G_L_5_G_L_2_G"
+                android:translateX="72.75"
+                android:translateY="56.25">
+                <group android:name="_R_G_L_5_G_L_2_C_0_G">
+                    <clip-path
+                        android:name="_R_G_L_5_G_L_2_C_0"
+                        android:pathData=" M145.05 139.94 C145.05,139.94 154.95,139.94 154.95,139.94 C157.71,139.94 159.95,142.17 159.95,144.94 C159.95,144.94 159.95,155.07 159.95,155.07 C159.95,157.83 157.71,160.07 154.95,160.07 C154.95,160.07 145.05,160.07 145.05,160.07 C142.29,160.07 140.05,157.83 140.05,155.07 C140.05,155.07 140.05,144.94 140.05,144.94 C140.05,142.17 142.29,139.94 145.05,139.94c " />
+                    <group android:name="_R_G_L_5_G_L_2_C_0_G_G">
+                        <path
+                            android:name="_R_G_L_5_G_L_2_G_G_0_S"
+                            android:fillColor="@color/ic_launcher_foreground"
+                            android:pathData="M0,0 L300,0 L300,300 L0,300z" />
+                    </group>
+                </group>
+            </group>
+            <group
+                android:name="_R_G_L_5_G_L_1_G"
+                android:translateX="72.75"
+                android:translateY="20">
+                <group android:name="_R_G_L_5_G_L_1_C_0_G">
+                    <clip-path
+                        android:name="_R_G_L_5_G_L_1_C_0"
+                        android:pathData=" M145.05 139.93 C145.05,139.93 154.95,139.93 154.95,139.93 C157.71,139.93 159.95,142.17 159.95,144.93 C159.95,144.93 159.95,155.07 159.95,155.07 C159.95,157.83 157.71,160.07 154.95,160.07 C154.95,160.07 145.05,160.07 145.05,160.07 C142.29,160.07 140.05,157.83 140.05,155.07 C140.05,155.07 140.05,144.93 140.05,144.93 C140.05,142.17 142.29,139.93 145.05,139.93c " />
+                    <group android:name="_R_G_L_5_G_L_1_C_0_G_G">
+                        <path
+                            android:name="_R_G_L_5_G_L_1_G_G_0_S"
+                            android:fillColor="@color/ic_launcher_foreground"
+                            android:pathData="M0,0 L300,0 L300,300 L0,300z" />
+                    </group>
+                </group>
+            </group>
+            <group
+                android:name="_R_G_L_5_G_L_0_G"
+                android:translateX="-0.25"
+                android:translateY="93">
+                <group android:name="_R_G_L_5_G_L_0_C_0_G">
+                    <clip-path
+                        android:name="_R_G_L_5_G_L_0_C_0"
+                        android:pathData=" M93.3 139.43 C93.3,139.43 206.7,139.43 206.7,139.43 C209.46,139.43 211.7,141.67 211.7,144.43 C211.7,144.43 211.7,155.57 211.7,155.57 C211.7,158.33 209.46,160.57 206.7,160.57 C206.7,160.57 93.3,160.57 93.3,160.57 C90.54,160.57 88.3,158.33 88.3,155.57 C88.3,155.57 88.3,144.43 88.3,144.43 C88.3,141.67 90.54,139.43 93.3,139.43c " />
+                    <group android:name="_R_G_L_5_G_L_0_C_0_G_G">
+                        <path
+                            android:name="_R_G_L_5_G_L_0_G_G_0_S"
+                            android:fillColor="@color/ic_launcher_foreground"
+                            android:pathData="M0,0 L300,0 L300,300 L0,300z" />
+                    </group>
+                </group>
+            </group>
+        </group>
+        <group
+            android:name="_R_G_L_4_G_T_1"
+            android:scaleX="0.11086"
+            android:scaleY="0.11086"
+            android:translateX="150"
+            android:translateY="206.75">
+            <group
+                android:name="_R_G_L_4_G"
+                android:translateX="-150"
+                android:translateY="-150">
+                <group android:name="_R_G_L_4_C_0_G">
+                    <group android:name="_R_G_L_4_C_0_G_G">
+                        <path
+                            android:name="_R_G_L_4_G_G_0_S"
+                            android:fillColor="@color/ic_launcher_foreground"
+                            android:pathData="M103.001 79.0003V155.549L150.032 194.952L197.53 155.464L197.905 79.0003H103.001ZM98.0004 59H202.93C211.243 59 217.971 65.7608 217.93 74.0738L217.519 157.893C217.497 162.325 215.516 166.52 212.108 169.354L153.192 218.335C151.333 219.88 148.636 219.875 146.784 218.323L88.367 169.381C84.9652 166.53 83 162.32 83 157.882V74.0002C83 65.7158 89.7159 59 98.0004 59Z" />
+                    </group>
+                </group>
+            </group>
+        </group>
+        <group
+            android:name="_R_G_L_3_G"
+            android:pivotX="150"
+            android:pivotY="150"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:translateX="-0.25"
+            android:translateY="56.5">
+            <group android:name="_R_G_L_3_C_0_G">
+                <clip-path
+                    android:name="_R_G_L_3_C_0"
+                    android:pathData=" M145.05 139.94 C145.05,139.94 154.95,139.94 154.95,139.94 C157.71,139.94 159.95,142.17 159.95,144.94 C159.95,144.94 159.95,155.07 159.95,155.07 C159.95,157.83 157.71,160.07 154.95,160.07 C154.95,160.07 145.05,160.07 145.05,160.07 C142.29,160.07 140.05,157.83 140.05,155.07 C140.05,155.07 140.05,144.94 140.05,144.94 C140.05,142.17 142.29,139.94 145.05,139.94c " />
+                <group android:name="_R_G_L_3_C_0_G_G">
+                    <path
+                        android:name="_R_G_L_3_G_G_0_S"
+                        android:fillColor="@color/ic_launcher_foreground"
+                        android:pathData="M0,0 L300,0 L300,300 L0,300z" />
+                </group>
+            </group>
+        </group>
+        <group
+            android:name="_R_G_L_2_G"
+            android:pivotX="150"
+            android:pivotY="150"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:translateX="-36.5"
+            android:translateY="20.25">
+            <group android:name="_R_G_L_2_C_0_G">
+                <clip-path
+                    android:name="_R_G_L_2_C_0"
+                    android:pathData=" M145.05 139.94 C145.05,139.94 154.95,139.94 154.95,139.94 C157.71,139.94 159.95,142.17 159.95,144.94 C159.95,144.94 159.95,155.07 159.95,155.07 C159.95,157.83 157.71,160.07 154.95,160.07 C154.95,160.07 145.05,160.07 145.05,160.07 C142.29,160.07 140.05,157.83 140.05,155.07 C140.05,155.07 140.05,144.94 140.05,144.94 C140.05,142.17 142.29,139.94 145.05,139.94c " />
+                <group android:name="_R_G_L_2_C_0_G_G">
+                    <path
+                        android:name="_R_G_L_2_G_G_0_S"
+                        android:fillColor="@color/ic_launcher_foreground"
+                        android:pathData="M0,0 L300,0 L300,300 L0,300z" />
+                </group>
+            </group>
+        </group>
+        <group
+            android:name="_R_G_L_1_G"
+            android:pivotX="150"
+            android:pivotY="150"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:translateX="36"
+            android:translateY="20">
+            <group android:name="_R_G_L_1_C_0_G">
+                <clip-path
+                    android:name="_R_G_L_1_C_0"
+                    android:pathData=" M145.05 139.94 C145.05,139.94 154.95,139.94 154.95,139.94 C157.71,139.94 159.95,142.17 159.95,144.94 C159.95,144.94 159.95,155.07 159.95,155.07 C159.95,157.83 157.71,160.07 154.95,160.07 C154.95,160.07 145.05,160.07 145.05,160.07 C142.29,160.07 140.05,157.83 140.05,155.07 C140.05,155.07 140.05,144.94 140.05,144.94 C140.05,142.17 142.29,139.94 145.05,139.94c " />
+                <group android:name="_R_G_L_1_C_0_G_G">
+                    <path
+                        android:name="_R_G_L_1_G_G_0_S"
+                        android:fillColor="@color/ic_launcher_foreground"
+                        android:pathData="M0,0 L300,0 L300,300 L0,300z" />
+                </group>
+            </group>
+        </group>
+        <group
+            android:name="_R_G_L_0_G"
+            android:pivotX="150"
+            android:pivotY="150"
+            android:scaleX="1"
+            android:scaleY="1"
+            android:translateY="20.125">
+            <group android:name="_R_G_L_0_C_0_G">
+                <clip-path
+                    android:name="_R_G_L_0_C_0"
+                    android:pathData=" M145.05 139.94 C145.05,139.94 154.95,139.94 154.95,139.94 C157.71,139.94 159.95,142.17 159.95,144.94 C159.95,144.94 159.95,155.07 159.95,155.07 C159.95,157.83 157.71,160.07 154.95,160.07 C154.95,160.07 145.05,160.07 145.05,160.07 C142.29,160.07 140.05,157.83 140.05,155.07 C140.05,155.07 140.05,144.94 140.05,144.94 C140.05,142.17 142.29,139.94 145.05,139.94c " />
+                <group android:name="_R_G_L_0_C_0_G_G">
+                    <path
+                        android:name="_R_G_L_0_G_G_0_S"
+                        android:fillColor="@color/ic_launcher_foreground"
+                        android:pathData="M0,0 L300,0 L300,300 L0,300z" />
+                </group>
+            </group>
+        </group>
+    </group>
+    <group android:name="time_group" />
+</vector>

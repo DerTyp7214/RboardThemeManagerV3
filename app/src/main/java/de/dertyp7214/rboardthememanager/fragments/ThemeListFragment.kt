@@ -12,7 +12,7 @@ import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
-import de.dertyp7214.rboardthememanager.utils.asyncInto
+import de.dertyp7214.rboardcomponents.utils.asyncInto
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 import java.lang.Integer.max
 
