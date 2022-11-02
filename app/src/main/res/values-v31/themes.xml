@@ -3,6 +3,8 @@
     <style name="Theme.RboardThemeManagerV3" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
 
+        <item name="fontFamily">@font/google_sans_text_400</item>
+
         <item name="android:statusBarColor">?android:attr/colorBackground</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
@@ -18,7 +20,10 @@
         <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView</item>
         <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
 
+        <item name="android:windowSplashScreenBackground">?attr/colorSurface</item>
         <item name="android:windowSplashScreenBrandingImage">@drawable/dertyp_branding</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_animation</item>
+        <item name="android:windowSplashScreenAnimationDuration">@integer/splashAnimationDuration</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3" />
@@ -35,5 +40,13 @@
 
     <style name="Theme.RboardThemeManagerV3.InstallPack" parent="Theme.RboardThemeManagerV3">
         <item name="android:statusBarColor">@color/color_primary_0_10_overlay</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.TextAppearanceHeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">@font/google_sans_text_500</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.TextAppearanceHeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">@font/google_sans_text_400</item>
     </style>
 </resources>

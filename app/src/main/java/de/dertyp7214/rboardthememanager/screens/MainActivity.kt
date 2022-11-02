@@ -40,6 +40,8 @@ import com.skydoves.balloon.BalloonAnimation
 import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.createBalloon
 import com.topjohnwu.superuser.io.SuFile
+import de.dertyp7214.rboardcomponents.utils.asyncInto
+import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.MODULE_META
 import de.dertyp7214.rboardthememanager.Config.PATCHER_PACKAGE
@@ -61,7 +63,12 @@ import kotlin.math.roundToInt
 class MainActivity : AppCompatActivity() {
 
     private val updateUrl by lazy {
-        "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk"
+        if (BuildConfig.DEBUG){
+            "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible-debug/app-debug.apk"
+        }
+        else{
+            "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk"
+        }
     }
 
     @Suppress("MemberVisibilityCanBePrivate")

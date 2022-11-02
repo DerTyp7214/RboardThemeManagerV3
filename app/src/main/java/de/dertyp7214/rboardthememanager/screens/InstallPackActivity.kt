@@ -15,7 +15,7 @@ import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.ActivityInstallPackBinding
-import de.dertyp7214.rboardthememanager.utils.doAsync
+import de.dertyp7214.rboardcomponents.utils.doAsync
 import java.io.File
 import java.util.regex.Pattern
 

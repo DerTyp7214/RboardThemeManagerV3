@@ -6,7 +6,8 @@
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:ignore="ScopedStorage" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
@@ -27,6 +28,7 @@
         tools:targetApi="tiramisu">
         <activity
             android:name=".screens.Logs"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -35,6 +37,7 @@
         <activity
             android:name=".screens.ShareFlags"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.RboardThemeManagerV3.ShareFlags" />
         <activity
             android:name=".screens.ReadMoreReadFast"
@@ -54,6 +57,7 @@
 
         <activity
             android:name=".widgets.SwitchKeyboardWidgetConfigureActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
@@ -76,14 +80,17 @@
         <activity
             android:name=".screens.ManageRepo"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />
         <activity
             android:name=".screens.InstallPackActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />
         <activity
             android:name=".screens.PreferencesActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.RboardThemeManagerV3.Info" />
         <activity
             android:name=".screens.MainActivity"
@@ -150,6 +157,7 @@
         </activity>
         <activity
             android:name="com.dertyp7214.logs.helpers.CrashReportDialog"
+            android:screenOrientation="portrait"
             android:exported="false" />
 
         <provider

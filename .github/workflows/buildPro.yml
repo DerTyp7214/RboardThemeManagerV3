@@ -9,26 +9,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.0.2
+        uses: actions/checkout@v3.1.0
         with:
           submodules: recursive
 
-      - uses: nttld/setup-ndk@v1
+      - uses: nttld/setup-ndk@v1.2.0
         with:
-          ndk-version: r23
+          ndk-version: r25b
 
       - name: Get Commit Message
         id: commitMessage
         run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=message::${IN%%$'\n'*}"
 
       - name: Setup JDK
-        uses: actions/setup-java@v3.4.1
+        uses: actions/cache@v3.0.11
         with:
           distribution: temurin
           java-version: 17
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3.0.11
         with:
           path: |
             ~/.gradle/caches
@@ -54,7 +54,7 @@ jobs:
         
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2.2.1
+        uses: gradle/gradle-build-action@v2.3.3
         with:
           gradle-version: wrapper
           arguments: assemblePro
@@ -89,7 +89,7 @@ jobs:
         run: mv app/build/outputs/apk/pro/app-pro-unsigned-signed.apk app/build/outputs/apk/pro/app-pro.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.0
+        uses: actions/upload-artifact@v3.1.1
         with:
           name: Release Artifact
           path: app/build/outputs/apk/pro/app-pro.apk

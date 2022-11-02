@@ -35,6 +35,8 @@ import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 import de.dertyp7214.rboardthememanager.screens.ShareFlags
 import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
+import de.dertyp7214.rboardcomponents.utils.doAsync
+import de.dertyp7214.rboardcomponents.utils.doInBackground
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -42,8 +44,13 @@ import java.net.URL
 
 class AppStartUp(private val activity: AppCompatActivity) {
     private val checkUpdateUrl by lazy {
-        "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/output-metadata.json"
-    }
+        if (BuildConfig.DEBUG){
+        "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible-debug/output-metadata.json"
+        }
+        else{
+            "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/output-metadata.json"
+        }
+}
     private val gboardPlayStoreUrl by lazy {
         "https://play.google.com/store/apps/details?id=${Config.GBOARD_PACKAGE_NAME}"
     }

@@ -26,7 +26,7 @@ import de.dertyp7214.rboardthememanager.core.getAttr
 import de.dertyp7214.rboardthememanager.core.setAll
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.utils.TraceWrapper
-import de.dertyp7214.rboardthememanager.utils.doAsync
+import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.utils.getActiveTheme
 
 class ThemeAdapter(
