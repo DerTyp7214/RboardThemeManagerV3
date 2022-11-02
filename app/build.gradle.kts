@@ -72,7 +72,7 @@ dependencies {
     implementation(project(":colorutilsc"))
     implementation(project(":rboardcomponents"))
 
-    implementation(platform("com.google.firebase:firebase-bom:31.0.1"))
+    implementation(platform("com.google.firebase:firebase-bom:31.0.2"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.1.0")
     implementation("com.google.firebase:firebase-analytics-ktx:21.2.0")
 
