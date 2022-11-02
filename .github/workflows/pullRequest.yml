@@ -13,6 +13,7 @@ on:
 
 jobs:
   build:
+    name: Build debug apk from current pull request
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
