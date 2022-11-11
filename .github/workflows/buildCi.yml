@@ -3,16 +3,6 @@ name: Build CI
 on:
   push:
     branches: [ master, rCompatible, rCompatible-Dev ]
-    paths:
-      - 'app/**'
-      - 'gradle/**'
-      - 'build.gradle.kts'
-      - 'gradle.properties'
-      - 'mathc/**'
-      - 'colorutilsc/**'
-      - 'rboardcomponents/**'
-      - 'settings.gradle.kts'
-      - '.github/workflows/buildCi.yml'
   workflow_dispatch:
 
 jobs:
@@ -89,15 +79,15 @@ jobs:
 
       - name: Sign artifact
         id: signArtifact
-        uses: r0adkll/sign-android-release@v1
+        uses: ilharp/sign-android-release@v1.0.4
         with:
-          releaseDirectory: app/build/outputs/apk/debug
-          alias: ${{ secrets.KEYALIAS }}
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          releaseDir: app/build/outputs/apk/debug
+          keyAlias: ${{ secrets.KEYALIAS }}
+          signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: "33.0.0"
+          buildToolsVersion: 33.0.0
 
       - name: Delete old APK
         run: rm app/build/outputs/apk/debug/app-debug.apk
@@ -218,7 +208,7 @@ jobs:
 
       - name: Sign artifact
         id: signArtifact
-        uses: r0adkll/sign-android-release@v1
+        uses: ilharp/sign-android-release@v1.0.4
         with:
           releaseDirectory: app/build/outputs/apk/release
           alias: ${{ secrets.KEYALIAS }}
@@ -226,7 +216,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: "33.0.0"
+          buildToolsVersion: 33.0.0
 
       - name: Rename APK
         run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk
@@ -354,15 +344,15 @@ jobs:
 
       - name: Sign artifact
         id: signArtifact
-        uses: r0adkll/sign-android-release@v1
+        uses: ilharp/sign-android-release@v1.0.4
         with:
-          releaseDirectory: app/build/outputs/apk/debug
-          alias: ${{ secrets.KEYALIAS }}
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          releaseDir: app/build/outputs/apk/debug
+          keyAlias: ${{ secrets.KEYALIAS }}
+          signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          BUILD_TOOLS_VERSION: "33.0.0"
+          buildToolsVersion: 33.0.0
 
       - name: Rename APK
         run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk
