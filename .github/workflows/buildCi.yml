@@ -3,16 +3,6 @@ name: Build CI
 on:
   push:
     branches: [ master, rCompatible, rCompatible-Dev ]
-    paths:
-      - 'app/**'
-      - 'gradle/**'
-      - 'build.gradle.kts'
-      - 'gradle.properties'
-      - 'settings.gradle.kts'
-      - 'mathc/**'
-      - 'colorutilsc/**'
-      - 'rboardcomponents/**'
-      - '.github/workflows/buildCi.yml'
   workflow_dispatch:
 
 jobs:
