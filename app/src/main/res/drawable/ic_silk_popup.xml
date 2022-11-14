@@ -1,16 +1,16 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:width="24dp"
     android:height="24dp"
     android:tint="?attr/colorControlNormal"
     android:viewportWidth="24"
-    android:viewportHeight="24">
+    android:viewportHeight="24"
+    tools:ignore="VectorRaster">
     <path
-        android:fillAlpha="0.7"
         android:fillColor="#FFFFFFFF"
         android:fillType="evenOdd"
-        android:pathData="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8Zm0 2c5.52 0 10-4.48 10-10S17.52 2 12 2 2 6.48 2 12s4.48 10 10 10Z" />
+        android:pathData="M12 20c4.42 0 8-3.58 8-8s-3.58-8-8-8-8 3.58-8 8 3.58 8 8 8Zm0 2c5.52 0 10-4.48 10-10S17.52 2 12 2 2 6.48 2 12s4.48 10 10 10Z"/>
     <path
-        android:fillAlpha="0.7"
         android:fillColor="#FFFFFFFF"
-        android:pathData="M9 7v2h4v2h-2c-0.53 0-1.04 0.21-1.41 0.59C9.2 11.96 9 12.47 9 13v4h2 4v-2h-4v-2h2c0.53 0 1.04-0.21 1.41-0.59C14.8 12.04 15 11.53 15 11V9c0-0.53-0.21-1.04-0.59-1.41C14.04 7.2 13.53 7 13 7H9Z" />
+        android:pathData="M9 7v2h4v2h-2c-0.53 0-1.04 0.21-1.41 0.59C9.2 11.96 9 12.47 9 13v4h2 4v-2h-4v-2h2c0.53 0 1.04-0.21 1.41-0.59C14.8 12.04 15 11.53 15 11V9c0-0.53-0.21-1.04-0.59-1.41C14.04 7.2 13.53 7 13 7H9Z"/>
 </vector>

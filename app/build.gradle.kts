@@ -72,7 +72,7 @@ dependencies {
     implementation(project(":mathc"))
     implementation(project(":rboardcomponents"))
 
-    implementation(platform("com.google.firebase:firebase-bom:31.0.2"))
+    implementation(platform("com.google.firebase:firebase-bom:31.0.3"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.1.0")
     implementation("com.google.firebase:firebase-analytics-ktx:21.2.0")
 
@@ -107,8 +107,8 @@ dependencies {
     implementation("com.github.skydoves:balloon:1.4.8-SNAPSHOT")
     implementation("androidx.appcompat:appcompat:1.7.0-alpha01")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.4-rc01")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0-rc01")
+    androidTestImplementation("androidx.test.ext:junit:1.1.4")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
     implementation("androidx.browser:browser:1.4.0")
     implementation("com.github.bumptech.glide:glide:4.14.2")
     kapt("com.github.bumptech.glide:compiler:4.14.2")
