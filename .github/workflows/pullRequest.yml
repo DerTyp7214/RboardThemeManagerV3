@@ -82,10 +82,7 @@ jobs:
         uses: ilharp/sign-android-release@v1.0.4
         with:
           releaseDir: app/build/outputs/apk/debug
-          keyAlias: ${{ secrets.KEYALIAS }}
-          signingKey: ${{ secrets.SIGNING_KEY }}
-          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEY_PASSWORD }}
+
         env:
           buildToolsVersion: 33.0.0
 
