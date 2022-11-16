@@ -74,17 +74,6 @@ jobs:
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
           echo "::set-output name=json::$content"
-      - name: List files
-        run: ls app/build/outputs/apk/debug
-
-      - name: Sign artifact
-        id: signArtifact
-        uses: ilharp/sign-android-release@v1.0.4
-        with:
-          releaseDir: app/build/outputs/apk/debug
-
-        env:
-          buildToolsVersion: 33.0.0
 
       - name: List files
         run: ls app/build/outputs/apk/debug
