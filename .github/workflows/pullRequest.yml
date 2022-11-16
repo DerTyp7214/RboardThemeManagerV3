@@ -75,12 +75,6 @@ jobs:
           content="${content//$'\r'/'%0D'}"
           echo "::set-output name=json::$content"
 
-      - name: List files
-        run: ls app/build/outputs/apk/debug
-
-      - name: Rename APK
-        run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk
-
       - name: Upload Artifact
         uses: actions/upload-artifact@v3.1.1
         with:
