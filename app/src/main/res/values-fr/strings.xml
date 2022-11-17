@@ -38,7 +38,7 @@
     <string name="rboard_app_version">Version de l\’application Rboard</string>
     <string name="device">Appareil</string>
     <string name="android_version">Version d\’Android</string>
-    <string name="root_version">Version du root</string>
+    <string name="root_version">Version de la racine</string>
     <string name="gboard_version">Version de Gboard</string>
     <string name="unsupported_oem">OEM non pris en charge</string>
     <string name="no">Non</string>
@@ -60,7 +60,7 @@
     <string name="emoji_compat_app_whitelist">Correction de compat d\’émoji</string>
     <string name="flags">Drapeaux Gboard</string>
     <string name="themes_header">Thèmes</string>
-    <string name="show_system_theme">Afficher le thème système</string>
+    <string name="show_system_theme">Afficher le thème du système</string>
     <string name="enable_joystick_delete">Suppression de Joystick</string>
     <string name="deprecate_search">Icône Google</string>
     <string name="enable_sharing">Partager l\’icône</string>
@@ -92,7 +92,7 @@
     <string name="monet_details">Thème du clavier basé sur le thème système</string>
     <string name="download_header">Télécharger</string>
     <string name="repos">Dépôts</string>
-    <string name="repos_long">Changer les repos du thème</string>
+    <string name="repos_long">Changer les dépôts du thème</string>
     <string name="apply">Appliquer</string>
     <string name="add">Ajouter</string>
     <string name="save_repos">Voulez-vous appliquer les modifications ?</string>
@@ -116,11 +116,11 @@
     <string name="apply_light">Appliquer le thème pour la lumière</string>
     <string name="app_theme">Thème de l\’application</string>
     <string name="dark">Sombre</string>
-    <string name="light">Lumière</string>
-    <string name="system_theme">Thème système</string>
+    <string name="light">Clair</string>
+    <string name="system_theme">Thème du système</string>
     <string name="flags_loaded">%o drapeaux chargés</string>
     <string name="show_preinstalled_themes_long">Afficher les thèmes préinstallés dans la section thèmes</string>
-    <string name="show_system_theme_long">Afficher les thèmes système dans la section thèmes</string>
+    <string name="show_system_theme_long">Afficher les thèmes du système dans la section thèmes</string>
     <string name="speedup_process">Accélération du processus</string>
     <string name="key">Touche</string>
     <string name="unreleased">Cette application n\’est pas publiée, certaines fonctionnalités peuvent ne pas fonctionner. Veuillez ne pas signaler d\’erreurs au groupe principal.</string>
@@ -162,7 +162,7 @@
     <string name="do_not_report">Ne signalez pas cette erreur.</string>
     <string name="menu_moved">Le menu est maintenant dans la feuille du bas.</string>
     <string name="fix_flags">Corriger les drapeaux</string>
-    <string name="fix_flags_long">Supprime les drapeaux et force le tableau de bord fermé.</string>
+    <string name="fix_flags_long">Supprime les drapeaux et force la fermeture du tableau de bord.</string>
     <string name="flags_fixed">Drapeaux corrigés</string>
     <string name="flags_copied">Drapeaux copiés</string>
     <string name="try_fix_flags">Essayez d\’aller dans les paramètres et cliquez sur \"Corriger les drapeaux\"</string>
@@ -235,7 +235,7 @@
     <string name="silk">Silk Popup</string>
     <string name="silk_details">Silk Popup</string>
     <string name="keyboard_redesign_google_sans">Refonte du clavier Google Sans</string>
-    <string name="gboard_cache_cleared">Cache Gboard effacé</string>
+    <string name="gboard_cache_cleared">Effacer le cache de Gboard</string>
     <string name="gboard_cache_clear">Cache Gboard effacé</string>
     <string name="gboard_cache_clear_long">Supprime le cache et force l\’arrêt de gboard.</string>
     <string name="clear_recent_emojis">Effacer les émoticones récemment utilisés</string>
@@ -252,7 +252,7 @@
     <string name="logs">Journeaux</string>
     <string name="logs_long">Ouvrir page des journeaux</string>
     <string name="copy_flags">Copier commutateurs</string>
-    <string name="copy_flags_long"><![CDATA[Copy \"flag_value.xml\" -> \"flag_override.xml\"]]></string>
+    <string name="copy_flags_long"><![CDATA[Copier \"flag_value.xml\" -> \"flag_override.xml\"]]></string>
     <string name="new_flags_long">Nouveaux commutateurs trouvés.</string>
     <string name="app_style">Style de l\’application</string>
     <string name="ime_test">Test de l\’IME</string>
