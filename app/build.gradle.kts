@@ -17,6 +17,7 @@ android {
     buildToolsVersion = "33.0.1"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
+    buildFeatures.buildConfig = true
 
     defaultConfig {
         applicationId = "de.dertyp7214.rboardthememanager"
