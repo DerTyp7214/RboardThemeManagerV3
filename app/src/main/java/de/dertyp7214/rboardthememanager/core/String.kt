@@ -21,15 +21,29 @@ import javax.xml.parsers.DocumentBuilderFactory
 
 typealias RepoUrl = String
 
-fun RepoUrl.parseRepo(): RboardRepo? {
-    val url = removePrefix("true:").removePrefix("false:")
+fun RepoUrl.parseRepo(): RboardRepo {
+    val url = let {
+        when {
+            contains(Config.GITHUB_REPO_PREFIX) -> replace(
+                Config.GITHUB_REPO_PREFIX,
+                Config.REPO_PREFIX
+            )
+
+            contains(Config.GITLAB_REPO_PREFIX) -> replace(
+                Config.GITLAB_REPO_PREFIX,
+                Config.REPO_PREFIX
+            )
+
+            else -> this
+        }
+    }.removePrefix("true:").removePrefix("false:")
     val meta = try {
         Gson().fromJson(
             URL(url.replace("list.json", "meta.json")).readText(),
             RboardRepoMeta::class.java
         )
     } catch (e: IOException) {
-        return null
+        null
     } catch (e: Exception) {
         null
     }

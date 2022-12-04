@@ -23,8 +23,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 33
-        versionCode = 369000
-        versionName = "3.6.9"
+        versionCode = 370000
+        versionName = "3.7.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -79,7 +79,7 @@ dependencies {
 
     implementation("com.github.DerTyp7214:PreferencesPlus:1.0")
 
-    implementation("com.google.protobuf:protobuf-kotlin:3.21.9")
+    implementation("com.google.protobuf:protobuf-kotlin:3.21.10")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0-alpha04")

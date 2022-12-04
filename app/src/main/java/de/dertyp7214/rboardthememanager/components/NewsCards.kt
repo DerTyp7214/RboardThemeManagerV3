@@ -14,12 +14,13 @@ import de.dertyp7214.rboardthememanager.adapter.NewsFeedAdapter
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.utils.TypeTokens
 import de.dertyp7214.rboardcomponents.utils.doAsync
+import de.dertyp7214.rboardthememanager.Config.REPO_PREFIX
 import java.net.URL
 
 class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
 
     private val newsFeedUrl =
-        "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/top.json"
+        "$REPO_PREFIX/top.json"
 
     companion object {
         val cards: ArrayList<CardElement> = arrayListOf()
