@@ -1,9 +1,9 @@
-[submodule "ColorUtilsC"]
-	path = ColorUtilsC
+[submodule "colorutilsc"]
+	path = colorutilsc
 	url = https://github.com/DerTyp7214/ColorUtilsC.git
-[submodule "MathC"]
-	path = MathC
+[submodule "mathc"]
+	path = mathc
 	url = https://github.com/DerTyp7214/MathC.git
-[submodule "RboardComponents"]
-	path = RboardComponents
+[submodule "rboardcomponents"]
+	path = rboardcomponents
 	url = https://github.com/DerTyp7214/RboardComponents.git
