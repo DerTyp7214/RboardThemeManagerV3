@@ -47,6 +47,9 @@ class AppStartUp(private val activity: AppCompatActivity) {
     private val checkUpdateUrl by lazy {
         "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-${BuildConfig.BUILD_TYPE}/output-metadata.json"
     }
+    private val checkUpdateUrlGitlab by lazy {
+        "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/${BuildConfig.BUILD_TYPE}/output-metadata.json"
+    }
     private val gboardPlayStoreUrl by lazy {
         "https://play.google.com/store/apps/details?id=${Config.GBOARD_PACKAGE_NAME}"
     }
@@ -275,6 +278,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     }
                     finishAndRemoveTask()
                 }
+
                 initialized && data?.toString()?.endsWith(".rboard") == true -> {
                     val resultLauncher =
                         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -316,6 +320,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                         file.readXML()
                     }
                 }
+
                 initialized && data != null -> {
                     val resultLauncher =
                         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -348,6 +353,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                         }
                     }
                 }
+
                 else -> {
                     gboardInstalled =
                         PackageUtils.isPackageInstalled(
@@ -367,6 +373,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                         ) {
                             openUrl(gboardPlayStoreUrl)
                         }
+
                         !rootAccess -> NoRootDialog.open(this)
                         else -> checkForUpdate { update ->
                             checkedForUpdate = true
@@ -391,7 +398,9 @@ class AppStartUp(private val activity: AppCompatActivity) {
             ) + 5 * 60 * 100 > System.currentTimeMillis()
             || activity.verifyInstallerId()
         ) callback(false)
-        else doAsync(URL(checkUpdateUrl)::getTextFromUrl) { text ->
+        else doAsync({
+            URL(checkUpdateUrl).getTextFromUrl(URL(checkUpdateUrlGitlab)::getTextFromUrl)
+        }) { text ->
             try {
                 val outputMetadata = Gson().fromJson(text, OutputMetadata::class.java)
                 val versionCode = outputMetadata.elements.first().versionCode
