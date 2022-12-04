@@ -5,6 +5,10 @@ on:
     branches: [ master, rCompatible, rCompatible-Dev ]
   workflow_dispatch:
 
+concurrency:
+  group: 'ci-build'
+  cancel-in-progress: true
+
 jobs:
   buildMaster:
     name: Build Ci APK from master

@@ -9,17 +9,19 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
+import de.dertyp7214.rboardcomponents.utils.doAsync
+import de.dertyp7214.rboardthememanager.Config.REPO_PREFIX
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.NewsFeedAdapter
+import de.dertyp7214.rboardthememanager.core.isReachable
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.utils.TypeTokens
-import de.dertyp7214.rboardcomponents.utils.doAsync
 import java.net.URL
 
 class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
 
-    private val newsFeedUrl =
-        "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/top.json"
+    private val newsFeedUrl
+        get() = "$REPO_PREFIX/top.json"
 
     companion object {
         val cards: ArrayList<CardElement> = arrayListOf()
@@ -33,9 +35,7 @@ class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
     init {
         inflate(context, R.layout.news_card, this)
 
-        newsFeedAdapter = NewsFeedAdapter(cards) {
-            clickNewsListener(it)
-        }
+        newsFeedAdapter = NewsFeedAdapter(cards) { clickNewsListener(it) }
         recyclerView = findViewById(R.id.recyclerViewNews)
 
         val snapHelper = LinearSnapHelper()
@@ -61,7 +61,16 @@ class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
 
     private fun fetchNewsFeed(): List<CardElement> {
         return try {
-            Gson().fromJson(URL(newsFeedUrl).readText(), TypeTokens<List<CardElement>>())
+            Gson().fromJson<List<CardElement>?>(
+                URL(newsFeedUrl).readText(),
+                TypeTokens<List<CardElement>>()
+            ).filter {
+                try {
+                    !it.url.startsWith("http") || URL(it.url).isReachable()
+                } catch (e: Exception) {
+                    false
+                }
+            }
         } catch (e: Exception) {
             listOf()
         }
@@ -77,7 +86,13 @@ class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
             private set
             get() {
                 if (field == null)
-                    field = BitmapFactory.decodeStream(URL(image).openConnection().getInputStream())
+                    field = try {
+                        val imageUrl =
+                            if (image.startsWith("http")) image else "$REPO_PREFIX/$image"
+                        BitmapFactory.decodeStream(URL(imageUrl).openConnection().getInputStream())
+                    } catch (_: Exception) {
+                        null
+                    }
                 return field
             }
     }

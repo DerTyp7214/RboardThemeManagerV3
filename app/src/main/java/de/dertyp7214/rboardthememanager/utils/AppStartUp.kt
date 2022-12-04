@@ -37,6 +37,7 @@ import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
 import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardcomponents.utils.doInBackground
+import de.dertyp7214.rboardthememanager.Config.REPO_PREFIX
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -50,12 +51,20 @@ class AppStartUp(private val activity: AppCompatActivity) {
         else{
             "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/output-metadata.json"
         }
-}
+    }
+    private val checkUpdateUrlGitlab by lazy {
+        if (BuildConfig.DEBUG){
+            "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/debug/output-rCompatible-metadata.json"
+        }
+        else{
+            "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/release/output-rCompatible-metadata.json"
+        }
+    }
     private val gboardPlayStoreUrl by lazy {
         "https://play.google.com/store/apps/details?id=${Config.GBOARD_PACKAGE_NAME}"
     }
     private val flagsUrl by lazy {
-        "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/flags.json"
+        "$REPO_PREFIX/flags.json"
     }
 
     private var checkedForUpdate = false
@@ -419,7 +428,9 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 0
             ) + 5 * 60 * 100 > System.currentTimeMillis()
         ) callback(false)
-        else doAsync(URL(checkUpdateUrl)::getTextFromUrl) { text ->
+        else doAsync({
+            URL(checkUpdateUrl).getTextFromUrl(URL(checkUpdateUrlGitlab)::getTextFromUrl)
+        }) { text ->
             try {
                 val outputMetadata = Gson().fromJson(text, OutputMetadata::class.java)
                 val versionCode = outputMetadata.elements.first().versionCode

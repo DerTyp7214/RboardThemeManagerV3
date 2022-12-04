@@ -58,6 +58,7 @@ import de.dertyp7214.rboardthememanager.utils.ThemeUtils.getSystemAutoTheme
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 import dev.chrisbanes.insetter.applyInsetter
 import java.io.File
+import java.net.URL
 import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
@@ -68,6 +69,15 @@ class MainActivity : AppCompatActivity() {
         }
         else{
             "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk"
+        }
+    }
+
+    private val updateUrlGitlab by lazy {
+        if (BuildConfig.DEBUG){
+            "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/debug/app-rCompatible-debug.apk"
+        }
+        else{
+            "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/release/app-rCompatible-release.apk"
         }
     }
 
@@ -201,9 +211,9 @@ class MainActivity : AppCompatActivity() {
                         setArrowOrientation(ArrowOrientation.BOTTOM)
                         setCornerRadius(resources.getDimension(R.dimen.roundCornersInner))
                         setText(getString(R.string.menu_moved))
-                        setTextColor(getAttr(R.attr.colorBackgroundFloating))
+                        setTextColor(getAttr(com.google.android.material.R.attr.colorBackgroundFloating))
                         setTextSize(12f)
-                        setBackgroundColor(getAttr(R.attr.colorPrimary))
+                        setBackgroundColor(getAttr(com.google.android.material.R.attr.colorPrimary))
                         setBalloonAnimation(BalloonAnimation.FADE)
                         setDismissWhenClicked(true)
                         setOnBalloonDismissListener {
@@ -730,7 +740,8 @@ class MainActivity : AppCompatActivity() {
             notify(this, notificationId, builder.build())
         }
         var finished = false
-        UpdateHelper(updateUrl, this).apply {
+        val url = if (URL(updateUrl).isReachable()) updateUrl else updateUrlGitlab
+        UpdateHelper(url, this).apply {
             addOnProgressListener { progress, bytes, total ->
                 if (!finished) {
                     builder

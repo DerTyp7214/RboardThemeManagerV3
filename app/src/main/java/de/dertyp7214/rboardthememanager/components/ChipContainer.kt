@@ -12,7 +12,7 @@ import de.dertyp7214.rboardthememanager.core.dpToPx
 import de.dertyp7214.rboardthememanager.core.filterIt
 import de.dertyp7214.rboardthememanager.core.forEachIndexedIt
 import de.dertyp7214.rboardthememanager.core.getAttr
-import java.util.*
+import java.util.Locale
 
 class ChipContainer(context: Context, attrs: AttributeSet?) : LinearLayout(context, attrs) {
 
@@ -60,7 +60,8 @@ class ChipContainer(context: Context, attrs: AttributeSet?) : LinearLayout(conte
     private fun refreshChips() {
         chipGroup.removeAllViews()
 
-        val colorSurfaceVariant = context.getAttr(R.attr.colorSurfaceVariant)
+        val colorSurfaceVariant =
+            context.getAttr(com.google.android.material.R.attr.colorSurfaceVariant)
         val textColorLink = context.getAttr(android.R.attr.textColorLink)
 
         chips.forEachIndexedIt { index, it ->

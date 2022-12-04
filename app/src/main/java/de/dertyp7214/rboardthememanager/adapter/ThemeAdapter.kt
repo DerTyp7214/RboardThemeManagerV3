@@ -52,7 +52,9 @@ class ThemeAdapter(
         )!!.toBitmap()
     }
     private val selectedBackground by lazy {
-        ColorDrawable(context.getAttr(R.attr.colorBackgroundFloating)).apply { alpha = 187 }
+        ColorDrawable(context.getAttr(com.google.android.material.R.attr.colorBackgroundFloating)).apply {
+            alpha = 187
+        }
     }
 
     private val selected: ArrayListWrapper<Boolean> = ArrayListWrapper(themes.map { false }) {
