@@ -182,7 +182,7 @@ object ThemeUtils {
             REPOS.filterActive().forEach { repo ->
                 try {
                     val rboardRepo = repo.parseRepo()
-                    val protoListPath = rboardRepo?.meta?.protoList
+                    val protoListPath = rboardRepo.meta?.protoList
                     if (protoListPath != null) {
                         val protoListUrl = rboardRepo.url.replace("list.json", protoListPath)
 
@@ -405,7 +405,7 @@ object ThemeUtils {
             addView(View(context).apply {
                 setHeight(1.dp(context) / 2)
                 setWidth(LinearLayout.LayoutParams.MATCH_PARENT)
-                setBackgroundColor(context.getAttr(R.attr.colorOnSurface))
+                setBackgroundColor(context.getAttr(com.google.android.material.R.attr.colorOnSurface))
                 alpha = .6F
             })
         }

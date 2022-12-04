@@ -13,12 +13,12 @@ import com.dertyp7214.logs.helpers.Logger
 import com.downloader.PRDownloader
 import de.dertyp7214.colorutilsc.ColorUtilsC
 import de.dertyp7214.rboardcomponents.utils.ThemeUtils
+import de.dertyp7214.rboardcomponents.utils.doInBackground
 import de.dertyp7214.rboardthememanager.core.getAttr
 import de.dertyp7214.rboardthememanager.core.hasRoot
 import de.dertyp7214.rboardthememanager.core.isReachable
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
-import de.dertyp7214.rboardcomponents.utils.doInBackground
 import java.net.URL
 
 class Application : Application() {
@@ -47,12 +47,20 @@ class Application : Application() {
         ThemeUtils.registerActivityLifecycleCallbacks(this)
         PRDownloader.initialize(this)
         doInBackground {
+            if (!URL(Config.GITHUB_REPO_PREFIX).isReachable()) {
+                Config.REPO_PREFIX = Config.GITLAB_REPO_PREFIX
+                Config.RAW_PREFIX = Config.GITLAB_RAW_PREFIX
+            }
             if (!URL("https://bin.utwitch.net").isReachable())
                 Logger.customBin = "hastebin.com"
         }
         PreferenceManager.getDefaultSharedPreferences(this)
             .edit { putString("logMode", if (BuildConfig.DEBUG) "VERBOSE" else "ERROR") }
-        Logger.init(this, getAttr(R.attr.colorPrimary), getAttr(R.attr.colorAccent))
+        Logger.init(
+            this,
+            getAttr(com.google.android.material.R.attr.colorPrimary),
+            getAttr(com.google.android.material.R.attr.colorAccent)
+        )
         Logger.extraData = {
             StringBuilder("Rooted: ")
                 .append(if (hasRoot()) "yes" else "no").append("\n")
@@ -83,9 +91,11 @@ class Application : Application() {
                 "dark" -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 }
+
                 "light" -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 }
+
                 "system_theme" -> {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                 }

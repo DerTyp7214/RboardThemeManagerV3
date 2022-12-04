@@ -10,12 +10,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.recyclerview.widget.RecyclerView
+import de.dertyp7214.rboardcomponents.utils.doAsync
+import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
-import de.dertyp7214.rboardcomponents.utils.doAsync
 
 class ThemePackAdapter(
     private val list: List<ThemePack>,
@@ -90,13 +91,15 @@ class ThemePackAdapter(
                         R.string.download,
                         {
                             it.dismiss()
-                            openUrl(themePack.url)
+                            openUrl(themePack.url.let { url ->
+                                if (url.startsWith("http")) url else "${Config.RAW_PREFIX}/$url"
+                            })
                         }
                     ) {
                         it.dismiss()
                     }.apply {
                         doAsync(themePack.repoUrl::parseRepo) { repo ->
-                            if (repo?.meta?.name != null) {
+                            if (repo.meta?.name != null) {
                                 val mainMessage =
                                     themePack.description ?: getString(R.string.theme_pack)
                                 val footerSpan = repo.meta.name.fontSize(.6f)

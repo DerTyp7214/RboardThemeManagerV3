@@ -1,10 +1,12 @@
 package de.dertyp7214.rboardthememanager.core
 
 import android.app.Activity
+import com.dertyp7214.logs.helpers.Logger
 import com.downloader.Error
 import com.downloader.OnDownloadListener
 import com.downloader.PRDownloader
 import com.topjohnwu.superuser.io.SuFile
+import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.data.ThemePack
@@ -14,7 +16,12 @@ import java.io.File
 fun ThemePack.download(activity: Activity, result: (themes: List<String>) -> Unit) {
     val dialog = activity.openLoadingDialog(R.string.downloading_pack)
     val name = name.replace(" ", "_")
-    PRDownloader.download(url, activity.cacheDir.absolutePath, "$name.pack").build()
+    Logger.log(Logger.Companion.Type.DEBUG, "Download", "Downloading $url ${url.let {
+        if (it.startsWith("http")) it else "${Config.RAW_PREFIX}/$it"
+    }} -> $name")
+    PRDownloader.download(url.let {
+        if (it.startsWith("http")) it else "${Config.RAW_PREFIX}/$it"
+    }, activity.cacheDir.absolutePath, "$name.pack").build()
         .setOnStartOrResumeListener { }
         .setOnCancelListener { }
         .setOnProgressListener { }

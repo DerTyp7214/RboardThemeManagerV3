@@ -13,7 +13,9 @@ fun URL.getTextFromUrl(): String {
 
 fun URL.isReachable(): Boolean {
     return try {
-        (openConnection() as HttpURLConnection).responseCode == 200
+        val responseCode = (openConnection() as HttpURLConnection).responseCode
+
+        responseCode == 200 || responseCode == 301 || responseCode == 302 || responseCode == 303 || responseCode == 307 || responseCode == 308 || responseCode == 404 || responseCode == 405 || responseCode == 400
     } catch (e: Exception) {
         false
     }

@@ -29,8 +29,7 @@
         </activity>
         <activity
             android:name=".screens.ManageRepo"
-            android:exported="true"
-            android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />
+            android:exported="true" />
         <activity
             android:name=".screens.ShareFlags"
             android:exported="true"
@@ -136,10 +135,9 @@
 
                 <data android:scheme="rboard" />
                 <data android:scheme="http" />
-                <data
-                    android:host="repos.rboard.dertyp7214.de"
-                    android:pathPrefix="/"
-                    android:scheme="https" />
+                <data android:scheme="https"/>
+                <data android:host="repos.rboard.dertyp7214.de"/>
+                <data android:pathPrefix="/"/>
             </intent-filter>
         </activity>
         <activity

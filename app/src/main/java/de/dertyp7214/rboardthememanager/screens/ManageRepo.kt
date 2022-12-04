@@ -8,6 +8,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.gson.Gson
+import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ManageRepoThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
@@ -16,7 +17,6 @@ import de.dertyp7214.rboardthememanager.core.safeParse
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.databinding.ActivityManageRepoBinding
 import de.dertyp7214.rboardthememanager.utils.TypeTokens
-import de.dertyp7214.rboardcomponents.utils.doAsync
 import org.json.JSONObject
 import java.net.URL
 

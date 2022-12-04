@@ -9,6 +9,15 @@ object Config {
     var newGboard = true
     var THEME_LOCATION = "/system/etc/gboard_theme"
 
+    var GITLAB_REPO_PREFIX = "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/PackRepoBeta"
+    var GITHUB_REPO_PREFIX = "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main"
+
+    var GITLAB_RAW_PREFIX = "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/PackRepoBeta"
+    var GITHUB_RAW_PREFIX = "https://github.com/GboardThemes/PackRepoBeta/raw/main"
+
+    var REPO_PREFIX = GITHUB_REPO_PREFIX
+    var RAW_PREFIX = GITHUB_RAW_PREFIX
+
     val PLAY_URL = { packageName: String ->
         "https://play.google.com/store/apps/details?id=$packageName"
     }
@@ -50,13 +59,14 @@ object Config {
             else if (!THEME_LOCATION.startsWith("/system")) THEME_LOCATION else "$MODULE_PATH$THEME_LOCATION"
         }
 
-    val PACKS_URLS =
-        listOf(
-            "true:https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/list.json",
+    val PACKS_URLS
+        get() = listOf(
+            "true:${REPO_PREFIX}/list.json",
             "true:https://raw.githubusercontent.com/AkosPaha/PackRepoBeta/main/list.json",
             "true:https://raw.githubusercontent.com/GboardThemes/RboardCommunityThemes/main/list.json"
         )
-    val REPOS = ArrayList(PACKS_URLS)
+    val REPOS
+        get() = ArrayList(PACKS_URLS)
 
     // TODO: add repo button should load list of verified repos
     const val REPOS_LIST_URL =
