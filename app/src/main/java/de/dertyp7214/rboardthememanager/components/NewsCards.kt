@@ -76,7 +76,12 @@ class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
             private set
             get() {
                 if (field == null)
-                    field = BitmapFactory.decodeStream(URL(image).openConnection().getInputStream())
+                    field = try {
+                        val imageUrl = if (image.startsWith("http")) image else "$REPO_PREFIX/$image"
+                        BitmapFactory.decodeStream(URL(imageUrl).openConnection().getInputStream())
+                    } catch (_: Exception) {
+                        null
+                    }
                 return field
             }
     }
