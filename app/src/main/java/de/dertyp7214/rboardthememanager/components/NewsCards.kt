@@ -66,7 +66,7 @@ class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
                 TypeTokens<List<CardElement>>()
             ).filter {
                 try {
-                    URL(it.url).isReachable()
+                    !it.url.startsWith("http") || URL(it.url).isReachable()
                 } catch (e: Exception) {
                     false
                 }
