@@ -64,6 +64,7 @@ import de.dertyp7214.rboardthememanager.utils.ThemeUtils.getSystemAutoTheme
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 import dev.chrisbanes.insetter.applyInsetter
 import java.io.File
+import java.net.URL
 import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
@@ -73,6 +74,9 @@ class MainActivity : AppCompatActivity() {
 
     private val updateUrl by lazy {
         "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-${BuildConfig.BUILD_TYPE}/app-${BuildConfig.BUILD_TYPE}.apk"
+    }
+    private val updateUrlGitlab by lazy {
+        "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/${BuildConfig.BUILD_TYPE}/app-${BuildConfig.BUILD_TYPE}.apk"
     }
 
     @Suppress("MemberVisibilityCanBePrivate")
@@ -163,6 +167,7 @@ class MainActivity : AppCompatActivity() {
             when {
                 bottomSheetBehavior.state == BottomSheetBehavior.STATE_EXPANDED ->
                     bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
                 mainViewModel.getSelections().first -> mainViewModel.getSelections().second?.clearSelection()
                 searchBar.focus -> searchBar.clearText()
                 else -> {
@@ -324,6 +329,7 @@ class MainActivity : AppCompatActivity() {
                                 ).show()
                             }
                         }
+
                         R.id.delete -> {
                             openDialog(
                                 R.string.do_you_want_to_delete_theme,
@@ -353,6 +359,7 @@ class MainActivity : AppCompatActivity() {
                                 }
                             }
                         }
+
                         R.id.select_all -> {
                             mainViewModel.getSelections().second?.selectAll()
                         }
@@ -587,6 +594,7 @@ class MainActivity : AppCompatActivity() {
                         R.id.action_themeListFragment_to_downloadListFragment -> {
                             searchBar.setMenu(R.menu.menu_downloads)
                         }
+
                         R.id.action_downloadListFragment_to_themeListFragment -> {
                         }
                     }
@@ -618,6 +626,7 @@ class MainActivity : AppCompatActivity() {
                     controller.navigate(R.id.action_soundsFragment_to_themeListFragment)
                 }
             }
+
             R.id.navigation_downloads -> {
                 searchBar.setMenu(R.menu.menu_downloads) {
                     when (it.itemId) {
@@ -626,11 +635,13 @@ class MainActivity : AppCompatActivity() {
                             mainViewModel.setPacksSortByDate(it.isChecked)
                             true
                         }
+
                         R.id.include_theme_names -> {
                             it.isChecked = !it.isChecked
                             mainViewModel.setIncludeThemeNames(it.isChecked)
                             true
                         }
+
                         else -> false
                     }
                 }
@@ -640,6 +651,7 @@ class MainActivity : AppCompatActivity() {
                     controller.navigate(R.id.action_soundsFragment_to_downloadListFragment)
                 }
             }
+
             R.id.navigation_sounds -> {
                 if (currentDestination == R.id.themeListFragment) {
                     controller.navigate(R.id.action_themeListFragment_to_soundsFragment)
@@ -749,7 +761,8 @@ class MainActivity : AppCompatActivity() {
             notify(this, notificationId, builder.build())
         }
         var finished = false
-        UpdateHelper(updateUrl, this).apply {
+        val url = if (URL(updateUrl).isReachable()) updateUrl else updateUrlGitlab
+        UpdateHelper(url, this).apply {
             addOnProgressListener { progress, bytes, total ->
                 if (!finished) {
                     builder
