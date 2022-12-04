@@ -1,18 +1,29 @@
 package de.dertyp7214.rboardthememanager.fragments
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.view.WindowInsets
+import android.view.WindowInsetsAnimation
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import de.dertyp7214.rboardcomponents.utils.asyncInto
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
 import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.core.applyTransitions
+import de.dertyp7214.rboardthememanager.core.applyTransitionsViewCreated
+import de.dertyp7214.rboardthememanager.core.dp
+import de.dertyp7214.rboardthememanager.core.dpToPx
+import de.dertyp7214.rboardthememanager.core.dpToPxRounded
+import de.dertyp7214.rboardthememanager.core.get
+import de.dertyp7214.rboardthememanager.core.getAttr
+import de.dertyp7214.rboardthememanager.core.setMargin
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
-import de.dertyp7214.rboardcomponents.utils.asyncInto
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 import java.lang.Integer.max
 
@@ -97,8 +108,13 @@ class ThemeListFragment : Fragment() {
             0,
             5.dpToPx(requireContext()).toInt()
         )
-        refreshLayout.setProgressBackgroundColorSchemeColor(requireActivity().getAttr(R.attr.colorBackgroundFloating))
-        refreshLayout.setColorSchemeColors(requireActivity().getAttr(R.attr.colorPrimary), requireActivity().getAttr(R.attr.colorTertiary))
+        refreshLayout.setProgressBackgroundColorSchemeColor(requireActivity().getAttr(com.google.android.material.R.attr.colorBackgroundFloating))
+        refreshLayout.setColorSchemeColors(
+            requireActivity().getAttr(com.google.android.material.R.attr.colorPrimary),
+            requireActivity().getAttr(
+                com.google.android.material.R.attr.colorTertiary
+            )
+        )
 
         recyclerView.layoutManager = LayoutManager(requireContext())
         recyclerView.setHasFixedSize(false)

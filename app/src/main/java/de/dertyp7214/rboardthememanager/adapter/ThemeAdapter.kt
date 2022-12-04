@@ -21,12 +21,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.color.MaterialColors
 import de.dertyp7214.colorutilsc.ColorUtilsC
+import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.getAttr
 import de.dertyp7214.rboardthememanager.core.setAll
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.utils.TraceWrapper
-import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.utils.getActiveTheme
 
 class ThemeAdapter(
@@ -52,7 +52,9 @@ class ThemeAdapter(
         )!!.toBitmap()
     }
     private val selectedBackground by lazy {
-        ColorDrawable(context.getAttr(R.attr.colorBackgroundFloating)).apply { alpha = 187 }
+        ColorDrawable(context.getAttr(com.google.android.material.R.attr.colorBackgroundFloating)).apply {
+            alpha = 187
+        }
     }
 
     private val selected: ArrayListWrapper<Boolean> = ArrayListWrapper(themes.map { false }) {

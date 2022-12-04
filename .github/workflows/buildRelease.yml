@@ -81,15 +81,14 @@ jobs:
 
       - name: Sign artifact
         id: signArtifact
-        uses: r0adkll/sign-android-release@v1
+        uses: ilharp/sign-android-release@v1
         with:
-          releaseDirectory: app/build/outputs/apk/release
-          alias: ${{ secrets.KEYALIAS }}
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          releaseDir: app/build/outputs/apk/release
+          keyAlias: ${{ secrets.KEYALIAS }}
+          signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-        env:
-          BUILD_TOOLS_VERSION: 33.0.0
+          buildToolsVersion: 33.0.0
 
       - name: List files
         run: ls app/build/outputs/apk/release
@@ -119,7 +118,7 @@ jobs:
         run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_TO_MAIN }}\",\"message_thread_id\":${{ secrets.TELEGRAM_MAIN_TOPIC_ID }},\"text\":\"commit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Latest Android 12 Only\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-release/app-release.apk\"}],[{\"text\":\"Latest Android 12 and Below\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk\"}]]}}'"
 
       - name: Send Telegram message
-        run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_CHANNEL_ID }}\",\"text\":\"**staging**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Download A12+\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-release/app-release.apk\"}]]}}'"
+        run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_TO_MAIN }}\",\"message_thread_id\":${{ secrets.TELEGRAM_MAIN_TOPIC_ID_DEBUG }},\"text\":\"**staging**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Download A12+\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-release/app-release.apk\"}]]}}'"
 
       - name: Upload Assets
         id: upload_assets

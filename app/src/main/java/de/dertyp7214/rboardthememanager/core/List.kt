@@ -27,16 +27,16 @@ fun List<String>.toMap(): Map<String, Boolean> {
     }
 }
 
-fun List<ThemePackList.Object>.toPackList() = map {
+fun List<ThemePackList.Object>.toPackList() = map { pack ->
     ThemePack(
-        it.getAuthor(),
-        it.getUrl(),
-        it.getName(),
-        it.getTagsList() ?: listOf(),
-        it.getThemesList(),
-        it.getSize(),
-        it.getDescription(),
+        pack.getAuthor(),
+        pack.getUrl(),
+        pack.getName(),
+        pack.getTagsList() ?: listOf(),
+        pack.getThemesList(),
+        pack.getSize(),
+        pack.getDescription(),
         false,
-        it.getDate()
+        pack.getDate()
     )
 }

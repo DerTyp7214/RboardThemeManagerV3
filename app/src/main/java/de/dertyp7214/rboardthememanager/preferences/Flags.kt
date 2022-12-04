@@ -241,6 +241,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                         true
                     }
                 }
+
                 TYPE.SELECT -> {
                     SingleChoiceDialogPreference(item.key, item.valueMap?.map { (key, _) ->
                         if (key is String) SelectionItem(
@@ -261,6 +262,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                         defaultOnSelectionChange(item::setValue)
                     }
                 }
+
                 TYPE.INT, TYPE.LONG, TYPE.FLOAT -> Preference(item.key)
                 TYPE.GROUP -> CategoryHeader(item.key)
                 TYPE.STRING -> Preference(item.key)
@@ -333,6 +335,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                         onlyDisabled = it.isChecked
                         requestReload()
                     }
+
                     R.id.share_flags -> ShareFlags::class.java[activity]
                 }
                 true
@@ -470,6 +473,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                         onlyDisabled = it.isChecked
                         requestReload()
                     }
+
                     R.id.share_prefs -> ShareFlags::class.java[activity] = {
                         putExtra("isFlags", false)
                     }

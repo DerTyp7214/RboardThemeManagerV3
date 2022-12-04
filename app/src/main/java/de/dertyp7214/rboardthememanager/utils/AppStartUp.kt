@@ -26,6 +26,7 @@ import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardcomponents.utils.doInBackground
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
+import de.dertyp7214.rboardthememanager.Config.REPO_PREFIX
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.*
@@ -40,6 +41,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 import java.net.URL
+import kotlin.collections.set
 
 class AppStartUp(private val activity: AppCompatActivity) {
     private val checkUpdateUrl by lazy {
@@ -49,7 +51,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
         "https://play.google.com/store/apps/details?id=${Config.GBOARD_PACKAGE_NAME}"
     }
     private val flagsUrl by lazy {
-        "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/flags.json"
+        "$REPO_PREFIX/flags.json"
     }
 
     private var checkedForUpdate = false
