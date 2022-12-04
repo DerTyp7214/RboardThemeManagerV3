@@ -13,14 +13,15 @@ import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.Config.REPO_PREFIX
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.NewsFeedAdapter
+import de.dertyp7214.rboardthememanager.core.isReachable
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.utils.TypeTokens
 import java.net.URL
 
 class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
 
-    private val newsFeedUrl =
-        "$REPO_PREFIX/top.json"
+    private val newsFeedUrl
+        get() = "$REPO_PREFIX/top.json"
 
     companion object {
         val cards: ArrayList<CardElement> = arrayListOf()
@@ -60,7 +61,16 @@ class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
 
     private fun fetchNewsFeed(): List<CardElement> {
         return try {
-            Gson().fromJson(URL(newsFeedUrl).readText(), TypeTokens<List<CardElement>>())
+            Gson().fromJson<List<CardElement>?>(
+                URL(newsFeedUrl).readText(),
+                TypeTokens<List<CardElement>>()
+            ).filter {
+                try {
+                    URL(it.url).isReachable()
+                } catch (e: Exception) {
+                    false
+                }
+            }
         } catch (e: Exception) {
             listOf()
         }
@@ -77,7 +87,8 @@ class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
             get() {
                 if (field == null)
                     field = try {
-                        val imageUrl = if (image.startsWith("http")) image else "$REPO_PREFIX/$image"
+                        val imageUrl =
+                            if (image.startsWith("http")) image else "$REPO_PREFIX/$image"
                         BitmapFactory.decodeStream(URL(imageUrl).openConnection().getInputStream())
                     } catch (_: Exception) {
                         null
