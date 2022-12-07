@@ -127,7 +127,7 @@ jobs:
             app/build/outputs/apk/debug/output-metadata.json
 
       - name: Send Telegram message
-        run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_TO_MAIN }}\",\"message_thread_id\":${{ secrets.TELEGRAM_MAIN_TOPIC_ID_DEBUG }},\"text\":\"**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Download A12+\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-debug/app-debug.apk\"}]]}}'"
+        run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_TO_MAIN }}\",\"message_thread_id\":${{ secrets.TELEGRAM_MAIN_TOPIC_ID_DEBUG }},\"text\":\"**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Download A12+\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-debug/app-debug.apk\"}]]}}'"
 
       - name: Send Notification
         uses: fjogeleit/http-request-action@master

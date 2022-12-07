@@ -72,8 +72,13 @@ class MainActivity : AppCompatActivity() {
     @Suppress("PrivatePropertyName")
     private val PLAY_UPDATE_ID = 3117
 
-    private val updateUrl by lazy {
-        "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-${BuildConfig.BUILD_TYPE}/app-${BuildConfig.BUILD_TYPE}.apk"
+    private val updateUrl: (versionName: String) -> String = { versionName ->
+        @Suppress("KotlinConstantConditions")
+        "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/${versionName}${
+            BuildConfig.BUILD_TYPE.let {
+                if (it == "release") "" else "-$it"
+            }
+        }/app-${BuildConfig.BUILD_TYPE}.apk"
     }
     private val updateUrlGitlab by lazy {
         "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/${BuildConfig.BUILD_TYPE}/app-${BuildConfig.BUILD_TYPE}.apk"
@@ -761,7 +766,8 @@ class MainActivity : AppCompatActivity() {
             notify(this, notificationId, builder.build())
         }
         var finished = false
-        val url = if (URL(updateUrl).isReachable()) updateUrl else updateUrlGitlab
+        val versionName = this.intent.getStringExtra("versionName") ?: "3.7.1"
+        val url = if (URL(updateUrl(versionName)).isReachable()) updateUrl(versionName) else updateUrlGitlab
         UpdateHelper(url, this).apply {
             addOnProgressListener { progress, bytes, total ->
                 if (!finished) {
