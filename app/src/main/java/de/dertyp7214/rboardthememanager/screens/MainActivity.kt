@@ -63,13 +63,13 @@ import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
-    private val updateUrl by lazy {
-        if (BuildConfig.DEBUG){
-            "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible-debug/app-debug.apk"
-        }
-        else{
-            "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/app-release.apk"
-        }
+    private val updateUrl: (versionName: String) -> String = { versionName ->
+        @Suppress("KotlinConstantConditions")
+        "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/${versionName}${
+            BuildConfig.BUILD_TYPE.let {
+                if (it == "release") "-rCompatible" else "-rCompatible-debug"
+            }
+        }/app-${BuildConfig.BUILD_TYPE}.apk"
     }
 
     private val updateUrlGitlab by lazy {
@@ -740,7 +740,8 @@ class MainActivity : AppCompatActivity() {
             notify(this, notificationId, builder.build())
         }
         var finished = false
-        val url = if (URL(updateUrl).isReachable()) updateUrl else updateUrlGitlab
+        val versionName = this.intent.getStringExtra("versionName") ?: "3.7.1"
+        val url = if (URL(updateUrl(versionName)).isReachable()) updateUrl(versionName) else updateUrlGitlab
         UpdateHelper(url, this).apply {
             addOnProgressListener { progress, bytes, total ->
                 if (!finished) {
