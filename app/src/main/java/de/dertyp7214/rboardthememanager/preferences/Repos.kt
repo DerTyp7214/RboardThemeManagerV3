@@ -45,7 +45,7 @@ class Repos(
             doAsync({
                 it.toList().map { url -> url.parseRepo() }
             }, { data ->
-                repositories.addAll(data.filterNotNull())
+                repositories.addAll(data)
                 onRequestReload()
             })
         }
@@ -113,17 +113,9 @@ class Repos(
             activity.openInputDialog(R.string.repository) { dialog, text ->
                 doAsync("true:$text"::parseRepo) {
                     dialog.dismiss()
-                    if (it != null) {
-                        repositories.add(it)
-                        onRequestReload()
-                        modified = true
-                    } else activity.openDialog(
-                        R.string.invalid_repo_long,
-                        R.string.invalid_repo,
-                        false,
-                        ::dismiss,
-                        ::dismiss
-                    )
+                    repositories.add(it)
+                    onRequestReload()
+                    modified = true
                 }
             }
         }
