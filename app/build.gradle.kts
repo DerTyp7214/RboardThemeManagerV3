@@ -92,7 +92,7 @@ dependencies {
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
     implementation("androidx.core:core-ktx:1.9.0")
     //noinspection DifferentStdlibGradleVersion
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.22")
     implementation("androidx.core:core:1.9.0")
     implementation("com.google.android.material:material:1.8.0-beta01")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha05")
@@ -117,5 +117,5 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.4.0-alpha03")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.21")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.22")
 }
