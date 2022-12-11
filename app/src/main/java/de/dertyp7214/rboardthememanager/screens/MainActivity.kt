@@ -720,11 +720,14 @@ class MainActivity : AppCompatActivity() {
                 this@MainActivity.intent.getBooleanExtra("update", false)
             )
         ) {
-            openDialog(R.string.update_ready, R.string.update) { update() }
+            openDialog(
+                R.string.update_ready,
+                R.string.update
+            ) { update(intent.getStringExtra("versionName") ?: "3.7.3") }
         }
     }
 
-    private fun update() {
+    private fun update(versionName: String) {
         val maxProgress = 100
         val notificationId = 42069
         val builder =
@@ -740,8 +743,8 @@ class MainActivity : AppCompatActivity() {
             notify(this, notificationId, builder.build())
         }
         var finished = false
-        val versionName = this.intent.getStringExtra("versionName") ?: "3.7.1"
-        val url = if (URL(updateUrl(versionName)).isReachable()) updateUrl(versionName) else updateUrlGitlab
+        val url =
+            if (URL(Config.GITHUB_REPO_PREFIX).isReachable()) updateUrl(versionName) else updateUrlGitlab
         UpdateHelper(url, this).apply {
             addOnProgressListener { progress, bytes, total ->
                 if (!finished) {

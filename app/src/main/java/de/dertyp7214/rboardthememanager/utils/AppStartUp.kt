@@ -16,6 +16,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.FileProvider
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
@@ -204,7 +205,12 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 }
             }
 
-            val initialized = preferences.getBoolean("initialized", false)
+            val notificationPermissionGranted =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+                    NotificationManagerCompat.from(this).areNotificationsEnabled()
+                else true
+            val initialized =
+                preferences.getBoolean("initialized", false) && notificationPermissionGranted
 
             val scheme = intent.scheme
             val data = intent.data
@@ -396,17 +402,8 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     FirebaseMessaging.getInstance()
                         .subscribeToTopic("update-v3-r-${BuildConfig.BUILD_TYPE.lowercase()}")
 
-                    isReady = !gboardInstalled || !rootAccess
-                    when {
-                        !gboardInstalled -> openDialog(
-                            R.string.install_gboard,
-                            R.string.gboard_not_installed
-                        ) {
-                            openUrl(gboardPlayStoreUrl)
-                            finish()
-                        }
-                        !rootAccess -> NoRootDialog.open(this)
-                        else -> checkForUpdate { update, versionName ->
+                    val checkUpdate = {
+                        checkForUpdate { update, versionName ->
                             checkedForUpdate = true
                             isReady = true
                             validApp(this) {
@@ -420,6 +417,28 @@ class AppStartUp(private val activity: AppCompatActivity) {
                                 else finish()
                             }
                         }
+                    }
+
+                    val pushNotificationPermissionLauncher =
+                        activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+                            checkUpdate()
+                        }
+
+                    isReady = !gboardInstalled || !rootAccess
+                    when {
+                        !gboardInstalled -> openDialog(
+                            R.string.install_gboard,
+                            R.string.gboard_not_installed
+                        ) {
+                            openUrl(gboardPlayStoreUrl)
+                        }
+
+                        !rootAccess -> NoRootDialog.open(this)
+                        !notificationPermissionGranted && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU -> pushNotificationPermissionLauncher.launch(
+                            android.Manifest.permission.POST_NOTIFICATIONS
+                        )
+
+                        else -> checkUpdate()
                     }
                 }
             }
