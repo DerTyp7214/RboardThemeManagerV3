@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
@@ -83,7 +84,8 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.RboardThemeManagerV3.Main"
-            android:windowSoftInputMode="adjustNothing">
+            android:windowSoftInputMode="adjustNothing"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -166,7 +168,8 @@
             android:name=".services.AppThemeService"
             android:enabled="true"
             android:exported="true"
-            android:process=":remote">
+            android:process=":remote"
+            tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="de.dertyp7214.rboard.IAppTheme" />
             </intent-filter>

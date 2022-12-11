@@ -1,20 +1,23 @@
 package de.dertyp7214.rboardthememanager.screens
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.topjohnwu.superuser.io.SuFile
+import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
 import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.core.decodeBitmap
+import de.dertyp7214.rboardthememanager.core.dp
+import de.dertyp7214.rboardthememanager.core.install
+import de.dertyp7214.rboardthememanager.core.isInstalled
+import de.dertyp7214.rboardthememanager.core.openPreviewDialog
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.ActivityInstallPackBinding
-import de.dertyp7214.rboardcomponents.utils.doAsync
 import java.io.File
 import java.util.regex.Pattern
 
@@ -83,7 +86,6 @@ class InstallPackActivity : AppCompatActivity() {
                     val path = file.absolutePath
                     val imageFile = SuFile(file.absolutePath.removeSuffix(".zip"))
                     val image = imageFile.exists().let {
-                        Log.d("IMAGE", "$it $name")
                         if (it) {
                             imageFile.decodeBitmap()
                         } else null

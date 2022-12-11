@@ -18,12 +18,20 @@ import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.checkBox
 import de.Maxr1998.modernpreferences.helpers.onClick
+import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.core.SafeJSON
+import de.dertyp7214.rboardthememanager.core.get
+import de.dertyp7214.rboardthememanager.core.openDialog
+import de.dertyp7214.rboardthememanager.core.openInputDialog
+import de.dertyp7214.rboardthememanager.core.openUrl
+import de.dertyp7214.rboardthememanager.core.parseRepo
+import de.dertyp7214.rboardthememanager.core.remove
+import de.dertyp7214.rboardthememanager.core.set
+import de.dertyp7214.rboardthememanager.core.toStringSet
 import de.dertyp7214.rboardthememanager.data.RboardRepo
 import de.dertyp7214.rboardthememanager.screens.ManageRepo
-import de.dertyp7214.rboardcomponents.utils.doAsync
 
 class Repos(
     private val activity: AppCompatActivity,
@@ -45,7 +53,7 @@ class Repos(
             doAsync({
                 it.toList().map { url -> url.parseRepo() }
             }, { data ->
-                repositories.addAll(data.filterNotNull())
+                repositories.addAll(data)
                 onRequestReload()
             })
         }
@@ -113,17 +121,9 @@ class Repos(
             activity.openInputDialog(R.string.repository) { dialog, text ->
                 doAsync("true:$text"::parseRepo) {
                     dialog.dismiss()
-                    if (it != null) {
-                        repositories.add(it)
-                        onRequestReload()
-                        modified = true
-                    } else activity.openDialog(
-                        R.string.invalid_repo_long,
-                        R.string.invalid_repo,
-                        false,
-                        ::dismiss,
-                        ::dismiss
-                    )
+                    repositories.add(it)
+                    onRequestReload()
+                    modified = true
                 }
             }
         }
