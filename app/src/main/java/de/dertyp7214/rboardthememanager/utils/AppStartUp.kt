@@ -406,13 +406,17 @@ class AppStartUp(private val activity: AppCompatActivity) {
                             finish()
                         }
                         !rootAccess -> NoRootDialog.open(this)
-                        else -> checkForUpdate { update ->
+                        else -> checkForUpdate { update, versionName ->
                             checkedForUpdate = true
                             isReady = true
                             validApp(this) {
                                 preferences.edit { putBoolean("initialized", true) }
 
-                                if (it) block(this, Intent().putExtra("update", update))
+                                if (it) block(
+                                    this, Intent()
+                                        .putExtra("update", update)
+                                        .putExtra("versionName", versionName)
+                                )
                                 else finish()
                             }
                         }
@@ -422,12 +426,12 @@ class AppStartUp(private val activity: AppCompatActivity) {
         }
     }
 
-    private fun checkForUpdate(callback: (update: Boolean) -> Unit) {
+    private fun checkForUpdate(callback: (update: Boolean, versionName: String?) -> Unit) {
         if (preferences.getLong(
                 "lastCheck",
                 0
             ) + 5 * 60 * 100 > System.currentTimeMillis()
-        ) callback(false)
+        ) callback(false, null)
         else doAsync({
             URL(checkUpdateUrl).getTextFromUrl(URL(checkUpdateUrlGitlab)::getTextFromUrl)
         }) { text ->
@@ -435,9 +439,12 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 val outputMetadata = Gson().fromJson(text, OutputMetadata::class.java)
                 val versionCode = outputMetadata.elements.first().versionCode
                 preferences.edit { putLong("lastCheck", System.currentTimeMillis()) }
-                callback(versionCode > BuildConfig.VERSION_CODE)
+                callback(
+                    versionCode > BuildConfig.VERSION_CODE,
+                    outputMetadata.elements.first().versionName
+                )
             } catch (e: Exception) {
-                callback(false)
+                callback(false, null)
             }
         }
     }
