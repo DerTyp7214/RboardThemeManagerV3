@@ -87,7 +87,6 @@ class InstallPackActivity : AppCompatActivity() {
                     val path = file.absolutePath
                     val imageFile = SuFile(file.absolutePath.removeSuffix(".zip"))
                     val image = imageFile.exists().let {
-                        Log.d("IMAGE", "$it $name")
                         if (it) {
                             imageFile.decodeBitmap()
                         } else null
