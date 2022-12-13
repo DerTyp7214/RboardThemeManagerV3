@@ -25,8 +25,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 33
-        versionCode = 374000
-        versionName = "3.7.4"
+        versionCode = 375000
+        versionName = "3.7.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -36,7 +36,8 @@ android {
             "fr", "hi", "hu", "id",
             "it", "ja", "nl", "no",
             "pl", "pt", "ro", "ru",
-            "sv", "uk", "vi"
+            "sv", "uk", "vi",
+            "zh-rCN", "zh-rTW"
         )
     }
 
@@ -109,7 +110,7 @@ dependencies {
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
     implementation("com.github.skydoves:balloon:1.4.7")
-    implementation("androidx.appcompat:appcompat:1.5.1")
+    implementation("androidx.appcompat:appcompat:1.7.0-alpha01")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.4")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
