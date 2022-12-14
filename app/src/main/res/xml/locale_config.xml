@@ -24,5 +24,5 @@
     <locale android:name="uk" />
     <locale android:name="vi" />
     <locale android:name="zh-rCN" />
-    <locale android:name="zh-tTW" />
+    <locale android:name="zh-rTW" />
 </locale-config>
