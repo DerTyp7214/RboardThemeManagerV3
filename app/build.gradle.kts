@@ -3,7 +3,6 @@ import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
-    id("kotlin-android-extensions")
     kotlin("android")
     kotlin("kapt")
 }
@@ -52,11 +51,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_15
-        targetCompatibility = JavaVersion.VERSION_15
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_15.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     packagingOptions {
@@ -79,7 +78,7 @@ dependencies {
 
     implementation("com.github.DerTyp7214:PreferencesPlus:1.0")
 
-    implementation("com.google.protobuf:protobuf-kotlin:3.21.11")
+    implementation("com.google.protobuf:protobuf-kotlin:3.21.12")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0-alpha04")
@@ -92,7 +91,7 @@ dependencies {
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
     implementation("androidx.core:core-ktx:1.9.0")
     //noinspection DifferentStdlibGradleVersion
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.22")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0-RC")
     implementation("androidx.core:core:1.9.0")
     implementation("com.google.android.material:material:1.8.0-beta01")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha05")
@@ -105,7 +104,7 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
-    implementation("com.github.skydoves:balloon:1.4.8-SNAPSHOT")
+    implementation("com.github.skydoves:balloon:1.4.9-SNAPSHOT")
     implementation("androidx.appcompat:appcompat:1.7.0-alpha01")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.4")
@@ -117,5 +116,5 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.4.0-alpha03")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.22")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.0-RC")
 }
