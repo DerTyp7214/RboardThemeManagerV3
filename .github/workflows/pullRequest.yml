@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-java@v3.9.0
         with:
           distribution: temurin
-          java-version: 15
+          java-version: 17
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v3.0.11
