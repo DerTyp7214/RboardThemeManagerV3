@@ -7,7 +7,7 @@ plugins {
     kotlin("kapt")
 }
 
-val libsuVersion = "5.0.3"
+val libsuVersion = "5.0.4"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 @Suppress("UnstableApiUsage")
@@ -91,9 +91,9 @@ dependencies {
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
     implementation("androidx.core:core-ktx:1.9.0")
     //noinspection DifferentStdlibGradleVersion
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0-RC2")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.0")
     implementation("androidx.core:core:1.9.0")
-    implementation("com.google.android.material:material:1.8.0-beta01")
+    implementation("com.google.android.material:material:1.8.0-rc01")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha05")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.activity:activity-ktx:1.7.0-alpha02")
@@ -101,14 +101,14 @@ dependencies {
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:21.2.0")
     implementation("com.google.firebase:firebase-messaging:23.1.1")
-    implementation("com.google.code.gson:gson:2.10")
+    implementation("com.google.code.gson:gson:2.10.1")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
-    implementation("com.github.skydoves:balloon:1.4.9-SNAPSHOT")
+    implementation("com.github.skydoves:balloon:1.5.3-SNAPSHOT")
     implementation("androidx.appcompat:appcompat:1.7.0-alpha01")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.4")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("androidx.browser:browser:1.4.0")
     implementation("com.github.bumptech.glide:glide:4.14.2")
     kapt("com.github.bumptech.glide:compiler:4.14.2")
@@ -116,5 +116,5 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.4.0-alpha03")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.0-RC2")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.0")
 }
