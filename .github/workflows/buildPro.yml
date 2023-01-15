@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.2.0
         with:
           submodules: recursive
 
@@ -22,13 +22,13 @@ jobs:
         run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=message::${IN%%$'\n'*}"
 
       - name: Setup JDK
-        uses: actions/cache@v3.0.11
+        uses: actions/setup-java@v3.9.0
         with:
           distribution: temurin
           java-version: 17
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.0.11
+        uses: actions/cache@v3.2.2
         with:
           path: |
             ~/.gradle/caches
@@ -72,15 +72,14 @@ jobs:
 
       - name: Sign artifact
         id: signArtifact
-        uses: r0adkll/sign-android-release@v1
+        uses: ilharp/sign-android-release@v1.0.4
         with:
-          releaseDirectory: app/build/outputs/apk/pro
-          alias: ${{ secrets.KEYALIAS }}
-          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+          releaseDir: app/build/outputs/apk/debug
+          keyAlias: ${{ secrets.KEYALIAS }}
+          signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-        env:
-          BUILD_TOOLS_VERSION: "33.0.0"
+          buildToolsVersion: 33.0.1
 
       - name: List files
         run: ls app/build/outputs/apk/pro
