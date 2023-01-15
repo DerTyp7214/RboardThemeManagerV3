@@ -1,5 +1,6 @@
 @file:Suppress("SpellCheckingInspection")
 
+import org.jetbrains.kotlin.config.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 
 plugins {
@@ -59,7 +60,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_15
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_15.toString()
+        jvmTarget = JvmTarget.JVM_15.description
+    }
+
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = JvmTarget.JVM_15.description
+        }
     }
 
     packagingOptions {
@@ -94,7 +101,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.9.0")
     //noinspection DifferentStdlibGradleVersion
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.21")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.0")
     implementation("androidx.core:core:1.9.0")
 
     implementation("com.google.android.material:material:1.8.0-rc01")
@@ -121,7 +128,7 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.4.0-alpha04")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.21")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.0")
 
     implementation("com.google.android.play:core:1.10.3")
     implementation("com.google.android.play:core-ktx:1.8.1")

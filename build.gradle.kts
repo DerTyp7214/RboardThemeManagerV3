@@ -9,7 +9,7 @@
     dependencies {
         classpath("com.android.tools.build:gradle:8.0.0-alpha11")
         //noinspection DifferentKotlinGradleVersion
-        classpath(kotlin("gradle-plugin", version = "1.7.20"))
+        classpath(kotlin("gradle-plugin", version = "1.8.0"))
         classpath("com.google.gms:google-services:4.3.14")
     }
 }
