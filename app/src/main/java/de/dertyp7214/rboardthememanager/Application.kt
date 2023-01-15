@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
+import androidx.core.os.LocaleListCompat
 import androidx.preference.PreferenceManager
 import com.dertyp7214.logs.helpers.Logger
 import com.downloader.PRDownloader
@@ -44,6 +45,7 @@ class Application : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.getDefault())
         ThemeUtils.registerActivityLifecycleCallbacks(this)
         PRDownloader.initialize(this)
         doInBackground {
