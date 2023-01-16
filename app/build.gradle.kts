@@ -2,6 +2,7 @@
 
 import org.jetbrains.kotlin.config.JvmTarget
 import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
@@ -26,7 +27,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 33
-        versionCode = 376000
+        versionCode = 376100
         versionName = "3.7.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -63,7 +64,7 @@ android {
         jvmTarget = JvmTarget.JVM_15.description
     }
 
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    tasks.withType<KotlinCompile> {
         kotlinOptions {
             jvmTarget = JvmTarget.JVM_15.description
         }
@@ -107,7 +108,7 @@ dependencies {
     implementation("com.google.android.material:material:1.8.0-rc01")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha05")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.7.0-alpha02")
+    implementation("androidx.activity:activity-ktx:1.7.0-alpha03")
     implementation("androidx.fragment:fragment-ktx:1.5.5")
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:21.2.0")
