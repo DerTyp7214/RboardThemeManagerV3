@@ -1,5 +1,6 @@
 import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 import org.jetbrains.kotlin.config.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
@@ -23,7 +24,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 33
-        versionCode = 376000
+        versionCode = 376100
         versionName = "3.7.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -59,7 +60,7 @@ android {
         jvmTarget = JvmTarget.JVM_17.description
     }
 
-    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    tasks.withType<KotlinCompile> {
         kotlinOptions {
             jvmTarget = JvmTarget.JVM_17.description
         }
@@ -103,7 +104,7 @@ dependencies {
     implementation("com.google.android.material:material:1.8.0-rc01")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha05")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.7.0-alpha02")
+    implementation("androidx.activity:activity-ktx:1.7.0-alpha03")
     implementation("androidx.fragment:fragment-ktx:1.6.0-alpha04")
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:21.2.0")
@@ -122,6 +123,6 @@ dependencies {
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.4.0-alpha03")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.4.0-alpha04")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.0")
 }
