@@ -107,6 +107,13 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.pack" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.pack" />
                 <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.pack" />
+                <data android:pathPattern=".*\\.pack.zip" />
+                <data android:pathPattern=".*\\..*\\.pack.zip" />
+                <data android:pathPattern=".*\\..*\\..*\\.pack.zip" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\.pack.zip" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\.pack.zip" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\.pack.zip" />
+                <data android:pathPattern=".*\\..*\\..*\\..*\\..*\\..*\\..*\\.pack.zip" />
                 <data android:scheme="content" />
                 <data android:scheme="file" />
             </intent-filter>
