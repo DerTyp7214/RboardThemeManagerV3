@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.2.0
+        uses: actions/checkout@v3.3.0
         with:
           submodules: recursive
 
@@ -35,7 +35,7 @@ jobs:
           java-version: 17
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.2.2
+        uses: actions/cache@v3.2.4
         if: ${{ false }}
         with:
           path: |
@@ -46,7 +46,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3.2.2
+        uses: actions/cache@v3.2.4
         with:
           path: |
             ${{ github.workspace }}/.ccache
@@ -99,7 +99,7 @@ jobs:
         run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: Debug Artifact
           path: app/build/outputs/apk/debug/app-debug.apk
@@ -144,7 +144,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.2.0
+        uses: actions/checkout@v3.3.0
         with:
           submodules: recursive
 
@@ -163,7 +163,7 @@ jobs:
           java-version: 17
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.2.2
+        uses: actions/cache@v3.2.4
         if: ${{ false }}
         with:
           path: |
@@ -174,7 +174,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3.2.2
+        uses: actions/cache@v3.2.4
         with:
           path: |
             ${{ github.workspace }}/.ccache
@@ -224,7 +224,7 @@ jobs:
         run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: Debug Artifact
           path: app/build/outputs/apk/release/app-release.apk
@@ -274,7 +274,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.2.0
+        uses: actions/checkout@v3.3.0
         with:
           submodules: recursive
 
@@ -293,7 +293,7 @@ jobs:
           java-version: 17
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.2.2
+        uses: actions/cache@v3.2.4
         if: ${{ false }}
         with:
           path: |
@@ -304,7 +304,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3.2.2
+        uses: actions/cache@v3.2.4
         with:
           path: |
             ${{ github.workspace }}/.ccache
@@ -355,7 +355,7 @@ jobs:
         run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: Debug Artifact
           path: app/build/outputs/apk/debug/app-debug.apk
