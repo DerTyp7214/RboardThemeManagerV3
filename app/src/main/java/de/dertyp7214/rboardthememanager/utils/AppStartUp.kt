@@ -420,7 +420,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     }
 
                     val pushNotificationPermissionLauncher =
-                        activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+                        activity.registerForActivityResult(ActivityResultContracts.RequestPermission()) { _ ->
                             checkUpdate()
                         }
 
