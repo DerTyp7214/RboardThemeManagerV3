@@ -66,7 +66,7 @@ android {
         }
     }
 
-    packagingOptions {
+    packaging {
         jniLibs {
             useLegacyPackaging = true
         }
@@ -80,7 +80,7 @@ dependencies {
     implementation(project(":mathc"))
     implementation(project(":rboardcomponents"))
 
-    implementation(platform("com.google.firebase:firebase-bom:31.2.0"))
+    implementation(platform("com.google.firebase:firebase-bom:31.2.2"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.1.1")
     implementation("com.google.firebase:firebase-analytics-ktx:21.2.0")
 
