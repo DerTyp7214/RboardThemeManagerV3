@@ -16,25 +16,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@latest
         with:
           submodules: recursive
 
-      - uses: nttld/setup-ndk@v1
+      - uses: nttld/setup-ndk@latest
         with:
-          ndk-version: r25
+          ndk-version: r25b
 
       - name: Get Commit Message
         id: commitMessage
         run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=message::${IN%%$'\n'*}"
 
       - name: Setup JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@latest
         with:
           java-version: 17
+          distribution: temurin
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@latest
         with:
           path: |
             ~/.gradle/caches
@@ -44,7 +45,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3
+        uses: actions/cache@latest
         with:
           path: |
             ${{ github.workspace }}/.ccache
@@ -65,7 +66,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@latest
         with:
           gradle-version: wrapper
           arguments: assembleDebug
@@ -81,14 +82,14 @@ jobs:
 
       - name: Sign artifact
         id: signArtifact
-        uses: ilharp/sign-android-release@v1
+        uses: ilharp/sign-android-release@latest
         with:
           releaseDir: app/build/outputs/apk/debug
           keyAlias: ${{ secrets.KEYALIAS }}
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: 33.0.0
+          buildToolsVersion: 34.0.0-rc1
 
       - name: Delete old APK
         run: rm app/build/outputs/apk/debug/app-debug.apk
@@ -97,7 +98,7 @@ jobs:
         run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@latest
         with:
           name: Debug Artifact
           path: app/build/outputs/apk/debug/app-debug.apk
