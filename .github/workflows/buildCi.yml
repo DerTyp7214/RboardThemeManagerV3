@@ -22,7 +22,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r23
+          ndk-version: r25
 
       - name: Get Commit Message
         id: commitMessage

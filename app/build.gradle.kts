@@ -15,7 +15,7 @@ val libsuVersion = "5.0.3"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
-    compileSdk = 33
+    compileSdkPreview = "UpsideDownCake"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
     buildFeatures.buildConfig = true
@@ -81,13 +81,14 @@ dependencies {
     implementation(project(":colorutilsc"))
     implementation(project(":rboardcomponents"))
 
-    implementation(platform("com.google.firebase:firebase-bom:31.1.1"))
+    implementation(platform("com.google.firebase:firebase-bom:31.2.2"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.1.1")
     implementation("com.google.firebase:firebase-analytics-ktx:21.2.0")
 
     implementation("com.github.DerTyp7214:PreferencesPlus:1.0")
 
-    implementation("com.google.protobuf:protobuf-kotlin:3.21.11")
+    implementation("com.google.protobuf:protobuf-kotlin:3.22.0")
+    implementation("com.google.protobuf:protobuf-java:3.22.0")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
@@ -112,11 +113,11 @@ dependencies {
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:21.2.0")
     implementation("com.google.firebase:firebase-messaging:23.1.1")
-    implementation("com.google.code.gson:gson:2.10")
+    implementation("com.google.code.gson:gson:2.10.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0-beta01")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
-    implementation("com.github.skydoves:balloon:1.4.7")
+    implementation("com.github.skydoves:balloon:1.5.2")
     implementation("androidx.appcompat:appcompat:1.7.0-alpha02")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
