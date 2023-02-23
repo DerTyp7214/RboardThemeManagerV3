@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.3.0
         with:
           submodules: recursive
 
@@ -35,7 +35,7 @@ jobs:
           distribution: temurin
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v3.2.4
         with:
           path: |
             ~/.gradle/caches
