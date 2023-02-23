@@ -74,10 +74,6 @@ jobs:
       - name: Get JSON
         id: metadataJson
         run: |
-          content=`cat app/build/outputs/apk/debug/output-metadata.json`
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
           echo "json=$(cat app/build/outputs/apk/debug/output-metadata.json | jq -c .)" >> $GITHUB_OUTPUT
 
       - name: Sign artifact
