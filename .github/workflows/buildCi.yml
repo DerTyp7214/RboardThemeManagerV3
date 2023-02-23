@@ -26,7 +26,7 @@ jobs:
 
       - name: Get Commit Message
         id: commitMessage
-        run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=message::${IN%%$'\n'*}"
+        run: IN="${{ github.event.head_commit.message }}" && echo "message=${IN%%$'\n'*}" >> $GITHUB_OUTPUT
 
       - name: Setup JDK
         uses: actions/setup-java@v3
@@ -55,7 +55,7 @@ jobs:
 
       - name: Extract branch name
         shell: bash
-        run: echo "::set-output name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
         id: extract_branch
 
       - name: File Permissions
@@ -78,18 +78,18 @@ jobs:
           content="${content//'%'/'%25'}"
           content="${content//$'\n'/'%0A'}"
           content="${content//$'\r'/'%0D'}"
-          echo "::set-output name=json::$content"
+          echo "json=$content" >> $GITHUB_OUTPUT
 
       - name: Sign artifact
         id: signArtifact
-        uses: ilharp/sign-android-release@v1
+        uses: ilharp/sign-android-release@v1.0.4
         with:
           releaseDir: app/build/outputs/apk/debug
           keyAlias: ${{ secrets.KEYALIAS }}
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '34.0.0-rc1'
+          buildToolsVersion: 34.0.0-rc1
 
       - name: Delete old APK
         run: rm app/build/outputs/apk/debug/app-debug.apk
