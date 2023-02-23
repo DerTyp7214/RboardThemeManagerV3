@@ -20,7 +20,7 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: nttld/setup-ndk@v1
+      - uses: nttld/setup-ndk@v1.2.0
         with:
           ndk-version: r25b
 
@@ -29,7 +29,7 @@ jobs:
         run: IN="${{ github.event.head_commit.message }}" && echo "message=${IN%%$'\n'*}" >> $GITHUB_OUTPUT
 
       - name: Setup JDK
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v3.9.0
         with:
           java-version: 17
           distribution: temurin
@@ -66,7 +66,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v2.3.3
         with:
           gradle-version: wrapper
           arguments: assembleDebug
@@ -85,7 +85,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: 33.0.0
+          buildToolsVersion: 34.0.0-rc1
 
       - name: Delete old APK
         run: rm app/build/outputs/apk/debug/app-debug.apk
