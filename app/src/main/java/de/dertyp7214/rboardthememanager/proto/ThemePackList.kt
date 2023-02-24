@@ -680,8 +680,8 @@ object ThemePackList {
         private constructor() {
             url_ = ""
             author_ = ""
-            tags_ = LazyStringArrayList.EMPTY
-            themes_ = LazyStringArrayList.EMPTY
+            tags_ = LazyStringArrayList.emptyList()
+            themes_ = LazyStringArrayList.emptyList()
             name_ = ""
             description_ = ""
         }
@@ -1226,9 +1226,9 @@ object ThemePackList {
                 super.clear()
                 url_ = ""
                 author_ = ""
-                tags_ = LazyStringArrayList.EMPTY
+                tags_ = LazyStringArrayList.emptyList()
                 bitField0_ = (bitField0_ and 0x00000001.inv())
-                themes_ = LazyStringArrayList.EMPTY
+                themes_ = LazyStringArrayList.emptyList()
                 bitField0_ = (bitField0_ and 0x00000002.inv())
                 size_ = 0L
                 date_ = 0L
@@ -1261,12 +1261,12 @@ object ThemePackList {
                 result.url_ = url_
                 result.author_ = author_
                 if (((bitField0_ and 0x00000001) != 0)) {
-                    tags_ = tags_!!.unmodifiableView
+                    tags_ = LazyStringArrayList(tags_!!.unmodifiableView)
                     bitField0_ = (bitField0_ and 0x00000001.inv())
                 }
                 result.tags_ = tags_
                 if (((bitField0_ and 0x00000002) != 0)) {
-                    themes_ = themes_!!.unmodifiableView
+                    themes_ = LazyStringArrayList(themes_!!.unmodifiableView)
                     bitField0_ = (bitField0_ and 0x00000002.inv())
                 }
                 result.themes_ = themes_
@@ -1340,7 +1340,7 @@ object ThemePackList {
                 }
                 if (other.tags_!!.isNotEmpty()) {
                     if (tags_!!.isEmpty()) {
-                        tags_ = other.tags_
+                        tags_ = LazyStringArrayList(other.tags_)
                         bitField0_ = (bitField0_ and 0x00000001.inv())
                     } else {
                         ensureTagsIsMutable()
@@ -1350,7 +1350,7 @@ object ThemePackList {
                 }
                 if (other.themes_!!.isNotEmpty()) {
                     if (themes_!!.isEmpty()) {
-                        themes_ = other.themes_
+                        themes_ = LazyStringArrayList(other.themes_)
                         bitField0_ = (bitField0_ and 0x00000002.inv())
                     } else {
                         ensureThemesIsMutable()
@@ -1474,7 +1474,7 @@ object ThemePackList {
                 }
             }
 
-            private var tags_ = LazyStringArrayList.EMPTY
+            private var tags_ = LazyStringArrayList.emptyList()
             private fun ensureTagsIsMutable() {
                 if ((bitField0_ and 0x00000001) == 0) {
                     tags_ = LazyStringArrayList(tags_)
@@ -1520,7 +1520,7 @@ object ThemePackList {
                 return tags_!!.getByteString(index)
             }
 
-            private var themes_ = LazyStringArrayList.EMPTY
+            private var themes_ = LazyStringArrayList.emptyList()
             private fun ensureThemesIsMutable() {
                 if ((bitField0_ and 0x00000002) == 0) {
                     themes_ = LazyStringArrayList(themes_)
