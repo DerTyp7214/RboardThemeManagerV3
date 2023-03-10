@@ -97,7 +97,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.21")
     implementation("androidx.core:core:1.9.0")
 
-    implementation("com.google.android.material:material:1.8.0-beta01")
+    implementation("com.google.android.material:material:1.9.0-alpha02")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha05")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.activity:activity-ktx:1.7.0-alpha02")
