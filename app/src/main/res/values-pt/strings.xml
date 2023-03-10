@@ -121,7 +121,7 @@
     <string name="show_system_theme_long">Mostrar temas do sistema na seção de temas</string>
     <string name="speedup_process">Acelerar processo</string>
     <string name="key">Chave</string>
-    <string name="unreleased">Este app não foi lançado publicamente, alguns recursos podem não funcionar. Favor não relatar erros no grupo principal.</string>
+    <string name="unreleased">Esta versão do app não foi lançada publicamente. Alguns recursos podem não funcionar. Favor não relatar erros no grupo principal.</string>
     <string name="notice">Aviso</string>
     <string name="flags_applied">Flags aplicadas</string>
     <string name="install_module">Caminho de temas pré-existente encontrado. Deseja instalar o módulo mesmo assim?</string>
@@ -203,7 +203,7 @@
     <string name="margins">Margens</string>
     <string name="margins_lanscape">Margens (modo paisagem)</string>
     <string name="radius">Curvatura</string>
-    <string name="not_set">Not set</string>
+    <string name="not_set">Não definido</string>
 
     <string name="kb_pad_land_b">Inferior</string>
     <string name="kb_pad_land_l">Esquerda</string>
