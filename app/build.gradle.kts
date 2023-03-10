@@ -11,7 +11,7 @@ plugins {
     id("com.google.gms.google-services")
 }
 
-val libsuVersion = "5.0.3"
+val libsuVersion = "5.0.4"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
