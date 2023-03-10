@@ -86,7 +86,7 @@ dependencies {
 
     implementation("com.github.DerTyp7214:PreferencesPlus:1.0")
 
-    implementation("com.google.protobuf:protobuf-kotlin:3.22.0")
+    implementation("com.google.protobuf:protobuf-kotlin:3.22.1")
     implementation("com.google.protobuf:protobuf-java:3.22.0")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
