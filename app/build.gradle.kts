@@ -75,7 +75,7 @@ dependencies {
     implementation(project(":rboardcomponents"))
 
     implementation(platform("com.google.firebase:firebase-bom:31.1.1"))
-    implementation("com.google.firebase:firebase-messaging-ktx:23.1.1")
+    implementation("com.google.firebase:firebase-messaging-ktx:23.1.2")
     implementation("com.google.firebase:firebase-analytics-ktx:21.2.0")
 
     implementation("com.github.DerTyp7214:PreferencesPlus:1.0")
