@@ -15,7 +15,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1.2.0
         with:
-          ndk-version: r25b
+          ndk-version: r25c
 
       - name: Get Commit Message
         id: commitMessage
@@ -28,7 +28,7 @@ jobs:
           java-version: 17
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.2.6
+        uses: actions/cache@v3.3.0
         with:
           path: |
             ~/.gradle/caches
@@ -79,7 +79,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '34.0.0-rc1'
+          buildToolsVersion: "34.0.0 rc2"
 
       - name: List files
         run: ls app/build/outputs/apk/pro
