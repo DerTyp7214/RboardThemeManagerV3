@@ -112,7 +112,7 @@ dependencies {
     implementation("com.github.skydoves:balloon:1.4.7")
     implementation("androidx.appcompat:appcompat:1.7.0-alpha01")
     testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.4")
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.0")
     implementation("androidx.browser:browser:1.4.0")
     implementation("com.github.bumptech.glide:glide:4.14.2")
