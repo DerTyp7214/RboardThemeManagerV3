@@ -21,7 +21,7 @@ jobs:
           curl -LsS https://raw.githubusercontent.com/DerTyp7214/DerTyp7214/main/PULL_REQUEST_TEMPLATE.md -o .tmp/PULL_REQUEST_TEMPLATE.md
 
       - name: Create Pull Request
-        uses: devops-infra/action-pull-request@v0.4.2
+        uses: devops-infra/action-pull-request@v0.5.5
         with:
           github_token: ${{ secrets.REPO_SCOPED_TOKEN }}
           template: .tmp/PULL_REQUEST_TEMPLATE.md
