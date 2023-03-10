@@ -123,6 +123,6 @@ dependencies {
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.4.0-beta02")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.4.0-rc01")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.20-Beta")
 }
