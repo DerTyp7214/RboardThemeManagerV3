@@ -97,7 +97,7 @@ jobs:
         run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Release Artifact
           path: app/build/outputs/apk/release/app-release.apk
