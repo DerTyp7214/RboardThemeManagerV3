@@ -89,7 +89,7 @@ dependencies {
     implementation("com.google.protobuf:protobuf-java:3.22.0")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.6.0-alpha06")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.6.0-alpha07")
     implementation("androidx.navigation:navigation-ui-ktx:2.6.0-alpha06")
     implementation("org.apache.commons:commons-text:1.10.0")
 
