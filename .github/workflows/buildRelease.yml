@@ -133,7 +133,7 @@ jobs:
             app/build/outputs/apk/release/output-metadata.json
 
       - name: Dispatch Fdroid Repo
-        uses: peter-evans/repository-dispatch@v1
+        uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.DISPATCH_GITHUB_TOKEN }}
           repository: GboardThemes/Fdroid
