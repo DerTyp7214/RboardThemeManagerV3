@@ -28,7 +28,7 @@ jobs:
           java-version: 17
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.3.0
+        uses: actions/cache@v3.3.1
         with:
           path: |
             ~/.gradle/caches
@@ -38,7 +38,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3.0.5
+        uses: actions/cache@v3.3.1
         with:
           path: |
             ${{ github.workspace }}/.ccache
