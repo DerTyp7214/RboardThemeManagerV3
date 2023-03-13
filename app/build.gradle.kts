@@ -86,7 +86,7 @@ dependencies {
     implementation("com.google.firebase:firebase-messaging-ktx:23.1.2")
     implementation("com.google.firebase:firebase-analytics-ktx:21.2.0")
 
-    implementation("com.google.protobuf:protobuf-java:3.22.1")
+    implementation("com.google.protobuf:protobuf-java:3.22.2")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
