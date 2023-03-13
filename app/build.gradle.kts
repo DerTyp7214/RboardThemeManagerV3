@@ -84,7 +84,7 @@ dependencies {
     implementation("com.google.firebase:firebase-messaging-ktx:23.1.2")
     implementation("com.google.firebase:firebase-analytics-ktx:21.2.0")
 
-    implementation("com.github.DerTyp7214:PreferencesPlus:1.0")
+    implementation("com.github.DerTyp7214:PreferencesPlus:1.1")
 
     implementation("com.google.protobuf:protobuf-kotlin:3.22.0")
     implementation("com.google.protobuf:protobuf-java:3.22.0")
