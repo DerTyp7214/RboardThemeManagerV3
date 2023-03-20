@@ -119,8 +119,8 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("androidx.browser:browser:1.5.0")
-    implementation("com.github.bumptech.glide:glide:4.15.0")
-    ksp("com.github.bumptech.glide:ksp:4.15.0")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+    ksp("com.github.bumptech.glide:ksp:4.15.1")
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
