@@ -1,0 +1,201 @@
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion\nimport org.jetbrains.kotlin.config.JvmTarget\nimport org.jetbrains.kotlin.gradle.tasks.KotlinCompile\n\nplugins {\n    id(\"com.android.application\")\n    id(\"com.google.gms.google-services\")\n    kotlin(\"android\")\n    kotlin(\"kapt\")\n    id(\"com.google.devtools.ksp\") version(\"1.8.20-RC-1.0.9\")\n}\n\nval libsuVersion = \"5.0.4\"\nval kotlinVersion: String = project.getKotlinPluginVersion()\n\nandroid {\n    compileSdkPreview = \"UpsideDownCake\"\n    buildToolsVersion = \"34.0.0 rc2\"\n    buildFeatures.dataBinding = true\n    buildFeatures.viewBinding = true\n    buildFeatures.buildConfig = true\n\n    defaultConfig {\n        applicationId = \"de.dertyp7214.rboardthememanager\"\n        minSdk = 23\n        targetSdk = 33\n        versionCode = 376400\n        versionName = \"3.7.6\"\n\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\n\n        resourceConfigurations += listOf(\n            \"af\", \"cs\", \"da\", \"de\",\n            \"el\", \"en\", \"es\", \"fi\",\n            \"fr\", \"hi\", \"hu\", \"id\",\n            \"it\", \"ja\", \"nl\", \"no\",\n            \"pl\", \"pt\", \"ro\", \"ru\",\n            \"sv\", \"uk\", \"vi\", \"zh-rCN\",\n            \"zh-rTW\"\n        )\n    }\n    buildTypes {\n        getByName(\"release\") {\n            isMinifyEnabled = false\n            proguardFiles(\n                getDefaultProguardFile(\"proguard-android-optimize.txt\"),\n                \"proguard-rules.pro\"\n            )\n        }\n        getByName(\"debug\") {\n            isDebuggable = true\n            applicationIdSuffix = \".debug\"\n        }\n    }\n    compileOptions {\n        sourceCompatibility = JavaVersion.VERSION_17\n        targetCompatibility = JavaVersion.VERSION_17\n    }\n    kotlinOptions {\n        jvmTarget = JvmTarget.JVM_17.description\n    }\n\n    tasks.withType<KotlinCompile> {\n        kotlinOptions {\n            jvmTarget = JvmTarget.JVM_17.description\n        }\n    }\n\n    packaging {\n        jniLibs {\n            useLegacyPackaging = true\n        }\n        resources.excludes.add(\"META-INF/*\")\n    }\n    namespace = \"de.dertyp7214.rboardthememanager\"\n}\n\ndependencies {\n    implementation(project(\":colorutilsc\"))\n    implementation(project(\":mathc\"))\n    implementation(project(\":rboardcomponents\"))\n\n    implementation(platform(\"com.google.firebase:firebase-bom:31.2.3\"))\n    implementation(\"com.google.firebase:firebase-messaging-ktx:23.1.2\")\n    implementation(\"com.google.firebase:firebase-analytics-ktx:21.2.0\")\n\n    implementation(\"com.github.DerTyp7214:PreferencesPlus:1.0\")\n\n    implementation(\"com.google.protobuf:protobuf-kotlin:3.22.0\")\n    implementation(\"com.google.protobuf:protobuf-java:3.22.0\")\n\n    implementation(\"androidx.legacy:legacy-support-v4:1.0.0\")\n    implementation(\"androidx.navigation:navigation-fragment-ktx:2.6.0-alpha07\")\n    implementation(\"androidx.navigation:navigation-ui-ktx:2.6.0-alpha07\")\n    implementation(\"org.apache.commons:commons-text:1.10.0\")\n\n    implementation(\"com.github.topjohnwu.libsu:core:$libsuVersion\")\n    implementation(\"com.github.topjohnwu.libsu:io:$libsuVersion\")\n    implementation(\"com.github.topjohnwu.libsu:nio:$libsuVersion\")\n    implementation(\"dev.chrisbanes.insetter:insetter:0.6.1\")\n    implementation(\"androidx.core:core-ktx:1.12.0-alpha01\")\n    //noinspection DifferentStdlibGradleVersion\n    implementation(\"org.jetbrains.kotlin:kotlin-stdlib:1.8.20-RC\")\n    implementation(\"androidx.core:core:1.12.0-alpha01\")\n    implementation(\"com.google.android.material:material:1.9.0-alpha02\")\n    implementation(\"androidx.constraintlayout:constraintlayout:2.2.0-alpha08\")\n    implementation(\"androidx.preference:preference-ktx:1.2.0\")\n    implementation(\"androidx.activity:activity-ktx:1.8.0-alpha02\")\n    implementation(\"androidx.fragment:fragment-ktx:1.6.0-alpha07\")\n    implementation(\"com.jaredrummler:android-shell:1.0.0\")\n    implementation(\"com.google.firebase:firebase-analytics:21.2.0\")\n    implementation(\"com.google.firebase:firebase-messaging:23.1.2\")\n    implementation(\"com.google.code.gson:gson:2.10.1\")\n    implementation(\"com.bignerdranch.android:simple-item-decoration:1.0.0\")\n    implementation(\"de.dertyp7214:PRDownloader:v0.6.0\")\n    implementation(\"com.github.skydoves:balloon:1.5.3-SNAPSHOT\")\n    implementation(\"androidx.appcompat:appcompat:1.7.0-alpha02\")\n    testImplementation(\"junit:junit:4.13.2\")\n    androidTestImplementation(\"androidx.test.ext:junit:1.1.5\")\n    androidTestImplementation(\"androidx.test.espresso:espresso-core:3.5.1\")\n    implementation(\"androidx.browser:browser:1.5.0\")\n    implementation(\"com.github.bumptech.glide:glide:4.15.0\")\n    ksp(\"com.github.bumptech.glide:ksp:4.15.0\")\n    implementation(\"com.github.murgupluoglu:flagkit-android:1.0.2\")\n    implementation(fileTree(mapOf(\"dir\" to \"libs\", \"include\" to listOf(\"*.jar\", \"*.aar\"))))\n\n    debugImplementation(\"androidx.compose.ui:ui-tooling:1.4.0-rc01\")\n    implementation(\"org.jetbrains.kotlin:kotlin-reflect:1.8.20-RC\")\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	(revision 0031d8e5de62a221805aedd56c441c220d93c4f0)
++++ b/app/build.gradle.kts	(date 1679340584545)
+@@ -102,7 +102,7 @@
+     //noinspection DifferentStdlibGradleVersion
+     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.20-RC")
+     implementation("androidx.core:core:1.12.0-alpha01")
+-    implementation("com.google.android.material:material:1.9.0-alpha02")
++    implementation("com.google.android.material:material:1.9.0-beta01")
+     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha08")
+     implementation("androidx.preference:preference-ktx:1.2.0")
+     implementation("androidx.activity:activity-ktx:1.8.0-alpha02")
+@@ -119,8 +119,8 @@
+     androidTestImplementation("androidx.test.ext:junit:1.1.5")
+     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+     implementation("androidx.browser:browser:1.5.0")
+-    implementation("com.github.bumptech.glide:glide:4.15.0")
+-    ksp("com.github.bumptech.glide:ksp:4.15.0")
++    implementation("com.github.bumptech.glide:glide:4.15.1")
++    ksp("com.github.bumptech.glide:ksp:4.15.1")
+     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
+     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
+ 
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><project version=\"4\">\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_17\" project-jdk-name=\"17\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\n  </component>\n  <component name=\"ProjectType\">\n    <option name=\"id\" value=\"Android\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 0031d8e5de62a221805aedd56c441c220d93c4f0)
++++ b/.idea/misc.xml	(date 1679600560901)
+@@ -1,6 +1,6 @@
+ <project version="4">
+   <component name="ExternalStorageConfigurationManager" enabled="true" />
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="17" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>@file:Suppress(\"UNUSED_VARIABLE\")\n\n// Top-level build file where you can add configuration options common to all sub-projects/modules.\nbuildscript {\n    repositories {\n        google()\n        mavenCentral()\n        maven(\"https://jitpack.io\")\n        maven(\"https://maven.fabric.io/public\")\n        maven(\"https://maven.google.com\")\n        maven(\"https://oss.sonatype.org/content/repositories/snapshots/\")\n    }\n    dependencies {\n        classpath(\"com.android.tools.build:gradle:8.1.0-alpha08\")\n        //noinspection DifferentKotlinGradleVersion\n        classpath(kotlin(\"gradle-plugin\", version = \"1.8.20-RC\"))\n        classpath(\"com.google.gms:google-services:4.3.15\")\n        //classpath(\"com.google.protobuf:protobuf-gradle-plugin:0.9.1\")\n    }\n}\n\nallprojects {\n    repositories {\n        google()\n        mavenCentral()\n        maven(\"https://jitpack.io\")\n        maven(\"https://maven.fabric.io/public\")\n        maven(\"https://maven.google.com\")\n        maven(\"https://oss.sonatype.org/content/repositories/snapshots/\")\n    }\n}\n\ntasks {\n    val clean by registering(Delete::class) {\n        delete(buildDir)\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle.kts b/build.gradle.kts
+--- a/build.gradle.kts	(revision 0031d8e5de62a221805aedd56c441c220d93c4f0)
++++ b/build.gradle.kts	(date 1679422845273)
+@@ -11,11 +11,11 @@
+         maven("https://oss.sonatype.org/content/repositories/snapshots/")
+     }
+     dependencies {
+-        classpath("com.android.tools.build:gradle:8.1.0-alpha08")
++        classpath("com.android.tools.build:gradle:8.1.0-alpha10")
+         //noinspection DifferentKotlinGradleVersion
+         classpath(kotlin("gradle-plugin", version = "1.8.20-RC"))
+         classpath("com.google.gms:google-services:4.3.15")
+-        //classpath("com.google.protobuf:protobuf-gradle-plugin:0.9.1")
++        //classpath("com.google.protobuf:protobuf-gradle-plugin:0.9.2")
+     }
+ }
+ 
+Index: .github/workflows/pullRequest.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>name: Build Pull Request rCompatible\n\non:\n  pull_request:\n    branches: [ rCompatible-Dev ]\n\njobs:\n  build:\n    name: Build debug apk from current pull request\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout\n        uses: actions/checkout@v3.3.0\n        with:\n          submodules: recursive\n\n      - uses: nttld/setup-ndk@v1.2.0\n        with:\n          ndk-version: r25c\n\n      - name: Setup JDK\n        uses: actions/setup-java@v3.10.0\n        with:\n          distribution: temurin\n          java-version: 17\n\n      - name: Cache Gradle dependencies\n        uses: actions/cache@v3.3.0\n        with:\n          path: |\n            ~/.gradle/caches\n            ~/.gradle/wrapper\n            !~/.gradle/caches/build-cache-*\n          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}\n          restore-keys: ${{ runner.os }}-gradle-\n\n      - name: Cache build cache\n        uses: actions/cache@v3.3.0\n        with:\n          path: |\n            ${{ github.workspace }}/.ccache\n            ~/.gradle/caches/build-cache-*\n          key: ${{ runner.os }}-build-cache-${{ github.sha }}\n          restore-keys: ${{ runner.os }}-build-cache-\n\n      - name: File Permissions\n        run: chmod +x gradlew\n\n      - name: Accept Preview SDK License\n        run: echo -n -e \"\\n84831b9409646a918e30573bab4c9c91346d8abd\" > /usr/local/lib/android/sdk/licenses/android-sdk-preview-license\n\n      - name: Build apk\n        id: buildAllApks\n        uses: gradle/gradle-build-action@v2.4.0\n        with:\n          gradle-version: wrapper\n          wrapper-cache-enabled: true\n          dependencies-cache-enabled: true\n          configuration-cache-enabled: true\n          arguments: assembleDebug\n\n      - name: Get JSON\n        id: metadataJson\n        run: |\n          content=`cat app/build/outputs/apk/debug/output-metadata.json`\n          content=\"${content//'%'/'%25'}\"\n          content=\"${content//$'\\n'/'%0A'}\"\n          content=\"${content//$'\\r'/'%0D'}\"\n          echo \"::set-output name=json::$content\"\n\n      - name: Upload Artifact\n        uses: actions/upload-artifact@v3.1.2\n        with:\n          name: Debug Artifact\n          path: app/build/outputs/apk/debug/app-debug.apk\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.github/workflows/pullRequest.yml b/.github/workflows/pullRequest.yml
+--- a/.github/workflows/pullRequest.yml	(revision 0031d8e5de62a221805aedd56c441c220d93c4f0)
++++ b/.github/workflows/pullRequest.yml	(date 1678892106311)
+@@ -25,7 +25,7 @@
+           java-version: 17
+ 
+       - name: Cache Gradle dependencies
+-        uses: actions/cache@v3.3.0
++        uses: actions/cache@v3.3.1
+         with:
+           path: |
+             ~/.gradle/caches
+@@ -35,7 +35,7 @@
+           restore-keys: ${{ runner.os }}-gradle-
+ 
+       - name: Cache build cache
+-        uses: actions/cache@v3.3.0
++        uses: actions/cache@v3.3.1
+         with:
+           path: |
+             ${{ github.workspace }}/.ccache
+Index: .github/workflows/buildPro.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>name: Build Pro\n\non:\n  workflow_dispatch:\n\njobs:\n  build:\n    name: Build new Pro Apk\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout\n        uses: actions/checkout@v3.3.0\n        with:\n          submodules: recursive\n\n      - uses: nttld/setup-ndk@v1.2.0\n        with:\n          ndk-version: r25c\n\n      - name: Get Commit Message\n        id: commitMessage\n        run: IN=\"${{ github.event.head_commit.message }}\" && echo \"::set-output name=message::${IN%%$'\\n'*}\"\n\n      - name: Setup JDK\n        uses: actions/setup-java@v3.10.0\n        with:\n          distribution: temurin\n          java-version: 17\n\n      - name: Cache Gradle dependencies\n        uses: actions/cache@v3.3.0\n        with:\n          path: |\n            ~/.gradle/caches\n            ~/.gradle/wrapper\n            !~/.gradle/caches/build-cache-*\n          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}\n          restore-keys: ${{ runner.os }}-gradle-\n\n      - name: Cache build cache\n        uses: actions/cache@v3.0.5\n        with:\n          path: |\n            ${{ github.workspace }}/.ccache\n            ~/.gradle/caches/build-cache-*\n          key: ${{ runner.os }}-build-cache-${{ github.sha }}\n          restore-keys: ${{ runner.os }}-build-cache-\n\n      - name: File Permissions\n        run: chmod +x gradlew\n\n      - name: Accept Preview SDK License\n        run: echo -n -e \"\\n84831b9409646a918e30573bab4c9c91346d8abd\" > /usr/local/lib/android/sdk/licenses/android-sdk-preview-license\n        \n      - name: Build apk\n        id: buildAllApks\n        uses: gradle/gradle-build-action@v2.4.0\n        with:\n          gradle-version: wrapper\n          arguments: assemblePro\n\n      - name: Get JSON\n        id: metadataJson\n        run: |\n          content=`cat app/build/outputs/apk/pro/output-metadata.json`\n          content=\"${content//'%'/'%25'}\"\n          content=\"${content//$'\\n'/'%0A'}\"\n          content=\"${content//$'\\r'/'%0D'}\"\n          echo \"::set-output name=json::$content\"\n      - name: List files\n        run: ls app/build/outputs/apk/pro\n\n      - name: Sign artifact\n        id: signArtifact\n        uses: ilharp/sign-android-release@v1.0.4\n        with:\n          releaseDir: app/build/outputs/apk/debug\n          keyAlias: ${{ secrets.KEYALIAS }}\n          signingKey: ${{ secrets.SIGNING_KEY }}\n          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}\n          keyPassword: ${{ secrets.KEY_PASSWORD }}\n          buildToolsVersion: '34.0.0-rc2'\n\n      - name: List files\n        run: ls app/build/outputs/apk/pro\n\n      - name: Rename APK\n        run: mv app/build/outputs/apk/pro/app-pro-unsigned-signed.apk app/build/outputs/apk/pro/app-pro.apk\n\n      - name: Upload Artifact\n        uses: actions/upload-artifact@v3.1.2\n        with:\n          name: Release Artifact\n          path: app/build/outputs/apk/pro/app-pro.apk\n\n      - name: Print json\n        run: echo ${{ github.event.head_commit }} 
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.github/workflows/buildPro.yml b/.github/workflows/buildPro.yml
+--- a/.github/workflows/buildPro.yml	(revision 0031d8e5de62a221805aedd56c441c220d93c4f0)
++++ b/.github/workflows/buildPro.yml	(date 1678892106311)
+@@ -28,7 +28,7 @@
+           java-version: 17
+ 
+       - name: Cache Gradle dependencies
+-        uses: actions/cache@v3.3.0
++        uses: actions/cache@v3.3.1
+         with:
+           path: |
+             ~/.gradle/caches
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Fri Oct 28 17:49:00 CEST 2022\ndistributionBase=GRADLE_USER_HOME\ndistributionPath=wrapper/dists\ndistributionUrl=https\\://services.gradle.org/distributions-snapshots/gradle-8.1-20230302232219+0000-all.zip\nzipStoreBase=GRADLE_USER_HOME\nzipStorePath=wrapper/dists\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/gradle/wrapper/gradle-wrapper.properties b/gradle/wrapper/gradle-wrapper.properties
+--- a/gradle/wrapper/gradle-wrapper.properties	(revision 0031d8e5de62a221805aedd56c441c220d93c4f0)
++++ b/gradle/wrapper/gradle-wrapper.properties	(date 1678891824139)
+@@ -1,6 +1,6 @@
+ #Fri Oct 28 17:49:00 CEST 2022
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions-snapshots/gradle-8.1-20230302232219+0000-all.zip
++distributionUrl=https\://services.gradle.org/distributions-snapshots/gradle-8.2-20230314235557+0000-all.zip
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+Index: .github/workflows/buildCi.yml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>name: Build CI\n\non:\n  push:\n    branches: [ master, rCompatible, rCompatible-Dev ]\n  workflow_dispatch:\n\nconcurrency:\n  group: 'ci-build'\n  cancel-in-progress: true\n\njobs:\n  buildMaster:\n    name: Build Ci APK from master\n    if: startsWith(github.ref, 'refs/heads/master')\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout\n        uses: actions/checkout@v3.3.0\n        with:\n          submodules: recursive\n\n      - uses: nttld/setup-ndk@v1.2.0\n        with:\n          ndk-version: r25c\n\n      - name: Get Commit Message\n        id: commitMessage\n        run: IN=\"${{ github.event.head_commit.message }}\" && echo \"message=${IN%%$'\\n'*}\" >> $GITHUB_OUTPUT\n\n      - name: Setup JDK\n        uses: actions/setup-java@v3.10.0\n        with:\n          distribution: temurin\n          java-version: 17\n\n      - name: Cache Gradle dependencies\n        uses: actions/cache@v3.3.0\n        if: ${{ false }}\n        with:\n          path: |\n            ~/.gradle/caches\n            ~/.gradle/wrapper\n            !~/.gradle/caches/build-cache-*\n          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}\n          restore-keys: ${{ runner.os }}-gradle-\n\n      - name: Cache build cache\n        uses: actions/cache@v3.3.0\n        with:\n          path: |\n            ${{ github.workspace }}/.ccache\n            ~/.gradle/caches/build-cache-*\n          key: ${{ runner.os }}-build-cache-${{ github.sha }}\n          restore-keys: ${{ runner.os }}-build-cache-\n\n      - name: Extract branch name\n        shell: bash\n        run: echo \"BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\\//_/g')\" >> $GITHUB_OUTPUT\n        id: extract_branch\n\n      - name: File Permissions\n        run: chmod +x gradlew\n\n      - name: Accept Preview SDK License\n        run: echo -n -e \"\\n84831b9409646a918e30573bab4c9c91346d8abd\" > /usr/local/lib/android/sdk/licenses/android-sdk-preview-license\n\n      - name: Build apk\n        id: buildAllApks\n        uses: gradle/gradle-build-action@v2.4.0\n        with:\n          gradle-version: wrapper\n          arguments: assembleDebug\n\n      - name: Get JSON\n        id: metadataJson\n        run: |\n          echo \"json=$(cat app/build/outputs/apk/debug/output-metadata.json | jq -c .)\" >> $GITHUB_OUTPUT\n\n      - name: Sign artifact\n        id: signArtifact\n        uses: ilharp/sign-android-release@v1.0.4\n        with:\n          releaseDir: app/build/outputs/apk/debug\n          keyAlias: ${{ secrets.KEYALIAS }}\n          signingKey: ${{ secrets.SIGNING_KEY }}\n          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}\n          keyPassword: ${{ secrets.KEY_PASSWORD }}\n          buildToolsVersion: '34.0.0-rc2'\n\n      - name: Delete old APK\n        run: rm app/build/outputs/apk/debug/app-debug.apk\n\n      - name: Rename APK\n        run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk\n\n      - name: Upload Artifact\n        uses: actions/upload-artifact@v3.1.2\n        with:\n          name: Debug Artifact\n          path: app/build/outputs/apk/debug/app-debug.apk\n\n      - name: Create new Release\n        id: create_release\n        uses: marvinpinto/action-automatic-releases@latest\n        with:\n          repo_token: ${{ secrets.GITHUB_TOKEN }}\n          automatic_release_tag: ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-debug\n          prerelease: true\n          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}\n          files: |\n            app/build/outputs/apk/debug/app-debug.apk\n            app/build/outputs/apk/debug/output-metadata.json\n\n      - name: Create new Release\n        id: create_latest_release\n        uses: marvinpinto/action-automatic-releases@latest\n        with:\n          repo_token: ${{ secrets.GITHUB_TOKEN }}\n          automatic_release_tag: latest-debug\n          prerelease: true\n          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}\n          files: |\n            app/build/outputs/apk/debug/app-debug.apk\n            app/build/outputs/apk/debug/output-metadata.json\n\n      - name: Send Telegram message\n        run: \"curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\\\"chat_id\\\":\\\"${{ secrets.TELEGRAM_TO_MAIN }}\\\",\\\"message_thread_id\\\":${{ secrets.TELEGRAM_MAIN_TOPIC_ID_DEBUG }},\\\"text\\\":\\\"#A6\\\\n**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\\\n\\\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\\\",\\\"parse_mode\\\":\\\"markdown\\\",\\\"reply_markup\\\":{\\\"inline_keyboard\\\":[[{\\\"text\\\":\\\"Download A12+\\\",\\\"url\\\":\\\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-debug/app-debug.apk\\\"}]]}}'\"\n\n      - name: Send Notification\n        uses: fjogeleit/http-request-action@master\n        with:\n          url: 'https://fcm.googleapis.com/fcm/send'\n          method: 'POST'\n          customHeaders: '{\"Authorization\":\"key=${{ secrets.FCM_KEY }}\"}'\n          data: '{\"to\": \"/topics/update-v3-debug\",\"data\": {\"version\": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},\"type\": \"update\",\"notification\": {\"body\": \"Update available. ${{ steps.commitMessage.outputs.message }}\",\"title\": \"Update\"}}}'\n  buildRCompatible:\n    name: Build Ci APK from rCompatible\n    if: github.ref == 'refs/heads/rCompatible'\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout\n        uses: actions/checkout@v3.3.0\n        with:\n          submodules: recursive\n\n      - uses: nttld/setup-ndk@v1.2.0\n        with:\n          ndk-version: r25c\n\n      - name: Get Commit Message\n        id: commitMessage\n        run: IN=\"${{ github.event.head_commit.message }}\" && echo \"::set-output name=message::${IN%%$'\\n'*}\"\n\n      - name: Setup JDK\n        uses: actions/setup-java@v3.10.0\n        with:\n          distribution: temurin\n          java-version: 17\n\n      - name: Cache Gradle dependencies\n        uses: actions/cache@v3.3.0\n        if: ${{ false }}\n        with:\n          path: |\n            ~/.gradle/caches\n            ~/.gradle/wrapper\n            !~/.gradle/caches/build-cache-*\n          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}\n          restore-keys: ${{ runner.os }}-gradle-\n\n      - name: Cache build cache\n        uses: actions/cache@v3.3.0\n        with:\n          path: |\n            ${{ github.workspace }}/.ccache\n            ~/.gradle/caches/build-cache-*\n          key: ${{ runner.os }}-build-cache-${{ github.sha }}\n          restore-keys: ${{ runner.os }}-build-cache-\n\n      - name: Extract branch name\n        shell: bash\n        run: echo \"::set-output name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\\//_/g')\"\n        id: extract_branch\n\n      - name: File Permissions\n        run: chmod +x gradlew\n\n      - name: Accept Preview SDK License\n        run: echo -n -e \"\\n84831b9409646a918e30573bab4c9c91346d8abd\" > /usr/local/lib/android/sdk/licenses/android-sdk-preview-license\n        \n      - name: Build apk\n        id: buildAllApks\n        uses: gradle/gradle-build-action@v2.4.0\n        with:\n          gradle-version: wrapper\n          arguments: assembleRelease\n\n      - name: Get JSON\n        id: metadataJson\n        run: |\n          content=`cat app/build/outputs/apk/release/output-metadata.json`\n          content=\"${content//'%'/'%25'}\"\n          content=\"${content//$'\\n'/'%0A'}\"\n          content=\"${content//$'\\r'/'%0D'}\"\n          echo \"::set-output name=json::$content\"\n\n      - name: Sign artifact\n        id: signArtifact\n        uses: ilharp/sign-android-release@v1.0.4\n        with:\n          releaseDir: app/build/outputs/apk/release\n          keyAlias: ${{ secrets.KEYALIAS }}\n          signingKey: ${{ secrets.SIGNING_KEY }}\n          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}\n          keyPassword: ${{ secrets.KEY_PASSWORD }}\n          buildToolsVersion: '34.0.0-rc2'\n\n      - name: Rename APK\n        run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk\n\n      - name: Upload Artifact\n        uses: actions/upload-artifact@v3.1.2\n        with:\n          name: Debug Artifact\n          path: app/build/outputs/apk/release/app-release.apk\n\n      - name: Create new Release\n        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'\n        id: create_release\n        uses: marvinpinto/action-automatic-releases@latest\n        with:\n          repo_token: ${{ secrets.GITHUB_TOKEN }}\n          automatic_release_tag: ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-rCompatible\n          prerelease: true\n          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}\n          files: |\n            app/build/outputs/apk/release/app-release.apk\n            app/build/outputs/apk/release/output-metadata.json\n\n      - name: Create new Release\n        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'\n        id: create_latest_release\n        uses: marvinpinto/action-automatic-releases@latest\n        with:\n          repo_token: ${{ secrets.GITHUB_TOKEN }}\n          automatic_release_tag: latest-rCompatible\n          prerelease: true\n          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}\n          files: |\n            app/build/outputs/apk/release/app-release.apk\n            app/build/outputs/apk/release/output-metadata.json\n\n      - name: Send Telegram message\n        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'\n        run: \"curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\\\"chat_id\\\":\\\"${{ secrets.TELEGRAM_TO_MAIN }}\\\",\\\"message_thread_id\\\":${{ secrets.TELEGRAM_MAIN_TOPIC_ID }},\\\"text\\\":\\\"#A6\\\\n**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\\\n\\\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\\\",\\\"parse_mode\\\":\\\"markdown\\\",\\\"reply_markup\\\":{\\\"inline_keyboard\\\":[[{\\\"text\\\":\\\"Download A6+ Release\\\",\\\"url\\\":\\\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-rCompatible/app-release.apk\\\"}]]}}'\"\n\n      - name: Send Notification\n        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible'\n        uses: fjogeleit/http-request-action@master\n        with:\n          url: 'https://fcm.googleapis.com/fcm/send'\n          method: 'POST'\n          customHeaders: '{\"Authorization\":\"key=${{ secrets.FCM_KEY }}\"}'\n          data: '{\"to\": \"/topics/update-v3-r-release\",\"data\": {\"version\": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},\"type\": \"update\",\"notification\": {\"body\": \"Update available. ${{ steps.commitMessage.outputs.message }}\",\"title\": \"Update\"}}}'\n\n  buildRCompatible-Dev:\n    name: Build Ci APK from rCompatible-Dev\n    if: startsWith(github.ref, 'refs/heads/rCompatible-Dev')\n    runs-on: ubuntu-latest\n    steps:\n      - name: Checkout\n        uses: actions/checkout@v3.3.0\n        with:\n          submodules: recursive\n\n      - uses: nttld/setup-ndk@v1.2.0\n        with:\n          ndk-version: r25c\n\n      - name: Get Commit Message\n        id: commitMessage\n        run: IN=\"${{ github.event.head_commit.message }}\" && echo \"::set-output name=message::${IN%%$'\\n'*}\"\n\n      - name: Setup JDK\n        uses: actions/setup-java@v3.10.0\n        with:\n          distribution: temurin\n          java-version: 17\n\n      - name: Cache Gradle dependencies\n        uses: actions/cache@v3.3.0\n        if: ${{ false }}\n        with:\n          path: |\n            ~/.gradle/caches\n            ~/.gradle/wrapper\n            !~/.gradle/caches/build-cache-*\n          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle.kts') }}\n          restore-keys: ${{ runner.os }}-gradle-\n\n      - name: Cache build cache\n        uses: actions/cache@v3.3.0\n        with:\n          path: |\n            ${{ github.workspace }}/.ccache\n            ~/.gradle/caches/build-cache-*\n          key: ${{ runner.os }}-build-cache-${{ github.sha }}\n          restore-keys: ${{ runner.os }}-build-cache-\n\n      - name: Extract branch name\n        shell: bash\n        run: echo \"::set-output name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\\//_/g')\"\n        id: extract_branch\n\n      - name: File Permissions\n        run: chmod +x gradlew\n\n      - name: Accept Preview SDK License\n        run: echo -n -e \"\\n84831b9409646a918e30573bab4c9c91346d8abd\" > /usr/local/lib/android/sdk/licenses/android-sdk-preview-license\n\n      - name: Build apk\n        id: buildAllApks\n        uses: gradle/gradle-build-action@v2.4.0\n        with:\n          gradle-version: wrapper\n          arguments: assembleDebug\n\n      - name: Get JSON\n        id: metadataJson\n        run: |\n          content=`cat app/build/outputs/apk/debug/output-metadata.json`\n          content=\"${content//'%'/'%25'}\"\n          content=\"${content//$'\\n'/'%0A'}\"\n          content=\"${content//$'\\r'/'%0D'}\"\n          echo \"::set-output name=json::$content\"\n\n\n      - name: Sign artifact\n        id: signArtifact\n        uses: ilharp/sign-android-release@v1.0.4\n        with:\n          releaseDir: app/build/outputs/apk/debug\n          keyAlias: ${{ secrets.KEYALIAS }}\n          signingKey: ${{ secrets.SIGNING_KEY }}\n          keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}\n          keyPassword: ${{ secrets.KEY_PASSWORD }}\n          buildToolsVersion: '34.0.0-rc2'\n\n      - name: Rename APK\n        run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk\n\n      - name: Upload Artifact\n        uses: actions/upload-artifact@v3.1.2\n        with:\n          name: Debug Artifact\n          path: app/build/outputs/apk/debug/app-debug.apk\n\n      - name: Create new Release\n        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible-Dev'\n        id: create_release\n        uses: marvinpinto/action-automatic-releases@latest\n        with:\n          repo_token: ${{ secrets.GITHUB_TOKEN }}\n          automatic_release_tag: ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-rCompatible-debug\n          prerelease: true\n          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}\n          files: |\n            app/build/outputs/apk/debug/app-debug.apk\n            app/build/outputs/apk/debug/output-metadata.json\n\n      - name: Create new Release\n        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible-Dev'\n        id: create_latest_release\n        uses: marvinpinto/action-automatic-releases@latest\n        with:\n          repo_token: ${{ secrets.GITHUB_TOKEN }}\n          automatic_release_tag: latest-rCompatible-debug\n          prerelease: true\n          title: Rboard Manager Development ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}\n          files: |\n            app/build/outputs/apk/debug/app-debug.apk\n            app/build/outputs/apk/debug/output-metadata.json\n\n      - name: Send Telegram message\n        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible-Dev'\n        run: \"curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\\\"chat_id\\\":\\\"${{ secrets.TELEGRAM_TO_MAIN }}\\\",\\\"message_thread_id\\\":${{ secrets.TELEGRAM_MAIN_TOPIC_ID_DEBUG }},\\\"text\\\":\\\"#A6\\\\n**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\\\n\\\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\\\",\\\"parse_mode\\\":\\\"markdown\\\",\\\"reply_markup\\\":{\\\"inline_keyboard\\\":[[{\\\"text\\\":\\\"Download A6+ Debug\\\",\\\"url\\\":\\\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-rCompatible-debug/app-debug.apk\\\"}]]}}'\"\n\n      - name: Send Notification\n        if: steps.extract_branch.outputs.BRANCH_NAME == 'rCompatible-Dev'\n        uses: fjogeleit/http-request-action@master\n        with:\n          url: 'https://fcm.googleapis.com/fcm/send'\n          method: 'POST'\n          customHeaders: '{\"Authorization\":\"key=${{ secrets.FCM_KEY }}\"}'\n          data: '{\"to\": \"/topics/update-v3-r-debug\",\"data\": {\"version\": ${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionCode }},\"type\": \"update\",\"notification\": {\"body\": \"Update available. ${{ steps.commitMessage.outputs.message }}\",\"title\": \"Update\"}}}'\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.github/workflows/buildCi.yml b/.github/workflows/buildCi.yml
+--- a/.github/workflows/buildCi.yml	(revision 0031d8e5de62a221805aedd56c441c220d93c4f0)
++++ b/.github/workflows/buildCi.yml	(date 1678892106311)
+@@ -35,7 +35,7 @@
+           java-version: 17
+ 
+       - name: Cache Gradle dependencies
+-        uses: actions/cache@v3.3.0
++        uses: actions/cache@v3.3.1
+         if: ${{ false }}
+         with:
+           path: |
+@@ -46,7 +46,7 @@
+           restore-keys: ${{ runner.os }}-gradle-
+ 
+       - name: Cache build cache
+-        uses: actions/cache@v3.3.0
++        uses: actions/cache@v3.3.1
+         with:
+           path: |
+             ${{ github.workspace }}/.ccache
+@@ -159,7 +159,7 @@
+           java-version: 17
+ 
+       - name: Cache Gradle dependencies
+-        uses: actions/cache@v3.3.0
++        uses: actions/cache@v3.3.1
+         if: ${{ false }}
+         with:
+           path: |
+@@ -170,7 +170,7 @@
+           restore-keys: ${{ runner.os }}-gradle-
+ 
+       - name: Cache build cache
+-        uses: actions/cache@v3.3.0
++        uses: actions/cache@v3.3.1
+         with:
+           path: |
+             ${{ github.workspace }}/.ccache
+@@ -289,7 +289,7 @@
+           java-version: 17
+ 
+       - name: Cache Gradle dependencies
+-        uses: actions/cache@v3.3.0
++        uses: actions/cache@v3.3.1
+         if: ${{ false }}
+         with:
+           path: |
+@@ -300,7 +300,7 @@
+           restore-keys: ${{ runner.os }}-gradle-
+ 
+       - name: Cache build cache
+-        uses: actions/cache@v3.3.0
++        uses: actions/cache@v3.3.1
+         with:
+           path: |
+             ${{ github.workspace }}/.ccache
