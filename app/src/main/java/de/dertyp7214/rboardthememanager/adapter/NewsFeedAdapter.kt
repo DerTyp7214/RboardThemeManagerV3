@@ -51,7 +51,7 @@ class NewsFeedAdapter(
         holder.author.text = "by ${item.author}"
 
         holder.card.setOnClickListener {
-            onCardClicked(ThemePack(item.author, item.url, item.title, listOf()))
+            onCardClicked(ThemePack(item.author, "", item.url, item.title, listOf()))
         }
     }
 

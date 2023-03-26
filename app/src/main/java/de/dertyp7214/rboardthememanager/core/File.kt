@@ -11,6 +11,7 @@ import de.dertyp7214.rboardthememanager.data.ModuleMeta
 import java.io.File
 import java.io.InputStream
 import kotlin.text.Charsets.UTF_8
+import java.security.MessageDigest
 
 fun File.parseModuleMeta(): ModuleMeta {
     val text = SuFileInputStream.open(this).readBytes().toString(UTF_8)
@@ -70,3 +71,5 @@ fun File.share(
             )
         }
 }
+fun File.hash(): String = MessageDigest.getInstance("SHA-256").digest(readBytes())
+    .joinToString("") { "%02x".format(it) }
