@@ -32,7 +32,7 @@ import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.preferences.Settings
-import de.dertyp7214.rboardthememanager.proto.ThemePackList
+import de.dertyp7214.rboardthememanager.proto.ThemePackProto
 import java.io.BufferedInputStream
 import java.io.File
 import java.net.URL
@@ -188,11 +188,10 @@ object ThemeUtils {
 
                         val protoList = URL(protoListUrl).readBytes()
 
-                        ThemePackList.ObjectList.parseFrom(protoList).objectsList?.toPackList()
-                            ?.map {
-                                it.repoUrl = repo
-                                it
-                            }?.let(packs::addAll)
+                        ThemePackProto.parsePacks(protoList).map { pack ->
+                            pack.repoUrl = repo
+                            pack
+                        }.let(packs::addAll)
                     } else packs.addAll(
                         Gson().fromJson<Collection<ThemePack>?>(
                             URL(repo).readText(),
@@ -202,7 +201,8 @@ object ThemeUtils {
                             it
                         }
                     )
-                } catch (_: Exception) {
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
             }
             ArrayList(packs.sortedBy { it.name.lowercase() })

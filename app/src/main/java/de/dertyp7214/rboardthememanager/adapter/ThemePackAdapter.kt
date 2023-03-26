@@ -1,7 +1,6 @@
 package de.dertyp7214.rboardthememanager.adapter
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -9,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.Config
@@ -20,7 +20,7 @@ import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 
 class ThemePackAdapter(
     private val list: List<ThemePack>,
-    private val activity: Activity,
+    private val activity: FragmentActivity,
     private val resultLauncher: ActivityResultLauncher<Intent>
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {

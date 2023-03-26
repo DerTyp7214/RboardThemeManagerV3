@@ -6,6 +6,7 @@ import de.dertyp7214.rboardthememanager.core.RepoUrl
 data class ThemePack(
     val author: String,
     val url: String,
+    val hash: String? = null,
     @SerializedName(value = "title", alternate = ["name"])
     val name: String,
     val tags: List<String>,
@@ -30,6 +31,7 @@ data class ThemePack(
 
         if (author != other.author) return false
         if (url != other.url) return false
+        if (hash != other.hash) return false
         if (name != other.name) return false
         if (tags != other.tags) return false
         if (themes != other.themes) return false
@@ -42,6 +44,6 @@ data class ThemePack(
     }
 
     companion object {
-        val NONE = ThemePack("", "", "", listOf(), listOf(), 0, null, true)
+        val NONE = ThemePack("", "", "", "", listOf(), listOf(), 0, null, true)
     }
 }

@@ -10,10 +10,10 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import de.dertyp7214.rboardcomponents.utils.asyncInto
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.data.ThemePack
-import de.dertyp7214.rboardcomponents.utils.asyncInto
 
 class NewsFeedAdapter(
     private val news: List<NewsCards.CardElement>,
@@ -51,7 +51,7 @@ class NewsFeedAdapter(
         holder.author.text = "by ${item.author}"
 
         holder.card.setOnClickListener {
-            onCardClicked(ThemePack(item.author, item.url, item.title, listOf()))
+            onCardClicked(ThemePack(item.author, "", item.url, item.title, listOf()))
         }
     }
 

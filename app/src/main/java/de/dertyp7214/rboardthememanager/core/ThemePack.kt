@@ -1,6 +1,6 @@
 package de.dertyp7214.rboardthememanager.core
 
-import android.app.Activity
+import androidx.fragment.app.FragmentActivity
 import com.dertyp7214.logs.helpers.Logger
 import com.downloader.Error
 import com.downloader.OnDownloadListener
@@ -13,7 +13,7 @@ import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.utils.ZipHelper
 import java.io.File
 
-fun ThemePack.download(activity: Activity, result: (themes: List<String>) -> Unit) {
+fun ThemePack.download(activity: FragmentActivity, result: (themes: List<String>) -> Unit) {
     val dialog = activity.openLoadingDialog(R.string.downloading_pack)
     val name = name.replace(" ", "_")
     Logger.log(Logger.Companion.Type.DEBUG, "Download", "Downloading $url ${url.let {
@@ -28,6 +28,18 @@ fun ThemePack.download(activity: Activity, result: (themes: List<String>) -> Uni
         .start(object : OnDownloadListener {
             override fun onDownloadComplete() {
                 val pack = File(activity.cacheDir, "$name.pack")
+
+                if (this@download.hash != null && pack.hash() != this@download.hash) {
+                    dialog.dismiss()
+                    result(listOf())
+
+                    activity.openDialog(R.string.error, R.string.hash_mismatch, negative = null) {
+                        it.dismiss()
+                    }
+
+                    return
+                }
+
                 val destination = File(activity.cacheDir, name)
                 dialog.dismiss()
                 if (ZipHelper().unpackZip(destination.absolutePath, pack.absolutePath)) {

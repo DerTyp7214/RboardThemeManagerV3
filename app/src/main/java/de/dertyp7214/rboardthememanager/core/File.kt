@@ -10,6 +10,7 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 import java.io.File
 import java.io.InputStream
+import java.security.MessageDigest
 import kotlin.text.Charsets.UTF_8
 
 fun File.parseModuleMeta(): ModuleMeta {
@@ -70,3 +71,6 @@ fun File.share(
             )
         }
 }
+
+fun File.hash(): String = MessageDigest.getInstance("SHA-256").digest(readBytes())
+    .joinToString("") { "%02x".format(it) }

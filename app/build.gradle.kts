@@ -27,7 +27,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 33
-        versionCode = 376400
+        versionCode = 376500
         versionName = "3.7.6"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -82,11 +82,11 @@ dependencies {
     implementation(project(":colorutilsc"))
     implementation(project(":rboardcomponents"))
 
-    implementation(platform("com.google.firebase:firebase-bom:31.2.3"))
+    implementation(platform("com.google.firebase:firebase-bom:31.3.0"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.1.2")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.2.0")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.2.1")
 
-    implementation("com.google.protobuf:protobuf-java:3.22.1")
+    implementation("com.github.os72:protobuf-dynamic:1.0.1")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
@@ -103,16 +103,16 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.10")
     implementation("androidx.core:core:1.9.0")
 
-    implementation("com.google.android.material:material:1.9.0-alpha02")
-    implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha07")
+    implementation("com.google.android.material:material:1.9.0-beta01")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha09")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.8.0-alpha01")
-    implementation("androidx.fragment:fragment-ktx:1.5.5")
+    implementation("androidx.activity:activity-ktx:1.8.0-alpha02")
+    implementation("androidx.fragment:fragment-ktx:1.5.6")
     implementation("com.jaredrummler:android-shell:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:21.2.0")
+    implementation("com.google.firebase:firebase-analytics:21.2.1")
     implementation("com.google.firebase:firebase-messaging:23.1.2")
     implementation("com.google.code.gson:gson:2.10.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
     implementation("com.github.skydoves:balloon:1.5.2")
@@ -121,15 +121,15 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("androidx.browser:browser:1.5.0")
-    implementation("com.github.bumptech.glide:glide:4.15.0")
+    implementation("com.github.bumptech.glide:glide:4.15.1")
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.4.0-rc01")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.5.0-alpha01")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.10")
 
     implementation("com.google.android.play:core:1.10.3")
     implementation("com.google.android.play:core-ktx:1.8.1")
 
-    ksp("com.github.bumptech.glide:ksp:4.14.2")
+    ksp("com.github.bumptech.glide:ksp:4.15.1")
 }
