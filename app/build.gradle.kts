@@ -125,5 +125,5 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.5.0-alpha01")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.20-RC2")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.255-SNAPSHOT")
 }
