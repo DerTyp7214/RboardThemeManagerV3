@@ -10,7 +10,7 @@ plugins {
     id("com.google.devtools.ksp") version("1.8.20-RC2-1.0.9")
 }
 
-val libsuVersion = "5.0.4"
+val libsuVersion = "5.0.5"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
