@@ -7,10 +7,10 @@ plugins {
     id("com.google.gms.google-services")
     kotlin("android")
     kotlin("kapt")
-    id("com.google.devtools.ksp") version("1.8.20-RC2-1.0.9")
+    id("com.google.devtools.ksp") version("1.8.20-1.0.10")
 }
 
-val libsuVersion = "5.0.4"
+val libsuVersion = "5.0.5"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
@@ -99,7 +99,7 @@ dependencies {
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
     implementation("androidx.core:core-ktx:1.12.0-alpha01")
     //noinspection DifferentStdlibGradleVersion
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.20-RC2")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.20")
     implementation("androidx.core:core:1.12.0-alpha01")
     implementation("com.google.android.material:material:1.9.0-beta01")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha09")
@@ -125,5 +125,5 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.5.0-alpha01")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.20-RC2")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.20")
 }
