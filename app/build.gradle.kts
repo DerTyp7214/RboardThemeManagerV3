@@ -90,7 +90,7 @@ dependencies {
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.navigation:navigation-fragment-ktx:2.6.0-alpha08")
-    implementation("androidx.navigation:navigation-ui-ktx:2.6.0-alpha08")
+    implementation("androidx.navigation:navigation-ui-ktx:2.6.0-alpha09")
     implementation("org.apache.commons:commons-text:1.10.0")
 
     implementation("com.github.topjohnwu.libsu:core:$libsuVersion")
