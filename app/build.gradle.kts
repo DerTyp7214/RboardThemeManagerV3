@@ -105,7 +105,7 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha09")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.activity:activity-ktx:1.8.0-alpha02")
-    implementation("androidx.fragment:fragment-ktx:1.6.0-alpha08")
+    implementation("androidx.fragment:fragment-ktx:1.6.0-alpha09")
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:21.2.1")
     implementation("com.google.firebase:firebase-messaging:23.1.2")
