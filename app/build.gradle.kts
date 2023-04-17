@@ -97,10 +97,10 @@ dependencies {
     implementation("com.github.topjohnwu.libsu:io:$libsuVersion")
     implementation("com.github.topjohnwu.libsu:nio:$libsuVersion")
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
-    implementation("androidx.core:core-ktx:1.12.0-alpha01")
+    implementation("androidx.core:core-ktx:1.12.0-alpha03")
     //noinspection DifferentStdlibGradleVersion
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.20")
-    implementation("androidx.core:core:1.12.0-alpha01")
+    implementation("androidx.core:core:1.12.0-alpha03")
     implementation("com.google.android.material:material:1.10.0-alpha01")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha09")
     implementation("androidx.preference:preference-ktx:1.2.0")
