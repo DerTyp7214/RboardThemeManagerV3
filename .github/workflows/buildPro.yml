@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.0
+        uses: actions/checkout@v3.5.2
         with:
           submodules: recursive
 
@@ -54,7 +54,7 @@ jobs:
         
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2.4.0
+        uses: gradle/gradle-build-action@v2.4.2
         with:
           gradle-version: wrapper
           arguments: assemblePro
@@ -79,7 +79,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '34.0.0-rc2'
+          buildToolsVersion: '34.0.0-rc3'
 
       - name: List files
         run: ls app/build/outputs/apk/pro
