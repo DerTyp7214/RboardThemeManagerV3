@@ -80,7 +80,8 @@ class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
         val image: String,
         val author: String,
         val title: String,
-        val url: String
+        val url: String,
+        val hash: String
     ) {
         var bitmap: Bitmap? = null
             private set
