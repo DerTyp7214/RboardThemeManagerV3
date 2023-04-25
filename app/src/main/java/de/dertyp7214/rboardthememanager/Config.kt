@@ -62,7 +62,7 @@ object Config {
     val PACKS_URLS
         get() = listOf(
             "true:${REPO_PREFIX}/list.json",
-            "true:https://raw.githubusercontent.com/AkosPaha/PackRepoBeta/main/list.json",
+            "true:https://raw.githubusercontent.com/AkosPaha01/PackRepoBeta/main/list.json",
             "true:https://raw.githubusercontent.com/GboardThemes/RboardCommunityThemes/main/list.json"
         )
     val REPOS
