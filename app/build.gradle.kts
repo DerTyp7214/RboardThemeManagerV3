@@ -100,7 +100,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.9.0")
     //noinspection DifferentStdlibGradleVersion
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.21")
     implementation("androidx.core:core:1.9.0")
 
     implementation("com.google.android.material:material:1.9.0-beta01")
