@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: 'ci-build'
+  group: 'ci-build-r'
   cancel-in-progress: true
 
 jobs:
@@ -16,26 +16,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.2.0
+        uses: actions/checkout@v3.5.2
         with:
           submodules: recursive
 
       - uses: nttld/setup-ndk@v1.2.0
         with:
-          ndk-version: r25b
+          ndk-version: r25c
 
       - name: Get Commit Message
         id: commitMessage
-        run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=message::${IN%%$'\n'*}"
+        run: IN="${{ github.event.head_commit.message }}" && echo "message=${IN%%$'\n'*}" >> $GITHUB_OUTPUT
 
       - name: Setup JDK
-        uses: actions/setup-java@v3.9.0
+        uses: actions/setup-java@v3.11.0
         with:
           distribution: temurin
           java-version: 17
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.2.2
+        uses: actions/cache@v3.3.1
         if: ${{ false }}
         with:
           path: |
@@ -46,7 +46,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3.2.2
+        uses: actions/cache@v3.3.1
         with:
           path: |
             ${{ github.workspace }}/.ccache
@@ -56,7 +56,7 @@ jobs:
 
       - name: Extract branch name
         shell: bash
-        run: echo "::set-output name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
         id: extract_branch
 
       - name: File Permissions
@@ -67,7 +67,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2.3.3
+        uses: gradle/gradle-build-action@v2.4.2
         with:
           gradle-version: wrapper
           arguments: assembleDebug
@@ -75,11 +75,7 @@ jobs:
       - name: Get JSON
         id: metadataJson
         run: |
-          content=`cat app/build/outputs/apk/debug/output-metadata.json`
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          echo "::set-output name=json::$content"
+          echo "json=$(cat app/build/outputs/apk/debug/output-metadata.json | jq -c .)" >> $GITHUB_OUTPUT
 
       - name: Sign artifact
         id: signArtifact
@@ -90,7 +86,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: 33.0.1
+          buildToolsVersion: '34.0.0-rc3'
 
       - name: Delete old APK
         run: rm app/build/outputs/apk/debug/app-debug.apk
@@ -99,7 +95,7 @@ jobs:
         run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: Debug Artifact
           path: app/build/outputs/apk/debug/app-debug.apk
@@ -144,26 +140,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.2.0
+        uses: actions/checkout@v3.5.2
         with:
           submodules: recursive
 
       - uses: nttld/setup-ndk@v1.2.0
         with:
-          ndk-version: r25b
+          ndk-version: r25c
 
       - name: Get Commit Message
         id: commitMessage
         run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=message::${IN%%$'\n'*}"
 
       - name: Setup JDK
-        uses: actions/setup-java@v3.9.0
+        uses: actions/setup-java@v3.11.0
         with:
           distribution: temurin
           java-version: 17
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.2.2
+        uses: actions/cache@v3.3.1
         if: ${{ false }}
         with:
           path: |
@@ -174,7 +170,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3.2.2
+        uses: actions/cache@v3.3.1
         with:
           path: |
             ${{ github.workspace }}/.ccache
@@ -195,7 +191,7 @@ jobs:
         
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2.3.3
+        uses: gradle/gradle-build-action@v2.4.2
         with:
           gradle-version: wrapper
           arguments: assembleRelease
@@ -218,13 +214,13 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: 33.0.1
+          buildToolsVersion: '34.0.0-rc3'
 
       - name: Rename APK
         run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: Debug Artifact
           path: app/build/outputs/apk/release/app-release.apk
@@ -274,26 +270,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.2.0
+        uses: actions/checkout@v3.5.2
         with:
           submodules: recursive
 
       - uses: nttld/setup-ndk@v1.2.0
         with:
-          ndk-version: r25b
+          ndk-version: r25c
 
       - name: Get Commit Message
         id: commitMessage
         run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=message::${IN%%$'\n'*}"
 
       - name: Setup JDK
-        uses: actions/setup-java@v3.9.0
+        uses: actions/setup-java@v3.11.0
         with:
           distribution: temurin
           java-version: 17
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.2.2
+        uses: actions/cache@v3.3.1
         if: ${{ false }}
         with:
           path: |
@@ -304,7 +300,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3.2.2
+        uses: actions/cache@v3.3.1
         with:
           path: |
             ${{ github.workspace }}/.ccache
@@ -325,7 +321,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2.3.3
+        uses: gradle/gradle-build-action@v2.4.2
         with:
           gradle-version: wrapper
           arguments: assembleDebug
@@ -349,13 +345,13 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: 33.0.1
+          buildToolsVersion: '34.0.0-rc3'
 
       - name: Rename APK
         run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: Debug Artifact
           path: app/build/outputs/apk/debug/app-debug.apk

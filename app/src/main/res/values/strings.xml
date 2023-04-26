@@ -281,4 +281,5 @@
     <string name="blue_style">Blue</string>
     <string name="orange_style">Orange</string>
     <string name="lime_style">Lime</string>
+    <string name="hash_mismatch">Hash mismatch</string>
 </resources>

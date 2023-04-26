@@ -20,6 +20,8 @@ object Config {
     var GITLAB_RAW_PREFIX = "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/PackRepoBeta"
     var GITHUB_RAW_PREFIX = "https://github.com/GboardThemes/PackRepoBeta/raw/main"
 
+    var PROTO_FILE = "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/proto/list.proto"
+
     var REPO_PREFIX = GITHUB_REPO_PREFIX
     var RAW_PREFIX = GITHUB_RAW_PREFIX
 
@@ -62,7 +64,7 @@ object Config {
     val PACKS_URLS
         get() = listOf(
             "true:${REPO_PREFIX}/list.json",
-            "true:https://raw.githubusercontent.com/AkosPaha/PackRepoBeta/main/list.json",
+            "true:https://raw.githubusercontent.com/AkosPaha01/PackRepoBeta/main/list.json",
             "true:https://raw.githubusercontent.com/GboardThemes/RboardCommunityThemes/main/list.json"
         )
     val REPOS

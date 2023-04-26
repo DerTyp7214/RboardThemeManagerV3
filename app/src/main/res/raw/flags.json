@@ -1,5 +1,5 @@
 {
-  "time": "1652986081698",
+  "time": "1682014214771",
   "flags": [
     {
       "key": "general",
@@ -89,11 +89,11 @@
       "key": "themed_nav_bar_all_devices",
       "title": "themed_nav_bar_all_devices",
       "summary": "",
+      "minSdk": 29,
       "icon": "ic_navbar",
       "defaultValue": false,
       "type": "BOOLEAN",
-      "file": "FLAGS",
-      "minSdk": 29
+      "file": "FLAGS"
     },
     {
       "key": "enable_email_provider_completion",
@@ -282,8 +282,7 @@
       "type": "BOOLEAN",
       "file": "FLAGS",
       "visible": false
-    },
-    {
+    },{
       "key": "silk",
       "title": "silk",
       "summary": "silk_details",
@@ -378,7 +377,8 @@
       "icon": "ic_translate_new_ui",
       "defaultValue": false,
       "type": "BOOLEAN",
-      "file": "FLAGS"
+      "file": "FLAGS",
+      "visible": false
     },
     {
       "key": "keyboard_redesign_forbid_key_shadows",
