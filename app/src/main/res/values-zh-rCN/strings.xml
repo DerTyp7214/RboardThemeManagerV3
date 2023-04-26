@@ -254,4 +254,27 @@
     <string name="logs_long">打开日志页</string>
     <string name="copy_flags">复制flag值文件</string>
     <string name="copy_flags_long"><![CDATA[复制 \"flag_value.xml\" -> \"flag_override.xml\"]]></string>
+    
+    <string name="new_flags_long">发现新的flag值</string>
+    <string name="app_style">App风格</string>
+    <string name="ime_test">输入法测试</string>
+    <string name="ime_test_long">Rboard 输入法测试</string>
+    <string name="why_no_root">不root怎么用?</string>
+    <string name="get_magisk">获取Magisk</string>
+    <string name="no_magisk_detected">未检测到Magisk</string>
+    <string name="root_explanation">目前没有root权限无法使用,这意味着任何adb命令都是徒劳 尽管我们尝试了所有方法,但始终无效</string>
+    <string name="install_methods">我们提供两种安装途径\n你可以随时在设置中切换</string>
+    <string name="magisk_module">模块</string>
+    <string name="inside_gboard">Gboard内置</string>
+    <string name="module_1">为明暗模式分别设计的主题</string>
+    <string name="module_2">编辑圆角和填充属性</string>
+    <string name="module_3">更改声音</string>
+    <string name="module_4">在ColorOS上无效</string>
+    <string name="module_5">在MIUI上存在问题</string>
+    <string name="gboard_1">主题的基本下载和安装</string>
+    <string name="gboard_2">无需Magisk模块</string>
+    <string name="gboard_3">更改声音无法生效/string>
+    <string name="gboard_4">主题不会在Gboard设置中显示</string>
+    <string name="gboard_5">兼容性</string>
+    <string name="hash_mismatch">哈希值不匹配</string>
 </resources>
