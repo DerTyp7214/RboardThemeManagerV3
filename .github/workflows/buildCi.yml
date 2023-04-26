@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: 'ci-build'
+  group: 'ci-build-r'
   cancel-in-progress: true
 
 jobs:
