@@ -47,6 +47,7 @@ import com.skydoves.balloon.BalloonSizeSpec
 import com.skydoves.balloon.createBalloon
 import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardcomponents.utils.asyncInto
+import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.MODULE_META
@@ -683,8 +684,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 Config.useMagisk = false
                 ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
-            }, onMagisk = {
-                it.dismiss()
+            }, onMagisk = { dialogFragment ->
+                dialogFragment.dismiss()
                 preferenceManager.edit {
                     putBoolean("useMagisk", true)
                     putBoolean("usageSet", true)
@@ -769,48 +770,51 @@ class MainActivity : AppCompatActivity() {
             notify(this, notificationId, builder.build())
         }
         var finished = false
-        val url =
+
+        doAsync({
             if (URL(Config.GITHUB_REPO_PREFIX).isReachable()) updateUrl(versionName) else updateUrlGitlab
-        UpdateHelper(url, this).apply {
-            addOnProgressListener { progress, bytes, total ->
-                if (!finished) {
-                    builder
-                        .setContentText(
-                            getString(
-                                R.string.download_update_progress,
-                                "${bytes.toHumanReadableBytes(this@MainActivity)}/${
-                                    total.toHumanReadableBytes(this@MainActivity)
-                                }"
+        }) { url ->
+            UpdateHelper(url, this).apply {
+                addOnProgressListener { progress, bytes, total ->
+                    if (!finished) {
+                        builder
+                            .setContentText(
+                                getString(
+                                    R.string.download_update_progress,
+                                    "${bytes.toHumanReadableBytes(this@MainActivity)}/${
+                                        total.toHumanReadableBytes(this@MainActivity)
+                                    }"
+                                )
                             )
+                            .setProgress(maxProgress, progress.toInt(), false)
+                        notify(manager, notificationId, builder.build())
+                    }
+                }
+                setFinishListener { path, _ ->
+                    finished = true
+                    manager.cancel(notificationId)
+                    if (enableBlur) content.setRenderEffect(
+                        RenderEffect.createBlurEffect(
+                            10F,
+                            10F,
+                            Shader.TileMode.REPEAT
                         )
-                        .setProgress(maxProgress, progress.toInt(), false)
-                    notify(manager, notificationId, builder.build())
-                }
-            }
-            setFinishListener { path, _ ->
-                finished = true
-                manager.cancel(notificationId)
-                if (enableBlur) content.setRenderEffect(
-                    RenderEffect.createBlurEffect(
-                        10F,
-                        10F,
-                        Shader.TileMode.REPEAT
                     )
-                )
-                PackageUtils.install(this@MainActivity, File(path), downloadResultLauncher) {
-                    if (enableBlur) content.setRenderEffect(null)
-                    Toast.makeText(this@MainActivity, R.string.error, Toast.LENGTH_LONG).show()
+                    PackageUtils.install(this@MainActivity, File(path), downloadResultLauncher) {
+                        if (enableBlur) content.setRenderEffect(null)
+                        Toast.makeText(this@MainActivity, R.string.error, Toast.LENGTH_LONG).show()
+                    }
                 }
-            }
-            setErrorListener {
-                finished = true
-                builder.setContentText(getString(R.string.download_error))
-                    .setProgress(0, 0, false)
-                notify(manager, notificationId, builder.build())
-                it?.connectionException?.printStackTrace()
-                Log.d("ERROR", it?.serverErrorMessage ?: "NOO")
-            }
-        }.start()
+                setErrorListener {
+                    finished = true
+                    builder.setContentText(getString(R.string.download_error))
+                        .setProgress(0, 0, false)
+                    notify(manager, notificationId, builder.build())
+                    it?.connectionException?.printStackTrace()
+                    Log.d("ERROR", it?.serverErrorMessage ?: "NOO")
+                }
+            }.start()
+        }
     }
 
     override fun onDestroy() {

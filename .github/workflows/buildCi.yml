@@ -16,25 +16,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.3.0
         with:
           submodules: recursive
 
-      - uses: nttld/setup-ndk@v1
+      - uses: nttld/setup-ndk@v1.2.0
         with:
-          ndk-version: r23
+          ndk-version: r25b
 
       - name: Get Commit Message
         id: commitMessage
-        run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=message::${IN%%$'\n'*}"
+        run: IN="${{ github.event.head_commit.message }}" && echo "message=${IN%%$'\n'*}" >> $GITHUB_OUTPUT
 
       - name: Setup JDK
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3.9.0
         with:
           java-version: 17
+          distribution: temurin
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v3.2.4
         with:
           path: |
             ~/.gradle/caches
@@ -44,7 +45,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3
+        uses: actions/cache@v3.2.4
         with:
           path: |
             ${{ github.workspace }}/.ccache
@@ -54,7 +55,7 @@ jobs:
 
       - name: Extract branch name
         shell: bash
-        run: echo "::set-output name=BRANCH_NAME::$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')"
+        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/} | sed 's/\//_/g')" >> $GITHUB_OUTPUT
         id: extract_branch
 
       - name: File Permissions
@@ -65,7 +66,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v2.3.3
         with:
           gradle-version: wrapper
           arguments: assembleDebug
@@ -73,15 +74,11 @@ jobs:
       - name: Get JSON
         id: metadataJson
         run: |
-          content=`cat app/build/outputs/apk/debug/output-metadata.json`
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          echo "::set-output name=json::$content"
+          echo "json=$(cat app/build/outputs/apk/debug/output-metadata.json | jq -c .)" >> $GITHUB_OUTPUT
 
       - name: Sign artifact
         id: signArtifact
-        uses: ilharp/sign-android-release@v1
+        uses: ilharp/sign-android-release@v1.0.4
         with:
           releaseDir: app/build/outputs/apk/debug
           keyAlias: ${{ secrets.KEYALIAS }}
@@ -97,7 +94,7 @@ jobs:
         run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: Debug Artifact
           path: app/build/outputs/apk/debug/app-debug.apk
@@ -130,7 +127,7 @@ jobs:
         run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_TO_MAIN }}\",\"message_thread_id\":${{ secrets.TELEGRAM_MAIN_TOPIC_ID_DEBUG }},\"text\":\"#A12\\n**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Download A12+\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-debug/app-debug.apk\"}]]}}'"
 
       - name: Send Notification
-        uses: fjogeleit/http-request-action@master
+        uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://fcm.googleapis.com/fcm/send'
           method: 'POST'

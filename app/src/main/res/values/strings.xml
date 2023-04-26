@@ -276,4 +276,5 @@
     <string name="gboard_3">Changing sounds won\'t work</string>
     <string name="gboard_4">Themes won\'t appear in gboard settings</string>
     <string name="gboard_5">Compatibility</string>
+    <string name="hash_mismatch">Hash mismatch</string>
 </resources>
