@@ -44,6 +44,6 @@ data class ThemePack(
     }
 
     companion object {
-        val NONE = ThemePack("", "", "", "", listOf(), listOf(), 0, null, true)
+        val NONE = ThemePack("", "", null, "", listOf(), listOf(), 0, null, true)
     }
 }
