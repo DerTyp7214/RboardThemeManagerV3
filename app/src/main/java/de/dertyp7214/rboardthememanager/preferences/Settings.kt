@@ -25,7 +25,6 @@ import de.dertyp7214.rboardthememanager.Application.Companion.context
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.FLAG_PATH
-import de.dertyp7214.rboardthememanager.Config.GBOARD_VERSION_CODE
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.Config.PLAY_URL
 import de.dertyp7214.rboardthememanager.R
@@ -359,19 +358,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
         SETTINGS.values().filter { it.visible }
             .filter {
                 !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) &&
-                        !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) &&
-                        !(it == SETTINGS.FIX_FLAGS && BuildConfig.DEBUG && context?.let { it1 ->
-                            PackageUtils.getAppVersionCode(
-                                Config.GBOARD_PACKAGE_NAME,
-                                it1.packageManager
-                            )
-                        }!! > GBOARD_VERSION_CODE) &&
-                        !(it == SETTINGS.COPY_FLAGS && BuildConfig.DEBUG && context?.let { it1 ->
-                            PackageUtils.getAppVersionCode(
-                                Config.GBOARD_PACKAGE_NAME,
-                                it1.packageManager
-                            )
-                        }!! > GBOARD_VERSION_CODE)
+                        !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
             }
             .forEach { item ->
                 val pref: Preference = when (item.type) {
