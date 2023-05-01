@@ -9,7 +9,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("com.google.gms.google-services")
-    id("com.google.devtools.ksp") version "1.8.10-1.0.9"
+    id("com.google.devtools.ksp") version "1.8.21-1.0.11"
 }
 
 val libsuVersion = "5.0.5"
