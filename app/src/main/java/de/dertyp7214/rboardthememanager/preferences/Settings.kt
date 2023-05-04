@@ -238,6 +238,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             {
                 listOf(
                     "\\cp \"$FLAG_PATH\" \"${Flags.FILES.FLAGS.filePath}\"",
+                    "\"\\${Flags.setValue("", "crowdsource_uri", Flags.FILES.FLAGS)}\"",
                     "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
                 ).runAsCommand()
                 Toast.makeText(this, R.string.flags_copied, Toast.LENGTH_LONG).show()
