@@ -218,7 +218,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             {
                 val xmlFile = XMLFile(path=FLAG_PATH)
                 xmlFile.setValue(XMLEntry("crowdsource_uri", "", XMLType.STRING))
-                SuFile(Flags.FILES.FLAGS.filePath).writeText(xmlFile.toString())
+                SuFile(Flags.FILES.FLAGS.filePath).writeFile(xmlFile.toString())
                 listOf(
                     "chmod 644 \"${Flags.FILES.FLAGS.filePath}\"",
                     "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
