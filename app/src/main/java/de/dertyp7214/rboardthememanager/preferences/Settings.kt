@@ -236,10 +236,20 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(),
             {
+                val xmlFile = de.dertyp7214.rboardthememanager.components.XMLFile(path = FLAG_PATH)
+                xmlFile.setValue(
+                    de.dertyp7214.rboardthememanager.components.XMLEntry(
+                        "crowdsource_uri",
+                        "",
+                        de.dertyp7214.rboardthememanager.components.XMLType.STRING
+                    )
+                )
+                com.topjohnwu.superuser.io.SuFile(Flags.FILES.FLAGS.filePath).writeFile(xmlFile.toString())
                 listOf(
-                    "\\cp \"$FLAG_PATH\" \"${Flags.FILES.FLAGS.filePath}\"",
+                    "chmod 644 \"${Flags.FILES.FLAGS.filePath}\"",
                     "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
                 ).runAsCommand()
+
                 Toast.makeText(this, R.string.flags_copied, Toast.LENGTH_LONG).show()
             }
         ),
