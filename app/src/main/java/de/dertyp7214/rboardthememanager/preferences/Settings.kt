@@ -35,6 +35,10 @@ import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.utils.PackageUtils
+import de.dertyp7214.rboardthememanager.components.XMLEntry
+import de.dertyp7214.rboardthememanager.components.XMLFile
+import de.dertyp7214.rboardthememanager.components.XMLType
+import com.topjohnwu.superuser.io.SuFile
 
 class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
     enum class FILES(val Path: String) {
@@ -236,15 +240,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(),
             {
-                val xmlFile = de.dertyp7214.rboardthememanager.components.XMLFile(path = FLAG_PATH)
-                xmlFile.setValue(
-                    de.dertyp7214.rboardthememanager.components.XMLEntry(
-                        "crowdsource_uri",
-                        "",
-                        de.dertyp7214.rboardthememanager.components.XMLType.STRING
-                    )
-                )
-                com.topjohnwu.superuser.io.SuFile(Flags.FILES.FLAGS.filePath).writeFile(xmlFile.toString())
+                val xmlFile = XMLFile(path=FLAG_PATH)
+                xmlFile.setValue(XMLEntry("crowdsource_uri", "", XMLType.STRING))
+                SuFile(Flags.FILES.FLAGS.filePath).writeFile(xmlFile.toString())
                 listOf(
                     "chmod 644 \"${Flags.FILES.FLAGS.filePath}\"",
                     "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
