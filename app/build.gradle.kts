@@ -27,8 +27,8 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 33
-        versionCode = 381000
-        versionName = "3.8.1"
+        versionCode = 382000
+        versionName = "3.8.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -82,7 +82,7 @@ dependencies {
     implementation(project(":colorutilsc"))
     implementation(project(":rboardcomponents"))
 
-    implementation(platform("com.google.firebase:firebase-bom:31.5.0"))
+    implementation(platform("com.google.firebase:firebase-bom:32.0.0"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.1.2")
     implementation("com.google.firebase:firebase-analytics-ktx:21.2.2")
 
@@ -97,16 +97,16 @@ dependencies {
     implementation("com.github.topjohnwu.libsu:io:$libsuVersion")
     implementation("com.github.topjohnwu.libsu:nio:$libsuVersion")
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
-    implementation("androidx.core:core-ktx:1.12.0-alpha03")
+    implementation("androidx.core:core-ktx:1.12.0-alpha04")
     //noinspection DifferentStdlibGradleVersion
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.21")
-    implementation("androidx.core:core:1.12.0-alpha03")
+    implementation("androidx.core:core:1.12.0-alpha04")
 
-    implementation("com.google.android.material:material:1.10.0-alpha01")
+    implementation("com.google.android.material:material:1.10.0-alpha02")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha09")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.8.0-alpha03")
+    implementation("androidx.activity:activity-ktx:1.8.0-alpha04")
     implementation("androidx.fragment:fragment-ktx:1.5.7")
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:21.2.2")
@@ -125,7 +125,7 @@ dependencies {
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.5.0-alpha03")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.5.0-alpha04")
     implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.21")
 
     implementation("com.google.android.play:core:1.10.3")
