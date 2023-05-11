@@ -13,6 +13,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
+import com.topjohnwu.superuser.io.SuFile
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
@@ -26,6 +27,9 @@ import de.dertyp7214.rboardthememanager.Config.FLAG_PATH
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.Config.PLAY_URL
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.components.XMLEntry
+import de.dertyp7214.rboardthememanager.components.XMLFile
+import de.dertyp7214.rboardthememanager.components.XMLType
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.Logs
 import de.dertyp7214.rboardthememanager.screens.MainActivity
@@ -53,7 +57,6 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
         SELECT
     }
 
-    @Suppress("UNCHECKED_CAST")
     enum class SETTINGS(
         val key: String,
         @StringRes val title: Int,
@@ -213,10 +216,14 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(),
             {
+                val xmlFile = XMLFile(path=FLAG_PATH)
+                xmlFile.setValue(XMLEntry("crowdsource_uri", "", XMLType.STRING))
+                SuFile(Flags.FILES.FLAGS.filePath).writeFile(xmlFile.toString())
                 listOf(
-                    "\\cp \"$FLAG_PATH\" \"${Flags.FILES.FLAGS.filePath}\"",
+                    "chmod 644 \"${Flags.FILES.FLAGS.filePath}\"",
                     "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
                 ).runAsCommand()
+
                 Toast.makeText(this, R.string.flags_copied, Toast.LENGTH_LONG).show()
             }
         ),
