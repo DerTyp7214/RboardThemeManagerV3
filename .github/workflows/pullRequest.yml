@@ -23,7 +23,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r23
+          ndk-version: r25c
 
       - name: Setup JDK
         uses: actions/setup-java@v1

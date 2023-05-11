@@ -16,6 +16,7 @@ val libsuVersion = "5.0.5"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
+    buildToolsVersion = "34.0.0 rc4"
     compileSdkPreview = "UpsideDownCake"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
