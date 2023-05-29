@@ -85,7 +85,7 @@ dependencies {
 
     implementation(platform("com.google.firebase:firebase-bom:32.0.0"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.1.2")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.2.2")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.3.0")
 
     implementation("com.github.os72:protobuf-dynamic:1.0.1")
 
@@ -110,7 +110,7 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.8.0-alpha04")
     implementation("androidx.fragment:fragment-ktx:1.5.7")
     implementation("com.jaredrummler:android-shell:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:21.2.2")
+    implementation("com.google.firebase:firebase-analytics:21.3.0")
     implementation("com.google.firebase:firebase-messaging:23.1.2")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
