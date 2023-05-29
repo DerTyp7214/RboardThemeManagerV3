@@ -105,7 +105,7 @@ dependencies {
     implementation("androidx.core:core:1.12.0-alpha04")
 
     implementation("com.google.android.material:material:1.10.0-alpha03")
-    implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha09")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha10")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.activity:activity-ktx:1.8.0-alpha04")
     implementation("androidx.fragment:fragment-ktx:1.5.7")
