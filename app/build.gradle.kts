@@ -16,7 +16,7 @@ val libsuVersion = "5.0.5"
 val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
-    buildToolsVersion = "34.0.0 rc4"
+    buildToolsVersion = "34.0.0"
     compileSdkPreview = "UpsideDownCake"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
@@ -27,9 +27,9 @@ android {
     defaultConfig {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
-        targetSdk = 33
-        versionCode = 382000
-        versionName = "3.8.2"
+        targetSdk = 34
+        versionCode = 383000
+        versionName = "3.8.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -83,34 +83,34 @@ dependencies {
     implementation(project(":colorutilsc"))
     implementation(project(":rboardcomponents"))
 
-    implementation(platform("com.google.firebase:firebase-bom:32.0.0"))
+    implementation(platform("com.google.firebase:firebase-bom:32.1.0"))
     implementation("com.google.firebase:firebase-messaging-ktx:23.1.2")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.2.2")
+    implementation("com.google.firebase:firebase-analytics-ktx:21.3.0")
 
     implementation("com.github.os72:protobuf-dynamic:1.0.1")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.5.3")
-    implementation("androidx.navigation:navigation-ui-ktx:2.5.3")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.6.0")
+    implementation("androidx.navigation:navigation-ui-ktx:2.6.0")
     implementation("org.apache.commons:commons-text:1.10.0")
 
     implementation("com.github.topjohnwu.libsu:core:$libsuVersion")
     implementation("com.github.topjohnwu.libsu:io:$libsuVersion")
     implementation("com.github.topjohnwu.libsu:nio:$libsuVersion")
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
-    implementation("androidx.core:core-ktx:1.12.0-alpha04")
+    implementation("androidx.core:core-ktx:1.12.0-alpha05")
     //noinspection DifferentStdlibGradleVersion
 
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.21")
-    implementation("androidx.core:core:1.12.0-alpha04")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.22")
+    implementation("androidx.core:core:1.12.0-alpha05")
 
     implementation("com.google.android.material:material:1.10.0-alpha03")
-    implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha09")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha10")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.8.0-alpha04")
-    implementation("androidx.fragment:fragment-ktx:1.5.7")
+    implementation("androidx.activity:activity-ktx:1.8.0-alpha05")
+    implementation("androidx.fragment:fragment-ktx:1.6.0")
     implementation("com.jaredrummler:android-shell:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:21.2.2")
+    implementation("com.google.firebase:firebase-analytics:21.3.0")
     implementation("com.google.firebase:firebase-messaging:23.1.2")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
@@ -126,8 +126,8 @@ dependencies {
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.5.0-alpha04")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.21")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.5.0-beta02")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.22")
 
     implementation("com.google.android.play:core:1.10.3")
     implementation("com.google.android.play:core-ktx:1.8.1")
