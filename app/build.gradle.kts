@@ -17,7 +17,7 @@ val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
     buildToolsVersion = "34.0.0"
-    compileSdkPreview = "UpsideDownCake"
+    compileSdk = 34
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
     buildFeatures.buildConfig = true
@@ -104,7 +104,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.22")
     implementation("androidx.core:core:1.12.0-alpha05")
 
-    implementation("com.google.android.material:material:1.10.0-alpha03")
+    implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha10")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.activity:activity-ktx:1.8.0-alpha05")
