@@ -99,9 +99,9 @@ dependencies {
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
     implementation("androidx.core:core-ktx:1.12.0-alpha05")
     //noinspection DifferentStdlibGradleVersion
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0-Beta")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0-RC")
     implementation("androidx.core:core:1.12.0-alpha05")
-    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.google.android.material:material:1.10.0-alpha04")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha10")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.activity:activity-ktx:1.8.0-alpha05")
@@ -113,7 +113,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
     implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
     implementation("de.dertyp7214:PRDownloader:v0.6.0")
-    implementation("com.github.skydoves:balloon:1.5.4-SNAPSHOT")
+    implementation("com.github.skydoves:balloon:1.5.5-SNAPSHOT")
     implementation("androidx.appcompat:appcompat:1.7.0-alpha02")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.0-alpha01")
@@ -125,5 +125,5 @@ dependencies {
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
     debugImplementation("androidx.compose.ui:ui-tooling:1.5.0-beta02")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.0-Beta")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.0-RC")
 }
