@@ -107,7 +107,7 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha10")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.8.0-alpha05")
+    implementation("androidx.activity:activity-ktx:1.8.0-alpha06")
     implementation("androidx.fragment:fragment-ktx:1.6.0")
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:21.3.0")
