@@ -118,7 +118,7 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.0-alpha01")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.0-alpha01")
-    implementation("androidx.browser:browser:1.6.0-alpha02")
+    implementation("androidx.browser:browser:1.6.0-beta01")
     implementation("com.github.bumptech.glide:glide:4.15.1")
     ksp("com.github.bumptech.glide:ksp:4.15.1")
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
