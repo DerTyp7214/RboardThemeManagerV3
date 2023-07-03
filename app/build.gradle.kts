@@ -89,7 +89,7 @@ dependencies {
     implementation("com.github.os72:protobuf-dynamic:1.0.1")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.0-beta01")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.0-beta02")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.0-beta01")
     implementation("org.apache.commons:commons-text:1.10.0")
 
