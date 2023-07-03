@@ -101,7 +101,7 @@ dependencies {
     //noinspection DifferentStdlibGradleVersion
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0-RC")
     implementation("androidx.core:core:1.12.0-alpha05")
-    implementation("com.google.android.material:material:1.10.0-alpha04")
+    implementation("com.google.android.material:material:1.10.0-alpha05")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha10")
     implementation("androidx.preference:preference-ktx:1.2.0")
     implementation("androidx.activity:activity-ktx:1.8.0-alpha05")
