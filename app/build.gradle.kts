@@ -7,7 +7,7 @@ plugins {
     id("com.google.gms.google-services")
     kotlin("android")
     kotlin("kapt")
-    id("com.google.devtools.ksp") version("1.9.0-Beta-1.0.11")
+    id("com.google.devtools.ksp") version("1.9.0-1.0.11")
 }
 
 val libsuVersion = "5.1.0"
@@ -89,8 +89,8 @@ dependencies {
     implementation("com.github.os72:protobuf-dynamic:1.0.1")
 
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.0-beta01")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.0-beta01")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.0-beta02")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.0-beta02")
     implementation("org.apache.commons:commons-text:1.10.0")
 
     implementation("com.github.topjohnwu.libsu:core:$libsuVersion")
@@ -99,12 +99,12 @@ dependencies {
     implementation("dev.chrisbanes.insetter:insetter:0.6.1")
     implementation("androidx.core:core-ktx:1.12.0-alpha05")
     //noinspection DifferentStdlibGradleVersion
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0-RC")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
     implementation("androidx.core:core:1.12.0-alpha05")
-    implementation("com.google.android.material:material:1.10.0-alpha04")
+    implementation("com.google.android.material:material:1.11.0-alpha01")
     implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha10")
     implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.8.0-alpha05")
+    implementation("androidx.activity:activity-ktx:1.8.0-alpha06")
     implementation("androidx.fragment:fragment-ktx:1.7.0-alpha01")
     implementation("com.jaredrummler:android-shell:1.0.0")
     implementation("com.google.firebase:firebase-analytics:21.3.0")
@@ -118,12 +118,12 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.0-alpha01")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.6.0-alpha01")
-    implementation("androidx.browser:browser:1.6.0-alpha02")
+    implementation("androidx.browser:browser:1.6.0-beta01")
     implementation("com.github.bumptech.glide:glide:4.15.1")
     ksp("com.github.bumptech.glide:ksp:4.15.1")
     implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.5.0-beta02")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.0-RC")
+    debugImplementation("androidx.compose.ui:ui-tooling:1.5.0-beta03")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.0")
 }
