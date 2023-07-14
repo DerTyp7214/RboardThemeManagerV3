@@ -1,7 +1,6 @@
 import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 import org.jetbrains.kotlin.config.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -19,6 +18,7 @@ android {
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
     buildFeatures.buildConfig = true
+    buildFeatures.compose = true
 
     defaultConfig {
         applicationId = "de.dertyp7214.rboardthememanager"
@@ -56,8 +56,17 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.8"
+    }
+
     kotlinOptions {
         jvmTarget = JvmTarget.JVM_17.description
+        freeCompilerArgs += listOf(
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+        )
     }
 
     tasks.withType<KotlinCompile> {
@@ -70,7 +79,7 @@ android {
         jniLibs {
             useLegacyPackaging = true
         }
-        resources.excludes.add("META-INF/*")
+        resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
     }
     namespace = "de.dertyp7214.rboardthememanager"
 }
@@ -79,51 +88,50 @@ dependencies {
     implementation(project(":colorutilsc"))
     implementation(project(":mathc"))
     implementation(project(":rboardcomponents"))
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.messaging.ktx)
+    implementation(libs.firebase.analytics.ktx)
 
-    implementation(platform("com.google.firebase:firebase-bom:32.1.1"))
-    implementation("com.google.firebase:firebase-messaging-ktx:23.1.2")
-    implementation("com.google.firebase:firebase-analytics-ktx:21.3.0")
+    implementation(libs.preferencesplus)
 
-    implementation("com.github.DerTyp7214:PreferencesPlus:1.0")
+    implementation(libs.protobuf.dynamic)
 
-    implementation("com.github.os72:protobuf-dynamic:1.0.1")
+    implementation(libs.legacy.support.v4)
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
+    implementation(libs.commons.text)
 
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.0-beta02")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.0-beta02")
-    implementation("org.apache.commons:commons-text:1.10.0")
-
-    implementation("com.github.topjohnwu.libsu:core:$libsuVersion")
-    implementation("com.github.topjohnwu.libsu:io:$libsuVersion")
-    implementation("com.github.topjohnwu.libsu:nio:$libsuVersion")
-    implementation("dev.chrisbanes.insetter:insetter:0.6.1")
-    implementation("androidx.core:core-ktx:1.12.0-alpha05")
+    implementation(libs.core)
+    implementation(libs.io)
+    implementation(libs.nio)
+    implementation(libs.insetter)
+    implementation(libs.core.ktx)
     //noinspection DifferentStdlibGradleVersion
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.9.0")
-    implementation("androidx.core:core:1.12.0-alpha05")
-    implementation("com.google.android.material:material:1.11.0-alpha01")
-    implementation("androidx.constraintlayout:constraintlayout:2.2.0-alpha10")
-    implementation("androidx.preference:preference-ktx:1.2.0")
-    implementation("androidx.activity:activity-ktx:1.8.0-alpha06")
-    implementation("androidx.fragment:fragment-ktx:1.7.0-alpha01")
-    implementation("com.jaredrummler:android-shell:1.0.0")
-    implementation("com.google.firebase:firebase-analytics:21.3.0")
-    implementation("com.google.firebase:firebase-messaging:23.1.2")
-    implementation("com.google.code.gson:gson:2.10.1")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
-    implementation("com.bignerdranch.android:simple-item-decoration:1.0.0")
-    implementation("de.dertyp7214:PRDownloader:v0.6.0")
-    implementation("com.github.skydoves:balloon:1.5.5-SNAPSHOT")
-    implementation("androidx.appcompat:appcompat:1.7.0-alpha02")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.0-alpha01")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.0-alpha01")
-    implementation("androidx.browser:browser:1.6.0-beta01")
-    implementation("com.github.bumptech.glide:glide:4.15.1")
-    ksp("com.github.bumptech.glide:ksp:4.15.1")
-    implementation("com.github.murgupluoglu:flagkit-android:1.0.2")
+    implementation(libs.kotlin.stdlib)
+    implementation(libs.androidx.core)
+    implementation(libs.material)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.preference.ktx)
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.fragment.ktx)
+    implementation(libs.android.shell)
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.messaging)
+    implementation(libs.gson)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.simple.item.decoration)
+    implementation(libs.prdownloader)
+    implementation(libs.balloon)
+    implementation(libs.androidx.appcompat)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    implementation(libs.androidx.browser)
+    implementation(libs.glide)
+    ksp(libs.ksp)
+    implementation(libs.flagkit.android)
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar", "*.aar"))))
 
-    debugImplementation("androidx.compose.ui:ui-tooling:1.6.0-alpha01")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.0")
+    debugImplementation(libs.androidx.ui.tooling)
+    implementation(libs.kotlin.reflect)
 }
