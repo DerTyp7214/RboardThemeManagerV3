@@ -1,5 +1,3 @@
-@file:Suppress("UNUSED_VARIABLE")
-
 plugins {
     id("com.google.devtools.ksp") version "1.8.21-1.0.11" apply false
 }
@@ -11,10 +9,10 @@ plugins {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:8.2.0-alpha07")
+        classpath(libs.gradle)
         //noinspection DifferentKotlinGradleVersion
         classpath(kotlin("gradle-plugin", version = "1.8.0"))
-        classpath("com.google.gms:google-services:4.3.15")
+        classpath(libs.google.services)
     }
 }
 
