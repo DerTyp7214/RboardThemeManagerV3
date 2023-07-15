@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.getKotlinPluginVersion
 import org.jetbrains.kotlin.config.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
@@ -6,26 +5,23 @@ plugins {
     id("com.google.gms.google-services")
     kotlin("android")
     kotlin("kapt")
-    id("com.google.devtools.ksp") version("1.9.0-1.0.11")
+    alias(libs.plugins.ksp)
 }
-
-val libsuVersion = "5.1.0"
-val kotlinVersion: String = project.getKotlinPluginVersion()
 
 android {
     compileSdk = 34
     buildToolsVersion = "34.0.0"
     buildFeatures.dataBinding = true
+
     buildFeatures.viewBinding = true
     buildFeatures.buildConfig = true
-    buildFeatures.compose = true
 
     defaultConfig {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 34
-        versionCode = 383000
-        versionName = "3.8.3"
+        versionCode = 384000
+        versionName = "3.8.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -53,16 +49,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.8"
+        sourceCompatibility = JavaVersion.VERSION_20
+        targetCompatibility = JavaVersion.VERSION_20
     }
 
     kotlinOptions {
-        jvmTarget = JvmTarget.JVM_17.description
+        jvmTarget = JvmTarget.JVM_20.description
         freeCompilerArgs += listOf(
             "-P",
             "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
@@ -71,7 +63,7 @@ android {
 
     tasks.withType<KotlinCompile> {
         kotlinOptions {
-            jvmTarget = JvmTarget.JVM_17.description
+            jvmTarget = JvmTarget.JVM_20.description
         }
     }
 

@@ -21,6 +21,7 @@ insetter = "0.6.1"
 junit = "4.13.2"
 kotlin-reflect = "1.9.0"
 ksp = "4.15.1"
+kspPlugin = "1.9.0-1.0.11"
 legacy-support-v4 = "1.0.0"
 libsuVersion = "5.1.0"
 lifecycle-viewmodel-ktx = "2.6.1"
@@ -30,7 +31,6 @@ prdownloader = "v0.6.0"
 preference-ktx = "1.2.0"
 preferencesplus = "1.0"
 protobuf-dynamic = "1.0.1"
-protobuf = "0.9.3"
 simple-item-decoration = "1.0.0"
 ui-tooling = "1.6.0-alpha01"
 
@@ -75,7 +75,8 @@ nio = { module = "com.github.topjohnwu.libsu:nio", version.ref = "libsuVersion" 
 prdownloader = { module = "de.dertyp7214:PRDownloader", version.ref = "prdownloader" }
 preferencesplus = { module = "com.github.DerTyp7214:PreferencesPlus", version.ref = "preferencesplus" }
 protobuf-dynamic = { module = "com.github.os72:protobuf-dynamic", version.ref = "protobuf-dynamic" }
-protobuf = { module = "com.google.protobuf:protobuf-gradle-plugin", version.ref = "protobuf" }
 simple-item-decoration = { module = "com.bignerdranch.android:simple-item-decoration", version.ref = "simple-item-decoration" }
 
+[plugins]
+ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }
 
