@@ -20,7 +20,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 17
+          java-version: 20
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v2
