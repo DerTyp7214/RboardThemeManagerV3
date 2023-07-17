@@ -41,7 +41,7 @@ kspPlugin = "1.9.0-1.0.11"
 
 googleServices = "4.3.15"
 gradle = "8.2.0-alpha12"
-uiTooling = "1.5.0-beta03"
+uiTooling = "1.6.0-alpha01"
 
 [libraries]
 prDownloader = { module = "de.dertyp7214:PRDownloader", version.ref = "de-PRDownloader" }
