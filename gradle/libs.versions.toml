@@ -6,7 +6,7 @@ play-core-ktx = "1.8.1"
 junit-junit = "4.13.2"
 kotlinReflect = "1.9.0"
 ksp = "4.15.1"
-libsuVersion = "5.1.0"
+libsuVersion = "5.2.0"
 insetter = "0.6.1"
 
 kotlin-stdlib = "1.9.0"
