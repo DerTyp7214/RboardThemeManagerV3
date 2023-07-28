@@ -2,13 +2,12 @@
 activity-ktx = "1.8.0-alpha06"
 android-shell = "1.0.0"
 androidx-junit = "1.2.0-alpha01"
-appcompat = "1.7.0-alpha03"
+appcompat = "1.7.0-alpha02"
 balloon = "1.5.5-SNAPSHOT"
-browser = "1.6.0-rc01"
+browser = "1.6.0-beta01"
 commons-text = "1.10.0"
-constraintlayout = "2.2.0-alpha11"
-core = "1.12.0-beta01"
-core-ktx = "1.12.0-beta01"
+constraintlayout = "2.2.0-alpha10"
+core-ktx = "1.12.0-alpha05"
 espresso-core = "3.6.0-alpha01"
 firebase-bom = "32.2.0"
 firebase-analytics-ktx = "21.3.0"
@@ -16,25 +15,24 @@ firebase-messaging-ktx = "23.2.0"
 flagkit-android = "1.0.2"
 fragment-ktx = "1.7.0-alpha01"
 googleServices = "4.3.15"
-gradle = "8.2.0-alpha14"
+gradle = "8.2.0-alpha12"
 gson = "2.10.1"
 insetter = "0.6.1"
 junit = "4.13.2"
 kotlin-reflect = "1.9.0"
 ksp = "4.15.1"
-kspPlugin = "1.9.0-1.0.12"
+kspPlugin = "1.9.0-1.0.11"
 legacy-support-v4 = "1.0.0"
-libsuVersion = "5.2.0"
-lifecycle-viewmodel-ktx = "2.7.0-alpha01"
+libsuVersion = "5.1.0"
+lifecycle-viewmodel-ktx = "2.6.1"
 material = "1.11.0-alpha01"
-navigation-fragment-ktx = "2.7.0-rc01"
-navigation-ui-ktx = "2.7.0-rc01"
+navigation-fragment-ktx = "2.7.0-beta02"
 prdownloader = "v0.6.0"
 preference-ktx = "1.2.0"
 preferencesplus = "1.0"
 protobuf-dynamic = "1.0.1"
 simple-item-decoration = "1.0.0"
-ui-tooling = "1.6.0-alpha02"
+ui-tooling = "1.6.0-alpha01"
 
 [libraries]
 android-shell = { module = "com.jaredrummler:android-shell", version.ref = "android-shell" }
@@ -42,7 +40,7 @@ androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
 androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
-androidx-core = { module = "androidx.core:core", version.ref = "core" }
+androidx-core = { module = "androidx.core:core", version.ref = "core-ktx" }
 androidx-espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment-ktx" }
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
@@ -72,7 +70,7 @@ ksp = { module = "com.github.bumptech.glide:ksp", version.ref = "ksp" }
 legacy-support-v4 = { module = "androidx.legacy:legacy-support-v4", version.ref = "legacy-support-v4" }
 material = { module = "com.google.android.material:material", version.ref = "material" }
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation-fragment-ktx" }
-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation-ui-ktx" }
+navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation-fragment-ktx" }
 nio = { module = "com.github.topjohnwu.libsu:nio", version.ref = "libsuVersion" }
 prdownloader = { module = "de.dertyp7214:PRDownloader", version.ref = "prdownloader" }
 preferencesplus = { module = "com.github.DerTyp7214:PreferencesPlus", version.ref = "preferencesplus" }
