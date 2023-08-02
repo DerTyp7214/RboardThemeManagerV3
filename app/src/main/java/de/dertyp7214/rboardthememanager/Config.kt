@@ -20,8 +20,6 @@ object Config {
     var GITLAB_RAW_PREFIX = "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/PackRepoBeta"
     var GITHUB_RAW_PREFIX = "https://github.com/GboardThemes/PackRepoBeta/raw/main"
 
-    var PROTO_FILE = "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/proto/list.proto"
-
     var REPO_PREFIX = GITHUB_REPO_PREFIX
     var RAW_PREFIX = GITHUB_RAW_PREFIX
 
@@ -59,7 +57,11 @@ object Config {
             return if (!useMagisk) "/data/data/$GBOARD_PACKAGE_NAME/files/themes"
             else if (!THEME_LOCATION.startsWith("/system")) THEME_LOCATION else "$MODULE_PATH$THEME_LOCATION"
         }
-
+    val PROTO_FILE
+        get() = listOf(
+            "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/proto/list.proto",
+            "https://raw.githubusercontent.com/AkosPaha01/PackRepoBeta/main/proto/list.proto"
+        )
     val PACKS_URLS
         get() = listOf(
             "true:${REPO_PREFIX}/list.json",
