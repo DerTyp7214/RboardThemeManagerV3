@@ -10,19 +10,21 @@ constraintlayout = "2.2.0-alpha11"
 core = "1.12.0-beta01"
 core-ktx = "1.12.0-beta01"
 espresso-core = "3.6.0-alpha01"
-firebase-bom = "32.2.0"
+firebase-bom = "32.2.2"
+firebase-analytics = "21.3.0"
 firebase-analytics-ktx = "21.3.0"
-firebase-messaging-ktx = "23.2.0"
+firebase-messaging = "23.2.1"
+firebase-messaging-ktx = "23.2.1"
 flagkit-android = "1.0.2"
 fragment-ktx = "1.7.0-alpha01"
 googleServices = "4.3.15"
-gradle = "8.2.0-alpha14"
+gradle = "8.2.0-alpha15"
 gson = "2.10.1"
 insetter = "0.6.1"
 junit = "4.13.2"
 kotlin-reflect = "1.9.0"
 ksp = "4.15.1"
-kspPlugin = "1.9.0-1.0.12"
+kspPlugin = "1.9.0-1.0.13"
 legacy-support-v4 = "1.0.0"
 libsuVersion = "5.2.0"
 lifecycle-viewmodel-ktx = "2.7.0-alpha01"
@@ -54,9 +56,9 @@ commons-text = { module = "org.apache.commons:commons-text", version.ref = "comm
 core = { module = "com.github.topjohnwu.libsu:core", version.ref = "libsuVersion" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref = "firebase-analytics-ktx" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref = "firebase-analytics" }
 firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx", version.ref = "firebase-analytics-ktx" }
-firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebase-messaging-ktx" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebase-messaging" }
 firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx", version.ref = "firebase-messaging-ktx" }
 flagkit-android = { module = "com.github.murgupluoglu:flagkit-android", version.ref = "flagkit-android" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "ksp" }
