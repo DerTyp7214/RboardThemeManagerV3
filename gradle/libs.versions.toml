@@ -37,7 +37,7 @@ gson = "2.10.1"
 protobufDynamic = "1.0.1"
 simple-item-decoration = "1.0.0"
 balloon = "1.5.4"
-kspPlugin = "1.9.0-1.0.11"
+kspPlugin = "1.9.0-1.0.13"
 
 googleServices = "4.3.15"
 gradle = "8.2.0-alpha15"
