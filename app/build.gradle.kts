@@ -96,7 +96,6 @@ dependencies {
     implementation(libs.libsu.nio)
     implementation(libs.insetter)
     implementation(libs.core.ktx)
-    //noinspection DifferentStdlibGradleVersion
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.core)
