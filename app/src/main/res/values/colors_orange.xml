@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="orange_seed">#DB543B</color>
+    <color name="orange_seed">#AC331D</color>
     <color name="orange_md_theme_light_primary">#AC331D</color>
     <color name="orange_md_theme_light_onPrimary">#FFFFFF</color>
     <color name="orange_md_theme_light_primaryContainer">#FFDAD3</color>
-    <color name="orange_md_theme_light_onPrimaryContainer">#3F0400</color>
+    <color name="orange_md_theme_light_onPrimaryContainer">#3E0400</color>
     <color name="orange_md_theme_light_secondary">#775750</color>
     <color name="orange_md_theme_light_onSecondary">#FFFFFF</color>
     <color name="orange_md_theme_light_secondaryContainer">#FFDAD3</color>
@@ -29,12 +29,13 @@
     <color name="orange_md_theme_light_inversePrimary">#FFB4A5</color>
     <color name="orange_md_theme_light_shadow">#000000</color>
     <color name="orange_md_theme_light_surfaceTint">#AC331D</color>
-    <color name="orange_md_theme_light_surfaceTintColor">#AC331D</color>
+    <color name="orange_md_theme_light_outlineVariant">#D8C2BD</color>
+    <color name="orange_md_theme_light_scrim">#000000</color>
     <color name="orange_md_theme_dark_primary">#FFB4A5</color>
-    <color name="orange_md_theme_dark_onPrimary">#650A00</color>
-    <color name="orange_md_theme_dark_primaryContainer">#8B1A07</color>
+    <color name="orange_md_theme_dark_onPrimary">#650B00</color>
+    <color name="orange_md_theme_dark_primaryContainer">#8B1B07</color>
     <color name="orange_md_theme_dark_onPrimaryContainer">#FFDAD3</color>
-    <color name="orange_md_theme_dark_secondary">#E7BDB5</color>
+    <color name="orange_md_theme_dark_secondary">#E7BDB4</color>
     <color name="orange_md_theme_dark_onSecondary">#442A24</color>
     <color name="orange_md_theme_dark_secondaryContainer">#5D3F39</color>
     <color name="orange_md_theme_dark_onSecondaryContainer">#FFDAD3</color>
@@ -58,5 +59,6 @@
     <color name="orange_md_theme_dark_inversePrimary">#AC331D</color>
     <color name="orange_md_theme_dark_shadow">#000000</color>
     <color name="orange_md_theme_dark_surfaceTint">#FFB4A5</color>
-    <color name="orange_md_theme_dark_surfaceTintColor">#FFB4A5</color>
+    <color name="orange_md_theme_dark_outlineVariant">#534340</color>
+    <color name="orange_md_theme_dark_scrim">#000000</color>
 </resources>

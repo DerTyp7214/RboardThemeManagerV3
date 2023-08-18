@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="red_seed">#DB3B52</color>
+    <color name="red_seed">#B71E3B</color>
     <color name="red_md_theme_light_primary">#B71E3B</color>
     <color name="red_md_theme_light_onPrimary">#FFFFFF</color>
     <color name="red_md_theme_light_primaryContainer">#FFDADA</color>
@@ -29,7 +29,8 @@
     <color name="red_md_theme_light_inversePrimary">#FFB3B6</color>
     <color name="red_md_theme_light_shadow">#000000</color>
     <color name="red_md_theme_light_surfaceTint">#B71E3B</color>
-    <color name="red_md_theme_light_surfaceTintColor">#B71E3B</color>
+    <color name="red_md_theme_light_outlineVariant">#D7C1C1</color>
+    <color name="red_md_theme_light_scrim">#000000</color>
     <color name="red_md_theme_dark_primary">#FFB3B6</color>
     <color name="red_md_theme_dark_onPrimary">#680019</color>
     <color name="red_md_theme_dark_primaryContainer">#920027</color>
@@ -58,5 +59,6 @@
     <color name="red_md_theme_dark_inversePrimary">#B71E3B</color>
     <color name="red_md_theme_dark_shadow">#000000</color>
     <color name="red_md_theme_dark_surfaceTint">#FFB3B6</color>
-    <color name="red_md_theme_dark_surfaceTintColor">#FFB3B6</color>
+    <color name="red_md_theme_dark_outlineVariant">#524343</color>
+    <color name="red_md_theme_dark_scrim">#000000</color>
 </resources>

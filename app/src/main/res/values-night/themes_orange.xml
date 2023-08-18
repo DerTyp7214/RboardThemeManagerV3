@@ -13,18 +13,18 @@
         <item name="colorTertiaryContainer">@color/orange_md_theme_dark_tertiaryContainer</item>
         <item name="colorOnTertiaryContainer">@color/orange_md_theme_dark_onTertiaryContainer</item>
         <item name="colorError">@color/orange_md_theme_dark_error</item>
-        <item name="colorErrorContainer">@color/orange_md_theme_dark_errorContainer</item>
         <item name="colorOnError">@color/orange_md_theme_dark_onError</item>
+        <item name="colorErrorContainer">@color/orange_md_theme_dark_errorContainer</item>
         <item name="colorOnErrorContainer">@color/orange_md_theme_dark_onErrorContainer</item>
+        <item name="colorOutline">@color/orange_md_theme_dark_outline</item>
         <item name="android:colorBackground">@color/orange_md_theme_dark_background</item>
         <item name="colorOnBackground">@color/orange_md_theme_dark_onBackground</item>
         <item name="colorSurface">@color/orange_md_theme_dark_surface</item>
         <item name="colorOnSurface">@color/orange_md_theme_dark_onSurface</item>
         <item name="colorSurfaceVariant">@color/orange_md_theme_dark_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/orange_md_theme_dark_onSurfaceVariant</item>
-        <item name="colorOutline">@color/orange_md_theme_dark_outline</item>
-        <item name="colorOnSurfaceInverse">@color/orange_md_theme_dark_inverseOnSurface</item>
         <item name="colorSurfaceInverse">@color/orange_md_theme_dark_inverseSurface</item>
+        <item name="colorOnSurfaceInverse">@color/orange_md_theme_dark_inverseOnSurface</item>
         <item name="colorPrimaryInverse">@color/orange_md_theme_dark_inversePrimary</item>
     </style>
 </resources>

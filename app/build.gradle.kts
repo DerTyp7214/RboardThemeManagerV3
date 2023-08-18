@@ -20,7 +20,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 34
-        versionCode = 384001
+        versionCode = 384002
         versionName = "3.8.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -98,7 +98,7 @@ dependencies {
     implementation(libs.nio)
     implementation(libs.insetter)
     implementation(libs.core.ktx)
-    //noinspection DifferentStdlibGradleVersion
+
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core)
     implementation(libs.material)

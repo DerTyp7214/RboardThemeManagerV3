@@ -20,8 +20,6 @@ object Config {
     var GITLAB_RAW_PREFIX = "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/PackRepoBeta"
     var GITHUB_RAW_PREFIX = "https://github.com/GboardThemes/PackRepoBeta/raw/main"
 
-    var PROTO_FILE = "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/proto/list.proto"
-
     var REPO_PREFIX = GITHUB_REPO_PREFIX
     var RAW_PREFIX = GITHUB_RAW_PREFIX
 
