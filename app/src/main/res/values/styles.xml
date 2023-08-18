@@ -39,6 +39,7 @@
     <style name="Dialog.RboardThemeManagerV3.MaterialAlertDialog" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog">
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Dialog.Rounded
         </item>
+        <item name="android:background">@drawable/color_surface_overlay_background</item>
     </style>
 
     <style name="ShapeAppearanceOverlay.MyApp.Dialog.Rounded" parent="">

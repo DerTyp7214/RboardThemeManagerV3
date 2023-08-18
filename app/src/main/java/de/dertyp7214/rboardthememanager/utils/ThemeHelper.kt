@@ -434,7 +434,7 @@ object ThemeUtils {
             .setAction(if (install) Intent.ACTION_VIEW else Intent.ACTION_SEND)
             .setDataAndType(uri, "application/pack")
             .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION).apply {
-                packageName?.let { pkg -> setPackage(pkg) }
+                packageName?.let(this::setPackage)
                 activity.startActivity(
                     Intent.createChooser(
                         this,
