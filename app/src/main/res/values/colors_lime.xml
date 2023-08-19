@@ -8,6 +8,7 @@
     <color name="lime_md_theme_light_secondary">#596248</color>
     <color name="lime_md_theme_light_onSecondary">#FFFFFF</color>
     <color name="lime_md_theme_light_secondaryContainer">#DDE6C6</color>
+    <color name="lime_md_theme_light_SurfaceContainerHighest">#e4e3db</color>
     <color name="lime_md_theme_light_onSecondaryContainer">#171E0A</color>
     <color name="lime_md_theme_light_tertiary">#396661</color>
     <color name="lime_md_theme_light_onTertiary">#FFFFFF</color>
@@ -52,6 +53,7 @@
     <color name="lime_md_theme_dark_surface">#1B1C18</color>
     <color name="lime_md_theme_dark_onSurface">#E4E3DB</color>
     <color name="lime_md_theme_dark_surfaceVariant">#45483D</color>
+    <color name="lime_md_theme_dark_SurfaceContainerHighest">#343530</color>
     <color name="lime_md_theme_dark_onSurfaceVariant">#C5C8B9</color>
     <color name="lime_md_theme_dark_outline">#8F9284</color>
     <color name="lime_md_theme_dark_inverseOnSurface">#1B1C18</color>
