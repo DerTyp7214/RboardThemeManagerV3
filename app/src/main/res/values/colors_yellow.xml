@@ -22,6 +22,7 @@
     <color name="yellow_md_theme_light_surface">#FFFBFF</color>
     <color name="yellow_md_theme_light_onSurface">#1E1B16</color>
     <color name="yellow_md_theme_light_surfaceVariant">#EBE1CF</color>
+    <color name="yellow_md_theme_light_SurfaceContainerHighest">#e8e1d9</color>
     <color name="yellow_md_theme_light_onSurfaceVariant">#4C4639</color>
     <color name="yellow_md_theme_light_outline">#7E7667</color>
     <color name="yellow_md_theme_light_inverseOnSurface">#F7F0E7</color>
@@ -52,6 +53,7 @@
     <color name="yellow_md_theme_dark_surface">#1E1B16</color>
     <color name="yellow_md_theme_dark_onSurface">#E8E1D9</color>
     <color name="yellow_md_theme_dark_surfaceVariant">#4C4639</color>
+    <color name="yellow_md_theme_dark_SurfaceContainerHighest">#37342e</color>
     <color name="yellow_md_theme_dark_onSurfaceVariant">#CFC5B4</color>
     <color name="yellow_md_theme_dark_outline">#989080</color>
     <color name="yellow_md_theme_dark_inverseOnSurface">#1E1B16</color>

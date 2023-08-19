@@ -26,5 +26,6 @@
         <item name="colorSurfaceInverse">@color/green_md_theme_dark_inverseSurface</item>
         <item name="colorOnSurfaceInverse">@color/green_md_theme_dark_inverseOnSurface</item>
         <item name="colorPrimaryInverse">@color/green_md_theme_dark_inversePrimary</item>
+        <item name="colorSurfaceContainerHighest">@color/green_md_theme_dark_SurfaceContainerHighest</item>
     </style>
 </resources>
