@@ -18,6 +18,7 @@ android {
 
     defaultConfig {
         applicationId = "de.dertyp7214.rboardthememanager"
+        // Update the minSdk if old Android Versions are no longer supported on the Gboard side.
         minSdk = 23
         targetSdk = 34
         versionCode = 384002

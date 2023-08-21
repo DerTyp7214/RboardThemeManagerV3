@@ -68,6 +68,7 @@ object PackageUtils {
 
     fun getAppVersionCode(packageName: String, packageManager: PackageManager): Long {
         return try {
+            // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 packageManager.getPackageInfo(packageName, 0).longVersionCode
             } else {
