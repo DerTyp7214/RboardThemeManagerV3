@@ -14,6 +14,7 @@ fun SoundPack.download(activity: Activity, result: (sounds: List<String>) -> Uni
     val dialog = activity.openLoadingDialog(R.string.downloading_pack)
     val name = title.replace(" ", "_")
     PRDownloader.download(
+        // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
         url, if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             activity.cacheDir.absolutePath
         } else {
@@ -26,6 +27,7 @@ fun SoundPack.download(activity: Activity, result: (sounds: List<String>) -> Uni
         .start(object : OnDownloadListener {
             override fun onDownloadComplete() {
                 val pack = File(
+                    // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         activity.cacheDir
                     } else {
@@ -33,6 +35,7 @@ fun SoundPack.download(activity: Activity, result: (sounds: List<String>) -> Uni
                     }, "$name.zip"
                 )
                 val destination = File(
+                    // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         activity.cacheDir
                     } else {
