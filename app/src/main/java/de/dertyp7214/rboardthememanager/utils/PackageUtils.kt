@@ -27,7 +27,8 @@ object PackageUtils {
                 if (file.extension == "apk") {
                     val intent: Intent?
                     val downloadedApk = getFileUri(context, file)
-                    val newFile = File(context.getExternalFilesDir(""), "updater" + "/update.apk")
+                    val newFile = File(context.getExternalFilesDir(""), "updater" + "/update.apk")        
+                    // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
                     when {
                         Build.VERSION.SDK_INT >= Build.VERSION_CODES.N -> {
                             intent = Intent(Intent.ACTION_VIEW).setDataAndType(
