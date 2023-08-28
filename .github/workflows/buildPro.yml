@@ -13,7 +13,7 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: nttld/setup-ndk@v1.2.0
+      - uses: nttld/setup-ndk@v1.3.1
         with:
           ndk-version: r25c
 
