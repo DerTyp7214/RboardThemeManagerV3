@@ -1,5 +1,5 @@
 [versions]
-activity-ktx = "1.8.0-alpha06"
+activity-ktx = "1.8.0-alpha07"
 android-shell = "1.0.0"
 androidx-junit = "1.2.0-alpha01"
 appcompat = "1.7.0-alpha03"
