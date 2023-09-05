@@ -81,6 +81,21 @@ object PackageUtils {
         }
     }
 
+    fun getPackageUid(packageName: String, packageManager: PackageManager): Int? {
+        return try {
+            // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
+            if (Build.VERSION.SDK_INT >= 33)
+                packageManager.getPackageUid(packageName, PackageManager.PackageInfoFlags.of(0L))
+            else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                packageManager.getPackageUid(packageName, 0)
+            } else {
+                packageManager.getApplicationInfo(packageName, 0).uid
+            }
+        } catch (e: PackageManager.NameNotFoundException) {
+            null
+        }
+    }
+
 
     private fun getFileUri(context: Context, file: File): Uri {
         return FileProvider.getUriForFile(

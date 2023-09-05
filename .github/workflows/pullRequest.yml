@@ -17,11 +17,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.5.3
+        uses: actions/checkout@v4.0.0
         with:
           submodules: recursive
 
-      - uses: nttld/setup-ndk@v1.2.0
+      - uses: nttld/setup-ndk@v1.3.1
         with:
           ndk-version: r25c
 
@@ -58,7 +58,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2.7.1
+        uses: gradle/gradle-build-action@v2.8.0
         with:
           gradle-version: wrapper
           wrapper-cache-enabled: true
