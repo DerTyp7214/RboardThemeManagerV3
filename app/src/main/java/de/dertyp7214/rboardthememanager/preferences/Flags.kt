@@ -215,7 +215,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
         val preferences = hashMapOf<String, Preference>()
         val allFlags = ArrayList(getFlagItems(activity, true))
         val values = values
-        allFlags.addAll(FLAGS.values().map { FlagItem(it) })
+        allFlags.addAll(FLAGS.entries.map { FlagItem(it) })
         allFlags.forEach { item ->
             prefs.edit { remove(item.key) }
             val pref: Preference = when (item.type) {
@@ -680,7 +680,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
             }
 
         private fun getCurrentXmlFile(file: String, cached: Boolean = false): XMLFile {
-            val xmlFileName = FILES.values().find { it.filePath == file }
+            val xmlFileName = FILES.entries.find { it.filePath == file }
             val xmlFile = flagsString[xmlFileName]
             return if (cached && xmlFile != null) xmlFile
             else XMLFile(path = file).also { flagsString[xmlFileName] = it }
@@ -694,7 +694,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
         fun applyChanges(): Boolean {
             if (!changes) return false
             changes = false
-            FILES.values().filter { it != FILES.NONE }.forEach { file ->
+            FILES.entries.filter { it != FILES.NONE }.forEach { file ->
                 flagsString[file]?.let {
                     if (file == FILES.FLAGS) GboardUtils.updateCurrentFlags(it.toString())
                     it.writeFile()
@@ -707,7 +707,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
         @SuppressLint("SdCardPath")
         fun setUpFlags() {
             changes = false
-            FILES.values().filter { it != FILES.NONE }.forEach { file ->
+            FILES.entries.filter { it != FILES.NONE }.forEach { file ->
                 flagsString[file] = XMLFile(path = file.filePath)
             }
         }

@@ -36,6 +36,7 @@ import de.dertyp7214.rboardthememanager.screens.MainActivity
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
+import de.dertyp7214.rboardthememanager.utils.PackageUtils.getPackageUid
 
 class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
     enum class FILES(val Path: String) {
@@ -216,11 +217,17 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(),
             {
-                val xmlFile = XMLFile(path=FLAG_PATH)
+                val xmlFile = XMLFile(path = FLAG_PATH)
                 xmlFile.setValue(XMLEntry("crowdsource_uri", "", XMLType.STRING))
                 SuFile(Flags.FILES.FLAGS.filePath).writeFile(xmlFile.toString())
+                val uid = getPackageUid(
+                    Config.GBOARD_PACKAGE_NAME,
+                    packageManager
+                )
+                val gids = packageManager.getPackageGids(Config.GBOARD_PACKAGE_NAME)
                 listOf(
-                    "chmod 644 \"${Flags.FILES.FLAGS.filePath}\"",
+                    "chmod 660 \"${Flags.FILES.FLAGS.filePath}\"",
+                    if (uid != null) gids.joinToString(" && ") { "chown ${uid}:${it}" } else "",
                     "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
                 ).runAsCommand()
 
@@ -339,7 +346,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
     }
 
     override fun preferences(builder: PreferenceScreen.Builder) {
-        SETTINGS.values().filter { it.visible }.forEach { item ->
+        SETTINGS.entries.filter { it.visible }.forEach { item ->
             val pref: Preference = when (item.type) {
                 TYPE.BOOLEAN -> builder.switch(item.key) {
                     defaultValue = item.defaultValue as Boolean
@@ -348,12 +355,14 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                         true
                     }
                 }
+
                 TYPE.INT, TYPE.LONG, TYPE.FLOAT -> builder.pref(item.key) {}
                 TYPE.GROUP -> builder.categoryHeader(item.key) {
                     titleRes = item.title
                     summaryRes = item.summary
                     iconRes = item.icon
                 }.let { Preference("") }
+
                 TYPE.STRING -> builder.pref(item.key) {}
                 TYPE.SELECT -> builder.singleChoice(item.key, item.items) {
                     initialSelection = item.items.last().key
@@ -363,13 +372,16 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                                 "dark" -> {
                                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                                 }
+
                                 "light" -> {
                                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                                 }
+
                                 "system_theme" -> {
                                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                                 }
                             }
+
                             "app_style" -> {
                                 if (item.getValue(activity, "") != it) {
                                     MainActivity.clearInstances()
