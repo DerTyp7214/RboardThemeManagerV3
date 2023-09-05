@@ -39,6 +39,7 @@ import de.dertyp7214.rboardthememanager.components.XMLEntry
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.components.XMLType
 import com.topjohnwu.superuser.io.SuFile
+import de.dertyp7214.rboardthememanager.utils.PackageUtils.getPackageUid
 
 class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
     enum class FILES(val Path: String) {
@@ -241,11 +242,17 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(),
             {
-                val xmlFile = XMLFile(path=FLAG_PATH)
+                val xmlFile = XMLFile(path = FLAG_PATH)
                 xmlFile.setValue(XMLEntry("crowdsource_uri", "", XMLType.STRING))
                 SuFile(Flags.FILES.FLAGS.filePath).writeFile(xmlFile.toString())
+                val uid = getPackageUid(
+                    Config.GBOARD_PACKAGE_NAME,
+                    packageManager
+                )
+                val gids = packageManager.getPackageGids(Config.GBOARD_PACKAGE_NAME)
                 listOf(
-                    "chmod 644 \"${Flags.FILES.FLAGS.filePath}\"",
+                    "chmod 660 \"${Flags.FILES.FLAGS.filePath}\"",
+                    if (uid != null && gids != null) "chown ${uid}:${gids.first()} \"${Flags.FILES.FLAGS.filePath}\"" else "",
                     "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
                 ).runAsCommand()
 
@@ -364,7 +371,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
     }
 
     override fun preferences(builder: PreferenceScreen.Builder) {
-        SETTINGS.values().filter { it.visible }
+        SETTINGS.entries.filter { it.visible }
             .filter {
                 !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) &&
                         !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
