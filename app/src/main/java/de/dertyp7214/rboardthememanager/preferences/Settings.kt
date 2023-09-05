@@ -227,7 +227,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                 val gids = packageManager.getPackageGids(Config.GBOARD_PACKAGE_NAME)
                 listOf(
                     "chmod 660 \"${Flags.FILES.FLAGS.filePath}\"",
-                    if (uid != null) gids.joinToString(" && ") { "chown ${uid}:${it}" } else "",
+                    if (uid != null) gids.joinToString(" && ") { "chown ${uid}:${it} \"${Flags.FILES.FLAGS.filePath}\"" } else "",
                     "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
                 ).runAsCommand()
 
