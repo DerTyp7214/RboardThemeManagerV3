@@ -120,6 +120,8 @@ object ThemeUtils {
     private val MAX_IMAGE_HEIGHT = { context: Context -> 80.dp(context) }
 
     fun loadThemes(): List<ThemeDataClass> {
+        val maxImageHeight = Application.context?.let { ctx -> MAX_IMAGE_HEIGHT(ctx) } ?: 220
+
         val themePacks = loadThemePacks()
         val themeDir =
             SuFile(Config.MAGISK_THEME_LOC)
@@ -129,9 +131,7 @@ object ThemeUtils {
             val imageFile = SuFile(Config.MAGISK_THEME_LOC, it.name.removeSuffix(".zip"))
             if (imageFile.exists()) ThemeDataClass(
                 imageFile.decodeBitmap()?.let { bmp ->
-                    val resized =
-                        Application.context?.let { ctx -> bmp.resize(height = MAX_IMAGE_HEIGHT(ctx)) }
-                            ?: bmp
+                    val resized = bmp.resize(height = maxImageHeight)
                     bmp.recycle()
                     resized
                 },
@@ -175,7 +175,7 @@ object ThemeUtils {
                                 )
                             )
                         ).let { bmp ->
-                            val resized = bmp.resize(height = MAX_IMAGE_HEIGHT(ctx))
+                            val resized = bmp.resize(height = maxImageHeight)
                             bmp.recycle()
                             resized
                         },
@@ -342,7 +342,13 @@ object ThemeUtils {
 
     fun getSystemAutoTheme(): ThemeDataClass {
         return ThemeDataClass(
-            getSystemAutoImage(),
+            getSystemAutoImage()?.let { bmp ->
+                val resized =
+                    Application.context?.let { ctx -> bmp.resize(height = MAX_IMAGE_HEIGHT(ctx)) }
+                        ?: bmp
+                bmp.recycle()
+                resized
+            },
             "system_auto:",
             "system_auto:"
         )

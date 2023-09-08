@@ -16,6 +16,8 @@ import de.dertyp7214.rboardthememanager.core.dp
 import de.dertyp7214.rboardthememanager.core.install
 import de.dertyp7214.rboardthememanager.core.isInstalled
 import de.dertyp7214.rboardthememanager.core.openPreviewDialog
+import de.dertyp7214.rboardthememanager.core.resize
+import de.dertyp7214.rboardthememanager.core.screenWidth
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.ActivityInstallPackBinding
 import java.io.File
@@ -78,6 +80,7 @@ class InstallPackActivity : AppCompatActivity() {
         })
 
         doAsync({
+            val maxWidth = screenWidth() - 68.dp(this)
             intent.getStringArrayListExtra("themes")?.let { paths ->
                 val list = arrayListOf<ThemeDataClass>()
                 paths.forEach { themePath ->
@@ -87,7 +90,11 @@ class InstallPackActivity : AppCompatActivity() {
                     val imageFile = SuFile(file.absolutePath.removeSuffix(".zip"))
                     val image = imageFile.exists().let {
                         if (it) {
-                            imageFile.decodeBitmap()
+                            imageFile.decodeBitmap()?.let { bmp ->
+                                val resized = bmp.resize(width = maxWidth)
+                                bmp.recycle()
+                                resized
+                            }
                         } else null
                     }
                     list.add(ThemeDataClass(image, name, path))
@@ -115,6 +122,7 @@ class InstallPackActivity : AppCompatActivity() {
                             "name" -> matcher.group(2)?.let { metaName ->
                                 name = metaName
                             }
+
                             "author" -> matcher.group(2)?.let { metaAuthor ->
                                 author = metaAuthor
                             }
