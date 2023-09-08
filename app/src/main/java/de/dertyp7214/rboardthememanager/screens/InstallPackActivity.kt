@@ -63,7 +63,7 @@ class InstallPackActivity : AppCompatActivity() {
         }
 
         fab.setOnClickListener { _ ->
-            val success = adapter.getSelected().map { it.install() }
+            val success = adapter.getSelected().map { it.install(recycle = true) }
             if (success.contains(false)) Toast.makeText(this, R.string.error, Toast.LENGTH_LONG)
                 .also { toast = it }.show()
             else Toast.makeText(this, R.string.themes_installed, Toast.LENGTH_LONG)
@@ -79,6 +79,7 @@ class InstallPackActivity : AppCompatActivity() {
         })
 
         doAsync({
+            val maxWidth = screenWidth() - 68.dp(this)
             intent.getStringArrayListExtra("themes")?.let { paths ->
                 val list = arrayListOf<ThemeDataClass>()
                 paths.forEach { themePath ->
@@ -88,7 +89,11 @@ class InstallPackActivity : AppCompatActivity() {
                     val imageFile = SuFile(file.absolutePath.removeSuffix(".zip"))
                     val image = imageFile.exists().let {
                         if (it) {
-                            imageFile.decodeBitmap()
+                            imageFile.decodeBitmap()?.let { bmp ->
+                                val resized = bmp.resize(width = maxWidth)
+                                if (resized != bmp) bmp.recycle()
+                                resized
+                            }
                         } else null
                     }
                     list.add(ThemeDataClass(image, name, path))
