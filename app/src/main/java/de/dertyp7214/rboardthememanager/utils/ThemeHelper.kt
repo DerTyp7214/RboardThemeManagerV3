@@ -132,7 +132,7 @@ object ThemeUtils {
             if (imageFile.exists()) ThemeDataClass(
                 imageFile.decodeBitmap()?.let { bmp ->
                     val resized = bmp.resize(height = maxImageHeight)
-                    bmp.recycle()
+                    if (resized != bmp) bmp.recycle()
                     resized
                 },
                 it.name.removeSuffix(".zip"),
@@ -176,7 +176,7 @@ object ThemeUtils {
                             )
                         ).let { bmp ->
                             val resized = bmp.resize(height = maxImageHeight)
-                            bmp.recycle()
+                            if (resized != bmp) bmp.recycle()
                             resized
                         },
                         ctx.getString(R.string.download_themes),
@@ -346,7 +346,7 @@ object ThemeUtils {
                 val resized =
                     Application.context?.let { ctx -> bmp.resize(height = MAX_IMAGE_HEIGHT(ctx)) }
                         ?: bmp
-                bmp.recycle()
+                if (resized != bmp) bmp.recycle()
                 resized
             },
             "system_auto:",

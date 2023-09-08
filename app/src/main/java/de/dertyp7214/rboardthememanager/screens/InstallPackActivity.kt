@@ -64,7 +64,7 @@ class InstallPackActivity : AppCompatActivity() {
         }
 
         fab.setOnClickListener { _ ->
-            val success = adapter.getSelected().map { it.install() }
+            val success = adapter.getSelected().map { it.install(recycle = true) }
             if (success.contains(false)) Toast.makeText(this, R.string.error, Toast.LENGTH_LONG)
                 .also { toast = it }.show()
             else Toast.makeText(this, R.string.themes_installed, Toast.LENGTH_LONG)
@@ -92,7 +92,7 @@ class InstallPackActivity : AppCompatActivity() {
                         if (it) {
                             imageFile.decodeBitmap()?.let { bmp ->
                                 val resized = bmp.resize(width = maxWidth)
-                                bmp.recycle()
+                                if (resized != bmp) bmp.recycle()
                                 resized
                             }
                         } else null
