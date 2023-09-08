@@ -118,7 +118,9 @@ fun getActiveTheme(): String {
 }
 
 object ThemeUtils {
+    private val MAX_IMAGE_HEIGHT = { context: Context -> 80.dp(context) }
     fun loadThemes(): List<ThemeDataClass> {
+        val maxImageHeight = Application.context?.let { ctx -> MAX_IMAGE_HEIGHT(ctx) } ?: 220
         val themePacks = loadThemePacks()
         val themeDir =
             SuFile(Config.MAGISK_THEME_LOC)
@@ -127,7 +129,11 @@ object ThemeUtils {
         }?.map {
             val imageFile = SuFile(Config.MAGISK_THEME_LOC, it.name.removeSuffix(".zip"))
             if (imageFile.exists()) ThemeDataClass(
-                imageFile.decodeBitmap(),
+                imageFile.decodeBitmap()?.let { bmp ->
+                    val resized = bmp.resize(height = maxImageHeight)
+                    if (resized != bmp) bmp.recycle()
+                    resized
+                },
                 it.name.removeSuffix(".zip"),
                 it.absolutePath
             )
@@ -171,7 +177,11 @@ object ThemeUtils {
                                     R.raw.system_auto
                                 )
                             )
-                        ),
+                        ).let { bmp ->
+                            val resized = bmp.resize(height = maxImageHeight)
+                            if (resized != bmp) bmp.recycle()
+                            resized
+                        },
                         ctx.getString(R.string.download_themes),
                         InternalThemeNames.DOWNLOAD_THEMES.path
                     )
@@ -335,7 +345,13 @@ object ThemeUtils {
 
     fun getSystemAutoTheme(): ThemeDataClass {
         return ThemeDataClass(
-            getSystemAutoImage(),
+            getSystemAutoImage()?.let { bmp ->
+                val resized =
+                    Application.context?.let { ctx -> bmp.resize(height = MAX_IMAGE_HEIGHT(ctx)) }
+                        ?: bmp
+                if (resized != bmp) bmp.recycle()
+                resized
+            },
             "system_auto:",
             "system_auto:"
         )
