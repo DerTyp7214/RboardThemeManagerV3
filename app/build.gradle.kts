@@ -50,6 +50,7 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_20
         targetCompatibility = JavaVersion.VERSION_20
     }
@@ -127,4 +128,5 @@ dependencies {
 
     debugImplementation(libs.androidx.ui.tooling)
     implementation(libs.kotlin.reflect)
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
 }
