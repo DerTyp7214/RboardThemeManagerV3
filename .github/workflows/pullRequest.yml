@@ -76,7 +76,7 @@ jobs:
           echo "::set-output name=json::$content"
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: Debug Artifact
           path: app/build/outputs/apk/debug/app-debug.apk
