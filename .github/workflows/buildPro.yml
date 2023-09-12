@@ -28,7 +28,7 @@ jobs:
           java-version: 20
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.3.1
+        uses: actions/cache@v3.3.2
         with:
           path: |
             ~/.gradle/caches
@@ -38,7 +38,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3.3.1
+        uses: actions/cache@v3.3.2
         with:
           path: |
             ${{ github.workspace }}/.ccache
@@ -88,7 +88,7 @@ jobs:
         run: mv app/build/outputs/apk/pro/app-pro-unsigned-signed.apk app/build/outputs/apk/pro/app-pro.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@v3.1.3
         with:
           name: Release Artifact
           path: app/build/outputs/apk/pro/app-pro.apk
