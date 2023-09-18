@@ -40,7 +40,7 @@ balloon = "1.5.4"
 kspPlugin = "1.9.10-1.0.13"
 
 googleServices = "4.3.15"
-gradle = "8.3.0-alpha03"
+gradle = "8.3.0-alpha04"
 uiTooling = "1.5.1"
 
 [libraries]
