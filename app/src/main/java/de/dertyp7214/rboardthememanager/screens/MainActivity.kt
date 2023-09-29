@@ -503,8 +503,7 @@ class MainActivity : AppCompatActivity() {
                                     menuItems.add(
                                         MenuItem(
                                             R.drawable.ic_patch,
-                                            R.string.patch,
-                                            Build.VERSION.SDK_INT > Build.VERSION_CODES.N
+                                            R.string.patch
                                         ) {
                                             val patcherPackage =
                                                 if (PackageUtils.isPackageInstalled(
@@ -551,7 +550,7 @@ class MainActivity : AppCompatActivity() {
                                     )
                                     menuItems.add(
                                         MenuItem(
-                                            R.drawable.ic_trash,
+                                            R.drawable.ic_delete,
                                             R.string.delete_theme
                                         ) {
                                             openDialog(

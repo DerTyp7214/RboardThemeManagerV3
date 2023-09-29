@@ -128,5 +128,5 @@ dependencies {
 
     debugImplementation(libs.androidx.ui.tooling)
     implementation(libs.kotlin.reflect)
-    coreLibraryDesugaring(libs.desugar.jdk.libs)
+    coreLibraryDesugaring(libs.desugar.jdk.libs.nio)
 }
