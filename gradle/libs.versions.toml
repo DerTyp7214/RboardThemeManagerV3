@@ -9,7 +9,7 @@ commons-text = "1.10.0"
 constraintlayout = "2.2.0-alpha12"
 core = "1.12.0"
 core-ktx = "1.12.0"
-desugar_jdk_libs = "2.0.3"
+desugar_jdk_libs_nio = "2.0.3"
 espresso-core = "3.6.0-alpha01"
 firebase-bom = "32.3.1"
 firebase-analytics = "21.3.0"
@@ -19,7 +19,7 @@ firebase-messaging-ktx = "23.2.1"
 flagkit-android = "1.0.2"
 fragment-ktx = "1.7.0-alpha05"
 googleServices = "4.4.0"
-gradle = "8.3.0-alpha05"
+gradle = "8.3.0-alpha06"
 gson = "2.10.1"
 insetter = "0.6.1"
 junit = "4.13.2"
@@ -46,7 +46,7 @@ appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat"
 androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
 androidx-core = { module = "androidx.core:core", version.ref = "core" }
-desugar_jdk_libs = { module = "com.android.tools:desugar_jdk_libs", version.ref = "desugar_jdk_libs" }
+desugar_jdk_libs_nio = { module = "com.android.tools:desugar_jdk_libs_nio", version.ref = "desugar_jdk_libs_nio" }
 espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
 androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment-ktx" }
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
