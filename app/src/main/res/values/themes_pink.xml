@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <style name="Theme.RboardThemeManager.Colors_pink" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/pink_md_theme_light_primary</item>
         <item name="colorOnPrimary">@color/pink_md_theme_light_onPrimary</item>
