@@ -12,7 +12,6 @@ import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.SwitchKeyboardWidgetConfigureBinding
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
-import de.dertyp7214.rboardthememanager.utils.applyTheme
 import de.dertyp7214.rboardcomponents.utils.doAsync
 
 class SwitchKeyboardWidgetConfigureActivity : Activity() {

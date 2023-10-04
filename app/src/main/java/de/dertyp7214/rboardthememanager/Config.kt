@@ -3,7 +3,6 @@ package de.dertyp7214.rboardthememanager
 import android.os.Build
 import de.dertyp7214.rboardthememanager.core.getSystemProperty
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
-import de.dertyp7214.rboardthememanager.utils.GboardUtils
 
 @Suppress("MemberVisibilityCanBePrivate", "unused", "SdCardPath")
 object Config {
