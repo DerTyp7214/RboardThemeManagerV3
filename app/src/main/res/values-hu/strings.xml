@@ -135,6 +135,7 @@
     <string name="share_flags">Zászlók megosztása</string>
     <string name="share_flags_title">Zászlók megosztása (%o)</string>
     <string name="import_flags_title">Zászlók importálása (%o)</string>
+    <string name="hash_mismatch">Hash eltérés</string>
     <string name="share_prefs_title">Preferenciák megosztása (%o)</string>
     <string name="import_prefs_title">Preferenciák importálása (%o)</string>
     <string name="model">Modell</string>
