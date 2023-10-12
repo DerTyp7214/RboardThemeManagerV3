@@ -22,6 +22,8 @@ object Config {
         "https://play.google.com/store/apps/details?id=$packageName"
     }
 
+    const val AIDL_VERSION = 2
+
     const val PATCHER_PACKAGE = "de.dertyp7214.rboardpatcher"
 
     const val MODULES_PATH = "/data/adb/modules"

@@ -1,11 +1,19 @@
 package de.dertyp7214.rboardthememanager.core
 
 import android.content.Context
+import android.content.res.Resources.Theme
+import android.graphics.BitmapFactory
 import com.dertyp7214.logs.helpers.Logger
+import com.google.gson.Gson
 import com.topjohnwu.superuser.io.SuFile
+import de.dertyp7214.rboard.CssFile
+import de.dertyp7214.rboard.ImageFile
+import de.dertyp7214.rboard.RboardTheme
+import de.dertyp7214.rboard.ThemeMetadata
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import java.io.File
+import java.util.zip.ZipFile
 
 fun ThemeDataClass.delete(): Boolean {
     if (image != null) "rm -rf \"${path.removeSuffix(".zip")}\"".runAsCommand { image ->
@@ -44,6 +52,36 @@ fun ThemeDataClass.install(overrideTheme: Boolean = true, recycle: Boolean = fal
             )
         )
     }.runAsCommand()
+}
+
+fun ThemeDataClass.toRboardTheme(): RboardTheme {
+    val zip = ZipFile(path)
+    val metadata = Gson().fromJson(
+        zip.getInputStream(zip.getEntry("metadata.json")).bufferedReader().readText(),
+        ThemeMetadata::class.java
+    )
+    val cssFiles = metadata.styleSheets.map { Pair(it, zip.getInputStream(zip.getEntry(it))) }
+        .map { CssFile(it.first, it.second.bufferedReader().readText()) }.let {
+            val arrayList: ArrayList<CssFile> = ArrayList(it)
+            if (metadata.flavors.isNotEmpty()) {
+                arrayList.addAll(metadata.flavors.flatMap { flavor ->
+                    flavor.styleSheets.map { Pair(it, zip.getInputStream(zip.getEntry(it))) }
+                        .map { CssFile(it.first, it.second.bufferedReader().readText()) }
+                })
+            }
+            arrayList
+        }
+    val imageFiles = zip.entries().toList().filter { it.name.endsWith(".png") }
+    val images = if (imageFiles.isNotEmpty()) imageFiles.map { Pair(it.name, zip.getInputStream(it)) }
+        .map { ImageFile(it.first, BitmapFactory.decodeStream(it.second)) } else listOf()
+
+    return RboardTheme(
+        name,
+        metadata,
+        image,
+        cssFiles,
+        images
+    )
 }
 
 fun ThemeDataClass.isInstalled() = SuFile(Config.MAGISK_THEME_LOC, File(path).name).exists()
