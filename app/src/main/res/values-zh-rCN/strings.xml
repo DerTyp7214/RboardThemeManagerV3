@@ -198,7 +198,7 @@
     <string name="extra_extra_tall">1.50 极高</string>
     <string name="max_tall">2.00 最高</string>
     <string name="margins">间距</string>
-    <string name="margins_lanscape">横屏间距</string>
+    <string name="margins_landscape">横屏间距</string>
     <string name="radius">圆角半径</string>
     <string name="not_set" tools:ignore="PrivateResource">未设置</string>
 
