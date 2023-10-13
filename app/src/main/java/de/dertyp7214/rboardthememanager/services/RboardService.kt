@@ -17,7 +17,7 @@ class RboardService : Service() {
         }
 
         override fun getRboardThemes(): Array<String> {
-            return ThemeHelper.loadThemes(this@RboardService).map { it.name }.toTypedArray()
+            return ThemeHelper.loadThemesCtx(this@RboardService).map { it.name }.toTypedArray()
         }
 
         override fun getRboardTheme(name: String?): RboardTheme {

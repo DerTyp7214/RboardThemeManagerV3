@@ -5,7 +5,11 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +31,21 @@ import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
 import de.dertyp7214.rboardthememanager.Config.REPOS
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.core.decodeBitmap
+import de.dertyp7214.rboardthememanager.core.dp
+import de.dertyp7214.rboardthememanager.core.filterActive
+import de.dertyp7214.rboardthememanager.core.get
+import de.dertyp7214.rboardthememanager.core.getAttr
+import de.dertyp7214.rboardthememanager.core.getLocalTime
+import de.dertyp7214.rboardthememanager.core.isInstalled
+import de.dertyp7214.rboardthememanager.core.monet
+import de.dertyp7214.rboardthememanager.core.openStream
+import de.dertyp7214.rboardthememanager.core.parseRepo
+import de.dertyp7214.rboardthememanager.core.resize
+import de.dertyp7214.rboardthememanager.core.runAsCommand
+import de.dertyp7214.rboardthememanager.core.setHeight
+import de.dertyp7214.rboardthememanager.core.setWidth
+import de.dertyp7214.rboardthememanager.core.writeFile
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.preferences.Flags
@@ -36,7 +54,7 @@ import de.dertyp7214.rboardthememanager.proto.ThemePackProto
 import java.io.BufferedInputStream
 import java.io.File
 import java.net.URL
-import java.util.*
+import java.util.Locale
 
 enum class InternalThemeNames(val path: String) {
     DOWNLOAD_THEMES("rboard:download_themes")
@@ -119,10 +137,16 @@ fun getActiveTheme(): String {
 object ThemeUtils {
     private val MAX_IMAGE_HEIGHT = { context: Context -> 80.dp(context) }
 
-    fun loadThemes(context: Context? = Application.context): List<ThemeDataClass> {
+
+    fun loadThemes(): List<ThemeDataClass> = loadThemesCtx(Application.context)
+    fun loadThemesCtx(context: Context?): List<ThemeDataClass> {
         val maxImageHeight = context?.let { ctx -> MAX_IMAGE_HEIGHT(ctx) } ?: 220
 
-        val themePacks = loadThemePacks()
+        val themePacks = try {
+            loadThemePacks()
+        } catch (_: Exception) {
+            listOf()
+        }
         val themeDir =
             SuFile(Config.MAGISK_THEME_LOC)
         return (themeDir.listFiles()?.filter {
@@ -272,7 +296,7 @@ object ThemeUtils {
                     .removePrefix("assets:theme_package_metadata_")
                     .removeSuffix(".binarypb")
                     .removeSuffix(":")
-            val image = if (themeName.startsWith("system_auto:")) getSystemAutoImage() else {
+            val image = if (themeName.startsWith("system_auto:")) getSystemAutoImage(context) else {
                 context.let {
                     try {
                         val inputStream = it.resources.openRawResource(
@@ -300,7 +324,7 @@ object ThemeUtils {
                 }, themeName
             )
         } else if (themeName.startsWith("silk:")) {
-            getDynamicColorsTheme() ?: ThemeDataClass(null, "", "")
+            getDynamicColorsTheme(context) ?: ThemeDataClass(null, "", "")
         } else if (themeName.isNotEmpty()) {
             val name = themeName.split("/").last()
             val image = SuFile(Config.MAGISK_THEME_LOC, name.removeSuffix(".zip"))
@@ -314,15 +338,15 @@ object ThemeUtils {
         }
     }
 
-    private fun getDynamicColorsTheme(): ThemeDataClass? {
-        return if (Application.context != null) {
-            val image = Application.context?.let { context ->
-                val inputStream = context.resources.openRawResource(
+    private fun getDynamicColorsTheme(context: Context? = Application.context): ThemeDataClass? {
+        return if (context != null) {
+            val image = context.let { ctx ->
+                val inputStream = ctx.resources.openRawResource(
                     FileUtils.getResourceId(
-                        context,
+                        ctx,
                         "system_auto",
                         "raw",
-                        context.packageName
+                        ctx.packageName
                     )
                 )
                 BitmapFactory.decodeStream(BufferedInputStream(inputStream))
@@ -332,18 +356,18 @@ object ThemeUtils {
                 "silk:",
                 "silk:",
                 colorFilter = PorterDuffColorFilter(
-                    Application.context!!.getAttr(android.R.attr.colorAccent),
+                    context.getAttr(android.R.attr.colorAccent),
                     PorterDuff.Mode.OVERLAY
                 )
             )
         } else null
     }
 
-    fun getSystemAutoTheme(): ThemeDataClass {
+    fun getSystemAutoTheme(context: Context? = Application.context): ThemeDataClass {
         return ThemeDataClass(
-            getSystemAutoImage()?.let { bmp ->
+            getSystemAutoImage(context)?.let { bmp ->
                 val resized =
-                    Application.context?.let { ctx -> bmp.resize(height = MAX_IMAGE_HEIGHT(ctx)) }
+                    context?.let { ctx -> bmp.resize(height = MAX_IMAGE_HEIGHT(ctx)) }
                         ?: bmp
                 if (resized != bmp) bmp.recycle()
                 resized
@@ -353,12 +377,12 @@ object ThemeUtils {
         )
     }
 
-    private fun getSystemAutoImage(): Bitmap? {
-        return Application.context?.let { context ->
+    private fun getSystemAutoImage(context: Context? = Application.context): Bitmap? {
+        return context?.let { ctx ->
             (try {
                 SuFile(
                     Config.MAGISK_THEME_LOC,
-                    ((context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES)
+                    ((ctx.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES)
                         .let { if (it) Config.darkTheme else Config.lightTheme }
                         ?.removeSuffix(".zip")
                 ).decodeBitmap()
@@ -366,7 +390,7 @@ object ThemeUtils {
                 null
             }) ?: BitmapFactory.decodeStream(
                 BufferedInputStream(
-                    context.resources.openRawResource(
+                    ctx.resources.openRawResource(
                         R.raw.system_auto
                     )
                 )
