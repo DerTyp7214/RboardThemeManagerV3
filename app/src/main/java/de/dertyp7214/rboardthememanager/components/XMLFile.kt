@@ -57,7 +57,10 @@ class XMLFile(
     fun hasNot(entry: XMLEntry) = !has(entry)
     fun entryEquals(entry: XMLEntry) = values[entry.name]?.value == entry.value
     fun entryNotEquals(entry: XMLEntry) = !entryEquals(entry)
+    fun remove(name: String) = values.remove(name)
     operator fun get(name: String): Any? = values[name]?.value
+    operator fun set(name: String, value: Any?) =
+        if (value == null) remove(name) else values[name]?.setValue(value)
 
     val entries: List<XMLEntry>
         get() = values.values.toList()
