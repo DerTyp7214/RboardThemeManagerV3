@@ -203,16 +203,25 @@
     <string name="extra_extra_tall">1,50 Extra-extra-magas</string>
     <string name="max_tall">2,00 Max-magas</string>
     <string name="margins">Margók</string>
-    <string name="margins_lanscape">Margók Fekvő</string>
+    <string name="margins_landscape">Margók Fekvő</string>
+    <string name="margins_fold">Margók összehajtható</string>
+    <string name="margins_landscape_fold">Margók Fekvő összehajtható</string>
     <string name="radius">Sugár</string>
-
     <string name="not_set">Nincs beállítva</string>
+
     <string name="kb_pad_land_b">Fekvő-alsó</string>
     <string name="kb_pad_land_l">Fekvő-bal-oldali</string>
     <string name="kb_pad_land_r">Fekvő-jobb-oldali</string>
     <string name="kb_pad_port_b">Álló-alsó</string>
     <string name="kb_pad_port_l">Álló-bal-oldali</string>
     <string name="kb_pad_port_r">Álló-jobb-oldali</string>
+
+    <string name="kbp_fland_b">Fekvő-alsó</string>
+    <string name="kbp_fland_l">Fekvő-bal-oldali</string>
+    <string name="kbp_fland_r">Fekvő-jobb-oldali</string>
+    <string name="kbp_fport_b">Álló-alsó</string>
+    <string name="kbp_fport_l">Álló-bal-oldali</string>
+    <string name="kbp_fport_r">Álló-jobb-oldali</string>
 
     <string name="corner_key_l">Sarok-sugár-bal-oldali (alul)</string>
     <string name="corner_key_r">Sarok-sugár (alul)</string>
