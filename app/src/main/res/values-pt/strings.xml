@@ -201,7 +201,7 @@
     <string name="extra_extra_tall">1.50 Avatar</string>
     <string name="max_tall">2.00 Gigante</string>
     <string name="margins">Margens</string>
-    <string name="margins_lanscape">Margens (modo paisagem)</string>
+    <string name="margins_landscape">Margens (modo paisagem)</string>
     <string name="radius">Curvatura</string>
     <string name="not_set">Not set</string>
 

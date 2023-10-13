@@ -204,7 +204,7 @@
     <string name="extra_extra_tall">1.50 Extrêmement-extrêmement-haut</string>
     <string name="max_tall">2.00 Maximum-haut</string>
     <string name="margins">Marges</string>
-    <string name="margins_lanscape">Marges Paysage</string>
+    <string name="margins_landscape">Marges Paysage</string>
     <string name="radius">Rayon</string>
     <string name="not_set" tools:ignore="PrivateResource">Non défini</string>
     
