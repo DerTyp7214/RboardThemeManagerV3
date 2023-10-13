@@ -181,6 +181,17 @@
             </intent-filter>
         </service>
 
+        <service
+            android:name=".services.RboardService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote"
+            tools:ignore="ExportedService">
+            <intent-filter>
+                <action android:name="de.dertyp7214.rboard.IRboard" />
+            </intent-filter>
+        </service>
+
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_notification" />

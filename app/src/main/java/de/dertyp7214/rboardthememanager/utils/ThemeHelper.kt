@@ -119,8 +119,8 @@ fun getActiveTheme(): String {
 object ThemeUtils {
     private val MAX_IMAGE_HEIGHT = { context: Context -> 80.dp(context) }
 
-    fun loadThemes(): List<ThemeDataClass> {
-        val maxImageHeight = Application.context?.let { ctx -> MAX_IMAGE_HEIGHT(ctx) } ?: 220
+    fun loadThemes(context: Context? = Application.context): List<ThemeDataClass> {
+        val maxImageHeight = context?.let { ctx -> MAX_IMAGE_HEIGHT(ctx) } ?: 220
 
         val themePacks = loadThemePacks()
         val themeDir =
@@ -148,7 +148,6 @@ object ThemeUtils {
                 }
             }
             val themes = arrayListOf<ThemeDataClass>()
-            val context = Application.context
             if (context?.let { ctx ->
                     Settings.SETTINGS.SHOW_SYSTEM_THEME.getValue(
                         ctx,
@@ -266,15 +265,15 @@ object ThemeUtils {
 
     fun getActiveThemeData(): ThemeDataClass = getThemeData(getActiveTheme())
 
-    fun getThemeData(themeName: String): ThemeDataClass {
-        return if ((themeName.startsWith("assets:") || themeName.startsWith("system_auto:")) && Application.context != null) {
+    fun getThemeData(themeName: String, context: Context? = Application.context): ThemeDataClass {
+        return if ((themeName.startsWith("assets:") || themeName.startsWith("system_auto:")) && context != null) {
             val imgName =
                 themeName
                     .removePrefix("assets:theme_package_metadata_")
                     .removeSuffix(".binarypb")
                     .removeSuffix(":")
             val image = if (themeName.startsWith("system_auto:")) getSystemAutoImage() else {
-                Application.context?.let {
+                context.let {
                     try {
                         val inputStream = it.resources.openRawResource(
                             FileUtils.getResourceId(
