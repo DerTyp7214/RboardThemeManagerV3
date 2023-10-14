@@ -2,6 +2,7 @@ package de.dertyp7214.rboardthememanager.services
 
 import android.app.Service
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.IBinder
 import de.dertyp7214.rboard.IRboard
 import de.dertyp7214.rboard.RboardTheme
@@ -26,7 +27,17 @@ class RboardService : Service() {
             return ThemeHelper.loadThemesCtx(this@RboardService).map { it.name }.toTypedArray()
         }
 
-        override fun getRboardTheme(name: String?): RboardTheme {
+        override fun getPreview(name: String?): Bitmap? {
+            Config.useMagisk = preferences.getBoolean("useMagisk", false)
+
+            buildShell()
+
+            return ThemeHelper.getThemeData(name?.let {
+                if (it.endsWith(".zip")) it else "$it.zip"
+            } ?: "", this@RboardService).image
+        }
+
+        override fun getRboardTheme(name: String?): RboardTheme? {
             Config.useMagisk = preferences.getBoolean("useMagisk", false)
 
             buildShell()
