@@ -37,6 +37,7 @@ import de.dertyp7214.rboardthememanager.dialogs.NoRootDialog
 import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 import de.dertyp7214.rboardthememanager.screens.ShareFlags
+import de.dertyp7214.rboardthememanager.utils.MagiskUtils.buildShell
 import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
 import org.json.JSONArray
@@ -115,12 +116,13 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 }
             })
 
-            Shell.enableVerboseLogging = PreferenceManager.getDefaultSharedPreferences(this)
-                .getString("logMode", "VERBOSE") == "VERBOSE"
+            Shell.enableVerboseLogging = preferences.getString("logMode", "VERBOSE") == "VERBOSE"
             if (Shell.getCachedShell() == null) Shell.setDefaultBuilder(
                 Shell.Builder.create().apply {
                     setFlags(Shell.FLAG_MOUNT_MASTER)
                 })
+
+            buildShell()
 
             val rootAccess = hasRoot(this)
 
