@@ -1,7 +1,6 @@
 package de.dertyp7214.rboardthememanager.core
 
 import android.content.Context
-import android.content.res.Resources.Theme
 import android.graphics.BitmapFactory
 import com.dertyp7214.logs.helpers.Logger
 import com.google.gson.Gson
@@ -35,8 +34,8 @@ fun ThemeDataClass.moveToCache(context: Context): ThemeDataClass {
 }
 
 fun ThemeDataClass.install(overrideTheme: Boolean = true, recycle: Boolean = false): Boolean {
-    val file = File(path)
-    val imageFile = File(file.absolutePath.removeSuffix(".zip"))
+    val file = SuFile(path)
+    val imageFile = SuFile(file.absolutePath.removeSuffix(".zip"))
     val installPath = SuFile(Config.MAGISK_THEME_LOC, file.name)
     if (recycle) image?.recycle()
     return if (installPath.exists() && !overrideTheme) true
@@ -54,26 +53,51 @@ fun ThemeDataClass.install(overrideTheme: Boolean = true, recycle: Boolean = fal
     }.runAsCommand()
 }
 
-fun ThemeDataClass.toRboardTheme(): RboardTheme {
-    val zip = ZipFile(path)
+fun ThemeDataClass.toRboardTheme(context: Context): RboardTheme {
+    val tmpPath = File(context.cacheDir, "rboard")
+    if (!tmpPath.exists()) tmpPath.mkdirs()
+
+    listOf(
+        "cp \"$path\" \"${tmpPath.absolutePath}\"",
+        "chmod 777 \"${tmpPath.absolutePath}\"",
+    ).runAsCommand()
+
+    val tmpFilePath = File(tmpPath, File(path).name)
+
+    val zip = ZipFile(tmpFilePath)
     val metadata = Gson().fromJson(
-        zip.getInputStream(zip.getEntry("metadata.json")).bufferedReader().readText(),
+        zip.getInputStream(zip.getEntry("metadata.json")).use { it.bufferedReader().readText() },
         ThemeMetadata::class.java
     )
     val cssFiles = metadata.styleSheets.map { Pair(it, zip.getInputStream(zip.getEntry(it))) }
-        .map { CssFile(it.first, it.second.bufferedReader().readText()) }.let {
-            val arrayList: ArrayList<CssFile> = ArrayList(it)
+        .map { CssFile(it.first, it.second.use { stream -> stream.bufferedReader().readText() }) }
+        .let { cssFiles ->
+            val arrayList: ArrayList<CssFile> = ArrayList(cssFiles)
             if (metadata.flavors.isNotEmpty()) {
                 arrayList.addAll(metadata.flavors.flatMap { flavor ->
                     flavor.styleSheets.map { Pair(it, zip.getInputStream(zip.getEntry(it))) }
-                        .map { CssFile(it.first, it.second.bufferedReader().readText()) }
+                        .map {
+                            CssFile(
+                                it.first,
+                                it.second.use { stream -> stream.bufferedReader().readText() })
+                        }
                 })
             }
             arrayList
         }
     val imageFiles = zip.entries().toList().filter { it.name.endsWith(".png") }
-    val images = if (imageFiles.isNotEmpty()) imageFiles.map { Pair(it.name, zip.getInputStream(it)) }
-        .map { ImageFile(it.first, BitmapFactory.decodeStream(it.second)) } else listOf()
+    val images =
+        if (imageFiles.isNotEmpty()) imageFiles.map { Pair(it.name, zip.getInputStream(it)) }
+            .map {
+                ImageFile(
+                    it.first,
+                    it.second.use { stream -> BitmapFactory.decodeStream(stream) })
+            } else listOf()
+
+    zip.close()
+
+    if (!tmpFilePath.deleteRecursively())
+        "rm -rf \"${tmpFilePath.absolutePath}\"".runAsCommand()
 
     return RboardTheme(
         name,
