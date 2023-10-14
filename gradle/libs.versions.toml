@@ -1,0 +1,88 @@
+[versions]
+activity-ktx = "1.8.0"
+android-shell = "1.0.0"
+androidx-junit = "1.2.0-alpha01"
+appcompat = "1.7.0-alpha03"
+balloon = "1.6.2-SNAPSHOT"
+browser = "1.7.0-alpha01"
+commons-text = "1.10.0"
+constraintlayout = "2.2.0-alpha13"
+core = "1.12.0"
+core-ktx = "1.12.0"
+desugar_jdk_libs_nio = "2.0.3"
+espresso-core = "3.6.0-alpha01"
+firebase-bom = "32.3.1"
+firebase-analytics = "21.3.0"
+firebase-analytics-ktx = "21.3.0"
+firebase-messaging = "23.2.1"
+firebase-messaging-ktx = "23.2.1"
+flagkit-android = "1.0.2"
+fragment-ktx = "1.7.0-alpha06"
+googleServices = "4.4.0"
+gradle = "8.3.0-alpha07"
+gson = "2.10.1"
+insetter = "0.6.1"
+junit = "4.13.2"
+kotlin-reflect = "1.9.20-RC"
+ksp = "5.0.0-SNAPSHOT"
+kspPlugin = "1.9.20-RC-1.0.13"
+legacy-support-v4 = "1.0.0"
+libsuVersion = "5.2.1"
+lifecycle-viewmodel-ktx = "2.7.0-alpha02"
+material = "1.11.0-alpha03"
+navigation-fragment-ktx = "2.7.4"
+navigation-ui-ktx = "2.7.4"
+prdownloader = "v0.6.0"
+preference-ktx = "1.2.1"
+preferencesplus = "1.1"
+protobuf-dynamic = "1.0.1"
+simple-item-decoration = "1.0.0"
+ui-tooling = "1.6.0-alpha07"
+
+[libraries]
+android-shell = { module = "com.jaredrummler:android-shell", version.ref = "android-shell" }
+androidx-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "activity-ktx" }
+appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
+androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
+androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayout" }
+androidx-core = { module = "androidx.core:core", version.ref = "core" }
+desugar_jdk_libs_nio = { module = "com.android.tools:desugar_jdk_libs_nio", version.ref = "desugar_jdk_libs_nio" }
+espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
+androidx-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment-ktx" }
+androidx-junit = { module = "androidx.test.ext:junit", version.ref = "androidx-junit" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel-ktx" }
+preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "preference-ktx" }
+androidx-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "ui-tooling" }
+balloon = { module = "com.github.skydoves:balloon", version.ref = "balloon" }
+commons-text = { module = "org.apache.commons:commons-text", version.ref = "commons-text" }
+core = { module = "com.github.topjohnwu.libsu:core", version.ref = "libsuVersion" }
+core-ktx = { module = "androidx.core:core-ktx", version.ref = "core-ktx" }
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase-bom" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics", version.ref = "firebase-analytics" }
+firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx", version.ref = "firebase-analytics-ktx" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebase-messaging" }
+firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx", version.ref = "firebase-messaging-ktx" }
+flagkit-android = { module = "com.github.murgupluoglu:flagkit-android", version.ref = "flagkit-android" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "ksp" }
+google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+insetter = { module = "dev.chrisbanes.insetter:insetter", version.ref = "insetter" }
+io = { module = "com.github.topjohnwu.libsu:io", version.ref = "libsuVersion" }
+junit = { module = "junit:junit", version.ref = "junit" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin-reflect" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin-reflect" }
+ksp = { module = "com.github.bumptech.glide:ksp", version.ref = "ksp" }
+legacy-support-v4 = { module = "androidx.legacy:legacy-support-v4", version.ref = "legacy-support-v4" }
+material = { module = "com.google.android.material:material", version.ref = "material" }
+navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "navigation-fragment-ktx" }
+navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation-ui-ktx" }
+nio = { module = "com.github.topjohnwu.libsu:nio", version.ref = "libsuVersion" }
+prdownloader = { module = "de.dertyp7214:PRDownloader", version.ref = "prdownloader" }
+preferencesplus = { module = "com.github.DerTyp7214:PreferencesPlus", version.ref = "preferencesplus" }
+protobuf-dynamic = { module = "com.github.os72:protobuf-dynamic", version.ref = "protobuf-dynamic" }
+simple-item-decoration = { module = "com.bignerdranch.android:simple-item-decoration", version.ref = "simple-item-decoration" }
+
+[plugins]
+ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }
+

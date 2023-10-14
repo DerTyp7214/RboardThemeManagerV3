@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="blue_seed">#3B92DB</color>
+    <color name="blue_seed">#00629F</color>
     <color name="blue_md_theme_light_primary">#00629F</color>
     <color name="blue_md_theme_light_onPrimary">#FFFFFF</color>
     <color name="blue_md_theme_light_primaryContainer">#D0E4FF</color>
@@ -22,19 +22,21 @@
     <color name="blue_md_theme_light_surface">#FCFCFF</color>
     <color name="blue_md_theme_light_onSurface">#1A1C1E</color>
     <color name="blue_md_theme_light_surfaceVariant">#DEE3EB</color>
+    <color name="blue_md_theme_light_SurfaceContainerHighest">#e2e2e6</color>
     <color name="blue_md_theme_light_onSurfaceVariant">#42474E</color>
     <color name="blue_md_theme_light_outline">#73777F</color>
     <color name="blue_md_theme_light_inverseOnSurface">#F1F0F4</color>
     <color name="blue_md_theme_light_inverseSurface">#2F3033</color>
-    <color name="blue_md_theme_light_inversePrimary">#9ACBFF</color>
+    <color name="blue_md_theme_light_inversePrimary">#9BCBFF</color>
     <color name="blue_md_theme_light_shadow">#000000</color>
     <color name="blue_md_theme_light_surfaceTint">#00629F</color>
-    <color name="blue_md_theme_light_surfaceTintColor">#00629F</color>
-    <color name="blue_md_theme_dark_primary">#9ACBFF</color>
-    <color name="blue_md_theme_dark_onPrimary">#003355</color>
+    <color name="blue_md_theme_light_outlineVariant">#C2C7CF</color>
+    <color name="blue_md_theme_light_scrim">#000000</color>
+    <color name="blue_md_theme_dark_primary">#9BCBFF</color>
+    <color name="blue_md_theme_dark_onPrimary">#003356</color>
     <color name="blue_md_theme_dark_primaryContainer">#004A79</color>
     <color name="blue_md_theme_dark_onPrimaryContainer">#D0E4FF</color>
-    <color name="blue_md_theme_dark_secondary">#BAC8DA</color>
+    <color name="blue_md_theme_dark_secondary">#BAC8DB</color>
     <color name="blue_md_theme_dark_onSecondary">#243240</color>
     <color name="blue_md_theme_dark_secondaryContainer">#3B4857</color>
     <color name="blue_md_theme_dark_onSecondaryContainer">#D6E4F7</color>
@@ -51,12 +53,14 @@
     <color name="blue_md_theme_dark_surface">#1A1C1E</color>
     <color name="blue_md_theme_dark_onSurface">#E2E2E6</color>
     <color name="blue_md_theme_dark_surfaceVariant">#42474E</color>
+    <color name="blue_md_theme_dark_SurfaceContainerHighest">#333538</color>
     <color name="blue_md_theme_dark_onSurfaceVariant">#C2C7CF</color>
     <color name="blue_md_theme_dark_outline">#8C9199</color>
     <color name="blue_md_theme_dark_inverseOnSurface">#1A1C1E</color>
     <color name="blue_md_theme_dark_inverseSurface">#E2E2E6</color>
     <color name="blue_md_theme_dark_inversePrimary">#00629F</color>
     <color name="blue_md_theme_dark_shadow">#000000</color>
-    <color name="blue_md_theme_dark_surfaceTint">#9ACBFF</color>
-    <color name="blue_md_theme_dark_surfaceTintColor">#9ACBFF</color>
+    <color name="blue_md_theme_dark_surfaceTint">#9BCBFF</color>
+    <color name="blue_md_theme_dark_outlineVariant">#42474E</color>
+    <color name="blue_md_theme_dark_scrim">#000000</color>
 </resources>

@@ -3,7 +3,6 @@ package de.dertyp7214.rboardthememanager
 import android.os.Build
 import de.dertyp7214.rboardthememanager.core.getSystemProperty
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
-import de.dertyp7214.rboardthememanager.utils.GboardUtils
 
 @Suppress("MemberVisibilityCanBePrivate", "unused", "SdCardPath")
 object Config {
@@ -20,12 +19,12 @@ object Config {
     var GITLAB_RAW_PREFIX = "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/PackRepoBeta"
     var GITHUB_RAW_PREFIX = "https://github.com/GboardThemes/PackRepoBeta/raw/main"
 
-    var PROTO_FILE = "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/proto/list.proto"
-
     var REPO_PREFIX = GITHUB_REPO_PREFIX
     var RAW_PREFIX = GITHUB_RAW_PREFIX
 
     const val MAGISK_PACKAGE_NAME = "com.topjohnwu.magisk"
+    const val AIDL_VERSION = 2
+
     const val PATCHER_PACKAGE = "de.dertyp7214.rboardpatcher"
     const val MODULES_PATH = "/data/adb/modules"
     const val MODULE_ID = "rboard-themes"
@@ -49,6 +48,7 @@ object Config {
     val GBOARD_PREFS_PATH: String
         get() {
             return newGboard.let {
+                // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
                 if (it) "/data/user${if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) "_de" else ""}/0/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
                 else "/data/data/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
             }

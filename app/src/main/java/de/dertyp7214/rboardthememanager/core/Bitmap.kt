@@ -4,6 +4,8 @@ import android.graphics.*
 
 fun Bitmap.resize(width: Int? = null, height: Int? = null): Bitmap {
     if (width == null && height == null) return this
+    if (width == this.width && height == this.height) return this
+    if ((width ?: 0) > this.width || (height ?: 0) > this.height) return this
     val w = width ?: (((height ?: 0).toFloat() / this.height.toFloat()) * this.width.toFloat())
     val h = height ?: (((width ?: 0).toFloat() / this.width.toFloat()) * this.height.toFloat())
     return Bitmap.createScaledBitmap(this, w.toInt(), h.toInt(), false)

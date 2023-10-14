@@ -14,30 +14,46 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
+import com.topjohnwu.superuser.io.SuFile
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
-import de.Maxr1998.modernpreferences.helpers.*
+import de.Maxr1998.modernpreferences.helpers.categoryHeader
+import de.Maxr1998.modernpreferences.helpers.onCheckedChange
+import de.Maxr1998.modernpreferences.helpers.onClick
+import de.Maxr1998.modernpreferences.helpers.onSelectionChange
+import de.Maxr1998.modernpreferences.helpers.pref
+import de.Maxr1998.modernpreferences.helpers.singleChoice
+import de.Maxr1998.modernpreferences.helpers.switch
 import de.Maxr1998.modernpreferences.preferences.choice.SelectionItem
 import de.dertyp7214.rboardcomponents.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.Application
-import de.dertyp7214.rboardthememanager.Application.Companion.context
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.FLAG_PATH
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.Config.PLAY_URL
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.components.XMLEntry
+import de.dertyp7214.rboardthememanager.components.XMLFile
+import de.dertyp7214.rboardthememanager.components.XMLType
+import de.dertyp7214.rboardthememanager.core.SafeJSON
+import de.dertyp7214.rboardthememanager.core.get
+import de.dertyp7214.rboardthememanager.core.openDialog
+import de.dertyp7214.rboardthememanager.core.openUrl
+import de.dertyp7214.rboardthememanager.core.runAsCommand
+import de.dertyp7214.rboardthememanager.core.set
+import de.dertyp7214.rboardthememanager.core.writeFile
 import de.dertyp7214.rboardthememanager.screens.Logs
 import de.dertyp7214.rboardthememanager.screens.MainActivity
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
-import de.dertyp7214.rboardthememanager.utils.PackageUtils
+import de.dertyp7214.rboardthememanager.utils.PackageUtils.getPackageUid
 
 class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
     enum class FILES(val Path: String) {
+        // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
         @SuppressLint("SdCardPath")
         CACHE("/data/user${if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) "_de" else ""}/0/${Config.GBOARD_PACKAGE_NAME}/cache/auto_clean/"),
 
@@ -236,10 +252,20 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(),
             {
+                val xmlFile = XMLFile(path = FLAG_PATH)
+                xmlFile.setValue(XMLEntry("crowdsource_uri", "", XMLType.STRING))
+                SuFile(Flags.FILES.FLAGS.filePath).writeFile(xmlFile.toString())
+                val uid = getPackageUid(
+                    Config.GBOARD_PACKAGE_NAME,
+                    packageManager
+                )
+                val gids = packageManager.getPackageGids(Config.GBOARD_PACKAGE_NAME)
                 listOf(
-                    "\\cp \"$FLAG_PATH\" \"${Flags.FILES.FLAGS.filePath}\"",
+                    "chmod 660 \"${Flags.FILES.FLAGS.filePath}\"",
+                    if (uid != null && gids != null) "chown ${uid}:${gids.first()} \"${Flags.FILES.FLAGS.filePath}\"" else "",
                     "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
                 ).runAsCommand()
+
                 Toast.makeText(this, R.string.flags_copied, Toast.LENGTH_LONG).show()
             }
         ),
@@ -355,7 +381,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
     }
 
     override fun preferences(builder: PreferenceScreen.Builder) {
-        SETTINGS.values().filter { it.visible }
+        SETTINGS.entries.filter { it.visible }
             .filter {
                 !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) &&
                         !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
