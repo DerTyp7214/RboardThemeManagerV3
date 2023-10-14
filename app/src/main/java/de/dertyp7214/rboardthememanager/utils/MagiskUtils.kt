@@ -3,17 +3,24 @@
 package de.dertyp7214.rboardthememanager.utils
 
 import android.app.Activity
+import android.content.Context
 import com.jaredrummler.android.shell.Shell
 import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileInputStream
 import com.topjohnwu.superuser.io.SuFileOutputStream
+import de.dertyp7214.rboardcomponents.core.preferences
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.MODULES_PATH
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.core.getString
+import de.dertyp7214.rboardthememanager.core.getSystemProp
+import de.dertyp7214.rboardthememanager.core.openDialog
+import de.dertyp7214.rboardthememanager.core.parseModuleMeta
+import de.dertyp7214.rboardthememanager.core.writeFile
 import de.dertyp7214.rboardthememanager.data.MagiskModule
 import de.dertyp7214.rboardthememanager.data.ModuleMeta
 import java.nio.charset.Charset
+import com.topjohnwu.superuser.Shell as MShell
 
 @Suppress("unused")
 object MagiskUtils {
@@ -137,6 +144,14 @@ object MagiskUtils {
                 }
             }
         }
+    }
+
+    fun Context.buildShell() {
+        MShell.enableVerboseLogging = preferences.getString("logMode", "VERBOSE") == "VERBOSE"
+        if (MShell.getCachedShell() == null) MShell.setDefaultBuilder(
+            MShell.Builder.create().apply {
+                setFlags(MShell.FLAG_MOUNT_MASTER)
+            })
     }
 
     private fun writeSuFile(file: SuFile, content: String) {

@@ -199,7 +199,7 @@
     <string name="extra_extra_tall">1.50 molto molto alta</string>
     <string name="max_tall">2.00 altissima</string>
     <string name="margins">Margini</string>
-    <string name="margins_lanscape">Margini orizzontali</string>
+    <string name="margins_landscape">Margini orizzontali</string>
     <string name="radius">Raggio</string>
     <string name="not_set" tools:ignore="PrivateResource">Non impostato</string>
     <string name="kb_pad_land_b">Orizzontale-Basso</string>

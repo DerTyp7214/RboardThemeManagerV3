@@ -1,0 +1,101 @@
+[versions]
+androidx-junit = "1.1.5"
+de-PRDownloader = "v0.6.0"
+google-core = "2.1.0"
+google-core-ktx = "2.1.0"
+junit-junit = "4.13.2"
+kotlinReflect = "1.9.10"
+ksp = "4.16.0"
+libsuVersion = "5.2.1"
+insetter = "0.6.1"
+
+kotlin-stdlib = "1.9.10"
+appcompat = "1.7.0-alpha03"
+constraintlayout = "2.2.0-alpha13"
+preference-ktx = "1.2.1"
+activity-ktx = "1.8.0"
+fragment-ktx = "1.6.1"
+lifecycle-viewmodel-ktx = "2.6.2"
+browser = "1.6.0"
+glide = "4.16.0"
+flagkit = "1.0.2"
+firebase-bom = "32.3.1"
+firebase-messaging-ktx = "23.2.1"
+firebase-analytics-ktx = "21.3.0"
+legacy-support-v4 = "1.0.0"
+navigation-fragment-ktx = "2.7.4"
+navigation-ui-ktx = "2.7.4"
+commons-text = "1.10.0"
+core-ktx = "1.12.0"
+core = "1.12.0"
+material = "1.10.0"
+espresso-core = "3.5.1"
+android-shell = "1.0.0"
+firebase-analytics = "21.3.0"
+firebase-messaging = "23.2.1"
+gson = "2.10.1"
+protobufDynamic = "1.0.1"
+simple-item-decoration = "1.0.0"
+balloon = "1.6.1"
+kspPlugin = "1.9.10-1.0.13"
+
+googleServices = "4.4.0"
+gradle = "8.3.0-alpha07"
+uiTooling = "1.5.3"
+
+[libraries]
+prDownloader = { module = "de.dertyp7214:PRDownloader", version.ref = "de-PRDownloader" }
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx", version.ref = "firebase-messaging-ktx" }
+firebase-analytics-ktx = { group = "com.google.firebase", name = "firebase-analytics-ktx", version.ref = "firebase-analytics-ktx" }
+
+protobuf-dynamic = { module = "com.github.os72:protobuf-dynamic", version.ref = "protobufDynamic" }
+
+legacy-support-v4 = { group = "androidx.legacy", name = "legacy-support-v4", version.ref = "legacy-support-v4" }
+navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation-fragment-ktx" }
+navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation-ui-ktx" }
+commons-text = { group = "org.apache.commons", name = "commons-text", version.ref = "commons-text" }
+
+libsu-core = { group = "com.github.topjohnwu.libsu", name = "core", version.ref = "libsuVersion" }
+libsu-io = { group = "com.github.topjohnwu.libsu", name = "io", version.ref = "libsuVersion" }
+libsu-nio = { group = "com.github.topjohnwu.libsu", name = "nio", version.ref = "libsuVersion" }
+insetter = { group = "dev.chrisbanes.insetter", name = "insetter", version.ref = "insetter" }
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+kotlin-stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin-stdlib" }
+core = { group = "androidx.core", name = "core", version.ref = "core" }
+
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference-ktx" }
+activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activity-ktx" }
+fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragment-ktx" }
+android-shell = { group = "com.jaredrummler", name = "android-shell", version.ref = "android-shell" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebase-analytics" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebase-messaging" }
+gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
+lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle-viewmodel-ktx" }
+simple-item-decoration = { group = "com.bignerdranch.android", name = "simple-item-decoration", version.ref = "simple-item-decoration" }
+balloon = { group = "com.github.skydoves", name = "balloon", version.ref = "balloon" }
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+
+junit = { module = "junit:junit", version.ref = "junit-junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-junit" }
+espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+
+browser = { group = "androidx.browser", name = "browser", version.ref = "browser" }
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+flagkit = { group = "com.github.murgupluoglu", name = "flagkit-android", version.ref = "flagkit" }
+
+ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "uiTooling" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlinReflect" }
+
+play-core = { module = "com.google.android.play:app-update", version.ref = "google-core" }
+play-core-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "google-core-ktx" }
+
+glide-ksp = { module = "com.github.bumptech.glide:ksp", version.ref = "ksp" }
+
+google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
+gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
+
+[plugins]
+ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }

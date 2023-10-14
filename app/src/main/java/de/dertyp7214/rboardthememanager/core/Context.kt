@@ -42,3 +42,7 @@ fun Context.notify(
         ) != PackageManager.PERMISSION_GRANTED
     ) notificationManager.notify(notificationId, notification)
 }
+
+fun Context.screenWidth(): Int {
+    return resources.displayMetrics.widthPixels
+}

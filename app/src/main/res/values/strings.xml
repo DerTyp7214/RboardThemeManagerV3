@@ -203,7 +203,9 @@
     <string name="extra_extra_tall">1.50 Extra-extra-tall</string>
     <string name="max_tall">2.00 Max-tall</string>
     <string name="margins">Margins</string>
-    <string name="margins_lanscape">Margins Landscape</string>
+    <string name="margins_landscape">Margins Landscape</string>
+    <string name="margins_fold">Margins Foldable</string>
+    <string name="margins_landscape_fold">Margins Landscape Foldable</string>
     <string name="radius">Radius</string>
     <string name="not_set" tools:ignore="PrivateResource">Not set</string>
 
@@ -213,6 +215,13 @@
     <string name="kb_pad_port_b">Bottom</string>
     <string name="kb_pad_port_l">Left</string>
     <string name="kb_pad_port_r">Right</string>
+
+    <string name="kbp_fland_b">Bottom</string>
+    <string name="kbp_fland_l">Left</string>
+    <string name="kbp_fland_r">Right</string>
+    <string name="kbp_fport_b">Bottom</string>
+    <string name="kbp_fport_l">Left</string>
+    <string name="kbp_fport_r">Right</string>
 
     <string name="corner_key_l">Corner-Radius-Left (Bottom)</string>
     <string name="corner_key_r">Corner-Radius (Bottom)</string>

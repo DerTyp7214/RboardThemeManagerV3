@@ -15,14 +15,14 @@ object Config {
     var GITLAB_RAW_PREFIX = "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/PackRepoBeta"
     var GITHUB_RAW_PREFIX = "https://github.com/GboardThemes/PackRepoBeta/raw/main"
 
-    var PROTO_FILE = "https://raw.githubusercontent.com/GboardThemes/PackRepoBeta/main/proto/list.proto"
-
     var REPO_PREFIX = GITHUB_REPO_PREFIX
     var RAW_PREFIX = GITHUB_RAW_PREFIX
 
     val PLAY_URL = { packageName: String ->
         "https://play.google.com/store/apps/details?id=$packageName"
     }
+
+    const val AIDL_VERSION = 2
 
     const val PATCHER_PACKAGE = "de.dertyp7214.rboardpatcher"
 
@@ -70,7 +70,6 @@ object Config {
     val REPOS
         get() = ArrayList(PACKS_URLS)
 
-    // TODO: add repo button should load list of verified repos
     const val REPOS_LIST_URL =
         "https://raw.githubusercontent.com/GboardThemes/Repositories/main/repos.json"
     const val SOUNDS_PACKS_URL =

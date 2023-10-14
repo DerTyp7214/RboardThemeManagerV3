@@ -13,6 +13,7 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
+import com.topjohnwu.superuser.io.SuFile
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
@@ -26,12 +27,16 @@ import de.dertyp7214.rboardthememanager.Config.FLAG_PATH
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
 import de.dertyp7214.rboardthememanager.Config.PLAY_URL
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.components.XMLEntry
+import de.dertyp7214.rboardthememanager.components.XMLFile
+import de.dertyp7214.rboardthememanager.components.XMLType
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.screens.Logs
 import de.dertyp7214.rboardthememanager.screens.MainActivity
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
+import de.dertyp7214.rboardthememanager.utils.PackageUtils.getPackageUid
 
 class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
     enum class FILES(val Path: String) {
@@ -53,7 +58,6 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
         SELECT
     }
 
-    @Suppress("UNCHECKED_CAST")
     enum class SETTINGS(
         val key: String,
         @StringRes val title: Int,
@@ -213,10 +217,20 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(),
             {
+                val xmlFile = XMLFile(path = FLAG_PATH)
+                xmlFile.setValue(XMLEntry("crowdsource_uri", "", XMLType.STRING))
+                SuFile(Flags.FILES.FLAGS.filePath).writeFile(xmlFile.toString())
+                val uid = getPackageUid(
+                    Config.GBOARD_PACKAGE_NAME,
+                    packageManager
+                )
+                val gids = packageManager.getPackageGids(Config.GBOARD_PACKAGE_NAME)
                 listOf(
-                    "\\cp \"$FLAG_PATH\" \"${Flags.FILES.FLAGS.filePath}\"",
+                    "chmod 660 \"${Flags.FILES.FLAGS.filePath}\"",
+                    if (uid != null && gids != null) "chown ${uid}:${gids.first()} \"${Flags.FILES.FLAGS.filePath}\"" else "",
                     "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
                 ).runAsCommand()
+
                 Toast.makeText(this, R.string.flags_copied, Toast.LENGTH_LONG).show()
             }
         ),
@@ -332,7 +346,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
     }
 
     override fun preferences(builder: PreferenceScreen.Builder) {
-        SETTINGS.values().filter { it.visible }.forEach { item ->
+        SETTINGS.entries.filter { it.visible }.forEach { item ->
             val pref: Preference = when (item.type) {
                 TYPE.BOOLEAN -> builder.switch(item.key) {
                     defaultValue = item.defaultValue as Boolean
@@ -341,12 +355,14 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                         true
                     }
                 }
+
                 TYPE.INT, TYPE.LONG, TYPE.FLOAT -> builder.pref(item.key) {}
                 TYPE.GROUP -> builder.categoryHeader(item.key) {
                     titleRes = item.title
                     summaryRes = item.summary
                     iconRes = item.icon
                 }.let { Preference("") }
+
                 TYPE.STRING -> builder.pref(item.key) {}
                 TYPE.SELECT -> builder.singleChoice(item.key, item.items) {
                     initialSelection = item.items.last().key
@@ -356,13 +372,16 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                                 "dark" -> {
                                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                                 }
+
                                 "light" -> {
                                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                                 }
+
                                 "system_theme" -> {
                                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                                 }
                             }
+
                             "app_style" -> {
                                 if (item.getValue(activity, "") != it) {
                                     MainActivity.clearInstances()

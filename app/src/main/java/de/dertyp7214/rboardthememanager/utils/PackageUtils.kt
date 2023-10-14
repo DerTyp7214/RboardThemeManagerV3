@@ -37,7 +37,6 @@ object PackageUtils {
         }
     }
 
-    @Suppress("DEPRECATION")
     fun isPackageInstalled(packageName: String, packageManager: PackageManager): Boolean {
         return try {
             if (Build.VERSION.SDK_INT >= 33)
@@ -49,7 +48,16 @@ object PackageUtils {
         }
     }
 
-    @Suppress("DEPRECATION")
+    fun getPackageUid(packageName: String, packageManager: PackageManager): Int? {
+        return try {
+            if (Build.VERSION.SDK_INT >= 33)
+                packageManager.getPackageUid(packageName, PackageManager.PackageInfoFlags.of(0L))
+            else packageManager.getPackageUid(packageName, 0)
+        } catch (e: PackageManager.NameNotFoundException) {
+            null
+        }
+    }
+
     fun getAppVersionCode(packageName: String, packageManager: PackageManager): Long {
         return try {
             if (Build.VERSION.SDK_INT >= 33)
