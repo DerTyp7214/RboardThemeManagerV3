@@ -66,16 +66,21 @@ fun ThemeDataClass.toRboardTheme(context: Context): RboardTheme {
 
     val zip = ZipFile(tmpFilePath)
     val metadata = Gson().fromJson(
-        zip.getInputStream(zip.getEntry("metadata.json")).bufferedReader().readText(),
+        zip.getInputStream(zip.getEntry("metadata.json")).use { it.bufferedReader().readText() },
         ThemeMetadata::class.java
     )
     val cssFiles = metadata.styleSheets.map { Pair(it, zip.getInputStream(zip.getEntry(it))) }
-        .map { CssFile(it.first, it.second.bufferedReader().readText()) }.let { cssFiles ->
+        .map { CssFile(it.first, it.second.use { stream -> stream.bufferedReader().readText() }) }
+        .let { cssFiles ->
             val arrayList: ArrayList<CssFile> = ArrayList(cssFiles)
             if (metadata.flavors.isNotEmpty()) {
                 arrayList.addAll(metadata.flavors.flatMap { flavor ->
                     flavor.styleSheets.map { Pair(it, zip.getInputStream(zip.getEntry(it))) }
-                        .map { CssFile(it.first, it.second.bufferedReader().readText()) }
+                        .map {
+                            CssFile(
+                                it.first,
+                                it.second.use { stream -> stream.bufferedReader().readText() })
+                        }
                 })
             }
             arrayList
@@ -83,7 +88,11 @@ fun ThemeDataClass.toRboardTheme(context: Context): RboardTheme {
     val imageFiles = zip.entries().toList().filter { it.name.endsWith(".png") }
     val images =
         if (imageFiles.isNotEmpty()) imageFiles.map { Pair(it.name, zip.getInputStream(it)) }
-            .map { ImageFile(it.first, BitmapFactory.decodeStream(it.second)) } else listOf()
+            .map {
+                ImageFile(
+                    it.first,
+                    it.second.use { stream -> BitmapFactory.decodeStream(stream) })
+            } else listOf()
 
     zip.close()
 
