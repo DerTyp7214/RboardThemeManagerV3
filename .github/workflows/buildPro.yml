@@ -13,9 +13,9 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: nttld/setup-ndk@v1.3.1
+      - uses: nttld/setup-ndk@v1.4.1
         with:
-          ndk-version: r26
+          ndk-version: r26b
 
       - name: Get Commit Message
         id: commitMessage

@@ -24,8 +24,11 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import com.topjohnwu.superuser.Shell
 import com.topjohnwu.superuser.io.SuFile
+import de.dertyp7214.rboardcomponents.utils.doAsync
+import de.dertyp7214.rboardcomponents.utils.doInBackground
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
+import de.dertyp7214.rboardthememanager.Config.REPO_PREFIX
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.*
@@ -34,11 +37,9 @@ import de.dertyp7214.rboardthememanager.dialogs.NoRootDialog
 import de.dertyp7214.rboardthememanager.preferences.Flags
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 import de.dertyp7214.rboardthememanager.screens.ShareFlags
+import de.dertyp7214.rboardthememanager.utils.MagiskUtils.buildShell
 import de.dertyp7214.rboardthememanager.widgets.FlagsWidget
 import de.dertyp7214.rboardthememanager.widgets.SwitchKeyboardWidget
-import de.dertyp7214.rboardcomponents.utils.doAsync
-import de.dertyp7214.rboardcomponents.utils.doInBackground
-import de.dertyp7214.rboardthememanager.Config.REPO_PREFIX
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -132,6 +133,8 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 Shell.Builder.create().apply {
                     setFlags(Shell.FLAG_MOUNT_MASTER)
                 })
+
+            buildShell()
 
             val rootAccess = hasRoot(this)
 
