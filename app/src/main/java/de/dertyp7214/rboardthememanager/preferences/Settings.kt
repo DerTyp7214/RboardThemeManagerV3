@@ -46,7 +46,6 @@ import de.dertyp7214.rboardthememanager.core.writeFile
 import de.dertyp7214.rboardthememanager.screens.Logs
 import de.dertyp7214.rboardthememanager.screens.MainActivity
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
-import de.dertyp7214.rboardthememanager.screens.ThemeValues
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.getPackageUid
@@ -303,7 +302,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(),
             {
-                ThemeValues::class.java[this]
+                packageManager.getLaunchIntentForPackage("de.dertyp7214.monetextractor")
+                    ?.let(::startActivity)
+                    ?: openUrl(PLAY_URL("de.dertyp7214.monetextractor"))
             }
         ),
         IME_TEST(
