@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="ThemeOverlay.RboardThemeManager.Colors_green_brown" parent="">
+    <style name="Theme.RboardThemeManager.Colors_green_brown" parent="">
         <item name="colorPrimary">@color/green_brown_md_theme_dark_primary</item>
         <item name="colorOnPrimary">@color/green_brown_md_theme_dark_onPrimary</item>
         <item name="colorPrimaryContainer">@color/green_brown_md_theme_dark_primaryContainer</item>
@@ -27,7 +27,7 @@
         <item name="colorSurfaceInverse">@color/green_brown_md_theme_dark_inverseSurface</item>
         <item name="colorOnSurfaceInverse">@color/green_brown_md_theme_dark_inverseOnSurface</item>
         <item name="colorPrimaryInverse">@color/green_brown_md_theme_dark_inversePrimary</item>
-        <item name="colorSurfaceContainerHighest">@color/green_brown_md_theme_dark_SurfaceContainerHighest</item>
+        <item name="colorSurfaceContainerHighest">@color/green_brown_md_theme_dark_surfaceContainerHighest</item>
         <item name="colorSurfaceContainerHigh">@color/green_brown_md_theme_dark_surfaceContainerHigh</item>
         <item name="colorSurfaceContainer">@color/green_brown_md_theme_dark_surfaceContainer</item>
         <item name="colorSurfaceContainerLow">@color/green_brown_md_theme_dark_surfaceContainerLow</item>

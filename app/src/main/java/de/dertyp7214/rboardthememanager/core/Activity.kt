@@ -255,13 +255,6 @@ fun Activity.applyTheme(
     val style = preferences.getString("app_style", "default_style")
     setTheme(
         when (style) {
-            "amoled_style" -> when {
-                main -> R.style.Theme_RboardThemeManagerV3_Main_amoled
-                info -> R.style.Theme_RboardThemeManagerV3_Info_amoled
-                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_amoled
-                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_amoled
-                else -> R.style.Theme_RboardThemeManagerV3_amoled
-            }
             "apocyan_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_apocyan
                 info -> R.style.Theme_RboardThemeManagerV3_Info_apocyan
@@ -360,12 +353,12 @@ fun Activity.applyTheme(
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Yellow
                 else -> R.style.Theme_RboardThemeManagerV3_Yellow
             }
-            "yellow_purple_style" -> when {
-                main -> R.style.Theme_RboardThemeManagerV3_Main_yellow_purple
-                info -> R.style.Theme_RboardThemeManagerV3_Info_yellow_purple
-                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_yellow_purple
-                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_yellow_purple
-                else -> R.style.Theme_RboardThemeManagerV3_yellow_purple
+            "yellow_blue_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_yellow_blue
+                info -> R.style.Theme_RboardThemeManagerV3_Info_yellow_blue
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_yellow_blue
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_yellow_blue
+                else -> R.style.Theme_RboardThemeManagerV3_yellow_blue
             }
             else -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main

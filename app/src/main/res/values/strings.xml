@@ -287,7 +287,7 @@
     <string name="green_brown_style">Green Brown</string>
     <string name="lavender_tonic_style">Lavender Tonic</string>
     <string name="peach_pearl_style">Peach Pearl</string>
-    <string name="yellow_purple_style">Yellow Purple</string>
+    <string name="yellow_blue_style">Yellow Blue</string>
     <string name="samoan_sun_style">Samoan Sun</string>
     <string name="monochrome_style">Monochrome</string>
     <string name="apocyan_style">Apocyan</string>
@@ -302,6 +302,5 @@
     <string name="copied_to_clipboard">Copied to Clipboard</string>
     <string name="theme_values_long">Theme Values</string>
     <string name="value_prefix">Value Prefix</string>
-    <string name="amoled_style">Amoled</string>
     <string name="brown_blue_style">Brown Blue</string>
 </resources>
