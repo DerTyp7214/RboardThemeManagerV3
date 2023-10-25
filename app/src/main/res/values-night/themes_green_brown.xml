@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ThemeOverlay.RboardThemeManager.Colors_green_brown" parent="">
+        <item name="colorPrimary">@color/green_brown_md_theme_dark_primary</item>
+        <item name="colorOnPrimary">@color/green_brown_md_theme_dark_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/green_brown_md_theme_dark_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/green_brown_md_theme_dark_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/green_brown_md_theme_dark_secondary</item>
+        <item name="colorOnSecondary">@color/green_brown_md_theme_dark_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/green_brown_md_theme_dark_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/green_brown_md_theme_dark_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/green_brown_md_theme_dark_tertiary</item>
+        <item name="colorOnTertiary">@color/green_brown_md_theme_dark_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/green_brown_md_theme_dark_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/green_brown_md_theme_dark_onTertiaryContainer</item>
+        <item name="colorError">@color/green_brown_md_theme_dark_error</item>
+        <item name="colorOnError">@color/green_brown_md_theme_dark_onError</item>
+        <item name="colorErrorContainer">@color/green_brown_md_theme_dark_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/green_brown_md_theme_dark_onErrorContainer</item>
+        <item name="colorOutline">@color/green_brown_md_theme_dark_outline</item>
+        <item name="android:colorBackground">@color/green_brown_md_theme_dark_background</item>
+        <item name="colorOnBackground">@color/green_brown_md_theme_dark_onBackground</item>
+        <item name="colorSurface">@color/green_brown_md_theme_dark_surface</item>
+        <item name="colorOnSurface">@color/green_brown_md_theme_dark_onSurface</item>
+        <item name="colorSurfaceVariant">@color/green_brown_md_theme_dark_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/green_brown_md_theme_dark_onSurfaceVariant</item>
+        <item name="colorSurfaceInverse">@color/green_brown_md_theme_dark_inverseSurface</item>
+        <item name="colorOnSurfaceInverse">@color/green_brown_md_theme_dark_inverseOnSurface</item>
+        <item name="colorPrimaryInverse">@color/green_brown_md_theme_dark_inversePrimary</item>
+        <item name="colorSurfaceContainerHighest">@color/green_brown_md_theme_dark_SurfaceContainerHighest</item>
+        <item name="colorSurfaceContainerHigh">@color/green_brown_md_theme_dark_surfaceContainerHigh</item>
+        <item name="colorSurfaceContainer">@color/green_brown_md_theme_dark_surfaceContainer</item>
+        <item name="colorSurfaceContainerLow">@color/green_brown_md_theme_dark_surfaceContainerLow</item>
+        <item name="colorSurfaceContainerLowest">@color/green_brown_md_theme_dark_surfaceContainerLowest</item>
+    </style>
+</resources>

@@ -21,8 +21,8 @@ android {
         // Update the minSdk if old Android Versions are no longer supported on the Gboard side.
         minSdk = 23
         targetSdk = 34
-        versionCode = 390000
-        versionName = "3.9.0"
+        versionCode = 391001
+        versionName = "3.9.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

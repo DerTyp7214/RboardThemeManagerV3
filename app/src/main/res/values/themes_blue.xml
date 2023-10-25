@@ -27,6 +27,10 @@
         <item name="colorOnSurfaceInverse">@color/blue_md_theme_light_inverseOnSurface</item>
         <item name="colorPrimaryInverse">@color/blue_md_theme_light_inversePrimary</item>
         <item name="colorSurfaceContainerHighest">@color/blue_md_theme_light_SurfaceContainerHighest</item>
+        <item name="colorSurfaceContainerHigh">@color/blue_md_theme_light_SurfaceContainerHigh</item>
+        <item name="colorSurfaceContainer">@color/blue_md_theme_light_SurfaceContainer</item>
+        <item name="colorSurfaceContainerLow">@color/blue_md_theme_light_SurfaceContainerLow</item>
+        <item name="colorSurfaceContainerLowest">@color/blue_md_theme_light_SurfaceContainerLowest</item>
     </style>
 
     <!-- Base application theme. -->
