@@ -202,7 +202,6 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.SELECT,
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
                 listOf(
-                    SelectionItem("amoled_style", R.string.amoled_style, -1),
                     SelectionItem("apocyan_style", R.string.apocyan_style, -1),
                     SelectionItem("blue_style", R.string.blue_style, -1),
                     SelectionItem("brown_blue_style", R.string.brown_blue_style, -1),
@@ -217,7 +216,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                     SelectionItem("red_style", R.string.red_style, -1),
                     SelectionItem("samoan_sun_style", R.string.samoan_sun_style, -1),
                     SelectionItem("yellow_style", R.string.yellow_style, -1),
-                    SelectionItem("yellow_purple_style", R.string.yellow_purple_style, -1),
+                    SelectionItem("yellow_blue_style", R.string.yellow_blue_style, -1),
                     SelectionItem("default_style", R.string.default_style, -1)
                 )
             } else {
@@ -334,7 +333,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(),
             {
-                de.dertyp7214.rboardthememanager.screens.ThemeValues::class.java[this]
+                packageManager.getLaunchIntentForPackage("de.dertyp7214.monetextractor")
+                    ?.let(::startActivity)
+                    ?: openUrl(PLAY_URL("de.dertyp7214.monetextractor"))
             }
         ),
         IME_TEST(

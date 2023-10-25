@@ -299,8 +299,7 @@
     <string name="copied_to_clipboard">Vágólapra másolva</string>
     <string name="theme_values_long">Téma Értékek</string>
     <string name="value_prefix">Érték előtag</string>
-    <string name="yellow_purple_style">Sárga Lila</string>
+    <string name="style_yellow_blue">Sárga Kék</string>
     <string name="samoan_sun_style">Szamoai Nap</string>
-    <string name="amoled_style">Amoled</string>
     <string name="brown_blue_style">Barna Kék</string>
 </resources>
