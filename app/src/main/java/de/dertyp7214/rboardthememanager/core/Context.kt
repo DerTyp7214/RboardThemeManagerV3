@@ -3,6 +3,7 @@ package de.dertyp7214.rboardthememanager.core
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Notification
+import android.content.ClipData
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Handler
@@ -21,6 +22,12 @@ fun Context.getAttr(@AttrRes attr: Int): Int {
     val typedValue = TypedValue()
     theme.resolveAttribute(attr, typedValue, true)
     return typedValue.data
+}
+
+fun Context.setClipboard(text: String) {
+    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+    val clip = ClipData.newPlainText("Copied Text", text)
+    clipboard.setPrimaryClip(clip)
 }
 
 @SuppressLint("DiscouragedApi", "InternalInsetResource")

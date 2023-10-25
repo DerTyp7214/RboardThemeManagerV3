@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.REQUEST_DELETE_PACKAGES" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
@@ -20,6 +20,9 @@
         android:theme="@style/Theme.RboardThemeManagerV3"
         tools:ignore="AllowBackup"
         tools:targetApi="tiramisu">
+        <activity
+            android:name=".screens.ThemeValues"
+            android:exported="false" />
         <activity
             android:name=".screens.Logs"
             android:exported="false">
@@ -143,9 +146,9 @@
 
                 <data android:scheme="rboard" />
                 <data android:scheme="http" />
-                <data android:scheme="https"/>
-                <data android:host="repos.rboard.dertyp7214.de"/>
-                <data android:pathPrefix="/"/>
+                <data android:scheme="https" />
+                <data android:host="repos.rboard.dertyp7214.de" />
+                <data android:pathPrefix="/" />
             </intent-filter>
         </activity>
         <activity
@@ -169,7 +172,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service
             android:name=".services.AppThemeService"
             android:enabled="true"
@@ -180,7 +182,6 @@
                 <action android:name="de.dertyp7214.rboard.IAppTheme" />
             </intent-filter>
         </service>
-
         <service
             android:name=".services.RboardService"
             android:enabled="true"

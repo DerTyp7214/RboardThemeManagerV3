@@ -17,7 +17,13 @@ import com.topjohnwu.superuser.io.SuFile
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
-import de.Maxr1998.modernpreferences.helpers.*
+import de.Maxr1998.modernpreferences.helpers.categoryHeader
+import de.Maxr1998.modernpreferences.helpers.onCheckedChange
+import de.Maxr1998.modernpreferences.helpers.onClick
+import de.Maxr1998.modernpreferences.helpers.onSelectionChange
+import de.Maxr1998.modernpreferences.helpers.pref
+import de.Maxr1998.modernpreferences.helpers.singleChoice
+import de.Maxr1998.modernpreferences.helpers.switch
 import de.Maxr1998.modernpreferences.preferences.choice.SelectionItem
 import de.dertyp7214.rboardcomponents.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.Application
@@ -30,10 +36,17 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.XMLEntry
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.components.XMLType
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.core.SafeJSON
+import de.dertyp7214.rboardthememanager.core.get
+import de.dertyp7214.rboardthememanager.core.openDialog
+import de.dertyp7214.rboardthememanager.core.openUrl
+import de.dertyp7214.rboardthememanager.core.runAsCommand
+import de.dertyp7214.rboardthememanager.core.set
+import de.dertyp7214.rboardthememanager.core.writeFile
 import de.dertyp7214.rboardthememanager.screens.Logs
 import de.dertyp7214.rboardthememanager.screens.MainActivity
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
+import de.dertyp7214.rboardthememanager.screens.ThemeValues
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.getPackageUid
@@ -280,6 +293,18 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                     ?: openUrl("https://github.com/DerTyp7214/DeepLinkRboard")
             },
             BuildConfig.DEBUG
+        ),
+        THEME_VALUES(
+            "theme_values",
+            R.string.theme_values,
+            R.string.theme_values_long,
+            R.drawable.ic_theme_settings,
+            "",
+            TYPE.STRING,
+            listOf(),
+            {
+                ThemeValues::class.java[this]
+            }
         ),
         IME_TEST(
             "ime_test",
