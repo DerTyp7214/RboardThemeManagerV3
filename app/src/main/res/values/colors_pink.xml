@@ -22,7 +22,11 @@
     <color name="pink_md_theme_light_surface">#FFFBFF</color>
     <color name="pink_md_theme_light_onSurface">#201A1B</color>
     <color name="pink_md_theme_light_surfaceVariant">#F2DDE2</color>
+    <color name="pink_md_theme_light_SurfaceContainer">#fbeff1</color>
+    <color name="pink_md_theme_light_SurfaceContainerLow">#fcf2f4</color>
+    <color name="pink_md_theme_light_SurfaceContainerLowest">#FFFFFF</color>
     <color name="pink_md_theme_light_SurfaceContainerHighest">#ebe0e1</color>
+    <color name="pink_md_theme_light_SurfaceContainerHigh">#f5e5e9</color>
     <color name="pink_md_theme_light_onSurfaceVariant">#514347</color>
     <color name="pink_md_theme_light_outline">#837377</color>
     <color name="pink_md_theme_light_inverseOnSurface">#FAEEEF</color>
@@ -53,7 +57,11 @@
     <color name="pink_md_theme_dark_surface">#201A1B</color>
     <color name="pink_md_theme_dark_onSurface">#EBE0E1</color>
     <color name="pink_md_theme_dark_surfaceVariant">#514347</color>
+    <color name="pink_md_theme_dark_SurfaceContainer">#281f23</color>
+    <color name="pink_md_theme_dark_SurfaceContainerLow">#221c1d</color>
+    <color name="pink_md_theme_dark_SurfaceContainerLowest">#0c080a</color>
     <color name="pink_md_theme_dark_SurfaceContainerHighest">#3a3335</color>
+    <color name="pink_md_theme_dark_SurfaceContainerHigh">#30272a</color>
     <color name="pink_md_theme_dark_onSurfaceVariant">#D5C2C6</color>
     <color name="pink_md_theme_dark_outline">#9E8C90</color>
     <color name="pink_md_theme_dark_inverseOnSurface">#201A1B</color>

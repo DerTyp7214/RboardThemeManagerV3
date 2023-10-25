@@ -202,13 +202,22 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.SELECT,
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
                 listOf(
+                    SelectionItem("amoled_style", R.string.amoled_style, -1),
+                    SelectionItem("apocyan_style", R.string.apocyan_style, -1),
                     SelectionItem("blue_style", R.string.blue_style, -1),
+                    SelectionItem("brown_blue_style", R.string.brown_blue_style, -1),
                     SelectionItem("green_style", R.string.green_style, -1),
-                    SelectionItem("red_style", R.string.red_style, -1),
-                    SelectionItem("yellow_style", R.string.yellow_style, -1),
+                    SelectionItem("green_brown_style", R.string.green_brown_style, -1),
+                    SelectionItem("lavender_tonic_style", R.string.lavender_tonic_style,-1),
+                    SelectionItem("lime_style", R.string.lime_style,-1),
+                    SelectionItem("monochrome_style", R.string.monochrome_style, -1),
                     SelectionItem("orange_style", R.string.orange_style, -1),
                     SelectionItem("pink_style", R.string.pink_style, -1),
-                    SelectionItem("lime_style", R.string.lime_style,-1),
+                    SelectionItem("peach_pearl_style", R.string.peach_pearl_style, -1),
+                    SelectionItem("red_style", R.string.red_style, -1),
+                    SelectionItem("samoan_sun_style", R.string.samoan_sun_style, -1),
+                    SelectionItem("yellow_style", R.string.yellow_style, -1),
+                    SelectionItem("yellow_purple_style", R.string.yellow_purple_style, -1),
                     SelectionItem("default_style", R.string.default_style, -1)
                 )
             } else {
@@ -315,6 +324,18 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                     ?: openUrl("https://github.com/DerTyp7214/DeepLinkRboard")
             },
             BuildConfig.DEBUG
+        ),
+        THEME_VALUES(
+            "theme_values",
+            R.string.theme_values,
+            R.string.theme_values_long,
+            R.drawable.ic_theme_settings,
+            "",
+            TYPE.STRING,
+            listOf(),
+            {
+                de.dertyp7214.rboardthememanager.screens.ThemeValues::class.java[this]
+            }
         ),
         IME_TEST(
             "ime_test",

@@ -3,6 +3,7 @@ package de.dertyp7214.rboardthememanager.core
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Notification
+import android.content.ClipData
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
@@ -33,6 +34,12 @@ fun Context.getNavigationBarHeight(): Int {
     return if (resourceId > 0) {
         resources.getDimensionPixelSize(resourceId)
     } else 0
+}
+
+fun Context.setClipboard(text: String) {
+    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
+    val clip = ClipData.newPlainText("Copied Text", text)
+    clipboard.setPrimaryClip(clip)
 }
 
 fun Context.notify(

@@ -1,0 +1,35 @@
+<resources>
+    <style name="Theme.RboardThemeManager.Colors_brown_blue" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/brown_blue_md_theme_dark_primary</item>
+        <item name="colorOnPrimary">@color/brown_blue_md_theme_dark_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/brown_blue_md_theme_dark_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/brown_blue_md_theme_dark_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/brown_blue_md_theme_dark_secondary</item>
+        <item name="colorOnSecondary">@color/brown_blue_md_theme_dark_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/brown_blue_md_theme_dark_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/brown_blue_md_theme_dark_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/brown_blue_md_theme_dark_tertiary</item>
+        <item name="colorOnTertiary">@color/brown_blue_md_theme_dark_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/brown_blue_md_theme_dark_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/brown_blue_md_theme_dark_onTertiaryContainer</item>
+        <item name="colorError">@color/brown_blue_md_theme_dark_error</item>
+        <item name="colorOnError">@color/brown_blue_md_theme_dark_onError</item>
+        <item name="colorErrorContainer">@color/brown_blue_md_theme_dark_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/brown_blue_md_theme_dark_onErrorContainer</item>
+        <item name="colorOutline">@color/brown_blue_md_theme_dark_outline</item>
+        <item name="android:colorBackground">@color/brown_blue_md_theme_dark_background</item>
+        <item name="colorOnBackground">@color/brown_blue_md_theme_dark_onBackground</item>
+        <item name="colorSurface">@color/brown_blue_md_theme_dark_surface</item>
+        <item name="colorOnSurface">@color/brown_blue_md_theme_dark_onSurface</item>
+        <item name="colorSurfaceVariant">@color/brown_blue_md_theme_dark_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/brown_blue_md_theme_dark_onSurfaceVariant</item>
+        <item name="colorSurfaceInverse">@color/brown_blue_md_theme_dark_inverseSurface</item>
+        <item name="colorOnSurfaceInverse">@color/brown_blue_md_theme_dark_inverseOnSurface</item>
+        <item name="colorPrimaryInverse">@color/brown_blue_md_theme_dark_inversePrimary</item>
+        <item name="colorSurfaceContainerHighest">@color/brown_blue_md_theme_dark_SurfaceContainerHighest</item>
+        <item name="colorSurfaceContainerHigh">@color/brown_blue_md_theme_dark_SurfaceContainerHigh</item>
+        <item name="colorSurfaceContainer">@color/brown_blue_md_theme_dark_SurfaceContainer</item>
+        <item name="colorSurfaceContainerLow">@color/brown_blue_md_theme_dark_SurfaceContainerLow</item>
+        <item name="colorSurfaceContainerLowest">@color/brown_blue_md_theme_dark_SurfaceContainerLowest</item>
+    </style>
+</resources>

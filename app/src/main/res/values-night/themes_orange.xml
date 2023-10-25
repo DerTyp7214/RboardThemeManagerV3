@@ -27,5 +27,9 @@
         <item name="colorOnSurfaceInverse">@color/orange_md_theme_dark_inverseOnSurface</item>
         <item name="colorPrimaryInverse">@color/orange_md_theme_dark_inversePrimary</item>
         <item name="colorSurfaceContainerHighest">@color/lime_md_theme_dark_SurfaceContainerHighest</item>
+        <item name="colorSurfaceContainerHigh">@color/orange_md_theme_dark_SurfaceContainerHigh</item>
+        <item name="colorSurfaceContainer">@color/orange_md_theme_dark_SurfaceContainer</item>
+        <item name="colorSurfaceContainerLow">@color/orange_md_theme_dark_SurfaceContainerLow</item>
+        <item name="colorSurfaceContainerLowest">@color/orange_md_theme_dark_SurfaceContainerLowest</item>
     </style>
 </resources>
