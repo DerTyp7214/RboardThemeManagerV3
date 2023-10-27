@@ -303,4 +303,7 @@
     <string name="theme_values_long">Theme Values</string>
     <string name="value_prefix">Value Prefix</string>
     <string name="brown_blue_style">Brown Blue</string>
+    <string name="amoled_style">Amoled</string>
+    <string name="night_rider_style">Night Rider</string>
+    <string name="mary_blue_style">Mary Blue</string>
 </resources>

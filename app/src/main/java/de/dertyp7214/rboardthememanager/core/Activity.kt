@@ -255,6 +255,13 @@ fun Activity.applyTheme(
     val style = preferences.getString("app_style", "default_style")
     setTheme(
         when (style) {
+            "amoled_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_amoled
+                info -> R.style.Theme_RboardThemeManagerV3_Info_amoled
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_amoled
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_amoled
+                else -> R.style.Theme_RboardThemeManagerV3_amoled
+            }
             "apocyan_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_apocyan
                 info -> R.style.Theme_RboardThemeManagerV3_Info_apocyan
@@ -304,12 +311,26 @@ fun Activity.applyTheme(
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Lime
                 else -> R.style.Theme_RboardThemeManagerV3_Lime
             }
+            "mary_blue_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_mary_blue
+                info -> R.style.Theme_RboardThemeManagerV3_Info_mary_blue
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_mary_blue
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_mary_blue
+                else -> R.style.Theme_RboardThemeManagerV3_mary_blue
+            }
             "monochrome_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_monochrome
                 info -> R.style.Theme_RboardThemeManagerV3_Info_monochrome
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_monochrome
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_monochrome
                 else -> R.style.Theme_RboardThemeManagerV3_monochrome
+            }
+            "night_rider_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_night_rider
+                info -> R.style.Theme_RboardThemeManagerV3_Info_night_rider
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_night_rider
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_night_rider
+                else -> R.style.Theme_RboardThemeManagerV3_night_rider
             }
             "orange_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Orange
