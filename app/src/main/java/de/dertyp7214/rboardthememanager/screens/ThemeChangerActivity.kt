@@ -2,7 +2,6 @@ package de.dertyp7214.rboardthememanager.screens
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
@@ -30,12 +29,6 @@ class ThemeChangerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
-        val callingActivityInstance =
-            callingActivity?.className?.let {
-                Class.forName(it).getDeclaredField("this$0").get(this)
-            }
-        Log.d("ThemeChangerActivity", "onCreate: $callingActivityInstance")
 
         val toolbar = binding.toolbar
         val applyButton = binding.applyButton
@@ -83,6 +76,7 @@ class ThemeChangerActivity : AppCompatActivity() {
 
                 MainActivity.clearInstances()
                 MainActivity::class.java[context]
+                PreferencesActivity.clearInstances()
                 PreferencesActivity::class.java[context] = {
                     putExtra("type", "settings")
                 }
