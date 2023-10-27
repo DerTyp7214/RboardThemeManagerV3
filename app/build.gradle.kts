@@ -25,7 +25,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 34
-        versionCode = 391003
+        versionCode = 391004
         versionName = "3.9.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -114,6 +114,7 @@ dependencies {
     implementation(libs.prDownloader)
     implementation(libs.balloon)
     implementation(libs.appcompat)
+    implementation(libs.dots.indicator)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

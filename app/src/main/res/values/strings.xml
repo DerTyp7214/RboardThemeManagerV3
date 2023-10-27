@@ -290,4 +290,5 @@
     <string name="copied_to_clipboard">Copied to Clipboard</string>
     <string name="theme_values_long">Theme Values</string>
     <string name="value_prefix">Value Prefix</string>
+    <string name="theme_changer">Theme Changer</string>
 </resources>

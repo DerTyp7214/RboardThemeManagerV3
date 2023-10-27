@@ -38,9 +38,10 @@ protobufDynamic = "1.0.1"
 simple-item-decoration = "1.0.0"
 balloon = "1.6.1"
 kspPlugin = "1.9.10-1.0.13"
+dotsIndicator = "5.0"
 
 googleServices = "4.4.0"
-gradle = "8.3.0-alpha10"
+gradle = "8.3.0-alpha11"
 uiTooling = "1.5.4"
 kotlin = "1.9.10"
 
@@ -78,6 +79,7 @@ lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-view
 simple-item-decoration = { group = "com.bignerdranch.android", name = "simple-item-decoration", version.ref = "simple-item-decoration" }
 balloon = { group = "com.github.skydoves", name = "balloon", version.ref = "balloon" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+dots-indicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "dotsIndicator" }
 
 junit = { module = "junit:junit", version.ref = "junit-junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-junit" }

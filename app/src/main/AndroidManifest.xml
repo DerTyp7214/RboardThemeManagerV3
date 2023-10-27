@@ -21,6 +21,9 @@
         tools:ignore="AllowBackup"
         tools:targetApi="tiramisu">
         <activity
+            android:name=".screens.ThemeChangerActivity"
+            android:exported="false" />
+        <activity
             android:name=".screens.Logs"
             android:exported="false">
             <meta-data
