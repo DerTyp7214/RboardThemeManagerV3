@@ -202,6 +202,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.SELECT,
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
                 listOf(
+                    SelectionItem("amoled_style", R.string.amoled_style, -1),
                     SelectionItem("apocyan_style", R.string.apocyan_style, -1),
                     SelectionItem("blue_style", R.string.blue_style, -1),
                     SelectionItem("brown_blue_style", R.string.brown_blue_style, -1),
@@ -209,7 +210,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                     SelectionItem("green_brown_style", R.string.green_brown_style, -1),
                     SelectionItem("lavender_tonic_style", R.string.lavender_tonic_style,-1),
                     SelectionItem("lime_style", R.string.lime_style,-1),
+                    SelectionItem("mary_blue_style", R.string.mary_blue_style, -1),
                     SelectionItem("monochrome_style", R.string.monochrome_style, -1),
+                    SelectionItem("night_rider_style", R.string.night_rider_style, -1),
                     SelectionItem("orange_style", R.string.orange_style, -1),
                     SelectionItem("pink_style", R.string.pink_style, -1),
                     SelectionItem("peach_pearl_style", R.string.peach_pearl_style, -1),
