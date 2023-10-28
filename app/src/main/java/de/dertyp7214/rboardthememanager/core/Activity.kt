@@ -325,6 +325,13 @@ fun Activity.applyTheme(
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_monochrome
                 else -> R.style.Theme_RboardThemeManagerV3_monochrome
             }
+            "mud_pink_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_mud_pink
+                info -> R.style.Theme_RboardThemeManagerV3_Info_mud_pink
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_mud_pink
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_mud_pink
+                else -> R.style.Theme_RboardThemeManagerV3_mud_pink
+            }
             "night_rider_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_night_rider
                 info -> R.style.Theme_RboardThemeManagerV3_Info_night_rider
@@ -366,6 +373,13 @@ fun Activity.applyTheme(
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_samoan_sun
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_samoan_sun
                 else -> R.style.Theme_RboardThemeManagerV3_samoan_sun
+            }
+            "vert_pierre_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_vert_pierre
+                info -> R.style.Theme_RboardThemeManagerV3_Info_vert_pierre
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_vert_pierre
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_vert_pierre
+                else -> R.style.Theme_RboardThemeManagerV3_vert_pierre
             }
             "yellow_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Yellow
