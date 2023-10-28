@@ -100,7 +100,7 @@ dependencies {
     implementation(libs.nio)
     implementation(libs.insetter)
     implementation(libs.core.ktx)
-
+    implementation(libs.dots.indicator)
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core)
     implementation(libs.material)

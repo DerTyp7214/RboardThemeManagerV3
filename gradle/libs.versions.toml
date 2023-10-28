@@ -10,6 +10,7 @@ constraintlayout = "2.2.0-alpha13"
 core = "1.13.0-alpha01"
 core-ktx = "1.13.0-alpha01"
 desugar_jdk_libs_nio = "2.0.3"
+dotsIndicator = "5.0"
 espresso-core = "3.6.0-alpha01"
 firebase-bom = "32.4.0"
 firebase-analytics = "21.4.0"
@@ -82,6 +83,7 @@ prdownloader = { module = "de.dertyp7214:PRDownloader", version.ref = "prdownloa
 preferencesplus = { module = "com.github.DerTyp7214:PreferencesPlus", version.ref = "preferencesplus" }
 protobuf-dynamic = { module = "com.github.os72:protobuf-dynamic", version.ref = "protobuf-dynamic" }
 simple-item-decoration = { module = "com.bignerdranch.android:simple-item-decoration", version.ref = "simple-item-decoration" }
+dots-indicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "dotsIndicator" }
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }

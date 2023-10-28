@@ -49,13 +49,42 @@ import de.dertyp7214.rboardthememanager.Config.PATCHER_PACKAGE
 import de.dertyp7214.rboardthememanager.Config.PLAY_URL
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.MenuAdapter
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.core.addCallback
+import de.dertyp7214.rboardthememanager.core.applyTheme
+import de.dertyp7214.rboardthememanager.core.content
+import de.dertyp7214.rboardthememanager.core.delayed
+import de.dertyp7214.rboardthememanager.core.delete
+import de.dertyp7214.rboardthememanager.core.dpToPx
+import de.dertyp7214.rboardthememanager.core.enableBlur
+import de.dertyp7214.rboardthememanager.core.get
+import de.dertyp7214.rboardthememanager.core.getAttr
+import de.dertyp7214.rboardthememanager.core.getNavigationBarHeight
+import de.dertyp7214.rboardthememanager.core.isReachable
+import de.dertyp7214.rboardthememanager.core.moveToCache
+import de.dertyp7214.rboardthememanager.core.notify
+import de.dertyp7214.rboardthememanager.core.openDialog
+import de.dertyp7214.rboardthememanager.core.openShareThemeDialog
+import de.dertyp7214.rboardthememanager.core.openUrl
+import de.dertyp7214.rboardthememanager.core.preferences
+import de.dertyp7214.rboardthememanager.core.runAsCommand
+import de.dertyp7214.rboardthememanager.core.set
+import de.dertyp7214.rboardthememanager.core.setHeight
+import de.dertyp7214.rboardthememanager.core.setMargin
+import de.dertyp7214.rboardthememanager.core.share
+import de.dertyp7214.rboardthememanager.core.showMaterial
+import de.dertyp7214.rboardthememanager.core.toHumanReadableBytes
 import de.dertyp7214.rboardthememanager.data.MenuItem
 import de.dertyp7214.rboardthememanager.databinding.ActivityMainBinding
 import de.dertyp7214.rboardthememanager.dialogs.UsageDialog
 import de.dertyp7214.rboardthememanager.preferences.Flags
-import de.dertyp7214.rboardthememanager.utils.*
+import de.dertyp7214.rboardthememanager.utils.AppStartUp
+import de.dertyp7214.rboardthememanager.utils.MagiskUtils
+import de.dertyp7214.rboardthememanager.utils.PackageUtils
+import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils.getSystemAutoTheme
+import de.dertyp7214.rboardthememanager.utils.UpdateHelper
+import de.dertyp7214.rboardthememanager.utils.ZipHelper
+import de.dertyp7214.rboardthememanager.utils.applyTheme
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 import dev.chrisbanes.insetter.applyInsetter
 import java.io.File
@@ -798,6 +827,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         callbacks.forEach { it.remove() }
+        instances.remove(this)
         super.onDestroy()
     }
 }

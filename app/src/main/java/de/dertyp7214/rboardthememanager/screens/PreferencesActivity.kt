@@ -12,11 +12,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.Maxr1998.modernpreferences.PreferencesAdapter
+import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.core.addCallback
 import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.databinding.ActivityPreferencesBinding
 import de.dertyp7214.rboardthememanager.preferences.Preferences
-import de.dertyp7214.rboardcomponents.utils.doAsync
 import dev.chrisbanes.insetter.applyInsetter
 
 class PreferencesActivity : AppCompatActivity() {
@@ -26,6 +26,19 @@ class PreferencesActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
 
     private val callbacks: ArrayList<OnBackPressedCallback> = arrayListOf()
+    @Suppress("MemberVisibilityCanBePrivate")
+    companion object {
+        private val instances = arrayListOf<PreferencesActivity>()
+
+        fun clearInstances() {
+            while (instances.isNotEmpty()) popInstance()
+        }
+
+        fun popInstance() {
+            instances.removeLast().finish()
+        }
+    }
+
 
     @SuppressLint("NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.R)
@@ -39,7 +52,7 @@ class PreferencesActivity : AppCompatActivity() {
             window.setDecorFitsSystemWindows(false)
         }
         setContentView(binding.root)
-
+        instances.add(this)
         val preferencesToolbar = binding.preferencesToolbar
         val loadingPreferences = binding.loadingPreferences
         val extraContent = binding.extraContent
@@ -110,6 +123,7 @@ class PreferencesActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         callbacks.forEach { it.remove() }
+        instances.remove(this)
         super.onDestroy()
     }
 }
