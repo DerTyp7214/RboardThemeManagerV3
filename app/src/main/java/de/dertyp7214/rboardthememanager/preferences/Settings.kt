@@ -399,11 +399,17 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                     TYPE.STRING -> builder.pref(item.key) {
                         when (item.key) {
                             "app_style" -> {
-                                summaryRes =
+                                summaryRes = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
+                                    de.dertyp7214.rboardthememanager.screens.ThemeChangerActivity.Companion.APP_THEMES.toList()
+                                        .first {
+                                            it.second == ThemeUtils.getStyleName(activity)
+                                        }.first
+                                } else {
                                     ThemeUtils.APP_THEMES.toList()
                                         .first {
                                             it.second == ThemeUtils.getStyleName(activity)
                                         }.first
+                                }
                             }
                         }
                     }

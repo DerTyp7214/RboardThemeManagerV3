@@ -25,7 +25,6 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
-import de.dertyp7214.rboardcomponents.utils.THEMES
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.XMLEntry
 import de.dertyp7214.rboardthememanager.components.XMLType
@@ -253,129 +252,129 @@ fun Activity.applyTheme(
     shareFlags: Boolean = false,
     installPack: Boolean = false
 ) {
-    val style = preferences.getString("app_style", THEMES.DEFAULT.name)
+    val style = preferences.getString("app_style", "default_style")
     setTheme(
         when (style) {
-            THEMES.AMOLED.name -> when {
+            "amoled_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_amoled
                 info -> R.style.Theme_RboardThemeManagerV3_Info_amoled
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_amoled
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_amoled
                 else -> R.style.Theme_RboardThemeManagerV3_amoled
             }
-            THEMES.APOCYAN.name  -> when {
+            "apocyan_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_apocyan
                 info -> R.style.Theme_RboardThemeManagerV3_Info_apocyan
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_apocyan
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_apocyan
                 else -> R.style.Theme_RboardThemeManagerV3_apocyan
             }
-            THEMES.BLUE.name -> when {
+            "blue_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Blue
                 info -> R.style.Theme_RboardThemeManagerV3_Info_Blue
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Blue
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Blue
                 else -> R.style.Theme_RboardThemeManagerV3_Blue
             }
-            THEMES.BROWN_BLUE.name -> when {
+            "brown_blue_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_brown_blue
                 info -> R.style.Theme_RboardThemeManagerV3_Info_brown_blue
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_brown_blue
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_brown_blue
                 else -> R.style.Theme_RboardThemeManagerV3_brown_blue
             }
-            THEMES.GREEN.name -> when {
+            "green_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Green
                 info -> R.style.Theme_RboardThemeManagerV3_Info_Green
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Green
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Green
                 else -> R.style.Theme_RboardThemeManagerV3_Green
             }
-            THEMES.GREEN_BROWN.name -> when {
+            "green_brown_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_green_brown
                 info -> R.style.Theme_RboardThemeManagerV3_Info_green_brown
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_green_brown
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_green_brown
                 else -> R.style.Theme_RboardThemeManagerV3_green_brown
             }
-            THEMES.LAVENDER_TONIC.name -> when {
+            "lavender_tonic_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_lavender_tonic
                 info -> R.style.Theme_RboardThemeManagerV3_Info_lavender_tonic
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_lavender_tonic
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_lavender_tonic
                 else -> R.style.Theme_RboardThemeManagerV3_lavender_tonic
             }
-            THEMES.LIME.name -> when {
+            "lime_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Lime
                 info -> R.style.Theme_RboardThemeManagerV3_Info_Lime
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Lime
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Lime
                 else -> R.style.Theme_RboardThemeManagerV3_Lime
             }
-            THEMES.MARY_BLUE.name -> when {
+            "mary_blue_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_mary_blue
                 info -> R.style.Theme_RboardThemeManagerV3_Info_mary_blue
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_mary_blue
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_mary_blue
                 else -> R.style.Theme_RboardThemeManagerV3_mary_blue
             }
-            THEMES.MONOCHROME.name -> when {
+            "monochrome_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_monochrome
                 info -> R.style.Theme_RboardThemeManagerV3_Info_monochrome
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_monochrome
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_monochrome
                 else -> R.style.Theme_RboardThemeManagerV3_monochrome
             }
-            THEMES.NIGHT_RIDER.name -> when {
+            "night_rider_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_night_rider
                 info -> R.style.Theme_RboardThemeManagerV3_Info_night_rider
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_night_rider
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_night_rider
                 else -> R.style.Theme_RboardThemeManagerV3_night_rider
             }
-            THEMES.ORANGE.name -> when {
+            "orange_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Orange
                 info -> R.style.Theme_RboardThemeManagerV3_Info_Orange
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Orange
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Orange
                 else -> R.style.Theme_RboardThemeManagerV3_Orange
             }
-            THEMES.PINK.name -> when {
+            "pink_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Pink
                 info -> R.style.Theme_RboardThemeManagerV3_Info_Pink
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Pink
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Pink
                 else -> R.style.Theme_RboardThemeManagerV3_Pink
             }
-            THEMES.PEACH_PEARL.name -> when {
+            "peach_pearl_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_peach_pearl
                 info -> R.style.Theme_RboardThemeManagerV3_Info_peach_pearl
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_peach_pearl
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_peach_pearl
                 else -> R.style.Theme_RboardThemeManagerV3_peach_pearl
             }
-            THEMES.RED.name -> when {
+            "red_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Red
                 info -> R.style.Theme_RboardThemeManagerV3_Info_Red
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Red
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Red
                 else -> R.style.Theme_RboardThemeManagerV3_Red
             }
-            THEMES.SAMOAN_SUN.name -> when {
+            "samoan_sun_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_samoan_sun
                 info -> R.style.Theme_RboardThemeManagerV3_Info_samoan_sun
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_samoan_sun
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_samoan_sun
                 else -> R.style.Theme_RboardThemeManagerV3_samoan_sun
             }
-            THEMES.YELLOW.name -> when {
+            "yellow_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_Yellow
                 info -> R.style.Theme_RboardThemeManagerV3_Info_Yellow
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_Yellow
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Yellow
                 else -> R.style.Theme_RboardThemeManagerV3_Yellow
             }
-            THEMES.YELLOW_BLUE.name -> when {
+            "yellow_blue_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_yellow_blue
                 info -> R.style.Theme_RboardThemeManagerV3_Info_yellow_blue
                 shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_yellow_blue
