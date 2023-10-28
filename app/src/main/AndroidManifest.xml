@@ -27,6 +27,9 @@
         tools:ignore="AllowBackup"
         tools:targetApi="tiramisu">
         <activity
+            android:name=".screens.ThemeChangerActivity"
+            android:exported="false" />
+        <activity
             android:name=".screens.Logs"
             android:screenOrientation="portrait"
             android:exported="false">

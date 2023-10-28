@@ -27,7 +27,6 @@ import de.Maxr1998.modernpreferences.helpers.singleChoice
 import de.Maxr1998.modernpreferences.helpers.switch
 import de.Maxr1998.modernpreferences.preferences.choice.SelectionItem
 import de.dertyp7214.rboardcomponents.utils.ThemeUtils
-import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.FLAG_PATH
@@ -45,7 +44,6 @@ import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.core.set
 import de.dertyp7214.rboardthememanager.core.writeFile
 import de.dertyp7214.rboardthememanager.screens.Logs
-import de.dertyp7214.rboardthememanager.screens.MainActivity
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
@@ -141,11 +139,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(),
             {
-                Application.context?.let {
-                    PreferencesActivity::class.java[it] = {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                        putExtra("type", "repos")
-                    }
+                PreferencesActivity::class.java[this] = {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    putExtra("type", "repos")
                 }
             }
         ),
@@ -165,11 +161,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             "",
             TYPE.STRING,
             listOf(), {
-                Application.context?.let {
-                    PreferencesActivity::class.java[it] = {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                        putExtra("type", "info")
-                    }
+                PreferencesActivity::class.java[this] = {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    putExtra("type", "info")
                 }
             }
         ),
@@ -199,33 +193,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             -1,
             R.drawable.ic_theme_settings,
             "default",
-            TYPE.SELECT,
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-                listOf(
-                    SelectionItem("amoled_style", R.string.amoled_style, -1),
-                    SelectionItem("apocyan_style", R.string.apocyan_style, -1),
-                    SelectionItem("blue_style", R.string.blue_style, -1),
-                    SelectionItem("brown_blue_style", R.string.brown_blue_style, -1),
-                    SelectionItem("green_style", R.string.green_style, -1),
-                    SelectionItem("green_brown_style", R.string.green_brown_style, -1),
-                    SelectionItem("lavender_tonic_style", R.string.lavender_tonic_style,-1),
-                    SelectionItem("lime_style", R.string.lime_style,-1),
-                    SelectionItem("mary_blue_style", R.string.mary_blue_style, -1),
-                    SelectionItem("monochrome_style", R.string.monochrome_style, -1),
-                    SelectionItem("night_rider_style", R.string.night_rider_style, -1),
-                    SelectionItem("orange_style", R.string.orange_style, -1),
-                    SelectionItem("pink_style", R.string.pink_style, -1),
-                    SelectionItem("peach_pearl_style", R.string.peach_pearl_style, -1),
-                    SelectionItem("red_style", R.string.red_style, -1),
-                    SelectionItem("samoan_sun_style", R.string.samoan_sun_style, -1),
-                    SelectionItem("yellow_style", R.string.yellow_style, -1),
-                    SelectionItem("yellow_blue_style", R.string.yellow_blue_style, -1),
-                    SelectionItem("default_style", R.string.default_style, -1)
-                )
-            } else {
-                ThemeUtils.APP_THEMES.map {
-                    SelectionItem(it.value, it.key, -1)
-                }
+            TYPE.STRING,
+            listOf(), {
+                de.dertyp7214.rboardthememanager.screens.ThemeChangerActivity::class.java[this]
             }
         ),
         USE_BLUR(
@@ -426,7 +396,23 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                         summaryRes = item.summary
                         iconRes = item.icon
                     }.let { Preference("") }
-                    TYPE.STRING -> builder.pref(item.key) {}
+                    TYPE.STRING -> builder.pref(item.key) {
+                        when (item.key) {
+                            "app_style" -> {
+                                summaryRes = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
+                                    de.dertyp7214.rboardthememanager.screens.ThemeChangerActivity.Companion.APP_THEMES.toList()
+                                        .first {
+                                            it.second == ThemeUtils.getStyleName(activity)
+                                        }.first
+                                } else {
+                                    ThemeUtils.APP_THEMES.toList()
+                                        .first {
+                                            it.second == ThemeUtils.getStyleName(activity)
+                                        }.first
+                                }
+                            }
+                        }
+                    }
                     TYPE.SELECT -> builder.singleChoice(item.key, item.items) {
                         initialSelection = item.items.last().key
                         onSelectionChange {
@@ -442,24 +428,14 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                                     }
                                 }
-                                "app_style" -> {
-                                    if (item.getValue(activity, "") != it) {
-                                        MainActivity.clearInstances()
-                                        MainActivity::class.java[activity]
-                                        PreferencesActivity::class.java[activity] = {
-                                            putExtra("type", "settings")
-                                        }
-                                        activity.finish()
-                                    }
-                                }
                             }
                             true
                         }
                     }
                 }
                 pref.apply {
-                    titleRes = item.title
-                    summaryRes = item.summary
+                    if (titleRes == -1) titleRes = item.title
+                    if (summaryRes == -1) summaryRes = item.summary
                     iconRes = item.icon
                     onClick { item.onClick(activity, false); false }
                 }

@@ -16,7 +16,7 @@ import org.xml.sax.InputSource
 import java.io.IOException
 import java.io.StringReader
 import java.net.URL
-import java.util.*
+import java.util.Locale
 import javax.xml.parsers.DocumentBuilderFactory
 
 typealias RepoUrl = String
@@ -81,8 +81,9 @@ fun String.runAsCommand(callback: (result: Array<String>) -> Unit = {}): Boolean
     }
 }
 
-fun String.capitalize() =
-    replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+fun String.capitalize(forceLower: Boolean = false) =
+    forceLower.let { if (it) lowercase(Locale.getDefault()) else this }
+        .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
 fun String.getSystemProperty(): String {
     return try {

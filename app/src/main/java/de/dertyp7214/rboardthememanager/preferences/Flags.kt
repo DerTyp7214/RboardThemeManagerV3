@@ -470,9 +470,9 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                         onlyDisabled = it.isChecked
                         requestReload()
                     }
-                    R.id.share_prefs -> ShareFlags::class.java[activity] = {
+                    R.id.share_prefs -> ShareFlags::class.java.set(activity, {
                         putExtra("isFlags", false)
-                    }
+                    })
                 }
                 true
             }
