@@ -133,6 +133,8 @@ class ThemeChangerActivity : AppCompatActivity() {
                 de.dertyp7214.rboardcomponents.R.string.style_orange to "orange_style",
                 de.dertyp7214.rboardcomponents.R.string.style_pink to "pink_style",
                 de.dertyp7214.rboardcomponents.R.string.style_peach_pearl to "peach_pearl_style",
+                de.dertyp7214.rboardcomponents.R.string.style_rboard_v1 to "rboard_v1_style",
+                de.dertyp7214.rboardcomponents.R.string.style_rboard_v2 to "rboard_v2_style",
                 de.dertyp7214.rboardcomponents.R.string.style_red to "red_style",
                 de.dertyp7214.rboardcomponents.R.string.style_samoan_sun to "samoan_sun_style",
                 de.dertyp7214.rboardcomponents.R.string.style_vert_pierre to "vert_pierre_style",
@@ -160,6 +162,8 @@ class ThemeChangerActivity : AppCompatActivity() {
                     "orange_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_orange
                     "pink_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_pink
                     "peach_pearl_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_peach_pearl
+                    "rboard_v1_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_rboard_v1
+                    "rboard_v2_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_rboard_v2
                     "red_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_red
                     "samoan_sun_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_samoan_sun
                     "vert_pierre_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_vert_pierre
@@ -186,6 +190,8 @@ class ThemeChangerActivity : AppCompatActivity() {
                     THEMES.ORANGE.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_orange
                     THEMES.PINK.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_pink
                     THEMES.PEACH_PEARL.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_peach_pearl
+                    THEMES.RBOARD_V1.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_rboard_v1
+                    THEMES.RBOARD_V2.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_rboard_v2
                     THEMES.RED.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_red
                     THEMES.SAMOAN_SUN.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_samoan_sun
                     THEMES.VERT_PIERRE.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_vert_pierre
