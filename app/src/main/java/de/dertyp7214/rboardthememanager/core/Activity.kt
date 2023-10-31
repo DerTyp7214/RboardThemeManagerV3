@@ -367,6 +367,20 @@ fun Activity.applyTheme(
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_Red
                 else -> R.style.Theme_RboardThemeManagerV3_Red
             }
+            "rboard_v1_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_rboard_v1
+                info -> R.style.Theme_RboardThemeManagerV3_Info_rboard_v1
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_rboard_v1
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_rboard_v1
+                else -> R.style.Theme_RboardThemeManagerV3_rboard_v1
+            }
+            "rboard_v2_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_rboard_v2
+                info -> R.style.Theme_RboardThemeManagerV3_Info_rboard_v2
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_rboard_v2
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_rboard_v2
+                else -> R.style.Theme_RboardThemeManagerV3_rboard_v2
+            }
             "samoan_sun_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_samoan_sun
                 info -> R.style.Theme_RboardThemeManagerV3_Info_samoan_sun
