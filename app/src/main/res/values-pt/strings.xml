@@ -1,5 +1,5 @@
-<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
-    
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
     <string name="search">Pesquisar</string>
     <string name="title_themes">Temas</string>
     <string name="title_downloads">Downloads</string>
@@ -7,7 +7,7 @@
     <string name="error">Ops!</string>
     <string name="update_ready">Atualização pronta, deseja instalá-la?</string>
     <string name="update">Atualizar</string>
-    <string name="install_gboard">Você deseja instalar o Gboard?</string>
+    <string name="install_gboard">Deseja instalar o Gboard?</string>
     <string name="gboard_not_installed">O Gboard não está instalado</string>
     <string name="cant_use_app">Você não pode usar este app sem root</string>
     <string name="not_rooted">Seu dispositivo não está rooteado</string>
@@ -26,10 +26,10 @@
     <string name="apply_automatic_theme">Aplicar tema automático</string>
     <string name="applied">Tema aplicado</string>
     <string name="delete_theme">Excluir tema</string>
-    <string name="q_delete_theme">Você deseja excluir este tema?</string>
+    <string name="q_delete_theme">Deseja excluir este tema?</string>
     <string name="theme_deleted">Tema excluído</string>
     <string name="info">Informações</string>
-    <string name="theme_count">Número de temas</string>
+    <string name="theme_count">Temas instalados</string>
     <string name="theme_path">Caminho dos temas</string>
     <string name="installation_method">Método de instalação</string>
     <string name="other">Outro</string>
@@ -49,7 +49,7 @@
     <string name="select_at_least_one_not_default_theme">Selecione pelo menos um tema que não seja o padrão</string>
     <string name="rboard_theme_creator">Rboard Theme Creator</string>
     <string name="downloading_pack">Baixando pacote</string>
-    <string name="install_themes">Instalar temas (%s)</string>
+    <string name="install_themes">Instalar %s temas</string>
     <string name="install">Instalar</string>
     <string name="themes_installed">Temas instalados</string>
     <string name="unpacking_themes">Descompactando temas</string>
@@ -61,7 +61,7 @@
     <string name="show_system_theme">Mostrar tema do sistema</string>
     <string name="enable_joystick_delete">Excluir joystick</string>
     <string name="deprecate_search">Ícone do Google</string>
-    <string name="enable_sharing">Ícone de compartilhamento</string>
+    <string name="enable_sharing">Ícone de compartilhar</string>
     <string name="themed_nav_bar_all_devices">Cor da barra de navegação</string>
     <string name="enable_email_provider_completion">Provedor de e-mail</string>
     <string name="enable_popup_view_v2">Pop-up v2</string>
@@ -126,17 +126,17 @@
     <string name="flags_applied">Flags aplicadas</string>
     <string name="install_module">Caminho dos temas existentes encontrado, você ainda deseja instalar o módulo?</string>
     <string name="module">Instalar módulo</string>
-    <string name="use_gboard">Deseja carregar temas diretamente no Gboard? Ou continue com o módulo</string>
+    <string name="use_gboard">Deseja carregar temas diretamente no Gboard? Ou continue com o módulo.</string>
     <string name="gboard_magisk">Use o módulo do Magisk em vez de carregar os temas no Gboard</string>
     <string name="use_module">Módulo</string>
     <string name="use_magisk">Usar Magisk</string>
     <string name="gboard">Usar Gboard</string>
     <string name="show_only_disabled">Mostrar apenas flags desativadas</string>
     <string name="share_flags">Compartilhar flags</string>
-    <string name="share_flags_title">Compartilhar flags (%o)</string>
-    <string name="import_flags_title">Importar flags (%o)</string>
-    <string name="share_prefs_title">Compartilhar preferências (%o)</string>
-    <string name="import_prefs_title">Importar preferências (%o)</string>
+    <string name="share_flags_title">Compartilhar %o flags</string>
+    <string name="import_flags_title">Importar %o flags</string>
+    <string name="share_prefs_title">Compartilhar %o preferências</string>
+    <string name="import_prefs_title">Importar %o preferências</string>
     <string name="model">Modelo</string>
     <string name="processing_flags">Processando flags</string>
     <string name="load_flags">Carregar flags</string>
@@ -157,13 +157,13 @@
     <string name="keyboard_redesign_forbid_key_shadows">Remover sombras das teclas</string>
     <string name="enable_bitmoji_contextual_category_icon">Ativar Bitmoji</string>
     <string name="none">Nenhum</string>
-    <string name="do_not_report">Não reporte este erro.</string>
-    <string name="menu_moved">O menu agora está na página inferior.</string>
+    <string name="do_not_report">Não reporte este erro</string>
+    <string name="menu_moved">O menu agora está na página inferior</string>
     <string name="fix_flags">Corrigir flags</string>
-    <string name="fix_flags_long">Excluir flags e forçar parada do Gboard.</string>
+    <string name="fix_flags_long">Excluir flags e forçar parada do Gboard</string>
     <string name="flags_fixed">Flags corrigidas</string>
     <string name="flags_copied">Flags copiadas</string>
-    <string name="try_fix_flags">Tente ir nas configurações e clique em \"Corrigir flags\"</string>
+    <string name="try_fix_flags">Tente ir nas Configurações e clique em \"Corrigir flags\"</string>
     <string name="flags_corrupted">As flags parecem estar corrompidas</string>
     <string name="sort_by_date">Classificar por data</string>
     <string name="press_back_to_apply">Para aplicar as flags basta voltar</string>
@@ -238,13 +238,13 @@
     <string name="silk_popup">Silk pop-up</string>
     <string name="silk">Silk pop-up</string>
     <string name="silk_details">Silk pop-up</string>
-    <string name="keyboard_redesign_google_sans">Usar fonte do Google Sans</string>
+    <string name="keyboard_redesign_google_sans">Usar fonte Google Sans</string>
     <string name="gboard_cache_cleared">Cache do Gboard limpo</string>
-    <string name="gboard_cache_clear">Limpar o cache do Gboard</string>
+    <string name="gboard_cache_clear">Limpar cache do Gboard</string>
     <string name="gboard_cache_clear_long">Limpar o cache e forçar parada do Gboard.</string>
-    <string name="clear_recent_emojis">Limpar emojis usados ​​recentemente</string>
-    <string name="clear_recent_emojis_long">Limpar emojis usados ​​recentemente e forçar parada do Gboard.</string>
-    <string name="recent_emojis_cleared">Emojis usados ​​recentemente limpos</string>
+    <string name="clear_recent_emojis">Limpar emojis usados recentemente</string>
+    <string name="clear_recent_emojis_long">Limpar emojis usados recentemente e forçar parada do Gboard</string>
+    <string name="recent_emojis_cleared">Emojis usados recentemente limpos</string>
     <string name="show_language_switch_key">Mostrar tecla de mudança de idioma</string>
     <string name="value">Valor</string>
     <string name="type">Tipo</string>
@@ -260,7 +260,7 @@
     <string name="app_style">Estilo do app</string>
     <string name="ime_test">Testar IME</string>
     <string name="ime_test_long">Rboard IME Test</string>
-    <string name="new_flags_long">Novas flags encontradas.</string>
+    <string name="new_flags_long">Novas flags encontradas</string>
     <string name="why_no_root">Por que você não está rooteado?</string>
     <string name="get_magisk">Baixe o Magisk</string>
     <string name="no_magisk_detected">Magisk não detectado</string>
