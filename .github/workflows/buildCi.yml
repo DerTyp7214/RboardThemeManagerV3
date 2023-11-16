@@ -32,7 +32,7 @@ jobs:
         uses: actions/setup-java@v3.13.0
         with:
           distribution: temurin
-          java-version: 20
+          java-version: 21
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v3.3.2
@@ -156,7 +156,7 @@ jobs:
         uses: actions/setup-java@v3.13.0
         with:
           distribution: temurin
-          java-version: 20
+          java-version: 21
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v3.3.2
@@ -286,7 +286,7 @@ jobs:
         uses: actions/setup-java@v3.13.0
         with:
           distribution: temurin
-          java-version: 20
+          java-version: 21
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v3.3.2
