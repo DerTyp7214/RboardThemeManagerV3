@@ -14,9 +14,9 @@ import androidx.viewpager.widget.ViewPager
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.color.DynamicColors
 import de.dertyp7214.rboardcomponents.core.applyThemeOverlay
+import de.dertyp7214.rboardcomponents.core.preferences
 import de.dertyp7214.rboardcomponents.utils.THEMES
 import de.dertyp7214.rboardcomponents.utils.ThemeUtils
-import de.dertyp7214.rboardcomponents.utils.ThemeUtils.getStyleName
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.core.capitalize
@@ -43,7 +43,7 @@ class ThemeChangerActivity : AppCompatActivity() {
         val dotsIndicator = binding.wormDotsIndicator
 
         val themes = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
-            APP_THEMES.toList()
+            APP_THEMES_Q.toList()
         }
         else{
             ThemeUtils.APP_THEMES.toList()
@@ -116,7 +116,16 @@ class ThemeChangerActivity : AppCompatActivity() {
                 }) else it
             }
         }
-        val APP_THEMES =
+        fun getStyleName(context: Context): String {
+            return if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
+                context.preferences.getString("app_style", "default_style")
+                    ?: "default_style"
+            } else{
+                context.preferences.getString("app_style", THEMES.DEFAULT.name)
+                    ?: THEMES.DEFAULT.name
+            }
+        }
+        val APP_THEMES_Q =
             mapOf(
                 de.dertyp7214.rboardcomponents.R.string.style_amoled to "amoled_style",
                 de.dertyp7214.rboardcomponents.R.string.style_apocyan to "apocyan_style",
