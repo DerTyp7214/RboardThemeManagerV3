@@ -37,7 +37,7 @@ gson = "2.10.1"
 protobufDynamic = "1.0.1"
 simple-item-decoration = "1.0.0"
 balloon = "1.6.2"
-kspPlugin = "1.9.10-1.0.13"
+kspPlugin = "1.9.20-1.0.14"
 dotsIndicator = "5.0"
 
 googleServices = "4.4.0"
