@@ -16,12 +16,12 @@
     <string name="channel_name_download">Notificações de download</string>
     <string name="channel_description_download">Para notificações de download</string>
     <string name="download_update">Baixando atualização</string>
-    <string name="download_update_progress">Baixando atualização (%s)</string>
+    <string name="download_update_progress">Baixando atualização %s</string>
     <string name="download_complete">Download completo</string>
     <string name="download_error">Erro ao baixar</string>
     <string name="reboot">Reiniciar</string>
     <string name="reboot_now">Reiniciar agora?</string>
-    <string name="reboot_to_continue">Você tem que reiniciar para que o módulo funcione</string>
+    <string name="reboot_to_continue">É necessário reiniciar para que o módulo funcione</string>
     <string name="apply_theme">Aplicar tema</string>
     <string name="apply_automatic_theme">Aplicar tema automático</string>
     <string name="applied">Tema aplicado</string>
@@ -69,7 +69,7 @@
     <string name="enable_secondary_symbols">Símbolos secundários</string>
     <string name="show_suggestions">Mostrar sugestões</string>
     <string name="show_all_flags">Mostrar todas as flags</string>
-    <string name="show_all_flags_long">Mostrar todas as flags atualmente definidos</string>
+    <string name="show_all_flags_long">Mostrar todas as flags atualmente definidas</string>
     <string name="all_flags">Todas as flags</string>
     <string name="loading_preferences">Carregando preferências</string>
     <string name="use_silk_theme_by_default">Use o tema Silk por padrão</string>
@@ -187,8 +187,8 @@
     <string name="applied_theme">(aplicado)</string>
     <string name="keyboard_height_ratio">Altura do teclado</string>
     <string name="max_short">0.50 Altura mínima</string>
-    <string name="extra_extra_short">0.65 Muito curto</string>
-    <string name="extra_short">0.85 Extracurto</string>
+    <string name="extra_extra_short">0.65 Ultra curto</string>
+    <string name="extra_short">0.85 Extra curto</string>
     <string name="key_short">0.90 Curto</string>
     <string name="mid_short">0.95 Meio curto</string>
     <string name="normal">1.00 Normal</string>
@@ -229,7 +229,7 @@
     <string name="deep_link">Link profundo</string>
     <string name="download">Baixar</string>
     <string name="include_theme_names">Incluir nomes dos temas</string>
-    <string name="update_available">Atualização disponível (%s)</string>
+    <string name="update_available">Atualização disponível %s</string>
     <string name="help">Ajuda</string>
     <string name="enable_get_bitmoji_card">Obtenha o card Bitmoji</string>
     <string name="translate_new_ui">Traduzir nova IU</string>
@@ -241,7 +241,7 @@
     <string name="keyboard_redesign_google_sans">Usar fonte Google Sans</string>
     <string name="gboard_cache_cleared">Cache do Gboard limpo</string>
     <string name="gboard_cache_clear">Limpar cache do Gboard</string>
-    <string name="gboard_cache_clear_long">Limpar o cache e forçar parada do Gboard.</string>
+    <string name="gboard_cache_clear_long">Limpar cache e forçar parada do Gboard</string>
     <string name="clear_recent_emojis">Limpar emojis usados recentemente</string>
     <string name="clear_recent_emojis_long">Limpar emojis usados recentemente e forçar parada do Gboard</string>
     <string name="recent_emojis_cleared">Emojis usados recentemente limpos</string>
@@ -265,7 +265,7 @@
     <string name="get_magisk">Baixe o Magisk</string>
     <string name="no_magisk_detected">Magisk não detectado</string>
     <string name="root_explanation">Sem root ainda não é possível. Isso significa que não há truques de adb, nada. Tentamos de tudo, mas não funciona.</string>
-    <string name="install_methods">Fornecemos dois métodos de instalação.\nVocê pode alterar isso a qualquer momento nas configurações.</string>
+    <string name="install_methods">Fornecemos dois métodos de instalação.\nVocê pode alterar isso a qualquer momento nas Configurações.</string>
     <string name="magisk_module">Módulo</string>
     <string name="inside_gboard">No Gboard</string>
     <string name="module_1">Temas claro e escuro separados</string>
