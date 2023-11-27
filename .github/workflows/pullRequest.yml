@@ -58,7 +58,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2.9.0
+        uses: gradle/gradle-build-action@v2.10.0
         with:
           gradle-version: wrapper
           wrapper-cache-enabled: true
