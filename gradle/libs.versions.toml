@@ -43,7 +43,7 @@ dotsIndicator = "5.0"
 googleServices = "4.4.0"
 gradle = "8.3.0-alpha13"
 uiTooling = "1.5.4"
-kotlin = "1.9.10"
+kotlin = "1.9.21"
 
 [libraries]
 prDownloader = { module = "de.dertyp7214:PRDownloader", version.ref = "de-PRDownloader" }
