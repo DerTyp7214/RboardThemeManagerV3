@@ -21,7 +21,7 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: nttld/setup-ndk@v1.4.1
+      - uses: nttld/setup-ndk@v1.4.2
         with:
           ndk-version: r26b
 
