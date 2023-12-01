@@ -16,7 +16,7 @@ buildscript {
     dependencies {
         classpath(libs.gradle)
         //noinspection DifferentKotlinGradleVersion
-        classpath(kotlin("gradle-plugin", version = "2.0.0-Beta1"))
+        classpath(kotlin("gradle-plugin", version = "1.9.21"))
         classpath(libs.google.services)
     }
 }

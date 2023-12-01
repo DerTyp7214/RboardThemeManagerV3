@@ -2,6 +2,7 @@ package de.dertyp7214.rboardthememanager.core
 
 import android.content.Context
 import android.graphics.BitmapFactory
+import android.os.Build
 import com.dertyp7214.logs.helpers.Logger
 import com.google.gson.Gson
 import com.topjohnwu.superuser.io.SuFile
@@ -25,9 +26,17 @@ fun ThemeDataClass.delete(): Boolean {
 
 fun ThemeDataClass.moveToCache(context: Context): ThemeDataClass {
     val zip = SuFile(path)
-    val newZip = SuFile(context.cacheDir, zip.name)
+    val newZip = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        SuFile(context.cacheDir, zip.name)
+    } else {
+        SuFile(context.externalCacheDir, zip.name)
+    }
     val imageFile = SuFile(path.removeSuffix(".zip"))
-    val newImage = SuFile(context.cacheDir, imageFile.name)
+    val newImage = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        SuFile(context.cacheDir, imageFile.name)
+    } else {
+        SuFile(context.externalCacheDir, imageFile.name)
+    }
     zip.copy(newZip)
     if (imageFile.exists()) imageFile.copy(newImage)
     return ThemeDataClass(image, name, newZip.absolutePath)
@@ -54,7 +63,11 @@ fun ThemeDataClass.install(overrideTheme: Boolean = true, recycle: Boolean = fal
 }
 
 fun ThemeDataClass.toRboardTheme(context: Context): RboardTheme {
-    val tmpPath = File(context.cacheDir, "rboard")
+    val tmpPath = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        File(context.cacheDir, "rboard")
+    } else {
+        File(context.externalCacheDir, "rboard")
+    }
     if (!tmpPath.exists()) tmpPath.mkdirs()
 
     listOf(
