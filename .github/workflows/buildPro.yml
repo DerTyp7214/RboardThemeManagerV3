@@ -24,7 +24,7 @@ jobs:
           distribution: temurin
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.3.2
+        uses: actions/cache@v3.3.3
         with:
           path: |
             ~/.gradle/caches
@@ -34,7 +34,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3.3.2
+        uses: actions/cache@v3.3.3
         with:
           path: |
             ${{ github.workspace }}/.ccache
@@ -47,7 +47,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2.10.0
+        uses: gradle/gradle-build-action@v2.11.1
         with:
           gradle-version: wrapper
           arguments: assemblePro
@@ -83,7 +83,7 @@ jobs:
         run: mv app/build/outputs/apk/pro/app-pro-unsigned-signed.apk app/build/outputs/apk/pro/app-pro.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.1.0
         with:
           name: Release Artifact
           path: app/build/outputs/apk/pro/app-pro.apk
