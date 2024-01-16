@@ -1,5 +1,5 @@
 {
-  "time": "1682014214771",
+  "time": "1705418202551",
   "flags": [
     {
       "key": "general",
@@ -40,7 +40,7 @@
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS",
-      "visible": true
+      "visible": false
     },
     {
       "key": "enable_joystick_delete",
@@ -93,7 +93,9 @@
       "icon": "ic_navbar",
       "defaultValue": false,
       "type": "BOOLEAN",
-      "file": "FLAGS"
+      "file": "FLAGS",
+      "visible": false
+
     },
     {
       "key": "enable_email_provider_completion",
@@ -368,7 +370,8 @@
       "icon": "ic_float_v2",
       "defaultValue": false,
       "type": "BOOLEAN",
-      "file": "FLAGS"
+      "file": "FLAGS",
+      "visible": false
     },
     {
       "key": "translate_new_ui",
@@ -482,7 +485,8 @@
           "type2": "string"
         }
       ],
-      "file": "GBOARD_PREFERENCES"
+      "file": "GBOARD_PREFERENCES",
+      "visible": false
     }
   ]
 }
