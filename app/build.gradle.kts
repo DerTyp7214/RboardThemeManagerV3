@@ -31,11 +31,11 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += listOf(
-            "af", "cs", "da", "de",
+            "ar", "cs", "da", "de",
             "el", "en", "es", "fi",
             "fr", "hi", "hu", "id",
             "it", "ja", "nl", "no",
-            "pl", "pt", "ro", "ru",
+            "pl", "pt-rBR", "ro", "ru",
             "sv", "uk", "vi",
             "zh-rCN", "zh-rTW"
         )
