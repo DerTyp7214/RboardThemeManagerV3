@@ -21,17 +21,17 @@ android {
         // Update the minSdk if old Android Versions are no longer supported on the Gboard side.
         minSdk = 23
         targetSdk = 34
-        versionCode = 391009
-        versionName = "3.9.1"
+        versionCode = 392000
+        versionName = "3.9.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += listOf(
-            "af", "cs", "da", "de",
+            "ar", "cs", "da", "de",
             "el", "en", "es", "fi",
             "fr", "hi", "hu", "id",
             "it", "ja", "nl", "no",
-            "pl", "pt", "ro", "ru",
+            "pl", "pt-rBR", "ro", "ru",
             "sv", "uk", "vi", "zh-rCN",
             "zh-rTW"
         )
