@@ -132,6 +132,12 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
         builder.categoryHeader("translators") {
             titleRes = R.string.translators
         }
+        builder.pref("pt-rBR") {
+            titleRes = R.string.portuguese_brazilian
+            summaryRes = R.string.igormiguell
+            useTint = false
+            iconRes = FlagKit.getResId(activity, "br")
+        }
         builder.pref("fr") {
             titleRes = R.string.french
             summaryRes = R.string.yoanndp
