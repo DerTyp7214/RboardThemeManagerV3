@@ -63,7 +63,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2.11.1
+        uses: gradle/gradle-build-action@v3.0.0
         with:
           gradle-version: wrapper
           arguments: assembleRelease
@@ -98,7 +98,7 @@ jobs:
         run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4.1.0
+        uses: actions/upload-artifact@v4.3.0
         with:
           name: Release Artifact
           path: app/build/outputs/apk/release/app-release.apk
