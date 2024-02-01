@@ -17,10 +17,15 @@ import com.topjohnwu.superuser.io.SuFile
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
-import de.Maxr1998.modernpreferences.helpers.*
+import de.Maxr1998.modernpreferences.helpers.categoryHeader
+import de.Maxr1998.modernpreferences.helpers.onCheckedChange
+import de.Maxr1998.modernpreferences.helpers.onClick
+import de.Maxr1998.modernpreferences.helpers.onSelectionChange
+import de.Maxr1998.modernpreferences.helpers.pref
+import de.Maxr1998.modernpreferences.helpers.singleChoice
+import de.Maxr1998.modernpreferences.helpers.switch
 import de.Maxr1998.modernpreferences.preferences.choice.SelectionItem
 import de.dertyp7214.rboardcomponents.utils.ThemeUtils
-import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.FLAG_PATH
@@ -30,15 +35,22 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.XMLEntry
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.components.XMLType
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.core.SafeJSON
+import de.dertyp7214.rboardthememanager.core.get
+import de.dertyp7214.rboardthememanager.core.openDialog
+import de.dertyp7214.rboardthememanager.core.openUrl
+import de.dertyp7214.rboardthememanager.core.runAsCommand
+import de.dertyp7214.rboardthememanager.core.set
+import de.dertyp7214.rboardthememanager.core.writeFile
 import de.dertyp7214.rboardthememanager.screens.Logs
-import de.dertyp7214.rboardthememanager.screens.MainActivity
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
+import de.dertyp7214.rboardthememanager.screens.ThemeChangerActivity
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.getPackageUid
 
 class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
+
     enum class FILES(val Path: String) {
         @SuppressLint("SdCardPath")
         CACHE("/data/user_de/0/${Config.GBOARD_PACKAGE_NAME}/cache/auto_clean/"),
@@ -126,11 +138,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(),
             {
-                Application.context?.let {
-                    PreferencesActivity::class.java[it] = {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                        putExtra("type", "repos")
-                    }
+                PreferencesActivity::class.java[this] = {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    putExtra("type", "repos")
                 }
             }
         ),
@@ -150,11 +160,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             "",
             TYPE.STRING,
             listOf(), {
-                Application.context?.let {
-                    PreferencesActivity::class.java[it] = {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                        putExtra("type", "info")
-                    }
+                PreferencesActivity::class.java[this] = {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    putExtra("type", "info")
                 }
             }
         ),
@@ -177,9 +185,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             -1,
             R.drawable.ic_theme_settings,
             "default",
-            TYPE.SELECT,
-            ThemeUtils.APP_THEMES.map {
-                SelectionItem(it.value, it.key, -1)
+            TYPE.STRING,
+            listOf(), {
+                ThemeChangerActivity::class.java[this]
             }
         ),
         USE_BLUR(
@@ -281,6 +289,20 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             },
             BuildConfig.DEBUG
         ),
+        THEME_VALUES(
+            "theme_values",
+            R.string.theme_values,
+            R.string.theme_values_long,
+            R.drawable.ic_theme_settings,
+            "",
+            TYPE.STRING,
+            listOf(),
+            {
+                packageManager.getLaunchIntentForPackage("de.dertyp7214.monetextractor")
+                    ?.let(::startActivity)
+                    ?: openUrl(PLAY_URL("de.dertyp7214.monetextractor"))
+            }
+        ),
         IME_TEST(
             "ime_test",
             R.string.ime_test,
@@ -363,7 +385,18 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                     iconRes = item.icon
                 }.let { Preference("") }
 
-                TYPE.STRING -> builder.pref(item.key) {}
+                TYPE.STRING -> builder.pref(item.key) {
+                    when (item.key) {
+                        "app_style" -> {
+                            summaryRes =
+                                ThemeUtils.APP_THEMES.toList()
+                                    .first {
+                                        it.second == ThemeUtils.getStyleName(activity)
+                                    }.first
+                        }
+                    }
+                }
+
                 TYPE.SELECT -> builder.singleChoice(item.key, item.items) {
                     initialSelection = item.items.last().key
                     onSelectionChange {
@@ -381,25 +414,14 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
                                 }
                             }
-
-                            "app_style" -> {
-                                if (item.getValue(activity, "") != it) {
-                                    MainActivity.clearInstances()
-                                    MainActivity::class.java[activity]
-                                    PreferencesActivity::class.java[activity] = {
-                                        putExtra("type", "settings")
-                                    }
-                                    activity.finish()
-                                }
-                            }
                         }
                         true
                     }
                 }
             }
             pref.apply {
-                titleRes = item.title
-                summaryRes = item.summary
+                if (titleRes == -1) titleRes = item.title
+                if (summaryRes == -1) summaryRes = item.summary
                 iconRes = item.icon
                 onClick { item.onClick(activity, false); false }
             }

@@ -4,44 +4,46 @@ de-PRDownloader = "v0.6.0"
 google-core = "2.1.0"
 google-core-ktx = "2.1.0"
 junit-junit = "4.13.2"
-kotlinReflect = "1.9.10"
+kotlinReflect = "1.9.22"
 ksp = "4.16.0"
-libsuVersion = "5.2.1"
+libsuVersion = "5.2.2"
 insetter = "0.6.1"
 
-kotlin-stdlib = "1.9.10"
+kotlin-stdlib = "1.9.22"
 appcompat = "1.7.0-alpha03"
 constraintlayout = "2.2.0-alpha13"
 preference-ktx = "1.2.1"
-activity-ktx = "1.8.0"
-fragment-ktx = "1.6.1"
-lifecycle-viewmodel-ktx = "2.6.2"
-browser = "1.6.0"
+activity-ktx = "1.8.2"
+fragment-ktx = "1.6.2"
+lifecycle-viewmodel-ktx = "2.7.0"
+browser = "1.7.0"
 glide = "4.16.0"
 flagkit = "1.0.2"
-firebase-bom = "32.3.1"
-firebase-messaging-ktx = "23.2.1"
-firebase-analytics-ktx = "21.3.0"
+firebase-bom = "32.7.1"
+firebase-messaging-ktx = "23.4.0"
+firebase-analytics-ktx = "21.5.0"
 legacy-support-v4 = "1.0.0"
-navigation-fragment-ktx = "2.7.4"
-navigation-ui-ktx = "2.7.4"
-commons-text = "1.10.0"
+navigation-fragment-ktx = "2.7.6"
+navigation-ui-ktx = "2.7.6"
+commons-text = "1.11.0"
 core-ktx = "1.12.0"
 core = "1.12.0"
-material = "1.10.0"
+material = "1.11.0"
 espresso-core = "3.5.1"
 android-shell = "1.0.0"
-firebase-analytics = "21.3.0"
-firebase-messaging = "23.2.1"
+firebase-analytics = "21.5.0"
+firebase-messaging = "23.4.0"
 gson = "2.10.1"
 protobufDynamic = "1.0.1"
 simple-item-decoration = "1.0.0"
-balloon = "1.6.1"
-kspPlugin = "1.9.10-1.0.13"
+balloon = "1.6.4"
+kspPlugin = "1.9.22-1.0.17"
+dotsIndicator = "5.0"
 
 googleServices = "4.4.0"
-gradle = "8.3.0-alpha07"
-uiTooling = "1.5.3"
+gradle = "8.4.0-alpha07"
+uiTooling = "1.6.0"
+kotlin = "1.9.22"
 
 [libraries]
 prDownloader = { module = "de.dertyp7214:PRDownloader", version.ref = "de-PRDownloader" }
@@ -77,6 +79,7 @@ lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-view
 simple-item-decoration = { group = "com.bignerdranch.android", name = "simple-item-decoration", version.ref = "simple-item-decoration" }
 balloon = { group = "com.github.skydoves", name = "balloon", version.ref = "balloon" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+dots-indicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "dotsIndicator" }
 
 junit = { module = "junit:junit", version.ref = "junit-junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-junit" }
@@ -99,3 +102,4 @@ gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
 
 [plugins]
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

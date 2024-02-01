@@ -14,6 +14,7 @@
     <string name="akos_paha">Akos Paha</string>
     <string name="akos_github">https://github.com/AkosPaha01</string>
     <string name="dertyp">DerTyp7214</string>
+    <string name="igormiguell">Igormiguell</string>
     <string name="dertyp_github">https://github.com/DerTyp7214</string>
     <string name="dan">Daniel Felipe</string>
     <string name="telegram_channel_url">https://t.me/rkbdigboard</string>
@@ -27,6 +28,7 @@
     <string name="github_repo_url">https://github.com/DerTyp7214/RboardThemeManagerV3</string>
     <string name="magisk_github_url">https://github.com/topjohnwu/Magisk</string>
     <string name="hungarian">Hungarian</string>
+    <string name="portuguese_brazilian">Brazilian</string>
     <string name="italian">Italian</string>
     <string name="alpha4041">Alpha4041</string>
     <string name="polish">Polish</string>

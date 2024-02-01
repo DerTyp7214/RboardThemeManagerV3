@@ -286,4 +286,9 @@
     <string name="gboard_4">Themes won\'t appear in gboard settings</string>
     <string name="gboard_5">Compatibility</string>
     <string name="hash_mismatch">Hash mismatch</string>
+    <string name="theme_values">Theme Values</string>
+    <string name="copied_to_clipboard">Copied to Clipboard</string>
+    <string name="theme_values_long">Theme Values</string>
+    <string name="value_prefix">Value Prefix</string>
+    <string name="theme_changer">Theme Changer</string>
 </resources>
