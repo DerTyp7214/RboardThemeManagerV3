@@ -1,6 +1,6 @@
-@file:Suppress("UNUSED_VARIABLE")
 plugins {
     alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.kotlinAndroid) apply false
 }
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
@@ -15,7 +15,7 @@ buildscript {
     dependencies {
         classpath(libs.gradle)
         //noinspection DifferentKotlinGradleVersion
-        classpath(kotlin("gradle-plugin", version = "1.9.20-RC"))
+        classpath(kotlin("gradle-plugin", version = "1.9.22"))
         classpath(libs.google.services)
     }
 }

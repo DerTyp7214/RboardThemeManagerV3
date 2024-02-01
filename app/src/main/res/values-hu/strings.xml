@@ -282,12 +282,9 @@
     <string name="gboard_3">A hangok módosítása nem fog működni</string>
     <string name="gboard_4">A témák nem jelennek meg a gboard beállításaiban</string>
     <string name="gboard_5">Kompatibilitás</string>
-    <string name="default_style">Alapértelmezett</string>
-    <string name="green_style">Zöld</string>
-    <string name="yellow_style">Sárga</string>
-    <string name="pink_style">Rózsaszín</string>
-    <string name="red_style">Piros</string>
-    <string name="blue_style">Kék</string>
-    <string name="orange_style">Narancssárga</string>
-    <string name="lime_style">Lime</string>
+    <string name="theme_values">Téma Értékek</string>
+    <string name="copied_to_clipboard">Vágólapra másolva</string>
+    <string name="theme_values_long">Téma Értékek</string>
+    <string name="value_prefix">Érték előtag</string>
+    <string name="theme_changer">Téma Váltó</string>
 </resources>

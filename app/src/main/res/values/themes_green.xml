@@ -16,17 +16,36 @@
         <item name="colorOnError">@color/green_md_theme_light_onError</item>
         <item name="colorErrorContainer">@color/green_md_theme_light_errorContainer</item>
         <item name="colorOnErrorContainer">@color/green_md_theme_light_onErrorContainer</item>
-        <item name="colorOutline">@color/green_md_theme_light_outline</item>
         <item name="android:colorBackground">@color/green_md_theme_light_background</item>
         <item name="colorOnBackground">@color/green_md_theme_light_onBackground</item>
         <item name="colorSurface">@color/green_md_theme_light_surface</item>
         <item name="colorOnSurface">@color/green_md_theme_light_onSurface</item>
         <item name="colorSurfaceVariant">@color/green_md_theme_light_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/green_md_theme_light_onSurfaceVariant</item>
+        <item name="colorOutline">@color/green_md_theme_light_outline</item>
+        <item name="colorOutlineVariant">@color/green_md_theme_light_outlineVariant</item>
         <item name="colorSurfaceInverse">@color/green_md_theme_light_inverseSurface</item>
         <item name="colorOnSurfaceInverse">@color/green_md_theme_light_inverseOnSurface</item>
         <item name="colorPrimaryInverse">@color/green_md_theme_light_inversePrimary</item>
-        <item name="colorSurfaceContainerHighest">@color/green_md_theme_light_SurfaceContainerHighest</item>
+        <item name="colorPrimaryFixed">@color/green_md_theme_light_primaryFixed</item>
+        <item name="colorOnPrimaryFixed">@color/green_md_theme_light_onPrimaryFixed</item>
+        <item name="colorPrimaryFixedDim">@color/green_md_theme_light_primaryFixedDim</item>
+        <item name="colorOnPrimaryFixedVariant">@color/green_md_theme_light_onPrimaryFixedVariant</item>
+        <item name="colorSecondaryFixed">@color/green_md_theme_light_secondaryFixed</item>
+        <item name="colorOnSecondaryFixed">@color/green_md_theme_light_onSecondaryFixed</item>
+        <item name="colorSecondaryFixedDim">@color/green_md_theme_light_secondaryFixedDim</item>
+        <item name="colorOnSecondaryFixedVariant">@color/green_md_theme_light_onSecondaryFixedVariant</item>
+        <item name="colorTertiaryFixed">@color/green_md_theme_light_tertiaryFixed</item>
+        <item name="colorOnTertiaryFixed">@color/green_md_theme_light_onTertiaryFixed</item>
+        <item name="colorTertiaryFixedDim">@color/green_md_theme_light_tertiaryFixedDim</item>
+        <item name="colorOnTertiaryFixedVariant">@color/green_md_theme_light_onTertiaryFixedVariant</item>
+        <item name="colorSurfaceDim">@color/green_md_theme_light_surfaceDim</item>
+        <item name="colorSurfaceBright">@color/green_md_theme_light_surfaceBright</item>
+        <item name="colorSurfaceContainerLowest">@color/green_md_theme_light_surfaceContainerLowest</item>
+        <item name="colorSurfaceContainerLow">@color/green_md_theme_light_surfaceContainerLow</item>
+        <item name="colorSurfaceContainer">@color/green_md_theme_light_surfaceContainer</item>
+        <item name="colorSurfaceContainerHigh">@color/green_md_theme_light_surfaceContainerHigh</item>
+        <item name="colorSurfaceContainerHighest">@color/green_md_theme_light_surfaceContainerHighest</item>
     </style>
 
     <!-- Base application theme. -->

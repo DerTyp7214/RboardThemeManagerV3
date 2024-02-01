@@ -21,17 +21,17 @@ android {
         // Update the minSdk if old Android Versions are no longer supported on the Gboard side.
         minSdk = 23
         targetSdk = 34
-        versionCode = 390000
-        versionName = "3.9.0"
+        versionCode = 392000
+        versionName = "3.9.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += listOf(
-            "af", "cs", "da", "de",
+            "ar", "cs", "da", "de",
             "el", "en", "es", "fi",
             "fr", "hi", "hu", "id",
             "it", "ja", "nl", "no",
-            "pl", "pt", "ro", "ru",
+            "pl", "pt-rBR", "ro", "ru",
             "sv", "uk", "vi", "zh-rCN",
             "zh-rTW"
         )
@@ -51,12 +51,12 @@ android {
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_20
-        targetCompatibility = JavaVersion.VERSION_20
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     kotlinOptions {
-        jvmTarget = JvmTarget.JVM_20.description
+        jvmTarget = JvmTarget.JVM_21.description
         freeCompilerArgs += listOf(
             "-P",
             "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
@@ -65,7 +65,7 @@ android {
 
     tasks.withType<KotlinCompile> {
         kotlinOptions {
-            jvmTarget = JvmTarget.JVM_20.description
+            jvmTarget = JvmTarget.JVM_21.description
         }
     }
 
@@ -100,7 +100,7 @@ dependencies {
     implementation(libs.nio)
     implementation(libs.insetter)
     implementation(libs.core.ktx)
-
+    implementation(libs.dots.indicator)
     implementation(libs.kotlin.stdlib)
     implementation(libs.androidx.core)
     implementation(libs.material)

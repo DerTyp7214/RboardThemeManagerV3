@@ -1,0 +1,36 @@
+<resources>
+    <style name="Theme.RboardThemeManager.Colors_mud_pink" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/mud_pink_md_theme_dark_colorPrimary</item>
+        <item name="colorOnPrimary">@color/mud_pink_md_theme_dark_colorOnPrimary</item>
+        <item name="colorPrimaryContainer">@color/mud_pink_md_theme_dark_colorPrimaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/mud_pink_md_theme_dark_colorOnPrimaryContainer</item>
+        <item name="colorSecondary">@color/mud_pink_md_theme_dark_colorSecondary</item>
+        <item name="colorOnSecondary">@color/mud_pink_md_theme_dark_colorOnSecondary</item>
+        <item name="colorSecondaryContainer">@color/mud_pink_md_theme_dark_colorSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/mud_pink_md_theme_dark_colorOnSecondaryContainer</item>
+        <item name="colorTertiary">@color/mud_pink_md_theme_dark_colorTertiary</item>
+        <item name="colorOnTertiary">@color/mud_pink_md_theme_dark_colorOnTertiary</item>
+        <item name="colorTertiaryContainer">@color/mud_pink_md_theme_dark_colorTertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/mud_pink_md_theme_dark_colorOnTertiaryContainer</item>
+        <item name="colorError">@color/mud_pink_md_theme_dark_colorError</item>
+        <item name="colorOnError">@color/mud_pink_md_theme_dark_colorOnError</item>
+        <item name="colorErrorContainer">@color/mud_pink_md_theme_dark_colorErrorContainer</item>
+        <item name="colorOnErrorContainer">@color/mud_pink_md_theme_dark_colorOnErrorContainer</item>
+        <item name="colorOutline">@color/mud_pink_md_theme_dark_colorOutline</item>
+        <item name="colorOutlineVariant">@color/mud_pink_md_theme_dark_colorOutlineVariant</item>
+        <item name="android:colorBackground">@color/mud_pink_md_theme_dark_colorBackground</item>
+        <item name="colorOnBackground">@color/mud_pink_md_theme_dark_colorOnBackground</item>
+        <item name="colorSurface">@color/mud_pink_md_theme_dark_colorSurface</item>
+        <item name="colorOnSurface">@color/mud_pink_md_theme_dark_colorOnSurface</item>
+        <item name="colorSurfaceVariant">@color/mud_pink_md_theme_dark_colorSurfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/mud_pink_md_theme_dark_colorOnSurfaceVariant</item>
+        <item name="colorSurfaceInverse">@color/mud_pink_md_theme_dark_colorSurfaceInverse</item>
+        <item name="colorOnSurfaceInverse">@color/mud_pink_md_theme_dark_colorOnSurfaceInverse</item>
+        <item name="colorPrimaryInverse">@color/mud_pink_md_theme_dark_colorPrimaryInverse</item>
+        <item name="colorSurfaceContainerHigh">@color/mud_pink_md_theme_dark_colorSurfaceContainerHigh</item>
+        <item name="colorSurfaceContainerHighest">@color/mud_pink_md_theme_dark_colorSurfaceContainerHighest</item>
+        <item name="colorSurfaceContainer">@color/mud_pink_md_theme_dark_colorSurfaceContainer</item>
+        <item name="colorSurfaceContainerLow">@color/mud_pink_md_theme_dark_colorSurfaceContainerLow</item>
+        <item name="colorSurfaceContainerLowest">@color/mud_pink_md_theme_dark_colorSurfaceContainerLowest</item>
+    </style>
+</resources>

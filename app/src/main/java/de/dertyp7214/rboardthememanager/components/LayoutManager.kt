@@ -6,3 +6,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 class LayoutManager(context: Context, spanCount: Int = 1) : GridLayoutManager(context, spanCount) {
     override fun supportsPredictiveItemAnimations(): Boolean = true
 }
+
+class HorizontalLayoutManager(context: Context, spanCount: Int = 1) :
+    GridLayoutManager(context, spanCount, HORIZONTAL, false) {
+    override fun supportsPredictiveItemAnimations(): Boolean = true
+}

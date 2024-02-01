@@ -16,16 +16,35 @@
         <item name="colorOnError">@color/yellow_md_theme_dark_onError</item>
         <item name="colorErrorContainer">@color/yellow_md_theme_dark_errorContainer</item>
         <item name="colorOnErrorContainer">@color/yellow_md_theme_dark_onErrorContainer</item>
-        <item name="colorOutline">@color/yellow_md_theme_dark_outline</item>
         <item name="android:colorBackground">@color/yellow_md_theme_dark_background</item>
         <item name="colorOnBackground">@color/yellow_md_theme_dark_onBackground</item>
         <item name="colorSurface">@color/yellow_md_theme_dark_surface</item>
         <item name="colorOnSurface">@color/yellow_md_theme_dark_onSurface</item>
         <item name="colorSurfaceVariant">@color/yellow_md_theme_dark_surfaceVariant</item>
         <item name="colorOnSurfaceVariant">@color/yellow_md_theme_dark_onSurfaceVariant</item>
+        <item name="colorOutline">@color/yellow_md_theme_dark_outline</item>
+        <item name="colorOutlineVariant">@color/yellow_md_theme_dark_outlineVariant</item>
         <item name="colorSurfaceInverse">@color/yellow_md_theme_dark_inverseSurface</item>
         <item name="colorOnSurfaceInverse">@color/yellow_md_theme_dark_inverseOnSurface</item>
         <item name="colorPrimaryInverse">@color/yellow_md_theme_dark_inversePrimary</item>
-        <item name="colorSurfaceContainerHighest">@color/lime_md_theme_dark_SurfaceContainerHighest</item>
+        <item name="colorPrimaryFixed">@color/yellow_md_theme_dark_primaryFixed</item>
+        <item name="colorOnPrimaryFixed">@color/yellow_md_theme_dark_onPrimaryFixed</item>
+        <item name="colorPrimaryFixedDim">@color/yellow_md_theme_dark_primaryFixedDim</item>
+        <item name="colorOnPrimaryFixedVariant">@color/yellow_md_theme_dark_onPrimaryFixedVariant</item>
+        <item name="colorSecondaryFixed">@color/yellow_md_theme_dark_secondaryFixed</item>
+        <item name="colorOnSecondaryFixed">@color/yellow_md_theme_dark_onSecondaryFixed</item>
+        <item name="colorSecondaryFixedDim">@color/yellow_md_theme_dark_secondaryFixedDim</item>
+        <item name="colorOnSecondaryFixedVariant">@color/yellow_md_theme_dark_onSecondaryFixedVariant</item>
+        <item name="colorTertiaryFixed">@color/yellow_md_theme_dark_tertiaryFixed</item>
+        <item name="colorOnTertiaryFixed">@color/yellow_md_theme_dark_onTertiaryFixed</item>
+        <item name="colorTertiaryFixedDim">@color/yellow_md_theme_dark_tertiaryFixedDim</item>
+        <item name="colorOnTertiaryFixedVariant">@color/yellow_md_theme_dark_onTertiaryFixedVariant</item>
+        <item name="colorSurfaceDim">@color/yellow_md_theme_dark_surfaceDim</item>
+        <item name="colorSurfaceBright">@color/yellow_md_theme_dark_surfaceBright</item>
+        <item name="colorSurfaceContainerLowest">@color/yellow_md_theme_dark_surfaceContainerLowest</item>
+        <item name="colorSurfaceContainerLow">@color/yellow_md_theme_dark_surfaceContainerLow</item>
+        <item name="colorSurfaceContainer">@color/yellow_md_theme_dark_surfaceContainer</item>
+        <item name="colorSurfaceContainerHigh">@color/yellow_md_theme_dark_surfaceContainerHigh</item>
+        <item name="colorSurfaceContainerHighest">@color/yellow_md_theme_dark_surfaceContainerHighest</item>
     </style>
 </resources>

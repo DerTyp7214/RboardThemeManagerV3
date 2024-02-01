@@ -282,13 +282,10 @@
     <string name="gboard_3">Changing sounds won\'t work</string>
     <string name="gboard_4">Themes won\'t appear in gboard settings</string>
     <string name="gboard_5">Compatibility</string>
-    <string name="default_style">Default</string>
-    <string name="green_style">Green</string>
-    <string name="yellow_style">Yellow</string>
-    <string name="pink_style">Pink</string>
-    <string name="red_style">Red</string>
-    <string name="blue_style">Blue</string>
-    <string name="orange_style">Orange</string>
-    <string name="lime_style">Lime</string>
     <string name="hash_mismatch">Hash mismatch</string>
+    <string name="theme_values">Theme Values</string>
+    <string name="copied_to_clipboard">Copied to Clipboard</string>
+    <string name="theme_values_long">Theme Values</string>
+    <string name="value_prefix">Value Prefix</string>
+    <string name="theme_changer">Theme Changer</string>
 </resources>
