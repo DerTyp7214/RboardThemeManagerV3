@@ -22,7 +22,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r26
+          ndk-version: r26b
 
       - name: Get Commit Message
         id: commitMessage
@@ -35,7 +35,7 @@ jobs:
           distribution: temurin
 
       - name: Cache Gradle dependencies
-        uses: actions/cache@v3.3.3
+        uses: actions/cache@v4.0.0
         with:
           path: |
             ~/.gradle/caches
@@ -45,7 +45,7 @@ jobs:
           restore-keys: ${{ runner.os }}-gradle-
 
       - name: Cache build cache
-        uses: actions/cache@v3.3.3
+        uses: actions/cache@v4.0.0
         with:
           path: |
             ${{ github.workspace }}/.ccache
@@ -66,7 +66,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v2.11.1
+        uses: gradle/gradle-build-action@v3.0.0
         with:
           gradle-version: wrapper
           arguments: assembleDebug
@@ -94,7 +94,7 @@ jobs:
         run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4.1.0
+        uses: actions/upload-artifact@v4.3.0
         with:
           name: Debug Artifact
           path: app/build/outputs/apk/debug/app-debug.apk
