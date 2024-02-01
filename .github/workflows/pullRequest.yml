@@ -23,7 +23,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r26
+          ndk-version: r26b
 
       - name: Setup JDK
         uses: actions/setup-java@v4.0.0
