@@ -185,7 +185,6 @@
     <string name="github_repo">Repositório GitHub</string>
     <string name="translators">Tradutores</string>
     <string name="applied_theme">(aplicado)</string>
-    <string name="installed_from_play">Instalado da Play Store</string>
     <string name="keyboard_height_ratio">Altura do teclado</string>
     <string name="max_short">0.50 Altura mínima</string>
     <string name="extra_extra_short">0.65 Ultra curto</string>
@@ -226,7 +225,6 @@
     <string name="other_props_long">Outros parâmetros configurados via resetprop</string>
     <string name="prop_changed">Parâmetros alterados</string>
     <string name="reset">Resetar</string>
-    <string name="restart">Reiniciar</string>
     <string name="invalid_link">Link inválido</string>
     <string name="deep_link">Link profundo</string>
     <string name="download">Baixar</string>
