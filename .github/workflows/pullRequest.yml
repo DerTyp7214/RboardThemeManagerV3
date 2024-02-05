@@ -79,7 +79,7 @@ jobs:
           path: app/build/outputs/apk/debug/app-debug.apk
 
       - name: Check if release already exists
-        uses: mukunku/tag-exists-action@v1.5.0
+        uses: mukunku/tag-exists-action@v1.6.0
         id: checkTag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
