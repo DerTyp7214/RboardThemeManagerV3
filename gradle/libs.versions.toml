@@ -42,7 +42,7 @@ dotsIndicator = "5.0"
 
 googleServices = "4.4.0"
 gradle = "8.4.0-alpha07"
-uiTooling = "1.6.0"
+uiTooling = "1.6.1"
 kotlin = "1.9.22"
 
 [libraries]
