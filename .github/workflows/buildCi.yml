@@ -85,7 +85,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: "35.0.0 rc1"
+          buildToolsVersion: '35.0.0 rc1'
 
       - name: Delete old APK
         run: rm app/build/outputs/apk/debug/app-debug.apk
