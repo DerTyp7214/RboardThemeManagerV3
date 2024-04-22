@@ -67,7 +67,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/actions/setup-gradle@v3.1.0
+        uses: gradle/actions/setup-gradle@v3.3.1
         with:
           gradle-version: wrapper
           arguments: assembleDebug
@@ -191,7 +191,7 @@ jobs:
         
       - name: Build apk
         id: buildAllApks
-        uses: gradle/actions/setup-gradle@v3.1.0
+        uses: gradle/actions/setup-gradle@v3.3.1
         with:
           gradle-version: wrapper
           arguments: assembleRelease
@@ -321,7 +321,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/actions/setup-gradle@v3.1.0
+        uses: gradle/actions/setup-gradle@v3.3.1
         with:
           gradle-version: wrapper
           arguments: assembleDebug
