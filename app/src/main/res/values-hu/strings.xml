@@ -11,7 +11,7 @@
     <string name="gboard_not_installed">A Gboard nincs telepítve</string>
     <string name="cant_use_app">Ezt az alkalmazást nem használhatja root nélkül</string>
     <string name="not_rooted">Az eszköz nincs root-olva</string>
-    <string name="channel_name">Push értesítések</string>
+    <string name="channel_name">Push Értesítések</string>
     <string name="channel_description">Frissítésekért és információkért.</string>
     <string name="channel_name_download">Letöltés Értesítések</string>
     <string name="channel_description_download">Letöltési értesítésekért</string>
