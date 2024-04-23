@@ -23,12 +23,12 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r26c
+          ndk-version: r26d
 
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 20
+          java-version: 21
           distribution: temurin
 
       - name: Cache Gradle dependencies
