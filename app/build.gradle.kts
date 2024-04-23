@@ -13,7 +13,7 @@ plugins {
 }
 
 android {
-    buildToolsVersion = "35.0.0 rc1"
+    buildToolsVersion = "35.0.0 rc3"
     compileSdkPreview = "VanillaIceCream"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
@@ -25,7 +25,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 34
-        versionCode = 392002
+        versionCode = 392006
         versionName = "3.9.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -55,16 +55,16 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_20
-        targetCompatibility = JavaVersion.VERSION_20
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     kotlinOptions {
-        jvmTarget = JvmTarget.JVM_20.description
+        jvmTarget = JvmTarget.JVM_21.description
     }
 
     tasks.withType<KotlinCompile> {
         kotlinOptions {
-            jvmTarget = JvmTarget.JVM_20.description
+            jvmTarget = JvmTarget.JVM_21.description
         }
     }
 

@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.Intent.ACTION_SEND
 import android.graphics.RenderEffect
 import android.graphics.Shader
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -123,7 +124,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun popInstance() {
-            instances.removeLast().finish()
+            if (Build.VERSION.SDK_INT >= 35) {
+                instances.removeLast().finish()
+            } else {
+                instances.removeLastOrNull()?.finish()
+            }
         }
     }
 
