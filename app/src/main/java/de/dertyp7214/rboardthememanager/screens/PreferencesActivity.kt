@@ -1,6 +1,7 @@
 package de.dertyp7214.rboardthememanager.screens
 
 import android.annotation.SuppressLint
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -33,7 +34,11 @@ class PreferencesActivity : AppCompatActivity() {
         }
 
         fun popInstance() {
-            instances.removeLast().finish()
+            if (Build.VERSION.SDK_INT >= 35) {
+                instances.removeLast().finish()
+            } else {
+                instances.removeLastOrNull()?.finish()
+            }
         }
     }
 

@@ -22,7 +22,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r26c
+          ndk-version: r26d
 
       - name: Get Commit Message
         id: commitMessage
@@ -31,7 +31,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 20
+          java-version: 21
           distribution: temurin
 
       - name: Cache Gradle dependencies
@@ -85,7 +85,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '35.0.0-rc1'
+          buildToolsVersion: '35.0.0-rc3'
 
       - name: Delete old APK
         run: rm app/build/outputs/apk/debug/app-debug.apk
