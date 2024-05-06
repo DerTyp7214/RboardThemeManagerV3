@@ -2,7 +2,7 @@
 activity-ktx = "1.9.0"
 android-shell = "1.0.0"
 androidx-junit = "1.2.0-alpha03"
-appcompat = "1.7.0-alpha03"
+appcompat = "1.7.0-beta01"
 balloon = "1.6.5-SNAPSHOT"
 browser = "1.8.0"
 commons-text = "1.12.0"
