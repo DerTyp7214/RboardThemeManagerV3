@@ -1,7 +1,6 @@
 package de.dertyp7214.rboardthememanager.screens
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.dertyp7214.logs.fragments.Logs

@@ -56,7 +56,7 @@
     <string name="unpacking_themes">Unpacking themes</string>
     <string name="do_you_want_to_delete_theme">Do you want to delete these themes?</string>
     <string name="show_preinstalled_themes">Show preinstalled themes</string>
-    <string name="emoji_compat_app_whitelist">Emoji compat fix</string>
+    <string name="emoji_compat_app_whitelist">Emoji Compat Fix</string>
     <string name="flags">Gboard Flags</string>
     <string name="themes_header">Themes</string>
     <string name="show_system_theme">Show system theme</string>
@@ -64,11 +64,11 @@
     <string name="deprecate_search">Google icon</string>
     <string name="enable_sharing">Share Icon</string>
     <string name="themed_nav_bar_all_devices">Navbar color</string>
-    <string name="enable_email_provider_completion">Email provider</string>
+    <string name="enable_email_provider_completion">Email Provider</string>
     <string name="enable_popup_view_v2">Popup v2</string>
-    <string name="enable_key_border">Key border</string>
-    <string name="enable_secondary_symbols">Secondary symbols</string>
-    <string name="show_suggestions">Show suggestions</string>
+    <string name="enable_key_border">Key Border</string>
+    <string name="enable_secondary_symbols">Secondary Symbols</string>
+    <string name="show_suggestions">Show Suggestions</string>
     <string name="show_all_flags">Show all flags</string>
     <string name="show_all_flags_long">Shows all currently set flags</string>
     <string name="all_flags">All flags</string>
@@ -81,9 +81,10 @@
     <string name="android_12">Android 12</string>
     <string name="general">General</string>
     <string name="show_branding_on_space">Show branding on space</string>
+    <string name="show_branding_on_space_details">Show Google branding on space</string>
     <string name="enable_auto_float_keyboard_in_multi_window">Auto float Keyboard in multi window</string>
-    <string name="pill_shaped_key">Pill shaped key</string>
-    <string name="enable_clipboard_screenshot_paste">Clipboard screenshot paste</string>
+    <string name="pill_shaped_key">Pill Shaped Key</string>
+    <string name="enable_clipboard_screenshot_paste">Clipboard Screenshot Paste</string>
     <string name="enable_lens">Enable lens</string>
     <string name="branding">Branding</string>
     <string name="show_branding_interval_seconds">Show branding interval seconds</string>
@@ -288,4 +289,19 @@
     <string name="theme_values_long">Theme Values</string>
     <string name="value_prefix">Value Prefix</string>
     <string name="theme_changer">Theme Changer</string>
+    <string name="material3_theme">Material3 Theme</string>
+    <string name="material3_theme_details">Material3 System auto Dark/light keyboard theme</string>
+    <string name="show_language_switch_key_details">Show dedicated key to switch languages</string>
+    <string name="show_suggestions_details">Display suggestion strip while typing</string>
+    <string name="pill_shaped_key_details">Using Pill Shaped Key</string>
+    <string name="enable_clipboard_screenshot_paste_details">Add screenshots to your Gboard clipboard for easier pasting</string>
+    <string name="keyboard_redesign_forbid_key_shadows_details">Remove a forbid shadow from the key</string>
+    <string name="enable_auto_float_keyboard_in_multi_window_details">Automatic floating keyboard in multiple windows</string>
+    <string name="enable_sharing_details">Show Sharing Icon</string>
+    <string name="enable_key_border_details">Using Key Border</string>
+    <string name="enable_secondary_symbols_details">Using Secondary Symbols</string>
+    <string name="silk_popup_details">Using Silk Popup</string>
+    <string name="keyboard_redesign_google_sans_details">Using Keyboard Redesign Google Sans</string>
+    <string name="emoji_compat_app_whitelist_details">Using Emoji Compat Fix</string>
+    <string name="enable_email_provider_completion_details">Using Email Provider</string>
 </resources>

@@ -55,7 +55,7 @@
     <string name="unpacking_themes">Témák kicsomagolása</string>
     <string name="do_you_want_to_delete_theme">Szeretné törölni ezeket a témákat?</string>
     <string name="show_preinstalled_themes">Előre telepített témák megjelenítése</string>
-    <string name="emoji_compat_app_whitelist">Emoji kompatibilis javítás</string>
+    <string name="emoji_compat_app_whitelist">Emoji Kompatibilis Javítás</string>
     <string name="flags">Gboard Zászlók</string>
     <string name="themes_header">Témák</string>
     <string name="show_system_theme">Rendszertéma megjelenítése</string>
@@ -63,11 +63,11 @@
     <string name="deprecate_search">Google ikon</string>
     <string name="enable_sharing">Megosztás Ikon</string>
     <string name="themed_nav_bar_all_devices">Navigációs sáv szín</string>
-    <string name="enable_email_provider_completion">E-mail szolgáltató</string>
+    <string name="enable_email_provider_completion">E-mail Szolgáltató</string>
     <string name="enable_popup_view_v2">Popup v2</string>
-    <string name="enable_key_border">Billentyű szegély</string>
-    <string name="enable_secondary_symbols">Másodlagos szimbólumok</string>
-    <string name="show_suggestions">Javaslatok megjelenítése</string>
+    <string name="enable_key_border">Billentyű Szegély</string>
+    <string name="enable_secondary_symbols">Másodlagos Szimbólumok</string>
+    <string name="show_suggestions">Javaslatok Megjelenítése</string>
     <string name="show_all_flags">Összes zászló megjelenítése</string>
     <string name="show_all_flags_long">Összes jelenleg beállított zászlót megjelenítése</string>
     <string name="all_flags">Minden zászló</string>
@@ -81,8 +81,8 @@
     <string name="general">Általános</string>
     <string name="show_branding_on_space">Márkajelzés megjelenítése a szóközön</string>
     <string name="enable_auto_float_keyboard_in_multi_window">Automatikus lebegő billentyűzet több ablakban</string>
-    <string name="pill_shaped_key">Pirula alakú billentyű</string>
-    <string name="enable_clipboard_screenshot_paste">Vágólap képernyőkép beillesztése</string>
+    <string name="pill_shaped_key">Pirula Alakú Billentyű</string>
+    <string name="enable_clipboard_screenshot_paste">Vágólap Képernyőkép Beillesztése</string>
     <string name="enable_lens">Lens engedélyezése</string>
     <string name="branding">Márkajelzés</string>
     <string name="show_branding_interval_seconds">A márkaintervallum másodperceinek megjelenítése</string>
@@ -287,4 +287,20 @@
     <string name="theme_values_long">Téma Értékek</string>
     <string name="value_prefix">Érték előtag</string>
     <string name="theme_changer">Téma Váltó</string>
+    <string name="material3_theme">Material3 Téma</string>
+    <string name="show_language_switch_key_details">Külön gomb megjelnítése a nyelvek közötti váltáshoz</string>
+    <string name="show_suggestions_details">Gépelés közben megjeleníti a javaslatsávot</string>
+    <string name="show_branding_on_space_details">Google márkajelzés megjelenítése a szóközön</string>
+    <string name="material3_theme_details">Material3 Rendszer automatikus Sötét/világos billentyűzet téma</string>
+    <string name="pill_shaped_key_details">Pirula Alakú Billentyű Használata</string>
+    <string name="enable_clipboard_screenshot_paste_details">Képernyőképek hozzáadása a Gboard vágólapjához a könnyebb beillesztés érdekében</string>
+    <string name="keyboard_redesign_forbid_key_shadows_details">Tiltott árnyék eltávolítása a kulcsról</string>
+    <string name="enable_auto_float_keyboard_in_multi_window_details">Automatikus lebegő billentyűzet több ablakban</string>
+    <string name="enable_sharing_details">Megosztás Ikon Megjelenítése</string>
+    <string name="enable_key_border_details">Billentyű Szegély Használata</string>
+    <string name="enable_secondary_symbols_details">Másodlagos Szimbólumok Használata</string>
+    <string name="keyboard_redesign_google_sans_details">A billentyűzet újratervezése Google Sans használatával</string>
+    <string name="silk_popup_details">Selyem Popup Használata</string>
+    <string name="emoji_compat_app_whitelist_details">Emoji Kompatibilis Javítás Használata</string>
+    <string name="enable_email_provider_completion_details">E-mail Szolgáltató Használata</string>
 </resources>
