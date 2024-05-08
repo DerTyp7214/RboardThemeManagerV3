@@ -12,7 +12,7 @@ plugins {
     dependencies {
         classpath(libs.gradle)
         //noinspection DifferentKotlinGradleVersion
-        classpath(kotlin("gradle-plugin", version = "1.9.23"))
+        classpath(kotlin("gradle-plugin", version = "1.9.24"))
         classpath(libs.google.services)
     }
 }
