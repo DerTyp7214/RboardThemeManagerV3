@@ -1,5 +1,5 @@
 {
-  "time": "1705418202551",
+  "time": "1714154132813",
   "flags": [
     {
       "key": "general",
@@ -12,7 +12,7 @@
     {
       "key": "emoji_compat_app_whitelist",
       "title": "emoji_compat_app_whitelist",
-      "summary": "",
+      "summary": "emoji_compat_app_whitelist_details",
       "icon": "ic_emoji_compat",
       "defaultValue": false,
       "type": "BOOLEAN",
@@ -79,7 +79,7 @@
     {
       "key": "enable_sharing",
       "title": "enable_sharing",
-      "summary": "",
+      "summary": "enable_sharing_details",
       "icon": "ic_share",
       "defaultValue": false,
       "type": "BOOLEAN",
@@ -100,7 +100,7 @@
     {
       "key": "enable_email_provider_completion",
       "title": "enable_email_provider_completion",
-      "summary": "",
+      "summary": "enable_email_provider_completion_details",
       "icon": "ic_email",
       "defaultValue": false,
       "type": "BOOLEAN",
@@ -119,7 +119,7 @@
     {
       "key": "enable_key_border",
       "title": "enable_key_border",
-      "summary": "",
+      "summary": "enable_key_border_details",
       "icon": "ic_key_border",
       "defaultValue": false,
       "type": "BOOLEAN",
@@ -128,7 +128,7 @@
     {
       "key": "enable_secondary_symbols",
       "title": "enable_secondary_symbols",
-      "summary": "",
+      "summary": "enable_secondary_symbols_details",
       "icon": "ic_numeric",
       "defaultValue": false,
       "type": "BOOLEAN",
@@ -137,7 +137,7 @@
     {
       "key": "show_language_switch_key",
       "title": "show_language_switch_key",
-      "summary": "",
+      "summary": "show_language_switch_key_details",
       "icon": "ic_globe",
       "defaultValue": false,
       "type": "BOOLEAN",
@@ -146,7 +146,7 @@
     {
       "key": "show_suggestions",
       "title": "show_suggestions",
-      "summary": "",
+      "summary": "show_suggestions_details",
       "icon": "ic_alphabetical",
       "defaultValue": false,
       "type": "BOOLEAN",
@@ -155,7 +155,7 @@
     {
       "key": "keyboard_redesign_google_sans",
       "title": "keyboard_redesign_google_sans",
-      "summary": "",
+      "summary": "keyboard_redesign_google_sans_details",
       "icon": "ic_g_sans",
       "defaultValue": false,
       "type": "BOOLEAN",
@@ -165,7 +165,7 @@
     {
       "key": "branding",
       "title": "show_branding_on_space",
-      "summary": "show_branding_on_space",
+      "summary": "show_branding_on_space_details",
       "icon": "ic_google_logo",
       "defaultValue": false,
       "type": "BOOLEAN",
@@ -231,6 +231,15 @@
       ]
     },
     {
+      "key": "material3_theme",
+      "title": "material3_theme",
+      "summary": "material3_theme_details",
+      "icon": "ic_md3",
+      "defaultValue": false,
+      "type": "BOOLEAN",
+      "file": "FLAGS"
+    },
+    {
       "key": "monet",
       "title": "monet",
       "summary": "monet_details",
@@ -287,7 +296,7 @@
     },{
       "key": "silk",
       "title": "silk",
-      "summary": "silk_details",
+      "summary": "silk_popup_details",
       "icon": "ic_silk_popup",
       "defaultValue": false,
       "type": "BOOLEAN",
@@ -319,7 +328,7 @@
     {
       "key": "pill_shaped_key",
       "title": "pill_shaped_key",
-      "summary": "",
+      "summary": "pill_shaped_key_details",
       "icon": "ic_pill",
       "defaultValue": false,
       "type": "BOOLEAN",
@@ -338,7 +347,7 @@
     {
       "key": "enable_clipboard_screenshot_paste",
       "title": "enable_clipboard_screenshot_paste",
-      "summary": "",
+      "summary": "enable_clipboard_screenshot_paste_details",
       "icon": "ic_screenshot",
       "defaultValue": false,
       "type": "BOOLEAN",
@@ -357,7 +366,7 @@
     {
       "key": "enable_auto_float_keyboard_in_multi_window",
       "title": "enable_auto_float_keyboard_in_multi_window",
-      "summary": "",
+      "summary": "enable_auto_float_keyboard_in_multi_window_details",
       "icon": "ic_float",
       "defaultValue": false,
       "type": "BOOLEAN",
@@ -386,7 +395,7 @@
     {
       "key": "keyboard_redesign_forbid_key_shadows",
       "title": "keyboard_redesign_forbid_key_shadows",
-      "summary": "",
+      "summary": "keyboard_redesign_forbid_key_shadows_details",
       "icon": "ic_box_shadow",
       "defaultValue": false,
       "type": "BOOLEAN",
