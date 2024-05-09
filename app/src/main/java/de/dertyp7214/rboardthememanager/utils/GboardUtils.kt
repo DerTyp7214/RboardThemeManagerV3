@@ -21,7 +21,7 @@ object GboardUtils {
     @Suppress("DEPRECATION")
     fun getGboardVersion(context: Context): String {
         return try {
-            if (Build.VERSION.SDK_INT >= 33) {
+            (if (Build.VERSION.SDK_INT >= 33) {
                 context.packageManager.getPackageInfo(
                     GBOARD_PACKAGE_NAME, PackageManager.PackageInfoFlags.of(
                         GET_META_DATA.toLong()
@@ -32,7 +32,7 @@ object GboardUtils {
                     GBOARD_PACKAGE_NAME,
                     GET_META_DATA
                 ).versionName
-            }
+            }) as String
         } catch (error: Exception) {
             Logger.log(
                 Logger.Companion.Type.ERROR,

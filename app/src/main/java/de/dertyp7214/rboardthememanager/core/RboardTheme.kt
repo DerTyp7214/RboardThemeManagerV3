@@ -5,11 +5,8 @@ import com.topjohnwu.superuser.io.SuFile
 import com.topjohnwu.superuser.io.SuFileOutputStream
 import de.dertyp7214.rboard.RboardTheme
 import de.dertyp7214.rboardthememanager.Config
-import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.util.zip.ZipEntry
-import java.util.zip.ZipFile
 import java.util.zip.ZipOutputStream
 
 fun RboardTheme.install(overrideTheme: Boolean = true, recycle: Boolean = false): Boolean {

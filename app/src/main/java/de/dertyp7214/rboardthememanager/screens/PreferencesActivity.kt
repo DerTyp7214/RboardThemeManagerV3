@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package de.dertyp7214.rboardthememanager.screens
 
 import android.annotation.SuppressLint
@@ -26,6 +28,7 @@ class PreferencesActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
 
     private val callbacks: ArrayList<OnBackPressedCallback> = arrayListOf()
+
     @Suppress("MemberVisibilityCanBePrivate")
     companion object {
         private val instances = arrayListOf<PreferencesActivity>()
@@ -35,7 +38,11 @@ class PreferencesActivity : AppCompatActivity() {
         }
 
         fun popInstance() {
-            instances.removeLast().finish()
+            if (Build.VERSION.SDK_INT >= 35) {
+                instances.removeLast().finish()
+            } else {
+                instances.removeLastOrNull()?.finish()
+            }
         }
     }
 
