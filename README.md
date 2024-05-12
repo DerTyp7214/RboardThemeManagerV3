@@ -8,7 +8,7 @@
 [![Donate Dev](https://img.shields.io/badge/Donate%20Dev-PayPal-green.svg)](https://paypal.me/JosuaLengwenath)
 [![Donate Designer](https://img.shields.io/badge/Donate%20Designer-PayPal-green.svg)](https://paypal.me/rkbdi)
 
-# For translators
+# For translators 
 work on [master](https://github.com/DerTyp7214/RboardThemeManagerV3/tree/master) and [rCompatible-Dev](https://github.com/DerTyp7214/RboardThemeManagerV3/tree/rCompatible-Dev)
 
 Fdroid Repo
