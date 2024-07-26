@@ -1,5 +1,5 @@
 import org.jetbrains.kotlin.config.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -9,8 +9,8 @@ plugins {
 }
 
 android {
-    compileSdkPreview = "VanillaIceCream"
-    buildToolsVersion = "35.0.0 rc3"
+    compileSdk = 35
+    buildToolsVersion = "35.0.0"
     buildFeatures.dataBinding = true
 
     buildFeatures.viewBinding = true
@@ -20,16 +20,16 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         // Update the minSdk if old Android Versions are no longer supported on the Gboard side.
         minSdk = 23
-        targetSdk = 34
-        versionCode = 392008
-        versionName = "3.9.2"
+        targetSdk = 35
+        versionCode = 393000
+        versionName = "3.9.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += listOf(
             "ar", "cs", "da", "de",
             "el", "en", "es", "fi",
-            "fr", "hi", "hu", "id",
+            "fr", "hi", "hu", "in",
             "it", "ja", "nl", "no",
             "pl", "pt-rBR", "ro", "ru",
             "sv", "uk", "vi", "zh-rCN",
@@ -56,17 +56,12 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JvmTarget.JVM_21.description
+        jvmTarget = JvmTarget.JVM_21.toString()
         freeCompilerArgs += listOf(
             "-P",
-            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true",
+            "-Xsuppress-version-warnings"
         )
-    }
-
-    tasks.withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = JvmTarget.JVM_21.description
-        }
     }
 
     packaging {

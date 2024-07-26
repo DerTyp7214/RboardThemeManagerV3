@@ -5,7 +5,7 @@
 
         <item name="fontFamily">@font/google_sans_text_400</item>
 
-        <item name="android:statusBarColor">?android:attr/colorBackground</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
         <item name="floatingActionButtonStyle">?floatingActionButtonSecondaryStyle</item>

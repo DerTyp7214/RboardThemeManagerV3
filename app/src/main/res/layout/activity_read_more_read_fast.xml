@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".screens.ReadMoreReadFast">
+    tools:context=".screens.ReadMoreReadFast"
+    android:fitsSystemWindows="true">
 
     <ScrollView
         android:id="@+id/scrollView"

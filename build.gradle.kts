@@ -11,11 +11,13 @@ buildscript {
         maven("https://maven.fabric.io/public")
         maven("https://maven.google.com")
         maven("https://oss.sonatype.org/content/repositories/snapshots/")
+        maven ("https://storage.googleapis.com/r8-releases/raw")
     }
     dependencies {
         classpath(libs.gradle)
+        classpath(libs.r8)
         //noinspection DifferentKotlinGradleVersion
-        classpath(kotlin("gradle-plugin", version = "1.9.24"))
+        classpath(kotlin("gradle-plugin", version = "2.0.0"))
         classpath(libs.google.services)
     }
 }
