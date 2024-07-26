@@ -1,11 +1,15 @@
 package de.dertyp7214.rboardthememanager.screens
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.view.View.FOCUS_DOWN
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
 import de.dertyp7214.rboardthememanager.R
@@ -17,6 +21,15 @@ import de.dertyp7214.rboardcomponents.utils.doAsync
 class ReadMoreReadFast : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+        )
+
+        window.setDecorFitsSystemWindows(false)
+
+        val view: View = window.decorView
+        window.isNavigationBarContrastEnforced = false
+        window.navigationBarColor = Color.TRANSPARENT
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_read_more_read_fast)
 

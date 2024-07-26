@@ -1,7 +1,11 @@
 package de.dertyp7214.rboardthememanager.screens
 
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +24,7 @@ import de.dertyp7214.rboardthememanager.core.resize
 import de.dertyp7214.rboardthememanager.core.screenWidth
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.ActivityInstallPackBinding
+import dev.chrisbanes.insetter.applyInsetter
 import java.io.File
 import java.util.regex.Pattern
 
@@ -28,6 +33,13 @@ class InstallPackActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInstallPackBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+        )
+        window.setDecorFitsSystemWindows(false)
+        val view: View = window.decorView
+        window.isNavigationBarContrastEnforced = false
+        window.navigationBarColor = Color.TRANSPARENT
         super.onCreate(savedInstanceState)
         binding = ActivityInstallPackBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -35,6 +47,18 @@ class InstallPackActivity : AppCompatActivity() {
         val fab = binding.fab
         val toolbar = binding.toolbar
         val recyclerview = binding.recyclerview
+
+        toolbar.applyInsetter {
+            type(statusBars = true) {
+                margin()
+            }
+        }
+
+        recyclerview.applyInsetter {
+            type(navigationBars = true) {
+                margin()
+            }
+        }
 
         toolbar.title = getString(R.string.install_themes, "0")
 

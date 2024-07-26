@@ -2,10 +2,13 @@ package de.dertyp7214.rboardthememanager.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.ComponentDialog
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.button.MaterialButton
@@ -41,6 +44,14 @@ class NoRootDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+            activity?.enableEdgeToEdge(
+                statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+            )
+
+            dialog?.window?.setDecorFitsSystemWindows(false)
+
+            dialog?.window?.isNavigationBarContrastEnforced = false
+            dialog?.window?.navigationBarColor = Color.TRANSPARENT
 
         val getMagiskButton: MaterialButton = view.findViewById(R.id.magisk_button)
 
