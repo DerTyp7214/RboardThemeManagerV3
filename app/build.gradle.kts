@@ -13,8 +13,8 @@ plugins {
 }
 
 android {
-    buildToolsVersion = "35.0.0 rc3"
-    compileSdkPreview = "VanillaIceCream"
+    buildToolsVersion = "35.0.0"
+    compileSdk = 35
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
     buildFeatures.buildConfig = true
@@ -24,16 +24,16 @@ android {
     defaultConfig {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
-        targetSdk = 34
-        versionCode = 392008
-        versionName = "3.9.2"
+        targetSdk = 35
+        versionCode = 393000
+        versionName = "3.9.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         resourceConfigurations += listOf(
             "ar", "cs", "da", "de",
             "el", "en", "es", "fi",
-            "fr", "hi", "hu", "id",
+            "fr", "hi", "hu", "in",
             "it", "ja", "nl", "no",
             "pl", "pt-rBR", "ro", "ru",
             "sv", "uk", "vi",

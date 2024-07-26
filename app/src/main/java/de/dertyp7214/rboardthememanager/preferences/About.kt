@@ -5,6 +5,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -18,6 +19,8 @@ import de.Maxr1998.modernpreferences.helpers.pref
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.SafeJSON
 import de.dertyp7214.rboardthememanager.core.openUrl
+import de.dertyp7214.rboardthememanager.core.isReachable
+import java.net.URL
 
 class About(private val activity: AppCompatActivity, private val args: SafeJSON) :
     AbstractMenuPreference() {
@@ -45,11 +48,16 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
         builder.pref("rkbdi") {
             titleRes = R.string.rkbdi
             summaryRes = R.string.owner_themer
-            useTint = false
-            icon = glide
-                .load(activity.getString(R.string.rkbdi_image))
-                .apply(options)
-                .submit(100, 100).get()
+            if (!URL(activity.getString(R.string.rkbdi_image)).isReachable()) {
+                iconRes = R.drawable.ic_person
+            }
+            else{
+                useTint = false
+                icon = glide
+                    .load(activity.getString(R.string.rkbdi_image))
+                    .apply(options)
+                    .submit(100, 100).get()
+            }
             onClick {
                 activity.openUrl(activity.getString(R.string.rkbdi_github))
                 false
@@ -58,11 +66,16 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
         builder.pref("akos") {
             titleRes = R.string.akos_paha
             summaryRes = R.string.developer_themer
-            useTint = false
-            icon = glide
-                .load(activity.getString(R.string.akos_image))
-                .apply(options)
-                .submit(100, 100).get()
+            if (!URL(activity.getString(R.string.akos_image)).isReachable()) {
+                iconRes = R.drawable.ic_person
+            }
+            else{
+                useTint = false
+                icon = glide
+                    .load(activity.getString(R.string.akos_image))
+                    .apply(options)
+                    .submit(100, 100).get()
+            }
             onClick {
                 activity.openUrl(activity.getString(R.string.akos_github))
                 false
@@ -71,11 +84,16 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
         builder.pref("dertyp") {
             titleRes = R.string.dertyp
             summaryRes = R.string.developer
-            useTint = false
-            icon = glide
-                .load(activity.getString(R.string.dertyp_image))
-                .apply(options)
-                .submit(100, 100).get()
+            if (!URL(activity.getString(R.string.dertyp_image)).isReachable()) {
+                iconRes = R.drawable.ic_person
+            }
+            else{
+                useTint = false
+                icon = glide
+                    .load(activity.getString(R.string.dertyp_image))
+                    .apply(options)
+                    .submit(100, 100).get()
+            }
             onClick {
                 activity.openUrl(activity.getString(R.string.dertyp_github))
                 false
@@ -84,11 +102,16 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
         builder.pref("dan") {
             titleRes = R.string.dan
             summaryRes = R.string.moderator
-            useTint = false
-            icon = glide
-                .load(activity.getString(R.string.dan_image))
-                .apply(options)
-                .submit(100, 100).get()
+            if (!URL(activity.getString(R.string.dan_image)).isReachable()) {
+                iconRes = R.drawable.ic_person
+            }
+            else{
+                useTint = false
+                icon = glide
+                    .load(activity.getString(R.string.dan_image))
+                    .apply(options)
+                    .submit(100, 100).get()
+            }
             onClick {
                 activity.openUrl(activity.getString(R.string.dan_github))
                 false

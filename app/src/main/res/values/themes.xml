@@ -3,7 +3,9 @@
     <style name="Theme.RboardThemeManagerV3" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
 
-        <item name="android:statusBarColor">?android:attr/colorBackground</item>
+        <item name="fontFamily">@font/google_sans_text_400</item>
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
         <item name="floatingActionButtonStyle">?floatingActionButtonSecondaryStyle</item>
@@ -11,8 +13,6 @@
         <item name="materialAlertDialogTheme">
             @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
         </item>
-
-        <item name="fontFamily">@font/google_sans_text_400</item>
 
         <item name="collapsingToolbarLayoutStyle">@style/Widget.CollapsingToolbar</item>
 
@@ -23,9 +23,7 @@
         <item name="android:windowSplashScreenBackground">?attr/colorSurface</item>
         <item name="android:windowSplashScreenBrandingImage">@drawable/dertyp_branding</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_launcher_animation</item>
-        <item name="android:windowSplashScreenAnimationDuration">
-            @integer/splashAnimationDuration
-        </item>
+        <item name="android:windowSplashScreenAnimationDuration">@integer/splashAnimationDuration</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.Main" parent="Theme.RboardThemeManagerV3" />

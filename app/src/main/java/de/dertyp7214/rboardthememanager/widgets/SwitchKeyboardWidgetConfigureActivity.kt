@@ -3,7 +3,12 @@ package de.dertyp7214.rboardthememanager.widgets
 import android.app.Activity
 import android.appwidget.AppWidgetManager
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
@@ -11,13 +16,24 @@ import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.SwitchKeyboardWidgetConfigureBinding
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardcomponents.utils.doAsync
+import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
+import de.dertyp7214.rboardthememanager.core.dpToPxRounded
 
-class SwitchKeyboardWidgetConfigureActivity : Activity() {
+class SwitchKeyboardWidgetConfigureActivity : AppCompatActivity() {
     private var appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
     private lateinit var recyclerView: RecyclerView
     private lateinit var binding: SwitchKeyboardWidgetConfigureBinding
 
     public override fun onCreate(icicle: Bundle?) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+        )
+
+        window.setDecorFitsSystemWindows(false)
+
+        val view: View = window.decorView
+        window.isNavigationBarContrastEnforced = false
+        window.navigationBarColor = Color.TRANSPARENT
         super.onCreate(icicle)
 
         setResult(RESULT_CANCELED)
@@ -44,6 +60,7 @@ class SwitchKeyboardWidgetConfigureActivity : Activity() {
         recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.addItemDecoration(MarginItemDecoration(2.1.dpToPxRounded(this)))
 
         doAsync(ThemeUtils::loadThemes) { themes ->
             list.addAll(themes)

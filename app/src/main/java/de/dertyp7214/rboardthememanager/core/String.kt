@@ -67,7 +67,7 @@ fun String.fontSize(relative: Float): CharSequence {
 
 @Suppress("DEPRECATION")
 fun String.runAsCommand(callback: (result: Array<String>) -> Unit = {}): Boolean {
-    return Shell.su(this).exec().apply {
+    return Shell.cmd(this).exec().apply {
         if (err.size > 0) Logger.log(
             Logger.Companion.Type.ERROR, "RUN COMMAND",
             err.toTypedArray().apply { callback(this) }.contentToString()
@@ -108,7 +108,7 @@ fun String.setSystemProperty(value: String = "", saveToModule: Boolean = false):
 
 @Suppress("DEPRECATION")
 fun List<String>.runAsCommand(callback: (result: Array<String>) -> Unit = {}): Boolean {
-    return Shell.su(*this.toTypedArray()).exec().apply {
+    return Shell.cmd(*this.toTypedArray()).exec().apply {
         if (err.size > 0) Logger.log(
             Logger.Companion.Type.ERROR, "RUN COMMAND",
             err.toTypedArray().apply { callback(this) }.contentToString()

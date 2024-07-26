@@ -4,7 +4,11 @@ package de.dertyp7214.rboardthememanager.screens
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.view.View
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.gson.Gson
@@ -17,6 +21,7 @@ import de.dertyp7214.rboardthememanager.core.safeParse
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.databinding.ActivityManageRepoBinding
 import de.dertyp7214.rboardthememanager.utils.TypeTokens
+import dev.chrisbanes.insetter.applyInsetter
 import org.json.JSONObject
 import java.net.URL
 
@@ -36,6 +41,15 @@ class ManageRepo : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+        )
+
+        window.setDecorFitsSystemWindows(false)
+
+        val view: View = window.decorView
+        window.isNavigationBarContrastEnforced = false
+        window.navigationBarColor = Color.TRANSPARENT
         super.onCreate(savedInstanceState)
         binding = ActivityManageRepoBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -53,6 +67,18 @@ class ManageRepo : AppCompatActivity() {
         recyclerView.layoutManager = LayoutManager(this)
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
+
+        toolbar.applyInsetter {
+            type(statusBars = true) {
+                margin()
+            }
+        }
+
+        recyclerView.applyInsetter {
+            type(navigationBars = true) {
+                margin()
+            }
+        }
 
         toolbar.title = getString(R.string.manage_repo)
 
