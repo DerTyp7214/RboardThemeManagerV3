@@ -6,7 +6,7 @@ google-core-ktx = "2.1.0"
 junit-junit = "4.13.2"
 kotlinReflect = "1.9.24"
 ksp = "4.16.0"
-libsuVersion = "5.2.2"
+libsuVersion = "6.0.0"
 insetter = "0.6.1"
 
 kotlin-stdlib = "1.9.24"
