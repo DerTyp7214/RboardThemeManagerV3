@@ -1,0 +1,75 @@
+<resources>
+    <style name="Theme.RboardThemeManager.Colors_teal" parent="">
+        <item name="colorPrimary">@color/teal_md_theme_light_colorPrimary</item>
+        <item name="colorOnPrimary">@color/teal_md_theme_light_colorOnPrimary</item>
+        <item name="colorPrimaryContainer">@color/teal_md_theme_light_colorPrimaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/teal_md_theme_light_colorOnPrimaryContainer</item>
+        <item name="colorSecondary">@color/teal_md_theme_light_colorSecondary</item>
+        <item name="colorOnSecondary">@color/teal_md_theme_light_colorOnSecondary</item>
+        <item name="colorSecondaryContainer">@color/teal_md_theme_light_colorSecondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/teal_md_theme_light_colorOnSecondaryContainer</item>
+        <item name="colorTertiary">@color/teal_md_theme_light_colorTertiary</item>
+        <item name="colorOnTertiary">@color/teal_md_theme_light_colorOnTertiary</item>
+        <item name="colorTertiaryContainer">@color/teal_md_theme_light_colorTertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/teal_md_theme_light_colorOnTertiaryContainer</item>
+        <item name="colorError">@color/teal_md_theme_light_colorError</item>
+        <item name="colorOnError">@color/teal_md_theme_light_colorOnError</item>
+        <item name="colorErrorContainer">@color/teal_md_theme_light_colorErrorContainer</item>
+        <item name="colorOnErrorContainer">@color/teal_md_theme_light_colorOnErrorContainer</item>
+        <item name="colorOutline">@color/teal_md_theme_light_colorOutline</item>
+        <item name="colorOutlineVariant">@color/teal_md_theme_light_colorOutlineVariant</item>
+        <item name="android:colorBackground">@color/teal_md_theme_light_colorBackground</item>
+        <item name="colorOnBackground">@color/teal_md_theme_light_colorOnBackground</item>
+        <item name="colorSurface">@color/teal_md_theme_light_colorSurface</item>
+        <item name="colorOnSurface">@color/teal_md_theme_light_colorOnSurface</item>
+        <item name="colorSurfaceVariant">@color/teal_md_theme_light_colorSurfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/teal_md_theme_light_colorOnSurfaceVariant</item>
+        <item name="colorSurfaceInverse">@color/teal_md_theme_light_colorSurfaceInverse</item>
+        <item name="colorOnSurfaceInverse">@color/teal_md_theme_light_colorOnSurfaceInverse</item>
+        <item name="colorPrimaryInverse">@color/teal_md_theme_light_colorPrimaryInverse</item>
+        <item name="colorSurfaceContainerHigh">@color/teal_md_theme_light_colorSurfaceContainerHigh</item>
+        <item name="colorSurfaceContainerHighest">@color/teal_md_theme_light_colorSurfaceContainerHighest</item>
+        <item name="colorSurfaceContainer">@color/teal_md_theme_light_colorSurfaceContainer</item>
+        <item name="colorSurfaceContainerLow">@color/teal_md_theme_light_colorSurfaceContainerLow</item>
+        <item name="colorSurfaceContainerLowest">@color/teal_md_theme_light_colorSurfaceContainerLowest</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="Theme.RboardThemeManagerV3_teal" parent="Theme.RboardThemeManager.Colors_teal">
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+
+        <item name="fontFamily">@font/google_sans_text_400</item>
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/black</item>
+
+        <item name="floatingActionButtonStyle">?floatingActionButtonSecondaryStyle</item>
+        <item name="popupMenuStyle">@style/PopupStyle</item>
+        <item name="alertDialogTheme">@style/Dialog.RboardThemeManagerV3.MaterialAlertDialog</item>
+        <item name="materialAlertDialogTheme">
+            @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
+        </item>
+
+        <item name="collapsingToolbarLayoutStyle">@style/Widget.CollapsingToolbar</item>
+
+        <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
+        <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView</item>
+        <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.Main_teal" parent="Theme.RboardThemeManagerV3_teal" />
+
+    <style name="Theme.RboardThemeManagerV3.Info_teal" parent="Theme.RboardThemeManagerV3_teal">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.InstallPack_teal" parent="Theme.RboardThemeManagerV3_teal">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.ShareFlags_teal" parent="Theme.RboardThemeManagerV3_teal">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+    
+</resources>

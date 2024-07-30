@@ -176,6 +176,7 @@ class ThemeChangerActivity : AppCompatActivity() {
                 de.dertyp7214.rboardcomponents.R.string.style_rboard_v2 to "rboard_v2_style",
                 de.dertyp7214.rboardcomponents.R.string.style_red to "red_style",
                 de.dertyp7214.rboardcomponents.R.string.style_samoan_sun to "samoan_sun_style",
+                de.dertyp7214.rboardcomponents.R.string.style_teal to "teal_style",
                 de.dertyp7214.rboardcomponents.R.string.style_vert_pierre to "vert_pierre_style",
                 de.dertyp7214.rboardcomponents.R.string.style_yellow to "yellow_style",
                 de.dertyp7214.rboardcomponents.R.string.style_yellow_blue to "yellow_blue_style",
@@ -205,6 +206,7 @@ class ThemeChangerActivity : AppCompatActivity() {
                     "rboard_v2_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_rboard_v2
                     "red_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_red
                     "samoan_sun_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_samoan_sun
+                    "teal_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_teal
                     "vert_pierre_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_vert_pierre
                     "yellow_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_yellow
                     "yellow_blue_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_yellow_blue
@@ -233,6 +235,7 @@ class ThemeChangerActivity : AppCompatActivity() {
                     THEMES.RBOARD_V2.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_rboard_v2
                     THEMES.RED.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_red
                     THEMES.SAMOAN_SUN.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_samoan_sun
+                    THEMES.TEAL.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_teal
                     THEMES.VERT_PIERRE.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_vert_pierre
                     THEMES.YELLOW.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_yellow
                     THEMES.YELLOW_BLUE.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_yellow_blue
