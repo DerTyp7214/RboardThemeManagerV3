@@ -54,7 +54,7 @@
 
         <item name="fontFamily">@font/google_sans_text_400</item>
 
-        <item name="android:statusBarColor">?android:attr/colorBackground</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/black</item>
 
         <item name="floatingActionButtonStyle">?floatingActionButtonSecondaryStyle</item>
@@ -79,11 +79,19 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.InstallPack" parent="Theme.RboardThemeManagerV3">
-        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
+    <style name="Theme.RboardThemeManagerV3.ShareFlags" parent="Theme.RboardThemeManagerV3">
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.ShareFlags" parent="Theme.RboardThemeManagerV3">
-        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
+    <style name="Theme.RboardThemeManagerV3.InstallPack" parent="Theme.RboardThemeManagerV3">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.TextAppearanceHeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">@font/google_sans_text_500</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.TextAppearanceHeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">@font/google_sans_text_400</item>
     </style>
 </resources>

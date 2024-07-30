@@ -1,8 +1,13 @@
 package de.dertyp7214.rboardthememanager.screens
 
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.WindowInsets
 import android.widget.Toast
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +27,7 @@ import de.dertyp7214.rboardthememanager.core.resize
 import de.dertyp7214.rboardthememanager.core.screenWidth
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.ActivityInstallPackBinding
+import dev.chrisbanes.insetter.applyInsetter
 import java.io.File
 import java.util.regex.Pattern
 
@@ -33,6 +39,21 @@ class InstallPackActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             applyTheme(installPack = true)
         }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+            enableEdgeToEdge(
+                statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+            )
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+        }
+
+        val view: View = window.decorView
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            window.isNavigationBarContrastEnforced = false
+            window.navigationBarColor = Color.TRANSPARENT
+        }
         super.onCreate(savedInstanceState)
         binding = ActivityInstallPackBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -41,6 +62,17 @@ class InstallPackActivity : AppCompatActivity() {
         val toolbar = binding.toolbar
         val recyclerview = binding.recyclerview
 
+        toolbar.applyInsetter {
+            type(statusBars = true) {
+                margin()
+            }
+        }
+
+        recyclerview.applyInsetter {
+            type(navigationBars = true) {
+                margin()
+            }
+        }
         toolbar.title = getString(R.string.install_themes, "0")
 
         val themes = arrayListOf<ThemeDataClass>()

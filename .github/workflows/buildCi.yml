@@ -22,7 +22,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r26d
+          ndk-version: r27
 
       - name: Get Commit Message
         id: commitMessage
@@ -86,7 +86,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '35.0.0-rc3'
+          buildToolsVersion: '35.0.0'
 
       - name: Delete old APK
         run: rm app/build/outputs/apk/debug/app-debug.apk
@@ -146,7 +146,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r26d
+          ndk-version: r27
 
       - name: Get Commit Message
         id: commitMessage
@@ -214,7 +214,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '35.0.0-rc3'
+          buildToolsVersion: '35.0.0'
 
       - name: Rename APK
         run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk
@@ -276,7 +276,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r26d
+          ndk-version: r27
 
       - name: Get Commit Message
         id: commitMessage
@@ -345,7 +345,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '35.0.0-rc3'
+          buildToolsVersion: '35.0.0'
 
       - name: Rename APK
         run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk

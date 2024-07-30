@@ -4,8 +4,12 @@ package de.dertyp7214.rboardthememanager.screens
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.gson.Gson
@@ -19,6 +23,7 @@ import de.dertyp7214.rboardthememanager.core.safeParse
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.databinding.ActivityManageRepoBinding
 import de.dertyp7214.rboardthememanager.utils.TypeTokens
+import dev.chrisbanes.insetter.applyInsetter
 import org.json.JSONObject
 import java.net.URL
 
@@ -41,6 +46,21 @@ class ManageRepo : AppCompatActivity() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             applyTheme(installPack = true)
         }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+            enableEdgeToEdge(
+                statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+            )
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+        }
+
+        val view: View = window.decorView
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            window.isNavigationBarContrastEnforced = false
+            window.navigationBarColor = Color.TRANSPARENT
+        }
         super.onCreate(savedInstanceState)
         binding = ActivityManageRepoBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -51,6 +71,17 @@ class ManageRepo : AppCompatActivity() {
         val toolbar = binding.toolbar
         val recyclerView = binding.recyclerView
 
+        toolbar.applyInsetter {
+            type(statusBars = true) {
+                margin()
+            }
+        }
+
+        recyclerView.applyInsetter {
+            type(navigationBars = true) {
+                margin()
+            }
+        }
         val items = ArrayList<ThemePack>()
 
         val adapter = ManageRepoThemePackAdapter(items)

@@ -15,7 +15,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r26d
+          ndk-version: r27
 
       - name: Get Commit Message
         id: commitMessage
@@ -79,7 +79,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '35.0.0-rc3'
+          buildToolsVersion: '35.0.0'
 
       - name: List files
         run: ls app/build/outputs/apk/pro

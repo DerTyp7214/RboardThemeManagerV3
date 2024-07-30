@@ -388,6 +388,13 @@ fun Activity.applyTheme(
                 installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_samoan_sun
                 else -> R.style.Theme_RboardThemeManagerV3_samoan_sun
             }
+            "teal_style" -> when {
+                main -> R.style.Theme_RboardThemeManagerV3_Main_teal
+                info -> R.style.Theme_RboardThemeManagerV3_Info_teal
+                shareFlags -> R.style.Theme_RboardThemeManagerV3_ShareFlags_teal
+                installPack -> R.style.Theme_RboardThemeManagerV3_InstallPack_teal
+                else -> R.style.Theme_RboardThemeManagerV3_teal
+            }
             "vert_pierre_style" -> when {
                 main -> R.style.Theme_RboardThemeManagerV3_Main_vert_pierre
                 info -> R.style.Theme_RboardThemeManagerV3_Info_vert_pierre

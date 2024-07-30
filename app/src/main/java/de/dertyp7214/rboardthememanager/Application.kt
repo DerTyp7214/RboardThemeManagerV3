@@ -55,7 +55,7 @@ class Application : Application() {
                 Config.RAW_PREFIX = Config.GITLAB_RAW_PREFIX
             }
             if (!URL("https://bin.utwitch.net").isReachable())
-                Logger.customBin = "hastebin.com"
+                Logger.customBin = "bin.dertyp.dev"
         }
         PreferenceManager.getDefaultSharedPreferences(this)
             .edit { putString("logMode", if (BuildConfig.DEBUG) "VERBOSE" else "ERROR") }

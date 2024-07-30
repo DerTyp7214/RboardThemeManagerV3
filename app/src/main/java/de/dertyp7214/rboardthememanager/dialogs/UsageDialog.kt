@@ -1,16 +1,21 @@
 package de.dertyp7214.rboardthememanager.dialogs
 
 import android.app.Dialog
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.ComponentDialog
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.card.MaterialCardView
 import de.dertyp7214.rboardcomponents.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.applyTheme
 
 class UsageDialog(
     private val onMagisk: (DialogFragment) -> Unit,
@@ -48,6 +53,23 @@ class UsageDialog(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
+            activity?.applyTheme()
+        }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+            activity?.enableEdgeToEdge(
+                statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+            )
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            dialog?.window?.setDecorFitsSystemWindows(false)
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            dialog?.window?.isNavigationBarContrastEnforced = false
+            dialog?.window?.navigationBarColor = Color.TRANSPARENT
+        }
 
         val magiskCard: MaterialCardView = view.findViewById(R.id.cardMagisk)
         val gboardCard: MaterialCardView = view.findViewById(R.id.cardGboard)
