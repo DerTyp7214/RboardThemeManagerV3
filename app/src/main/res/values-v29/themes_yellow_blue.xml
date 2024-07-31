@@ -1,0 +1,75 @@
+<resources>
+    <style name="Theme.RboardThemeManager.Colors_yellow_blue" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/yellow_blue_md_theme_light_primary</item>
+        <item name="colorOnPrimary">@color/yellow_blue_md_theme_light_onPrimary</item>
+        <item name="colorPrimaryContainer">@color/yellow_blue_md_theme_light_primaryContainer</item>
+        <item name="colorOnPrimaryContainer">@color/yellow_blue_md_theme_light_onPrimaryContainer</item>
+        <item name="colorSecondary">@color/yellow_blue_md_theme_light_secondary</item>
+        <item name="colorOnSecondary">@color/yellow_blue_md_theme_light_onSecondary</item>
+        <item name="colorSecondaryContainer">@color/yellow_blue_md_theme_light_secondaryContainer</item>
+        <item name="colorOnSecondaryContainer">@color/yellow_blue_md_theme_light_onSecondaryContainer</item>
+        <item name="colorTertiary">@color/yellow_blue_md_theme_light_tertiary</item>
+        <item name="colorOnTertiary">@color/yellow_blue_md_theme_light_onTertiary</item>
+        <item name="colorTertiaryContainer">@color/yellow_blue_md_theme_light_tertiaryContainer</item>
+        <item name="colorOnTertiaryContainer">@color/yellow_blue_md_theme_light_onTertiaryContainer</item>
+        <item name="colorError">@color/yellow_blue_md_theme_light_error</item>
+        <item name="colorOnError">@color/yellow_blue_md_theme_light_onError</item>
+        <item name="colorErrorContainer">@color/yellow_blue_md_theme_light_errorContainer</item>
+        <item name="colorOnErrorContainer">@color/yellow_blue_md_theme_light_onErrorContainer</item>
+        <item name="colorOutline">@color/yellow_blue_md_theme_light_outline</item>
+        <item name="android:colorBackground">@color/yellow_blue_md_theme_light_background</item>
+        <item name="colorOnBackground">@color/yellow_blue_md_theme_light_onBackground</item>
+        <item name="colorSurface">@color/yellow_blue_md_theme_light_surface</item>
+        <item name="colorOnSurface">@color/yellow_blue_md_theme_light_onSurface</item>
+        <item name="colorSurfaceVariant">@color/yellow_blue_md_theme_light_surfaceVariant</item>
+        <item name="colorOnSurfaceVariant">@color/yellow_blue_md_theme_light_onSurfaceVariant</item>
+        <item name="colorSurfaceInverse">@color/yellow_blue_md_theme_light_inverseSurface</item>
+        <item name="colorOnSurfaceInverse">@color/yellow_blue_md_theme_light_inverseOnSurface</item>
+        <item name="colorPrimaryInverse">@color/yellow_blue_md_theme_light_inversePrimary</item>
+        <item name="colorSurfaceContainerHighest">@color/yellow_blue_md_theme_light_SurfaceContainerHighest</item>
+        <item name="colorSurfaceContainerHigh">@color/yellow_blue_md_theme_light_SurfaceContainerHigh</item>
+        <item name="colorSurfaceContainer">@color/yellow_blue_md_theme_light_SurfaceContainer</item>
+        <item name="colorSurfaceContainerLow">@color/yellow_blue_md_theme_light_SurfaceContainerLow</item>
+        <item name="colorSurfaceContainerLowest">@color/yellow_blue_md_theme_light_SurfaceContainerLowest</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="Theme.RboardThemeManagerV3_yellow_blue" parent="Theme.RboardThemeManager.Colors_yellow_blue">
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
+
+        <item name="fontFamily">@font/google_sans_text_400</item>
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+
+        <item name="floatingActionButtonStyle">?floatingActionButtonSecondaryStyle</item>
+        <item name="popupMenuStyle">@style/PopupStyle</item>
+        <item name="alertDialogTheme">@style/Dialog.RboardThemeManagerV3.MaterialAlertDialog</item>
+        <item name="materialAlertDialogTheme">
+            @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
+        </item>
+
+        <item name="collapsingToolbarLayoutStyle">@style/Widget.CollapsingToolbar</item>
+
+        <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
+        <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView</item>
+        <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.Main_yellow_blue" parent="Theme.RboardThemeManagerV3_yellow_blue" />
+
+    <style name="Theme.RboardThemeManagerV3.Info_yellow_blue" parent="Theme.RboardThemeManagerV3_yellow_blue">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.InstallPack_yellow_blue" parent="Theme.RboardThemeManagerV3_yellow_blue">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Theme.RboardThemeManagerV3.ShareFlags_yellow_blue" parent="Theme.RboardThemeManagerV3_yellow_blue">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+</resources>

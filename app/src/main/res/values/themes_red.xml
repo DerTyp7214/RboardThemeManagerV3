@@ -54,7 +54,7 @@
 
         <item name="fontFamily">@font/google_sans_text_400</item>
 
-        <item name="android:statusBarColor">?android:attr/colorBackground</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/black</item>
 
         <item name="floatingActionButtonStyle">?floatingActionButtonSecondaryStyle</item>
@@ -80,10 +80,10 @@
     </style>
 
     <style name="Theme.RboardThemeManagerV3.InstallPack_Red" parent="Theme.RboardThemeManagerV3_Red">
-        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="Theme.RboardThemeManagerV3.ShareFlags_Red" parent="Theme.RboardThemeManagerV3_Red">
-        <item name="android:statusBarColor">?attr/colorSurfaceVariant</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 </resources>

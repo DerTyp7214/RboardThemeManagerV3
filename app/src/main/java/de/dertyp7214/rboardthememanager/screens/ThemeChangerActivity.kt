@@ -1,12 +1,15 @@
 package de.dertyp7214.rboardthememanager.screens
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.PagerAdapter
@@ -23,18 +26,36 @@ import de.dertyp7214.rboardthememanager.core.capitalize
 import de.dertyp7214.rboardthememanager.core.get
 import de.dertyp7214.rboardthememanager.core.getAttr
 import de.dertyp7214.rboardthememanager.core.set
+import de.dertyp7214.rboardthememanager.databinding.ActivityShareFlagsBinding
 import de.dertyp7214.rboardthememanager.databinding.ActivityThemeChangerBinding
+import dev.chrisbanes.insetter.applyInsetter
 
 class ThemeChangerActivity : AppCompatActivity() {
 
-    val binding by lazy { ActivityThemeChangerBinding.inflate(layoutInflater) }
+    private lateinit var binding: ActivityThemeChangerBinding
     private val currentTheme by lazy { ThemeUtils.getStyleName(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             applyTheme()
         }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+            enableEdgeToEdge(
+                statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+            )
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+        }
+
+        val view: View = window.decorView
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            window.isNavigationBarContrastEnforced = false
+            window.navigationBarColor = Color.TRANSPARENT
+        }
+        super.onCreate(savedInstanceState)
+        binding = ActivityThemeChangerBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val toolbar = binding.toolbar
@@ -49,7 +70,16 @@ class ThemeChangerActivity : AppCompatActivity() {
             ThemeUtils.APP_THEMES.toList()
         }
 
-
+        toolbar.applyInsetter {
+            type(statusBars = true) {
+                margin()
+            }
+        }
+        applyButton.applyInsetter {
+            type(navigationBars = true) {
+                margin()
+            }
+        }
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -146,6 +176,7 @@ class ThemeChangerActivity : AppCompatActivity() {
                 de.dertyp7214.rboardcomponents.R.string.style_rboard_v2 to "rboard_v2_style",
                 de.dertyp7214.rboardcomponents.R.string.style_red to "red_style",
                 de.dertyp7214.rboardcomponents.R.string.style_samoan_sun to "samoan_sun_style",
+                de.dertyp7214.rboardcomponents.R.string.style_teal to "teal_style",
                 de.dertyp7214.rboardcomponents.R.string.style_vert_pierre to "vert_pierre_style",
                 de.dertyp7214.rboardcomponents.R.string.style_yellow to "yellow_style",
                 de.dertyp7214.rboardcomponents.R.string.style_yellow_blue to "yellow_blue_style",
@@ -175,6 +206,7 @@ class ThemeChangerActivity : AppCompatActivity() {
                     "rboard_v2_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_rboard_v2
                     "red_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_red
                     "samoan_sun_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_samoan_sun
+                    "teal_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_teal
                     "vert_pierre_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_vert_pierre
                     "yellow_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_yellow
                     "yellow_blue_style" -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_yellow_blue
@@ -203,6 +235,7 @@ class ThemeChangerActivity : AppCompatActivity() {
                     THEMES.RBOARD_V2.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_rboard_v2
                     THEMES.RED.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_red
                     THEMES.SAMOAN_SUN.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_samoan_sun
+                    THEMES.TEAL.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_teal
                     THEMES.VERT_PIERRE.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_vert_pierre
                     THEMES.YELLOW.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_yellow
                     THEMES.YELLOW_BLUE.name -> de.dertyp7214.rboardcomponents.R.style.ThemeOverlay_RboardThemeManager_Colors_yellow_blue

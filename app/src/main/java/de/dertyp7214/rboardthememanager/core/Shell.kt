@@ -15,7 +15,7 @@ fun hasRoot(): Boolean {
 
 @Suppress("DEPRECATION", "UNUSED_PARAMETER")
 fun hasRoot(activity: Activity): Boolean = try {
-    Shell.su().exec()
+    Shell.cmd().exec()
     hasRoot()
 } catch (_: Exception) {
     false

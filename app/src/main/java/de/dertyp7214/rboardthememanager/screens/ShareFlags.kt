@@ -3,13 +3,20 @@ package de.dertyp7214.rboardthememanager.screens
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.ACTION_SEND
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import androidx.recyclerview.widget.RecyclerView
+import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.dertyp7214.rboardcomponents.components.SearchBar
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ShareFlagsAdapter
@@ -19,6 +26,7 @@ import de.dertyp7214.rboardthememanager.core.addCallback
 import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.core.getMapExtra
 import de.dertyp7214.rboardthememanager.core.share
+import de.dertyp7214.rboardthememanager.databinding.ActivityPreferencesBinding
 import de.dertyp7214.rboardthememanager.databinding.ActivityShareFlagsBinding
 import de.dertyp7214.rboardthememanager.preferences.Flags
 import dev.chrisbanes.insetter.applyInsetter
@@ -42,6 +50,21 @@ class ShareFlags : AppCompatActivity() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             applyTheme(shareFlags = true)
         }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+            enableEdgeToEdge(
+                statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+            )
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.setDecorFitsSystemWindows(false)
+        }
+
+        val view: View = window.decorView
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            window.isNavigationBarContrastEnforced = false
+            window.navigationBarColor = Color.TRANSPARENT
+        }
         super.onCreate(savedInstanceState)
         binding = ActivityShareFlagsBinding.inflate(layoutInflater)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -64,6 +87,11 @@ class ShareFlags : AppCompatActivity() {
             }
         }
 
+        recyclerView.applyInsetter {
+            type(navigationBars = true) {
+                margin()
+            }
+        }
         if (!isFlags) titleRes = R.string.share_prefs_title
         if (import) titleRes =
             if (isFlags) R.string.import_flags_title else R.string.import_prefs_title
@@ -132,12 +160,14 @@ class ShareFlags : AppCompatActivity() {
                 file.share(this, "text/xml", ACTION_SEND, R.string.share_flags)
                 true
             }
+
             R.id.select_all -> {
                 adapter.selectAll()
                 title =
                     getString(titleRes, adapter.getSelectedFlags().size)
                 true
             }
+
             R.id.apply_flags -> {
                 Flags.setUpFlags()
                 val selectedFlags = adapter.getSelectedFlags()
@@ -153,6 +183,7 @@ class ShareFlags : AppCompatActivity() {
                 finish()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
     }
