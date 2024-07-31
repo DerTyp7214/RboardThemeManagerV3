@@ -1,11 +1,17 @@
+@file:Suppress("DEPRECATION")
+
 package de.dertyp7214.rboardthememanager.screens
 
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,15 +39,27 @@ class PreferencesActivity : AppCompatActivity() {
         }
 
         fun popInstance() {
-            instances.removeLast().finish()
+            if (Build.VERSION.SDK_INT >= 35) {
+                instances.removeLast().finish()
+            } else {
+                instances.removeLastOrNull()?.finish()
+            }
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+        )
+
+        window.setDecorFitsSystemWindows(false)
+
+        val view: View = window.decorView
+        window.isNavigationBarContrastEnforced = false
+        window.navigationBarColor = Color.TRANSPARENT
         super.onCreate(savedInstanceState)
         binding = ActivityPreferencesBinding.inflate(layoutInflater)
-        window.setDecorFitsSystemWindows(false)
         setContentView(binding.root)
 
         instances.add(this)

@@ -1,12 +1,18 @@
+@file:Suppress("DEPRECATION")
+
 package de.dertyp7214.rboardthememanager.screens
 
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.ACTION_SEND
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import de.dertyp7214.rboardcomponents.components.SearchBar
 import de.dertyp7214.rboardthememanager.R
@@ -36,9 +42,17 @@ class ShareFlags : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+        )
+
+        window.setDecorFitsSystemWindows(false)
+
+        val view: View = window.decorView
+        window.isNavigationBarContrastEnforced = false
+        window.navigationBarColor = Color.TRANSPARENT
         super.onCreate(savedInstanceState)
         binding = ActivityShareFlagsBinding.inflate(layoutInflater)
-        window.setDecorFitsSystemWindows(false)
         setContentView(binding.root)
 
         import = intent.getBooleanExtra("import", false)
@@ -50,6 +64,11 @@ class ShareFlags : AppCompatActivity() {
 
         toolbar.applyInsetter {
             type(statusBars = true) {
+                margin()
+            }
+        }
+        recyclerView.applyInsetter {
+            type(navigationBars = true) {
                 margin()
             }
         }

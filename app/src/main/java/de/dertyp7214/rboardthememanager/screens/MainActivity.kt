@@ -5,8 +5,10 @@ package de.dertyp7214.rboardthememanager.screens
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.ACTION_SEND
+import android.graphics.Color
 import android.graphics.RenderEffect
 import android.graphics.Shader
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,6 +18,8 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.SystemBarStyle
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -123,7 +127,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun popInstance() {
-            instances.removeLast().finish()
+            if (Build.VERSION.SDK_INT >= 35) {
+                instances.removeLast().finish()
+            } else {
+                instances.removeLastOrNull()?.finish()
+            }
         }
     }
 
@@ -139,10 +147,18 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("NotifyDataSetChanged", "ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+        )
+
+        window.setDecorFitsSystemWindows(false)
+
+        val view: View = window.decorView
+        window.isNavigationBarContrastEnforced = false
+        window.navigationBarColor = Color.TRANSPARENT
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        window.setDecorFitsSystemWindows(false)
 
         instances.add(this)
 

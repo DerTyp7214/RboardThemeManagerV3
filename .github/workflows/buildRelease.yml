@@ -24,16 +24,16 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r26b
+          ndk-version: r27
 
       - name: Get Commit Message
         id: commitMessage
         run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=message::${IN%%$'\n'*}"
 
       - name: Setup JDK
-        uses: actions/setup-java@v4.0.0
+        uses: actions/setup-java@v4
         with:
-          java-version: 20
+          java-version: 21
           distribution: temurin
 
       - name: Cache Gradle dependencies
@@ -63,7 +63,7 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v3.0.0
+        uses: gradle/gradle-build-action@v3
         with:
           gradle-version: wrapper
           arguments: assembleRelease
@@ -89,7 +89,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: 34.0.0
+          buildToolsVersion: '35.0.0'
 
       - name: List files
         run: ls app/build/outputs/apk/release
@@ -98,7 +98,7 @@ jobs:
         run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4.3.0
+        uses: actions/upload-artifact@v4
         with:
           name: Release Artifact
           path: app/build/outputs/apk/release/app-release.apk
