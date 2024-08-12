@@ -11,7 +11,7 @@ insetter = "0.6.1"
 
 kotlin-stdlib = "2.0.0"
 appcompat = "1.7.0"
-constraintlayout = "2.2.0-alpha13"
+constraintlayout = "2.2.0-alpha14"
 preference-ktx = "1.2.1"
 activity-ktx = "1.9.1"
 fragment-ktx = "1.8.2"
