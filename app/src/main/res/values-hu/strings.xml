@@ -146,7 +146,7 @@
     <string name="use_blur_long">Elmosódás rendereffektek használata</string>
     <string name="remove_repo">Eltávolítja a tárolót?</string>
     <string name="remove_repo_long">Szeretné eltávolítani ezt a Tárolót?</string>
-    <string name="do_you_want_to_delete_repo">Szeretné törölni ezeket a tárolókat?</string>
+    <string name="do_you_want_to_delete_repo">Szeretné törölni ezeket a repókat?</string>
     <string name="manage_repo">Tároló Kezelése</string>
     <string name="address">Cím</string>
     <string name="enabled">Engedélyezve</string>
