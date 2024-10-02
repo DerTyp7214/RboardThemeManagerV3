@@ -47,11 +47,10 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/gradle-build-action@v3
         with:
-            gradle-version: "wrapper"
-      - name: AssemblePro the project
-        run: ./gradlew assemblePro
+          gradle-version: wrapper
+          arguments: assemblePro
 
       - name: Get JSON
         id: metadataJson
