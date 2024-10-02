@@ -13,7 +13,7 @@
         <item name="materialAlertDialogTheme">
             @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
         </item>
-        <item name="materialSwitchStyle">@style/Widget.Material3.CompoundButton.MaterialSwitch</item>
+        
         <item name="collapsingToolbarLayoutStyle">@style/Widget.CollapsingToolbar</item>
 
         <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
