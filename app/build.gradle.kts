@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.config.JvmTarget
-
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -25,8 +23,10 @@ android {
         versionName = "3.9.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
 
-        resourceConfigurations += listOf(
+    androidResources {
+        localeFilters += listOf(
             "ar", "cs", "da", "de",
             "el", "en", "es", "fi",
             "fr", "hi", "hu", "in",
@@ -51,19 +51,21 @@ android {
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_22
-        targetCompatibility = JavaVersion.VERSION_22
+        sourceCompatibility = JavaVersion.current()
+        targetCompatibility = JavaVersion.current()
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_22.toString()
+        jvmTarget = JavaVersion.current().toString()
         freeCompilerArgs += listOf(
             "-P",
             "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true",
             "-Xsuppress-version-warnings"
         )
     }
-
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
     packaging {
         jniLibs {
             useLegacyPackaging = true

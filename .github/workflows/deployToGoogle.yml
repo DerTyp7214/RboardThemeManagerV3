@@ -1,12 +1,22 @@
-name: Build Pro
+name: Deploy to Google Play
 
 on:
+  push:
+    branches: [ staging ]
+    paths:
+      - 'app/**'
+      - 'gradle/**'
+      - 'build.gradle.kts'
+      - 'gradle.properties'
+      - 'settings.gradle.kts'
+      - '.github/workflows/deployToGoogle.yml'
   workflow_dispatch:
 
 jobs:
   build:
-    name: Build new Pro Apk
+    name: Deploy to Google Play
     runs-on: ubuntu-latest
+    if: 'false'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -15,17 +25,13 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27
-
-      - name: Get Commit Message
-        id: commitMessage
-        run: IN="${{ github.event.head_commit.message }}" && echo "::set-output name=message::${IN%%$'\n'*}"
+          ndk-version: r26
 
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          distribution: temurin
           java-version: 21
+          distribution: temurin
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v4
@@ -51,47 +57,43 @@ jobs:
 
       - name: Accept Preview SDK License
         run: echo -n -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > /usr/local/lib/android/sdk/licenses/android-sdk-preview-license
-        
-      - name: Build apk
-        id: buildAllApks
+
+      - name: Build Bundle
         uses: gradle/actions/setup-gradle@v3
         with:
-          gradle-version: wrapper
-          arguments: assemblePro
-
-      - name: Get JSON
-        id: metadataJson
-        run: |
-          content=`cat app/build/outputs/apk/pro/output-metadata.json`
-          content="${content//'%'/'%25'}"
-          content="${content//$'\n'/'%0A'}"
-          content="${content//$'\r'/'%0D'}"
-          echo "::set-output name=json::$content"
-      - name: List files
-        run: ls app/build/outputs/apk/pro
+            gradle-version: wrapper
+      - name: AssembleRelease the project
+        run: ./gradlew assembleRelease
 
       - name: Sign artifact
         id: signArtifact
-        uses: ilharp/sign-android-release@v1.0.4
+        uses: r0adkll/sign-android-release@v1
         with:
-          releaseDir: app/build/outputs/apk/debug
-          keyAlias: ${{ secrets.KEYALIAS }}
-          signingKey: ${{ secrets.SIGNING_KEY }}
+          releaseDirectory: app/build/outputs/bundle/release
+          alias: ${{ secrets.KEYALIAS }}
+          signingKeyBase64: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
+        env:
           buildToolsVersion: '35.0.0'
-
-      - name: List files
-        run: ls app/build/outputs/apk/pro
-
-      - name: Rename APK
-        run: mv app/build/outputs/apk/pro/app-pro-unsigned-signed.apk app/build/outputs/apk/pro/app-pro.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Release Artifact
-          path: app/build/outputs/apk/pro/app-pro.apk
+          name: Artifact
+          path: app/build/outputs/bundle/release/app-release.aab
 
-      - name: Print json
-        run: echo ${{ github.event.head_commit }} 
+      - name: Create whatsNew
+        run: mkdir distribution/; echo '${{ github.event.head_commit.message }}' > whatsnew-en-US
+
+      - name: Create service_account.json
+        run: echo '${{ secrets.SERVICE_ACCOUNT_JSON }}' > service_account.json
+
+      - name: Deploy to Production
+        uses: r0adkll/upload-google-play@v1.1.3
+        with:
+          serviceAccountJson: service_account.json
+          packageName: de.dertyp7214.rboardthememanager
+          releaseFiles: app/build/outputs/bundle/release/*.aab
+          track: production
+          whatsNewDirectory: distribution/
