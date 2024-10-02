@@ -90,6 +90,7 @@
     <string name="monet_details">Billentyűzettéma a rendszer témája alapján</string>
     <string name="download_header">Letöltés</string>
     <string name="repos">Tárolók</string>
+    <string name="delete_repo">Tároló törlése</string>
     <string name="repos_long">Téma tárolók módosítása</string>
     <string name="apply">Alkalmaz</string>
     <string name="add">Hozzáadás</string>
@@ -145,6 +146,7 @@
     <string name="use_blur_long">Elmosódás rendereffektek használata</string>
     <string name="remove_repo">Eltávolítja a tárolót?</string>
     <string name="remove_repo_long">Szeretné eltávolítani ezt a Tárolót?</string>
+    <string name="do_you_want_to_delete_repo">Szeretné törölni ezeket a tárolókat?</string>
     <string name="manage_repo">Tároló Kezelése</string>
     <string name="address">Cím</string>
     <string name="enabled">Engedélyezve</string>

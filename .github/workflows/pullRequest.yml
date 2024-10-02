@@ -23,7 +23,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27b
+          ndk-version: r27
 
       - name: Setup JDK
         uses: actions/setup-java@v4
@@ -58,10 +58,11 @@ jobs:
         
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: wrapper
-          arguments: assembleDebug
+            gradle-version: wrapper
+      - name: AssembleDebug the project
+        run: ./gradlew assembleDebug
 
       - name: Get JSON
         id: metadataJson

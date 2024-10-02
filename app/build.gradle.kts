@@ -25,7 +25,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 35
-        versionCode = 393001
+        versionCode = 393002
         versionName = "3.9.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -58,20 +58,20 @@ android {
         sourceCompatibility = JavaVersion.VERSION_22
         targetCompatibility = JavaVersion.VERSION_22
     }
+
     kotlinOptions {
-        jvmTarget = JvmTarget.JVM_22.description
+        jvmTarget = JavaVersion.VERSION_22.toString()
+        freeCompilerArgs += listOf(
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true",
+            "-Xsuppress-version-warnings"
+        )
     }
-
-    tasks.withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = JvmTarget.JVM_22.description
-        }
-    }
-
     packaging {
         jniLibs {
             useLegacyPackaging = true
         }
+        resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
     }
 }
 

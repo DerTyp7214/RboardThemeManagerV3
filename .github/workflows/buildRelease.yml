@@ -24,7 +24,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27b
+          ndk-version: r27
 
       - name: Get Commit Message
         id: commitMessage
@@ -63,10 +63,11 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: wrapper
-          arguments: assembleRelease
+            gradle-version: wrapper
+      - name: AssembleRelease the project
+        run: ./gradlew assembleRelease
 
       - name: Get JSON
         id: metadataJson
