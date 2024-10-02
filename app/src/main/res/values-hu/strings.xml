@@ -26,6 +26,7 @@
     <string name="apply_automatic_theme">Automatikus Téma Alkalmazása</string>
     <string name="applied">Téma Alkalmazva</string>
     <string name="delete_theme">Téma Törlése</string>
+    <string name="delete_repo">Tároló törlése</string>
     <string name="q_delete_theme">Szeretné törölni ezt a témát?</string>
     <string name="theme_deleted">Téma Törölve</string>
     <string name="info">Információ</string>
@@ -54,6 +55,7 @@
     <string name="themes_installed">Témák telepítve</string>
     <string name="unpacking_themes">Témák kicsomagolása</string>
     <string name="do_you_want_to_delete_theme">Szeretné törölni ezeket a témákat?</string>
+    <string name="do_you_want_to_delete_repo">Szeretné törölni ezeket a repókat?</string>
     <string name="show_preinstalled_themes">Előre telepített témák megjelenítése</string>
     <string name="emoji_compat_app_whitelist">Emoji Kompatibilis Javítás</string>
     <string name="flags">Gboard Zászlók</string>

@@ -19,12 +19,12 @@ android {
         // Update the minSdk if old Android Versions are no longer supported on the Gboard side.
         minSdk = 23
         targetSdk = 35
-        versionCode = 393002
+        versionCode = 393003
         versionName = "3.9.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    @Suppress("UnstableApiUsage")
     androidResources {
         localeFilters += listOf(
             "ar", "cs", "da", "de",
@@ -63,15 +63,16 @@ android {
             "-Xsuppress-version-warnings"
         )
     }
-    lint {
-        baseline = file("lint-baseline.xml")
-    }
     packaging {
         jniLibs {
             useLegacyPackaging = true
         }
         resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
     }
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+
     namespace = "de.dertyp7214.rboardthememanager"
 }
 

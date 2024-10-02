@@ -22,13 +22,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27
-
-      - name: Cache (NDK)
-        uses: actions/cache@v4
-        with:
-          path: ${ANDROID_HOME}/ndk/27.1.12297006
-          key: ndk-cache
+          ndk-version: r27b
 
       - name: Get Commit Message
         id: commitMessage
@@ -38,7 +32,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 22
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v4
@@ -73,10 +67,11 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: wrapper
-          arguments: assembleDebug
+            gradle-version: wrapper
+      - name: AssembleDebug the project
+        run: ./gradlew assembleDebug
 
       - name: Get JSON
         id: metadataJson
@@ -152,7 +147,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27
+          ndk-version: r27b
 
       - name: Get Commit Message
         id: commitMessage
@@ -162,7 +157,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 22
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v4
@@ -197,10 +192,11 @@ jobs:
         
       - name: Build apk
         id: buildAllApks
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: wrapper
-          arguments: assembleRelease
+            gradle-version: wrapper
+      - name: AssembleRelease the project
+        run: ./gradlew assembleRelease
 
       - name: Get JSON
         id: metadataJson
@@ -282,7 +278,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27
+          ndk-version: r27b
 
       - name: Get Commit Message
         id: commitMessage
@@ -292,7 +288,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 22
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v4
@@ -327,10 +323,11 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: wrapper
-          arguments: assembleDebug
+            gradle-version: wrapper
+      - name: AssembleDebug the project
+        run: ./gradlew assembleDebug
 
       - name: Get JSON
         id: metadataJson
