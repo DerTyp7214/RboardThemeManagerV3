@@ -64,8 +64,9 @@ jobs:
       - name: Build apk
         id: buildAllApks
         uses: gradle/actions/setup-gradle@v4
-
-      - name: AssemblePro the project
+        with:
+            gradle-version: "wrapper"
+      - name: AssembleRelease the project
         run: ./gradlew assembleRelease
 
       - name: Get JSON
