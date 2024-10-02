@@ -92,6 +92,7 @@
     <string name="monet_details">Keyboard theme based on System theme</string>
     <string name="download_header">Download</string>
     <string name="repos">Repos</string>
+    <string name="delete_repo">Delete Repo</string>
     <string name="repos_long">Change theme repos</string>
     <string name="apply">Apply</string>
     <string name="add">Add</string>
@@ -147,6 +148,7 @@
     <string name="use_blur_long">Use blur Rendereffects</string>
     <string name="remove_repo">Remove repository?</string>
     <string name="remove_repo_long">Do you want to remove this Repository?</string>
+    <string name="do_you_want_to_delete_repo">Do you want to delete these repo?</string>
     <string name="manage_repo">Manage Repo</string>
     <string name="address">Address</string>
     <string name="enabled">Enabled</string>

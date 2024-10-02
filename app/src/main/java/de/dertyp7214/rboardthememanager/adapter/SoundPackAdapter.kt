@@ -60,11 +60,11 @@ class SoundPackAdapter(
             soundPack.download(activity) { sounds ->
                 activity.openDialog(R.layout.soundpack_dialog) { dialog ->
                     val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-
+                    val textView = findViewById<TextView>(R.id.TextViewSound)
                     recyclerView.setHasFixedSize(true)
                     recyclerView.layoutManager = LinearLayoutManager(activity)
                     recyclerView.adapter = SoundAdapter(sounds, activity)
-
+                    textView.text = soundPack.title
                     findViewById<Button>(R.id.ok)?.setOnClickListener {
                         getSoundsDirectory()?.path?.let { path ->
                             SuFile("${Config.MODULE_PATH}$path/audio/ui").apply {
