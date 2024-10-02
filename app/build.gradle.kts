@@ -1,4 +1,4 @@
-@file:Suppress("SpellCheckingInspection")
+@file:Suppress("SpellCheckingInspection", "UnstableApiUsage")
 
 plugins {
     id("com.android.application")
@@ -22,7 +22,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 35
-        versionCode = 393002
+        versionCode = 393003
         versionName = "3.9.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
