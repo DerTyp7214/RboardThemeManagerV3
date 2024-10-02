@@ -28,6 +28,7 @@
         tools:targetApi="tiramisu">
         <activity
             android:name=".screens.ThemeChangerActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".screens.Logs"
@@ -48,6 +49,7 @@
 
         <receiver
             android:name=".widgets.SwitchKeyboardWidget"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -69,6 +71,7 @@
 
         <receiver
             android:name=".widgets.FlagsWidget"
+            android:screenOrientation="portrait"
             android:enabled="@bool/is_post_api_31"
             android:exported="true">
             <intent-filter>

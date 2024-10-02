@@ -25,10 +25,11 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
+import de.dertyp7214.rboardcomponents.core.getActivity
 import de.dertyp7214.rboardthememanager.R
-import de.dertyp7214.rboardthememanager.components.XMLEntry
 import de.dertyp7214.rboardthememanager.components.XMLType
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
+import de.dertyp7214.rboardthememanager.components.XMLEntry
 
 val Activity.preferences: SharedPreferences
     get() = PreferenceManager.getDefaultSharedPreferences(this)
@@ -175,14 +176,17 @@ fun Activity.openShareThemeDialog(
 }
 
 @SuppressLint("InflateParams")
-fun Activity.openInputDialog(
+fun Activity.openInputDialogFlag(
+    name: String,
     @StringRes hint: Int,
     value: String? = null,
     @StringRes negativeText: Int = android.R.string.cancel,
     negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },
     positive: (dialogInterface: DialogInterface, text: String) -> Unit
-) = openDialog(R.layout.input_dialog, false) { dialog ->
+) = openDialog(R.layout.input_dialog_with_title, false) { dialog ->
+    val flagnames = findViewById<TextView>(R.id.TextViewFlag)
     val input = findViewById<EditText>(R.id.editText)
+    flagnames.text = name
     input.setHint(hint)
     if (value != null) input.setText(value)
 
