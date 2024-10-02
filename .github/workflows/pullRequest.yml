@@ -23,12 +23,12 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27
+          ndk-version: r27b
 
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 21
+          java-version: 22
           distribution: temurin
 
       - name: Cache Gradle dependencies
@@ -58,10 +58,10 @@ jobs:
         
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v3
-        with:
-          gradle-version: wrapper
-          arguments: assembleDebug
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: AssemblePro the project
+        run: ./gradlew assembleRelease
 
       - name: Get JSON
         id: metadataJson
