@@ -1,8 +1,5 @@
 @file:Suppress("SpellCheckingInspection")
 
-import org.jetbrains.kotlin.config.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -29,8 +26,10 @@ android {
         versionName = "3.9.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
 
-        resourceConfigurations += listOf(
+    androidResources {
+        localeFilters += listOf(
             "ar", "cs", "da", "de",
             "el", "en", "es", "fi",
             "fr", "hi", "hu", "in",
@@ -55,12 +54,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_22
-        targetCompatibility = JavaVersion.VERSION_22
+        sourceCompatibility = JavaVersion.current()
+        targetCompatibility = JavaVersion.current()
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_22.toString()
+        jvmTarget = JavaVersion.current().toString()
         freeCompilerArgs += listOf(
             "-P",
             "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true",
@@ -72,6 +71,9 @@ android {
             useLegacyPackaging = true
         }
         resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+    }
+    lint {
+        baseline = file("lint-baseline.xml")
     }
 }
 

@@ -33,7 +33,8 @@ class UsageDialog(
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context = requireContext()
-        return ComponentDialog(context,
+        return ComponentDialog(
+            context,
             ThemeUtils.getTheme(context)
                 ?: com.google.android.material.R.attr.dynamicColorThemeOverlay
         )
@@ -54,9 +55,11 @@ class UsageDialog(
             statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
         )
 
+        @Suppress("DEPRECATION")
         dialog?.window?.setDecorFitsSystemWindows(false)
 
         dialog?.window?.isNavigationBarContrastEnforced = false
+        @Suppress("DEPRECATION")
         dialog?.window?.navigationBarColor = Color.TRANSPARENT
 
         val magiskCard: MaterialCardView = view.findViewById(R.id.cardMagisk)
