@@ -50,6 +50,7 @@
     <string name="share_themes">Share themes</string>
     <string name="select_at_least_one_not_default_theme">Select at least one not default theme</string>
     <string name="rboard_theme_creator">Rboard Theme Creator</string>
+    <string name="rboard_theme_patcher">Rboard Patcher</string>
     <string name="downloading_pack">Downloading pack</string>
     <string name="install_themes">Install themes (%s)</string>
     <string name="install">Install</string>
@@ -234,6 +235,7 @@
     <string name="reset">Reset</string>
     <string name="invalid_link">Invalid Link</string>
     <string name="deep_link">Deep link</string>
+    <string name="deep_link_long">Rboard Deep link</string>
     <string name="download">Download</string>
     <string name="include_theme_names">Include Theme Names</string>
     <string name="update_available">Update available (%s)</string>
@@ -306,4 +308,9 @@
     <string name="keyboard_redesign_google_sans_details">Using Keyboard Redesign Google Sans</string>
     <string name="emoji_compat_app_whitelist_details">Using Emoji Compat Fix</string>
     <string name="enable_email_provider_completion_details">Using Email Provider</string>
+    <string name="rboard_apps">Rboard Apps</string>
+    <string name="more_rboard_apps">More from Us</string>
+    <string name="more_rboard_apps_desc">Download more Rboard applications</string>
+    <string name="close">Close</string>
+    <string name="rboard_monet_extractor">Monet Extractor</string>
 </resources>
