@@ -17,7 +17,7 @@ firebase-analytics = "22.1.2"
 firebase-analytics-ktx = "22.1.2"
 firebase-messaging = "24.0.2"
 firebase-messaging-ktx = "24.0.2"
-flagkit-android = "1.0.2"
+flagkit-android = "1.0.3"
 fragment-ktx = "1.8.3"
 googleServices = "4.4.2"
 gradle = "8.8.0-alpha04"
@@ -64,7 +64,7 @@ firebase-analytics = { module = "com.google.firebase:firebase-analytics", versio
 firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx", version.ref = "firebase-analytics-ktx" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebase-messaging" }
 firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx", version.ref = "firebase-messaging-ktx" }
-flagkit-android = { module = "com.github.murgupluoglu:flagkit-android", version.ref = "flagkit-android" }
+flagkit-android = { module = "com.github.akospaha01:flagkit-android", version.ref = "flagkit-android" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "ksp" }
 google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
