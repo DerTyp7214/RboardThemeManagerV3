@@ -155,11 +155,24 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
         builder.categoryHeader("translators") {
             titleRes = R.string.translators
         }
+        builder.pref("ar") {
+            titleRes = R.string.arabic
+            summaryRes = R.string.muhammadbahaa2001
+            useTint = false
+            iconRes = FlagKit.getResId(activity, "arab")
+        }
         builder.pref("pt-rBR") {
             titleRes = R.string.portuguese_brazilian
             summaryRes = R.string.igormiguell
             useTint = false
             iconRes = FlagKit.getResId(activity, "br")
+        }
+        builder.pref("zh")
+        {
+            titleRes = R.string.chinese
+            summaryRes = R.string.contingency
+            useTint = false
+            iconRes = FlagKit.getResId(activity, "cn")
         }
         builder.pref("fr") {
             titleRes = R.string.french
@@ -196,12 +209,6 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
             summaryRes = R.string.primal_pea
             useTint = false
             iconRes = FlagKit.getResId(activity, "vn")
-        }
-        builder.pref("zh") {
-            titleRes = R.string.chinese
-            summaryRes = R.string.contingency
-            useTint = false
-            iconRes = FlagKit.getResId(activity, "cn")
         }
     }
 }

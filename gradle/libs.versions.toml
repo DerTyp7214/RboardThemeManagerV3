@@ -18,7 +18,7 @@ fragment-ktx = "1.8.3"
 lifecycle-viewmodel-ktx = "2.8.6"
 browser = "1.8.0"
 glide = "4.16.0"
-flagkit = "1.0.2"
+flagkit = "1.0.3"
 firebase-bom = "33.4.0"
 firebase-messaging-ktx = "24.0.2"
 firebase-analytics-ktx = "22.1.2"
@@ -87,7 +87,7 @@ espresso-core = { group = "androidx.test.espresso", name = "espresso-core", vers
 
 browser = { group = "androidx.browser", name = "browser", version.ref = "browser" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
-flagkit = { group = "com.github.murgupluoglu", name = "flagkit-android", version.ref = "flagkit" }
+flagkit = { group = "com.github.akospaha01", name = "flagkit-android", version.ref = "flagkit" }
 
 ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "uiTooling" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlinReflect" }
