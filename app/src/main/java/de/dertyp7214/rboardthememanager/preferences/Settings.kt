@@ -285,23 +285,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             {
                 packageManager.getLaunchIntentForPackage("de.dertyp7214.deeplinkrboard")
                     ?.let(::startActivity)
-                    ?: openUrl("https://github.com/DerTyp7214/DeepLinkRboard")
+                    ?: openUrl(getString(R.string.rboard_deep_link))
             },
             BuildConfig.DEBUG
-        ),
-        THEME_VALUES(
-            "theme_values",
-            R.string.theme_values,
-            R.string.theme_values_long,
-            R.drawable.ic_theme_settings,
-            "",
-            TYPE.STRING,
-            listOf(),
-            {
-                packageManager.getLaunchIntentForPackage("de.dertyp7214.monetextractor")
-                    ?.let(::startActivity)
-                    ?: openUrl(PLAY_URL("de.dertyp7214.monetextractor"))
-            }
         ),
         IME_TEST(
             "ime_test",

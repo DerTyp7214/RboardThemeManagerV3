@@ -309,4 +309,11 @@
     <string name="keyboard_redesign_google_sans_details">Using Keyboard Redesign Google Sans</string>
     <string name="emoji_compat_app_whitelist_details">Using Emoji Compat Fix</string>
     <string name="enable_email_provider_completion_details">Using Email Provider</string>
+    <string name="rboard_theme_patcher">Rboard Patcher</string>
+    <string name="deep_link_long">Rboard Deep link</string>
+    <string name="rboard_apps">Rboard Apps</string>
+    <string name="more_rboard_apps">More from Us</string>
+    <string name="more_rboard_apps_desc">Download more Rboard applications</string>
+    <string name="close">Close</string>
+    <string name="rboard_monet_extractor">Monet Extractor</string>
 </resources>
