@@ -111,6 +111,29 @@ class Application : Application() {
                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                     }
                 }
+            when (getString("language", "system_default")) {
+                    "en" -> {
+                        val localeList: LocaleListCompat = LocaleListCompat.forLanguageTags("en")
+                        AppCompatDelegate.setApplicationLocales(localeList)
+                        val currentLocalName =  AppCompatDelegate.getApplicationLocales()[0]?.displayName
+                    }
+                    "hu" -> {
+                        val localeList: LocaleListCompat = LocaleListCompat.forLanguageTags("hu")
+                        AppCompatDelegate.setApplicationLocales(localeList)
+                        val currentLocalName =  AppCompatDelegate.getApplicationLocales()[0]?.displayName
+                    }
+                    "system_default" -> {
+                        val localeList: LocaleListCompat = LocaleListCompat.forLanguageTags(
+                            ((if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                                resources.configuration.getLocales().get(0);
+                            } else{
+                                resources.configuration.locale;
+                            }).toString())
+                        )
+                        AppCompatDelegate.setApplicationLocales(localeList)
+                        val currentLocalName =  AppCompatDelegate.getApplicationLocales()[0]?.displayName
+                    }
+            }
         }
     }
 }

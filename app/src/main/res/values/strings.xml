@@ -313,4 +313,7 @@
     <string name="more_rboard_apps_desc">Download more Rboard applications</string>
     <string name="close">Close</string>
     <string name="rboard_monet_extractor">Monet Extractor</string>
+    <string name="language">Language</string>
+    <string name="english">English</string>
+    <string name="system_default">System Default</string>
 </resources>

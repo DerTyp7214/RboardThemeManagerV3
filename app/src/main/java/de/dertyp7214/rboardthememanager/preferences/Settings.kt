@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
@@ -12,8 +13,11 @@ import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat.startActivity
+import androidx.core.os.LocaleListCompat
 import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
+import com.dertyp7214.logs.helpers.Logger.Companion.context
 import com.topjohnwu.superuser.io.SuFile
 import de.Maxr1998.modernpreferences.Preference
 import de.Maxr1998.modernpreferences.PreferenceScreen
@@ -44,10 +48,13 @@ import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.core.set
 import de.dertyp7214.rboardthememanager.core.writeFile
 import de.dertyp7214.rboardthememanager.screens.Logs
+import de.dertyp7214.rboardthememanager.screens.MainActivity
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
+import de.dertyp7214.rboardthememanager.screens.ThemeChangerActivity
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.getPackageUid
+import java.util.Locale
 
 class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
     enum class FILES(val Path: String) {
@@ -340,6 +347,19 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                 Logs::class.java[this]
             },
             BuildConfig.DEBUG
+        ),
+        LANGUAGE(
+            "language",
+            R.string.language,
+            -1,
+            R.drawable.ic_translate_new_ui,
+            "",
+            TYPE.SELECT,
+            listOf(
+                SelectionItem("en", R.string.english, -1),
+                SelectionItem("hu", R.string.hungarian, -1),
+                SelectionItem("system_default", R.string.system_default, -1)
+            )
         );
 
         inline fun <reified T> getValue(context: Context, defaultValue: T? = null): T? {
@@ -407,11 +427,48 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                                     "dark" -> {
                                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                                     }
+
                                     "light" -> {
                                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                                     }
+
                                     "system_theme" -> {
                                         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
+                                    }
+                                }
+
+                                "language" -> when (it) {
+                                    "en" -> {
+                                        val localeList: LocaleListCompat =
+                                            LocaleListCompat.forLanguageTags("en")
+                                        AppCompatDelegate.setApplicationLocales(localeList)
+                                        val currentLocalName =
+                                            AppCompatDelegate.getApplicationLocales()[0]?.displayName
+                                    }
+
+                                    "hu" -> {
+                                        val localeList: LocaleListCompat =
+                                            LocaleListCompat.forLanguageTags("hu")
+                                        AppCompatDelegate.setApplicationLocales(localeList)
+                                        val currentLocalName =
+                                            AppCompatDelegate.getApplicationLocales()[0]?.displayName
+                                    }
+
+                                    "system_default" -> {
+                                        val localeList: LocaleListCompat =
+                                            LocaleListCompat.forLanguageTags(
+                                                ((if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                                    activity.resources.configuration.getLocales()
+                                                        .get(0);
+                                                    activity.recreate()
+                                                } else {
+                                                    activity.resources.configuration.locale;
+                                                    activity.recreate()
+                                                }).toString())
+                                            )
+                                        AppCompatDelegate.setApplicationLocales(localeList)
+                                        val currentLocalName =
+                                            AppCompatDelegate.getApplicationLocales()[0]?.displayName
                                     }
                                 }
                             }
