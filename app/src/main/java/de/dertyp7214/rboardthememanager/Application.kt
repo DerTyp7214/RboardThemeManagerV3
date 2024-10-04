@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.LocaleManagerCompat
 import androidx.core.content.edit
 import androidx.core.os.LocaleListCompat
 import androidx.preference.PreferenceManager
@@ -22,6 +23,7 @@ import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardcomponents.utils.doInBackground
 import de.dertyp7214.rboardthememanager.core.getAttr
 import java.net.URL
+import java.util.Locale
 
 class Application : Application() {
 
@@ -112,27 +114,190 @@ class Application : Application() {
                     }
                 }
             when (getString("language", "system_default")) {
-                    "en" -> {
-                        val localeList: LocaleListCompat = LocaleListCompat.forLanguageTags("en")
-                        AppCompatDelegate.setApplicationLocales(localeList)
-                        val currentLocalName =  AppCompatDelegate.getApplicationLocales()[0]?.displayName
-                    }
-                    "hu" -> {
-                        val localeList: LocaleListCompat = LocaleListCompat.forLanguageTags("hu")
-                        AppCompatDelegate.setApplicationLocales(localeList)
-                        val currentLocalName =  AppCompatDelegate.getApplicationLocales()[0]?.displayName
-                    }
-                    "system_default" -> {
-                        val localeList: LocaleListCompat = LocaleListCompat.forLanguageTags(
-                            ((if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                                resources.configuration.getLocales().get(0);
-                            } else{
-                                resources.configuration.locale;
-                            }).toString())
+
+                "system_default" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags(
+                            LocaleListCompat.getDefault().toString()
                         )
-                        AppCompatDelegate.setApplicationLocales(localeList)
-                        val currentLocalName =  AppCompatDelegate.getApplicationLocales()[0]?.displayName
-                    }
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "ar" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("ar")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "cs" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("cs")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "da" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("da")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "de" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("de")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "el" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("el")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "en" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("en")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "es" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("es")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "fi" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("fi")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "fr" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("fr")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "hi" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("hi")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "hu" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("hu")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "in" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("in")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "it" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("it")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "ja" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("ja")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "nb" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("nb")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "nl" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("nl")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "pl" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("pl")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "pt" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("pt")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "ro" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("ro")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "ru" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("ru")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "sv" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("sv")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "uk" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("uk")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "vi" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("vi")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "zh-rCN" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("zh-CN")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
+
+                "zh-rTW" -> {
+                    val localeList: LocaleListCompat =
+                        LocaleListCompat.forLanguageTags("zh-TW")
+                    AppCompatDelegate.setApplicationLocales(localeList)
+
+                }
             }
         }
     }

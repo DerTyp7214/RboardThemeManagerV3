@@ -313,7 +313,25 @@
     <string name="more_rboard_apps_desc">Download more Rboard applications</string>
     <string name="close">Close</string>
     <string name="rboard_monet_extractor">Monet Extractor</string>
-    <string name="language">Language</string>
+    <string name="app_language">App Language</string>
     <string name="english">English</string>
     <string name="system_default">System Default</string>
+    <string name="afrikaans">Afrikaans</string>
+    <string name="czech">Czech</string>
+    <string name="danish">Danish</string>
+    <string name="german">German</string>
+    <string name="greek">Greek</string>
+    <string name="spanish">Spanish</string>
+    <string name="finnish">Finnish</string>
+    <string name="hindi">Hindi</string>
+    <string name="indonesian">Indonesian</string>
+    <string name="japanese">Japanese</string>
+    <string name="dutch">Dutch</string>
+    <string name="norwegian">Norwegian</string>
+    <string name="portuguese">Portuguese</string>
+    <string name="romanian">Romanian</string>
+    <string name="swedish">Swedish</string>
+    <string name="ukrainian">Ukrainian</string>
+    <string name="chinese_simplified">Chinese (Simplified)</string>
+    <string name="chinese_traditional">Chinese (Traditional)</string>
 </resources>

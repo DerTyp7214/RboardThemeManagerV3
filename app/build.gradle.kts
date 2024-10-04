@@ -30,7 +30,7 @@ android {
             "ar", "cs", "da", "de",
             "el", "en", "es", "fi",
             "fr", "hi", "hu", "in",
-            "it", "ja", "nl", "no",
+            "it", "ja", "nl", "nb",
             "pl", "pt-rBR", "ro", "ru",
             "sv", "uk", "vi", "zh-rCN",
             "zh-rTW"
