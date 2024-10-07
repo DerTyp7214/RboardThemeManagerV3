@@ -24,6 +24,7 @@ import de.dertyp7214.rboardthememanager.core.safeString
 import de.dertyp7214.rboardthememanager.core.setSystemProperty
 import de.dertyp7214.rboardthememanager.utils.FileUtils
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
+import kotlin.math.absoluteValue
 
 class Props(private val activity: AppCompatActivity, private val args: SafeJSON) :
     AbstractMenuPreference() {
@@ -67,7 +68,11 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
 
                 "ch_radius",
 
-                "corner_key_r"
+                "corner_key_r",
+
+                "ch_top_icon_num",
+
+                "top_icon_num"
             )}
         else if (Application.context?.resources?.getBoolean(R.bool.isTab_or_fold) == true && GboardUtils.getGboardVersionCode(
                 activity) >= 153612662){
@@ -94,7 +99,11 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
 
                 "kbp_fland_b",
                 "kbp_fland_l",
-                "kbp_fland_r"
+                "kbp_fland_r",
+
+                "ch_top_icon_num",
+
+                "top_icon_num"
             )}
         else if (Application.context?.resources?.getBoolean(R.bool.isTab_or_fold) == false && GboardUtils.getGboardVersionCode(activity)  >= 153612662 ){
             listOf(
@@ -108,7 +117,11 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
 
                 "kb_pad_land_b",
                 "kb_pad_land_l",
-                "kb_pad_land_r"
+                "kb_pad_land_r",
+
+                "ch_top_icon_num",
+
+                "top_icon_num"
             )}
         else {
             listOf(
@@ -126,7 +139,11 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
 
                 "ch_radius",
 
-                "corner_key_r"
+                "corner_key_r",
+
+                "ch_top_icon_num",
+
+                "top_icon_num"
             )
         }
 
@@ -159,7 +176,11 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
                 onClick {
                     activity.openInputDialogFlag(
                         activity.getResources().getString(getString(key).safeString),
-                        R.string.nothing,
+                        if(key == "top_icon_num"){
+                            R.string.top_icon_num_long
+                        }else{
+                            R.string.nothing
+                        },
                         "ro.com.google.ime.$key".getSystemProperty(),
                         R.string.reset,
                         {
