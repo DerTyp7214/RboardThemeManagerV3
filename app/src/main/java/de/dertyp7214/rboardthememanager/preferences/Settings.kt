@@ -284,21 +284,6 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                 }
             }
         ),
-        DEEP_LINK(
-            "deep_link",
-            R.string.deep_link,
-            R.string.deep_link,
-            R.drawable.ic_link,
-            "",
-            TYPE.STRING,
-            listOf(),
-            {
-                packageManager.getLaunchIntentForPackage("de.dertyp7214.deeplinkrboard")
-                    ?.let(::startActivity)
-                    ?: openUrl(getString(R.string.rboard_deep_link))
-            },
-            BuildConfig.DEBUG
-        ),
         UNINSTALL(
             "uninstall",
             R.string.uninstall,
