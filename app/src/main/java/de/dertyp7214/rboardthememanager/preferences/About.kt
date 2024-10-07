@@ -1,5 +1,7 @@
 package de.dertyp7214.rboardthememanager.preferences
 
+import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.view.Menu
 import android.view.MenuInflater
@@ -10,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -41,9 +44,11 @@ import de.dertyp7214.rboardthememanager.core.safeString
 import de.dertyp7214.rboardthememanager.core.setSystemProperty
 import de.dertyp7214.rboardthememanager.core.showMaterial
 import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
+import de.dertyp7214.rboardthememanager.utils.PackageUtils
 import de.dertyp7214.rboardthememanager.utils.RootUtils
 import de.dertyp7214.rboardthememanager.utils.getSoundsDirectory
 import java.net.URL
+import kotlin.coroutines.coroutineContext
 
 class About(private val activity: AppCompatActivity, private val args: SafeJSON) :
     AbstractMenuPreference() {
@@ -192,13 +197,22 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
                 val rboardImeTester = findViewById<TextView>(R.id.rboard_ime_tester)
 
                 rboardDeepLink.setOnClickListener {
-                    activity.openUrl(activity.getString(R.string.rboard_deep_link))
+                    activity.packageManager.getLaunchIntentForPackage(
+                        "de.dertyp7214.deeplinkrboard"
+                    )?.let(activity::startActivity)
+                        ?: activity.openUrl(activity.getString(R.string.rboard_deep_link))
                 }
                 rboardThemePatcher.setOnClickListener {
-                    activity.openUrl(PLAY_URL("de.dertyp7214.rboardpatcher"))
+                    activity.packageManager.getLaunchIntentForPackage(
+                        "de.dertyp7214.rboardpatcher"
+                    )?.let(activity::startActivity)
+                        ?: activity.openUrl(PLAY_URL("de.dertyp7214.rboardpatcher"))
                 }
                 rboardThemeCreator.setOnClickListener {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    activity.packageManager.getLaunchIntentForPackage(
+                        "de.dertyp7214.rboardthemecreator"
+                    )?.let(activity::startActivity)
+                        ?: if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         activity.openUrl(PLAY_URL("de.dertyp7214.rboardthemecreator"))
                     }
                     else{
@@ -207,7 +221,10 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
 
                 }
                 rboardImeTester.setOnClickListener {
-                    activity.openUrl(PLAY_URL("de.dertyp7214.rboardimetester"))
+                    activity.packageManager.getLaunchIntentForPackage(
+                        "de.dertyp7214.rboardimetester"
+                    )?.let(activity::startActivity)
+                        ?: activity.openUrl(PLAY_URL("de.dertyp7214.rboardimetester"))
                 }
 
                 findViewById<Button>(R.id.close)?.setOnClickListener { dialog.dismiss() }

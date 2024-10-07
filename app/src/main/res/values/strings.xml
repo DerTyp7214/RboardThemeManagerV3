@@ -251,7 +251,8 @@
     <string name="gboard_cache_cleared">Gboard cache cleared</string>
     <string name="gboard_cache_clear">Gboard cache clear</string>
     <string name="gboard_cache_clear_long">Deletes cache and force closes gboard.</string>
-    <string name="gboard_cache_clear_question">Do you want to clear the cache and force gboard to close?</string>
+    <string name="gboard_cache_clear_question">Deletes cache gboard</string>
+    <string name="gboard_cache_clear_long_question">Do you want to clear the cache and force gboard to close?</string>
     <string name="clear_recent_emojis">Clear recent used emojis</string>
     <string name="clear_recent_emojis_long">Deletes recent used emojis and force closes gboard.</string>
     <string name="clear_recent_emojis_question">Do you want to delete recent used emojis and force gboard to close?</string>
