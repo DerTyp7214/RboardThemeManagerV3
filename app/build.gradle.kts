@@ -84,8 +84,6 @@ dependencies {
     implementation(libs.firebase.messaging.ktx)
     implementation(libs.firebase.analytics.ktx)
 
-    implementation(libs.preferencesplus)
-
     implementation(libs.protobuf.dynamic)
 
     implementation(libs.legacy.support.v4)
