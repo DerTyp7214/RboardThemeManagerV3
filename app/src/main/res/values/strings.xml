@@ -316,4 +316,9 @@
     <string name="more_rboard_apps_desc">Download more Rboard applications</string>
     <string name="close">Close</string>
     <string name="rboard_monet_extractor">Monet Extractor</string>
+    <string name="top_icon_num">Config Max Access Points</string>
+    <string name="top_icon_num_long">(Valid value should between 3 and 8)</string>
+    <string name="gboard_cache_clear_question">Deletes cache gboard</string>
+    <string name="gboard_cache_clear_long_question">Do you want to clear the cache and force gboard to close?</string>
+    <string name="clear_recent_emojis_question">Do you want to delete recent used emojis and force gboard to close?</string>
 </resources>
