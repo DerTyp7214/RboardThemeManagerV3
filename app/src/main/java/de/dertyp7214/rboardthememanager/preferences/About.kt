@@ -1,5 +1,6 @@
 package de.dertyp7214.rboardthememanager.preferences
 
+import android.os.Build
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -197,7 +198,13 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
                     activity.openUrl(PLAY_URL("de.dertyp7214.rboardpatcher"))
                 }
                 rboardThemeCreator.setOnClickListener {
-                    activity.openUrl(PLAY_URL("de.dertyp7214.rboardthemecreator"))
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        activity.openUrl(PLAY_URL("de.dertyp7214.rboardthemecreator"))
+                    }
+                    else{
+                        activity.openUrl("https://github.com/DerTyp7214/RboardThemeCreator/releases/tag/1.2.5")
+                    }
+
                 }
                 rboardImeTester.setOnClickListener {
                     activity.openUrl(PLAY_URL("de.dertyp7214.rboardimetester"))
