@@ -25,7 +25,6 @@ import androidx.preference.PreferenceManager
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputLayout
-import de.dertyp7214.rboardcomponents.core.getActivity
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.XMLType
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass

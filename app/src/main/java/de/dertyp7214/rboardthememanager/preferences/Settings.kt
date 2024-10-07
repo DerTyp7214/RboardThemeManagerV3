@@ -259,11 +259,13 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(),
             {
-                listOf(
-                    "rm -r \"${FILES.CACHE.Path}\"",
-                    "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
-                ).runAsCommand()
-                Toast.makeText(this, R.string.gboard_cache_cleared, Toast.LENGTH_LONG).show()
+                openDialog(R.string.gboard_cache_clear_question, R.string.gboard_cache_clear_long, false) {
+                    listOf(
+                        "rm -r \"${FILES.CACHE.Path}\"",
+                        "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
+                    ).runAsCommand()
+                    Toast.makeText(this, R.string.gboard_cache_cleared, Toast.LENGTH_LONG).show()
+                }
             }
         ),
         CLEAR_RECENT_EMOJIS(
@@ -272,14 +274,15 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             R.string.clear_recent_emojis_long,
             R.drawable.ic_emoji_clear,
             "",
-            TYPE.STRING,
-            listOf(),
+            TYPE.STRING,listOf(),
             {
-                listOf(
-                    "rm \"${FILES.EMOJIS.Path}\"",
-                    "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
-                ).runAsCommand()
-                Toast.makeText(this, R.string.recent_emojis_cleared, Toast.LENGTH_LONG).show()
+                openDialog(R.string.clear_recent_emojis_question, R.string.clear_recent_emojis_long, false) {
+                    listOf(
+                        "rm \"${FILES.EMOJIS.Path}\"",
+                        "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
+                    ).runAsCommand()
+                    Toast.makeText(this, R.string.recent_emojis_cleared, Toast.LENGTH_LONG).show()
+                }
             }
         ),
         DEEP_LINK(
