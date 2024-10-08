@@ -26,6 +26,7 @@
     <string name="apply_automatic_theme">Apply Automatic Theme</string>
     <string name="applied">Theme Applied</string>
     <string name="delete_theme">Delete Theme</string>
+    <string name="delete_repo">Delete Repo</string>
     <string name="q_delete_theme">Do you want to delete this theme?</string>
     <string name="theme_deleted">Theme Deleted</string>
 
@@ -49,12 +50,14 @@
     <string name="share_themes">Share themes</string>
     <string name="select_at_least_one_not_default_theme">Select at least one not default theme</string>
     <string name="rboard_theme_creator">Rboard Theme Creator</string>
+    <string name="rboard_theme_patcher">Rboard Patcher</string>
     <string name="downloading_pack">Downloading pack</string>
     <string name="install_themes">Install themes (%s)</string>
     <string name="install">Install</string>
     <string name="themes_installed">Themes installed</string>
     <string name="unpacking_themes">Unpacking themes</string>
     <string name="do_you_want_to_delete_theme">Do you want to delete these themes?</string>
+    <string name="do_you_want_to_delete_repo">Do you want to delete these repo?</string>
     <string name="show_preinstalled_themes">Show preinstalled themes</string>
     <string name="emoji_compat_app_whitelist">Emoji Compat Fix</string>
     <string name="flags">Gboard Flags</string>
@@ -232,6 +235,7 @@
     <string name="reset">Reset</string>
     <string name="invalid_link">Invalid Link</string>
     <string name="deep_link">Deep link</string>
+    <string name="deep_link_long">Rboard Deep link</string>
     <string name="download">Download</string>
     <string name="include_theme_names">Include Theme Names</string>
     <string name="update_available">Update available (%s)</string>
@@ -247,8 +251,11 @@
     <string name="gboard_cache_cleared">Gboard cache cleared</string>
     <string name="gboard_cache_clear">Gboard cache clear</string>
     <string name="gboard_cache_clear_long">Deletes cache and force closes gboard.</string>
+    <string name="gboard_cache_clear_question">Deletes gboard cache</string>
+    <string name="gboard_cache_clear_long_question">Do you want to clear the cache and force close gboard?</string>
     <string name="clear_recent_emojis">Clear recent used emojis</string>
     <string name="clear_recent_emojis_long">Deletes recent used emojis and force closes gboard.</string>
+    <string name="clear_recent_emojis_question">Do you want to delete recent used emojis and force close gboard?</string>
     <string name="recent_emojis_cleared">Recent used emojis cleared</string>
     <string name="show_language_switch_key">Show Language Switch Key</string>
     <string name="value">Value</string>
@@ -304,4 +311,11 @@
     <string name="keyboard_redesign_google_sans_details">Using Keyboard Redesign Google Sans</string>
     <string name="emoji_compat_app_whitelist_details">Using Emoji Compat Fix</string>
     <string name="enable_email_provider_completion_details">Using Email Provider</string>
+    <string name="rboard_apps">Rboard Apps</string>
+    <string name="more_rboard_apps">More from Us</string>
+    <string name="more_rboard_apps_desc">Download more Rboard applications</string>
+    <string name="close">Close</string>
+    <string name="rboard_monet_extractor">Monet Extractor</string>
+    <string name="top_icon_num">Config Max Access Points</string>
+    <string name="top_icon_num_long">(Valid value should between 3 and 8)</string>
 </resources>
