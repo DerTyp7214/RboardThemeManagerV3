@@ -1,7 +1,9 @@
 package de.dertyp7214.rboardthememanager.adapter
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.media.MediaPlayer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +18,11 @@ import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.copyRecursively
 import de.dertyp7214.rboardthememanager.core.download
+import de.dertyp7214.rboardthememanager.core.format
 import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.core.showMaterial
+import de.dertyp7214.rboardthememanager.core.toHumanReadableBytes
+import de.dertyp7214.rboardthememanager.core.zeroOrNull
 import de.dertyp7214.rboardthememanager.data.SoundPack
 import de.dertyp7214.rboardthememanager.utils.RootUtils
 import de.dertyp7214.rboardthememanager.utils.getSoundsDirectory
@@ -35,9 +40,11 @@ class SoundPackAdapter(
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val root: View = v.findViewById(R.id.root)
+        val size: TextView = v.findViewById(R.id.size)
         val title: TextView = v.findViewById(R.id.title)
         val image: ImageView = v.findViewById(R.id.image)
         val author: TextView = v.findViewById(R.id.author)
+        val lastUpdate: TextView = v.findViewById(R.id.lastUpdate)
     }
 
     override fun getItemId(position: Int): Long {
@@ -48,19 +55,28 @@ class SoundPackAdapter(
         return ViewHolder(LayoutInflater.from(activity).inflate(R.layout.pack_item, parent, false))
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val soundPack = list[position]
 
+        holder.size.text =
+            soundPack.size.zeroOrNull {
+                it.toHumanReadableBytes(
+                    activity
+                )
+            } ?: ""
         holder.title.text = soundPack.title
         holder.author.text = soundPack.author
 
         holder.image.setImageResource(R.drawable.ic_sounds)
 
+        holder.lastUpdate.text = soundPack.date.zeroOrNull{it.format(System.currentTimeMillis())} ?: ""
         holder.root.setOnClickListener {
             soundPack.download(activity) { sounds ->
                 activity.openDialog(R.layout.soundpack_dialog) { dialog ->
                     val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
                     val textView = findViewById<TextView>(R.id.TextViewSound)
+
                     recyclerView.setHasFixedSize(true)
                     recyclerView.layoutManager = LinearLayoutManager(activity)
                     recyclerView.adapter = SoundAdapter(sounds, activity)
