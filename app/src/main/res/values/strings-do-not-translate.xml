@@ -27,6 +27,7 @@
     <string name="xda_thread_url">https://forum.xda-developers.com/t/app-rboard-theme-manager.4331445</string>
     <string name="github_repo_url">https://github.com/DerTyp7214/RboardThemeManagerV3</string>
     <string name="magisk_github_url">https://github.com/topjohnwu/Magisk</string>
+    <string name="rboard_deep_link">https://github.com/DerTyp7214/DeepLinkRboard</string>
     <string name="hungarian">Hungarian</string>
     <string name="italian">Italian</string>
     <string name="alpha4041">Alpha4041</string>
@@ -41,4 +42,6 @@
     <string name="contingency">Contingency</string>
     <string name="french">French</string>
     <string name="yoanndp">Yoanndp</string>
+    <string name="arabic">Arabic</string>
+    <string name="muhammadbahaa2001">Muhammadbahaa</string>
 </resources>

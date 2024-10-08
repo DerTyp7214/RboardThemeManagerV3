@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package de.dertyp7214.rboardthememanager.widgets
 
 import android.app.Activity

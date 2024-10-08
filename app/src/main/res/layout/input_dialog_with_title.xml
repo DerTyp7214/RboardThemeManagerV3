@@ -8,7 +8,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/TextViewSound"
+            android:id="@+id/TextViewFlag"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -21,16 +21,22 @@
             tools:text="text"
             android:textSize="16sp"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/editText"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:hint="@string/author"
+            android:importantForAutofill="no"
+            android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/TextViewSound" />
+            app:layout_constraintTop_toBottomOf="@id/TextViewFlag"
+            tools:ignore="LabelFor"
+            tools:text="text" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -42,7 +48,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView">
+            app:layout_constraintTop_toBottomOf="@+id/editText">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel"
@@ -59,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="@string/install"
+                android:text="@android:string/ok"
                 app:cornerRadius="@dimen/roundCorners" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

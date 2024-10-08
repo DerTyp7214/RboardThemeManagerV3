@@ -31,7 +31,6 @@ import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.Config.FLAG_PATH
 import de.dertyp7214.rboardthememanager.Config.MODULE_ID
-import de.dertyp7214.rboardthememanager.Config.PLAY_URL
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.XMLEntry
 import de.dertyp7214.rboardthememanager.components.XMLFile
@@ -259,11 +258,13 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             TYPE.STRING,
             listOf(),
             {
-                listOf(
-                    "rm -r \"${FILES.CACHE.Path}\"",
-                    "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
-                ).runAsCommand()
-                Toast.makeText(this, R.string.gboard_cache_cleared, Toast.LENGTH_LONG).show()
+                openDialog(R.string.gboard_cache_clear_long_question, R.string.gboard_cache_clear_question, false) {
+                    listOf(
+                        "rm -r \"${FILES.CACHE.Path}\"",
+                        "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
+                    ).runAsCommand()
+                    Toast.makeText(this, R.string.gboard_cache_cleared, Toast.LENGTH_LONG).show()
+                }
             }
         ),
         CLEAR_RECENT_EMOJIS(
@@ -272,57 +273,15 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             R.string.clear_recent_emojis_long,
             R.drawable.ic_emoji_clear,
             "",
-            TYPE.STRING,
-            listOf(),
+            TYPE.STRING,listOf(),
             {
-                listOf(
-                    "rm \"${FILES.EMOJIS.Path}\"",
-                    "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
-                ).runAsCommand()
-                Toast.makeText(this, R.string.recent_emojis_cleared, Toast.LENGTH_LONG).show()
-            }
-        ),
-        DEEP_LINK(
-            "deep_link",
-            R.string.deep_link,
-            R.string.deep_link,
-            R.drawable.ic_link,
-            "",
-            TYPE.STRING,
-            listOf(),
-            {
-                packageManager.getLaunchIntentForPackage("de.dertyp7214.deeplinkrboard")
-                    ?.let(::startActivity)
-                    ?: openUrl("https://github.com/DerTyp7214/DeepLinkRboard")
-            },
-            BuildConfig.DEBUG
-        ),
-        THEME_VALUES(
-            "theme_values",
-            R.string.theme_values,
-            R.string.theme_values_long,
-            R.drawable.ic_theme_settings,
-            "",
-            TYPE.STRING,
-            listOf(),
-            {
-                packageManager.getLaunchIntentForPackage("de.dertyp7214.monetextractor")
-                    ?.let(::startActivity)
-                    ?: openUrl(PLAY_URL("de.dertyp7214.monetextractor"))
-            }
-        ),
-        IME_TEST(
-            "ime_test",
-            R.string.ime_test,
-            R.string.ime_test_long,
-            R.drawable.ic_ime_tester,
-            "",
-            TYPE.STRING,
-            listOf(),
-            {
-                packageManager.getLaunchIntentForPackage("de.dertyp7214.rboardimetester")
-                    ?.let(::startActivity)
-                    ?: openUrl(PLAY_URL("de.dertyp7214.rboardimetester"))
+                openDialog(R.string.clear_recent_emojis_question, R.string.clear_recent_emojis, false) {
+                    listOf(
+                        "rm \"${FILES.EMOJIS.Path}\"",
+                        "am force-stop ${Config.GBOARD_PACKAGE_NAME}"
+                    ).runAsCommand()
+                    Toast.makeText(this, R.string.recent_emojis_cleared, Toast.LENGTH_LONG).show()
+                }
             }
         ),
         UNINSTALL(

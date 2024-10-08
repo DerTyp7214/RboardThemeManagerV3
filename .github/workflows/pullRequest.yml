@@ -21,15 +21,20 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+          cmake-version: '3.30.3'
+
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27
+          ndk-version: r27b
 
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 21
+          java-version: 22
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v4
@@ -56,15 +61,16 @@ jobs:
       - name: Accept Preview SDK License
         run: echo -n -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > /usr/local/lib/android/sdk/licenses/android-sdk-preview-license
 
+      - name: CMake Version
+        run: cmake --version
+
       - name: Build apk
         id: buildAllApks
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: wrapper
-          wrapper-cache-enabled: true
-          dependencies-cache-enabled: true
-          configuration-cache-enabled: true
-          arguments: assembleDebug
+            gradle-version: wrapper
+      - name: AssembleDebug the project
+        run: ./gradlew assembleDebug
 
       - name: Get JSON
         id: metadataJson
