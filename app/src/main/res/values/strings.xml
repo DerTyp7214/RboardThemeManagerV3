@@ -92,6 +92,7 @@
     <string name="monet_details">Keyboard theme based on System theme</string>
     <string name="download_header">Download</string>
     <string name="repos">Repos</string>
+    <string name="delete_repo">Delete Repo</string>
     <string name="repos_long">Change theme repos</string>
     <string name="apply">Apply</string>
     <string name="add">Add</string>
@@ -147,6 +148,7 @@
     <string name="use_blur_long">Use blur Rendereffects</string>
     <string name="remove_repo">Remove repository?</string>
     <string name="remove_repo_long">Do you want to remove this Repository?</string>
+    <string name="do_you_want_to_delete_repo">Do you want to delete these repo?</string>
     <string name="manage_repo">Manage Repo</string>
     <string name="address">Address</string>
     <string name="enabled">Enabled</string>
@@ -307,4 +309,16 @@
     <string name="keyboard_redesign_google_sans_details">Using Keyboard Redesign Google Sans</string>
     <string name="emoji_compat_app_whitelist_details">Using Emoji Compat Fix</string>
     <string name="enable_email_provider_completion_details">Using Email Provider</string>
+    <string name="rboard_theme_patcher">Rboard Patcher</string>
+    <string name="deep_link_long">Rboard Deep link</string>
+    <string name="rboard_apps">Rboard Apps</string>
+    <string name="more_rboard_apps">More from Us</string>
+    <string name="more_rboard_apps_desc">Download more Rboard applications</string>
+    <string name="close">Close</string>
+    <string name="rboard_monet_extractor">Monet Extractor</string>
+    <string name="top_icon_num">Config Max Access Points</string>
+    <string name="top_icon_num_long">(Valid value should between 3 and 8)</string>
+    <string name="gboard_cache_clear_question">Deletes cache gboard</string>
+    <string name="gboard_cache_clear_long_question">Do you want to clear the cache and force gboard to close?</string>
+    <string name="clear_recent_emojis_question">Do you want to delete recent used emojis and force gboard to close?</string>
 </resources>

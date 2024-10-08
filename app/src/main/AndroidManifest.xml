@@ -22,9 +22,11 @@
         tools:targetApi="tiramisu">
         <activity
             android:name=".screens.ThemeChangerActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".screens.Logs"
+            android:screenOrientation="portrait"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -32,17 +34,21 @@
         </activity>
         <activity
             android:name=".screens.ManageRepo"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".screens.ShareFlags"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/Theme.RboardThemeManagerV3.ShareFlags" />
         <activity
             android:name=".screens.ReadMoreReadFast"
+            android:screenOrientation="portrait"
             android:exported="true" />
 
         <receiver
             android:name=".widgets.SwitchKeyboardWidget"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -55,6 +61,7 @@
 
         <activity
             android:name=".widgets.SwitchKeyboardWidgetConfigureActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
@@ -63,6 +70,7 @@
 
         <receiver
             android:name=".widgets.FlagsWidget"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -75,10 +83,12 @@
 
         <activity
             android:name=".screens.InstallPackActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/Theme.RboardThemeManagerV3.InstallPack" />
         <activity
             android:name=".screens.PreferencesActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/Theme.RboardThemeManagerV3.Info" />
         <activity

@@ -278,7 +278,8 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                 if (item.summary == -1) summary = item.key
                 if (listOf(TYPE.INT, TYPE.LONG, TYPE.FLOAT, TYPE.STRING).contains(item.type))
                     onClick {
-                        activity.openInputDialog(
+                        activity.openInputDialogFlag(
+                            title.toString(),
                             R.string.nothing,
                             item.defaultValue.toString()
                         ) { dialogInterface, text ->
@@ -416,7 +417,8 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                         }
                         summary = entry.value.toString()
                         onClick {
-                            activity.openInputDialog(
+                            activity.openInputDialogFlag(
+                                title.toString(),
                                 R.string.nothing,
                                 summary?.toString()
                             ) { dialogInterface, text ->
@@ -556,7 +558,8 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                         }
                         summary = entry.value.toString()
                         onClick {
-                            activity.openInputDialog(
+                            activity.openInputDialogFlag(
+                                title.toString(),
                                 R.string.nothing,
                                 summary?.toString()
                             ) { dialogInterface, text ->

@@ -24,7 +24,7 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.SafeJSON
 import de.dertyp7214.rboardthememanager.core.get
 import de.dertyp7214.rboardthememanager.core.openDialog
-import de.dertyp7214.rboardthememanager.core.openInputDialog
+import de.dertyp7214.rboardthememanager.core.openInputDialogFlag
 import de.dertyp7214.rboardthememanager.core.openUrl
 import de.dertyp7214.rboardthememanager.core.parseRepo
 import de.dertyp7214.rboardthememanager.core.remove
@@ -118,7 +118,10 @@ class Repos(
         fab.visibility = View.VISIBLE
         fab.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_baseline_add_24))
         fab.setOnClickListener {
-            activity.openInputDialog(R.string.repository) { dialog, text ->
+            activity.openInputDialogFlag(
+                activity.getResources().getString(R.string.repository),
+                R.string.nothing, ""
+            ) { dialog, text ->
                 doAsync("true:$text"::parseRepo) {
                     dialog.dismiss()
                     repositories.add(it)

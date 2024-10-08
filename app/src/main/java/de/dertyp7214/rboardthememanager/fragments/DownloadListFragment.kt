@@ -14,6 +14,7 @@ import de.dertyp7214.rboardcomponents.utils.asyncInto
 import de.dertyp7214.rboardcomponents.utils.doAsyncCallback
 import de.dertyp7214.rboardthememanager.Config.IS_MIUI
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.adapter.ThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.ChipContainer
 import de.dertyp7214.rboardthememanager.components.LayoutManager
@@ -71,7 +72,7 @@ class DownloadListFragment : Fragment() {
                     )
                         .setAnchorView(requireActivity().findViewById(R.id.bottom_bar))
                         .also { snackbar ->
-                            if (IS_MIUI)
+                            if (IS_MIUI || Config.useMagisk)
                                 snackbar.setAction(
                                     R.string.reboot
                                 ) {

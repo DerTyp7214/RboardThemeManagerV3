@@ -1,7 +1,4 @@
-@file:Suppress("SpellCheckingInspection")
-
-import org.jetbrains.kotlin.config.JvmTarget
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+@file:Suppress("SpellCheckingInspection", "UnstableApiUsage")
 
 plugins {
     id("com.android.application")
@@ -25,12 +22,14 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 35
-        versionCode = 393000
+        versionCode = 393005
         versionName = "3.9.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
 
-        resourceConfigurations += listOf(
+    androidResources {
+        localeFilters += listOf(
             "ar", "cs", "da", "de",
             "el", "en", "es", "fi",
             "fr", "hi", "hu", "in",
@@ -55,23 +54,26 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.current()
+        targetCompatibility = JavaVersion.current()
     }
+
     kotlinOptions {
-        jvmTarget = JvmTarget.JVM_21.description
+        jvmTarget = JavaVersion.current().toString()
+        freeCompilerArgs += listOf(
+            "-P",
+            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true",
+            "-Xsuppress-version-warnings"
+        )
     }
-
-    tasks.withType<KotlinCompile> {
-        kotlinOptions {
-            jvmTarget = JvmTarget.JVM_21.description
-        }
-    }
-
     packaging {
         jniLibs {
             useLegacyPackaging = true
         }
+        resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+    }
+    lint {
+        baseline = file("lint-baseline.xml")
     }
 }
 

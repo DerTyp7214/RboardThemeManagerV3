@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package de.dertyp7214.rboardthememanager.screens
 
 import android.graphics.Color
@@ -20,7 +22,6 @@ class Logs : AppCompatActivity() {
 
         window.setDecorFitsSystemWindows(false)
 
-        val view: View = window.decorView
         window.isNavigationBarContrastEnforced = false
         window.navigationBarColor = Color.TRANSPARENT
         super.onCreate(savedInstanceState)

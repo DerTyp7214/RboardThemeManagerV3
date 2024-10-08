@@ -1,4 +1,4 @@
-@file:Suppress("unused", "SameParameterValue")
+@file:Suppress("DEPRECATION","unused", "SameParameterValue")
 
 package de.dertyp7214.rboardthememanager.screens
 
@@ -18,6 +18,7 @@ import de.dertyp7214.rboardthememanager.adapter.ManageRepoThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
 import de.dertyp7214.rboardthememanager.core.getTextFromUrl
 import de.dertyp7214.rboardthememanager.core.safeParse
+import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.databinding.ActivityManageRepoBinding
 import de.dertyp7214.rboardthememanager.utils.TypeTokens
@@ -46,8 +47,6 @@ class ManageRepo : AppCompatActivity() {
         )
 
         window.setDecorFitsSystemWindows(false)
-
-        val view: View = window.decorView
         window.isNavigationBarContrastEnforced = false
         window.navigationBarColor = Color.TRANSPARENT
         super.onCreate(savedInstanceState)
@@ -90,7 +89,14 @@ class ManageRepo : AppCompatActivity() {
         toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.delete -> finishWithAction(Action.DELETE)
+                R.id.delete ->
+                    openDialog(
+                        R.string.do_you_want_to_delete_repo,
+                        R.string.delete_repo
+                    ) { dialog ->
+                        dialog.dismiss()
+                        finishWithAction(Action.DELETE)
+                    }
                 R.id.enabled -> if (it.isCheckable) {
                     it.isChecked = !it.isChecked
                     setAction(if (it.isChecked) Action.ENABLE else Action.DISABLE)
