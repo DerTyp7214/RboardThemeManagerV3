@@ -23,6 +23,7 @@ import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.*
 import de.Maxr1998.modernpreferences.preferences.CategoryHeader
+import de.Maxr1998.modernpreferences.preferences.SeekBarPreference
 import de.Maxr1998.modernpreferences.preferences.SwitchPreference
 import de.Maxr1998.modernpreferences.preferences.choice.SelectionItem
 import de.Maxr1998.modernpreferences.preferences.choice.SingleChoiceDialogPreference
@@ -276,7 +277,8 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                 if (item.summary == -1) summary = item.key
                 if (listOf(TYPE.INT, TYPE.LONG, TYPE.FLOAT, TYPE.STRING).contains(item.type))
                     onClick {
-                        activity.openInputDialog(
+                        activity.openInputDialogFlag(
+                            title.toString(),
                             R.string.nothing,
                             item.defaultValue.toString()
                         ) { dialogInterface, text ->
@@ -413,7 +415,8 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                         }
                         summary = entry.value.toString()
                         onClick {
-                            activity.openInputDialog(
+                            activity.openInputDialogFlag(
+                                title.toString(),
                                 R.string.nothing,
                                 summary?.toString()
                             ) { dialogInterface, text ->
@@ -552,7 +555,8 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                         }
                         summary = entry.value.toString()
                         onClick {
-                            activity.openInputDialog(
+                            activity.openInputDialogFlag(
+                                title.toString(),
                                 R.string.nothing,
                                 summary?.toString()
                             ) { dialogInterface, text ->
