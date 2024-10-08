@@ -248,8 +248,10 @@
     <string name="gboard_cache_cleared">Gboard gyorsítótár törölve</string>
     <string name="gboard_cache_clear">Gboard gyorsítótár törlése</string>
     <string name="gboard_cache_clear_long">Törli a gyorsítótárat és kényszeríti a gboard bezárását.</string>
+    <string name="gboard_cache_clear_long_question">Szeretné törölni a gyorsítótárat és kényszeríteni a gboard bezárását?</string>
     <string name="clear_recent_emojis">A legutóbb használt emojik törlése</string>
     <string name="clear_recent_emojis_long">Törli a legutóbb használt emojikat és kényszeríti a gboard bezárását.</string>
+    <string name="clear_recent_emojis_question">Szeretné törölni a legutóbb használt emojikat és kényszeríteni a gboard bezárását?</string>
     <string name="recent_emojis_cleared">Legutóbb használt emojik törölve</string>
     <string name="show_language_switch_key">Nyelvváltó gomb megjelenítése</string>
     <string name="value">Érték</string>
@@ -312,4 +314,7 @@
     <string name="close">Bezár</string>
     <string name="rboard_theme_patcher">Rboard Patcher</string>
     <string name="rboard_monet_extractor">Monet Extractor</string>
+    <string name="top_icon_num">Max hozzáférési pontok konfigurálása</string>
+    <string name="top_icon_num_long">(Az érvényes értéknek 3 és 8 között kell lennie)</string>
+    <string name="gboard_cache_clear_question">Törli a gboard gyorsítótárat</string>
 </resources>
