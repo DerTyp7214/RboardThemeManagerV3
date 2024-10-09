@@ -36,7 +36,7 @@ firebase-messaging = "24.0.2"
 gson = "2.11.0"
 protobufDynamic = "1.0.1"
 simple-item-decoration = "1.0.0"
-balloon = "1.6.7"
+balloon = "1.6.8"
 kspPlugin = "2.0.20-1.0.25"
 dotsIndicator = "5.1.0"
 
