@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -379,7 +380,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                     filter,
                     true
                 )) && onlyDisabled.let { b -> if (b) it.value is Boolean && it.value == false else true }
-            }.forEach { entry ->
+            }.filter {it.key.isNotEmpty()}.forEach { entry ->
                 prefs.edit { remove(entry.key) }
                 if (entry.value is Boolean) builder.switch(entry.key) {
                     title = entry.key.split("_").joinToString(" ") {
