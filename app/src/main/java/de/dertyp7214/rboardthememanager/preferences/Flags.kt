@@ -23,7 +23,6 @@ import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.*
 import de.Maxr1998.modernpreferences.preferences.CategoryHeader
-import de.Maxr1998.modernpreferences.preferences.SeekBarPreference
 import de.Maxr1998.modernpreferences.preferences.SwitchPreference
 import de.Maxr1998.modernpreferences.preferences.choice.SelectionItem
 import de.Maxr1998.modernpreferences.preferences.choice.SingleChoiceDialogPreference
@@ -379,7 +378,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                     filter,
                     true
                 )) && onlyDisabled.let { b -> if (b) it.value is Boolean && it.value == false else true }
-            }.forEach { entry ->
+            }.filter {it.key.isNotEmpty()}.forEach { entry ->
                 prefs.edit { remove(entry.key) }
                 if (entry.value is Boolean) builder.switch(entry.key) {
                     title = entry.key.split("_").joinToString(" ") {
