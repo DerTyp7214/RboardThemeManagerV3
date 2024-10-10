@@ -38,7 +38,6 @@ import de.dertyp7214.rboardthememanager.components.XMLType
 import de.dertyp7214.rboardthememanager.core.SafeJSON
 import de.dertyp7214.rboardthememanager.core.get
 import de.dertyp7214.rboardthememanager.core.openDialog
-import de.dertyp7214.rboardthememanager.core.openUrl
 import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.core.set
 import de.dertyp7214.rboardthememanager.core.writeFile

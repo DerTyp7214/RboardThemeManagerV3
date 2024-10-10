@@ -1,7 +1,5 @@
 package de.dertyp7214.rboardthememanager.data
 
-import kotlin.jvm.javaClass
-
 data class SoundPack(
     val author: String, val url: String, val title: String,
     val size: Long = 0,

@@ -28,7 +28,6 @@ import de.dertyp7214.rboardthememanager.core.capitalize
 import de.dertyp7214.rboardthememanager.core.get
 import de.dertyp7214.rboardthememanager.core.getAttr
 import de.dertyp7214.rboardthememanager.core.set
-import de.dertyp7214.rboardthememanager.databinding.ActivityShareFlagsBinding
 import de.dertyp7214.rboardthememanager.databinding.ActivityThemeChangerBinding
 import dev.chrisbanes.insetter.applyInsetter
 

@@ -24,7 +24,6 @@ import de.dertyp7214.rboardthememanager.core.safeString
 import de.dertyp7214.rboardthememanager.core.setSystemProperty
 import de.dertyp7214.rboardthememanager.utils.FileUtils
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
-import kotlin.math.absoluteValue
 
 class Props(private val activity: AppCompatActivity, private val args: SafeJSON) :
     AbstractMenuPreference() {
