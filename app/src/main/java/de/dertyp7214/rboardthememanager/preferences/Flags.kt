@@ -381,7 +381,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                     filter,
                     true
                 )) && onlyDisabled.let { b -> if (b) it.value is Boolean && it.value == false else true }
-            }.forEach { entry ->
+            }.filter {it.key.isNotEmpty()}.forEach { entry ->
                 prefs.edit { remove(entry.key) }
                 if (entry.value is Boolean) builder.switch(entry.key) {
                     title = entry.key.split("_").joinToString(" ") {
