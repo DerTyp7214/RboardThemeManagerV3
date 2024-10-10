@@ -114,6 +114,7 @@ jobs:
         run: echo ${{ github.event.head_commit }}
 
       - name: Send Notification
+        continue-on-error: true
         uses: fjogeleit/http-request-action@master
         with:
           url: 'https://fcm.googleapis.com/fcm/send'
