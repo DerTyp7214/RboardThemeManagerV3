@@ -151,6 +151,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+      
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+          cmake-version: '3.30.5'
 
       - uses: nttld/setup-ndk@v1
         with:
@@ -289,7 +294,6 @@ jobs:
         with:
           cmake-version: '3.30.5'
           
-
       - uses: nttld/setup-ndk@v1
         with:
           ndk-version: r27b
