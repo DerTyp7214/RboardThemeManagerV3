@@ -19,10 +19,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: recursive
+          
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v2
+        with:
+          cmake-version: '3.30.5'
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27
+          ndk-version: r27b
 
       - name: Get Commit Message
         id: commitMessage
@@ -31,7 +36,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 21
+          java-version: 22
           distribution: temurin
 
       - name: Cache Gradle dependencies
@@ -66,10 +71,11 @@ jobs:
 
       - name: Build apk
         id: buildAllApks
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: wrapper
-          arguments: assembleDebug
+            gradle-version: wrapper
+      - name: AssembleDebug the project
+        run: ./gradlew assembleDebug
 
       - name: Get JSON
         id: metadataJson
@@ -127,6 +133,7 @@ jobs:
         run: "curl --location --request POST 'https://api.telegram.org/bot${{ secrets.TELEGRAM_TOKEN }}/sendMessage' --header 'Content-Type:application/json' --data-raw '{\"chat_id\":\"${{ secrets.TELEGRAM_TO_MAIN }}\",\"message_thread_id\":${{ secrets.TELEGRAM_MAIN_TOPIC_ID_DEBUG }},\"text\":\"#A12\\n**${{ steps.extract_branch.outputs.BRANCH_NAME }}**\\n\\ncommit: `${{ github.event.head_commit.message }}` [${{ github.event.head_commit.id }}](${{ github.event.head_commit.url }})\",\"parse_mode\":\"markdown\",\"reply_markup\":{\"inline_keyboard\":[[{\"text\":\"Download A12+\",\"url\":\"https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/${{ fromJson(steps.metadataJson.outputs.json).elements[0].versionName }}-debug/app-debug.apk\"}]]}}'"
 
       - name: Send Notification
+        continue-on-error: true
         uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://fcm.googleapis.com/fcm/send'

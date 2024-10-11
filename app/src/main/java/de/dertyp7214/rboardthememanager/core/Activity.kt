@@ -177,14 +177,17 @@ fun Activity.openShareThemeDialog(
 }
 
 @SuppressLint("InflateParams")
-fun Activity.openInputDialog(
+fun Activity.openInputDialogFlag(
+    name: String,
     @StringRes hint: Int,
     value: String? = null,
     @StringRes negativeText: Int = android.R.string.cancel,
     negative: ((dialogInterface: DialogInterface) -> Unit) = { it.dismiss() },
     positive: (dialogInterface: DialogInterface, text: String) -> Unit
-) = openDialog(R.layout.input_dialog, false) { dialog ->
+) = openDialog(R.layout.input_dialog_with_title, false) { dialog ->
+    val flagnames = findViewById<TextView>(R.id.TextViewFlag)
     val input = findViewById<EditText>(R.id.editText)
+    flagnames.text = name
     input.setHint(hint)
     if (value != null) input.setText(value)
 

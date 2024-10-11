@@ -27,7 +27,8 @@ class NoRootDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context = requireContext()
-        return ComponentDialog(context,
+        return ComponentDialog(
+            context,
             ThemeUtils.getTheme(context)
                 ?: com.google.android.material.R.attr.dynamicColorThemeOverlay
         )
@@ -44,14 +45,16 @@ class NoRootDialog : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-            activity?.enableEdgeToEdge(
-                statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
-            )
+        activity?.enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
+        )
 
-            dialog?.window?.setDecorFitsSystemWindows(false)
+        @Suppress("DEPRECATION")
+        dialog?.window?.setDecorFitsSystemWindows(false)
 
-            dialog?.window?.isNavigationBarContrastEnforced = false
-            dialog?.window?.navigationBarColor = Color.TRANSPARENT
+        dialog?.window?.isNavigationBarContrastEnforced = false
+        @Suppress("DEPRECATION")
+        dialog?.window?.navigationBarColor = Color.TRANSPARENT
 
         val getMagiskButton: MaterialButton = view.findViewById(R.id.magisk_button)
 

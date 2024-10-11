@@ -29,10 +29,11 @@ class SwitchKeyboardWidgetConfigureActivity : AppCompatActivity() {
             statusBarStyle = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT)
         )
 
+        @Suppress("DEPRECATION")
         window.setDecorFitsSystemWindows(false)
 
-        val view: View = window.decorView
         window.isNavigationBarContrastEnforced = false
+        @Suppress("DEPRECATION")
         window.navigationBarColor = Color.TRANSPARENT
         super.onCreate(icicle)
 
