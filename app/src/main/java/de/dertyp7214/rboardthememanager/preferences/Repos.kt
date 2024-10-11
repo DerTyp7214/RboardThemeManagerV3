@@ -18,12 +18,12 @@ import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.checkBox
 import de.Maxr1998.modernpreferences.helpers.onClick
+import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.*
 import de.dertyp7214.rboardthememanager.data.RboardRepo
 import de.dertyp7214.rboardthememanager.screens.ManageRepo
-import de.dertyp7214.rboardcomponents.utils.doAsync
 
 class Repos(
     private val activity: AppCompatActivity,
@@ -110,7 +110,10 @@ class Repos(
         fab.visibility = View.VISIBLE
         fab.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_baseline_add_24))
         fab.setOnClickListener {
-            activity.openInputDialog(R.string.repository) { dialog, text ->
+            activity.openInputDialogFlag(
+                activity.getResources().getString(R.string.repository),
+                R.string.nothing, ""
+            ) { dialog, text ->
                 doAsync("true:$text"::parseRepo) {
                     dialog.dismiss()
                     repositories.add(it)

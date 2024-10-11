@@ -1,11 +1,13 @@
 package de.dertyp7214.rboardthememanager.preferences
 
+import android.os.Build
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -15,11 +17,14 @@ import de.Maxr1998.modernpreferences.PreferenceScreen
 import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.categoryHeader
 import de.Maxr1998.modernpreferences.helpers.onClick
+import de.Maxr1998.modernpreferences.helpers.onClickView
 import de.Maxr1998.modernpreferences.helpers.pref
+import de.dertyp7214.rboardthememanager.Config.PLAY_URL
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.SafeJSON
-import de.dertyp7214.rboardthememanager.core.openUrl
 import de.dertyp7214.rboardthememanager.core.isReachable
+import de.dertyp7214.rboardthememanager.core.openDialog
+import de.dertyp7214.rboardthememanager.core.openUrl
 import java.net.URL
 
 class About(private val activity: AppCompatActivity, private val args: SafeJSON) :
@@ -152,14 +157,78 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
                 false
             }
         }
+        builder.categoryHeader("rboard_apps") {
+            titleRes = R.string.rboard_apps
+        }
+        builder.pref("more_rboard_apps") {
+            titleRes = R.string.more_rboard_apps
+            summaryRes = R.string.more_rboard_apps_desc
+            iconRes = R.drawable.ic_rboard
+            onClickView {
+                activity.openDialog(R.layout.more_rboard_apps_dialog) { dialog ->
+                    val title = findViewById<TextView>(R.id.TextViewApps)
+                title.text = activity.getString(R.string.more_rboard_apps)
+                val rboardThemePatcher = findViewById<TextView>(R.id.rboard_theme_patcher)
+                val rboardThemeCreator = findViewById<TextView>(R.id.rboard_theme_creator)
+                val rboardDeepLink = findViewById<TextView>(R.id.rboard_deep_link)
+                val rboardImeTester = findViewById<TextView>(R.id.rboard_ime_tester)
+
+                rboardDeepLink.setOnClickListener {
+                    activity.packageManager.getLaunchIntentForPackage(
+                        "de.dertyp7214.deeplinkrboard"
+                    )?.let(activity::startActivity)
+                        ?: activity.openUrl(activity.getString(R.string.rboard_deep_link))
+                }
+                rboardThemePatcher.setOnClickListener {
+                    activity.packageManager.getLaunchIntentForPackage(
+                        "de.dertyp7214.rboardpatcher"
+                    )?.let(activity::startActivity)
+                        ?: activity.openUrl(PLAY_URL("de.dertyp7214.rboardpatcher"))
+                }
+                rboardThemeCreator.setOnClickListener {
+                    activity.packageManager.getLaunchIntentForPackage(
+                        "de.dertyp7214.rboardthemecreator"
+                    )?.let(activity::startActivity)
+                        ?: if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        activity.openUrl(PLAY_URL("de.dertyp7214.rboardthemecreator"))
+                    }
+                    else{
+                        activity.openUrl("https://github.com/DerTyp7214/RboardThemeCreator/releases/tag/1.2.5")
+                    }
+
+                }
+                rboardImeTester.setOnClickListener {
+                    activity.packageManager.getLaunchIntentForPackage(
+                        "de.dertyp7214.rboardimetester"
+                    )?.let(activity::startActivity)
+                        ?: activity.openUrl(PLAY_URL("de.dertyp7214.rboardimetester"))
+                }
+
+                findViewById<Button>(R.id.close)?.setOnClickListener { dialog.dismiss() }
+            }
+            }
+        }
         builder.categoryHeader("translators") {
             titleRes = R.string.translators
+        }
+        builder.pref("ar") {
+            titleRes = R.string.arabic
+            summaryRes = R.string.muhammadbahaa2001
+            useTint = false
+            iconRes = FlagKit.getResId(activity, "arab")
         }
         builder.pref("pt-rBR") {
             titleRes = R.string.portuguese_brazilian
             summaryRes = R.string.igormiguell
             useTint = false
             iconRes = FlagKit.getResId(activity, "br")
+        }
+        builder.pref("zh")
+        {
+            titleRes = R.string.chinese
+            summaryRes = R.string.contingency
+            useTint = false
+            iconRes = FlagKit.getResId(activity, "cn")
         }
         builder.pref("fr") {
             titleRes = R.string.french
@@ -196,12 +265,6 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
             summaryRes = R.string.primal_pea
             useTint = false
             iconRes = FlagKit.getResId(activity, "vn")
-        }
-        builder.pref("zh") {
-            titleRes = R.string.chinese
-            summaryRes = R.string.contingency
-            useTint = false
-            iconRes = FlagKit.getResId(activity, "cn")
         }
     }
 }

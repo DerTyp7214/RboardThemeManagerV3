@@ -276,7 +276,8 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                 if (item.summary == -1) summary = item.key
                 if (listOf(TYPE.INT, TYPE.LONG, TYPE.FLOAT, TYPE.STRING).contains(item.type))
                     onClick {
-                        activity.openInputDialog(
+                        activity.openInputDialogFlag(
+                            title.toString(),
                             R.string.nothing,
                             item.defaultValue.toString()
                         ) { dialogInterface, text ->
@@ -377,7 +378,7 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                     filter,
                     true
                 )) && onlyDisabled.let { b -> if (b) it.value is Boolean && it.value == false else true }
-            }.forEach { entry ->
+            }.filter {it.key.isNotEmpty()}.forEach { entry ->
                 prefs.edit { remove(entry.key) }
                 if (entry.value is Boolean) builder.switch(entry.key) {
                     title = entry.key.split("_").joinToString(" ") {
@@ -413,7 +414,8 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                         }
                         summary = entry.value.toString()
                         onClick {
-                            activity.openInputDialog(
+                            activity.openInputDialogFlag(
+                                title.toString(),
                                 R.string.nothing,
                                 summary?.toString()
                             ) { dialogInterface, text ->
@@ -552,7 +554,8 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
                         }
                         summary = entry.value.toString()
                         onClick {
-                            activity.openInputDialog(
+                            activity.openInputDialogFlag(
+                                title.toString(),
                                 R.string.nothing,
                                 summary?.toString()
                             ) { dialogInterface, text ->

@@ -1,10 +1,11 @@
+@file:Suppress("DEPRECATION")
+
 package de.dertyp7214.rboardthememanager.screens
 
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.view.View.FOCUS_DOWN
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -36,7 +37,6 @@ class ReadMoreReadFast : AppCompatActivity() {
             window.setDecorFitsSystemWindows(false)
         }
 
-        val view: View = window.decorView
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             window.isNavigationBarContrastEnforced = false
             window.navigationBarColor = Color.TRANSPARENT

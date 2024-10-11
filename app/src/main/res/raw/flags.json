@@ -1,5 +1,5 @@
 {
-  "time": "1714154132813",
+  "time": "1727767527651",
   "flags": [
     {
       "key": "general",
@@ -174,7 +174,8 @@
         "show_branding_on_space",
         "show_branding_interval_seconds",
         "branding_fadeout_delay_ms"
-      ]
+      ],
+      "visible": false
     },
     {
       "key": "show_branding_on_space",
@@ -332,7 +333,8 @@
       "icon": "ic_pill",
       "defaultValue": false,
       "type": "BOOLEAN",
-      "file": "FLAGS"
+      "file": "FLAGS",
+      "visible": false
     },
     {
       "key": "enable_bitmoji_contextual_category_icon",

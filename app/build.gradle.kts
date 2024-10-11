@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.config.JvmTarget
-
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -21,12 +19,14 @@ android {
         // Update the minSdk if old Android Versions are no longer supported on the Gboard side.
         minSdk = 23
         targetSdk = 35
-        versionCode = 393000
-        versionName = "3.9.3"
+        versionCode = 394000
+        versionName = "3.9.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        resourceConfigurations += listOf(
+    }
+    @Suppress("UnstableApiUsage")
+    androidResources {
+        localeFilters += listOf(
             "ar", "cs", "da", "de",
             "el", "en", "es", "fi",
             "fr", "hi", "hu", "in",
@@ -51,25 +51,28 @@ android {
     }
     compileOptions {
         isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
+        sourceCompatibility = JavaVersion.current()
+        targetCompatibility = JavaVersion.current()
     }
 
     kotlinOptions {
-        jvmTarget = JvmTarget.JVM_21.toString()
+        jvmTarget = JavaVersion.current().toString()
         freeCompilerArgs += listOf(
             "-P",
             "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true",
             "-Xsuppress-version-warnings"
         )
     }
-
     packaging {
         jniLibs {
             useLegacyPackaging = true
         }
         resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
     }
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+
     namespace = "de.dertyp7214.rboardthememanager"
 }
 
@@ -80,8 +83,6 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.messaging.ktx)
     implementation(libs.firebase.analytics.ktx)
-
-    implementation(libs.preferencesplus)
 
     implementation(libs.protobuf.dynamic)
 

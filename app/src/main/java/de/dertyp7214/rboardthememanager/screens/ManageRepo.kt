@@ -1,4 +1,4 @@
-@file:Suppress("unused", "SameParameterValue")
+@file:Suppress("unused", "SameParameterValue", "DEPRECATION")
 
 package de.dertyp7214.rboardthememanager.screens
 
@@ -7,7 +7,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,6 +18,7 @@ import de.dertyp7214.rboardthememanager.adapter.ManageRepoThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
 import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.core.getTextFromUrl
+import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.core.safeParse
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.databinding.ActivityManageRepoBinding
@@ -56,7 +56,6 @@ class ManageRepo : AppCompatActivity() {
             window.setDecorFitsSystemWindows(false)
         }
 
-        val view: View = window.decorView
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             window.isNavigationBarContrastEnforced = false
             window.navigationBarColor = Color.TRANSPARENT
@@ -100,7 +99,14 @@ class ManageRepo : AppCompatActivity() {
         toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.delete -> finishWithAction(Action.DELETE)
+                R.id.delete ->
+                    openDialog(
+                        R.string.do_you_want_to_delete_repo,
+                        R.string.delete_repo
+                    ) { dialog ->
+                        dialog.dismiss()
+                        finishWithAction(Action.DELETE)
+                    }
                 R.id.enabled -> if (it.isCheckable) {
                     it.isChecked = !it.isChecked
                     setAction(if (it.isChecked) Action.ENABLE else Action.DISABLE)

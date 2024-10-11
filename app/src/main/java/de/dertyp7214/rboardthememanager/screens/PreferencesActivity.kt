@@ -66,7 +66,6 @@ class PreferencesActivity : AppCompatActivity() {
             window.setDecorFitsSystemWindows(false)
         }
 
-        val view: View = window.decorView
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             window.isNavigationBarContrastEnforced = false
             window.navigationBarColor = Color.TRANSPARENT

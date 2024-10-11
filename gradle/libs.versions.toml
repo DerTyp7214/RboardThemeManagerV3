@@ -1,45 +1,44 @@
 [versions]
-activity-ktx = "1.9.1"
+activity-ktx = "1.10.0-alpha02"
 android-shell = "1.0.0"
 androidx-junit = "1.2.1"
 appcompat = "1.7.0"
-balloon = "1.6.6"
+balloon = "1.6.8"
 browser = "1.8.0"
 commons-text = "1.12.0"
-constraintlayout = "2.2.0-alpha13"
-core = "1.15.0-alpha01"
-core-ktx = "1.15.0-alpha01"
-desugar_jdk_libs_nio = "2.0.4"
-dotsIndicator = "5.0"
+constraintlayout = "2.2.0-beta01"
+core = "1.15.0-beta01"
+core-ktx = "1.15.0-beta01"
+desugar_jdk_libs_nio = "2.1.2"
+dotsIndicator = "5.1.0"
 espresso-core = "3.6.1"
-firebase-bom = "33.1.2"
-firebase-analytics = "22.0.2"
-firebase-analytics-ktx = "22.0.2"
-firebase-messaging = "24.0.0"
-firebase-messaging-ktx = "24.0.0"
-flagkit-android = "1.0.2"
-fragment-ktx = "1.8.2"
+firebase-bom = "33.4.0"
+firebase-analytics = "22.1.2"
+firebase-analytics-ktx = "22.1.2"
+firebase-messaging = "24.0.2"
+firebase-messaging-ktx = "24.0.2"
+flagkit-android = "1.0.3"
+fragment-ktx = "1.8.4"
 googleServices = "4.4.2"
-gradle = "8.7.0-alpha03"
+gradle = "8.8.0-alpha05"
 gson = "2.11.0"
 insetter = "0.6.1"
 junit = "4.13.2"
-kotlin-reflect = "2.0.0"
+kotlin-reflect = "2.1.0-Beta1"
 ksp = "5.0.0-SNAPSHOT"
-kspPlugin = "2.0.0-1.0.24"
+kspPlugin = "2.1.0-Beta1-1.0.25"
 legacy-support-v4 = "1.0.0"
 libsuVersion = "6.0.0"
-lifecycle-viewmodel-ktx = "2.8.4"
-material = "1.13.0-alpha04"
-navigation-fragment-ktx = "2.8.0-beta06"
-navigation-ui-ktx = "2.8.0-beta06"
+lifecycle-viewmodel-ktx = "2.9.0-alpha04"
+material = "1.13.0-alpha06"
+navigation-fragment-ktx = "2.8.2"
+navigation-ui-ktx = "2.8.2"
 prdownloader = "v0.6.0"
 preference-ktx = "1.2.1"
-preferencesplus = "1.1"
 protobuf-dynamic = "1.0.1"
 simple-item-decoration = "1.0.0"
-ui-tooling = "1.7.0-beta06"
-r8 = "8.7.1-dev"
+ui-tooling = "1.8.0-alpha03"
+r8 = "8.8.10-dev"
 
 [libraries]
 android-shell = { module = "com.jaredrummler:android-shell", version.ref = "android-shell" }
@@ -64,7 +63,7 @@ firebase-analytics = { module = "com.google.firebase:firebase-analytics", versio
 firebase-analytics-ktx = { module = "com.google.firebase:firebase-analytics-ktx", version.ref = "firebase-analytics-ktx" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging", version.ref = "firebase-messaging" }
 firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx", version.ref = "firebase-messaging-ktx" }
-flagkit-android = { module = "com.github.murgupluoglu:flagkit-android", version.ref = "flagkit-android" }
+flagkit-android = { module = "com.github.akospaha01:flagkit-android", version.ref = "flagkit-android" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "ksp" }
 google-services = { module = "com.google.gms:google-services", version.ref = "googleServices" }
 gradle = { module = "com.android.tools.build:gradle", version.ref = "gradle" }
@@ -81,7 +80,6 @@ navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-kt
 navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "navigation-ui-ktx" }
 nio = { module = "com.github.topjohnwu.libsu:nio", version.ref = "libsuVersion" }
 prdownloader = { module = "de.dertyp7214:PRDownloader", version.ref = "prdownloader" }
-preferencesplus = { module = "com.github.DerTyp7214:PreferencesPlus", version.ref = "preferencesplus" }
 protobuf-dynamic = { module = "com.github.os72:protobuf-dynamic", version.ref = "protobuf-dynamic" }
 simple-item-decoration = { module = "com.bignerdranch.android:simple-item-decoration", version.ref = "simple-item-decoration" }
 dots-indicator = { group = "com.tbuonomo", name = "dotsindicator", version.ref = "dotsIndicator" }

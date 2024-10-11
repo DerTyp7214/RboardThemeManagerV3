@@ -1,10 +1,10 @@
+@file:Suppress("DEPRECATION")
+
 package de.dertyp7214.rboardthememanager.screens
 
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.view.WindowInsets
 import android.widget.Toast
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
@@ -49,7 +49,6 @@ class InstallPackActivity : AppCompatActivity() {
             window.setDecorFitsSystemWindows(false)
         }
 
-        val view: View = window.decorView
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             window.isNavigationBarContrastEnforced = false
             window.navigationBarColor = Color.TRANSPARENT

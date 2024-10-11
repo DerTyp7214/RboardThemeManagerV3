@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="search">Keresés</string>
     <string name="title_themes">Témák</string>
     <string name="title_downloads">Letöltések</string>
@@ -26,6 +26,7 @@
     <string name="apply_automatic_theme">Automatikus Téma Alkalmazása</string>
     <string name="applied">Téma Alkalmazva</string>
     <string name="delete_theme">Téma Törlése</string>
+    <string name="delete_repo">Tároló törlése</string>
     <string name="q_delete_theme">Szeretné törölni ezt a témát?</string>
     <string name="theme_deleted">Téma Törölve</string>
     <string name="info">Információ</string>
@@ -54,6 +55,7 @@
     <string name="themes_installed">Témák telepítve</string>
     <string name="unpacking_themes">Témák kicsomagolása</string>
     <string name="do_you_want_to_delete_theme">Szeretné törölni ezeket a témákat?</string>
+    <string name="do_you_want_to_delete_repo">Szeretné törölni ezeket a repókat?</string>
     <string name="show_preinstalled_themes">Előre telepített témák megjelenítése</string>
     <string name="emoji_compat_app_whitelist">Emoji Kompatibilis Javítás</string>
     <string name="flags">Gboard Zászlók</string>
@@ -246,8 +248,10 @@
     <string name="gboard_cache_cleared">Gboard gyorsítótár törölve</string>
     <string name="gboard_cache_clear">Gboard gyorsítótár törlése</string>
     <string name="gboard_cache_clear_long">Törli a gyorsítótárat és kényszeríti a gboard bezárását.</string>
+    <string name="gboard_cache_clear_long_question">Szeretné törölni a gyorsítótárat és kényszeríteni a gboard bezárását?</string>
     <string name="clear_recent_emojis">A legutóbb használt emojik törlése</string>
     <string name="clear_recent_emojis_long">Törli a legutóbb használt emojikat és kényszeríti a gboard bezárását.</string>
+    <string name="clear_recent_emojis_question">Szeretné törölni a legutóbb használt emojikat és kényszeríteni a gboard bezárását?</string>
     <string name="recent_emojis_cleared">Legutóbb használt emojik törölve</string>
     <string name="show_language_switch_key">Nyelvváltó gomb megjelenítése</string>
     <string name="value">Érték</string>
@@ -303,4 +307,14 @@
     <string name="silk_popup_details">Selyem Popup Használata</string>
     <string name="emoji_compat_app_whitelist_details">Emoji Kompatibilis Javítás Használata</string>
     <string name="enable_email_provider_completion_details">E-mail Szolgáltató Használata</string>
+    <string name="deep_link_long">Rboard Deep link</string>
+    <string name="rboard_apps">Rboard Alkalmazások</string>
+    <string name="more_rboard_apps">Még több tőlünk</string>
+    <string name="more_rboard_apps_desc">További Rboard alkalmazások letöltése</string>
+    <string name="close">Bezár</string>
+    <string name="rboard_theme_patcher">Rboard Patcher</string>
+    <string name="rboard_monet_extractor">Monet Extractor</string>
+    <string name="top_icon_num">Max hozzáférési pontok konfigurálása</string>
+    <string name="top_icon_num_long">(Az érvényes értéknek 3 és 8 között kell lennie)</string>
+    <string name="gboard_cache_clear_question">Törli a gboard gyorsítótárat</string>
 </resources>
