@@ -314,7 +314,7 @@
     <string name="rboard_monet_extractor">Extrator de monet</string>
     <string name="top_icon_num">Configurar máximo de pontos de acesso</string>
     <string name="top_icon_num_long">(O valor válido deve estar entre 3 e 8)</string>
-    <string name="gboard_cache_clear_question">Excluir cache do Gboard</string>
+    <string name="gboard_cache_clear_question">Limpar cache do Gboard</string>
     <string name="gboard_cache_clear_long_question">Deseja limpar o cache e forçar a parada do Gboard?</string>
     <string name="clear_recent_emojis_question">Deseja excluir os emojis usados ​​recentemente e forçar a parada do Gboard?</string>
 </resources>
