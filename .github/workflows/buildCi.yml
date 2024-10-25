@@ -28,7 +28,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27b
+          ndk-version: r27c
 
       - name: Get Commit Message
         id: commitMessage
@@ -159,7 +159,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27b
+          ndk-version: r27c
 
       - name: Get Commit Message
         id: commitMessage
@@ -296,7 +296,7 @@ jobs:
           
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27b
+          ndk-version: r27c
 
       - name: Get Commit Message
         id: commitMessage

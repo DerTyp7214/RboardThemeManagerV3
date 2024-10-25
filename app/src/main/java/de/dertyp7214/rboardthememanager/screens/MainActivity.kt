@@ -434,10 +434,8 @@ class MainActivity : AppCompatActivity() {
                         R.id.select_all -> {
                             if (mainViewModel.getSelections().second?.getSelected()?.size == mainViewModel.getThemes().size ) {
                                 mainViewModel.getSelections().second?.clearSelection()
-                                item.setIcon(R.drawable.ic_select_all)
                             } else {
                                 mainViewModel.getSelections().second?.selectAll()
-                                item.setIcon(R.drawable.ic_deselect_all)
                             }
                         }
                     }

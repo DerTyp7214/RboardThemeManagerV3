@@ -95,10 +95,8 @@ class InstallPackActivity : AppCompatActivity() {
             if (it.itemId == R.id.select_all) {
                 if (adapter.getSelected().size == themes.size) {
                     adapter.clearSelection()
-                    it.setIcon(R.drawable.ic_select_all)
                 } else {
                     adapter.selectAll()
-                    it.setIcon(R.drawable.ic_deselect_all)
                 }
             }
             true

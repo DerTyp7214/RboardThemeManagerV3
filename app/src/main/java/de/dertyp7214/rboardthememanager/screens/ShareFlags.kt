@@ -174,10 +174,8 @@ class ShareFlags : AppCompatActivity() {
 
                 if (adapter.getSelectedFlags().size == flagKeys.size) {
                     adapter.clearSelection()
-                    item.setIcon(R.drawable.ic_select_all)
                 } else {
                     adapter.selectAll()
-                    item.setIcon(R.drawable.ic_deselect_all)
                 }
 
                 title =
