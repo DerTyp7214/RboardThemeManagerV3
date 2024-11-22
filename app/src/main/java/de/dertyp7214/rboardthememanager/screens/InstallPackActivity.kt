@@ -82,8 +82,11 @@ class InstallPackActivity : AppCompatActivity() {
         }
         toolbar.setOnMenuItemClickListener {
             if (it.itemId == R.id.select_all) {
-                if (adapter.getSelected().size == themes.size) adapter.clearSelection()
-                else adapter.selectAll()
+                if (adapter.getSelected().size == themes.size) {
+                    adapter.clearSelection()
+                } else {
+                    adapter.selectAll()
+                }
             }
             true
         }
