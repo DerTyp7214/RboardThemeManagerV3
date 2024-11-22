@@ -317,4 +317,6 @@
     <string name="top_icon_num">Max hozzáférési pontok konfigurálása</string>
     <string name="top_icon_num_long">(Az érvényes értéknek 3 és 8 között kell lennie)</string>
     <string name="gboard_cache_clear_question">Törli a gboard gyorsítótárat</string>
+    <string name="select_prefs">Válasszon ki legalább egy beállítást</string>
+    <string name="select_flags">Válasszon ki legalább egy zászlót</string>
 </resources>

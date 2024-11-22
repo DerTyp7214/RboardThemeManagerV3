@@ -4,13 +4,13 @@
     <option name="moduleKind" value="plain" />
   </component>
   <component name="Kotlin2JvmCompilerArguments">
-    <option name="jvmTarget" value="22" />
+    <option name="jvmTarget" value="23" />
   </component>
   <component name="KotlinCommonCompilerArguments">
     <option name="apiVersion" value="2.1" />
     <option name="languageVersion" value="2.1" />
   </component>
   <component name="KotlinJpsPluginSettings">
-    <option name="version" value="2.1.0-Beta1" />
+    <option name="version" value="2.1.0-RC2" />
   </component>
 </project>

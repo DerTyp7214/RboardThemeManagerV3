@@ -296,8 +296,22 @@
     <string name="enable_sharing_details">Mostre o ícone de compartilhamento</string>
     <string name="enable_key_border_details">Use a borda das teclas</string>
     <string name="enable_secondary_symbols_details">Use os símbolos secundários</string>
-    <string name="silk_popup_details">Usando silk pop-up</string>
+    <string name="silk_popup_details">Use o silk pop-up</string>
     <string name="keyboard_redesign_google_sans_details">Use o redesign do teclado com o Google Sans</string>
     <string name="emoji_compat_app_whitelist_details">Use a correção de compatibilidade de emojis</string>
     <string name="enable_email_provider_completion_details">Use o provedor de e-mail</string>
+    <string name="delete_repo">Excluir repositório</string>
+    <string name="do_you_want_to_delete_repo">Deseja excluir este repositório?</string>
+    <string name="rboard_theme_patcher">Rboard Patcher</string>
+    <string name="deep_link_long">Link direto do Rboard</string>
+    <string name="rboard_apps">Apps do Rboard</string>
+    <string name="more_rboard_apps">Mais de nós</string>
+    <string name="more_rboard_apps_desc">Baixe mais apps do Rboard</string>
+    <string name="close">Fechar</string>
+    <string name="rboard_monet_extractor">Extrator de monet</string>
+    <string name="top_icon_num">Configurar máximo de pontos de acesso</string>
+    <string name="top_icon_num_long">(O valor válido deve estar entre 3 e 8)</string>
+    <string name="gboard_cache_clear_question">Limpar cache do Gboard</string>
+    <string name="gboard_cache_clear_long_question">Deseja limpar o cache e forçar a parada do Gboard?</string>
+    <string name="clear_recent_emojis_question">Deseja excluir os emojis usados recentemente e forçar a parada do Gboard?</string>
 </resources>

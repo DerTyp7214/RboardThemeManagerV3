@@ -7,8 +7,8 @@ plugins {
 }
 
 android {
-    compileSdk = 35
-    buildToolsVersion = "35.0.0"
+    compileSdkPreview = "Baklava"
+    buildToolsVersion = "36.0.0 rc1"
     buildFeatures.dataBinding = true
 
     buildFeatures.viewBinding = true
@@ -19,7 +19,7 @@ android {
         // Update the minSdk if old Android Versions are no longer supported on the Gboard side.
         minSdk = 23
         targetSdk = 35
-        versionCode = 394000
+        versionCode = 394004
         versionName = "3.9.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
