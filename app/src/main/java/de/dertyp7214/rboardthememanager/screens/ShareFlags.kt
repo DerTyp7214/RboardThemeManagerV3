@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
@@ -133,13 +134,28 @@ class ShareFlags : AppCompatActivity() {
                 adapter.getSelectedFlags().forEach {
                     flags.getValue(it)?.let { entry -> xml.setValue(entry) }
                 }
-                val file = File(filesDir, "flags.rboard")
-                file.writeText(xml.toString(if (isFlags) "FLAGS" else "PREFS"))
-                file.share(this, "text/xml", ACTION_SEND, R.string.share_flags)
+                val file = File(filesDir, if (isFlags) "flags.rboard" else "prefs.rboard")
+                if (adapter.getSelectedFlags().isNotEmpty()) {
+                    file.writeText(xml.toString(if (isFlags) "FLAGS" else "PREFS"))
+                    file.share(this, "text/xml", ACTION_SEND, R.string.share_flags)
+                } else {
+                    Toast.makeText(
+                        this,
+                        if (isFlags) R.string.select_flags else R.string.select_prefs,
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
                 true
             }
             R.id.select_all -> {
-                adapter.selectAll()
+                val orig = ArrayList(flags.simpleMap().map { it.key })
+                val flagKeys = ArrayList(orig)
+
+                if (adapter.getSelectedFlags().size == flagKeys.size) {
+                    adapter.clearSelection()
+                } else {
+                    adapter.selectAll()
+                }
                 title =
                     getString(titleRes, adapter.getSelectedFlags().size)
                 true
