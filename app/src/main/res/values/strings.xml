@@ -318,4 +318,6 @@
     <string name="rboard_monet_extractor">Monet Extractor</string>
     <string name="top_icon_num">Config Max Access Points</string>
     <string name="top_icon_num_long">(Valid value should between 3 and 8)</string>
+    <string name="select_prefs">Select at least one preference</string>
+    <string name="select_flags">Select at least one flag</string>
 </resources>

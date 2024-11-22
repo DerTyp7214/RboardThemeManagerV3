@@ -77,6 +77,7 @@ import de.dertyp7214.rboardthememanager.core.share
 import de.dertyp7214.rboardthememanager.core.showMaterial
 import de.dertyp7214.rboardthememanager.core.toHumanReadableBytes
 import de.dertyp7214.rboardthememanager.data.MenuItem
+import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.ActivityMainBinding
 import de.dertyp7214.rboardthememanager.dialogs.UsageDialog
 import de.dertyp7214.rboardthememanager.preferences.Flags
@@ -352,7 +353,7 @@ class MainActivity : AppCompatActivity() {
                             val themes = adapter?.getSelected()?.filter {
                                 it.path.isNotEmpty() && !it.path.startsWith("assets:") && !it.path.startsWith(
                                     "system_auto:"
-                                ) && !it.path.startsWith("rboard:")
+                                ) && !it.path.startsWith("silk:") && !it.path.startsWith("rboard:")
                             }
                             if (!themes.isNullOrEmpty()) {
                                 openShareThemeDialog { dialog, name, author ->
@@ -411,7 +412,7 @@ class MainActivity : AppCompatActivity() {
                                 if (adapter != null) {
                                     val themes = adapter.getSelected().filter {
                                         it.path.isNotEmpty() && !it.path.startsWith("assets:") && !it.path.startsWith(
-                                            "rboard:"
+                                            "system_auto:") && !it.path.startsWith("silk:") && !it.path.startsWith("rboard:"
                                         )
                                     }
                                     if (themes.isNotEmpty()) {
@@ -431,7 +432,11 @@ class MainActivity : AppCompatActivity() {
                             }
                         }
                         R.id.select_all -> {
-                            mainViewModel.getSelections().second?.selectAll()
+                            if (mainViewModel.getSelections().second?.getSelected()?.size == mainViewModel.getThemes().size ) {
+                                mainViewModel.getSelections().second?.clearSelection()
+                            } else {
+                                mainViewModel.getSelections().second?.selectAll()
+                            }
                         }
                     }
                     true

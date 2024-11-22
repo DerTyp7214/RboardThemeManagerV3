@@ -46,6 +46,8 @@ import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.getPackageUid
+import de.dertyp7214.rboardthememanager.screens.ThemeChangerActivity.Companion.APP_THEMES_Q
+import de.dertyp7214.rboardthememanager.screens.ThemeChangerActivity.Companion.APP_THEMES_S
 
 class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
     enum class FILES(val Path: String) {
@@ -358,16 +360,20 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                         when (item.key) {
                             "app_style" -> {
                                 summaryRes = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
-                                    de.dertyp7214.rboardthememanager.screens.ThemeChangerActivity.Companion.APP_THEMES_Q.toList()
+                                    APP_THEMES_Q.toList()
                                         .first {
                                             it.second == de.dertyp7214.rboardthememanager.screens.ThemeChangerActivity.Companion.getStyleName(activity)
                                         }.first
-                                } else {
-                                    ThemeUtils.APP_THEMES.toList()
+                                } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+                                    APP_THEMES_S.toList()
                                         .first {
                                             it.second == ThemeUtils.getStyleName(activity)
                                         }.first
-                                }
+                                } else{
+                                    ThemeUtils.APP_THEMES.toList()
+                                        .first {
+                                            it.second == ThemeUtils.getStyleName(activity)
+                                        }.first}
                             }
                         }
                     }
