@@ -317,4 +317,6 @@
     <string name="gboard_cache_clear_question">Limpar cache do Gboard</string>
     <string name="gboard_cache_clear_long_question">Deseja limpar o cache e forçar a parada do Gboard?</string>
     <string name="clear_recent_emojis_question">Deseja excluir os emojis usados ​​recentemente e forçar a parada do Gboard?</string>
+    <string name="select_prefs">Selecione pelo menos uma preferência</string>
+    <string name="select_flags">Selecione pelo menos uma flag</string>
 </resources>
