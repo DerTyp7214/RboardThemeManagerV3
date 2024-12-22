@@ -30,7 +30,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 22
+          java-version: 23
           distribution: temurin
 
       - name: Cache Gradle dependencies
@@ -75,7 +75,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          buildToolsVersion: '35.0.0'
+          buildToolsVersion: '36.0.0-rc1'
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4

@@ -25,7 +25,11 @@ class ShareFlagsAdapter(val flags: List<String>, private val onClick: (key: Stri
     fun getSelectedFlags(): List<String> {
         return states.filter { it.value }.map { it.key }
     }
-
+    @SuppressLint("NotifyDataSetChanged")
+    fun clearSelection() {
+        states.forEach { (s, _) -> states[s] = false }
+        notifyDataSetChanged()
+    }
     @SuppressLint("NotifyDataSetChanged")
     fun selectAll() {
         states.forEach { (s, _) -> states[s] = true }
