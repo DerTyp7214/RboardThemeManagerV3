@@ -23,7 +23,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.31.0'
+          cmake-version: '3.31.1'
           
 
       - uses: nttld/setup-ndk@v1
@@ -93,7 +93,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '36.0.0-rc1'
+          buildToolsVersion: '36.0.0-rc3'
 
       - name: Delete old APK
         run: rm app/build/outputs/apk/debug/app-debug.apk
@@ -155,7 +155,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.31.0'
+          cmake-version: '3.31.1'
 
       - uses: nttld/setup-ndk@v1
         with:
@@ -228,7 +228,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '36.0.0-rc1'
+          buildToolsVersion: '36.0.0-rc3'
 
       - name: Rename APK
         run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk
@@ -292,7 +292,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.31.0'
+          cmake-version: '3.31.1'
           
       - uses: nttld/setup-ndk@v1
         with:
@@ -366,7 +366,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '36.0.0-rc1'
+          buildToolsVersion: '36.0.0-rc3'
 
       - name: Rename APK
         run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk
