@@ -125,8 +125,7 @@
     <string name="unreleased">Este app não foi lançado, alguns recursos podem não funcionar. Por favor, não relate nenhum erro ao grupo principal.</string>
     <string name="notice">Aviso</string>
     <string name="flags_applied">Flags aplicadas</string>
-    <string name="install_module">Caminho dos temas existentes encontrado, você ainda deseja instalar o módulo?</string>
-    <string name="module">Instalar módulo</string>
+    <string name="install_module">Caminho dos temas existentes encontrado. Você ainda deseja instalar o módulo?</string>
     <string name="use_gboard">Deseja carregar temas diretamente no Gboard? Ou continue com o módulo.</string>
     <string name="gboard_magisk">Use o módulo do Magisk em vez de carregar os temas no Gboard</string>
     <string name="use_module">Módulo</string>

@@ -187,10 +187,15 @@ fun Activity.openInputDialogFlag(
     val input = findViewById<EditText>(R.id.editText)
     flagnames.text = name
     input.setHint(hint)
-    if (value != null) input.setText(value)
 
     findViewById<Button>(R.id.ok)?.setOnClickListener {
-        positive(dialog, input?.text?.toString() ?: "")
+        positive(dialog, (if (input.text.isNullOrEmpty()){
+            input.error = getString(R.string.not_empty)
+            return@setOnClickListener;
+        } else{
+            input?.text?.toString()
+        }).toString()
+        )
     }
     findViewById<Button>(R.id.cancel)?.let { button ->
         button.setOnClickListener { negative(dialog) }
