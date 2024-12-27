@@ -24,7 +24,10 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.31.1'
+          cmake-version: '3.31.x'
+
+      - name: Cmake
+      run: cmake --version
 
       - uses: nttld/setup-ndk@v1
         with:
