@@ -26,9 +26,6 @@ jobs:
         with:
           cmake-version: '3.31.x'
 
-      - name: Cmake
-      run: cmake --version
-
       - uses: nttld/setup-ndk@v1
         with:
           ndk-version: r27c
