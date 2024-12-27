@@ -26,8 +26,10 @@ jobs:
         with:
           cmake-version: '3.31.1'
 
-      - name: Setup ninja
-        run: sudo apt-get install ninja-build
+      - name: Setup Ninja
+        uses: ashutoshvarma/setup-ninja@master
+        with:
+          version: 1.11.1
      
       - name: Ninja Version
         run: ninja --version
