@@ -28,6 +28,8 @@ jobs:
 
       - name: Setup ninja
         run: sudo apt-get install ninja-build
+     
+      - name: Ninja Version
         run: ninja --version
 
       - uses: nttld/setup-ndk@v1
