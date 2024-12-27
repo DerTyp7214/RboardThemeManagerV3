@@ -8,7 +8,7 @@
     <string name="magisk">Magisk</string>
     <string name="default_notification_channel_id">push_channel</string>
     <string name="download_notification_channel_id">download_channel</string>
-    <string name="i_have_not_read_this_text">I have not read the popup and still shared this "error". Please ban me!</string>
+    <string name="i_have_not_read_this_text">I haven\'t read the pop-up and still shared this "error". Please ban me!</string>
     <string name="rkbdi">RKBDI</string>
     <string name="rkbdi_github">https://github.com/RadekBledowski</string>
     <string name="akos_paha">Akos Paha</string>
