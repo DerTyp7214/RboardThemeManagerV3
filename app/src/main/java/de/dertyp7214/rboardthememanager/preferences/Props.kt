@@ -49,7 +49,7 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
     enum class PROPS(
         val key: String,
         val title: String,
-        val summary: Int,
+        @StringRes val summary: Int,
         @DrawableRes val icon: Int,
         val defaultValue: Any,
         val type: TYPE,
@@ -159,7 +159,7 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
                             if (key.title.toString() == "top_icon_num") {
                                 R.string.top_icon_num_long
                             } else {
-                                R.string.nothing
+                                R.string.not_set
                             },
                             "ro.com.google.ime.${key.key}".getSystemProperty(),
                             R.string.reset,

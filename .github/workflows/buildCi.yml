@@ -24,6 +24,12 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: '3.31.1'
+
+      - name: Setup Ninja
+        run: sudo apt-get install ninja-build
+     
+      - name: Ninja Version
+        run: ninja --version
           
 
       - uses: nttld/setup-ndk@v1
@@ -156,6 +162,12 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: '3.31.1'
+
+      - name: Setup Ninja
+        run: sudo apt-get install ninja-build
+     
+      - name: Ninja Version
+        run: ninja --version
 
       - uses: nttld/setup-ndk@v1
         with:
@@ -293,6 +305,12 @@ jobs:
         uses: jwlawson/actions-setup-cmake@v2
         with:
           cmake-version: '3.31.1'
+
+      - name: Setup Ninja
+        run: sudo apt-get install ninja-build
+     
+      - name: Ninja Version
+        run: ninja --version
           
       - uses: nttld/setup-ndk@v1
         with:
