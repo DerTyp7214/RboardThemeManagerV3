@@ -37,8 +37,7 @@ class Application : Application() {
 
         fun getTopActivity(context: Context? = this.context): Activity? {
             return if (context is ContextWrapper) {
-                if (context is Activity) context
-                else getTopActivity(context.baseContext)
+                context as? Activity ?: getTopActivity(context.baseContext)
             } else null
         }
     }
