@@ -68,6 +68,9 @@ class AppStartUp(private val activity: AppCompatActivity) {
     private val flagsUrl by lazy {
         "$REPO_PREFIX/flags.json"
     }
+    private val propsUrl by lazy {
+        "$REPO_PREFIX/props.json"
+    }
 
     private var checkedForUpdate = false
     private var gboardInstalled = false
@@ -208,6 +211,40 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 }
             }
 
+            File(applicationInfo.dataDir, "props.json").apply {
+                val timeStamp = try {
+                    let {
+                        if (!it.exists()) -1
+                        else JSONObject().safeParse(it.readText()).getLong("time", -1)
+                    }
+                } catch (e: Exception) {
+                    delete()
+                    -1
+                }
+                doAsync(URL(propsUrl)::getTextFromUrl) {
+                    val propFiles = listOf(
+                        JSONObject().safeParse(resources.openRawResource(
+                            FileUtils.getResourceId(
+                                activity,
+                                "props",
+                                "raw",
+                                packageName
+                            )
+                        ).bufferedReader().use { reader -> reader.readText() }),
+                        JSONObject().safeParse(it)
+                    )
+                    val latestJson =
+                        propFiles.reduce { acc, safeJSON ->
+                            if (acc.getLong("time") > safeJSON.getLong(
+                                    "time"
+                                )
+                            ) acc else safeJSON
+                        }
+                    val time = latestJson.getLong("time")
+                    if (!exists() || time > timeStamp)
+                        writeText(latestJson.toString())
+                }
+            }
             val notificationPermissionGranted =
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
                     NotificationManagerCompat.from(this).areNotificationsEnabled()

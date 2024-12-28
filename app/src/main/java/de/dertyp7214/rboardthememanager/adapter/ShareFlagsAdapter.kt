@@ -31,6 +31,12 @@ class ShareFlagsAdapter(val flags: List<String>, private val onClick: (key: Stri
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun clearSelection() {
+        states.forEach { (s, _) -> states[s] = false }
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val main: View = v
         val title: TextView = v.findViewById(R.id.title)
