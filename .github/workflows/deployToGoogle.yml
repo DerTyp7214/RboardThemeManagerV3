@@ -25,7 +25,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27b
+          ndk-version: r27c
 
       - name: Setup JDK
         uses: actions/setup-java@v4
@@ -75,7 +75,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          buildToolsVersion: '36.0.0-rc1'
+          buildToolsVersion: '36.0.0-rc3'
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
