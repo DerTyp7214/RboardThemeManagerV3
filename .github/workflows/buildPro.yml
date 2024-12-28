@@ -16,7 +16,13 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.31.0'
+          cmake-version: '3.31.1'
+
+      - name: Setup Ninja
+        run: sudo apt-get install ninja-build
+
+      - name: Ninja Version
+        run: ninja --version
 
       - name: Get Commit Message
         id: commitMessage
@@ -80,7 +86,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          buildToolsVersion: '36.0.0-rc1'
+          buildToolsVersion: '36.0.0-rc3'
 
       - name: List files
         run: ls app/build/outputs/apk/pro
