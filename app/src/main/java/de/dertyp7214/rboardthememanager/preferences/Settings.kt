@@ -301,19 +301,6 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                     }, 500)
                 }
             }
-        ),
-        LOGS(
-            "LOGS",
-            R.string.logs,
-            R.string.logs_long,
-            R.drawable.ic_logs,
-            "",
-            TYPE.STRING,
-            listOf(),
-            {
-                Logs::class.java[this]
-            },
-            BuildConfig.DEBUG
         );
 
         inline fun <reified T> getValue(context: Context, defaultValue: T? = null): T? {
