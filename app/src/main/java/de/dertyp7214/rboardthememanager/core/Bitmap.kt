@@ -1,6 +1,8 @@
 package de.dertyp7214.rboardthememanager.core
 
 import android.graphics.*
+import androidx.core.graphics.scale
+import androidx.core.graphics.createBitmap
 
 fun Bitmap.resize(width: Int? = null, height: Int? = null): Bitmap {
     if (width == null && height == null) return this
@@ -8,13 +10,10 @@ fun Bitmap.resize(width: Int? = null, height: Int? = null): Bitmap {
     if ((width ?: 0) > this.width || (height ?: 0) > this.height) return this
     val w = width ?: (((height ?: 0).toFloat() / this.height.toFloat()) * this.width.toFloat())
     val h = height ?: (((width ?: 0).toFloat() / this.width.toFloat()) * this.height.toFloat())
-    return Bitmap.createScaledBitmap(this, w.toInt(), h.toInt(), false)
-}
+    return scale(w.toInt(), h.toInt(), false)}
 
 fun Bitmap.roundCorners(pixels: Int, colorFilter: ColorFilter? = null): Bitmap {
-    val output = Bitmap.createBitmap(
-        width, height, Bitmap.Config.ARGB_8888
-    )
+    val output = createBitmap(width, height, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(output)
     val color = -0xbdbdbe
     val paint = Paint()
