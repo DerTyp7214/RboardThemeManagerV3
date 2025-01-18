@@ -80,7 +80,6 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
     }
 
     companion object {
-        var changes: Boolean = false
 
         val props = arrayListOf<PropItem>()
 
