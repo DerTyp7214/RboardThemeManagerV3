@@ -8,7 +8,7 @@ plugins {
 
 android {
     compileSdkPreview = "Baklava"
-    buildToolsVersion = "36.0.0 rc3"
+    buildToolsVersion = "36.0.0 rc4"
     buildFeatures.dataBinding = true
 
     buildFeatures.viewBinding = true
