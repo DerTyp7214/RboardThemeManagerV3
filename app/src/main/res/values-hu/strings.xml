@@ -319,4 +319,7 @@
     <string name="gboard_cache_clear_question">Törli a gboard gyorsítótárat</string>
     <string name="select_prefs">Válasszon ki legalább egy beállítást</string>
     <string name="select_flags">Válasszon ki legalább egy zászlót</string>
+    <string name="input_not_empty">A bevitel nem lehet üres</string>
+    <string name="dark_theme_reset">Sötét téma visszaállítva</string>
+    <string name="light_theme_reset">Világos téma visszaállítva</string>
 </resources>
