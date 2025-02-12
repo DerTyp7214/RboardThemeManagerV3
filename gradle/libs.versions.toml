@@ -38,7 +38,7 @@ preference-ktx = "1.2.1"
 protobuf-dynamic = "1.0.1"
 simple-item-decoration = "1.0.0"
 ui-tooling = "1.8.0-beta02"
-r8 = "8.10.6-dev"
+r8 = "8.10.7-dev"
 
 [libraries]
 android-shell = { module = "com.jaredrummler:android-shell", version.ref = "android-shell" }
