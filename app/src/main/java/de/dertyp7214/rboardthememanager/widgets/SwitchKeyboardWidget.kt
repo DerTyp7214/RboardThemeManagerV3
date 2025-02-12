@@ -17,6 +17,7 @@ import de.dertyp7214.rboardthememanager.core.roundCorners
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
 import de.dertyp7214.rboardthememanager.utils.applyTheme
 import kotlin.math.min
+import androidx.core.content.edit
 
 class SwitchKeyboardWidget : AppWidgetProvider() {
 
@@ -74,9 +75,9 @@ class SwitchKeyboardWidget : AppWidgetProvider() {
         }
 
         internal fun saveThemePath(context: Context, appWidgetId: Int, path: String) {
-            val prefs = context.getSharedPreferences(PREFS_NAME, 0).edit()
-            prefs.putString(PREF_PREFIX_KEY + appWidgetId, path)
-            prefs.apply()
+            context.getSharedPreferences(PREFS_NAME, 0).edit() {
+                putString(PREF_PREFIX_KEY + appWidgetId, path)
+            }
         }
 
         internal fun loadThemePath(context: Context, appWidgetId: Int): String? {
