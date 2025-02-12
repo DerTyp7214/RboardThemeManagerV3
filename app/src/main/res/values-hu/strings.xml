@@ -12,7 +12,7 @@
     <string name="cant_use_app">Ezt az alkalmazást nem használhatja root nélkül</string>
     <string name="not_rooted">Az eszköz nincs root-olva</string>
     <string name="channel_name">Push értesítések</string>
-    <string name="channel_description">Frissítésekért és információkért.</string>
+    <string name="channel_description">Frissítésekért és információkért</string>
     <string name="channel_name_download">Letöltés értesítések</string>
     <string name="channel_description_download">Letöltési értesítésekért</string>
     <string name="download_update">Frissítés letöltése</string>
@@ -21,7 +21,7 @@
     <string name="download_error">Hiba a letöltés során</string>
     <string name="reboot">Újraindítás</string>
     <string name="reboot_now">Újraindítja most?</string>
-    <string name="reboot_to_continue">A modul működéséhez újra kell indítania a rendszert.</string>
+    <string name="reboot_to_continue">A modul működéséhez újra kell indítania a rendszert</string>
     <string name="apply_theme">Téma alkalmazása</string>
     <string name="apply_automatic_theme">Automatikus téma alkalmazása</string>
     <string name="applied">Téma alkalmazva</string>
@@ -128,7 +128,7 @@
     <string name="flags_applied">Zászlók alkalmazva</string>
     <string name="install_module">Meglévő téma elérési útja megtalálható, továbbra is telepíti a modult?</string>
     <string name="module">Modul telepítése</string>
-    <string name="use_gboard">A témákat közvetlenül a Gboardba szeretné betölteni? Vagy folytassa a modullal</string>
+    <string name="use_gboard">A témákat közvetlenül a Gboardba szeretné betölteni? Vagy folytassa a modullal.</string>
     <string name="gboard_magisk">Használja a Magisk modult a témák Gboardba való betöltése helyett</string>
     <string name="use_module">Modul</string>
     <string name="use_magisk">Magisk használata</string>
@@ -160,13 +160,13 @@
     <string name="keyboard_redesign_forbid_key_shadows">Billentyűárnyékok eltávolítása</string>
     <string name="none">Egyik sem</string>
     <string name="enable_bitmoji_contextual_category_icon">Bitmoji engedélyezése</string>
-    <string name="do_not_report">Ne jelentse ezt a hibát.</string>
-    <string name="menu_moved">A menü most az alsó lapon található.</string>
+    <string name="do_not_report">Ne jelentse ezt a hibát</string>
+    <string name="menu_moved">A menü most az alsó lapon található</string>
     <string name="fix_flags">Zászlók javítása</string>
-    <string name="fix_flags_long">Törli a zászlókat, és kényszeríti a Gboard bezárását.</string>
+    <string name="fix_flags_long">Törli a zászlókat, és kényszeríti a Gboard bezárását</string>
     <string name="flags_fixed">Zászlók javítva</string>
     <string name="flags_copied">Zászlók másolva</string>
-    <string name="try_fix_flags">Próbáljon meg a beállításokhoz menni, és kattintson a \"Zászlók javítása\" gombra.</string>
+    <string name="try_fix_flags">Próbáljon meg a beállításokhoz menni, és kattintson a \"Zászlók javítása\" gombra</string>
     <string name="flags_corrupted">Úgy tűnik, hogy a zászlók sérültek</string>
     <string name="sort_by_date">Rendezés dátum szerint</string>
     <string name="press_back_to_apply">A zászlók alkalmazásához csak nyomja meg a vissza gombot</string>
@@ -247,10 +247,10 @@
     <string name="keyboard_redesign_google_sans">Google Sans betűtípus használata</string>
     <string name="gboard_cache_cleared">Gboard gyorsítótár törölve</string>
     <string name="gboard_cache_clear">Gboard gyorsítótár törlése</string>
-    <string name="gboard_cache_clear_long">Törli a gyorsítótárat és kényszeríti a Gboard bezárását.</string>
+    <string name="gboard_cache_clear_long">Törli a gyorsítótárat és kényszeríti a Gboard bezárását</string>
     <string name="gboard_cache_clear_long_question">Szeretné törölni a gyorsítótárat és kényszeríteni a Gboard bezárását?</string>
     <string name="clear_recent_emojis">A legutóbb használt emojik törlése</string>
-    <string name="clear_recent_emojis_long">Törli a legutóbb használt emojikat és kényszeríti a Gboard bezárását.</string>
+    <string name="clear_recent_emojis_long">Törli a legutóbb használt emojikat és kényszeríti a Gboard bezárását</string>
     <string name="clear_recent_emojis_question">Szeretné törölni a legutóbb használt emojikat és kényszeríteni a Gboard bezárását?</string>
     <string name="recent_emojis_cleared">Legutóbb használt emojik törölve</string>
     <string name="show_language_switch_key">Nyelvváltó gomb megjelenítése</string>
@@ -268,7 +268,7 @@
     <string name="app_style">Alkalmazás stílusa</string>
     <string name="ime_test">IME Teszt</string>
     <string name="ime_test_long">Rboard IME Teszt</string>
-    <string name="new_flags_long">Új zászlókat találtunk.</string>
+    <string name="new_flags_long">Új zászlókat találtunk</string>
     <string name="why_no_root">Miért nem vagy rootolva?</string>
     <string name="get_magisk">Magisk beszerzése</string>
     <string name="no_magisk_detected">Nincs Magisk észlelve</string>
