@@ -68,7 +68,7 @@
     <string name="enable_sharing">Share icon</string>
     <string name="themed_nav_bar_all_devices">Navbar color</string>
     <string name="enable_email_provider_completion">Email provider</string>
-    <string name="enable_popup_view_v2">Pop-up v2</string>
+    <string name="enable_popup_view_v2">Pop-up V2</string>
     <string name="enable_key_border">Key border</string>
     <string name="enable_secondary_symbols">Secondary symbols</string>
     <string name="show_suggestions">Show suggestions</string>
@@ -315,10 +315,13 @@
     <string name="more_rboard_apps">More from us</string>
     <string name="more_rboard_apps_desc">Download more Rboard apps</string>
     <string name="close">Close</string>
-    <string name="rboard_monet_extractor">Monet extractor</string>
+    <string name="rboard_monet_extractor">Monet Extractor</string>
     <string name="top_icon_num">Config max access points</string>
     <string name="top_icon_num_long">(The valid value must be between 3 and 8)</string>
     <string name="select_prefs">Select at least one preference</string>
     <string name="select_flags">Select at least one flag</string>
-    <string name="input_not_empty">Input cannot be empty</string>
+    <string name="dark_theme_reset">Dark theme reset</string>
+    <string name="light_theme_reset">Light theme reset</string>
+    <string name="system_automatic_reset_question">Reset system automatic theme</string>
+    <string name="system_automatic_reset_long_question">Do you want to reset the system automatic theme and force stop Gboard?</string>
 </resources>

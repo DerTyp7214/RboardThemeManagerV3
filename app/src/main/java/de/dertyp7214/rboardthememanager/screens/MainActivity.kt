@@ -47,6 +47,7 @@ import de.dertyp7214.rboardcomponents.utils.asyncInto
 import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
+import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
 import de.dertyp7214.rboardthememanager.Config.MODULE_META
 import de.dertyp7214.rboardthememanager.Config.PATCHER_PACKAGE
 import de.dertyp7214.rboardthememanager.Config.PLAY_URL
@@ -62,6 +63,7 @@ import de.dertyp7214.rboardthememanager.core.enableBlur
 import de.dertyp7214.rboardthememanager.core.get
 import de.dertyp7214.rboardthememanager.core.getAttr
 import de.dertyp7214.rboardthememanager.core.getNavigationBarHeight
+import de.dertyp7214.rboardthememanager.core.getSystemProperty
 import de.dertyp7214.rboardthememanager.core.isReachable
 import de.dertyp7214.rboardthememanager.core.moveToCache
 import de.dertyp7214.rboardthememanager.core.notify
@@ -73,6 +75,7 @@ import de.dertyp7214.rboardthememanager.core.runAsCommand
 import de.dertyp7214.rboardthememanager.core.set
 import de.dertyp7214.rboardthememanager.core.setHeight
 import de.dertyp7214.rboardthememanager.core.setMargin
+import de.dertyp7214.rboardthememanager.core.setSystemProperty
 import de.dertyp7214.rboardthememanager.core.share
 import de.dertyp7214.rboardthememanager.core.showMaterial
 import de.dertyp7214.rboardthememanager.core.toHumanReadableBytes
@@ -81,6 +84,7 @@ import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.ActivityMainBinding
 import de.dertyp7214.rboardthememanager.dialogs.UsageDialog
 import de.dertyp7214.rboardthememanager.preferences.Flags
+import de.dertyp7214.rboardthememanager.preferences.Settings.FILES
 import de.dertyp7214.rboardthememanager.utils.AppStartUp
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.utils.PackageUtils
@@ -547,6 +551,53 @@ class MainActivity : AppCompatActivity() {
                                                     findViewById<TextView>(R.id.light_theme)?.setOnClickListener {
                                                         applyTheme(false)
                                                         dialog.dismiss()
+                                                    }
+                                                    if ("ro.com.google.ime.theme_file".getSystemProperty().isNotEmpty()){
+                                                        findViewById<TextView>(R.id.reset_light_theme).visibility = VISIBLE
+                                                    }
+                                                    else{
+                                                        findViewById<TextView>(R.id.reset_light_theme).visibility = GONE
+                                                    }
+                                                    if ("ro.com.google.ime.d_theme_file".getSystemProperty().isNotEmpty()){
+                                                        findViewById<TextView>(R.id.reset_dark_theme).visibility = VISIBLE
+                                                    }
+                                                    else{
+                                                        findViewById<TextView>(R.id.reset_dark_theme).visibility = GONE
+                                                    }
+                                                    findViewById<TextView>(R.id.reset_dark_theme)?.setOnClickListener {
+                                                        openDialog(R.string.system_automatic_reset_long_question, R.string.system_automatic_reset_question, false) {
+                                                            "ro.com.google.ime.d_theme_file".setSystemProperty(saveToModule = true)
+                                                            Flags.run {
+                                                                if (flagValues["oem_dark_theme"] == true) {
+                                                                    setUpFlags()
+                                                                    setValue(false, "oem_dark_theme", Flags.FILES.FLAGS)
+                                                                    applyChanges()
+                                                                }
+                                                            }
+                                                            if ("am force-stop $GBOARD_PACKAGE_NAME".runAsCommand()) {
+                                                                dialog.dismiss()
+                                                                Toast.makeText(
+                                                                    applicationContext,
+                                                                    R.string.dark_theme_reset,
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
+                                                            } else Toast.makeText(applicationContext, R.string.error, Toast.LENGTH_SHORT)
+                                                                .show()
+                                                        }
+                                                    }
+                                                    findViewById<TextView>(R.id.reset_light_theme)?.setOnClickListener {
+                                                        openDialog(R.string.system_automatic_reset_long_question, R.string.system_automatic_reset_question, false) {
+                                                            "ro.com.google.ime.theme_file".setSystemProperty(saveToModule = true)
+                                                            if ("am force-stop $GBOARD_PACKAGE_NAME".runAsCommand()) {
+                                                                dialog.dismiss()
+                                                                Toast.makeText(
+                                                                    applicationContext,
+                                                                    R.string.light_theme_reset,
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
+                                                            } else Toast.makeText(applicationContext, R.string.error, Toast.LENGTH_SHORT)
+                                                                .show()
+                                                        }
                                                     }
                                                     findViewById<MaterialButton>(R.id.cancel)?.setOnClickListener { dialog.dismiss() }
                                                     findViewById<MaterialButton>(R.id.ok)?.setOnClickListener { dialog.dismiss() }

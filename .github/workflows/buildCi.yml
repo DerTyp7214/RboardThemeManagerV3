@@ -23,7 +23,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.31.1'
+          cmake-version: '3.31.5'
 
       - name: Setup Ninja
         run: sudo apt-get install ninja-build
@@ -34,7 +34,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27c
+          ndk-version: r28
 
       - name: Get Commit Message
         id: commitMessage
@@ -99,7 +99,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '36.0.0-rc3'
+          buildToolsVersion: '36.0.0-rc4'
 
       - name: Delete old APK
         run: rm app/build/outputs/apk/debug/app-debug.apk
@@ -161,7 +161,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.31.1'
+          cmake-version: '3.31.5'
 
       - name: Setup Ninja
         run: sudo apt-get install ninja-build
@@ -171,7 +171,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27c
+          ndk-version: r28
 
       - name: Get Commit Message
         id: commitMessage
@@ -240,7 +240,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '36.0.0-rc3'
+          buildToolsVersion: '36.0.0-rc4'
 
       - name: Rename APK
         run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk
@@ -304,7 +304,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.31.1'
+          cmake-version: '3.31.5'
 
       - name: Setup Ninja
         run: sudo apt-get install ninja-build
@@ -314,7 +314,7 @@ jobs:
           
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27c
+          ndk-version: r28
 
       - name: Get Commit Message
         id: commitMessage
@@ -384,7 +384,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '36.0.0-rc3'
+          buildToolsVersion: '36.0.0-rc4'
 
       - name: Rename APK
         run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk

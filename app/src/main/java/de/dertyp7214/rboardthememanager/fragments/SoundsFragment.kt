@@ -57,7 +57,7 @@ class SoundsFragment : Fragment() {
                 soundList.addAll(original.filter {
                     it.author.contains(filter, true)
                             || it.title.contains(filter, true)
-                            || filter.isNullOrEmpty()
+                            || filter.isEmpty()
                 })
                 adapter.notifyDataSetChanged()
             }
