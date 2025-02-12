@@ -319,4 +319,6 @@
     <string name="clear_recent_emojis_question">Do you want to delete recently used emojis and force stop Gboard?</string>
     <string name="select_prefs">Select at least one preference</string>
     <string name="select_flags">Select at least one flag</string>
+    <string name="dark_theme_reset">Dark theme reset</string>
+    <string name="light_theme_reset">Light theme reset</string>
 </resources>
