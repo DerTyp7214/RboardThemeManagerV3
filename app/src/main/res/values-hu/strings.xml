@@ -304,7 +304,7 @@
     <string name="enable_key_border_details">Billentyű szegély használata</string>
     <string name="enable_secondary_symbols_details">Másodlagos szimbólumok használata</string>
     <string name="keyboard_redesign_google_sans_details">A billentyűzet újratervezése Google Sans használatával</string>
-    <string name="silk_popup_details">Selyem pop-up Használata</string>
+    <string name="silk_popup_details">Selyem pop-up használata</string>
     <string name="emoji_compat_app_whitelist_details">Emoji kompatibilis javítás használata</string>
     <string name="enable_email_provider_completion_details">E-mail szolgáltató használata</string>
     <string name="deep_link_long">Rboard Deep link</string>
