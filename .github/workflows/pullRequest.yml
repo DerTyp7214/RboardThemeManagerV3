@@ -24,7 +24,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.31.1'
+          cmake-version: '3.31.5'
 
       - name: Setup Ninja
         run: sudo apt-get install ninja-build
@@ -34,7 +34,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27c
+          ndk-version: r28
 
       - name: Setup JDK
         uses: actions/setup-java@v4
