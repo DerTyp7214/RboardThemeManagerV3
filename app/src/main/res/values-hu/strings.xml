@@ -63,10 +63,10 @@
     <string name="show_system_theme">Rendszertéma megjelenítése</string>
     <string name="enable_joystick_delete">Joystick törlés</string>
     <string name="deprecate_search">Google ikon</string>
-    <string name="enable_sharing">Megosztás Ikon</string>
+    <string name="enable_sharing">Megosztás ikon</string>
     <string name="themed_nav_bar_all_devices">Navigációs sáv szín</string>
     <string name="enable_email_provider_completion">E-mail szolgáltató</string>
-    <string name="enable_popup_view_v2">Pop-up v2</string>
+    <string name="enable_popup_view_v2">Pop-up V2</string>
     <string name="enable_key_border">Billentyű szegély</string>
     <string name="enable_secondary_symbols">Másodlagos szimbólumok</string>
     <string name="show_suggestions">Javaslatok megjelenítése</string>
@@ -188,7 +188,7 @@
     <string name="github_repo">GitHub könyvtár</string>
     <string name="translators">Fordítók</string>
     <string name="applied_theme">(alkalmazva)</string>
-    <string name="keyboard_height_ratio">Billentyűzet Magasság-arány</string>
+    <string name="keyboard_height_ratio">Billentyűzet magasság</string>
     <string name="max_short">0.50 Max-alacsony</string>
     <string name="extra_extra_short">0.65 Extra-extra-alacsony</string>
     <string name="extra_short">0.85 Extra-alacsony</string>
