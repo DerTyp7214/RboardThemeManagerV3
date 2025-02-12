@@ -545,35 +545,39 @@ class MainActivity : AppCompatActivity() {
                                                         findViewById<TextView>(R.id.reset_dark_theme).visibility = GONE
                                                     }
                                                     findViewById<TextView>(R.id.reset_dark_theme)?.setOnClickListener {
-                                                        "ro.com.google.ime.d_theme_file".setSystemProperty(saveToModule = true)
-                                                        Flags.run {
-                                                            if (flagValues["oem_dark_theme"] == true) {
-                                                                setUpFlags()
-                                                                setValue(false, "oem_dark_theme", Flags.FILES.FLAGS)
-                                                                applyChanges()
+                                                        openDialog(R.string.system_automatic_reset_long_question, R.string.system_automatic_reset_question, false) {
+                                                            "ro.com.google.ime.d_theme_file".setSystemProperty(saveToModule = true)
+                                                            Flags.run {
+                                                                if (flagValues["oem_dark_theme"] == true) {
+                                                                    setUpFlags()
+                                                                    setValue(false, "oem_dark_theme", Flags.FILES.FLAGS)
+                                                                    applyChanges()
+                                                                }
                                                             }
+                                                            if ("am force-stop $GBOARD_PACKAGE_NAME".runAsCommand()) {
+                                                                dialog.dismiss()
+                                                                Toast.makeText(
+                                                                    applicationContext,
+                                                                    R.string.dark_theme_reset,
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
+                                                            } else Toast.makeText(applicationContext, R.string.error, Toast.LENGTH_SHORT)
+                                                                .show()
                                                         }
-                                                        if ("am force-stop $GBOARD_PACKAGE_NAME".runAsCommand()) {
-                                                            dialog.dismiss()
-                                                            Toast.makeText(
-                                                                applicationContext,
-                                                                R.string.dark_theme_reset,
-                                                                Toast.LENGTH_SHORT
-                                                            ).show()
-                                                        } else Toast.makeText(applicationContext, R.string.error, Toast.LENGTH_SHORT)
-                                                            .show()
                                                     }
                                                     findViewById<TextView>(R.id.reset_light_theme)?.setOnClickListener {
-                                                        "ro.com.google.ime.theme_file".setSystemProperty(saveToModule = true)
-                                                        if ("am force-stop $GBOARD_PACKAGE_NAME".runAsCommand()) {
-                                                            dialog.dismiss()
-                                                            Toast.makeText(
-                                                                applicationContext,
-                                                                R.string.light_theme_reset,
-                                                                Toast.LENGTH_SHORT
-                                                            ).show()
-                                                        } else Toast.makeText(applicationContext, R.string.error, Toast.LENGTH_SHORT)
-                                                            .show()
+                                                        openDialog(R.string.system_automatic_reset_long_question, R.string.system_automatic_reset_question, false) {
+                                                            "ro.com.google.ime.theme_file".setSystemProperty(saveToModule = true)
+                                                            if ("am force-stop $GBOARD_PACKAGE_NAME".runAsCommand()) {
+                                                                dialog.dismiss()
+                                                                Toast.makeText(
+                                                                    applicationContext,
+                                                                    R.string.light_theme_reset,
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
+                                                            } else Toast.makeText(applicationContext, R.string.error, Toast.LENGTH_SHORT)
+                                                                .show()
+                                                        }
                                                     }
                                                     findViewById<MaterialButton>(R.id.cancel)?.setOnClickListener { dialog.dismiss() }
                                                     findViewById<MaterialButton>(R.id.ok)?.setOnClickListener { dialog.dismiss() }
