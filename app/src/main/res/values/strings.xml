@@ -320,7 +320,6 @@
     <string name="top_icon_num_long">(The valid value must be between 3 and 8)</string>
     <string name="select_prefs">Select at least one preference</string>
     <string name="select_flags">Select at least one flag</string>
-    <string name="input_not_empty">Input cannot be empty</string>
     <string name="dark_theme_reset">Dark theme reset</string>
     <string name="light_theme_reset">Light theme reset</string>
 </resources>
