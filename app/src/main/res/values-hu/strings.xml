@@ -128,7 +128,7 @@
     <string name="flags_applied">Zászlók alkalmazva</string>
     <string name="install_module">Meglévő téma elérési útja megtalálható, továbbra is telepíti a modult?</string>
     <string name="module">Modul telepítése</string>
-    <string name="use_gboard">A témákat közvetlenül a gboardba szeretné betölteni? Vagy folytassa a modullal</string>
+    <string name="use_gboard">A témákat közvetlenül a Gboardba szeretné betölteni? Vagy folytassa a modullal</string>
     <string name="gboard_magisk">Használja a Magisk modult a témák Gboardba való betöltése helyett</string>
     <string name="use_module">Modul</string>
     <string name="use_magisk">Magisk használata</string>
@@ -247,11 +247,11 @@
     <string name="keyboard_redesign_google_sans">Google Sans betűtípus használata</string>
     <string name="gboard_cache_cleared">Gboard gyorsítótár törölve</string>
     <string name="gboard_cache_clear">Gboard gyorsítótár törlése</string>
-    <string name="gboard_cache_clear_long">Törli a gyorsítótárat és kényszeríti a gboard bezárását.</string>
-    <string name="gboard_cache_clear_long_question">Szeretné törölni a gyorsítótárat és kényszeríteni a gboard bezárását?</string>
+    <string name="gboard_cache_clear_long">Törli a gyorsítótárat és kényszeríti a Gboard bezárását.</string>
+    <string name="gboard_cache_clear_long_question">Szeretné törölni a gyorsítótárat és kényszeríteni a Gboard bezárását?</string>
     <string name="clear_recent_emojis">A legutóbb használt emojik törlése</string>
-    <string name="clear_recent_emojis_long">Törli a legutóbb használt emojikat és kényszeríti a gboard bezárását.</string>
-    <string name="clear_recent_emojis_question">Szeretné törölni a legutóbb használt emojikat és kényszeríteni a gboard bezárását?</string>
+    <string name="clear_recent_emojis_long">Törli a legutóbb használt emojikat és kényszeríti a Gboard bezárását.</string>
+    <string name="clear_recent_emojis_question">Szeretné törölni a legutóbb használt emojikat és kényszeríteni a Gboard bezárását?</string>
     <string name="recent_emojis_cleared">Legutóbb használt emojik törölve</string>
     <string name="show_language_switch_key">Nyelvváltó gomb megjelenítése</string>
     <string name="value">Érték</string>
@@ -284,7 +284,7 @@
     <string name="gboard_1">Alapvető témák letöltése és telepítése</string>
     <string name="gboard_2">Nem igényel magisk modult</string>
     <string name="gboard_3">A hangok módosítása nem fog működni</string>
-    <string name="gboard_4">A témák nem jelennek meg a gboard beállításaiban</string>
+    <string name="gboard_4">A témák nem jelennek meg a Gboard beállításaiban</string>
     <string name="gboard_5">Kompatibilitás</string>
     <string name="theme_values">Téma értékek</string>
     <string name="copied_to_clipboard">Vágólapra másolva</string>
@@ -316,7 +316,7 @@
     <string name="rboard_monet_extractor">Monet Extractor</string>
     <string name="top_icon_num">Max hozzáférési pontok konfigurálása</string>
     <string name="top_icon_num_long">(Az érvényes értéknek 3 és 8 között kell lennie)</string>
-    <string name="gboard_cache_clear_question">Törli a gboard gyorsítótárat</string>
+    <string name="gboard_cache_clear_question">Törli a Gboard gyorsítótárat</string>
     <string name="select_prefs">Válasszon ki legalább egy beállítást</string>
     <string name="select_flags">Válasszon ki legalább egy zászlót</string>
     <string name="dark_theme_reset">Sötét téma visszaállítva</string>
