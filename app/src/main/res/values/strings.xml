@@ -68,7 +68,7 @@
     <string name="enable_sharing">Share icon</string>
     <string name="themed_nav_bar_all_devices">Navbar color</string>
     <string name="enable_email_provider_completion">Email provider</string>
-    <string name="enable_popup_view_v2">Pop-up v2</string>
+    <string name="enable_popup_view_v2">Pop-up V2</string>
     <string name="enable_key_border">Key border</string>
     <string name="enable_secondary_symbols">Secondary symbols</string>
     <string name="show_suggestions">Show suggestions</string>
