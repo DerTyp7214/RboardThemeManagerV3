@@ -1,10 +1,13 @@
 package de.dertyp7214.rboardthememanager.preferences
 
+import android.content.Context
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import de.Maxr1998.modernpreferences.PreferenceScreen
@@ -12,10 +15,10 @@ import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.categoryHeader
 import de.Maxr1998.modernpreferences.helpers.onClick
 import de.Maxr1998.modernpreferences.helpers.pref
-import de.dertyp7214.rboardthememanager.Application
 import de.dertyp7214.rboardthememanager.Config.GBOARD_PACKAGE_NAME
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.SafeJSON
+import de.dertyp7214.rboardthememanager.core.forEach
 import de.dertyp7214.rboardthememanager.core.getSystemProperty
 import de.dertyp7214.rboardthememanager.core.openInputDialogFlag
 import de.dertyp7214.rboardthememanager.core.runAsCommand
@@ -23,8 +26,8 @@ import de.dertyp7214.rboardthememanager.core.safeIcon
 import de.dertyp7214.rboardthememanager.core.safeString
 import de.dertyp7214.rboardthememanager.core.setSystemProperty
 import de.dertyp7214.rboardthememanager.utils.FileUtils
-import de.dertyp7214.rboardthememanager.utils.GboardUtils
-import kotlin.math.absoluteValue
+import org.json.JSONObject
+import java.io.File
 
 class Props(private val activity: AppCompatActivity, private val args: SafeJSON) :
     AbstractMenuPreference() {
@@ -38,115 +41,87 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
             .let { if (it >= 0) recyclerView.scrollToPosition(it) }
     }
 
-    override fun preferences(builder: PreferenceScreen.Builder) {
-        val prefs = if (Application.context?.resources?.getBoolean(R.bool.isTab_or_fold) == true && GboardUtils.getGboardVersionCode(
-                activity) < 153612662){
-            listOf(
-                "ch_margins",
+    enum class TYPE {
+        GROUP,
+        STRING
+    }
 
-                "kb_pad_port_b",
-                "kb_pad_port_l",
-                "kb_pad_port_r",
+    enum class PROPS(
+        val key: String,
+        val title: String,
+        @StringRes val summary: Int,
+        @DrawableRes val icon: Int,
+        val defaultValue: Any,
+        val type: TYPE,
+        val visible: Boolean = true,
+        val onClick: () -> Unit = {}
+    )
 
-                "ch_margins_landscape",
+    data class PropItem(
+        val key: String,
+        val title: String,
+        @StringRes val summary: Int,
+        @DrawableRes val icon: Int,
+        val defaultValue: Any,
+        val type: TYPE,
+        val visible: Boolean = true,
+        val onClick: () -> Unit = {}
+    ) {
+        constructor(enum: PROPS) : this(
+            enum.key,
+            enum.title,
+            enum.summary,
+            enum.icon,
+            enum.defaultValue,
+            enum.type,
+            enum.visible,
+            enum.onClick
+        )
+    }
 
-                "kb_pad_land_b",
-                "kb_pad_land_l",
-                "kb_pad_land_r",
+    companion object {
 
-                "ch_margins_fold",
+        val props = arrayListOf<PropItem>()
 
-                "kbp_fport_b",
-                "kbp_fport_l",
-                "kbp_fport_r",
+        fun getPropItems(context: Context, refresh: Boolean = false): ArrayList<PropItem> {
+            if (!refresh && props.isNotEmpty()) return props
+            props.clear()
 
-                "ch_margins_landscape_fold",
+            val json = File(context.applicationInfo.dataDir, "props.json").let {
+                if (!it.exists()) null
+                else SafeJSON(JSONObject(it.readText())).getJSONArray("props")
+            }
 
-                "kbp_fland_b",
-                "kbp_fland_l",
-                "kbp_fland_r",
+            json?.forEach<JSONObject> { obj, _ ->
+                val o = SafeJSON(obj)
+                props.add(
+                    PropItem(
+                        o.getString("key"),
+                        o.getString("title"),
+                        FileUtils.getResourceId(
+                            context,
+                            o.getString("summary").toString(),
+                            "string",
+                            context.packageName
+                        ),
+                        FileUtils.getResourceId(
+                            context,
+                            o.getString("icon"),
+                            "drawable",
+                            context.packageName
+                        ),
+                        o["defaultValue"],
+                        TYPE.valueOf(o.getString("type").uppercase()),
+                        o.getBoolean("visible", true)
+                    )
+                )
+            }
 
-                "ch_radius",
-
-                "corner_key_r",
-
-                "ch_top_icon_num",
-
-                "top_icon_num"
-            )}
-        else if (Application.context?.resources?.getBoolean(R.bool.isTab_or_fold) == true && GboardUtils.getGboardVersionCode(
-                activity) >= 153612662){
-            listOf(
-                "ch_margins",
-
-                "kb_pad_port_b",
-                "kb_pad_port_l",
-                "kb_pad_port_r",
-
-                "ch_margins_landscape",
-
-                "kb_pad_land_b",
-                "kb_pad_land_l",
-                "kb_pad_land_r",
-
-                "ch_margins_fold",
-
-                "kbp_fport_b",
-                "kbp_fport_l",
-                "kbp_fport_r",
-
-                "ch_margins_landscape_fold",
-
-                "kbp_fland_b",
-                "kbp_fland_l",
-                "kbp_fland_r",
-
-                "ch_top_icon_num",
-
-                "top_icon_num"
-            )}
-        else if (Application.context?.resources?.getBoolean(R.bool.isTab_or_fold) == false && GboardUtils.getGboardVersionCode(activity)  >= 153612662 ){
-            listOf(
-                "ch_margins",
-
-                "kb_pad_port_b",
-                "kb_pad_port_l",
-                "kb_pad_port_r",
-
-                "ch_margins_landscape",
-
-                "kb_pad_land_b",
-                "kb_pad_land_l",
-                "kb_pad_land_r",
-
-                "ch_top_icon_num",
-
-                "top_icon_num"
-            )}
-        else {
-            listOf(
-                "ch_margins",
-
-                "kb_pad_port_b",
-                "kb_pad_port_l",
-                "kb_pad_port_r",
-
-                "ch_margins_landscape",
-
-                "kb_pad_land_b",
-                "kb_pad_land_l",
-                "kb_pad_land_r",
-
-                "ch_radius",
-
-                "corner_key_r",
-
-                "ch_top_icon_num",
-
-                "top_icon_num"
-            )
+            return props
         }
+    }
 
+    override fun preferences(builder: PreferenceScreen.Builder) {
         val getString = { key: String ->
             FileUtils.getResourceId(
                 activity,
@@ -164,28 +139,32 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
             )
         }
 
+        val prefs = ArrayList(getPropItems(activity, true))
+        prefs.addAll(PROPS.entries.map { PropItem(it) })
         prefs.forEach { key ->
-            if (key.startsWith("ch_")) builder.categoryHeader(key) {
-                titleRes = getString(key.removePrefix("ch_")).safeString
+            if (key.title.startsWith("ch_")) builder.categoryHeader(key.title) {
+                titleRes = getString(key.title.removePrefix("ch_")).safeString
+                visible = key.visible
             }
-            else builder.pref(key) {
-                val value = "ro.com.google.ime.$key".getSystemProperty()
-                titleRes = getString(key).safeString
+            else builder.pref(key.toString()) {
+                val value = "ro.com.google.ime.${key.key}".getSystemProperty()
                 summary = value.ifBlank { activity.getString(R.string.not_set) }
-                iconRes = getIcon("ic_$key").safeIcon
+                iconRes = getIcon(key.icon.toString()).safeIcon
+                titleRes = getString(key.title.toString()).safeString
+                visible = key.visible
                 onClick {
                     activity.openInputDialogFlag(
-                        activity.getResources().getString(getString(key).safeString),
-                        if(key == "top_icon_num"){
+                        activity.resources.getString(getString(key.title).safeString),
+                        if (key.title.toString() == "top_icon_num") {
                             R.string.top_icon_num_long
-                        }else{
-                            R.string.nothing
+                        } else {
+                            R.string.not_set
                         },
-                        "ro.com.google.ime.$key".getSystemProperty(),
+                        "ro.com.google.ime.${key.key}".getSystemProperty(),
                         R.string.reset,
                         {
                             it.dismiss()
-                            "ro.com.google.ime.$key".setSystemProperty(saveToModule = true)
+                            "ro.com.google.ime.${key.key}".setSystemProperty(saveToModule = true)
                             if ("am force-stop $GBOARD_PACKAGE_NAME".runAsCommand()) {
                                 Toast.makeText(
                                     activity,
@@ -199,7 +178,7 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
                         }
                     ) { dialogInterface, text ->
                         dialogInterface.dismiss()
-                        "ro.com.google.ime.$key".setSystemProperty(text, true)
+                        "ro.com.google.ime.${key.key}".setSystemProperty(text, true)
                         if ("am force-stop $GBOARD_PACKAGE_NAME".runAsCommand()) {
                             Toast.makeText(
                                 activity,
@@ -208,7 +187,8 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
                             ).show()
                             summary = text
                             requestRebind()
-                        } else Toast.makeText(activity, R.string.error, Toast.LENGTH_SHORT).show()
+                        } else Toast.makeText(activity, R.string.error, Toast.LENGTH_SHORT)
+                            .show()
                     }
                     false
                 }

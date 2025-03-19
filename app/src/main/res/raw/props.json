@@ -1,0 +1,207 @@
+{
+  "time": "1735304425090",
+  "props": [
+    {
+      "key": "ch_margins",
+      "title": "ch_margins",
+      "summary": "",
+      "icon": "",
+      "defaultValue": "",
+      "type": "GROUP",
+      "visible": true
+    },
+    {
+      "key": "kb_pad_port_b",
+      "title": "kb_pad_port_b",
+      "summary": "",
+      "icon": "ic_kb_pad_port_b",
+      "defaultValue": "",
+      "type": "STRING",
+      "file": "PROPS",
+      "visible": true
+    },
+    {
+      "key": "kb_pad_port_l",
+      "title": "kb_pad_port_l",
+      "summary": "",
+      "icon": "ic_kb_pad_port_l",
+      "defaultValue": "",
+      "type": "STRING",
+      "file": "PROPS",
+      "visible": true
+    },
+    {
+      "key": "kb_pad_port_r",
+      "title": "kb_pad_port_r",
+      "summary": "",
+      "icon": "ic_kb_pad_port_r",
+      "defaultValue": "",
+      "type": "STRING",
+      "file": "PROPS",
+      "visible": true
+    },
+    {
+      "key": "ch_margins_landscape",
+      "title": "ch_margins_landscape",
+      "summary": "",
+      "icon": "",
+      "defaultValue": "",
+      "type": "GROUP",
+      "visible": true
+    },
+    {
+      "key": "kb_pad_land_b",
+      "title": "kb_pad_land_b",
+      "summary": "",
+      "icon": "ic_kb_pad_land_b",
+      "defaultValue": "",
+      "type": "STRING",
+      "file": "PROPS",
+      "visible": true
+    },
+    {
+      "key": "kb_pad_land_l",
+      "title": "kb_pad_land_l",
+      "summary": "",
+      "icon": "ic_kb_pad_land_l",
+      "defaultValue": "",
+      "type": "STRING",
+      "file": "PROPS",
+      "visible": true
+    },
+    {
+      "key": "kb_pad_land_r",
+      "title": "kb_pad_land_r",
+      "summary": "",
+      "icon": "ic_kb_pad_land_r",
+      "defaultValue": "",
+      "type": "STRING",
+      "file": "PROPS",
+      "visible": true
+    },
+    {
+      "key": "ch_margins_fold",
+      "title": "ch_margins_fold",
+      "summary": "",
+      "icon": "",
+      "defaultValue": "",
+      "type": "GROUP",
+      "visible": true,
+      "is_tab_or_fold": true
+    },
+    {
+      "key": "kbp_fland_b",
+      "title": "kbp_fland_b",
+      "summary": "",
+      "icon": "ic_kbp_fland_b",
+      "defaultValue": "",
+      "type": "STRING",
+      "file": "PROPS",
+      "visible": true,
+      "is_tab_or_fold": true
+    },
+    {
+      "key": "kb_pad_land_l",
+      "title": "kbp_fland_l",
+      "summary": "",
+      "icon": "ic_kbp_fland_l",
+      "defaultValue": "",
+      "type": "STRING",
+      "file": "PROPS",
+      "visible": true,
+      "is_tab_or_fold": true
+    },
+    {
+      "key": "kbp_fland_r",
+      "title": "kbp_fland_r",
+      "summary": "",
+      "icon": "ic_kbp_fland_r",
+      "defaultValue": "",
+      "type": "STRING",
+      "file": "PROPS",
+      "visible": true,
+      "is_tab_or_fold": true
+    },
+    {
+      "key": "ch_margins_landscape_fold_landscape",
+      "title": "ch_margins_landscape_fold",
+      "summary": "",
+      "icon": "",
+      "defaultValue": "",
+      "type": "GROUP",
+      "visible": true,
+      "is_tab_or_fold": true
+    },
+    {
+      "key": "kbp_fland_b",
+      "title": "kbp_fland_b",
+      "summary": "",
+      "icon": "ic_kbp_fland_b",
+      "defaultValue": "",
+      "type": "STRING",
+      "file": "PROPS",
+      "visible": true,
+      "is_tab_or_fold": true
+    },
+    {
+      "key": "kb_pad_land_l",
+      "title": "kbp_fland_l",
+      "summary": "",
+      "icon": "ic_kbp_fland_l",
+      "defaultValue": "",
+      "type": "STRING",
+      "file": "PROPS",
+      "visible": true,
+      "is_tab_or_fold": true
+    },
+    {
+      "key": "kbp_fland_r",
+      "title": "kbp_fland_r",
+      "summary": "",
+      "icon": "ic_kbp_fland_r",
+      "defaultValue": "",
+      "type": "STRING",
+      "file": "PROPS",
+      "visible": true,
+      "is_tab_or_fold": true
+    },
+    {
+      "key": "ch_radius",
+      "title": "ch_radius",
+      "summary": "",
+      "icon": "",
+      "defaultValue": "",
+      "type": "GROUP",
+      "visible": false
+    },
+    {
+      "key": "corner_key_r",
+      "title": "corner_key_r",
+      "summary": "",
+      "icon": "ic_corner_key_r",
+      "defaultValue": "",
+      "type": "STRING",
+      "file": "PROPS",
+      "visible": false
+    },
+    {
+      "key": "ch_top_icon_num",
+      "title": "ch_top_icon_num",
+      "summary": "",
+      "icon": "",
+      "defaultValue": "",
+      "type": "GROUP",
+      "visible": true
+    },
+    {
+      "key": "top_icon_num",
+      "title": "top_icon_num",
+      "summary": "",
+      "icon": "ic_top_icon_num",
+      "defaultValue": "",
+      "type": "STRING",
+      "file": "PROPS",
+      "visible": true
+    }
+  ]
+}
