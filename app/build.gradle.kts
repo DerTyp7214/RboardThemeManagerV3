@@ -10,8 +10,8 @@ plugins {
 }
 
 android {
-    compileSdkPreview = "Baklava"
-    buildToolsVersion = "36.0.0 rc4"
+    compileSdk = 36
+    buildToolsVersion = "36.0.0"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
     buildFeatures.buildConfig = true
@@ -21,8 +21,8 @@ android {
     defaultConfig {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
-        targetSdk = 35
-        versionCode = 394007
+        targetSdk = 36
+        versionCode = 394008
         versionName = "3.9.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
