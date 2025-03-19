@@ -68,24 +68,6 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
                 false
             }
         }
-        builder.pref("akos") {
-            titleRes = R.string.akos_paha
-            summaryRes = R.string.developer_themer
-            if (!URL(activity.getString(R.string.akos_image)).isReachable()) {
-                iconRes = R.drawable.ic_person
-            }
-            else{
-                useTint = false
-                icon = glide
-                    .load(activity.getString(R.string.akos_image))
-                    .apply(options)
-                    .submit(100, 100).get()
-            }
-            onClick {
-                activity.openUrl(activity.getString(R.string.akos_github))
-                false
-            }
-        }
         builder.pref("dertyp") {
             titleRes = R.string.dertyp
             summaryRes = R.string.developer
@@ -235,12 +217,6 @@ class About(private val activity: AppCompatActivity, private val args: SafeJSON)
             summaryRes = R.string.yoanndp
             useTint = false
             iconRes = FlagKit.getResId(activity, "fr")
-        }
-        builder.pref("hu") {
-            titleRes = R.string.hungarian
-            summaryRes = R.string.akos_paha
-            useTint = false
-            iconRes = FlagKit.getResId(activity, "hu")
         }
         builder.pref("it") {
             titleRes = R.string.italian

@@ -23,12 +23,18 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.30.5'
+          cmake-version: '3.31.6'
+
+      - name: Setup Ninja
+        run: sudo apt-get install ninja-build
+     
+      - name: Ninja Version
+        run: ninja --version
           
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27b
+          ndk-version: r28
 
       - name: Get Commit Message
         id: commitMessage
@@ -38,7 +44,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 22
+          java-version: 23
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v4
@@ -93,7 +99,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '35.0.0'
+          buildToolsVersion: '36.0.0'
 
       - name: Delete old APK
         run: rm app/build/outputs/apk/debug/app-debug.apk
@@ -155,11 +161,17 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.30.5'
+          cmake-version: '3.31.6'
+
+      - name: Setup Ninja
+        run: sudo apt-get install ninja-build
+     
+      - name: Ninja Version
+        run: ninja --version
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27b
+          ndk-version: r28
 
       - name: Get Commit Message
         id: commitMessage
@@ -169,7 +181,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 22
+          java-version: 23
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v4
@@ -228,7 +240,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '35.0.0'
+          buildToolsVersion: '36.0.0'
 
       - name: Rename APK
         run: mv app/build/outputs/apk/release/app-release-unsigned-signed.apk app/build/outputs/apk/release/app-release.apk
@@ -292,11 +304,17 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.30.5'
+          cmake-version: '3.31.6'
+
+      - name: Setup Ninja
+        run: sudo apt-get install ninja-build
+     
+      - name: Ninja Version
+        run: ninja --version
           
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27b
+          ndk-version: r28
 
       - name: Get Commit Message
         id: commitMessage
@@ -306,7 +324,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 22
+          java-version: 23
 
       - name: Cache Gradle dependencies
         uses: actions/cache@v4
@@ -366,7 +384,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '35.0.0'
+          buildToolsVersion: '36.0.0'
 
       - name: Rename APK
         run: mv app/build/outputs/apk/debug/app-debug-signed.apk app/build/outputs/apk/debug/app-debug.apk

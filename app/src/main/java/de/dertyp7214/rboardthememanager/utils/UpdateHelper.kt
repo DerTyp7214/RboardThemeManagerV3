@@ -18,7 +18,7 @@ class UpdateHelper(
 ) {
     companion object {
         private fun getPath(context: Context, folder: String): String {
-            // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
+            
             return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 File(context.filesDir, folder).absolutePath
             } else {

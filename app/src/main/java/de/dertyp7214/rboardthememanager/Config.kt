@@ -48,7 +48,7 @@ object Config {
     val GBOARD_PREFS_PATH: String
         get() {
             return newGboard.let {
-                // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
+                
                 if (it) "/data/user${if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) "_de" else ""}/0/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
                 else "/data/data/$GBOARD_PACKAGE_NAME/shared_prefs/${GBOARD_PACKAGE_NAME}_preferences.xml"
             }

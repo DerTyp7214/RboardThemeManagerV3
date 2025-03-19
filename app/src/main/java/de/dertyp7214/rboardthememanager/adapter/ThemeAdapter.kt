@@ -28,6 +28,7 @@ import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.utils.TraceWrapper
 import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.utils.getActiveTheme
+import androidx.core.graphics.drawable.toDrawable
 
 class ThemeAdapter(
     private val context: Context,
@@ -52,7 +53,7 @@ class ThemeAdapter(
         )!!.toBitmap()
     }
     private val selectedBackground by lazy {
-        ColorDrawable(context.getAttr(com.google.android.material.R.attr.colorBackgroundFloating)).apply {
+        context.getAttr(com.google.android.material.R.attr.colorBackgroundFloating).toDrawable().apply {
             alpha = 187
         }
     }
