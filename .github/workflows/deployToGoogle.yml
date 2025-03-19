@@ -75,7 +75,7 @@ jobs:
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
         env:
-          buildToolsVersion: '36.0.0-rc4'
+          buildToolsVersion: '36.0.0'
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
