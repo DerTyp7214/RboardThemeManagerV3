@@ -51,7 +51,7 @@ import de.dertyp7214.rboardthememanager.screens.ThemeChangerActivity.Companion.A
 
 class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
     enum class FILES(val Path: String) {
-        // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
+        
         @SuppressLint("SdCardPath")
         CACHE("/data/user${if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) "_de" else ""}/0/${Config.GBOARD_PACKAGE_NAME}/cache/auto_clean/"),
 

@@ -64,7 +64,7 @@
     <string name="enable_sharing">Ícone de compartilhar</string>
     <string name="themed_nav_bar_all_devices">Cor da barra de navegação</string>
     <string name="enable_email_provider_completion">Provedor de e-mail</string>
-    <string name="enable_popup_view_v2">Pop-up v2</string>
+    <string name="enable_popup_view_v2">Pop-up V2</string>
     <string name="enable_key_border">Borda das teclas</string>
     <string name="enable_secondary_symbols">Símbolos secundários</string>
     <string name="show_suggestions">Mostrar sugestões</string>
@@ -313,4 +313,8 @@
     <string name="gboard_cache_clear_question">Limpar cache do Gboard</string>
     <string name="gboard_cache_clear_long_question">Deseja limpar o cache e forçar a parada do Gboard?</string>
     <string name="clear_recent_emojis_question">Deseja excluir os emojis usados recentemente e forçar a parada do Gboard?</string>
+    <string name="dark_theme_reset">Redefinir tema escuro</string>
+    <string name="light_theme_reset">Redefinir tema claro</string>
+    <string name="system_automatic_reset_question">Redefinir tema automático do sistema</string>
+    <string name="system_automatic_reset_long_question">Deseja redefinir o tema automático do sistema e forçar a parada do Gboard?</string>
 </resources>

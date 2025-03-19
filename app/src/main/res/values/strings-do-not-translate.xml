@@ -12,15 +12,12 @@
     <string name="i_have_not_read_this_text">I haven\'t read the pop-up and still shared this "error". Please ban me!</string>
     <string name="rkbdi">RKBDI</string>
     <string name="rkbdi_github">https://github.com/RadekBledowski</string>
-    <string name="akos_paha">Akos Paha</string>
-    <string name="akos_github">https://github.com/AkosPaha01</string>
     <string name="dertyp">DerTyp7214</string>
     <string name="dertyp_github">https://github.com/DerTyp7214</string>
     <string name="dan">Daniel Felipe</string>
     <string name="telegram_channel_url">https://t.me/rkbdigboard</string>
     <string name="telegram_group_url">https://t.me/gboardthemes</string>
     <string name="rkbdi_image">https://avatars.githubusercontent.com/u/22264125?v=4</string>
-    <string name="akos_image">https://avatars.githubusercontent.com/u/131550765?v=4</string>
     <string name="dertyp_image">https://avatars.githubusercontent.com/u/37804065?v=4</string>
     <string name="dan_image">https://avatars.githubusercontent.com/u/32078304?v=4</string>
     <string name="dan_github">https://github.com/Magisk-Modules-Repo/HideNavBar</string>
@@ -28,7 +25,6 @@
     <string name="github_repo_url">https://github.com/DerTyp7214/RboardThemeManagerV3</string>
     <string name="magisk_github_url">https://github.com/topjohnwu/Magisk</string>
     <string name="rboard_deep_link">https://github.com/DerTyp7214/DeepLinkRboard</string>
-    <string name="hungarian">Hungarian</string>
     <string name="italian">Italian</string>
     <string name="alpha4041">Alpha4041</string>
     <string name="portuguese_brazilian">Brazilian</string>
