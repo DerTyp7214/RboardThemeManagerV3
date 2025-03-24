@@ -3,7 +3,6 @@ package de.dertyp7214.rboardthememanager.adapter
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +12,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -54,7 +52,6 @@ class SoundPackAdapter(
         val author: TextView = v.findViewById(R.id.author)
         val lastUpdate: TextView = v.findViewById(R.id.lastUpdate)
         val newTagLinearLayout: LinearLayout = v.findViewById(R.id.newTagLinearLayout)
-        val newTag: TextView = v.findViewById(R.id.newTag)
     }
 
     override fun getItemId(position: Int): Long {
