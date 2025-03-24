@@ -9,7 +9,7 @@ ksp = "4.16.0"
 libsuVersion = "6.0.0"
 insetter = "0.6.1"
 
-kotlin-stdlib = "2.1.10"
+kotlin-stdlib = "2.1.20"
 appcompat = "1.7.0"
 constraintlayout = "2.2.1"
 preference-ktx = "1.2.1"
