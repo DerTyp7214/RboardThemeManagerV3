@@ -2,13 +2,18 @@ package de.dertyp7214.rboardthememanager.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
+import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.isVisible
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
@@ -19,6 +24,7 @@ import de.dertyp7214.rboardthememanager.core.copyRecursively
 import de.dertyp7214.rboardthememanager.core.download
 import de.dertyp7214.rboardthememanager.core.format
 import de.dertyp7214.rboardthememanager.core.openDialog
+import de.dertyp7214.rboardthememanager.core.preferences
 import de.dertyp7214.rboardthememanager.core.showMaterial
 import de.dertyp7214.rboardthememanager.core.toHumanReadableBytes
 import de.dertyp7214.rboardthememanager.core.zeroOrNull
@@ -29,6 +35,7 @@ import java.io.File
 import java.io.FileInputStream
 
 class SoundPackAdapter(
+    private val context: Context,
     private val list: List<SoundPack>,
     private val activity: Activity
 ) : RecyclerView.Adapter<SoundPackAdapter.ViewHolder>() {
@@ -36,6 +43,8 @@ class SoundPackAdapter(
     init {
         setHasStableIds(true)
     }
+    private val previousVisitSounds =
+        context.preferences.getLong("previousVisitSounds", System.currentTimeMillis())
 
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val root: View = v.findViewById(R.id.root)
@@ -44,6 +53,8 @@ class SoundPackAdapter(
         val image: ImageView = v.findViewById(R.id.image)
         val author: TextView = v.findViewById(R.id.author)
         val lastUpdate: TextView = v.findViewById(R.id.lastUpdate)
+        val newTagLinearLayout: LinearLayout = v.findViewById(R.id.newTagLinearLayout)
+        val newTag: TextView = v.findViewById(R.id.newTag)
     }
 
     override fun getItemId(position: Int): Long {
@@ -68,6 +79,9 @@ class SoundPackAdapter(
         holder.author.text = soundPack.author
 
         holder.image.setImageResource(R.drawable.ic_sounds)
+        holder.newTagLinearLayout.visibility = if (soundPack.date > previousVisitSounds) View.VISIBLE else View.GONE
+        holder.lastUpdate.visibility = if (holder.newTagLinearLayout.isVisible) View.GONE else View.VISIBLE
+        holder.size.visibility = if (holder.newTagLinearLayout.isVisible) View.GONE else View.VISIBLE
 
         holder.lastUpdate.text = soundPack.date.zeroOrNull{it.format(System.currentTimeMillis())} ?: ""
         holder.root.setOnClickListener {

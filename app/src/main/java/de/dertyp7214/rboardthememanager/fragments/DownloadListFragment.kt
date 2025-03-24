@@ -84,7 +84,7 @@ class DownloadListFragment : Fragment() {
 
         trace.addSplit("ADAPTER")
 
-        val adapter = ThemePackAdapter(themePacks, requireActivity(), resultLauncher)
+        val adapter = ThemePackAdapter(requireContext(),themePacks, requireActivity(), resultLauncher)
 
         val tags = arrayListOf<String>()
 
