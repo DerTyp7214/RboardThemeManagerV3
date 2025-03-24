@@ -1,13 +1,16 @@
 package de.dertyp7214.rboardthememanager.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
+import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import de.dertyp7214.rboardcomponents.utils.doAsync
@@ -19,6 +22,7 @@ import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.screens.InstallPackActivity
 
 class ThemePackAdapter(
+    private val context: Context,
     private val list: List<ThemePack>,
     private val activity: FragmentActivity,
     private val resultLauncher: ActivityResultLauncher<Intent>
@@ -29,12 +33,16 @@ class ThemePackAdapter(
         setHasStableIds(true)
     }
 
+    private val previousVisitThemes =
+        context.preferences.getLong("previousVisitThemes", System.currentTimeMillis())
+
     class ViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val root: View = v.findViewById(R.id.root)
         val size: TextView = v.findViewById(R.id.size)
         val title: TextView = v.findViewById(R.id.title)
         val author: TextView = v.findViewById(R.id.author)
         val lastUpdate: TextView = v.findViewById(R.id.lastUpdate)
+        val newTagLinearLayout: LinearLayout = v.findViewById(R.id.newTagLinearLayout)
     }
 
     class NewsViewHolder(v: NewsCards) : RecyclerView.ViewHolder(v) {
@@ -66,6 +74,10 @@ class ThemePackAdapter(
             holder.title.text = themePack.name
             holder.author.text = themePack.author
             holder.lastUpdate.text = themePack.date.format(System.currentTimeMillis())
+
+            holder.newTagLinearLayout.visibility = if (themePack.date > previousVisitThemes) View.VISIBLE else View.GONE
+            holder.lastUpdate.visibility = if (holder.newTagLinearLayout.isVisible) View.GONE else View.VISIBLE
+            holder.size.visibility = if (holder.newTagLinearLayout.isVisible) View.GONE else View.VISIBLE
 
             holder.root.setOnClickListener {
                 themePack.download(activity) {
