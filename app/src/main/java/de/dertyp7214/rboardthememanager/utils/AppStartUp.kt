@@ -68,6 +68,9 @@ class AppStartUp(private val activity: AppCompatActivity) {
     private val flagsUrl by lazy {
         "$REPO_PREFIX/flags.json"
     }
+    private val propsUrl by lazy {
+        "$REPO_PREFIX/props.json"
+    }
 
     private var checkedForUpdate = false
     private var gboardInstalled = false
@@ -208,6 +211,40 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 }
             }
 
+            File(applicationInfo.dataDir, "props.json").apply {
+                val timeStamp = try {
+                    let {
+                        if (!it.exists()) -1
+                        else JSONObject().safeParse(it.readText()).getLong("time", -1)
+                    }
+                } catch (e: Exception) {
+                    delete()
+                    -1
+                }
+                doAsync(URL(propsUrl)::getTextFromUrl) {
+                    val propFiles = listOf(
+                        JSONObject().safeParse(resources.openRawResource(
+                            FileUtils.getResourceId(
+                                activity,
+                                "props",
+                                "raw",
+                                packageName
+                            )
+                        ).bufferedReader().use { reader -> reader.readText() }),
+                        JSONObject().safeParse(it)
+                    )
+                    val latestJson =
+                        propFiles.reduce { acc, safeJSON ->
+                            if (acc.getLong("time") > safeJSON.getLong(
+                                    "time"
+                                )
+                            ) acc else safeJSON
+                        }
+                    val time = latestJson.getLong("time")
+                    if (!exists() || time > timeStamp)
+                        writeText(latestJson.toString())
+                }
+            }
             val notificationPermissionGranted =
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
                     NotificationManagerCompat.from(this).areNotificationsEnabled()
@@ -258,7 +295,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     if (data.scheme == "file") {
                         val file = SuFile(data.path).let {
                             File(
-                                // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
+                                
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                                     filesDir
                                 } else {
@@ -321,7 +358,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                             finishAndRemoveTask()
                         }
                     val file = File(
-                        // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
+                        
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                             cacheDir
                         } else {
@@ -362,7 +399,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     openLoadingDialog(R.string.unpacking_themes)
                     doAsync({
                         val zip = File(
-                            // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
+                            
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                                 cacheDir
                             } else {
@@ -375,7 +412,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
                         if (!zip.exists()) listOf()
                         else {
                             val destination = File(
-                                // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
+                                
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                                     cacheDir
                                 } else {
@@ -491,7 +528,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
 
     private fun createNotificationChannels(activity: AppCompatActivity) {
         activity.apply {
-            // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
+            
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val namePush = getString(R.string.channel_name)
                 val channelIdPush = getString(R.string.default_notification_channel_id)

@@ -46,10 +46,12 @@ import de.dertyp7214.rboardthememanager.screens.PreferencesActivity
 import de.dertyp7214.rboardthememanager.utils.GboardUtils
 import de.dertyp7214.rboardthememanager.utils.MagiskUtils
 import de.dertyp7214.rboardthememanager.utils.PackageUtils.getPackageUid
+import de.dertyp7214.rboardthememanager.screens.ThemeChangerActivity.Companion.APP_THEMES_Q
+import de.dertyp7214.rboardthememanager.screens.ThemeChangerActivity.Companion.APP_THEMES_S
 
 class Settings(private val activity: Activity, private val args: SafeJSON) : AbstractPreference() {
     enum class FILES(val Path: String) {
-        // Remove the Android Version check if old Android Versions are no longer supported on the Gboard side.
+        
         @SuppressLint("SdCardPath")
         CACHE("/data/user${if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) "_de" else ""}/0/${Config.GBOARD_PACKAGE_NAME}/cache/auto_clean/"),
 
@@ -299,19 +301,6 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                     }, 500)
                 }
             }
-        ),
-        LOGS(
-            "LOGS",
-            R.string.logs,
-            R.string.logs_long,
-            R.drawable.ic_logs,
-            "",
-            TYPE.STRING,
-            listOf(),
-            {
-                Logs::class.java[this]
-            },
-            BuildConfig.DEBUG
         );
 
         inline fun <reified T> getValue(context: Context, defaultValue: T? = null): T? {
@@ -358,16 +347,20 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
                         when (item.key) {
                             "app_style" -> {
                                 summaryRes = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
-                                    de.dertyp7214.rboardthememanager.screens.ThemeChangerActivity.Companion.APP_THEMES_Q.toList()
+                                    APP_THEMES_Q.toList()
                                         .first {
                                             it.second == de.dertyp7214.rboardthememanager.screens.ThemeChangerActivity.Companion.getStyleName(activity)
                                         }.first
-                                } else {
-                                    ThemeUtils.APP_THEMES.toList()
+                                } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+                                    APP_THEMES_S.toList()
                                         .first {
                                             it.second == ThemeUtils.getStyleName(activity)
                                         }.first
-                                }
+                                } else{
+                                    ThemeUtils.APP_THEMES.toList()
+                                        .first {
+                                            it.second == ThemeUtils.getStyleName(activity)
+                                        }.first}
                             }
                         }
                     }
