@@ -10,8 +10,8 @@ plugins {
 }
 
 android {
-    buildToolsVersion = "35.0.0"
-    compileSdk = 35
+    compileSdk = 36
+    buildToolsVersion = "36.0.0"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
     buildFeatures.buildConfig = true
@@ -21,9 +21,9 @@ android {
     defaultConfig {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
-        targetSdk = 35
-        versionCode = 394000
-        versionName = "3.9.4"
+        targetSdk = 36
+        versionCode = 395000
+        versionName = "3.9.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -28,6 +28,7 @@ import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.XMLEntry
 import de.dertyp7214.rboardthememanager.components.XMLType
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
+import androidx.core.net.toUri
 
 val Activity.preferences: SharedPreferences
     get() = PreferenceManager.getDefaultSharedPreferences(this)
@@ -68,7 +69,7 @@ fun Activity.openUrl(url: String) {
                 .build()
         )
         .build()
-        .launchUrl(this, Uri.parse(url))
+        .launchUrl(this, url.toUri())
 }
 
 fun Activity.openDialog(
@@ -192,7 +193,13 @@ fun Activity.openInputDialogFlag(
     if (value != null) input.setText(value)
 
     findViewById<Button>(R.id.ok)?.setOnClickListener {
-        positive(dialog, input?.text?.toString() ?: "")
+        positive(dialog, (if (input.text.isNullOrEmpty()){
+            input.error = getString(R.string.not_empty)
+            return@setOnClickListener;
+        } else{
+            input?.text?.toString()
+        }).toString()
+        )
     }
     findViewById<Button>(R.id.cancel)?.let { button ->
         button.setOnClickListener { negative(dialog) }

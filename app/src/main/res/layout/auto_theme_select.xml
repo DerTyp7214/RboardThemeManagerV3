@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,25 +22,67 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/dark_theme"
+            <LinearLayout
+                android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:drawablePadding="8dp"
-                android:padding="16dp"
-                android:text="@string/apply_dark"
-                app:drawableStartCompat="@drawable/ic_dark_mode" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/light_theme"
+                <TextView
+                    android:id="@+id/dark_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:drawablePadding="8dp"
+                    android:padding="16dp"
+                    android:text="@string/apply_dark"
+                    app:drawableStartCompat="@drawable/ic_dark_mode" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/reset_dark_theme"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reset"
+                    android:visibility="invisible"
+                    app:cornerRadius="@dimen/roundCorners"
+                    tools:visibility="visible" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?android:attr/selectableItemBackground"
-                android:drawablePadding="8dp"
-                android:padding="16dp"
-                android:text="@string/apply_light"
-                app:drawableStartCompat="@drawable/ic_light_mode" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/light_theme"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:drawablePadding="8dp"
+                    android:padding="16dp"
+                    android:text="@string/apply_light"
+                    app:drawableStartCompat="@drawable/ic_light_mode" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/reset_light_theme"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reset"
+                    android:visibility="invisible"
+                    app:cornerRadius="@dimen/roundCorners"
+                    tools:visibility="visible" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout

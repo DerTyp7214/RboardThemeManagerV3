@@ -25,11 +25,17 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.30.5'
+          cmake-version: '3.31.6'
+
+      - name: Setup Ninja
+        run: sudo apt-get install ninja-build
+
+      - name: Ninja Version
+        run: ninja --version
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r27b
+          ndk-version: r28
 
       - name: Get Commit Message
         id: commitMessage
@@ -38,7 +44,7 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          java-version: 22
+          java-version: 23
           distribution: temurin
 
       - name: Cache Gradle dependencies
@@ -95,7 +101,7 @@ jobs:
           signingKey: ${{ secrets.SIGNING_KEY }}
           keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
           keyPassword: ${{ secrets.KEY_PASSWORD }}
-          buildToolsVersion: '35.0.0'
+          buildToolsVersion: '36.0.0'
 
       - name: List files
         run: ls app/build/outputs/apk/release

@@ -43,7 +43,7 @@ class SoundsFragment : Fragment() {
         val original = arrayListOf<SoundPack>()
         val soundList = ArrayList(original)
 
-        val adapter = SoundPackAdapter(soundList, requireActivity())
+        val adapter = SoundPackAdapter(requireContext(),soundList, requireActivity())
 
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LayoutManager(requireContext())
@@ -57,7 +57,7 @@ class SoundsFragment : Fragment() {
                 soundList.addAll(original.filter {
                     it.author.contains(filter, true)
                             || it.title.contains(filter, true)
-                            || filter.isNullOrEmpty()
+                            || filter.isEmpty()
                 })
                 adapter.notifyDataSetChanged()
             }
