@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Notification
 import android.content.ClipData
 import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Handler
 import android.os.Looper
@@ -13,6 +14,7 @@ import androidx.annotation.AttrRes
 import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.os.postDelayed
+import androidx.preference.PreferenceManager
 
 fun delayed(delay: Long, callback: () -> Unit) {
     Handler(Looper.getMainLooper()).postDelayed(delay) { callback() }
@@ -23,7 +25,8 @@ fun Context.getAttr(@AttrRes attr: Int): Int {
     theme.resolveAttribute(attr, typedValue, true)
     return typedValue.data
 }
-
+val Context.preferences: SharedPreferences
+    get() = PreferenceManager.getDefaultSharedPreferences(this)
 fun Context.setClipboard(text: String) {
     val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as android.content.ClipboardManager
     val clip = ClipData.newPlainText("Copied Text", text)

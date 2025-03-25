@@ -327,4 +327,5 @@
     <string name="top_icon_num_long">(Az érvényes értéknek 3 és 8 között kell lennie)</string>
     <string name="gboard_cache_clear_question">Törli a Gboard gyorsítótárat</string>
     <string name="gboard_cache_clear_long_question">Szeretné törölni a gyorsítótárat és kényszeríteni a Gboard bezárását?</string>
+    <string name="newTag">Új</string>
 </resources>
