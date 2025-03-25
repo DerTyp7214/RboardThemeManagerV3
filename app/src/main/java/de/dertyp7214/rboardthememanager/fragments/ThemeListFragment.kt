@@ -106,9 +106,9 @@ class ThemeListFragment : Fragment() {
             0,
             5.dpToPx(requireContext()).toInt()
         )
-        refreshLayout.setProgressBackgroundColorSchemeColor(requireActivity().getAttr(com.google.android.material.R.attr.colorBackgroundFloating))
+        refreshLayout.setProgressBackgroundColorSchemeColor(requireActivity().getAttr(R.attr.colorBackgroundFloating))
         refreshLayout.setColorSchemeColors(
-            requireActivity().getAttr(com.google.android.material.R.attr.colorPrimary),
+            requireActivity().getAttr(R.attr.colorPrimary),
             requireActivity().getAttr(
                 com.google.android.material.R.attr.colorTertiary
             )
