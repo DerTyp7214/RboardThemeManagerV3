@@ -323,4 +323,5 @@
     <string name="light_theme_reset">Világos téma visszaállítva</string>
     <string name="system_automatic_reset_question">Rendszer automatikus téma visszaállítása</string>
     <string name="system_automatic_reset_long_question">Szeretné visszaállítani a rendszer automatikus témát és leállítani a Gboardot?</string>
+    <string name="newTag">Új</string>
 </resources>

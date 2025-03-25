@@ -324,4 +324,5 @@
     <string name="light_theme_reset">Light theme reset</string>
     <string name="system_automatic_reset_question">Reset system automatic theme</string>
     <string name="system_automatic_reset_long_question">Do you want to reset the system automatic theme and force stop Gboard?</string>
+    <string name="newTag">New</string>
 </resources>

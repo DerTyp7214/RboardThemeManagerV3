@@ -53,7 +53,7 @@ class ThemeAdapter(
         )!!.toBitmap()
     }
     private val selectedBackground by lazy {
-        context.getAttr(com.google.android.material.R.attr.colorBackgroundFloating).toDrawable().apply {
+        context.getAttr(R.attr.colorBackgroundFloating).toDrawable().apply {
             alpha = 187
         }
     }
