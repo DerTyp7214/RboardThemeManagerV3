@@ -41,7 +41,7 @@ kspPlugin = "2.1.20-1.0.31"
 dotsIndicator = "5.1.0"
 
 googleServices = "4.4.2"
-gradle = "8.11.0-alpha02"
+gradle = "8.12.0-alpha02"
 uiTooling = "1.7.8"
 kotlin = "2.1.20"
 
