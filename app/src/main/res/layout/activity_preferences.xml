@@ -22,6 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
             android:fitsSystemWindows="true"
+            style="@style/Widget.Material3Expressive.CollapsingToolbar"
             app:expandedTitleTextAppearance="@style/Theme.RboardThemeManagerV3.TextAppearanceHeadlineMedium"
             app:collapsedTitleTextAppearance="@style/Theme.RboardThemeManagerV3.TextAppearanceHeadlineSmall"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"

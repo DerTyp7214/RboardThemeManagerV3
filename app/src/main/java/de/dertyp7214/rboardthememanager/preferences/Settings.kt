@@ -73,9 +73,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
     @Suppress("UNCHECKED_CAST")
     enum class SETTINGS(
         val key: String,
-        @StringRes val title: Int,
-        @StringRes val summary: Int,
-        @DrawableRes val icon: Int,
+        @param:StringRes val title: Int,
+        @param:StringRes val summary: Int,
+        @param:DrawableRes val icon: Int,
         val defaultValue: Any,
         val type: TYPE,
         val items: List<SelectionItem> = listOf(),
@@ -326,7 +326,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
         SETTINGS.entries.filter { it.visible }
             .filter {
                 !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) &&
-                        !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
+                        !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) && it != SETTINGS.USE_MAGISK && it != SETTINGS.UNINSTALL
             }
             .forEach { item ->
                 val pref: Preference = when (item.type) {
