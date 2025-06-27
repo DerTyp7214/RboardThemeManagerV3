@@ -49,8 +49,8 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
     enum class PROPS(
         val key: String,
         val title: String,
-        @StringRes val summary: Int,
-        @DrawableRes val icon: Int,
+        @param:StringRes val summary: Int,
+        @param:DrawableRes val icon: Int,
         val defaultValue: Any,
         val type: TYPE,
         val visible: Boolean = true,
@@ -60,8 +60,8 @@ class Props(private val activity: AppCompatActivity, private val args: SafeJSON)
     data class PropItem(
         val key: String,
         val title: String,
-        @StringRes val summary: Int,
-        @DrawableRes val icon: Int,
+        @param:StringRes val summary: Int,
+        @param:DrawableRes val icon: Int,
         val defaultValue: Any,
         val type: TYPE,
         val visible: Boolean = true,
