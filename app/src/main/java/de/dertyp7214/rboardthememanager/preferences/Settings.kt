@@ -73,9 +73,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
     @Suppress("UNCHECKED_CAST")
     enum class SETTINGS(
         val key: String,
-        @StringRes val title: Int,
-        @StringRes val summary: Int,
-        @DrawableRes val icon: Int,
+        @param:StringRes val title: Int,
+        @param:StringRes val summary: Int,
+        @param:DrawableRes val icon: Int,
         val defaultValue: Any,
         val type: TYPE,
         val items: List<SelectionItem> = listOf(),

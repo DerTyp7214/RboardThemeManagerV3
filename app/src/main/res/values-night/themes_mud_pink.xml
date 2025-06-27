@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.RboardThemeManager.Colors_mud_pink" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.RboardThemeManager.Colors_mud_pink" parent="Theme.Material3Expressive.DayNight.NoActionBar">
         <item name="colorPrimary">@color/mud_pink_md_theme_dark_colorPrimary</item>
         <item name="colorOnPrimary">@color/mud_pink_md_theme_dark_colorOnPrimary</item>
         <item name="colorPrimaryContainer">@color/mud_pink_md_theme_dark_colorPrimaryContainer</item>

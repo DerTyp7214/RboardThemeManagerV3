@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -10,7 +12,7 @@ android {
     compileSdk = 36
     buildToolsVersion = "36.0.0"
     buildFeatures.dataBinding = true
-
+    ndkVersion = "28.1.13356709"
     buildFeatures.viewBinding = true
     buildFeatures.buildConfig = true
 
@@ -18,13 +20,12 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 36
-        versionCode = 395000
+        versionCode = 395001
         versionName = "3.9.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    @Suppress("UnstableApiUsage")
-    androidResources {
+    @Suppress("UnstableApiUsage") androidResources {
         localeFilters += listOf(
             "ar", "cs", "da", "de",
             "el", "en", "es", "fi",
@@ -39,8 +40,7 @@ android {
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
         }
         getByName("debug") {
@@ -48,20 +48,23 @@ android {
             applicationIdSuffix = ".debug"
         }
     }
-    compileOptions {
-        isCoreLibraryDesugaringEnabled = true
-        sourceCompatibility = JavaVersion.current()
-        targetCompatibility = JavaVersion.current()
+
+    kotlin {
+        compilerOptions {
+            freeCompilerArgs = freeCompilerArgs.get() + listOf(
+                "-P",
+                "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true",
+                "-Xsuppress-version-warnings"
+            )
+            jvmToolchain(23)
+            jvmTarget.set(JvmTarget.JVM_23)
+        }
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.current().toString()
-        freeCompilerArgs += listOf(
-            "-P",
-            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true",
-            "-Xsuppress-version-warnings"
-        )
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
     }
+
     packaging {
         jniLibs {
             useLegacyPackaging = true
