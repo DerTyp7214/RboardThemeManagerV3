@@ -256,9 +256,9 @@ class MainActivity : AppCompatActivity() {
                         setArrowOrientation(ArrowOrientation.BOTTOM)
                         setCornerRadius(resources.getDimension(R.dimen.roundCornersInner))
                         setText(getString(R.string.menu_moved))
-                        setTextColor(getAttr(com.google.android.material.R.attr.colorBackgroundFloating))
+                        setTextColor(getAttr(R.attr.colorBackgroundFloating))
                         setTextSize(12f)
-                        setBackgroundColor(getAttr(com.google.android.material.R.attr.colorPrimary))
+                        setBackgroundColor(getAttr(R.attr.colorPrimary))
                         setBalloonAnimation(BalloonAnimation.FADE)
                         setDismissWhenClicked(true)
                         setOnBalloonDismissListener {
@@ -775,32 +775,7 @@ class MainActivity : AppCompatActivity() {
 
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
 
-        if (!preferenceManager.getBoolean("usageSet", false)) {
-            UsageDialog.open(this, onGboard = {
-                it.dismiss()
-                preferenceManager.edit {
-                    putBoolean("useMagisk", false)
-                    putBoolean("usageSet", true)
-                }
-                Config.useMagisk = false
-                ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
-            }, onMagisk = { dialogFragment ->
-                dialogFragment.dismiss()
-                preferenceManager.edit {
-                    putBoolean("useMagisk", true)
-                    putBoolean("usageSet", true)
-                }
-                Config.useMagisk = true
-                ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
-                if (ThemeUtils.checkForExistingThemes()) openDialog(
-                    R.string.install_module,
-                    R.string.module
-                ) {
-                    it.dismiss()
-                    MagiskUtils.installModule(this)
-                } else MagiskUtils.installModule(this)
-            })
-        } else if (intent.getBooleanExtra(
+        if (intent.getBooleanExtra(
                 "update",
                 this@MainActivity.intent.getBooleanExtra("update", false)
             )

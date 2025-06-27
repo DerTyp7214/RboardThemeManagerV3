@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="22">
-      <module name="Rboard_Theme_Manager_V3.app" target="23" />
-      <module name="Rboard_Theme_Manager_V3.colorutilsc" target="23" />
-      <module name="Rboard_Theme_Manager_V3.mathc" target="23" />
-      <module name="Rboard_Theme_Manager_V3.rboardcomponents" target="23" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="23" />
   </component>
 </project>

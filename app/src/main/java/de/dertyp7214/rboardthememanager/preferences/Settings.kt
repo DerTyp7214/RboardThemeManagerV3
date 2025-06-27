@@ -72,9 +72,9 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
 
     enum class SETTINGS(
         val key: String,
-        @StringRes val title: Int,
-        @StringRes val summary: Int,
-        @DrawableRes val icon: Int,
+        @param:StringRes val title: Int,
+        @param:StringRes val summary: Int,
+        @param:DrawableRes val icon: Int,
         val defaultValue: Any,
         val type: TYPE,
         val items: List<SelectionItem> = listOf(),
@@ -316,7 +316,10 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
     }
 
     override fun preferences(builder: PreferenceScreen.Builder) {
-        SETTINGS.entries.filter { it.visible }.forEach { item ->
+        SETTINGS.entries.filter { it.visible }
+            .filter {
+            it != SETTINGS.USE_MAGISK && it != SETTINGS.UNINSTALL
+            }.forEach { item ->
             val pref: Preference = when (item.type) {
                 TYPE.BOOLEAN -> builder.switch(item.key) {
                     defaultValue = item.defaultValue as Boolean

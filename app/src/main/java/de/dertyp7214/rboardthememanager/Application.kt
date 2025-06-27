@@ -59,8 +59,8 @@ class Application : Application() {
             .edit { putString("logMode", if (BuildConfig.DEBUG) "VERBOSE" else "ERROR") }
         Logger.init(
             this,
-            getAttr(com.google.android.material.R.attr.colorPrimary),
-            getAttr(com.google.android.material.R.attr.colorAccent)
+            getAttr(R.attr.colorPrimary),
+            getAttr(R.attr.colorAccent)
         )
         Logger.extraData = {
             StringBuilder("Rooted: ")
