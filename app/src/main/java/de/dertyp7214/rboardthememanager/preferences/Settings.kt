@@ -326,7 +326,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
         SETTINGS.entries.filter { it.visible }
             .filter {
                 !(it == SETTINGS.SHOW_SYSTEM_THEME && Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) &&
-                        !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S)
+                        !(it == SETTINGS.USE_BLUR && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) && it != SETTINGS.USE_MAGISK && it != SETTINGS.UNINSTALL
             }
             .forEach { item ->
                 val pref: Preference = when (item.type) {
