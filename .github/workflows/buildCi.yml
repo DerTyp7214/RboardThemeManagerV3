@@ -23,7 +23,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '3.31.6'
+          cmake-version: '4.0.2'
 
       - name: Setup Ninja
         run: sudo apt-get install ninja-build
@@ -33,7 +33,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r28
+          ndk-version: r28b
 
       - name: Get Commit Message
         id: commitMessage
@@ -90,7 +90,7 @@ jobs:
 
       - name: Sign artifact
         id: signArtifact
-        uses: ilharp/sign-android-release@v1.0.4
+        uses: ilharp/sign-android-release@v2
         with:
           releaseDir: app/build/outputs/apk/debug
           keyAlias: ${{ secrets.KEYALIAS }}

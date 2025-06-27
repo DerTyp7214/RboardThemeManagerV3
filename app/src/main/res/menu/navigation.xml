@@ -14,6 +14,7 @@
     <item
         android:id="@+id/navigation_sounds"
         android:icon="@drawable/ic_sounds_state"
-        android:title="@string/title_sounds" />
+        android:title="@string/title_sounds"
+        android:visible="false"/>
 
 </menu>

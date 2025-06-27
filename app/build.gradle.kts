@@ -1,5 +1,8 @@
 @file:Suppress("SpellCheckingInspection", "UnstableApiUsage")
 
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
+
 plugins {
     id("com.android.application")
     kotlin("android")
@@ -12,6 +15,7 @@ plugins {
 android {
     compileSdk = 36
     buildToolsVersion = "36.0.0"
+    ndkVersion = "28.1.13356709"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
     buildFeatures.buildConfig = true
@@ -22,7 +26,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 36
-        versionCode = 395000
+        versionCode = 395002
         versionName = "3.9.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -53,18 +57,16 @@ android {
             applicationIdSuffix = ".debug"
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.current()
-        targetCompatibility = JavaVersion.current()
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.current().toString()
-        freeCompilerArgs += listOf(
-            "-P",
-            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true",
-            "-Xsuppress-version-warnings"
-        )
+    kotlin {
+        compilerOptions {
+            freeCompilerArgs = freeCompilerArgs.get() + listOf(
+                "-P",
+                "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true",
+                "-Xsuppress-version-warnings"
+            )
+            jvmToolchain(23)
+            jvmTarget.set(JvmTarget.JVM_23)
+        }
     }
     packaging {
         jniLibs {

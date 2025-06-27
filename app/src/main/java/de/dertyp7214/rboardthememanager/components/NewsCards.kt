@@ -61,7 +61,7 @@ class NewsCards(context: Context, attrs: AttributeSet? = null) : LinearLayout(co
 
     private fun fetchNewsFeed(): List<CardElement> {
         return try {
-            Gson().fromJson<List<CardElement>?>(
+            Gson().fromJson<List<CardElement>>(
                 URL(newsFeedUrl).readText(),
                 TypeTokens<List<CardElement>>()
             ).filter {
