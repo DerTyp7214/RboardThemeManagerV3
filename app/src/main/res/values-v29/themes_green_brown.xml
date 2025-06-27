@@ -1,5 +1,5 @@
 <resources>
-<style name="Theme.RboardThemeManager.Colors_green_brown" parent="Theme.Material3.DayNight.NoActionBar">
+<style name="Theme.RboardThemeManager.Colors_green_brown" parent="Theme.Material3Expressive.DayNight.NoActionBar">
     <item name="colorPrimary">@color/green_brown_md_theme_light_primary</item>
     <item name="colorOnPrimary">@color/green_brown_md_theme_light_onPrimary</item>
     <item name="colorPrimaryContainer">@color/green_brown_md_theme_light_primaryContainer</item>

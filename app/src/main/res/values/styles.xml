@@ -7,7 +7,7 @@
         <item name="android:windowIsFloating">false</item>
     </style>
 
-    <style name="Widget.CollapsingToolbar" parent="Widget.Material3.CollapsingToolbar">
+    <style name="Widget.CollapsingToolbar" parent="Widget.Material3Expressive.CollapsingToolbar">
         <item name="contentScrim">@drawable/color_surface_overlay_background</item>
     </style>
 
@@ -19,7 +19,7 @@
         <item name="android:textColor">?attr/colorOnSecondaryContainer</item>
     </style>
 
-    <style name="Widget.App.SnackbarButton" parent="Widget.Material3.Button.TextButton.Snackbar">
+    <style name="Widget.App.SnackbarButton" parent="Widget.Material3Expressive.Button.TextButton.Snackbar">
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">?attr/colorAccent</item>
     </style>
@@ -36,7 +36,7 @@
         <item name="android:clipToOutline" tools:targetApi="s">true</item>
     </style>
 
-    <style name="Dialog.RboardThemeManagerV3.MaterialAlertDialog" parent="@style/ThemeOverlay.Material3.MaterialAlertDialog">
+    <style name="Dialog.RboardThemeManagerV3.MaterialAlertDialog" parent="@style/ThemeOverlay.Material3Expressive.MaterialAlertDialog">
         <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.MyApp.Dialog.Rounded
         </item>
         <item name="android:background">@drawable/color_surface_overlay_background</item>

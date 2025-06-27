@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.RboardThemeManager.Colors_night_rider" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.RboardThemeManager.Colors_night_rider" parent="Theme.Material3Expressive.DayNight.NoActionBar">
         <item name="colorPrimary">@color/night_rider_md_theme_light_colorPrimary</item>
         <item name="colorOnPrimary">@color/night_rider_md_theme_light_colorOnPrimary</item>
         <item name="colorPrimaryContainer">@color/night_rider_md_theme_light_colorPrimaryContainer</item>
