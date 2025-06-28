@@ -168,6 +168,10 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     finish();
                     startActivity(intent);
                 }
+                val moduleDir = SuFile(Config.THEME_LOCATION);
+                if (moduleDir.exists() && moduleDir.isDirectory()){
+                    "rm -r \"${Config.THEME_LOCATION.Path}\"".runAsCommand()
+                }
                 AppWidgetManager.getInstance(this).let { appWidgetManager ->
                     appWidgetManager.getAppWidgetIds(
                         ComponentName(this, FlagsWidget::class.java)
