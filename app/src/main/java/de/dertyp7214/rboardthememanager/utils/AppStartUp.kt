@@ -46,7 +46,7 @@ import org.json.JSONObject
 import java.io.File
 import java.net.URL
 
-class AppStartUp(private val activity: AppCompatActivity, val Path: String) {
+class AppStartUp(private val activity: AppCompatActivity) {
     private val checkUpdateUrl by lazy {
         if (BuildConfig.DEBUG){
         "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible-debug/output-metadata.json"
