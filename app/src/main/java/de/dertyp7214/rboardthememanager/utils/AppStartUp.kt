@@ -156,6 +156,11 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 files.forEach {
                     SuFile(it.absolutePath).deleteRecursive()
                 }
+                if (Config.useMagisk){
+                    preferences.edit { putBoolean("useMagisk", false) }
+                    finish();
+                    startActivity(intent);
+                }
             }
 
             doAsync({
@@ -163,11 +168,6 @@ class AppStartUp(private val activity: AppCompatActivity) {
             }, Config::newGboard::set)
 
             doInBackground {
-                if (Config.useMagisk){
-                    preferences.edit { putBoolean("useMagisk", false) }
-                    finish();
-                    startActivity(intent);
-                }
                 AppWidgetManager.getInstance(this).let { appWidgetManager ->
                     appWidgetManager.getAppWidgetIds(
                         ComponentName(this, FlagsWidget::class.java)
