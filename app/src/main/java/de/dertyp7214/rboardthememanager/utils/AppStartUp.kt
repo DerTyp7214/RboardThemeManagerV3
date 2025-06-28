@@ -143,11 +143,6 @@ class AppStartUp(private val activity: AppCompatActivity) {
                 files.forEach {
                     SuFile(it.absolutePath).deleteRecursive()
                 }
-                if (Config.useMagisk){
-                    preferences.edit { putBoolean("useMagisk", false) }
-                    finish();
-                    startActivity(intent);
-                }
             }
 
             doAsync({
@@ -166,6 +161,14 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     ).forEach { id ->
                         SwitchKeyboardWidget.updateAppWidget(this, appWidgetManager, id)
                     }
+                }
+            }
+            
+            if (rootAccess && isReady) doInBackground 
+                if (Config.useMagisk){
+                    preferences.edit { putBoolean("useMagisk", false) }
+                    finish();
+                    startActivity(intent);
                 }
             }
 
