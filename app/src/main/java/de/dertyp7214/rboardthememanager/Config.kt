@@ -6,6 +6,7 @@ import de.dertyp7214.rboardthememanager.data.ModuleMeta
 
 @Suppress("MemberVisibilityCanBePrivate", "unused", "SdCardPath")
 object Config {
+    val Path: String
     var useMagisk = false
     var newGboard = true
     val PLAY_URL = { packageName: String ->
