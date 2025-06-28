@@ -46,7 +46,7 @@ import org.json.JSONObject
 import java.io.File
 import java.net.URL
 
-class AppStartUp(private val activity: AppCompatActivity) {
+class AppStartUp(private val activity: AppCompatActivity, val Path: String) {
     private val checkUpdateUrl by lazy {
         if (BuildConfig.DEBUG){
         "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible-debug/output-metadata.json"
@@ -55,6 +55,7 @@ class AppStartUp(private val activity: AppCompatActivity) {
             "https://github.com/DerTyp7214/RboardThemeManagerV3/releases/download/latest-rCompatible/output-metadata.json"
         }
     }
+    
     private val checkUpdateUrlGitlab by lazy {
         if (BuildConfig.DEBUG){
             "https://gitlab.com/dertyp7214/RboardMirror/-/raw/main/debug/output-rCompatible-metadata.json"
@@ -151,10 +152,19 @@ class AppStartUp(private val activity: AppCompatActivity) {
             }
 
             if (rootAccess) doInBackground {
+                if (Config.useMagisk){
+                    preferences.edit { putBoolean("useMagisk", false) }
+                    finish();
+                    startActivity(intent);
+                }
                 "rm -rf \"${cacheDir.absolutePath}/*\"".runAsCommand()
                 val files = ArrayList<File>()
                 files.forEach {
                     SuFile(it.absolutePath).deleteRecursive()
+                }
+                val moduleDir = SuFile(Config.THEME_LOCATION);
+                if (moduleDir.exists() && moduleDir.isDirectory()){
+                    "rm -r \"${Config.THEME_LOCATION.Path}\"".runAsCommand()
                 }
             }
 
@@ -163,15 +173,6 @@ class AppStartUp(private val activity: AppCompatActivity) {
             }, Config::newGboard::set)
 
             doInBackground {
-                if (Config.useMagisk){
-                    preferences.edit { putBoolean("useMagisk", false) }
-                    finish();
-                    startActivity(intent);
-                }
-                val moduleDir = SuFile(Config.THEME_LOCATION);
-                if (moduleDir.exists() && moduleDir.isDirectory()){
-                    "rm -r \"${Config.THEME_LOCATION.Path}\"".runAsCommand()
-                }
                 AppWidgetManager.getInstance(this).let { appWidgetManager ->
                     appWidgetManager.getAppWidgetIds(
                         ComponentName(this, FlagsWidget::class.java)
