@@ -27,11 +27,10 @@ import com.topjohnwu.superuser.io.SuFile
 import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardcomponents.utils.doInBackground
 import de.dertyp7214.rboardthememanager.BuildConfig
-import de.dertyp7214.rboardthememanager.Config
-import de.dertyp7214.rboardthememanager.Config.REPO_PREFIX
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.Config.*
 import de.dertyp7214.rboardthememanager.data.OutputMetadata
 import de.dertyp7214.rboardthememanager.dialogs.NoRootDialog
 import de.dertyp7214.rboardthememanager.preferences.Flags
