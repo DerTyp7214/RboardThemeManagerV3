@@ -138,6 +138,10 @@ class AppStartUp(private val activity: AppCompatActivity) {
             }
 
             if (rootAccess) doInBackground {
+                if (SuFile("$MODULE_PATH$THEME_LOCATION").exists()) {
+                    "rm -rf \"$MODULE_PATH$THEME_LOCATION\"".runAsCommand()
+                    Log.d("Path", "$MODULE_PATH$THEME_LOCATION")
+                }
                 "rm -rf \"${cacheDir.absolutePath}/*\"".runAsCommand()
                 val files = ArrayList<File>()
                 files.forEach {
@@ -150,11 +154,6 @@ class AppStartUp(private val activity: AppCompatActivity) {
             }, Config::newGboard::set)
 
             doInBackground {
-                if (Config.useMagisk){
-                    preferences.edit { putBoolean("useMagisk", false) }
-                    finish();
-                    startActivity(intent);
-                }
                 AppWidgetManager.getInstance(this).let { appWidgetManager ->
                     appWidgetManager.getAppWidgetIds(
                         ComponentName(this, FlagsWidget::class.java)
