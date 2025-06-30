@@ -8,6 +8,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
@@ -15,7 +16,6 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.runtime.simulateHotReload
 import androidx.core.animation.doOnEnd
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.FileProvider
@@ -29,10 +29,31 @@ import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardcomponents.utils.doInBackground
 import de.dertyp7214.rboardthememanager.BuildConfig
 import de.dertyp7214.rboardthememanager.Config
+import de.dertyp7214.rboardthememanager.Config.MODULE_PATH
 import de.dertyp7214.rboardthememanager.Config.REPO_PREFIX
+import de.dertyp7214.rboardthememanager.Config.THEME_LOCATION
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.XMLFile
-import de.dertyp7214.rboardthememanager.core.*
+import de.dertyp7214.rboardthememanager.core.SafeJSON
+import de.dertyp7214.rboardthememanager.core.content
+import de.dertyp7214.rboardthememanager.core.forEach
+import de.dertyp7214.rboardthememanager.core.getTextFromUrl
+import de.dertyp7214.rboardthememanager.core.hasComment
+import de.dertyp7214.rboardthememanager.core.hasRoot
+import de.dertyp7214.rboardthememanager.core.logs
+import de.dertyp7214.rboardthememanager.core.openDialog
+import de.dertyp7214.rboardthememanager.core.openLoadingDialog
+import de.dertyp7214.rboardthememanager.core.openUrl
+import de.dertyp7214.rboardthememanager.core.preferences
+import de.dertyp7214.rboardthememanager.core.putExtra
+import de.dertyp7214.rboardthememanager.core.readXML
+import de.dertyp7214.rboardthememanager.core.runAsCommand
+import de.dertyp7214.rboardthememanager.core.safeParse
+import de.dertyp7214.rboardthememanager.core.set
+import de.dertyp7214.rboardthememanager.core.su
+import de.dertyp7214.rboardthememanager.core.toMap
+import de.dertyp7214.rboardthememanager.core.toSet
+import de.dertyp7214.rboardthememanager.core.writeToFile
 import de.dertyp7214.rboardthememanager.data.OutputMetadata
 import de.dertyp7214.rboardthememanager.dialogs.NoRootDialog
 import de.dertyp7214.rboardthememanager.preferences.Flags
@@ -151,6 +172,10 @@ class AppStartUp(private val activity: AppCompatActivity) {
             }
 
             if (rootAccess) doInBackground {
+                if (SuFile("$MODULE_PATH$THEME_LOCATION").exists()) {
+                    "rm -rf \"$MODULE_PATH$THEME_LOCATION\"".runAsCommand()
+                    Log.d("Path", "$MODULE_PATH$THEME_LOCATION")
+                }
                 "rm -rf \"${cacheDir.absolutePath}/*\"".runAsCommand()
                 val files = ArrayList<File>()
                 files.forEach {
@@ -163,11 +188,6 @@ class AppStartUp(private val activity: AppCompatActivity) {
             }, Config::newGboard::set)
 
             doInBackground {
-                if (Config.useMagisk){
-                    preferences.edit { putBoolean("useMagisk", false) }
-                    finish();
-                    startActivity(intent);
-                }
                 AppWidgetManager.getInstance(this).let { appWidgetManager ->
                     appWidgetManager.getAppWidgetIds(
                         ComponentName(this, FlagsWidget::class.java)
