@@ -716,6 +716,10 @@ class MainActivity : AppCompatActivity() {
                     navigation.selectedItemId = id
                 }
             }
+            if (Config.useMagisk){
+                preferences.edit { putBoolean("useMagisk", false) }
+                recreate();
+            }
         }
     }
 
