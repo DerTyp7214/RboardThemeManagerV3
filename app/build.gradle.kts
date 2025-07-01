@@ -20,7 +20,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 36
-        versionCode = 395004
+        versionCode = 395005
         versionName = "3.9.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
