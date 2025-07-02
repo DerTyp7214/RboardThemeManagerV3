@@ -57,14 +57,46 @@
             android:textSize="12sp"
             tools:ignore="TextContrastCheck" />
 
-        <TextView
-            android:id="@+id/address"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:singleLine="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="?attr/colorOnSurface"
-            tools:text="This is a very long text to test the multiline capability of this textView" />
+            android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_gravity="start"
+                android:gravity="start"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="false"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textColor="?attr/colorOnSurface"
+                    tools:text="This is a very long text to test the multiline capability of this textView" />
+            </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/copy"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:focusable="true"
+                android:padding="7dp"
+                android:clickable="true"
+                app:srcCompat="@drawable/ic_repo_copy"
+                app:tint="?android:attr/textColorPrimary"
+                android:background="@drawable/ripple"
+                tools:ignore="ContentDescription,RtlSymmetry" />
+        </LinearLayout>
+        </LinearLayout>
 
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"

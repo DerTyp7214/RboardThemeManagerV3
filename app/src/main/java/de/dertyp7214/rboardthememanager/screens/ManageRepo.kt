@@ -3,14 +3,17 @@
 package de.dertyp7214.rboardthememanager.screens
 
 import android.annotation.SuppressLint
+import android.content.ClipboardManager
 import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.R
@@ -20,6 +23,7 @@ import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.core.getTextFromUrl
 import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.core.safeParse
+import de.dertyp7214.rboardthememanager.core.showMaterial
 import de.dertyp7214.rboardthememanager.data.ThemePack
 import de.dertyp7214.rboardthememanager.databinding.ActivityManageRepoBinding
 import de.dertyp7214.rboardthememanager.utils.TypeTokens
@@ -69,6 +73,7 @@ class ManageRepo : AppCompatActivity() {
 
         val toolbar = binding.toolbar
         val recyclerView = binding.recyclerView
+        val copy = binding.copy
 
         toolbar.applyInsetter {
             type(statusBars = true) {
@@ -93,6 +98,15 @@ class ManageRepo : AppCompatActivity() {
 
         binding.address.text = key
 
+
+        copy.setOnClickListener {
+            val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            clipboard.setText(binding.address.getText())
+            Snackbar.make(
+                window.decorView,
+                R.string.sounds_applied,
+                Snackbar.LENGTH_LONG).showMaterial()
+        }
         toolbar.menu.findItem(R.id.enabled).isChecked = enabled
         toolbar.navigationIcon =
             ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)

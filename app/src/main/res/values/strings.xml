@@ -325,4 +325,7 @@
     <string name="system_automatic_reset_question">Reset system automatic theme</string>
     <string name="system_automatic_reset_long_question">Do you want to reset the system automatic theme and force stop Gboard?</string>
     <string name="newTag">New</string>
+    <string name="succesful_copied">Successfully copied</string>
+    <string name="enable_text_preview">Text preview</string>
+    <string name="enable_text_preview_details">Show a preview of the text above the keyboard</string>
 </resources>
