@@ -3,6 +3,7 @@
 package de.dertyp7214.rboardthememanager.screens
 
 import android.annotation.SuppressLint
+import android.content.ClipboardManager
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
