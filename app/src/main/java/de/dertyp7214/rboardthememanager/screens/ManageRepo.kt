@@ -103,8 +103,8 @@ class ManageRepo : AppCompatActivity() {
             val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
             clipboard.setText(binding.address.getText())
             Snackbar.make(
-                window.decorView,
-                R.string.sounds_applied,
+                findViewById(android.R.id.content),
+                R.string.succesful_copied,
                 Snackbar.LENGTH_LONG).showMaterial()
         }
         toolbar.menu.findItem(R.id.enabled).isChecked = enabled
