@@ -328,4 +328,7 @@
     <string name="gboard_cache_clear_question">Törli a Gboard gyorsítótárat</string>
     <string name="gboard_cache_clear_long_question">Szeretné törölni a gyorsítótárat és kényszeríteni a Gboard bezárását?</string>
     <string name="newTag">Új</string>
+    <string name="succesful_copied">Sikeresen másolva</string>
+    <string name="enable_text_preview">Szöveges előnézet</string>
+    <string name="enable_text_preview_details">A szöveg előnézetének megjelenítése a billentyűzet felett</string>
 </resources>

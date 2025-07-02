@@ -11,7 +11,9 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
+import de.dertyp7214.rboardthememanager.core.showMaterial
 import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ManageRepoThemePackAdapter
@@ -58,11 +60,19 @@ class ManageRepo : AppCompatActivity() {
 
         val toolbar = binding.toolbar
         val recyclerView = binding.recyclerView
+        val copy = binding.copy
 
         val items = ArrayList<ThemePack>()
 
         val adapter = ManageRepoThemePackAdapter(items)
-
+        copy.setOnClickListener {
+            val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+            clipboard.setText(binding.address.getText())
+            Snackbar.make(
+                findViewById(android.R.id.content),
+                R.string.succesful_copied,
+                Snackbar.LENGTH_LONG).showMaterial()
+        }
         recyclerView.layoutManager = LayoutManager(this)
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
