@@ -1,5 +1,5 @@
 {
-  "time": "1751483534215",
+  "time": "1751491379904",
   "flags": [
     {
       "key": "general",
@@ -406,6 +406,7 @@
     {
       "key": "enable_text_preview",
       "title": "enable_text_preview",
+      "minSdk": 26,
       "summary": "enable_text_preview_details",
       "icon": "ic_text_preview",
       "defaultValue": false,
