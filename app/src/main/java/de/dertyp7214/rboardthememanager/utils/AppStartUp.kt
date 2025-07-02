@@ -163,11 +163,6 @@ class AppStartUp(private val activity: AppCompatActivity) {
             }, Config::newGboard::set)
 
             doInBackground {
-                if (Config.useMagisk){
-                    preferences.edit { putBoolean("useMagisk", false) }
-                    finish();
-                    startActivity(intent);
-                }
                 AppWidgetManager.getInstance(this).let { appWidgetManager ->
                     appWidgetManager.getAppWidgetIds(
                         ComponentName(this, FlagsWidget::class.java)

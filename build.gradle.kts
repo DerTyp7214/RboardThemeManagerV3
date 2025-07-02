@@ -10,7 +10,6 @@ buildscript {
         maven("https://jitpack.io")
         maven("https://maven.fabric.io/public")
         maven("https://maven.google.com")
-        maven("https://oss.sonatype.org/content/repositories/snapshots/")
         maven ("https://storage.googleapis.com/r8-releases/raw")
     }
     dependencies {
