@@ -4,8 +4,8 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 
 data class MenuItem(
-    @DrawableRes val icon: Int,
-    @StringRes val title: Int,
+    @param:DrawableRes val icon: Int,
+    @param:StringRes val title: Int,
     val visible: Boolean = true,
     val onClick: () -> Unit
 )

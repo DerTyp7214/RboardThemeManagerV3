@@ -248,18 +248,19 @@ class Preferences(
                 titleRes = R.string.theme_path
                 summary = infoData[key] as String
                 iconRes = R.drawable.ic_folder_open
-                onClick {
-                    Intent(ACTION_GET_CONTENT).apply {
-                        setDataAndType(Uri.fromFile(File(infoData[key] as String)), "application/*")
-                        activity.startActivity(this)
-                    }
-                    true
-                }
             }
             pref("installation_method") {
                 titleRes = R.string.installation_method
                 summaryRes = infoData[key] as Int
                 iconRes = R.drawable.ic_download
+                if (!Config.useMagisk){
+                    onClick {
+                        activity.packageManager.getLaunchIntentForPackage(
+                            Config.GBOARD_PACKAGE_NAME
+                        )?.let(activity::startActivity)
+                        false
+                    }
+                }
             }
             pref("rboard_app_version") {
                 titleRes = R.string.rboard_app_version

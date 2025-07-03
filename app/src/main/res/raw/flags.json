@@ -1,5 +1,5 @@
 {
-  "time": "1727767527651",
+  "time": "1751491379904",
   "flags": [
     {
       "key": "general",
@@ -399,6 +399,16 @@
       "title": "keyboard_redesign_forbid_key_shadows",
       "summary": "keyboard_redesign_forbid_key_shadows_details",
       "icon": "ic_box_shadow",
+      "defaultValue": false,
+      "type": "BOOLEAN",
+      "file": "FLAGS"
+    },
+    {
+      "key": "enable_text_preview",
+      "title": "enable_text_preview",
+      "minSdk": 26,
+      "summary": "enable_text_preview_details",
+      "icon": "ic_text_preview",
       "defaultValue": false,
       "type": "BOOLEAN",
       "file": "FLAGS"

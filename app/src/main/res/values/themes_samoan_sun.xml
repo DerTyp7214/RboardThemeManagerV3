@@ -1,5 +1,5 @@
 <resources>
-    <style name="Theme.RboardThemeManager.Colors_samoan_sun" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Theme.RboardThemeManager.Colors_samoan_sun" parent="Theme.Material3Expressive.DayNight.NoActionBar">
         <item name="colorPrimary">@color/samoan_sun_md_theme_light_primary</item>
         <item name="colorOnPrimary">@color/samoan_sun_md_theme_light_onPrimary</item>
         <item name="colorPrimaryContainer">@color/samoan_sun_md_theme_light_primaryContainer</item>

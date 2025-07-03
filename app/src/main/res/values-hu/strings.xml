@@ -324,4 +324,7 @@
     <string name="system_automatic_reset_question">Rendszer automatikus téma visszaállítása</string>
     <string name="system_automatic_reset_long_question">Szeretné visszaállítani a rendszer automatikus témát és leállítani a Gboardot?</string>
     <string name="newTag">Új</string>
+    <string name="succesful_copied">Sikeresen másolva</string>
+    <string name="enable_text_preview">Szöveges előnézet</string>
+    <string name="enable_text_preview_details">A szöveg előnézetének megjelenítése a billentyűzet felett</string>
 </resources>

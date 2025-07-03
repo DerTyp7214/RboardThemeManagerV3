@@ -742,6 +742,10 @@ class MainActivity : AppCompatActivity() {
                     navigation.selectedItemId = id
                 }
             }
+            if (Config.useMagisk){
+                preferences.edit { putBoolean("useMagisk", false) }
+                recreate();
+            }
         }
     }
 
@@ -794,34 +798,8 @@ class MainActivity : AppCompatActivity() {
         if (ThemeUtils.checkForExistingThemes()) ThemeUtils.getThemesPathFromProps()
             ?.apply { Config.THEME_LOCATION = this }
 
-        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
 
-        if (!preferenceManager.getBoolean("usageSet", false)) {
-            UsageDialog.open(this, onGboard = {
-                it.dismiss()
-                preferenceManager.edit {
-                    putBoolean("useMagisk", false)
-                    putBoolean("usageSet", true)
-                }
-                Config.useMagisk = false
-                ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
-            }, onMagisk = { dialogFragment ->
-                dialogFragment.dismiss()
-                preferenceManager.edit {
-                    putBoolean("useMagisk", true)
-                    putBoolean("usageSet", true)
-                }
-                Config.useMagisk = true
-                ThemeUtils::loadThemes asyncInto mainViewModel::setThemes
-                if (ThemeUtils.checkForExistingThemes()) openDialog(
-                    R.string.install_module,
-                    R.string.module
-                ) {
-                    it.dismiss()
-                    MagiskUtils.installModule(this)
-                } else MagiskUtils.installModule(this)
-            })
-        } else if (intent.getBooleanExtra(
+        if (intent.getBooleanExtra(
                 "update",
                 this@MainActivity.intent.getBooleanExtra("update", false)
             )
