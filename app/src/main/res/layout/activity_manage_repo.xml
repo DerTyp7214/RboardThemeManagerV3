@@ -38,81 +38,113 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
         tools:context="de.dertyp7214.rboardthememanager.screens.ManageRepo">
-    <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/address"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="?attr/colorSecondary"
-            android:textSize="12sp"
-            tools:ignore="TextContrastCheck" />
+            android:orientation="vertical"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:singleLine="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="?attr/colorOnSurface"
-            tools:text="This is a very long text to test the multiline capability of this textView" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/address"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="?attr/colorSecondary"
+                android:textSize="12sp"
+                tools:ignore="TextContrastCheck" />
 
-        <androidx.legacy.widget.Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/theme_pack_count"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="?attr/colorSecondary"
-            android:textSize="12sp"
-            tools:ignore="TextContrastCheck" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/theme_pack_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="?attr/colorOnSurface"
-            tools:text="20" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_gravity="start"
+                        android:gravity="start"
+                        android:layout_weight="1">
+                        <TextView
+                            android:id="@+id/address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:singleLine="false"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                            android:textColor="?attr/colorOnSurface"
+                            tools:text="This is a very long text to test the multiline capability of this textView" />
+                    </LinearLayout>
 
-        <androidx.legacy.widget.Space
-            android:layout_width="match_parent"
-            android:layout_height="8dp" />
+                    <ImageButton
+                        android:id="@+id/copy"
+                        android:layout_width="40dp"
+                        android:layout_height="match_parent"
+                        android:focusable="true"
+                        android:padding="7dp"
+                        android:clickable="true"
+                        app:srcCompat="@drawable/ic_repo_copy"
+                        app:tint="?android:attr/textColorPrimary"
+                        android:background="@drawable/ripple"
+                        tools:ignore="ContentDescription,RtlSymmetry" />
+                </LinearLayout>
+            </LinearLayout>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/theme_packs"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="?attr/colorSecondary"
-            android:textSize="12sp" />
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/theme_pack_count"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="?attr/colorSecondary"
+                android:textSize="12sp"
+                tools:ignore="TextContrastCheck" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:requiresFadingEdge="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        tools:ignore="SpeakableTextPresentCheck"
-        tools:listitem="@layout/manage_repo_theme_pack">
+            <TextView
+                android:id="@+id/theme_pack_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="?attr/colorOnSurface"
+                tools:text="20" />
 
-    </androidx.recyclerview.widget.RecyclerView>
+            <androidx.legacy.widget.Space
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/theme_packs"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="?attr/colorSecondary"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:requiresFadingEdge="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:listitem="@layout/manage_repo_theme_pack">
+
+        </androidx.recyclerview.widget.RecyclerView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

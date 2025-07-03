@@ -66,9 +66,9 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
 
     enum class FLAGS(
         val key: String,
-        @StringRes val title: Int,
-        @StringRes val summary: Int,
-        @DrawableRes val icon: Int,
+        @param:StringRes val title: Int,
+        @param:StringRes val summary: Int,
+        @param:DrawableRes val icon: Int,
         val defaultValue: Any,
         val type: TYPE,
         val file: FILES = FILES.NONE,
@@ -142,9 +142,9 @@ class Flags(val activity: Activity, private val args: SafeJSON) : AbstractPrefer
 
     data class FlagItem(
         val key: String,
-        @StringRes val title: Int,
-        @StringRes val summary: Int,
-        @DrawableRes val icon: Int,
+        @param:StringRes val title: Int,
+        @param:StringRes val summary: Int,
+        @param:DrawableRes val icon: Int,
         val defaultValue: Any,
         val type: TYPE,
         val file: FILES = FILES.NONE,

@@ -228,7 +228,7 @@ object ThemeUtils {
                             pack
                         }.let(packs::addAll)
                     } else packs.addAll(
-                        Gson().fromJson<Collection<ThemePack>?>(
+                        Gson().fromJson<Collection<ThemePack>>(
                             URL(repo).readText(),
                             TypeTokens<List<ThemePack>>()
                         ).map {
