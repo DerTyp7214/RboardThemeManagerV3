@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    compileSdk = 36
+    compileSdkPreview = "CANARY"
     buildToolsVersion = "36.0.0"
     buildFeatures.dataBinding = true
     ndkVersion = "28.1.13356709"
@@ -20,7 +20,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 23
         targetSdk = 36
-        versionCode = 395005
+        versionCode = 395006
         versionName = "3.9.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
