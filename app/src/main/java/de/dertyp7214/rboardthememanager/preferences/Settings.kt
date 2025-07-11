@@ -235,6 +235,7 @@ class Settings(private val activity: Activity, private val args: SafeJSON) : Abs
             {
                 val xmlFile = XMLFile(path = FLAG_PATH)
                 xmlFile.setValue(XMLEntry("crowdsource_uri", "", XMLType.STRING))
+                xmlFile.setValue(XMLEntry("llm_pc_gemma_prompt_tag_end", "", XMLType.STRING))
                 SuFile(Flags.FILES.FLAGS.filePath).writeFile(xmlFile.toString())
                 val uid = getPackageUid(
                     Config.GBOARD_PACKAGE_NAME,

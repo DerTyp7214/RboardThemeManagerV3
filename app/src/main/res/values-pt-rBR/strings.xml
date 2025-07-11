@@ -318,4 +318,7 @@
     <string name="system_automatic_reset_question">Redefinir tema automático do sistema</string>
     <string name="system_automatic_reset_long_question">Deseja redefinir o tema automático do sistema e forçar a parada do Gboard?</string>
     <string name="newTag">Novo</string>
+    <string name="succesful_copied">Copiado com sucesso</string>
+    <string name="enable_text_preview">Prévia do texto</string>
+    <string name="enable_text_preview_details">Mostre uma prévia do texto acima do teclado</string>
 </resources>
