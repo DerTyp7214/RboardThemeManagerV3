@@ -146,13 +146,6 @@ jobs:
             app/build/outputs/apk/release/app-release.apk
             app/build/outputs/apk/release/output-metadata.json
 
-      - name: Dispatch Fdroid Repo
-        uses: peter-evans/repository-dispatch@v3
-        with:
-          token: ${{ secrets.DISPATCH_GITHUB_TOKEN }}
-          repository: GboardThemes/Fdroid
-          event-type: update-repo
-
       - name: Create new Release
         id: create_release
         uses: marvinpinto/action-automatic-releases@latest
