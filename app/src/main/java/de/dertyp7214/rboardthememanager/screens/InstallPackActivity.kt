@@ -88,6 +88,10 @@ class InstallPackActivity : AppCompatActivity() {
             this,
             R.drawable.ic_baseline_arrow_back_24
         )
+
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_back_background)
+        toolbar.navigationIcon = ContextCompat.getDrawable(
+            this,R.drawable.ic_toolbar_back_background)
         toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }

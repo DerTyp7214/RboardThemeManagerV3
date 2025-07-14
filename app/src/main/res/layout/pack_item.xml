@@ -3,11 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        android:layout_width="match_parent"
+        android:layout_height="73dp"
+        android:layout_marginHorizontal="16dp"
+        app:cardElevation="3dp"
+        app:strokeWidth="0dp">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:id="@+id/root"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/selectableItemBackground"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         android:padding="7dp"
         android:paddingStart="16dp"
@@ -24,15 +33,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_gravity="start"
-                android:gravity="start"
+                android:layout_gravity="start|center_vertical"
+                android:gravity="start|center_vertical"
                 android:layout_weight="1">
                 <TextView
                     android:id="@+id/title"
@@ -56,8 +65,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:gravity="end"
-                android:layout_gravity="end">
+                android:layout_gravity="end|center_vertical"
+                android:gravity="end|center_vertical">
 
                 <TextView
                     android:id="@+id/size"
@@ -99,4 +108,6 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+    </FrameLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

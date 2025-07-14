@@ -25,6 +25,8 @@ import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardcomponents.utils.asyncInto
 import de.dertyp7214.rboardcomponents.utils.doAsyncCallback
 import de.dertyp7214.rboardthememanager.Config
+import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
+import de.dertyp7214.rboardthememanager.core.dpToPxRounded
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
 
 class DownloadListFragment : Fragment() {
@@ -169,6 +171,7 @@ class DownloadListFragment : Fragment() {
         recyclerView.layoutManager = LayoutManager(requireContext())
         recyclerView.setHasFixedSize(false)
         recyclerView.adapter = adapter
+        recyclerView.addItemDecoration(MarginItemDecoration(2.dpToPxRounded(requireContext())))
 
         trace.addSplit("CHIP CONTAINER")
 

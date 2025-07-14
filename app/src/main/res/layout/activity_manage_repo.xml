@@ -11,8 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:background="@drawable/color_surface_overlay_background"
-        app:background="@android:color/transparent"
+        android:paddingHorizontal="12dp"
+        android:background="?attr/colorSurface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
             android:textAlignment="center"
+            android:background="?attr/colorSurface"
             android:fitsSystemWindows="true"
             android:theme="?attr/actionBarTheme"
             app:menu="@menu/manage_repo"

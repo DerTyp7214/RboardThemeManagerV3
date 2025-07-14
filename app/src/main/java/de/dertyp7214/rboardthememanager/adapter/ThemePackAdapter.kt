@@ -10,9 +10,11 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
@@ -51,6 +53,7 @@ class ThemePackAdapter(
         val author: TextView = v.findViewById(R.id.author)
         val lastUpdate: TextView = v.findViewById(R.id.lastUpdate)
         val newTagLinearLayout: LinearLayout = v.findViewById(R.id.newTagLinearLayout)
+        val card: MaterialCardView = v.findViewById(R.id.card)
     }
 
     class NewsViewHolder(v: NewsCards) : RecyclerView.ViewHolder(v) {
@@ -71,6 +74,17 @@ class ThemePackAdapter(
         val themePack = list[position]
 
         if (holder is ViewHolder) {
+            when (position) {
+                1 -> {
+                    holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_top)
+                }
+                list.lastIndex -> {
+                    holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_bottom)
+                }
+                else -> {
+                    holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background)
+                }
+            }
             holder.size.text =
                 "${themePack.themes?.size?.let { "($it)" } ?: ""} ${
                     themePack.size.zeroOrNull {

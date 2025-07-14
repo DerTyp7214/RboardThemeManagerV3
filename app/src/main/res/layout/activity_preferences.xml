@@ -20,17 +20,22 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsingToolbarLayout"
             android:layout_width="match_parent"
-            android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
+            android:layout_height="179dp"
             android:fitsSystemWindows="true"
-            style="@style/Widget.Material3Expressive.CollapsingToolbar"
-            app:expandedTitleTextAppearance="@style/Theme.RboardThemeManagerV3.TextAppearanceHeadlineMedium"
+            android:paddingHorizontal="8dp"
+            app:contentInsetStart="0dp"
+            android:background="?attr/colorSurface"
+            style="@style/Widget.Material3.CollapsingToolbar.Large"
+            app:expandedTitleTextAppearance="@style/Theme.RboardThemeManagerV3.TextAppearanceHeadlineLarge"
             app:collapsedTitleTextAppearance="@style/Theme.RboardThemeManagerV3.TextAppearanceHeadlineSmall"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:titleCollapseMode="scale"
             app:toolbarId="@+id/toolbar">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/preferences_toolbar"
                 android:layout_width="match_parent"
+                android:background="?attr/colorSurface"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin" />
 

@@ -10,9 +10,9 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingHorizontal="12dp"
         android:fitsSystemWindows="true"
-        android:background="@drawable/color_surface_overlay_background"
-        app:background="@android:color/transparent"
+        android:background="?attr/colorSurface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,6 +25,7 @@
             android:textAlignment="center"
             android:fitsSystemWindows="true"
             android:theme="?attr/actionBarTheme"
+            android:background="?attr/colorSurface"
             app:menu="@menu/install_pack"
             app:subtitleCentered="true"
             app:titleCentered="true" />

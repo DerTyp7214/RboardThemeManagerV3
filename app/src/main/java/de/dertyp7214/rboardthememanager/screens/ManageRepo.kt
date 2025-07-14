@@ -108,9 +108,10 @@ class ManageRepo : AppCompatActivity() {
                 Snackbar.LENGTH_LONG).showMaterial()
         }
         toolbar.menu.findItem(R.id.enabled).isChecked = enabled
-        toolbar.navigationIcon =
-            ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)
         toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_back_background)
+        toolbar.navigationIcon = ContextCompat.getDrawable(
+            this,R.drawable.ic_toolbar_back_background)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.delete ->

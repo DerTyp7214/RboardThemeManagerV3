@@ -16,6 +16,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import de.dertyp7214.rboardcomponents.components.SearchBar
 import de.dertyp7214.rboardthememanager.R
@@ -98,6 +99,9 @@ class ShareFlags : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_back_background)
+        toolbar.navigationIcon = ContextCompat.getDrawable(
+            this,R.drawable.ic_toolbar_back_background)
         title = getString(titleRes, 0)
 
         flags = if (!import) if (isFlags) Flags.flagValues else Flags.prefValues
