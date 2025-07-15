@@ -3,6 +3,7 @@ package de.dertyp7214.rboardthememanager.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
@@ -77,17 +79,37 @@ class ThemePackAdapter(
             when (position) {
                 1 -> {
                     if (list.size == 2){
-                        holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_rounded)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                            holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_rounded)
+                        }
+                        else{
+                            holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_rounded))
+                        }
                     }
                     else{
-                        holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_top)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                            holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_top)
+                        }
+                        else{
+                            holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_top))
+                        }
                     }
                 }
                 list.lastIndex -> {
-                    holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_bottom)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                        holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_bottom)
+                    }
+                    else{
+                        holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_bottom))
+                    }
                 }
                 else -> {
-                    holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                        holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background)
+                    }
+                    else{
+                        holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background))
+                    }
                 }
             }
             holder.size.text =

@@ -3,13 +3,17 @@
     <item>
         <shape>
             <solid android:color="?attr/colorSurface" />
-            <corners android:topLeftRadius="20dp" android:topRightRadius="20dp"
-                android:bottomLeftRadius="5dp" android:bottomRightRadius="5dp"/>
-        </shape>
+            <corners android:topLeftRadius="20dp"
+                android:topRightRadius="20dp" android:bottomLeftRadius="5dp"
+                android:bottomRightRadius="5dp"/>
+            </shape>
     </item>
     <item>
         <shape>
             <solid android:color="@color/color_primary_0_10_overlay" />
+            <corners android:topLeftRadius="20dp"
+                android:topRightRadius="20dp" android:bottomLeftRadius="5dp"
+                android:bottomRightRadius="5dp"/>
         </shape>
     </item>
 </layer-list>

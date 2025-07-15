@@ -1,6 +1,7 @@
 package de.dertyp7214.rboardthememanager.adapter
 
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,9 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.dpToPxRounded
 import de.dertyp7214.rboardthememanager.data.ThemePack
 
 class ManageRepoThemePackAdapter(private val context: Context,private val items: List<ThemePack>) :
@@ -33,17 +36,37 @@ class ManageRepoThemePackAdapter(private val context: Context,private val items:
         when (position) {
             0 -> {
                 if (items.size == 1){
-                    holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_rounded)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                        holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_rounded)
+                    }
+                    else{
+                        holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_rounded))
+                    }
                 }
                 else{
-                    holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_top)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                        holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_top)
+                    }
+                    else{
+                        holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_top))
+                    }
                 }
             }
             items.lastIndex -> {
-                holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_bottom)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                    holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_bottom)
+                }
+                else{
+                    holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_bottom))
+                }
             }
             else -> {
-                holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                    holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background)
+                }
+                else{
+                    holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background))
+                }
             }
         }
         holder.title.text = item.name

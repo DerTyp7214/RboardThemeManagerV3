@@ -2,6 +2,7 @@ package de.dertyp7214.rboardthememanager.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.checkbox.MaterialCheckBox
+import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 import de.dertyp7214.rboardthememanager.R
 import java.util.*
 
@@ -64,17 +66,37 @@ class ShareFlagsAdapter(
         when (position) {
             0 -> {
                 if (flags.size == 1){
-                    holder.shareFlagsCard.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_rounded)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                        holder.shareFlagsCard.setBackgroundResource(R.drawable.color_surface_overlay_background_rounded)
+                    }
+                    else{
+                        holder.shareFlagsCard.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_rounded))
+                    }
                 }
                 else{
-                    holder.shareFlagsCard.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_top)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                        holder.shareFlagsCard.setBackgroundResource(R.drawable.color_surface_overlay_background_top)
+                    }
+                    else{
+                        holder.shareFlagsCard.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_top))
+                    }
                 }
             }
             flags.lastIndex -> {
-                holder.shareFlagsCard.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_bottom)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                    holder.shareFlagsCard.setBackgroundResource(R.drawable.color_surface_overlay_background_bottom)
+                }
+                else{
+                    holder.shareFlagsCard.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_bottom))
+                }
             }
             else -> {
-                holder.shareFlagsCard.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                    holder.shareFlagsCard.setBackgroundResource(R.drawable.color_surface_overlay_background)
+                }
+                else{
+                    holder.shareFlagsCard.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background))
+                }
             }
         }
 
