@@ -1,16 +1,20 @@
 package de.dertyp7214.rboardthememanager.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.checkbox.MaterialCheckBox
 import de.dertyp7214.rboardthememanager.R
 import java.util.*
 
-class ShareFlagsAdapter(val flags: List<String>, private val onClick: (key: String) -> Unit) :
+class ShareFlagsAdapter(
+    private val context: Context, val flags: List<String>, private val onClick: (key: String) -> Unit) :
     RecyclerView.Adapter<ShareFlagsAdapter.ViewHolder>() {
 
     init {
@@ -42,6 +46,7 @@ class ShareFlagsAdapter(val flags: List<String>, private val onClick: (key: Stri
         val title: TextView = v.findViewById(R.id.title)
         val summary: TextView = v.findViewById(R.id.summary)
         val checkBox: MaterialCheckBox = v.findViewById(R.id.checkBox)
+        val shareFlagsCard: MaterialCardView = v.findViewById(R.id.share_flags_card)
     }
 
     override fun getItemId(position: Int): Long {
@@ -56,6 +61,17 @@ class ShareFlagsAdapter(val flags: List<String>, private val onClick: (key: Stri
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val flag = flags[position]
+        when (position) {
+            0 -> {
+                holder.shareFlagsCard.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_top)
+            }
+            flags.lastIndex -> {
+                holder.shareFlagsCard.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_bottom)
+            }
+            else -> {
+                holder.shareFlagsCard.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background)
+            }
+        }
 
         holder.checkBox.isChecked = states[flag] == true
         holder.checkBox.setOnClickListener {

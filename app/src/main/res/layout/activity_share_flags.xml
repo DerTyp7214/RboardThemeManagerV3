@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
         android:paddingHorizontal="12dp"
-        android:background="?attr/colorSurface"
+        android:background="@drawable/actionbar_overlay_background"
+        app:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -24,7 +25,6 @@
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
             android:textAlignment="center"
-            android:background="?attr/colorSurface"
             android:theme="?attr/actionBarTheme"
             app:menu="@menu/share_flags"
             app:titleCentered="true" />
@@ -34,6 +34,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+    android:background="?attr/colorSurface"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"

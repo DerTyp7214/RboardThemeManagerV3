@@ -2,14 +2,14 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape>
-            <solid android:color="?attr/colorSurface" />
+            <solid android:color="?attr/android:colorBackground" />
             <corners android:topLeftRadius="5dp" android:topRightRadius="5dp"
-                android:bottomLeftRadius="20dp" android:bottomRightRadius="20dp"/>
+                android:bottomLeftRadius="5dp" android:bottomRightRadius="5dp"/>
         </shape>
     </item>
     <item>
         <shape>
-            <solid android:color="@color/color_primary_0_10_overlay" />
+            <solid android:color="?attr/android:colorBackground" />
         </shape>
     </item>
 </layer-list>

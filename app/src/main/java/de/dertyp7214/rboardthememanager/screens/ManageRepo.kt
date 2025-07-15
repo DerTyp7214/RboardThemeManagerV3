@@ -19,7 +19,9 @@ import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ManageRepoThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
+import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
 import de.dertyp7214.rboardthememanager.core.applyTheme
+import de.dertyp7214.rboardthememanager.core.dpToPxRounded
 import de.dertyp7214.rboardthememanager.core.getTextFromUrl
 import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.core.safeParse
@@ -88,11 +90,12 @@ class ManageRepo : AppCompatActivity() {
         }
         val items = ArrayList<ThemePack>()
 
-        val adapter = ManageRepoThemePackAdapter(items)
+        val adapter = ManageRepoThemePackAdapter(this, items)
 
         recyclerView.layoutManager = LayoutManager(this)
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
+        recyclerView.addItemDecoration(MarginItemDecoration(2.dpToPxRounded(this)))
 
         toolbar.title = getString(R.string.manage_repo)
 

@@ -117,7 +117,7 @@ class ThemeListFragment : Fragment() {
         recyclerView.layoutManager = LayoutManager(requireContext())
         recyclerView.setHasFixedSize(false)
         recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(MarginItemDecoration(2.1.dpToPxRounded(requireContext())))
+        recyclerView.addItemDecoration(MarginItemDecoration(2.dpToPxRounded(requireContext())))
 
         if (mainViewModel.getThemes().isEmpty() && mainViewModel.loaded()) {
             refreshLayout.isRefreshing = true
