@@ -76,7 +76,12 @@ class ThemePackAdapter(
         if (holder is ViewHolder) {
             when (position) {
                 1 -> {
-                    holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_top)
+                    if (list.size == 2){
+                        holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_rounded)
+                    }
+                    else{
+                        holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_top)
+                    }
                 }
                 list.lastIndex -> {
                     holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_bottom)

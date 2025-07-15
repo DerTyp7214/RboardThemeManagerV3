@@ -63,7 +63,12 @@ class ShareFlagsAdapter(
         val flag = flags[position]
         when (position) {
             0 -> {
-                holder.shareFlagsCard.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_top)
+                if (flags.size == 1){
+                    holder.shareFlagsCard.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_rounded)
+                }
+                else{
+                    holder.shareFlagsCard.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_top)
+                }
             }
             flags.lastIndex -> {
                 holder.shareFlagsCard.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_bottom)

@@ -32,7 +32,12 @@ class ManageRepoThemePackAdapter(private val context: Context,private val items:
 
         when (position) {
             0 -> {
-                holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_top)
+                if (items.size == 1){
+                    holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_rounded)
+                }
+                else{
+                    holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_top)
+                }
             }
             items.lastIndex -> {
                 holder.card.background = ContextCompat.getDrawable(context, R.drawable.color_surface_overlay_background_bottom)
