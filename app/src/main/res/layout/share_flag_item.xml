@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:minHeight="73dp"
         android:layout_marginHorizontal="16dp"
-        app:cardElevation="3dp"
+        app:cardElevation="0dp"
         app:strokeWidth="0dp">
         <FrameLayout
             android:layout_width="match_parent"

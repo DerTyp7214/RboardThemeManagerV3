@@ -13,6 +13,8 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import androidx.core.view.marginBottom
+import androidx.core.view.marginTop
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
@@ -69,7 +71,7 @@ class ThemePackAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == 0) return NewsViewHolder(NewsCards(activity))
+        if (viewType == 0.dpToPxRounded(context)) return NewsViewHolder(NewsCards(activity))
         return ViewHolder(LayoutInflater.from(activity).inflate(R.layout.pack_item, parent, false))
     }
 
@@ -83,44 +85,62 @@ class ThemePackAdapter(
                     if (list.size == 2){
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
                             holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_rounded)
-                            holder.card.setMargin(null, 8.dpToPxRounded(context), null, null);
-                            
+                            val param = holder.card.layoutParams as ViewGroup.MarginLayoutParams
+                            param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 0.dpToPxRounded(context))
+                            holder.card.layoutParams = param
+
                         }
                         else{
                             holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_rounded))
-                            holder.card.setMargin(null, 8.dpToPxRounded(context), null, null);
-                            
+                            val param = holder.card.layoutParams as ViewGroup.MarginLayoutParams
+                            param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 0.dpToPxRounded(context))
+                            holder.card.layoutParams = param
+
                         }
                     }
                     else{
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
                             holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_top)
-                            holder.card.setMargin(null, 8.dpToPxRounded(context), null, null);
-                            
+                            val param = holder.card.layoutParams as ViewGroup.MarginLayoutParams
+                            param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 0.dpToPxRounded(context))
+                            holder.card.layoutParams = param
+
                         }
                         else{
                             holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_top))
-                            holder.card.setMargin(null, 8.dpToPxRounded(context), null, null);
-                            
+                            val param = holder.card.layoutParams as ViewGroup.MarginLayoutParams
+                            param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 0.dpToPxRounded(context))
+                            holder.card.layoutParams = param
+
                         }
                     }
                 }
                 list.lastIndex -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
                         holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_bottom)
-                        holder.card.setMargin(null, null, null, 8.dpToPxRounded(context));
+                        val param = holder.card.layoutParams as ViewGroup.MarginLayoutParams
+                        param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 8.dpToPxRounded(context))
+                        holder.card.layoutParams = param
                     }
                     else{
                         holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_bottom))
-                        holder.card.setMargin(null, null, null, 8.dpToPxRounded(context));
+                        val param = holder.card.layoutParams as ViewGroup.MarginLayoutParams
+                        param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 8.dpToPxRounded(context))
+                        holder.card.layoutParams = param
                     }
                 }
                 else -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
                         holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background)
+                        val param = holder.card.layoutParams as ViewGroup.MarginLayoutParams
+                        param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 0.dpToPxRounded(context))
+                        holder.card.layoutParams = param
                     }
                     else{
                         holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background))
+                        val param = holder.card.layoutParams as ViewGroup.MarginLayoutParams
+                        param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 0.dpToPxRounded(context))
+                        holder.card.layoutParams = param
                     }
                 }
             }
