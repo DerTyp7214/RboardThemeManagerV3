@@ -79,7 +79,7 @@ class ThemeListFragment : Fragment() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 insetsView.setMargin(
                     bottomMargin = max(
-                        windowInsets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.ime()).bottom - 64.dp(
+                        windowInsets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.ime()).bottom - 80.dp(
                             requireContext()
                         ) - windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom,
                         2.dp(requireContext())
