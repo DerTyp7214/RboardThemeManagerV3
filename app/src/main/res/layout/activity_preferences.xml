@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="179dp"
             android:fitsSystemWindows="true"
-            android:paddingHorizontal="8dp"
+            android:paddingHorizontal="10dp"
             app:contentInsetStart="0dp"
             android:background="?attr/colorSurface"
             style="@style/Widget.Material3.CollapsingToolbar.Large"
