@@ -13,6 +13,8 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.checkbox.MaterialCheckBox
 import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 import de.dertyp7214.rboardthememanager.R
+import de.dertyp7214.rboardthememanager.core.dpToPxRounded
+import de.dertyp7214.rboardthememanager.core.setMargin
 import java.util.*
 
 class ShareFlagsAdapter(
@@ -48,7 +50,7 @@ class ShareFlagsAdapter(
         val title: TextView = v.findViewById(R.id.title)
         val summary: TextView = v.findViewById(R.id.summary)
         val checkBox: MaterialCheckBox = v.findViewById(R.id.checkBox)
-        val shareFlagsCard: MaterialCardView = v.findViewById(R.id.share_flags_card)
+        val card: MaterialCardView = v.findViewById(R.id.share_flags_card)
     }
 
     override fun getItemId(position: Int): Long {
@@ -67,35 +69,41 @@ class ShareFlagsAdapter(
             0 -> {
                 if (flags.size == 1){
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                        holder.shareFlagsCard.setBackgroundResource(R.drawable.color_surface_overlay_background_rounded)
+                        holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_rounded)
+                        holder.card.setMargin(null, 8.dpToPxRounded(context), null, null);
                     }
                     else{
-                        holder.shareFlagsCard.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_rounded))
+                        holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_rounded))
+                        holder.card.setMargin(null, 8.dpToPxRounded(context), null, null);
                     }
                 }
                 else{
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                        holder.shareFlagsCard.setBackgroundResource(R.drawable.color_surface_overlay_background_top)
+                        holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_top)
+                        holder.card.setMargin(null, 8.dpToPxRounded(context), null, null);
                     }
                     else{
-                        holder.shareFlagsCard.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_top))
+                        holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_top))
+                        holder.card.setMargin(null, 8.dpToPxRounded(context), null, null);
                     }
                 }
             }
             flags.lastIndex -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                    holder.shareFlagsCard.setBackgroundResource(R.drawable.color_surface_overlay_background_bottom)
+                    holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_bottom)
+                    holder.card.setMargin(null, null, null, 8.dpToPxRounded(context));
                 }
                 else{
-                    holder.shareFlagsCard.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_bottom))
+                    holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_bottom))
+                    holder.card.setMargin(null, null, null, 8.dpToPxRounded(context));
                 }
             }
             else -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                    holder.shareFlagsCard.setBackgroundResource(R.drawable.color_surface_overlay_background)
+                    holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background)
                 }
                 else{
-                    holder.shareFlagsCard.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background))
+                    holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background))
                 }
             }
         }

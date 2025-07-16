@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
+        app:elevation="0dp"
         android:paddingHorizontal="10dp"
         android:background="@drawable/actionbar_overlay_background"
         app:background="@android:color/transparent"

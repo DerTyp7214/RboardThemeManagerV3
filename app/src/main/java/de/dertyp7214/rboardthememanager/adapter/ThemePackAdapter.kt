@@ -22,12 +22,14 @@ import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.core.download
+import de.dertyp7214.rboardthememanager.core.dpToPxRounded
 import de.dertyp7214.rboardthememanager.core.fontSize
 import de.dertyp7214.rboardthememanager.core.format
 import de.dertyp7214.rboardthememanager.core.openDialog
 import de.dertyp7214.rboardthememanager.core.openUrl
 import de.dertyp7214.rboardthememanager.core.parseRepo
 import de.dertyp7214.rboardthememanager.core.preferences
+import de.dertyp7214.rboardthememanager.core.setMargin
 import de.dertyp7214.rboardthememanager.core.toHumanReadableBytes
 import de.dertyp7214.rboardthememanager.core.zeroOrNull
 import de.dertyp7214.rboardthememanager.data.ThemePack
@@ -81,26 +83,36 @@ class ThemePackAdapter(
                     if (list.size == 2){
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
                             holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_rounded)
+                            holder.card.setMargin(null, 8.dpToPxRounded(context), null, null);
+                            
                         }
                         else{
                             holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_rounded))
+                            holder.card.setMargin(null, 8.dpToPxRounded(context), null, null);
+                            
                         }
                     }
                     else{
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
                             holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_top)
+                            holder.card.setMargin(null, 8.dpToPxRounded(context), null, null);
+                            
                         }
                         else{
                             holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_top))
+                            holder.card.setMargin(null, 8.dpToPxRounded(context), null, null);
+                            
                         }
                     }
                 }
                 list.lastIndex -> {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
                         holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_bottom)
+                        holder.card.setMargin(null, null, null, 8.dpToPxRounded(context));
                     }
                     else{
                         holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_bottom))
+                        holder.card.setMargin(null, null, null, 8.dpToPxRounded(context));
                     }
                 }
                 else -> {
