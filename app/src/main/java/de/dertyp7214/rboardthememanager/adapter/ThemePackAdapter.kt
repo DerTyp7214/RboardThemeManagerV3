@@ -71,7 +71,7 @@ class ThemePackAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == 0.dpToPxRounded(context)) return NewsViewHolder(NewsCards(activity))
+        if (viewType == 0) return NewsViewHolder(NewsCards(activity))
         return ViewHolder(LayoutInflater.from(activity).inflate(R.layout.pack_item, parent, false))
     }
 
