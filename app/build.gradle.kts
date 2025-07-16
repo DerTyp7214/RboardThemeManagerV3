@@ -12,7 +12,7 @@ android {
     compileSdk = 36
     buildToolsVersion = "36.0.0"
     buildFeatures.dataBinding = true
-    ndkVersion = "28.1.13356709"
+    ndkVersion = "28.2.13676358"
     buildFeatures.viewBinding = true
     buildFeatures.buildConfig = true
 
