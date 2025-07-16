@@ -106,13 +106,13 @@ class ShareFlagsAdapter(
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
                     holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_bottom)
                     val param = holder.card.layoutParams as ViewGroup.MarginLayoutParams
-                    param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 8.dpToPxRounded(context))
+                    param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 4.dpToPxRounded(context))
                     holder.card.layoutParams = param
                 }
                 else{
                     holder.card.setBackgroundCompat(ContextCompat.getDrawable(context,R.drawable.color_surface_overlay_background_bottom))
                     val param = holder.card.layoutParams as ViewGroup.MarginLayoutParams
-                    param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 8.dpToPxRounded(context))
+                    param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 4.dpToPxRounded(context))
                     holder.card.layoutParams = param
                 }
             }
