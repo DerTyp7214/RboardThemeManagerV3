@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsets
+import android.view.WindowInsetsAnimation
+import android.view.WindowInsetsAnimation.Callback.DISPATCH_MODE_STOP
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -189,6 +191,17 @@ class DownloadListFragment : Fragment() {
                 )
             }
             windowInsets
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            recyclerView.setWindowInsetsAnimationCallback(object :
+                WindowInsetsAnimation.Callback(DISPATCH_MODE_STOP) {
+                override fun onProgress(
+                    insets: WindowInsets,
+                    runningAnimations: MutableList<WindowInsetsAnimation>
+                ): WindowInsets {
+                    return insets
+                }
+            })
         }
         trace.addSplit("CHIP CONTAINER")
 
