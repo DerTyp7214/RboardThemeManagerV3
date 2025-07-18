@@ -97,7 +97,9 @@
                 android:padding="7dp"
                 android:clickable="true"
                 app:icon="@drawable/ic_repo_copy"
+                app:iconTint="?attr/colorControlNormal"
                 style="@style/Widget.Material3Expressive.Button.IconButton"
+                android:backgroundTint="?attr/colorSecondaryContainer"
                 tools:ignore="ContentDescription,RtlSymmetry" />
         </LinearLayout>
         </LinearLayout>
