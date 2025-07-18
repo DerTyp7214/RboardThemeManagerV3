@@ -89,16 +89,15 @@
                     tools:text="This is a very long text to test the multiline capability of this textView" />
             </LinearLayout>
 
-            <ImageButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/copy"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:focusable="true"
                 android:padding="7dp"
                 android:clickable="true"
-                app:srcCompat="@drawable/ic_repo_copy"
-                app:tint="?android:attr/textColorPrimary"
-                android:background="@drawable/ripple"
+                app:icon="@drawable/ic_repo_copy"
+                style="@style/Widget.Material3Expressive.Button.IconButton"
                 tools:ignore="ContentDescription,RtlSymmetry" />
         </LinearLayout>
         </LinearLayout>
