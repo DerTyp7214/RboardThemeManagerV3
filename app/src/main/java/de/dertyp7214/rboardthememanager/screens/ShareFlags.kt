@@ -15,12 +15,15 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import de.dertyp7214.rboardcomponents.components.SearchBar
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ShareFlagsAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
+import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
 import de.dertyp7214.rboardthememanager.components.XMLFile
 import de.dertyp7214.rboardthememanager.core.addCallback
+import de.dertyp7214.rboardthememanager.core.dpToPxRounded
 import de.dertyp7214.rboardthememanager.core.getMapExtra
 import de.dertyp7214.rboardthememanager.core.share
 import de.dertyp7214.rboardthememanager.databinding.ActivityShareFlagsBinding
@@ -78,6 +81,9 @@ class ShareFlags : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_back_background)
+        toolbar.navigationIcon = ContextCompat.getDrawable(
+            this,R.drawable.ic_toolbar_back_background)
         title = getString(titleRes, 0)
 
         flags = if (!import) if (isFlags) Flags.flagValues else Flags.prefValues
@@ -85,12 +91,13 @@ class ShareFlags : AppCompatActivity() {
         val orig = ArrayList(flags.simpleMap().map { it.key })
         val flagKeys = ArrayList(orig)
 
-        adapter = ShareFlagsAdapter(flagKeys) {
+        adapter = ShareFlagsAdapter(this, flagKeys) {
             title = getString(titleRes, adapter.getSelectedFlags().size)
         }
 
         recyclerView.layoutManager = LayoutManager(this)
         recyclerView.adapter = adapter
+        recyclerView.addItemDecoration(MarginItemDecoration(2.dpToPxRounded(this)))
         recyclerView.setHasFixedSize(true)
 
         searchBar.instantSearch = true
