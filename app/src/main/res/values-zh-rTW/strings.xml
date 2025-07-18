@@ -231,8 +231,6 @@
     <string name="other_props_long">使用 resetprop 調整其他屬性</string>
     <string name="prop_changed">屬性已更改</string>
     <string name="reset">重置</string>
-    <string name="update_downloaded">更新已下載.</string>
-    <string name="restart">重啓</string>
     <string name="invalid_link">無效的鏈接</string>
     <string name="deep_link">鏈接</string>
     <string name="download">下載</string>
