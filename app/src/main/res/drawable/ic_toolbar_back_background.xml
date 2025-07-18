@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?attr/colorControlHighlight">
+    <item android:id="@+id/background"
+        android:width="40dp"
+        android:height="40dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/color_primary_0_10_overlay" />
+        </shape>
+    </item>
+    <item android:id="@+id/back"
+        android:width="24dp"
+        android:height="24dp"
+        android:drawable="@drawable/ic_baseline_arrow_back_24"
+        android:gravity="center" />
+</ripple>

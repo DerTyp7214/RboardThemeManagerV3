@@ -34,10 +34,10 @@
                 android:id="@+id/navigation"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottomBarHeight"
+                style="@style/Widget.Material3Expressive.BottomNavigationView"
                 android:alpha="1"
                 android:background="@android:color/transparent"
                 app:elevation="0dp"
-                style="@style/Widget.Material3Expressive.BottomNavigationView"
                 app:itemRippleColor="@android:color/transparent"
                 app:labelVisibilityMode="selected"
                 app:menu="@menu/navigation">

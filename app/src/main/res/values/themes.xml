@@ -15,7 +15,7 @@
         </item>
 
         <item name="collapsingToolbarLayoutStyle">@style/Widget.CollapsingToolbar</item>
-
+        <item name="materialSwitchStyle">@style/Theme.RboardThemeManagerV3.Switch</item>
         <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
         <item name="snackbarTextViewStyle">@style/Widget.App.SnackbarTextView</item>
         <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
@@ -42,7 +42,7 @@
         <item name="android:statusBarColor">@color/color_primary_0_10_overlay</item>
     </style>
 
-    <style name="Theme.RboardThemeManagerV3.TextAppearanceHeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+    <style name="Theme.RboardThemeManagerV3.TextAppearanceHeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
         <item name="fontFamily">@font/google_sans_text_500</item>
     </style>
 

@@ -438,8 +438,10 @@ class AppStartUp(private val activity: AppCompatActivity) {
                     when {
                         !gboardInstalled -> openDialog(
                             R.string.install_gboard,
-                            R.string.gboard_not_installed
-                        ) {
+                            R.string.gboard_not_installed, false, {
+                                finish()
+                            }) {
+                            finish()
                             openUrl(gboardPlayStoreUrl)
                         }
 
