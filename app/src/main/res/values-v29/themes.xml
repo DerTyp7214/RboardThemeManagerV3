@@ -64,6 +64,7 @@
         <item name="materialAlertDialogTheme">
             @style/Dialog.RboardThemeManagerV3.MaterialAlertDialog
         </item>
+        <item name="materialSwitchStyle">@style/Theme.RboardThemeManagerV3.Switch</item>
 
         <item name="collapsingToolbarLayoutStyle">@style/Widget.CollapsingToolbar</item>
 
