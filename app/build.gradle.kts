@@ -85,8 +85,6 @@ dependencies {
     implementation(project(":rboardcomponents"))
 
     implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.messaging.ktx)
-    implementation(libs.firebase.analytics.ktx)
 
     implementation(libs.protobuf.dynamic)
 
