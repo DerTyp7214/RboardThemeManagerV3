@@ -167,6 +167,8 @@ class MainActivity : AppCompatActivity() {
         mainViewModel = this[MainViewModel::class.java]
 
         val searchToolBar = binding.searchToolbar
+        searchToolBar.navigationIcon = ContextCompat.getDrawable(
+            this,R.drawable.ic_toolbar_back_background)
         val mainContent = binding.mainContent
         val bottomSheet = findViewById<NestedScrollView>(R.id.bottom_bar)
         val navigationHolder =
@@ -338,8 +340,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 })
 
-                searchToolBar.navigationIcon =
-                    ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)
                 searchToolBar.setNavigationOnClickListener { mainViewModel.getSelections().second?.clearSelection() }
 
                 searchToolBar.setOnMenuItemClickListener { item ->
