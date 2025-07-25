@@ -8,7 +8,7 @@
     </style>
 
     <style name="Widget.CollapsingToolbar" parent="Widget.Material3Expressive.CollapsingToolbar">
-        <item name="contentScrim">@drawable/color_surface_overlay_background</item>
+        <item name="contentScrim">?attr/colorSurface</item>
     </style>
 
     <style name="Widget.App.Snackbar" parent="Widget.Material3.Snackbar">
@@ -55,7 +55,9 @@
         <item name="appWidgetRadius">@dimen/roundCorners</item>
         <item name="appWidgetInnerRadius">@dimen/innerRoundCorners</item>
     </style>
-
+    <style name="Theme.RboardThemeManagerV3.Switch" parent="Widget.Material3.CompoundButton.MaterialSwitch">
+        <item name="thumbIcon">@drawable/default_switch_icon</item>
+    </style>
     <style name="Theme.RboardThemeManagerV3.AppWidgetContainer" parent="Theme.RboardThemeManagerV3.AppWidgetContainerParent">
         <item name="appWidgetPadding">@dimen/roundCorners</item>
     </style>

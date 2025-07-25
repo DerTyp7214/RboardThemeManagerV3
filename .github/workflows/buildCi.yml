@@ -23,7 +23,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '4.0.2'
+          cmake-version: '4.0.3'
 
       - name: Setup Ninja
         run: sudo apt-get install ninja-build
@@ -34,7 +34,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r28b
+          ndk-version: r28c
 
       - name: Get Commit Message
         id: commitMessage
@@ -161,7 +161,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '4.0.2'
+          cmake-version: '4.0.3'
 
       - name: Setup Ninja
         run: sudo apt-get install ninja-build
@@ -171,7 +171,7 @@ jobs:
 
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r28b
+          ndk-version: r28c
 
       - name: Get Commit Message
         id: commitMessage
@@ -304,7 +304,7 @@ jobs:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v2
         with:
-          cmake-version: '4.0.2'
+          cmake-version: '4.0.3'
 
       - name: Setup Ninja
         run: sudo apt-get install ninja-build
@@ -314,7 +314,7 @@ jobs:
           
       - uses: nttld/setup-ndk@v1
         with:
-          ndk-version: r28b
+          ndk-version: r28c
 
       - name: Get Commit Message
         id: commitMessage
