@@ -79,7 +79,7 @@ class ThemeListFragment : Fragment() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                 insetsView.setMargin(
                     bottomMargin = max(
-                        windowInsets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.ime()).bottom - 64.dp(
+                        windowInsets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.ime()).bottom - 80.dp(
                             requireContext()
                         ) - windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom,
                         2.dp(requireContext())
@@ -117,7 +117,7 @@ class ThemeListFragment : Fragment() {
         recyclerView.layoutManager = LayoutManager(requireContext())
         recyclerView.setHasFixedSize(false)
         recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(MarginItemDecoration(2.1.dpToPxRounded(requireContext())))
+        recyclerView.addItemDecoration(MarginItemDecoration(2.dpToPxRounded(requireContext())))
 
         if (mainViewModel.getThemes().isEmpty() && mainViewModel.loaded()) {
             refreshLayout.isRefreshing = true
