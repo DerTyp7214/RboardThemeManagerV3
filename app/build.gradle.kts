@@ -15,7 +15,7 @@ plugins {
 android {
     compileSdk = 36
     buildToolsVersion = "36.0.0"
-    ndkVersion = "28.1.13356709"
+    ndkVersion = "28.2.13676358"
     buildFeatures.dataBinding = true
     buildFeatures.viewBinding = true
     buildFeatures.buildConfig = true
@@ -26,7 +26,7 @@ android {
         applicationId = "de.dertyp7214.rboardthememanager"
         minSdk = 31
         targetSdk = 36
-        versionCode = 395008
+        versionCode = 395009
         versionName = "3.9.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -85,8 +85,6 @@ dependencies {
     implementation(project(":rboardcomponents"))
 
     implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.messaging.ktx)
-    implementation(libs.firebase.analytics.ktx)
 
     implementation(libs.protobuf.dynamic)
 

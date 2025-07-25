@@ -3,21 +3,29 @@ package de.dertyp7214.rboardthememanager.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
+import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
+import com.tbuonomo.viewpagerdotsindicator.setBackgroundCompat
 import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.Config
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.components.NewsCards
 import de.dertyp7214.rboardthememanager.core.download
+import de.dertyp7214.rboardthememanager.core.dpToPxRounded
 import de.dertyp7214.rboardthememanager.core.fontSize
 import de.dertyp7214.rboardthememanager.core.format
 import de.dertyp7214.rboardthememanager.core.openDialog
@@ -51,6 +59,7 @@ class ThemePackAdapter(
         val author: TextView = v.findViewById(R.id.author)
         val lastUpdate: TextView = v.findViewById(R.id.lastUpdate)
         val newTagLinearLayout: LinearLayout = v.findViewById(R.id.newTagLinearLayout)
+        val card: MaterialCardView = v.findViewById(R.id.card)
     }
 
     class NewsViewHolder(v: NewsCards) : RecyclerView.ViewHolder(v) {
@@ -71,6 +80,36 @@ class ThemePackAdapter(
         val themePack = list[position]
 
         if (holder is ViewHolder) {
+            when (position) {
+                1 -> {
+                    if (list.size == 2){
+                        holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_rounded)
+                        val param = holder.card.layoutParams as ViewGroup.MarginLayoutParams
+                        param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 0.dpToPxRounded(context))
+                        holder.card.layoutParams = param
+
+                    }
+                    else{
+                        holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_top)
+                        val param = holder.card.layoutParams as ViewGroup.MarginLayoutParams
+                        param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 0.dpToPxRounded(context))
+                        holder.card.layoutParams = param
+
+                    }
+                }
+                list.lastIndex -> {
+                    holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background_bottom)
+                    val param = holder.card.layoutParams as ViewGroup.MarginLayoutParams
+                    param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 4.dpToPxRounded(context))
+                    holder.card.layoutParams = param
+                }
+                else -> {
+                    holder.card.setBackgroundResource(R.drawable.color_surface_overlay_background)
+                    val param = holder.card.layoutParams as ViewGroup.MarginLayoutParams
+                    param.setMargins(16.dpToPxRounded(context), 0.dpToPxRounded(context), 16.dpToPxRounded(context), 0.dpToPxRounded(context))
+                    holder.card.layoutParams = param
+                }
+            }
             holder.size.text =
                 "${themePack.themes?.size?.let { "($it)" } ?: ""} ${
                     themePack.size.zeroOrNull {
@@ -81,11 +120,10 @@ class ThemePackAdapter(
                 }"
             holder.title.text = themePack.name
             holder.author.text = themePack.author
+            holder.lastUpdate.text = themePack.date.format(System.currentTimeMillis())
             holder.newTagLinearLayout.visibility = if (themePack.date > previousVisitThemes) View.VISIBLE else View.GONE
             holder.lastUpdate.visibility = if (holder.newTagLinearLayout.isVisible) View.GONE else View.VISIBLE
             holder.size.visibility = if (holder.newTagLinearLayout.isVisible) View.GONE else View.VISIBLE
-
-            holder.lastUpdate.text = themePack.date.format(System.currentTimeMillis())
 
             holder.root.setOnClickListener {
                 themePack.download(activity) {

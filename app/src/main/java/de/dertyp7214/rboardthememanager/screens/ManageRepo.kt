@@ -19,6 +19,8 @@ import de.dertyp7214.rboardcomponents.utils.doAsync
 import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.adapter.ManageRepoThemePackAdapter
 import de.dertyp7214.rboardthememanager.components.LayoutManager
+import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
+import de.dertyp7214.rboardthememanager.core.dpToPxRounded
 import de.dertyp7214.rboardthememanager.core.getTextFromUrl
 import de.dertyp7214.rboardthememanager.core.safeParse
 import de.dertyp7214.rboardthememanager.core.openDialog
@@ -65,7 +67,7 @@ class ManageRepo : AppCompatActivity() {
 
         val items = ArrayList<ThemePack>()
 
-        val adapter = ManageRepoThemePackAdapter(items)
+        val adapter = ManageRepoThemePackAdapter(this, items)
         copy.setOnClickListener {
             val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
             clipboard.setText(binding.address.getText())
@@ -77,6 +79,7 @@ class ManageRepo : AppCompatActivity() {
         recyclerView.layoutManager = LayoutManager(this)
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
+        recyclerView.addItemDecoration(MarginItemDecoration(2.dpToPxRounded(this)))
 
         toolbar.applyInsetter {
             type(statusBars = true) {
@@ -95,9 +98,10 @@ class ManageRepo : AppCompatActivity() {
         binding.address.text = key
 
         toolbar.menu.findItem(R.id.enabled).isChecked = enabled
-        toolbar.navigationIcon =
-            ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)
         toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_back_background)
+        toolbar.navigationIcon = ContextCompat.getDrawable(
+            this,R.drawable.ic_toolbar_back_background)
         toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.delete ->

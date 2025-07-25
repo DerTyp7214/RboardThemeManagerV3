@@ -3,8 +3,8 @@
 package de.dertyp7214.rboardthememanager.screens
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
@@ -19,6 +19,7 @@ import de.dertyp7214.rboardthememanager.adapter.ThemeAdapter
 import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
 import de.dertyp7214.rboardthememanager.core.decodeBitmap
 import de.dertyp7214.rboardthememanager.core.dp
+import de.dertyp7214.rboardthememanager.core.dpToPxRounded
 import de.dertyp7214.rboardthememanager.core.install
 import de.dertyp7214.rboardthememanager.core.isInstalled
 import de.dertyp7214.rboardthememanager.core.openPreviewDialog
@@ -60,7 +61,6 @@ class InstallPackActivity : AppCompatActivity() {
                 margin()
             }
         }
-
         toolbar.title = getString(R.string.install_themes, "0")
 
         val themes = arrayListOf<ThemeDataClass>()
@@ -77,6 +77,10 @@ class InstallPackActivity : AppCompatActivity() {
             this,
             R.drawable.ic_baseline_arrow_back_24
         )
+
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_back_background)
+        toolbar.navigationIcon = ContextCompat.getDrawable(
+            this,R.drawable.ic_toolbar_back_background)
         toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
@@ -150,7 +154,6 @@ class InstallPackActivity : AppCompatActivity() {
                             "name" -> matcher.group(2)?.let { metaName ->
                                 name = metaName
                             }
-
                             "author" -> matcher.group(2)?.let { metaAuthor ->
                                 author = metaAuthor
                             }
@@ -166,7 +169,7 @@ class InstallPackActivity : AppCompatActivity() {
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.setHasFixedSize(true)
         recyclerview.adapter = adapter
-        recyclerview.addItemDecoration(MarginItemDecoration(2.dp(this), all = true))
+        recyclerview.addItemDecoration(MarginItemDecoration(2.dpToPxRounded(this)))
     }
 
     companion object {

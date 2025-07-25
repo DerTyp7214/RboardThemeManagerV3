@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:translationZ="2dp"
-            style="@style/Widget.Material3Expressive.SearchBar"
+            android:layout_marginHorizontal="10dp"
             app:layout_constraintBottom_toTopOf="@+id/fragmentContainerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
