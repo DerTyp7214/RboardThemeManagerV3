@@ -20,6 +20,7 @@ import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
 import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.core.decodeBitmap
 import de.dertyp7214.rboardthememanager.core.dp
+import de.dertyp7214.rboardthememanager.core.dpToPxRounded
 import de.dertyp7214.rboardthememanager.core.install
 import de.dertyp7214.rboardthememanager.core.isInstalled
 import de.dertyp7214.rboardthememanager.core.openPreviewDialog
@@ -88,6 +89,10 @@ class InstallPackActivity : AppCompatActivity() {
             this,
             R.drawable.ic_baseline_arrow_back_24
         )
+
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_back_background)
+        toolbar.navigationIcon = ContextCompat.getDrawable(
+            this,R.drawable.ic_toolbar_back_background)
         toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
@@ -176,7 +181,7 @@ class InstallPackActivity : AppCompatActivity() {
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.setHasFixedSize(true)
         recyclerview.adapter = adapter
-        recyclerview.addItemDecoration(MarginItemDecoration(2.dp(this), all = true))
+        recyclerview.addItemDecoration(MarginItemDecoration(2.dpToPxRounded(this)))
     }
 
     companion object {

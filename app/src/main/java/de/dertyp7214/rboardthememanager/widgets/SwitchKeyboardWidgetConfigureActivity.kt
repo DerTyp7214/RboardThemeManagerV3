@@ -21,6 +21,7 @@ import de.dertyp7214.rboardthememanager.core.dpToPxRounded
 import de.dertyp7214.rboardthememanager.data.ThemeDataClass
 import de.dertyp7214.rboardthememanager.databinding.SwitchKeyboardWidgetConfigureBinding
 import de.dertyp7214.rboardthememanager.utils.ThemeUtils
+import dev.chrisbanes.insetter.applyInsetter
 
 class SwitchKeyboardWidgetConfigureActivity : AppCompatActivity() {
     private var appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID
@@ -68,11 +69,18 @@ class SwitchKeyboardWidgetConfigureActivity : AppCompatActivity() {
                     Intent().apply { putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId) })
                 finish()
             }
-
         recyclerView = binding.recyclerView
         recyclerView.adapter = adapter
+        recyclerView.applyInsetter {
+            type(navigationBars = true) {
+                margin()
+            }
+            type(statusBars = true) {
+                margin()
+            }
+        }
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.addItemDecoration(MarginItemDecoration(2.1.dpToPxRounded(this)))
+        recyclerView.addItemDecoration(MarginItemDecoration(2.dpToPxRounded(this)))
 
         doAsync(ThemeUtils::loadThemes) { themes ->
             list.addAll(themes)

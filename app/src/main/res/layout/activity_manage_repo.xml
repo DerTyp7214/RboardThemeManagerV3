@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true"
-        android:background="@drawable/color_surface_overlay_background"
+        android:paddingHorizontal="10dp"
+        android:background="@drawable/actionbar_overlay_background"
         app:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +44,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -55,13 +57,16 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="?attr/colorSecondary"
             android:textSize="12sp"
+            android:layout_marginHorizontal="16dp"
             tools:ignore="TextContrastCheck" />
 
         <LinearLayout
+            android:layout_gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
+            android:orientation="horizontal"
+            android:paddingVertical="7dp"
+            android:layout_marginHorizontal="16dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -84,20 +89,20 @@
                     tools:text="This is a very long text to test the multiline capability of this textView" />
             </LinearLayout>
 
-            <ImageButton
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/copy"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:focusable="true"
                 android:padding="7dp"
                 android:clickable="true"
-                app:srcCompat="@drawable/ic_repo_copy"
-                app:tint="?android:attr/textColorPrimary"
-                android:background="@drawable/ripple"
+                app:icon="@drawable/ic_repo_copy"
+                app:iconTint="?attr/colorControlNormal"
+                style="@style/Widget.Material3Expressive.Button.IconButton"
+                android:backgroundTint="?attr/colorSecondaryContainer"
                 tools:ignore="ContentDescription,RtlSymmetry" />
         </LinearLayout>
         </LinearLayout>
-
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
             android:layout_height="8dp" />
@@ -106,18 +111,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/theme_pack_count"
+            android:layout_marginHorizontal="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="?attr/colorSecondary"
             android:textSize="12sp"
             tools:ignore="TextContrastCheck" />
-
         <TextView
             android:id="@+id/theme_pack_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="?attr/colorOnSurface"
-            tools:text="20" />
+            tools:text="20"
+            android:paddingVertical="7dp"
+            android:layout_marginHorizontal="16dp"/>
 
         <androidx.legacy.widget.Space
             android:layout_width="match_parent"
@@ -127,6 +134,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/theme_packs"
+            android:layout_marginHorizontal="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="?attr/colorSecondary"
             android:textSize="12sp" />

@@ -14,10 +14,12 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.dertyp7214.rboardcomponents.utils.doAsync
+import de.dertyp7214.rboardthememanager.R
 import de.dertyp7214.rboardthememanager.core.addCallback
 import de.dertyp7214.rboardthememanager.core.applyTheme
 import de.dertyp7214.rboardthememanager.databinding.ActivityPreferencesBinding
@@ -78,6 +80,7 @@ class PreferencesActivity : AppCompatActivity() {
         setContentView(binding.root)
         instances.add(this)
         val preferencesToolbar = binding.preferencesToolbar
+        val appBarLayout = binding.appBarLayout
         val loadingPreferences = binding.loadingPreferences
         val extraContent = binding.extraContent
         recyclerView = binding.recyclerView
@@ -99,9 +102,12 @@ class PreferencesActivity : AppCompatActivity() {
         }
 
         setSupportActionBar(preferencesToolbar)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_toolbar_back_background)
+        preferencesToolbar.navigationIcon = ContextCompat.getDrawable(
+            this,R.drawable.ic_toolbar_back_background)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        appBarLayout.setExpanded(false)
         title = preferences.title
-
         preferencesToolbar.applyInsetter {
             type(statusBars = true) {
                 margin()
@@ -113,7 +119,6 @@ class PreferencesActivity : AppCompatActivity() {
                 margin()
             }
         }
-
         recyclerView.layoutManager = LinearLayoutManager(this)
         doAsync({ PreferencesAdapter(preferences.preferences) }) {
             loadingPreferences.visibility = View.GONE

@@ -23,6 +23,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.Modifier
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
@@ -174,6 +175,8 @@ class MainActivity : AppCompatActivity() {
         mainViewModel = this[MainViewModel::class.java]
 
         val searchToolBar = binding.searchToolbar
+        searchToolBar.navigationIcon = ContextCompat.getDrawable(
+            this,R.drawable.ic_toolbar_back_background)
         val mainContent = binding.mainContent
         val bottomSheet = findViewById<NestedScrollView>(R.id.bottom_bar)
         val navigationHolder =
@@ -345,9 +348,6 @@ class MainActivity : AppCompatActivity() {
                         mainContent.foreground.alpha = (slideOffset * 255).toInt()
                     }
                 })
-
-                searchToolBar.navigationIcon =
-                    ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)
                 searchToolBar.setNavigationOnClickListener { mainViewModel.getSelections().second?.clearSelection() }
 
                 searchToolBar.setOnMenuItemClickListener { item ->

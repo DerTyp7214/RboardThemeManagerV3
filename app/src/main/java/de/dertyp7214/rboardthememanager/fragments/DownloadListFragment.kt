@@ -2,10 +2,14 @@ package de.dertyp7214.rboardthememanager.fragments
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
+import android.view.WindowInsetsAnimation
+import android.view.WindowInsetsAnimation.Callback.DISPATCH_MODE_STOP
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +29,12 @@ import de.dertyp7214.rboardthememanager.utils.*
 import de.dertyp7214.rboardcomponents.utils.asyncInto
 import de.dertyp7214.rboardcomponents.utils.doAsyncCallback
 import de.dertyp7214.rboardthememanager.Config
+import de.dertyp7214.rboardthememanager.components.MarginItemDecoration
+import de.dertyp7214.rboardthememanager.core.dp
+import de.dertyp7214.rboardthememanager.core.dpToPxRounded
+import de.dertyp7214.rboardthememanager.core.setMargin
 import de.dertyp7214.rboardthememanager.viewmodels.MainViewModel
+import java.lang.Integer.max
 
 class DownloadListFragment : Fragment() {
 
@@ -169,7 +178,31 @@ class DownloadListFragment : Fragment() {
         recyclerView.layoutManager = LayoutManager(requireContext())
         recyclerView.setHasFixedSize(false)
         recyclerView.adapter = adapter
-
+        recyclerView.addItemDecoration(MarginItemDecoration(2.dpToPxRounded(requireContext())))
+        recyclerView.setOnApplyWindowInsetsListener { insetsView, windowInsets ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                insetsView.setMargin(
+                    bottomMargin = max(
+                        windowInsets.getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.ime()).bottom - 90.dp(
+                            requireContext()
+                        ) - windowInsets.getInsets(WindowInsets.Type.navigationBars()).bottom,
+                        2.dp(requireContext())
+                    )
+                )
+            }
+            windowInsets
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            recyclerView.setWindowInsetsAnimationCallback(object :
+                WindowInsetsAnimation.Callback(DISPATCH_MODE_STOP) {
+                override fun onProgress(
+                    insets: WindowInsets,
+                    runningAnimations: MutableList<WindowInsetsAnimation>
+                ): WindowInsets {
+                    return insets
+                }
+            })
+        }
         trace.addSplit("CHIP CONTAINER")
 
         chipContainer.setOnFilterToggle { filters ->
