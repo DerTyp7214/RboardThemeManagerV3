@@ -28,7 +28,7 @@ jobs:
           ndk-version: r28c
 
       - name: Setup JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 23
           distribution: temurin

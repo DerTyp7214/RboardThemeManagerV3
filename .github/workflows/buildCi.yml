@@ -40,7 +40,7 @@ jobs:
         run: IN="${{ github.event.head_commit.message }}" && echo "message=${IN%%$'\n'*}" >> $GITHUB_OUTPUT
 
       - name: Setup JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 23
           distribution: temurin
