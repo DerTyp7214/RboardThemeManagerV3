@@ -35,7 +35,7 @@ prdownloader = "v0.6.0"
 preference-ktx = "1.2.1"
 protobuf-dynamic = "1.0.1"
 simple-item-decoration = "1.0.0"
-ui-tooling = "1.9.0-beta03"
+ui-tooling = "1.10.0-beta01"
 r8 = "8.13.0-dev"
 
 [libraries]
