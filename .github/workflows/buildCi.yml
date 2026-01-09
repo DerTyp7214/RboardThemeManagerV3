@@ -37,7 +37,10 @@ jobs:
 
       - name: Get Commit Message
         id: commitMessage
-        run: IN="${{ github.event.head_commit.message }}" && echo "message=${IN%%$'\n'*}" >> $GITHUB_OUTPUT
+        env:
+          FULL_MSG: ${{ github.event.head_commit.message }}
+        run: |
+          echo "message=${FULL_MSG%%$'\n'*}" >> $GITHUB_OUTPUT
 
       - name: Setup JDK
         uses: actions/setup-java@v4
