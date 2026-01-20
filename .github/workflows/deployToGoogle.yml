@@ -78,7 +78,7 @@ jobs:
           buildToolsVersion: '36.0.0'
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: Artifact
           path: app/build/outputs/bundle/release/app-release.aab
